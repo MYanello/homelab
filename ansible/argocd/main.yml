@@ -1,0 +1,20 @@
+# Bootstrap argocd to k8s cluster
+---
+
+- name: Install argocd to k8s cluster
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create namespace
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: argocd
+    - name: Install argocd
+      kubernetes.core.k8s:
+        state: present
+        src: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+        namespace: argocd
