@@ -60,28 +60,6 @@
       path: /usr/local/bin/k3s
     register: k3s
 
-- name: Setup k3s agents
-  hosts: k3s_agents
-  tasks:
-  - name: Check if k3s is already installed
-    ansible.builtin.stat:
-      path: /usr/local/bin/k3s
-    register: k3s
-  - name: Extract k3s server node token from control node
-    local_action:
-      module: shell
-      cmd: cat node_join_token
-    register: node_join_token
-  - name: Install k3s on agent
-    become: yes
-    shell: curl -sfL https://get.k3s.io | sh -
-    environment:
-      K3S_TOKEN: "{{ node_join_token.stdout }}"
-      # Select the first host in the group of k3s servers as the server for the agent
-      K3S_URL: "https://{{ groups['k3s_servers'] | first }}:6443"
-      K3S_NODE_NAME: "{{ inventory_hostname }}"
-    when: not k3s.stat.exists
-
 - name: Setup initial k3s server
   hosts: initial_k3s_server
   become: yes
@@ -161,6 +139,27 @@
     retries: 10
     delay: 10
 
+- name: Setup k3s agents
+  hosts: k3s_agents
+  tasks:
+  - name: Check if k3s is already installed
+    ansible.builtin.stat:
+      path: /usr/local/bin/k3s
+    register: k3s
+  - name: Extract k3s server node token from control node
+    local_action:
+      module: shell
+      cmd: cat node_join_token
+    register: node_join_token
+  - name: Install k3s on agent
+    become: yes
+    shell: curl -sfL https://get.k3s.io | sh -
+    environment:
+      K3S_TOKEN: "{{ node_join_token.stdout }}"
+      # Select the first host in the group of k3s servers as the server for the agent
+      K3S_URL: "https://{{  {{ k3s_control_plane_vip }} }}:6443"
+      K3S_NODE_NAME: "{{ inventory_hostname }}"
+    when: not k3s.stat.exists
     #TODO
   # - name: Copy kubectl config from server to temp .kube directory on control node 
   #   become: yes
