@@ -1,0 +1,40 @@
+
+- name: Setup baseline for all raspberrypi k3s nodes
+  hosts: k3s_servers, k3s_agents
+  vars:
+    boot_file: /boot/cmdline.txt
+  tasks:
+    - name: Check if cgroups are set correctly
+      become: true
+      ansible.builtin.command:
+        cmd: grep -c 'cgroup_memory=1 cgroup_enable=memory' '{{ boot_file }}' | cat
+      register: cmdline
+      changed_when: false
+      ignore_errors: true
+
+    - name: Ensure cgroups are correctly set by updating raspberry pi
+      become: true
+      ansible.builtin.lineinfile:
+        state: present
+        backrefs: true
+        path: '{{ boot_file }}'
+        regexp: '(.+)(?!cgroup_memory=1 cgroup_enable=memory)'
+        line: '\1 cgroup_memory=1 cgroup_enable=memory'
+
+    - name: Disable swap with dphys-swapfile
+      become: true
+      ansible.builtin.command:
+        cmd: dphys-swapfile swapoff && dphys-swapfile uninstall && update-rc.d dphys-swapfile remove
+
+    - name: Disable dphys-swapfile service
+      become: true
+      ansible.builtin.systemd:
+        name: dphys-swapfile
+        enabled: false
+      register: swapfile_service
+
+    - name: Reboot host if system settings were updated
+      become: true
+      ansible.builtin.reboot:
+        reboot_timeout: 3600
+      when: cmdline.stdout == "0" or swapfile_service.changed

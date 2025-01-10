@@ -2,46 +2,6 @@
 
 ---
 
-- name: Setup baseline for all raspberrypi k3s nodes
-  hosts: k3s_servers, k3s_agents
-  vars:
-    boot_file: /boot/cmdline.txt
-  tasks:
-    - name: Check if cgroups are set correctly
-      become: true
-      ansible.builtin.command:
-        cmd: grep -c 'cgroup_memory=1 cgroup_enable=memory' '{{ boot_file }}' | cat
-      register: cmdline
-      changed_when: false
-      ignore_errors: true
-
-    - name: Ensure cgroups are correctly set by updating raspberry pi
-      become: true
-      ansible.builtin.lineinfile:
-        state: present
-        backrefs: true
-        path: '{{ boot_file }}'
-        regexp: '(.+)(?!cgroup_memory=1 cgroup_enable=memory)'
-        line: '\1 cgroup_memory=1 cgroup_enable=memory'
-
-    - name: Disable swap with dphys-swapfile
-      become: true
-      ansible.builtin.command:
-        cmd: dphys-swapfile swapoff && dphys-swapfile uninstall && update-rc.d dphys-swapfile remove
-
-    - name: Disable dphys-swapfile service
-      become: true
-      ansible.builtin.systemd:
-        name: dphys-swapfile
-        enabled: false
-      register: swapfile_service
-
-    - name: Reboot host if system settings were updated
-      become: true
-      ansible.builtin.reboot:
-        reboot_timeout: 3600
-      when: cmdline.stdout == "0" or swapfile_service.changed
-
 - name: Get install k3s script
   hosts: k3s_servers
   vars:
@@ -87,8 +47,9 @@
         INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
         K3S_NODE_NAME: "{{ node_name }}"
-        INSTALL_K3S_EXEC: >
-          "--disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init }}"
+        INSTALL_K3S_EXEC: |
+          --disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init
+          --flannel-backend=none --disable-network-policy --cluster-cidr=10.42.0.0/16 --disable=traefik
       when: not k3s.stat.exists or (reinstall | bool)
 
     - name: Read node join token
@@ -107,7 +68,7 @@
       delegate_facts: true
       with_items: "{{ groups['remaining_k3s_servers'] }}"
 
-    - name: Pause to allow first server startup
+    - name: Pause to allow first server startup # ideally we would wait for the server to be ready with a healthcheck
       when: (groups['k3s_servers'] | length) > 1
       ansible.builtin.pause:
         seconds: 10
@@ -121,7 +82,7 @@
         path: /usr/local/bin/k3s
       register: k3s
 
-    - name: Install k3s on server
+    - name: Install k3s on remaining servers
       become: true
       ansible.builtin.command: "{{ k3s_install_script_dest }}"
       environment:
@@ -132,7 +93,9 @@
         K3S_URL: "https://{{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }}:6443"
         K3S_NODE_NAME: "{{ node_name }}"
         # This needs to include `server` first so it does not get registered as an agent. Set the --tls-san to the VIP
-        INSTALL_K3S_EXEC: "server --disable servicelb --tls-san {{ k3s_control_plane_vip }}"
+        INSTALL_K3S_EXEC: |
+          server --disable servicelb --tls-san {{ k3s_control_plane_vip }} --disable=traefik
+          --flannel-backend=none --disable-network-policy --cluster-cidr=10.42.0.0/16
       when: (reinstall | bool) or not k3s.stat.exists
 
 - name: Wait for all nodes to complete their registraion
@@ -142,8 +105,7 @@
   tasks:
     - name: Wait until all agents are registered
       become: true
-      ansible.builtin.shell: |
-        set -o pipefail
+      ansible.builtin.command: |
         k3s kubectl get nodes --no-headers | wc -l
       until: agents.stdout | int == {{ total_amount_of_nodes }} | int
       register: agents
