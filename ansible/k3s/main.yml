@@ -49,7 +49,7 @@
         K3S_NODE_NAME: "{{ node_name }}"
         INSTALL_K3S_EXEC: |
           --disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init
-          --flannel-backend=none --disable-network-policy --cluster-cidr=10.42.0.0/16 --disable=traefik
+          --cluster-cidr=10.42.0.0/16 --disable=traefik
       when: not k3s.stat.exists or (reinstall | bool)
 
     - name: Read node join token
@@ -95,7 +95,7 @@
         # This needs to include `server` first so it does not get registered as an agent. Set the --tls-san to the VIP
         INSTALL_K3S_EXEC: |
           server --disable servicelb --tls-san {{ k3s_control_plane_vip }} --disable=traefik
-          --flannel-backend=none --disable-network-policy --cluster-cidr=10.42.0.0/16
+          --cluster-cidr=10.42.0.0/16
       when: (reinstall | bool) or not k3s.stat.exists
 
 - name: Wait for all nodes to complete their registraion
