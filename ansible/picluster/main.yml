@@ -55,7 +55,7 @@
 
     - name: Check if install script exists
       ansible.builtin.stat:
-        path: "{{ SEARCH_PATH }}/{{ SEARCH_FILE }}"
+        path: "{{ search_path }}/{{ search_file }}"
       register: result
 
     - name: Download k3s install script
@@ -88,7 +88,7 @@
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
         K3S_NODE_NAME: "{{ node_name }}"
         INSTALL_K3S_EXEC: >
-          "--disable servicelb --tls-san {{ k3s_control_plane_vip }} --disable-traefik --cluster-init }}"
+          "--disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init }}"
       when: not k3s.stat.exists or (reinstall | bool)
 
     - name: Read node join token
@@ -108,7 +108,7 @@
       with_items: "{{ groups['remaining_k3s_servers'] }}"
 
     - name: Pause to allow first server startup
-      when: (groups[k3s_servers] | length) > 1
+      when: (groups['k3s_servers'] | length) > 1
       ansible.builtin.pause:
         seconds: 10
 
@@ -132,7 +132,7 @@
         K3S_URL: "https://{{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }}:6443"
         K3S_NODE_NAME: "{{ node_name }}"
         # This needs to include `server` first so it does not get registered as an agent. Set the --tls-san to the VIP
-        INSTALL_K3S_EXEC: "server --disable servicelb  --disable-traefik --tls-san {{ k3s_control_plane_vip }}"
+        INSTALL_K3S_EXEC: "server --disable servicelb --tls-san {{ k3s_control_plane_vip }}"
       when: (reinstall | bool) or not k3s.stat.exists
 
 - name: Wait for all nodes to complete their registraion
@@ -145,7 +145,7 @@
       ansible.builtin.shell: |
         set -o pipefail
         k3s kubectl get nodes --no-headers | wc -l
-      until: agents.stdout | int == total_amount_of_nodes | int
+      until: agents.stdout | int == {{ total_amount_of_nodes }} | int
       register: agents
       retries: 10
       delay: 10
