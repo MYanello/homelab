@@ -2,96 +2,111 @@
 
 ---
 
-- name: Setup baseline for all raspberrypi k3s nodes 
+- name: Setup baseline for all raspberrypi k3s nodes
   hosts: k3s_servers, k3s_agents
   vars:
     boot_file: /boot/cmdline.txt
   tasks:
-  - name: Check if cgroups are set correctly
-    become: yes
-    shell: grep -c 'cgroup_memory=1 cgroup_enable=memory' '{{ boot_file }}' | cat
-    register: cmdline
-    ignore_errors: yes
-  - name: Ensure cgroups are correctly set by updating raspberry pi
-    become: yes
-    ansible.builtin.lineinfile:
-      state: present
-      backrefs: yes
-      path: '{{ boot_file }}'
-      regexp: '(.+)(?!cgroup_memory=1 cgroup_enable=memory)'
-      line: '\1 cgroup_memory=1 cgroup_enable=memory'
-    when: cmdline.stdout == "0"
-  - name: Disable swap with dphys-swapfile
-    become: yes
-    shell: dphys-swapfile swapoff && dphys-swapfile uninstall && update-rc.d dphys-swapfile remove
-  - name: Disable dphys-swapfile service
-    become: yes
-    systemd:
-      name: dphys-swapfile
-      enabled: no
-    register: swapfile_service
-  - name: Reboot host if system settings were updated
-    become: yes
-    ansible.builtin.reboot:
-      reboot_timeout: 3600
-    when: cmdline.stdout == "0" or swapfile_service.changed
+    - name: Check if cgroups are set correctly
+      become: true
+      ansible.builtin.command:
+        cmd: grep -c 'cgroup_memory=1 cgroup_enable=memory' '{{ boot_file }}' | cat
+      register: cmdline
+      changed_when: false
+      ignore_errors: true
+
+    - name: Ensure cgroups are correctly set by updating raspberry pi
+      become: true
+      ansible.builtin.lineinfile:
+        state: present
+        backrefs: true
+        path: '{{ boot_file }}'
+        regexp: '(.+)(?!cgroup_memory=1 cgroup_enable=memory)'
+        line: '\1 cgroup_memory=1 cgroup_enable=memory'
+
+    - name: Disable swap with dphys-swapfile
+      become: true
+      ansible.builtin.command:
+        cmd: dphys-swapfile swapoff && dphys-swapfile uninstall && update-rc.d dphys-swapfile remove
+
+    - name: Disable dphys-swapfile service
+      become: true
+      ansible.builtin.systemd:
+        name: dphys-swapfile
+        enabled: false
+      register: swapfile_service
+
+    - name: Reboot host if system settings were updated
+      become: true
+      ansible.builtin.reboot:
+        reboot_timeout: 3600
+      when: cmdline.stdout == "0" or swapfile_service.changed
 
 - name: Get install k3s script
   hosts: k3s_servers
   vars:
-    SEARCH_PATH: "{{ k3s_install_script_dest | dirname }}"
-    SEARCH_FILE: "k3s-install.sh"
-  tasks:
-  - name: Check if k3s is already installed
-    ansible.builtin.stat:
-      path: /usr/local/bin/k3s
-    register: k3s
-  - name: Check if install script exists
-    stat:
-      path: "{{ SEARCH_PATH }}/{{ SEARCH_FILE }}"
-    register: result
-  - name: Download k3s install script
-    become: yes
-    get_url:
-      url: "https://get.k3s.io"
-      dest: "{{ k3s_install_script_dest }}"
-      mode: '0755'
-    when: not result.stat.exists
-  - name: Check if k3s is already installed
-    ansible.builtin.stat:
-      path: /usr/local/bin/k3s
-    register: k3s
-
-- name: Setup initial k3s server
-  hosts: initial_k3s_server
-  become: yes
+    search_path: "{{ k3s_install_script_dest | dirname }}"
+    search_file: "k3s-install.sh"
   tasks:
     - name: Check if k3s is already installed
       ansible.builtin.stat:
         path: /usr/local/bin/k3s
       register: k3s
+
+    - name: Check if install script exists
+      ansible.builtin.stat:
+        path: "{{ SEARCH_PATH }}/{{ SEARCH_FILE }}"
+      register: result
+
+    - name: Download k3s install script
+      become: true
+      ansible.builtin.get_url:
+        url: "https://get.k3s.io"
+        dest: "{{ k3s_install_script_dest }}"
+        mode: '0755'
+      when: not result.stat.exists
+
+    - name: Check if k3s is already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s
+      register: k3s
+
+- name: Setup initial k3s server
+  hosts: initial_k3s_server
+  become: true
+  tasks:
+    - name: Check if k3s is already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s
+      register: k3s
+
     - name: Bootstrap k3s cluster with etcd
-      become: yes
-      shell: "{{ k3s_install_script_dest }}"
+      become: true
+      ansible.builtin.command: "{{ k3s_install_script_dest }}"
       environment:
         INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
         K3S_NODE_NAME: "{{ node_name }}"
-        INSTALL_K3S_EXEC: "--disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init }}" # --bind-address {{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }} }}"
+        INSTALL_K3S_EXEC: >
+          "--disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init }}"
       when: not k3s.stat.exists or (reinstall | bool)
+
     - name: Read node join token
-      slurp:
+      ansible.builtin.slurp:
         src: /var/lib/rancher/k3s/server/token
       register: k3s_token_file
+
     - name: Set k3s_token fact
-      set_fact:
+      ansible.builtin.set_fact:
         k3s_token: "{{ k3s_token_file.content | b64decode | trim }}"
+
     - name: Delegate k3s_token fact to remaining k3s servers
-      set_fact:
+      ansible.builtin.set_fact:
         k3s_token: "{{ k3s_token }}"
       delegate_to: "{{ item }}"
       delegate_facts: true
       with_items: "{{ groups['remaining_k3s_servers'] }}"
+
     - name: Pause to allow first server startup
       when: (groups[k3s_servers] | length) > 1
       ansible.builtin.pause:
@@ -99,30 +114,22 @@
 
 - name: Setup remaining k3s servers
   hosts: remaining_k3s_servers
-  become: yes
+  become: true
   tasks:
-    - name: Show token
-      debug:
-        var: k3s_token
-    - name: Show url
-      debug:
-        var: "https://{{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }}:6443"
-
     - name: Check if k3s is already installed
       ansible.builtin.stat:
         path: /usr/local/bin/k3s
       register: k3s
-      
+
     - name: Install k3s on server
-      become: yes
-      command: "{{ k3s_install_script_dest }}"
+      become: true
+      ansible.builtin.command: "{{ k3s_install_script_dest }}"
       environment:
         INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
         K3S_TOKEN: '{{ k3s_token }}'
         # There will only ever be one host in this group
-        #K3S_URL: "https://{{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }}:6443"
-        K3S_URL: "https://192.168.10.2:6443"
+        K3S_URL: "https://{{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }}:6443"
         K3S_NODE_NAME: "{{ node_name }}"
         # This needs to include `server` first so it does not get registered as an agent. Set the --tls-san to the VIP
         INSTALL_K3S_EXEC: "server --disable servicelb --tls-san {{ k3s_control_plane_vip }}"
@@ -133,43 +140,55 @@
   vars:
     total_amount_of_nodes: "{{ groups['k3s_servers'] | count + groups['k3s_agents'] | count }}"
   tasks:
-  - name: Wait until all agents are registered
-    become: yes
-    shell: k3s kubectl get nodes --no-headers | wc -l
-    until: agents.stdout | int == total_amount_of_nodes | int
-    register: agents
-    retries: 10
-    delay: 10
+    - name: Wait until all agents are registered
+      become: true
+      ansible.builtin.shell: |
+        set -o pipefail
+        k3s kubectl get nodes --no-headers | wc -l
+      until: agents.stdout | int == total_amount_of_nodes | int
+      register: agents
+      retries: 10
+      delay: 10
 
 - name: Setup k3s agents
   hosts: k3s_agents
   tasks:
-  - name: Check if k3s is already installed
-    ansible.builtin.stat:
-      path: /usr/local/bin/k3s
-    register: k3s
-  - name: Extract k3s server node token from control node
-    local_action:
-      module: shell
-      cmd: cat node_join_token
-    register: node_join_token
-  - name: Install k3s on agent
-    become: yes
-    shell: curl -sfL https://get.k3s.io | sh -
-    environment:
-      K3S_TOKEN: "{{ node_join_token.stdout }}"
-      # Select the first host in the group of k3s servers as the server for the agent
-      K3S_URL: "https://{{  {{ k3s_control_plane_vip }} }}:6443"
-      K3S_NODE_NAME: "{{ inventory_hostname }}"
-    when: not k3s.stat.exists
+    - name: Check if k3s is already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s
+      register: k3s
+
+    - name: Extract k3s server node token from control node
+      local_action:
+        module: shell
+        cmd: cat node_join_token
+      register: node_join_token
+
+    - name: Download k3s install script
+      become: true
+      ansible.builtin.get_url:
+        url: "https://get.k3s.io"
+        dest: {{ k3s_install_script_dest }}
+        mode: '0755'
+      when: not k3s.stat.exists
+
+    - name: Install k3s on agent
+      become: true
+      ansible.builtin.command: /tmp/k3s_install.sh
+      environment:
+        K3S_TOKEN: "{{ node_join_token.stdout }}"
+        # Select the first host in the group of k3s servers as the server for the agent
+        K3S_URL: "https://{{ k3s_control_plane_vip }}:6443"
+        K3S_NODE_NAME: "{{ inventory_hostname }}"
+      when: not k3s.stat.exists
     #TODO
   # - name: Copy kubectl config from server to temp .kube directory on control node 
-  #   become: yes
+  #   become: true
   #   ansible.builtin.fetch:
   #     src: /etc/rancher/k3s/k3s.yaml
   #     dest: .kube/k3s-config
   #     # The kubeconfig should be identical for all servers
-  #     flat: yes
+  #     flat: true
 
 # - name: Setup kubectl on control node with new context
 #   hosts: localhost
@@ -183,7 +202,7 @@
 #       path: .kube/k3s-config
 #       regexp: '127\.0\.0\.1'
 #       replace: "{{ groups['k3s_servers'] | first }}" 
-#       backup: yes
+#       backup: true
 #   - name: Copy k3s kube config to $HOME/.kube directory
 #     ansible.builtin.copy:
 #       src: .kube/k3s-config

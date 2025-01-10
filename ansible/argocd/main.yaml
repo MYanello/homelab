@@ -1,0 +1,17 @@
+- name: Install argocd to k8s cluster
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Check if cgroups are set correctly
+    become: true
+    shell: grep -c 'cgroup_memory=1 cgroup_enable=memory' '{{ boot_file }}' | cat
+    register: cmdline
+    ignore_errors: true
+  - name: Ensure cgroups are correctly set by updating raspberry pi
+    become: true
+    ansible.builtin.lineinfile:
+      state: present
+      backrefs: true
+      path: '{{ boot_file }}'
+      regexp: '(.+)(?!cgroup_memory=1 cgroup_enable=memory)'
+      line: '\1 cgroup_memory=1 cgroup_enable=memory'
