@@ -1,0 +1,45 @@
+---
+- name: Reset system configuration
+  hosts: k3s_servers, k3s_agents
+  tasks:
+  # - name: Enable swap with dphys-swapfile
+  #   become: yes
+  #   shell: dphys-swapfile setup && dphys-swapfile swapon && update-rc.d dphys-swapfile start
+
+  # - name: Enable dphys-swapfile service
+  #   become: yes
+  #   systemd:
+  #     name: dphys-swapfile
+  #     enabled: yes
+  #     state: started
+  #   register: swapfile_service
+
+  # - name: Reboot host if system settings were updated
+  #   become: yes
+  #   ansible.builtin.reboot:
+  #     reboot_timeout: 3600
+  #   when: swapfile_service.changed
+
+- name: Uninstall k3s agents
+  hosts: k3s_agents
+  tasks:
+  - name: Check if script for uninstalling k3s agent is present
+    stat: 
+      path: /usr/local/bin/k3s-agent-uninstall.sh
+    register: k3s_present
+  
+  - name: Uninstall k3s from agent
+    shell: /usr/local/bin/k3s-agent-uninstall.sh
+    when: k3s_present.stat.exists
+
+- name: Uninstall k3s servers
+  hosts: k3s_servers
+  tasks:
+  - name: Check if script for uninstalling k3s server is present
+    stat: 
+      path: /usr/local/bin/k3s-uninstall.sh
+    register: k3s_present
+
+  - name: Uninstall k3s from server
+    shell: /usr/local/bin/k3s-uninstall.sh
+    when: k3s_present.stat.exists
