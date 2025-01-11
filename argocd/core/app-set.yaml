@@ -12,6 +12,8 @@ spec:
       - path: argocd/apps/**
       - path: argocd/apps/istio
         exclude: true
+      - path: argocd/apps/authentik
+        exclude: true
   template:
     metadata:
       name: '{{path.basename}}-app'
