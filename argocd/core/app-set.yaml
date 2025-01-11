@@ -10,6 +10,8 @@ spec:
       revision: main
       directories:
       - path: argocd/apps/**
+      - path: argocd/apps/istio/**
+        exclude: true
   template:
     metadata:
       name: '{{path.basename}}-app'

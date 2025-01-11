@@ -8,6 +8,8 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs.
 - Opnsense configured to use bgp and advertising the received routes
 - Able to reach argocd from the external ip set by metallb
 
+With opnsense running a virtual ip and haproxy load balancer there, the metallb load balancer isn't exactly necessary. However, it is good practice and exposure to setting up BGP.
+
 ### 01.10.25
 - Argocd applicationset to deploy applications in the repo
 
