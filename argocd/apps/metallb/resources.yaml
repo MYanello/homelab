@@ -18,7 +18,7 @@ spec:
   myASN: 64512
   peerASN: 65551
   peerAddress: 192.168.10.1
-  #bfdProfile: bfd-profile
+  bfdProfile: bfd-profile
 ---
 apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
