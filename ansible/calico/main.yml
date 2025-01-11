@@ -1,0 +1,52 @@
+# Bootstrap argocd to k8s cluster
+---
+
+- name: Install calico cni to k8s cluster
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Check if calico tigera operator exists
+      ansible.builtin.stat:
+        path: "{{ playbook_dir }}/tigera-operator.yaml"
+      register: operator_result
+
+    - name: Download calico tigera operator
+      ansible.builtin.get_url:
+        url: "https://docs.projectcalico.org/manifests/tigera-operator.yaml"
+        dest: "{{ playbook_dir }}/tigera-operator.yaml"
+        mode: '0755'
+      when: not operator_result.stat.exists
+
+    - name: Check if calico crd exists
+      ansible.builtin.stat:
+        path: "{{ playbook_dir }}/custom-resources.yaml"
+      register: crd_result
+
+    - name: Download calico crd
+      ansible.builtin.get_url:
+        url: "https://docs.projectcalico.org/manifests/custom-resources.yaml"
+        dest: "{{ playbook_dir }}/custom-resources.yaml"
+        mode: '0755'
+      when: not crd_result.stat.exists
+
+    - name: Set cidr range of cluster
+      ansible.builtin.lineinfile:
+        state: present
+        backrefs: true
+        path: '{{ playbook_dir }}/custom-resources.yaml'
+        regexp: '^(\s*)cidr:.*'
+        line: '\1cidr: {{ cluster_cidr }}'
+
+    # - name: Create namespace
+    #   kubernetes.core.k8s:
+    #     state: present
+    #     definition:
+    #       apiVersion: v1
+    #       kind: Namespace
+    #       metadata:
+    #         name: argocd
+    # - name: Install argocd
+    #   kubernetes.core.k8s:
+    #     state: present
+    #     src: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    #     namespace: argocd
