@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: metallb-system
+  project: default
+  source:
+    repoURL: https://metallb.github.io/metallb
+    targetRevision: '*'
+    chart: metallb
+    helm:
+      values: |
+        frrk8s:
+          enabled: true
+    # helm:
+      # valueFiles:
+      # - values.yaml
+      # valuesObject:
+      #   config: |
+      #     peers:
+      #     - peer-address: 192.168.10.1
+      #       peer-asn: 65551
+      #       my-asn: 64512
+      #       bfdProfile: bfd-profile
+      #     address-pools:
+      #     - name: address-pool
+      #       protocol: bgp
+      #       addresses:
+      #       - 10.11.0.0/22
+      #     bfdProfiles:
+      #     - name: bfd-profile
+      #       receive-interval: 380
+      #       transmit-interval: 270
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
