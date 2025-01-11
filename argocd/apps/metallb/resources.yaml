@@ -12,7 +12,7 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: BGPPeer
 metadata:
-  name: bgp-peer
+  name: opnsense
   namespace: metallb-system
 spec:
   myASN: 64512
