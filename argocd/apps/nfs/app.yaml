@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-storage
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: nfs-storage
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  source:
+    chart: nfs-subdir-external-provisioner
+    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+    targetRevision: '*'
+    helm:
+      releaseName: nfs-storage
+      passCredentials: false
+      parameters:
+      - name: "nfs.server"
+        value: "192.168.1.18"
+      - name: "nameOverride"
+        value: "nfs-storage"
+      - name: "nfs.volumeName"
+        value: "nfs-storage"
+      - name: "nfs.path"
+        value: "/zpool/k8s/"
+      - name: "storageClass.onDelete"
+        value: "retain"
+      - name: "storageClass.pathPattern"
+        value: "/\\$\\{\\.PVC\\.namespace\\}-\\$\\{\\.PVC\\.name\\}"
+      - name: "storageClass.name"
+        value: "nfs-storage"
+      - name: "storageClass.provisionerName"
+        value: "k8s-sigs.io/nfs-storage"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kube-system

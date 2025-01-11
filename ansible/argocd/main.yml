@@ -17,7 +17,7 @@
       kubernetes.core.k8s:
         state: present
         src: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-        namespace: 
+        namespace: argocd
 
     # - name: Patch argocd-server service to use LoadBalancer
     #   kubernetes.core.k8s:

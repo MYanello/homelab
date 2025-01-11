@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: ingress-nginx
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: '*'
+    chart: ingress-nginx
+    helm:
+      releaseName: ingress-nginx
+      passCredentials: false
+      # parameters:
+      #   - name: "controller.metrics.enabled"
+      #     value: "true"
+      #   - name: "controller.metrics.serviceMonitor.enabled"
+      #     value: "true"
+      #   - name: "controller.metrics.serviceMonitor.additionalLabels.release"
+      #     value: "monitoring"
+      #   - name: "controller.podAnnotations.prometheus\\.io/scrape"
+      #     value: "true"
+      #     forceString: true # ensures that value is treated as a string 
+      #   - name: "controller.podAnnotations.prometheus\\.io/port"
+      #     value: "10254"
+      #     forceString: true # ensures that value is treated as a string 

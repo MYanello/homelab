@@ -1,22 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-base
+  name: kubernetes-dashboard
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
-    namespace: istio-system
-  project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: '*'
-    chart: istio
+    namespace: kubernetes-dashboard
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/dashboard/
+    targetRevision: '*'
+    chart: kubernetes-dashboard
+
