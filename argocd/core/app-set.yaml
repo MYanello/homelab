@@ -3,17 +3,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: argocd-apps
-  namespace: argocd
 spec:
   generators:
   - git:
       repoURL: https://github.com/myanello/homelab
       revision: main
-      files:
-      - path: argocd/apps
+      directories:
+      - path: argocd/apps/**
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path}}-app'
+      namespace: argocd
     spec:
       project: default
       source:
@@ -21,9 +21,10 @@ spec:
         targetRevision: main
         path: '{{path}}'
       destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: default
+        name: 'in-cluster'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
