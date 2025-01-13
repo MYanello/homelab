@@ -22,7 +22,7 @@ spec:
     chart: vault
     helm:
       valuesObject:
-        - server:
-            ha:
-              enabled: true
-              replicas: 3
+        server:
+          ha:
+            enabled: true
+            replicas: 3
