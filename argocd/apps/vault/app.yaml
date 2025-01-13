@@ -22,6 +22,8 @@ spec:
     chart: vault
     helm:
       valuesObject:
+        global:
+          tlsDisable: true
         server:
           ha:
             enabled: true
