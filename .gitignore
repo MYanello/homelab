@@ -1,2 +1,4 @@
 ansible_collections/
 .vscode/
+.terraform/
+*tfstate*
