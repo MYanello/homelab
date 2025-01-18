@@ -1,9 +1,13 @@
 This is my attempt to move my homelab from manual deployed using mostly docker compose and manual editing of a handful of config files, to a more modern gitops approach.
-The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs.
+The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then there is a consumer desktop running a amd 5900x and quadro rtx 4000 that is used for specific workloads.
 
 ## Worklog
 ### 01.18.25
 - Moved the argocd core components that needed to be `k apply`d to terraform
+- Add server as a worker node but taint it so it doesn't run any workloads unless specified
+  - This removes the metallb speaker pod from the node
+    - This is desirable because the speaker pod should be on the same nodes as what haproxy passes traffic to for the k8s subdomain
+    - If it needed to change we could aadd speaker.nodeSelector.metallbSpeakerEnabled to the metallb helm values and then add the nodelabel to the nodes that should run the speaker
 ### 01.12.25
 - ingress-nginx setup. there is also nginx-ingress but ingress-nginx is preferred
 - ingress working at k8s.yanello.net
