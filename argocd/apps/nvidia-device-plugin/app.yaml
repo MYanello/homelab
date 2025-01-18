@@ -4,7 +4,7 @@ metadata:
   name: nvidia-device-plugin
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
@@ -14,15 +14,15 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
   project: default
   source:
     repoURL: https://helm.ngc.nvidia.com/nvidia
-    targetRevision: '*'
+    targetRevision: "*"
     chart: gpu-operator
     helm:
       valuesObject:
-        node-feature-discover:
+        node-feature-discovery:
           tolerations:
             - key: "node-role.kubernetes.io/master"
               operator: "Equal"
@@ -35,6 +35,27 @@ spec:
             - key: nvidia.com/gpu
               operator: Exists
               effect: NoSchedule
+            - key: node-role.kuberenetes.io/server
+              operator: Exists
+              effect: NoSchedule
+        daemonsets:
+          tolerations:
+            - key: nvidia.com/gpu
+              operator: Exists
+              effect: NoSchedule
+            - key: node-role.kuberenetes.io/server
+              operator: Exists
+              effect: NoSchedule
+        operater:
+          tolerations:
+            - key: "node-role.kubernetes.io/master"
+              operator: "Equal"
+              value: ""
+              effect: "NoSchedule"
+            - key: "node-role.kubernetes.io/control-plane"
+              operator: "Equal"
+              value: ""
+              effect: "NoSchedule"
             - key: node-role.kuberenetes.io/server
               operator: Exists
               effect: NoSchedule
