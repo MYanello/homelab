@@ -22,18 +22,19 @@ spec:
     chart: gpu-operator
     helm:
       valuesObject:
-        tolerations:
-          - key: "node-role.kubernetes.io/master"
-            operator: "Equal"
-            value: ""
-            effect: "NoSchedule"
-          - key: "node-role.kubernetes.io/control-plane"
-            operator: "Equal"
-            value: ""
-            effect: "NoSchedule"
-          - key: nvidia.com/gpu
-            operator: Exists
-            effect: NoSchedule
-          - key: node-role.kuberenetes.io/server
-            operator: Exists
-            effect: NoSchedule
+        node-feature-discover:
+          tolerations:
+            - key: "node-role.kubernetes.io/master"
+              operator: "Equal"
+              value: ""
+              effect: "NoSchedule"
+            - key: "node-role.kubernetes.io/control-plane"
+              operator: "Equal"
+              value: ""
+              effect: "NoSchedule"
+            - key: nvidia.com/gpu
+              operator: Exists
+              effect: NoSchedule
+            - key: node-role.kuberenetes.io/server
+              operator: Exists
+              effect: NoSchedule
