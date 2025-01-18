@@ -46,7 +46,7 @@ spec:
             - key: node-role.kubernetes.io/server
               operator: Exists
               effect: NoSchedule
-        operater:
+        operator:
           tolerations:
             - key: "node-role.kubernetes.io/master"
               operator: "Equal"
