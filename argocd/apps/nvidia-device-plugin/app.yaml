@@ -19,4 +19,4 @@ spec:
   source:
     repoURL: https://helm.ngc.nvidia.com/nvidia
     targetRevision: '*'
-    chart: nvidia/gpu-operator
+    chart: gpu-operator
