@@ -2,6 +2,8 @@ This is my attempt to move my homelab from manual deployed using mostly docker c
 The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs.
 
 ## Worklog
+### 01.18.25
+- Moved the argocd core components that needed to be `k apply`d to terraform
 ### 01.12.25
 - ingress-nginx setup. there is also nginx-ingress but ingress-nginx is preferred
 - ingress working at k8s.yanello.net
