@@ -1,6 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: authentik-secrets
+  namespace: argocd
+spec:
+  destination:
+    namespace: authentik
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: homelab/argocd/apps/authentik/secrets
+    repoURL: git@github.com:myanello/homelab.git
+    targetRevision: HEAD
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
   name: authentik
   namespace: argocd
   finalizers:
