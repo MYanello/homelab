@@ -28,3 +28,11 @@ spec:
           ha:
             enabled: true
             replicas: 3
+          standalone.enabled: false
+          serviceAccount.create: true
+          dataStorage:
+            enabled: true
+            size: 10Gi
+            storageClass: nfs-storage
+          dev.enabled: false
+          
