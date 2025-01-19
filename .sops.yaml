@@ -1,0 +1,3 @@
+creation_rules:
+  - path_regex: .*\.(yaml|json)$
+    age: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5 # public key / recipient

@@ -8,6 +8,11 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 - Installed the nvidia gpu operator
   - Had to install cuda drivers and container toolkit on the host
   - Had a bug for the containerd config version that required installing the latest version of container toolkit
+- Got vault working with a ton of manual steps that aren't gitops'd yet
+  - [source](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-minikube-raft#install-the-vault-helm-chart)
+  - To unseal the vault, run  
+  `export VAULT_UNSEAL_KEY=$(jq -r ".unseal_keys_b64[]" cluster-keys.json); kubectl exec -it vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY`
+  - Sops encrypted the cluster secret using my ssh key converted to an age key and stored in ~/.config/age/keys.txt
 ### 01.18.25
 - Moved the argocd core components that needed to be `k apply`d to terraform
 - Add server as a worker node but taint it so it doesn't run any workloads unless specified
