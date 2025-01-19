@@ -1,2 +1,7 @@
 generators:
   - ./secret-generator.yaml
+configMapGenerator:
+  - name: authentik-values
+    behavior: merge
+    envs:
+      - secret-enc.yaml

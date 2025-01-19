@@ -15,15 +15,15 @@ spec:
     targetRevision: '*'
     chart: authentik
     helm:
-      values: |
+      valuesObject:
         authentik:
-            secret_key: "PleaseGenerateASecureKey"
+            secret_key: ${authentik.secret_key}
             # This sends anonymous usage-data, stack traces on errors and
             # performance data to sentry.io, and is fully opt-in
             error_reporting:
                 enabled: true
             postgresql:
-                password: "ThisIsNotASecurePassword"
+                password: ${authentik.posgresql_password}
         server:
             ingress:
                 # Specify kubernetes ingress controller class name
@@ -34,6 +34,6 @@ spec:
         postgresql:
             enabled: true
             auth:
-                password: "ThisIsNotASecurePassword"
+                password: ${authentik.posgresql_password}
         redis:
             enabled: true
