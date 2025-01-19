@@ -31,9 +31,10 @@ spec:
     chart: authentik
     helm:
       valuesObject:
-        envFrom:
-          - secretRef:
-              name: authentik-secrets
+        global:
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
         authentik:
           error_reporting:
             enabled: true
