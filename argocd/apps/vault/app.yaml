@@ -23,7 +23,7 @@ spec:
     helm:
       valuesObject:
         global:
-          tlsDisable: true
+          tlsDisable: false
         server:
           ha:
             enabled: true
