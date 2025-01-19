@@ -22,7 +22,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             },
             {
               "path"    = "argocd/apps/authentik"
-              "exclude" = true
+              "exclude" = false
             },
             {
               "path"    = "argocd/apps/istio"
@@ -34,7 +34,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             },
             {
               "path"    = "argocd/apps/vault"
-              "exclude" = false
+              "exclude" = true
             },
             {
               "path"    = "argocd/apps/k8s-dash"
@@ -85,7 +85,7 @@ resource "kubernetes_manifest" "argocd_cm" {
       }
     }
     data = {
-      "kustomize.buildOptions" = "--enable-helm"
+      "kustomize.buildOptions" = "--enable-helm --enable-alpha-plugins --enable-exec"
     }
   }
 }

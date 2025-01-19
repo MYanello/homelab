@@ -13,6 +13,9 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
   - To unseal the vault, run  
   `export VAULT_UNSEAL_KEY=$(jq -r ".unseal_keys_b64[]" cluster-keys.json); kubectl exec -it vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY`
   - Sops encrypted the cluster secret using my ssh key converted to an age key and stored in ~/.config/age/keys.txt
+  - Decided vault may be a bit heavy for my needs. Going to investigate ksops
+- Installed ksops in argocd-repo-server
+  
 ### 01.18.25
 - Moved the argocd core components that needed to be `k apply`d to terraform
 - Add server as a worker node but taint it so it doesn't run any workloads unless specified
