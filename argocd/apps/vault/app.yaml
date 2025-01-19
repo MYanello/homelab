@@ -4,7 +4,7 @@ metadata:
   name: vault
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
@@ -14,11 +14,11 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
   project: default
   source:
     repoURL: https://helm.releases.hashicorp.com
-    targetRevision: '*'
+    targetRevision: "*"
     chart: vault
     helm:
       valuesObject:
@@ -27,7 +27,7 @@ spec:
         server:
           ha:
             enabled: true
-            replicas: 3
+            replicas: 2
             raft:
               enabled: true
               setNodeId: true
@@ -50,7 +50,7 @@ spec:
                     leader_api_addr = "http://vault-2.vault-internal:8200"
                   }
                 }
-                
+
           standalone.enabled: false
           serviceAccount.create: true
           # dataStorage:
@@ -58,4 +58,3 @@ spec:
           #   size: 10Gi
           #   storageClass: nfs-storage
           dev.enabled: false
-          
