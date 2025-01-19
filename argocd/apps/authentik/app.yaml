@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: homelab/argocd/apps/authentik/secrets
+    path: argocd/apps/authentik/secrets
     repoURL: https://github.com/myanello/homelab.git
     targetRevision: HEAD
 ---
