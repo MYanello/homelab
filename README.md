@@ -1,7 +1,13 @@
 This is my attempt to move my homelab from manual deployed using mostly docker compose and manual editing of a handful of config files, to a more modern gitops approach.
 The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then there is a consumer desktop running a amd 5900x and quadro rtx 4000 that is used for specific workloads.
 
+Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
+
 ## Worklog
+### 01.19.25
+- Installed the nvidia gpu operator
+  - Had to install cuda drivers and container toolkit on the host
+  - Had a bug for the containerd config version that required installing the latest version of container toolkit
 ### 01.18.25
 - Moved the argocd core components that needed to be `k apply`d to terraform
 - Add server as a worker node but taint it so it doesn't run any workloads unless specified

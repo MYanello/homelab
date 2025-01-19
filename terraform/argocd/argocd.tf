@@ -31,6 +31,14 @@ resource "kubernetes_manifest" "argocd_appset" {
             {
               "path"    = "argocd/apps/bitwarden-sm"
               "exclude" = true
+            },
+            {
+              "path"    = "argocd/apps/vault"
+              "exclude" = false
+            },
+            {
+              "path"    = "argocd/apps/k8s-dash"
+              "exclude" = true
             }
           ]
         }
