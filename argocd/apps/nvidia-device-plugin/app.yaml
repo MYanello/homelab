@@ -17,37 +17,24 @@ spec:
       - CreateNamespace=true
   project: default
   source:
-    repoURL: https://nvidia.github.io/k8s-device-plugin
+    repoURL: https://helm.ngc.nvidia.com/nvidia
     targetRevision: "*"
-    chart: nvidia-device-plugin
+    chart: gpu-operator
     helm:
       valuesObject:
-        nfd:
+        dcgmExporter.enabled: false
+        node-feature-discovery:
           worker:
-            - key: "node-role.kubernetes.io/master"
-              operator: "Equal"
-              value: ""
-              effect: "NoSchedule"
-            - key: "nvidia.com/gpu"
-              operator: "Equal"
-              value: "present"
-              effect: "NoSchedule"
+            tolerations:
+              - key: ""
+                operator: Exists
+                effect: ""
+        daemonsets:
+          tolerations:
+            - key: nvidia.com/gpu
+              operator: Exists
+              effect: NoSchedule
             - key: node-role.kubernetes.io/server
               operator: Exists
               effect: NoSchedule
-    #     dcgmExporter.enabled: false
-    #     node-feature-discovery:
-    #       worker:
-    #         tolerations:
-    #           - key: ""
-    #             operator: Exists
-    #             effect: ""
-    #     daemonsets:
-    #       tolerations:
-    #         - key: nvidia.com/gpu
-    #           operator: Exists
-    #           effect: NoSchedule
-    #         - key: node-role.kubernetes.io/server
-    #           operator: Exists
-    #           effect: NoSchedule
 
