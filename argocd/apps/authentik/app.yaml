@@ -19,7 +19,7 @@ metadata:
   name: authentik
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
@@ -27,24 +27,24 @@ spec:
   project: default
   source:
     repoURL: https://charts.goauthentik.io/
-    targetRevision: '*'
+    targetRevision: "*"
     chart: authentik
     helm:
       valuesObject:
+        envFrom:
+          - secretRef:
+              name: authentik-secrets
         authentik:
-            error_reporting:
-                enabled: true
+          error_reporting:
+            enabled: true
         server:
-            envFrom:
-              - secretRef:
-                  name: authentik-secrets
-            ingress:
-                # Specify kubernetes ingress controller class name
-                ingressClassName: nginx
-                enabled: true
-                hosts:
-                    - authentik.k8s.yanello.net
+          ingress:
+            # Specify kubernetes ingress controller class name
+            ingressClassName: nginx
+            enabled: true
+            hosts:
+              - authentik.k8s.yanello.net
         postgresql:
-            enabled: true
+          enabled: true
         redis:
-            enabled: true
+          enabled: true
