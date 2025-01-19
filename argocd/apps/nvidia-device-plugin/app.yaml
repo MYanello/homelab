@@ -20,8 +20,21 @@ spec:
     repoURL: https://nvidia.github.io/k8s-device-plugin
     targetRevision: "*"
     chart: nvidia-device-plugin
-    # helm:
-    #   valuesObject:
+    helm:
+      valuesObject:
+        nfd:
+          worker:
+            - key: "node-role.kubernetes.io/master"
+              operator: "Equal"
+              value: ""
+              effect: "NoSchedule"
+            - key: "nvidia.com/gpu"
+              operator: "Equal"
+              value: "present"
+              effect: "NoSchedule"
+            - key: node-role.kubernetes.io/server
+              operator: Exists
+              effect: NoSchedule
     #     dcgmExporter.enabled: false
     #     node-feature-discovery:
     #       worker:
