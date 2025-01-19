@@ -31,14 +31,18 @@ spec:
     chart: authentik
     helm:
       valuesObject:
-        global:
-          envFrom:
-            - secretRef:
-                name: authentik-secrets
+        #global:
+
         authentik:
           error_reporting:
             enabled: true
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
         server:
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
           ingress:
             # Specify kubernetes ingress controller class name
             ingressClassName: nginx
@@ -47,5 +51,13 @@ spec:
               - authentik.k8s.yanello.net
         postgresql:
           enabled: true
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
+          primary:
+            persistence:
+              enabled: true
+              storageClass: nfs-storage
+              accessMode: ReadWriteOnce
         redis:
           enabled: true

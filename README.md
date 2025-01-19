@@ -15,6 +15,8 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
   - Sops encrypted the cluster secret using my ssh key converted to an age key and stored in ~/.config/age/keys.txt
   - Decided vault may be a bit heavy for my needs. Going to investigate ksops
 - Installed ksops in argocd-repo-server
+  - main manual thing was just adding the age key as a secret in the argocd namespace and applying the ksops-patch.yaml
+  - needed to split authentik app up because argocd expects if there is a kustomization.yaml that that handles everything so the helm chart wasn't deploying
   
 ### 01.18.25
 - Moved the argocd core components that needed to be `k apply`d to terraform
