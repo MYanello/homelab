@@ -39,6 +39,10 @@ resource "kubernetes_manifest" "argocd_appset" {
             {
               "path"    = "argocd/apps/k8s-dash"
               "exclude" = true
+            },
+            {
+              "path"   = "argocd/apps/nvidia-gpu-operator",
+              "exclued" = true
             }
           ]
         }

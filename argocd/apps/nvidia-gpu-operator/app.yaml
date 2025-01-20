@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nvidia-gpu-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: nvidia-gpu-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  source:
+    repoURL: https://helm.ngc.nvidia.com/nvidia
+    targetRevision: "*"
+    chart: gpu-operator
+    helm:
+      valuesObject:
+        dcgmExporter.enabled: false
+        node-feature-discovery:
+          worker:
+            tolerations:
+              - key: ""
+                operator: Exists
+                effect: ""
+        daemonsets:
+          tolerations:
+            - key: nvidia.com/gpu
+              operator: Exists
+              effect: NoSchedule
+            - key: node-role.kubernetes.io/server
+              operator: Exists
+              effect: NoSchedule
+
