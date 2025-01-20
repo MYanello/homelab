@@ -54,7 +54,6 @@ spec:
               storageClass: nfs-storage
               accessMode: ReadWriteOnce
           auth:
-            username: test
             existingSecret: authentik-secrets
             secretKeys:
               adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
