@@ -23,7 +23,7 @@ spec:
     helm:
       valuesObject:
         gfd.enabled: true
-        runtimeClassName: nvidia
+        runtimeClassName: containerd
       #   dcgmExporter.enabled: false
       #   node-feature-discovery:
       #     worker:

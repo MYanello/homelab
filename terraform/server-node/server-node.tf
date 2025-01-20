@@ -13,3 +13,15 @@ resource "kubernetes_node_taint" "gpu" {
     effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
   }
 }
+
+resource "kubernetes_labels" "gpu" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "marcus-server"
+  }
+
+  labels = {
+    "nvidia.com/gpu.present" = "true"
+  }
+}
