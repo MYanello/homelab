@@ -34,7 +34,7 @@ spec:
         global:
           envFrom:
             - secretRef:
-                name: authentik
+                name: authentik-secret
         authentik:
           error_reporting:
             enabled: true
