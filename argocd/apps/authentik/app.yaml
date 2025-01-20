@@ -31,36 +31,14 @@ spec:
     chart: authentik
     helm:
       valuesObject:
+        global:
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
         authentik:
           error_reporting:
             enabled: true
-          # Use env instead of envFrom
           env:
-            AUTHENTIK_SECRET_KEY:
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secrets
-                  key: AUTHENTIK_SECRET_KEY
-            AUTHENTIK_POSTGRESQL__PASSWORD:
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secrets
-                  key: AUTHENTIK_POSTGRESQL__PASSWORD
-            AUTHENTIK_POSTGRESQL__HOST:
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secrets
-                  key: AUTHENTIK_POSTGRESQL__HOST
-            AUTHENTIK_POSTGRESQL__NAME:
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secrets
-                  key: AUTHENTIK_POSTGRESQL__NAME
-            AUTHENTIK_POSTGRESQL__USER:
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secrets
-                  key: AUTHENTIK_POSTGRESQL__USER
         server:
           ingress:
             ingressClassName: nginx
@@ -69,12 +47,6 @@ spec:
               - authentik.k8s.yanello.net
         postgresql:
           enabled: true
-          auth:
-            postgresPassword:
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secrets
-                  key: POSTGRES_PASSWORD
           primary:
             persistence:
               enabled: true
