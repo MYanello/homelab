@@ -23,6 +23,7 @@ spec:
     helm:
       valuesObject:
         gfd.enabled: true
+        runtimeClassName: nvidia
       #   dcgmExporter.enabled: false
       #   node-feature-discovery:
       #     worker:

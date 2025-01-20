@@ -42,7 +42,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             },
             {
               "path"   = "argocd/apps/nvidia-gpu-operator",
-              "exclued" = true
+              "exclude" = true
             }
           ]
         }
