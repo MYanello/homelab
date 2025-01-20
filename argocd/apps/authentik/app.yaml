@@ -38,7 +38,6 @@ spec:
         authentik:
           error_reporting:
             enabled: true
-          env:
         server:
           ingress:
             ingressClassName: nginx
