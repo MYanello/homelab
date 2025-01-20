@@ -46,8 +46,15 @@ spec:
               - authentik.k8s.yanello.net
         redis:
           enabled: true
-          global:
-            defaultStorageClass: nfs-storage
+          master:
+            persistence:
+              enabled: false
+          replica:
+            persistence:
+              enabled: false
+          sentinel:
+            persistence:
+              enabled: false
         postgresql:
           enabled: true
           primary:
