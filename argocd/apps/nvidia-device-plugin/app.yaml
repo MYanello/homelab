@@ -23,7 +23,7 @@ spec:
     helm:
       valuesObject:
         gfd.enabled: true
-        runtimeClassName: containerd
+        devicePlugin.enabled: false
       #   dcgmExporter.enabled: false
       #   node-feature-discovery:
       #     worker:
