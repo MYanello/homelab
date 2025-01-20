@@ -19,7 +19,7 @@ spec:
   source:
     repoURL: https://nvidia.github.io/k8s-device-plugin
     targetRevision: "*"
-    chart: nvdp
+    chart: nvidia-device-plugin
     helm:
       # valuesObject:
       #   dcgmExporter.enabled: false
