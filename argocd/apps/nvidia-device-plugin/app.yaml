@@ -22,8 +22,10 @@ spec:
     chart: nvidia-device-plugin
     helm:
       valuesObject:
-        gfd.enabled: true
-        devicePlugin.enabled: false
+        gfd:
+          enabled: true
+        devicePlugin:
+          enabled: false
       #   dcgmExporter.enabled: false
       #   node-feature-discovery:
       #     worker:
