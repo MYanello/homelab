@@ -58,7 +58,7 @@ spec:
             username: authentik
             existingSecret: authentik-secrets
             secretKeys:
-              adminPasswordKey: AUTHENTIK_POSTGRES__PASSWORD
-              passwordKey: AUTHENTIK_POSTGRES__PASSWORD
-              replicationPasswordKey: AUTHENTIK_POSTGRES__PASSWORD
+              adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+              passwordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+              replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
               
