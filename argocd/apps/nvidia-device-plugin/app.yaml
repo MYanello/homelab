@@ -24,8 +24,6 @@ spec:
       valuesObject:
         gfd:
           enabled: true
-        devicePlugin:
-          enabled: false
       #   dcgmExporter.enabled: false
       #   node-feature-discovery:
       #     worker:
