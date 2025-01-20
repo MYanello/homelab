@@ -8,6 +8,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 - Worked on authentik secrets and config
   - Found that . separators in yaml isn't valid for helm
   - Found that helm chart dependencies have their own values that can be overridden and have to be investigate independently
+  - PSQL wasn't being recreated on deletion. Found it was because it kept reusing the same PV.
 ### 01.19.25
 - Installed the nvidia gpu operator
   - Had to install cuda drivers and container toolkit on the host

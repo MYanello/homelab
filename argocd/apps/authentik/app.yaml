@@ -36,6 +36,13 @@ spec:
             - secretRef:
                 name: authentik-secrets
         authentik:
+          email:
+            host: smtp.gmail.com
+            port: 587
+            username: "marcus.yanello@gmail.com"
+            from: "authentik <marcus.yanello@gmail.com>"
+            use_tls: true
+            timeout: 30
           error_reporting:
             enabled: true
         server:
