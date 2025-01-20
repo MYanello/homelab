@@ -46,6 +46,8 @@ spec:
               - authentik.k8s.yanello.net
         redis:
           enabled: true
+          global:
+            defaultStorageClass: nfs-storage
         postgresql:
           enabled: true
           primary:
@@ -61,4 +63,3 @@ spec:
               adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
               userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
               replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
-              
