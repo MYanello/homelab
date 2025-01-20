@@ -21,7 +21,8 @@ spec:
     targetRevision: "*"
     chart: nvidia-device-plugin
     helm:
-      # valuesObject:
+      valuesObject:
+        gfd.enabled: true
       #   dcgmExporter.enabled: false
       #   node-feature-discovery:
       #     worker:
