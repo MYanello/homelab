@@ -34,7 +34,7 @@ spec:
         global:
           envFrom:
             - secretRef:
-                name: authentik-secrets
+                name: authentik
         authentik:
           error_reporting:
             enabled: true
@@ -52,8 +52,5 @@ spec:
               enabled: true
               storageClass: nfs-storage
               accessMode: ReadWriteOnce
-          envFrom:
-            - secretRef:
-                name: authentik-secrets
         redis:
           enabled: true
