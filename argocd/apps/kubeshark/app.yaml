@@ -20,4 +20,5 @@ spec:
     targetRevision: "*"
     chart: kubeshark
     helm:
-      valuesFile: values.yaml
+      valueFiles:
+        - values.yaml
