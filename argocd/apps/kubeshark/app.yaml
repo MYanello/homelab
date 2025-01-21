@@ -6,6 +6,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
   destination:
     name: in-cluster
     namespace: kubeshark
