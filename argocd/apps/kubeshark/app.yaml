@@ -14,3 +14,5 @@ spec:
     repoURL: https://helm.kubeshark.co
     targetRevision: "*"
     chart: kubeshark
+    helm:
+      valuesFile: values.yaml
