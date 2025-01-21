@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeshark
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: kubeshark
+  project: default
+  source:
+    repoURL: https://helm.kubeshark.co
+    targetRevision: "*"
+    chart: kubeshark
