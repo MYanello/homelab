@@ -4,6 +4,7 @@ metadata:
   name: gpu-operator-test
 spec:
   restartPolicy: OnFailure
+  runtimeClassName: nvidia
   containers:
     - name: cuda-vector-add
       # https://catalog.ngc.nvidia.com/orgs/nvidia/teams/k8s/containers/cuda-sample

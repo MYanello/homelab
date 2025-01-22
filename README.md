@@ -4,6 +4,9 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 01.22.25
+- Got the nvidia container runtime working in the server. Secret trick was `runtimeClassNmae: nvidia` in the pod spec
+
 ### 01.20.25
 - Worked on authentik secrets and config
   - Found that . separators in yaml isn't valid for helm
