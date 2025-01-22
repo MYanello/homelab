@@ -5,8 +5,8 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 ### 01.22.25
-- Got the nvidia container runtime working in the server. Secret trick was `runtimeClassNmae: nvidia` in the pod spec
-
+- Got the nvidia container runtime working in the server. Secret trick was `runtimeClassName: nvidia` in the pod spec
+- Also learned that k3s uses the containerd config in /var/lib/rancher/k3s/agent/etc/containerd/config.toml
 ### 01.20.25
 - Worked on authentik secrets and config
   - Found that . separators in yaml isn't valid for helm
