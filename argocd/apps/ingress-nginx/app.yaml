@@ -23,6 +23,12 @@ spec:
     helm:
       releaseName: ingress-nginx
       passCredentials: false
+      valuesObject:
+        controller:
+          config:
+            use-forwarded-headers: "true"
+            
+      
       # parameters:
       #   - name: "controller.metrics.enabled"
       #     value: "true"
