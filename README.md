@@ -4,13 +4,15 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 01.23.25
+- Authentik login is now working after telling ingress-nginx that it should use the forwarded headers from haproxy since it isn't on the edge
 ### 01.22.25
 - Got the nvidia container runtime working in the server. Secret trick was `runtimeClassName: nvidia` in the pod spec
 - Also learned that k3s uses the containerd config in /var/lib/rancher/k3s/agent/etc/containerd/config.toml
 ### 01.20.25
 - Worked on authentik secrets and config
   - Found that . separators in yaml isn't valid for helm
-  - Found that helm chart dependencies have their own values that can be overridden and have to be investigate independently
+  - Found that helm chart dependencies have their own values that can be overridden and have to be investigated independently
   - PSQL wasn't being recreated on deletion. Found it was because it kept reusing the same PV.
 ### 01.19.25
 - Installed the nvidia gpu operator
