@@ -83,6 +83,10 @@ tap:
       operator: In
       values:
       - linux
+    - key: kubernetes.io/arch
+      operator: NotIn
+      values:
+      - arm64
   auth:
     enabled: false
     type: saml
