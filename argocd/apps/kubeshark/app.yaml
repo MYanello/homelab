@@ -20,5 +20,16 @@ spec:
     targetRevision: "*"
     chart: kubeshark
     helm:
-      valueFiles:
-        - values.yaml
+      valuesObject:
+        tap:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/os
+              operator: In
+              values:
+              - linux
+            - key: kubernetes.io/arch
+              operator: NotIn
+              values:
+              - arm64
+

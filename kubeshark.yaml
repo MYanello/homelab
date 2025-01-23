@@ -35,7 +35,7 @@ tap:
   persistentStorageStatic: false
   efsFileSytemIdAndPath: ""
   storageLimit: 5000Mi
-  storageClass: nfs-storage
+  storageClass: standard
   dryRun: false
   resources:
     hub:
@@ -83,10 +83,6 @@ tap:
       operator: In
       values:
       - linux
-    - key: kubernetes.io/arch
-      operator: NotIn
-      values:
-      - arm64
   auth:
     enabled: false
     type: saml
@@ -108,12 +104,12 @@ tap:
           canStopTrafficCapturing: true
           showAdminConsoleLink: true
   ingress:
-    enabled: true
-    className: "nginx"
-    host: ks.k8s.yanello.net
+    enabled: false
+    className: ""
+    host: ks.svc.cluster.local
     tls: []
     annotations: {}
-  ipv6: false
+  ipv6: true
   debug: false
   telemetry:
     enabled: true
