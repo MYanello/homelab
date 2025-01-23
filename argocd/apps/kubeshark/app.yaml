@@ -32,4 +32,7 @@ spec:
               operator: NotIn
               values:
               - arm64
-
+          ingress:
+            enabled: true
+            className: "nginx"
+            host: ks.k8s.yanello.net
