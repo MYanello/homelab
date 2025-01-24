@@ -25,6 +25,7 @@ spec:
       passCredentials: false
       valuesObject:
         controller:
+          replicaCount: 3
           config:
             use-forwarded-headers: "true"
             proxy-read-timeout: "3600"
