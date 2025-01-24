@@ -37,8 +37,11 @@ spec:
               name: vaultwarden-data
               size: 15Gi
               class: nfs-storage
+              keepPvc: true
+              accessMode: ReadWriteMany
             attachments:
               name: vaultwarden-data
               keepPvc: true
+              accessMode: ReadWriteMany
               size: 15Gi
               class: nfs-storage
