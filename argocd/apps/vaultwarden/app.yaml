@@ -24,8 +24,8 @@ spec:
           ingress:
             enabled: true
             className: "nginx"
-            hostname: bitwarden.k8s.yanello.net
-          domain: "https://bitwarden.k8s.yanello.net"
+            hostname: bitwarden.yanello.net
+          domain: "https://bitwarden.yanello.net"
           replicas: 3
           service:
             sessionAffinity: ClientIP
