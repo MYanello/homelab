@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    name: in-cluster
+    namespace: vaultwarden
+  project: default
+  source:
+    repoURL: https://guerzon.github.io/vaultwarden
+    targetRevision: "*"
+    chart: vaultwarden
+    helm:
+      valuesObject:
+          ingress:
+            enabled: true
+            className: "nginx"
+            host: bitwarden.k8s.yanello.net
+          domain: "https://bitwarden.k8s.yanello.net"
+          replicas: 3
+          service:
+            sessionAffinity: ClientIP
+            sessionAffinityConfig:
+              clientIP:
+                timeoutSeconds: 10800
+          storage:
+            data:
+              name: vaultwarden-data
+              size: 15Gi
+              class: nfs-storage
+            attachments:
+              name: vaultwarden-data
+              keepPvc: true
+              size: 15Gi
+              class: nfs-storage
