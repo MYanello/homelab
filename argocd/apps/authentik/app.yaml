@@ -51,6 +51,7 @@ spec:
             enabled: true
             hosts:
               - authentik.k8s.yanello.net
+          replicas: 3
         redis:
           enabled: true
           master:
