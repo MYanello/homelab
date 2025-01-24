@@ -29,12 +29,12 @@ spec:
             additionalAnnotations:
               nginx.org/websocket-services: "vaultwarden"
           domain: "https://bitwarden.k8s.yanello.net"
-          replicas: 3
-          service:
-            sessionAffinity: ClientIP
-            sessionAffinityConfig:
-              clientIP:
-                timeoutSeconds: 10800
+          # replicas: 3
+          # service:
+          #   sessionAffinity: ClientIP
+          #   sessionAffinityConfig:
+          #     clientIP:
+          #       timeoutSeconds: 10800
           storage:
             data:
               name: vaultwarden-data
