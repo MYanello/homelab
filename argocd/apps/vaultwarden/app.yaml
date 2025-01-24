@@ -26,6 +26,8 @@ spec:
             enabled: true
             className: "nginx"
             hostname: bitwarden.k8s.yanello.net
+            additionalAnnotations:
+              nginx.org/websocket-services: "vaultwarden"
           domain: "https://bitwarden.k8s.yanello.net"
           replicas: 3
           service:
