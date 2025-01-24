@@ -4,6 +4,12 @@ metadata:
   name: authentik-secrets
   namespace: argocd
 spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
   destination:
     namespace: authentik
     server: https://kubernetes.default.svc
@@ -21,6 +27,12 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
   destination:
     name: in-cluster
     namespace: authentik
