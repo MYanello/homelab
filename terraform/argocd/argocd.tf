@@ -81,7 +81,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   spec {
     ingress_class_name = "nginx"
     rule {
-      host = "argocd.k8s.yanello.net"
+      host = "argocd.yanello.net"
       http {
         path {
           path      = "/"
