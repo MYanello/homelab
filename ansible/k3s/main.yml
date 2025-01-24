@@ -1,7 +1,6 @@
 # playbook to setup the cluster. mostly sourced from https://fredrickb.com/2024/10/29/making-the-k3s-cluster-ha/
 
 ---
-
 - name: Get install k3s script
   hosts: k3s_servers
   vars:
@@ -23,7 +22,7 @@
       ansible.builtin.get_url:
         url: "https://get.k3s.io"
         dest: "{{ k3s_install_script_dest }}"
-        mode: '0755'
+        mode: "0755"
       when: not result.stat.exists
 
     - name: Check if k3s is already installed
@@ -88,7 +87,7 @@
       environment:
         INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
-        K3S_TOKEN: '{{ k3s_token }}'
+        K3S_TOKEN: "{{ k3s_token }}"
         # There will only ever be one host in this group
         K3S_URL: "https://{{ hostvars[groups['initial_k3s_server'][0]].ansible_default_ipv4.address }}:6443"
         K3S_NODE_NAME: "{{ node_name }}"
@@ -105,7 +104,7 @@
   tasks:
     - name: Wait until all agents are registered
       become: true
-      ansible.builtin.command: |
+      ansible.builtin.shell: |
         k3s kubectl get nodes --no-headers | wc -l
       until: agents.stdout | int == {{ total_amount_of_nodes }} | int
       register: agents
@@ -130,8 +129,8 @@
       become: true
       ansible.builtin.get_url:
         url: "https://get.k3s.io"
-        dest: {{ k3s_install_script_dest }}
-        mode: '0755'
+        dest: "{{ k3s_install_script_dest }}"
+        mode: "0755"
       when: not k3s.stat.exists
     - name: Install k3s on agent
       become: true
@@ -143,14 +142,13 @@
         K3S_NODE_NAME: "{{ inventory_hostname }}"
       when: not k3s.stat.exists
     #TODO
-  # - name: Copy kubectl config from server to temp .kube directory on control node 
+  # - name: Copy kubectl config from server to temp .kube directory on control node
   #   become: true
   #   ansible.builtin.fetch:
   #     src: /etc/rancher/k3s/k3s.yaml
   #     dest: .kube/k3s-config
   #     # The kubeconfig should be identical for all servers
   #     flat: true
-
 # - name: Setup kubectl on control node with new context
 #   hosts: localhost
 #   tasks:
@@ -162,7 +160,7 @@
 #     ansible.builtin.replace:
 #       path: .kube/k3s-config
 #       regexp: '127\.0\.0\.1'
-#       replace: "{{ groups['k3s_servers'] | first }}" 
+#       replace: "{{ groups['k3s_servers'] | first }}"
 #       backup: true
 #   - name: Copy k3s kube config to $HOME/.kube directory
 #     ansible.builtin.copy:
