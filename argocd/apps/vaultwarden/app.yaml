@@ -28,6 +28,8 @@ spec:
             hostname: bitwarden.k8s.yanello.net
             additionalAnnotations:
               nginx.org/websocket-services: "vaultwarden"
+              nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+              nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
           domain: "https://bitwarden.k8s.yanello.net"
           # replicas: 3
           # service:
