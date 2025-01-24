@@ -6,6 +6,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ## Worklog
 ### 01.23.25
 - Authentik login is now working after telling ingress-nginx that it should use the forwarded headers from haproxy since it isn't on the edge
+- Ran some further tests with the ingress and haproxy on the edge. Found that my private/public map files worked just as well for k8s endpoints. I simply need to point the subdomain such as bitwarden to k8s as the backend instead of to bitwarden as the backend. This is a good solution because it allows me to use the same haproxy config setup for both k8s and non-k8s services and will allow me to slowly migrate away from using the bad haproxy ui in opnsense for configuration of my routes.
 ### 01.22.25
 - Got the nvidia container runtime working in the server. Secret trick was `runtimeClassName: nvidia` in the pod spec
 - Also learned that k3s uses the containerd config in /var/lib/rancher/k3s/agent/etc/containerd/config.toml
