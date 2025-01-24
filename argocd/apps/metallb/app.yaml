@@ -14,6 +14,12 @@ spec:
     repoURL: https://metallb.github.io/metallb
     targetRevision: '*'
     chart: metallb
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
     # helm:
     #   values: |
     #     frrk8s:
@@ -37,10 +43,3 @@ spec:
       #     - name: bfd-profile
       #       receive-interval: 380
       #       transmit-interval: 270
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
