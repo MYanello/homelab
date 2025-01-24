@@ -36,7 +36,7 @@ spec:
       - name: "storageClass.onDelete"
         value: "retain"
       - name: "storageClass.pathPattern"
-        value: ${.PVC.namespace}/${.PVC.name}
+        value: ${.PVC.namespace}.${.PVC.name}
       - name: "storageClass.name"
         value: "nfs-storage"
       - name: "storageClass.provisionerName"
