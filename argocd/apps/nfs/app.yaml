@@ -23,24 +23,16 @@ spec:
     targetRevision: '*'
     helm:
       releaseName: nfs-storage
-      passCredentials: false
-      parameters:
-      - name: "nfs.server"
-        value: "192.168.1.18"
-      - name: "nameOverride"
-        value: "nfs-storage"
-      - name: "nfs.volumeName"
-        value: "nfs-storage"
-      - name: "nfs.path"
-        value: "/zpool/k8s/"
-      - name: "storageClass.onDelete"
-        value: "retain"
-      - name: "storageClass.pathPattern"
-        value: ${.PVC.namespace}.${.PVC.name}
-      - name: "storageClass.name"
-        value: "nfs-storage"
-      - name: "storageClass.provisionerName"
-        value: "k8s-sigs.io/nfs-storage"
+      valuesObject:
+        nfs:
+          server: 192.168.1.18
+          volumeName: nfs-storage
+          path: /zpool/k8s/
+        storageClass:
+          onDelete: retain
+          pathPattern: ${.PVC.namespace}.${.PVC.name}
+          name: nfs-storage
+          provisionerName: k8s-sigs.io/nfs-storage
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kube-system
