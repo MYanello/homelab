@@ -5,6 +5,10 @@ metadata:
   namespace: ytdl
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - ytdl.yanello.net
+      secretName: ytdl-cert-secret
   rules:
     - host: ytdl.yanello.net
       http:
