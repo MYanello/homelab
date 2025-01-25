@@ -55,6 +55,22 @@ spec:
               name: subscriptions
             - mountPath: /app/users
               name: users
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 17442
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 17442
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
       restartPolicy: Always
       volumes:
         - name: appdata
@@ -72,22 +88,6 @@ spec:
         - name: users
           persistentVolumeClaim:
             claimName: users
-      readinessProbe:
-        httpGet:
-          path: /
-          port: 17442
-        initialDelaySeconds: 30
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 3
-      livenessProbe:
-        httpGet:
-          path: /
-          port: 17442
-        initialDelaySeconds: 60
-        periodSeconds: 15
-        timeoutSeconds: 5
-        failureThreshold: 3
 ---
 apiVersion: apps/v1
 kind: Deployment
