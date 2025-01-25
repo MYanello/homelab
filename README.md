@@ -5,6 +5,11 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 
+### 01.24.25
+- Got the first app migrated off docker compose to k8s: ytdl. This will likely be the first app to be fully migrated because it is the simplest in terms of configuration and state.
+  - No crazy issues, kompose seemed to do a decent job if not perfect.
+  - Scaled down to allow the copy from the docker folder to nfs folder to complete
+
 ### 01.23.25
 
 - Authentik login is now working after telling ingress-nginx that it should use the forwarded headers from haproxy since it isn't on the edge
