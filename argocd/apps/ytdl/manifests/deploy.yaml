@@ -81,6 +81,6 @@ spec:
               name: mongodb
       restartPolicy: Always
       volumes:
-        - name: mongodb
+        - name: db
           persistentVolumeClaim:
-            claimName: mongodb
+            claimName: db

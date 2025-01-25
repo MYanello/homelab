@@ -15,7 +15,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     io.kompose.service: mongodb
-  name: mongodb
+  name: db
 spec:
   accessModes:
     - ReadWriteOnce
