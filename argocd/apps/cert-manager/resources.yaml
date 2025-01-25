@@ -1,24 +1,26 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: selfsigned-issuer
+  name: local-root-ca-issuer-selfsigned
 spec:
   selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: local-ca-cert
+  name: local-root-ca
   namespace: cert-manager
 spec:
   isCA: true
-  commonName: local-ca
-  secretName: ca-key-pair
+  commonName: local-root-ca
+  secretName: local-root-ca-secret
+  duration: 87600h # 10 years
+  renewBefore: 78840h # 9 years
   privateKey:
     algorithm: ECDSA
     size: 256
   issuerRef:
-    name: selfsigned-issuer
+    name:  local-root-ca-issuer-selfsigned
     kind: ClusterIssuer
     group: cert-manager.io
   nameConstraints:
@@ -26,13 +28,11 @@ spec:
     permitted:
       dnsDomains:
         - yanello.net
-
-
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: ca-issuer
+  name: local-root-ca-issuer
 spec:
   ca:
-    secretName: ca-key-pair
+    secretName: local-root-ca-secret
