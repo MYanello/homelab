@@ -6,10 +6,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: local-intermediate-ca1-issuer
     cert-manager.io/common-name: "ytdl.yanello.net"
-    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
-    nginx.ingress.kubernetes.io/auth-tls-secret: "ytdl/internal-ca-secret"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
