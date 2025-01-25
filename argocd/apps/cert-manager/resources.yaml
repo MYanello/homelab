@@ -65,3 +65,5 @@ metadata:
 spec:
   ca:
     secretName: local-intermediate-ca1-secret
+    
+  
