@@ -8,7 +8,7 @@ metadata:
     io.kompose.service: ytdl
   name: ytdl
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: ytdl
@@ -83,7 +83,7 @@ metadata:
     io.kompose.service: ytdl-mongo-db
   name: ytdl-mongo-db
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
