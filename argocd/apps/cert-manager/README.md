@@ -1,3 +1,6 @@
+https://raymii.org/s/tutorials/nameConstraints_on_your_Self_Signed_Root_CA_in_Kubernetes_with_cert_manager.html
+https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-manager_and_traefik.html
+
 Test cert is working and signed:
 `openssl verify -CAfile <(kubectl -n cert-manager get secret local-root-ca-secret -o jsonpath='{.data.tls\.crt}' | base64 --decode) <(kubectl -n cert-manager get secret local-intermediate-ca1-secret -o jsonpath='{.data.tls\.crt}' | base64 --decode)`
 
