@@ -17,6 +17,6 @@ spec:
     syncOptions:
     - CreateNamespace=true
   source:
-    repoURL: git@github.com/myanello/homelab.git
+    repoURL: git@github.com:myanello/homelab.git
     targetRevision: HEAD
     path: argocd/apps/ytdl/manifests
