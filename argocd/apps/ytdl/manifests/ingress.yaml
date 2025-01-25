@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: ytdl.k8s.yanello.net
+    - host: ytdl.yanello.net
       http:
         paths:
           - backend:
