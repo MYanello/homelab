@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: appdata
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteOnce
   resources:
@@ -14,6 +15,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: audio
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteOnce
   resources:
@@ -27,6 +29,7 @@ metadata:
     io.kompose.service: ytdl-claim0
   name: video
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteOnce
   resources:
@@ -38,6 +41,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: subscriptions
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteOnce
   resources:
@@ -49,6 +53,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: users
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteOnce
   resources:
