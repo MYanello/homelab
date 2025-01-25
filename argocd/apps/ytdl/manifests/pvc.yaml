@@ -65,6 +65,7 @@ metadata:
     io.kompose.service: mongodb
   name: db
 spec:
+  storageClassName: nfs-storage
   accessModes:
     - ReadWriteOnce
   resources:
