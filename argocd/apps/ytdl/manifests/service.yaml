@@ -14,3 +14,14 @@ spec:
       targetPort: 17442
   selector:
     io.kompose.service: ytdl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ytdl-mongo-db
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  selector:
+    app: ytdl-mongo-db
