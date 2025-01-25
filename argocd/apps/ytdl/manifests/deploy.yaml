@@ -22,6 +22,8 @@ spec:
       labels:
         io.kompose.service: ytdl
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: arm64
       containers:
         - env:
             - name: ALLOW_CONFIG_MUTATIONS
@@ -39,8 +41,6 @@ spec:
           image: tzahi12345/youtubedl-material:latest
           imagePullPolicy: Always
           name: ytdl
-          nodeSelector:
-            beta.kubernetes.io/arch: arm64
           ports:
             - containerPort: 17442
               protocol: TCP
@@ -87,8 +87,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
-  nodeSelector:
-    beta.kubernetes.io/arch: arm64
   strategy:
     type: Recreate
   template:
@@ -96,6 +94,8 @@ spec:
       labels:
         io.kompose.service: ytdl-mongo-db
     spec:
+      nodeSelector:
+          beta.kubernetes.io/arch: arm64
       containers:
         - image: mongo:4.4.18
           imagePullPolicy: Always
