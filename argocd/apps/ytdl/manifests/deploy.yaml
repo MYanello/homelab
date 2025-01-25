@@ -126,7 +126,7 @@ spec:
           startupProbe:
             httpGet:
               path: /
-              port: 17442
+              port: 27017
             failureThreshold: 30
             periodSeconds: 10
           readinessProbe:
