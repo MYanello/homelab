@@ -21,6 +21,13 @@ spec:
     name: selfsigned-issuer
     kind: ClusterIssuer
     group: cert-manager.io
+  nameConstraints:
+    isCritical: true
+    permitted:
+      dnsDomains:
+        - yanello.net
+
+
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
