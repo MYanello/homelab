@@ -119,7 +119,6 @@ spec:
           beta.kubernetes.io/arch: arm64
       containers:
         - image: mongo:4.4.18
-          imagePullPolicy: Always
           name: ytdl-mongo-db
           volumeMounts:
             - mountPath: /data/db
