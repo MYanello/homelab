@@ -4,7 +4,8 @@ metadata:
   name: ytdl
   namespace: ytdl
   annotations:
-    cert-manager.io/cluster-issuer: local-intermediate-ca1-issuer
+    #cert-manager.io/cluster-issuer: local-intermediate-ca1-issuer
+    cert-manager.io/cluster-issuer: local-root-ca-issuer
     cert-manager.io/common-name: "ytdl.yanello.net"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
