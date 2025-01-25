@@ -8,7 +8,7 @@ metadata:
     io.kompose.service: ytdl
   name: ytdl
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       io.kompose.service: ytdl
@@ -104,7 +104,7 @@ metadata:
     io.kompose.service: ytdl-mongo-db
   name: ytdl-mongo-db
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
@@ -144,7 +144,7 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
-  restartPolicy: Always
+      restartPolicy: Always
       volumes:
         - name: db
           persistentVolumeClaim:
