@@ -22,7 +22,7 @@ spec:
     kind: ClusterIssuer
     group: cert-manager.io
   nameConstraints:
-    isCritical: true
+    critical: true
     permitted:
       dnsDomains:
         - yanello.net
