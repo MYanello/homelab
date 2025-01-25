@@ -78,7 +78,7 @@ spec:
           name: ytdl-mongo-db
           volumeMounts:
             - mountPath: /data/db
-              name: mongodb
+              name: db
       restartPolicy: Always
       volumes:
         - name: db
