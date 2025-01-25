@@ -39,6 +39,8 @@ spec:
           image: tzahi12345/youtubedl-material:latest
           imagePullPolicy: Always
           name: ytdl
+          nodeSelector:
+            beta.kubernetes.io/arch: arm64
           ports:
             - containerPort: 17442
               protocol: TCP
@@ -65,6 +67,8 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
+  nodeSelector:
+    beta.kubernetes.io/arch: arm64
   strategy:
     type: Recreate
   template:
