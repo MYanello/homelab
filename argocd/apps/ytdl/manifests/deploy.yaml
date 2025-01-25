@@ -45,13 +45,33 @@ spec:
             - containerPort: 17442
               protocol: TCP
           volumeMounts:
-            - mountPath: /app/
-              name: data
+            - mountPath: /app/appdata
+              name: appdata
+            - mountPath: /app/audio
+              name: audio
+            - mountPath: /app/video
+              name: video
+            - mountPath: /app/subscriptions
+              name: subscriptions
+            - mountPath: /app/users
+              name: users
       restartPolicy: Always
       volumes:
-        - name: data
+        - name: appdata
           persistentVolumeClaim:
-            claimName: data
+            claimName: appdata
+        - name: audio
+          persistentVolumeClaim:
+            claimName: audio
+        - name: video
+          persistentVolumeClaim:
+            claimName: video
+        - name: subscriptions
+          persistentVolumeClaim:
+            claimName: subscriptions
+        - name: users
+          persistentVolumeClaim:
+            claimName: users
 ---
 apiVersion: apps/v1
 kind: Deployment
