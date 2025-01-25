@@ -37,7 +37,7 @@ spec:
             - name: ytdl_use_local_db
               value: "false"
           image: tzahi12345/youtubedl-material:latest
-          imagepullPolicy: Always
+          imagePullPolicy: Always
           name: ytdl
           ports:
             - containerPort: 17442
