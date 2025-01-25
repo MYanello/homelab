@@ -27,6 +27,6 @@ spec:
               service:
                 name: ytdl
                 port:
-                  name: http
+                  name: 8998
             path: /
             pathType: Prefix
