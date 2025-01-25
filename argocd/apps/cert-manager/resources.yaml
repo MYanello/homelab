@@ -46,8 +46,8 @@ metadata:
   namespace: cert-manager
 spec:
   isCA: true
-  commonName: spnw-intermediate-ca1
-  secretName: spnw-intermediate-ca1-secret
+  commonName: local-intermediate-ca1
+  secretName: local-intermediate-ca1-secret
   duration: 43800h # 5y
   renewBefore: 35040h # 4y
   privateKey:
