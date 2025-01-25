@@ -23,6 +23,5 @@ spec:
     helm:
       valuesObject:
         installCRDs: true
-        featureGates:
-          NameConstraints: true
+        featureGates: NameConstraints
         
