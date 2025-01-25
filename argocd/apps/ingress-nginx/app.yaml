@@ -4,7 +4,7 @@ metadata:
   name: ingress-nginx
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
@@ -15,10 +15,10 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: '*'
+    targetRevision: "*"
     chart: ingress-nginx
     helm:
       releaseName: ingress-nginx
@@ -30,7 +30,10 @@ spec:
             use-forwarded-headers: "true"
             proxy-read-timeout: "3600"
             proxy-send-timeout: "3600"
-      
+          service:
+            annotations:
+              metallb.universe.tf/loadBalancerIPs: 10.10.8.0
+
       # parameters:
       #   - name: "controller.metrics.enabled"
       #     value: "true"
@@ -40,7 +43,7 @@ spec:
       #     value: "monitoring"
       #   - name: "controller.podAnnotations.prometheus\\.io/scrape"
       #     value: "true"
-      #     forceString: true # ensures that value is treated as a string 
+      #     forceString: true # ensures that value is treated as a string
       #   - name: "controller.podAnnotations.prometheus\\.io/port"
       #     value: "10254"
-      #     forceString: true # ensures that value is treated as a string 
+      #     forceString: true # ensures that value is treated as a string
