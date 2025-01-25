@@ -73,7 +73,8 @@ spec:
         io.kompose.service: ytdl-mongo-db
     spec:
       containers:
-        - image: mongo:4.18
+        - image: mongo
+          imagePullPolicy: Always
           name: ytdl-mongo-db
           volumeMounts:
             - mountPath: /data/db
