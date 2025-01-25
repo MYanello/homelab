@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f ytdl.yaml convert
+    kompose.version: 1.35.0 (HEAD)
+  labels:
+    io.kompose.service: ytdl
+  name: ytdl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ytdl
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f ytdl.yaml convert
+        kompose.version: 1.35.0 (HEAD)
+      labels:
+        io.kompose.service: ytdl
+    spec:
+      containers:
+        - env:
+            - name: ALLOW_CONFIG_MUTATIONS
+              value: "true"
+            - name: write_ytdl_config
+              value: "true"
+            - name: ytdl_allow_registration
+              value: "false"
+            - name: ytdl_mongodb_connection_string
+              value: mongodb://ytdl-mongo-db:27017
+            - name: ytdl_multi_user_mode
+              value: "true"
+            - name: ytdl_use_local_db
+              value: "false"
+          image: tzahi12345/youtubedl-material:latest
+          name: ytdl
+          ports:
+            - containerPort: 17442
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/appdata
+              name: appdata
+            - mountPath: /app/audio
+              name: audio
+            - mountPath: /app/video
+              name: video
+            - mountPath: /app/subscriptions
+              name: subscriptions
+            - mountPath: /app/users
+              name: users
+      restartPolicy: Always
+      volumes:
+        - name: appdata
+          persistentVolumeClaim:
+            claimName: appdata
+        - name: audio
+          persistentVolumeClaim:
+            claimName: audio
+        - name: video
+          persistentVolumeClaim:
+            claimName: video
+        - name: subscriptions
+          persistentVolumeClaim:
+            claimName: subscriptions
+        - name: users
+          persistentVolumeClaim:
+            claimName: users
