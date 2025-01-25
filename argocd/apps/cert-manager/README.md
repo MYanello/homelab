@@ -6,6 +6,7 @@ Test cert is working and signed:
 
 
 # To get a cert for ingress
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -31,3 +32,4 @@ spec:
   - hosts:
     - echo.k3s.homelab.mydomain.org
       secretName: echo-cert-secret
+```

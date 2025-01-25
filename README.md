@@ -6,6 +6,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ## Worklog
 ### 01.25.25
 - Setting up cert-manager following [this](https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-manager_and_traefik.html).
+- Found kubeshark worker cant run on rpi because it lacks bpf support. 
 
 ### 01.24.25
 - Got the first app migrated off docker compose to k8s: ytdl. This will likely be the first app to be fully migrated because it is the simplest in terms of configuration and state.
