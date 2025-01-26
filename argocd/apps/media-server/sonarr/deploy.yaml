@@ -34,7 +34,7 @@ spec:
           imagePullPolicy: Always
           name: sonarr
           ports:
-            - containerPort: 7878
+            - containerPort: 8989
               protocol: TCP
           volumeMounts:
             - mountPath: /config

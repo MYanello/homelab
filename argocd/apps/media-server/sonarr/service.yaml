@@ -9,8 +9,8 @@ metadata:
   name: sonarr
 spec:
   ports:
-    - name: "7878"
-      port: 7878
-      targetPort: 7878
+    - name: "8989"
+      port: 8989
+      targetPort: 8989
   selector:
     io.kompose.service: sonarr
