@@ -13,7 +13,6 @@ spec:
   template:
     metadata:
       name: "{{path.basename}}-app"
-      namespace: {{path.basename}}
     spec:
       project: default
       syncPolicy:
@@ -24,7 +23,7 @@ spec:
           - CreateNamespace=true
       destination:
         name: in-cluster
-        namespace: media-server
+        namespace: {{path.basename}}
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
