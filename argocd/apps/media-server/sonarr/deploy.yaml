@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f sonarr.yaml convert
+    kompose.version: 1.35.0 (HEAD)
+  labels:
+    io.kompose.service: sonarr
+  name: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: sonarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f sonarr.yaml convert
+        kompose.version: 1.35.0 (HEAD)
+      labels:
+        io.kompose.service: sonarr
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: America/Chicago
+          image: linuxserver/sonarr:latest
+          imagePullPolicy: Always
+          name: sonarr
+          ports:
+            - containerPort: 7878
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: sonarr-config
+          #   - mountPath: /data/media
+          #     name: media
+      restartPolicy: Always
+      volumes:
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+      #   - name: sonarr-claim1
+      #     persistentVolumeClaim:
+      #       claimName: sonarr-claim1
