@@ -32,7 +32,7 @@ spec:
             enabled: true
             ingressClassName: nginx
             hosts:
-              - host: frigate.k8s.yanello.netg
+              - host: frigate.k8s.yanello.net
                 paths:
                   - path: "/"
                     portName: http
