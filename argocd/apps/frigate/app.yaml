@@ -24,7 +24,7 @@ spec:
         nodeSelector:
           beta.kubernetes.io/arch: arm64
         image:
-          tag: amd64nvidia
+          tag: stable
           pullPolicy: IfNotPresent
         ingress:
           enabled: true
