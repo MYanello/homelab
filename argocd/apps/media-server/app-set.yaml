@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/myanello/homelab.git
         revision: HEAD
         directories:
-          - path: "argocd/apps/arr-stack/*"
+          - path: "argocd/apps/media-server/*"
   template:
     metadata:
       name: "{{path.basename}}-app"
@@ -23,7 +23,7 @@ spec:
           - CreateNamespace=true
       destination:
         name: in-cluster
-        namespace: arr-stack
+        namespace: media-server
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
