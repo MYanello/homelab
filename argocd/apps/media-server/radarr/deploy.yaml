@@ -47,6 +47,9 @@ spec:
           persistentVolumeClaim:
             claimName: radarr-config
         - name: media
-          nfs:
-            server: marcus-server.lan
-            path: /data/media
+          persistentVolumeClaim:
+            claimName: radarr-media
+        # - name: media
+        #   nfs:
+        #     server: marcus-server.lan
+        #     path: /data/media
