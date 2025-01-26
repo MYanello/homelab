@@ -51,10 +51,10 @@ spec:
             httpGet:
               path: /
               port: 7878
-            initialDelaySeconds: 60
-            periodSeconds: 15
+            initialDelaySeconds: 300
+            periodSeconds: 30
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 10
       restartPolicy: Always
       volumes:
         - name: config
