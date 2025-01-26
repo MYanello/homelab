@@ -54,18 +54,16 @@ spec:
         env:
         - name: TZ
           value: "America/Chicago"
-        - name: FIREWALL_DEBUG
-          value: "on"
         - name: FIREWALL_INPUT_PORTS
           value: "8080" # <- the port for qbittorrent container otherwise blocked by gluetun firewall in same pod
         - name: VPN_SERVICE_PROVIDER
           value: custom
         - name: VPN_TYPE
           value: wireguard
-        # - name: VPN_PORT_FORWARDING
-        #   value: "on"
-        # - name: VPN_PORT_FORWARDING_PROVIDER
-        #   value: protonvpn
+        - name: VPN_PORT_FORWARDING
+          value: on
+        - name: VPN_PORT_FORWARDING_PROVIDER
+          value: protonvpn
         # - name: DNS_KEEP_NAMESERVER
         #   value: "true"
         securityContext:
