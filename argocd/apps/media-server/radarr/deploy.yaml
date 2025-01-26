@@ -38,7 +38,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /config
-              name: radarr-config
+              name: config
             - mountPath: /data/media
               name: media
           readinessProbe:
