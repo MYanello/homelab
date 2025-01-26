@@ -67,8 +67,12 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
-
-          # volumeMounts:
+          privileged: true
+        volumeMounts:
+          - name: tun-device
+            hostPath:
+              path: /dev/net/tun
+              type: CharDevice
           #   - mountPath: /config
           #     name: config
           #   - mountPath: /data/media
@@ -90,7 +94,10 @@ spec:
           #   timeoutSeconds: 5
           #   failureThreshold: 3
       restartPolicy: Always
-      # volumes:
+      volumes:
+        - name: tun-device
+          mountPath: /dev/net/tun
+            
       #   - name: config
       #     persistentVolumeClaim:
       #       claimName: config
