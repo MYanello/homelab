@@ -38,7 +38,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /config
-              name: sonarr-config
+              name: config
           readinessProbe:
             httpGet:
               path: /
