@@ -31,6 +31,9 @@ spec:
           ingressClassName: nginx
           hosts:
             - host: frigate.k8s.yanello.net
+              paths: 
+                - path: "/"
+                  portName: http
         persistence:
           media:
             enabled: true
