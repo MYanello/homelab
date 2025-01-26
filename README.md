@@ -8,7 +8,9 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 - Setting up cert-manager following [this](https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-manager_and_traefik.html).
   - Got haproxy using the cert-manager root ca to verify the cert to the backend
   - Found sni is critical for the ingress to provide the correct cert and ssl verification to work
-- Found kubeshark worker cant run on rpi because it lacks bpf support. 
+  - Decided to use a single cert as default for the ingress controller to reduce the modification of the haproxy config which is outside of gitops control currently and would be difficult to refactor the way the config is set up.
+  - Simply needed to add the intermediate and root ca to opnsense trust store and enable ssl verification in the haproxy backend config
+- Found kubeshark worker can'gt run on rpi because it lacks bpf support. 
 
 ### 01.24.25
 - Got the first app migrated off docker compose to k8s: ytdl. This will likely be the first app to be fully migrated because it is the simplest in terms of configuration and state.
