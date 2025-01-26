@@ -5,6 +5,8 @@ metadata:
   labels:
     type: media-storage    # Matched by PVC selector
 spec:
+  capacity:
+    storage: 10Ti
   accessModes:
     - ReadWriteMany
   volumeMode:
