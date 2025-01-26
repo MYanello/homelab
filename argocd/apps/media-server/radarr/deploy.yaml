@@ -41,6 +41,22 @@ spec:
               name: radarr-config
             - mountPath: /data/media
               name: media
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7878
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7878
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
       restartPolicy: Always
       volumes:
         - name: radarr-config
@@ -49,22 +65,7 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: radarr-media
-      readinessProbe:
-        httpGet:
-          path: /
-          port: 7878
-        initialDelaySeconds: 30
-        periodSeconds: 10
-        timeoutSeconds: 5
-        failureThreshold: 3
-      livenessProbe:
-        httpGet:
-          path: /
-          port: 7878
-        initialDelaySeconds: 60
-        periodSeconds: 15
-        timeoutSeconds: 5
-        failureThreshold: 3
+
         # - name: media
         #   nfs:
         #     server: marcus-server.lan
