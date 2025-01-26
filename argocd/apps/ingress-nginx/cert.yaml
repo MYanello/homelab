@@ -13,11 +13,11 @@ spec:
     name: local-intermediate-ca1-issuer
     kind: ClusterIssuer
     group: cert-manager.io
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-data:
-  default-ssl-certificate: "ingress-nginx/default-cert"
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: ingress-nginx-controller
+#   namespace: ingress-nginx
+# data:
+#   default-ssl-certificate: "ingress-nginx/default-cert"
