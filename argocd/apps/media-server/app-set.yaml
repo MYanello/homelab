@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       name: "{{path.basename}}-app"
-      namespace: media-server
+      namespace: {{path.basename}}
     spec:
       project: default
       syncPolicy:
