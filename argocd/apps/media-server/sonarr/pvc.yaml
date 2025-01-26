@@ -1,9 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
-    io.kompose.service: sonarr-config
-  name: sonarr-config
+  name: config
 spec:
   storageClassName: nfs-storage
   accessModes:
