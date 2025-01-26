@@ -3,6 +3,8 @@ kind: PersistentVolume
 metadata:
   name: media-pv   # Matched by PVC selector
 spec:
+  storageClassName: ""
+  persistentVolumeReclaimPolicy: Retain
   capacity:
     storage: 10Ti
   accessModes:

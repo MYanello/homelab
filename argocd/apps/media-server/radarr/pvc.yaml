@@ -17,6 +17,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: radarr-media
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
