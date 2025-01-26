@@ -21,7 +21,7 @@ spec:
       chart: frigate
       helm:
         valuesFiles:
-          - $values/config.yaml
+          - $values/argocd/apps/frigate/config.yaml
         valuesObject:
           nodeSelector:
             beta.kubernetes.io/arch: arm64
@@ -47,7 +47,6 @@ spec:
             - frigate-secrets
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
-      path: argocd/apps/frigate/config
       ref: values
 ---
 apiVersion: argoproj.io/v1alpha1
