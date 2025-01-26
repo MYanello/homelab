@@ -5,7 +5,7 @@ config: |
     topic_prefix: frigate
     client_id: frigate
     user: mosquitto
-    password: {FRIGATE_MQTT_PASSWORD}
+    password: "{FRIGATE_MQTT_PASSWORD}"
 
   detectors:
     coral:
