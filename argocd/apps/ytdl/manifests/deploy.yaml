@@ -24,11 +24,11 @@ spec:
     spec:
       nodeSelector:
         beta.kubernetes.io/arch: arm64
-      # initContainers:
-      #   - name: wait-for-mongodb
-      #     image: busybox:1.28
-      #     command: ['sh', '-c', 
-      #       'until nc -z ytdl-mongo-db 27017; do echo waiting for mongodb; sleep 2; done;']
+      initContainers:
+        - name: wait-for-mongodb
+          image: busybox:1.28
+          command: ['sh', '-c', 
+            'until nc -z ytdl-mongo-db 27017; do echo waiting for mongodb; sleep 2; done;']
       containers:
         - env:
             - name: ALLOW_CONFIG_MUTATIONS
