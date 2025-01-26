@@ -11,12 +11,12 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-      - RespectIgnoreDifferences=true
-  ignoreDifferences:
-    - group: apps
-      kind: Deployment
-      jsonPointers:
-        - /spec/replicas
+  #     - RespectIgnoreDifferences=true
+  # ignoreDifferences:
+  #   - group: apps
+  #     kind: Deployment
+  #     jsonPointers:
+  #       - /spec/replicas
   destination:
     name: in-cluster
     namespace: frigate
@@ -46,7 +46,6 @@ spec:
             media:
               enabled: true
               storageClass: nfs-storage
-              subPath: media
               accessMode: ReadWriteOnce
               size: 1Ti
           envFromSecrets:
