@@ -48,5 +48,5 @@ spec:
             claimName: radarr-config
         - name: media
           nfs:
-            server: marcus-server.local
+            server: marcus-server.lan
             path: /data/media
