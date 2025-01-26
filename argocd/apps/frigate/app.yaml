@@ -20,8 +20,7 @@ spec:
       targetRevision: "*"
       chart: frigate
       helm:
-        valuesFiles:
-          $values/conf.yaml
+        valuesFiles: $values
         valuesObject:
           nodeSelector:
             beta.kubernetes.io/arch: arm64
@@ -33,7 +32,7 @@ spec:
             ingressClassName: nginx
             hosts:
               - host: frigate.k8s.yanello.net
-                paths: 
+                paths:
                   - path: "/"
                     portName: http
           persistence:
@@ -47,7 +46,7 @@ spec:
             - frigate-secrets
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
-      path: argocd/apps/frigate
+      path: argocd/apps/frigate/config.yaml
       ref: values
 ---
 apiVersion: argoproj.io/v1alpha1
