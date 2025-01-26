@@ -57,9 +57,9 @@ spec:
             failureThreshold: 3
       restartPolicy: Always
       volumes:
-        - name: sonarr-config
+        - name: config
           persistentVolumeClaim:
-            claimName: sonarr-config
+            claimName: config
         - name: media
           nfs:
             server: marcus-server.lan

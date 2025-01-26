@@ -59,12 +59,13 @@ spec:
             failureThreshold: 3
       restartPolicy: Always
       volumes:
-        - name: radarr-config
+        - name: config
           persistentVolumeClaim:
-            claimName: radarr-config
+            claimName: config
         - name: media
-          persistentVolumeClaim:
-            claimName: radarr-media
+          nfs:
+            server: marcus-server.lan
+            path: /data/media
 
         # - name: media
         #   nfs:
