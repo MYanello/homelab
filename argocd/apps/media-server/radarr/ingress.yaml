@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ytdl
+  name: radarr
 spec:
   ingressClassName: nginx
   rules:
-    - host: ytdl.yanello.net
+    - host: radarr.k8s.yanello.net
       http:
         paths:
           - backend:
               service:
                 name: ytdl
                 port:
-                  number: 8998
+                  number: 7878
             path: /
             pathType: Prefix
