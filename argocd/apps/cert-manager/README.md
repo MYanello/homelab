@@ -4,6 +4,8 @@ https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-m
 Test cert is working and signed:
 `openssl verify -CAfile <(kubectl -n cert-manager get secret local-root-ca-secret -o jsonpath='{.data.tls\.crt}' | base64 --decode) <(kubectl -n cert-manager get secret local-intermediate-ca1-secret -o jsonpath='{.data.tls\.crt}' | base64 --decode)`
 
+Get a cert for a service: `openssl s_client -connect 10.10.8.0:443 -servername ytdl.yanello.net -showcerts` with sni, remove -servername to see the default cert provided without sni
+
 To get the root ca for installing on devices
 `kubectl -n cert-manager get secret local-root-ca-secret -o jsonpath='{.data.tls\.crt}' | base64 -d > root-ca.crt`
 Can copy that to /usr/local/www on opnsense to download it from opn.yanell.net/root-ca.crt

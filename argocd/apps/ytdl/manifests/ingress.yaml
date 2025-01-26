@@ -3,15 +3,8 @@ kind: Ingress
 metadata:
   name: ytdl
   namespace: ytdl
-  annotations:
-    cert-manager.io/cluster-issuer: local-intermediate-ca1-issuer
-    cert-manager.io/common-name: "ytdl.yanello.net"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - ytdl.yanello.net
-      secretName: ytdl-cert-secret
   rules:
     - host: ytdl.yanello.net
       http:

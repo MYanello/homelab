@@ -7,6 +7,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ### 01.25.25
 - Setting up cert-manager following [this](https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-manager_and_traefik.html).
   - Got haproxy using the cert-manager root ca to verify the cert to the backend
+  - Found sni is critical for the ingress to provide the correct cert and ssl verification to work
 - Found kubeshark worker cant run on rpi because it lacks bpf support. 
 
 ### 01.24.25
