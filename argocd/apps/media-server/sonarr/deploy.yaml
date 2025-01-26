@@ -39,6 +39,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountpath: /data/media
+              name: media
           readinessProbe:
             httpGet:
               path: /
