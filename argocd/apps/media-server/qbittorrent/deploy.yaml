@@ -61,7 +61,7 @@ spec:
         - name: VPN_TYPE
           value: wireguard
         - name: VPN_PORT_FORWARDING
-          value: on
+          value: "on"
         - name: VPN_PORT_FORWARDING_PROVIDER
           value: protonvpn
         # - name: DNS_KEEP_NAMESERVER
