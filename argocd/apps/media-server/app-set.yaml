@@ -13,14 +13,13 @@ spec:
   template:
     metadata:
       name: "{{path.basename}}-app"
+      namespace: media-server
     spec:
       project: default
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
       destination:
         name: in-cluster
         namespace: media-server
