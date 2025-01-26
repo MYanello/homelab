@@ -20,7 +20,7 @@ spec:
       targetRevision: "*"
       chart: frigate
       helm:
-        valuesFiles:
+        valueFiles:
           - $values/argocd/apps/frigate/config.yaml
         valuesObject:
           nodeSelector:
