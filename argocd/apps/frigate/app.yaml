@@ -21,7 +21,7 @@ spec:
     chart: frigate
     helm:
       valueFiles:
-        - conf.yaml
+        - ./conf.yaml
       valuesObject:
         nodeSelector:
           beta.kubernetes.io/arch: arm64
