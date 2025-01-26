@@ -61,5 +61,6 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr-config
         - name: media
-          persistentVolumeClaim:
-            claimName: radarr-media
+          nfs:
+            server: marcus-server.lan
+            path: /data/media
