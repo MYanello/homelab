@@ -31,20 +31,7 @@ spec:
             proxy-read-timeout: "3600"
             proxy-send-timeout: "3600"
             default-ssl-certificate: "ingress-nginx/default-ingress-cert"
+            force-ssl-redirect: "true"
           service:
             annotations:
               metallb.universe.tf/loadBalancerIPs: 10.10.8.0
-
-      # parameters:
-      #   - name: "controller.metrics.enabled"
-      #     value: "true"
-      #   - name: "controller.metrics.serviceMonitor.enabled"
-      #     value: "true"
-      #   - name: "controller.metrics.serviceMonitor.additionalLabels.release"
-      #     value: "monitoring"
-      #   - name: "controller.podAnnotations.prometheus\\.io/scrape"
-      #     value: "true"
-      #     forceString: true # ensures that value is treated as a string
-      #   - name: "controller.podAnnotations.prometheus\\.io/port"
-      #     value: "10254"
-      #     forceString: true # ensures that value is treated as a string
