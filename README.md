@@ -4,15 +4,19 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+
 ### 01.25.25
+
 - Setting up cert-manager following [this](https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-manager_and_traefik.html).
   - Got haproxy using the cert-manager root ca to verify the cert to the backend
   - Found sni is critical for the ingress to provide the correct cert and ssl verification to work
   - Decided to use a single cert as default for the ingress controller to reduce the modification of the haproxy config which is outside of gitops control currently and would be difficult to refactor the way the config is set up.
   - Simply needed to add the intermediate and root ca to opnsense trust store and enable ssl verification in the haproxy backend config
-- Found kubeshark worker can'gt run on rpi because it lacks bpf support. 
+- Found kubeshark worker can'gt run on rpi because it lacks bpf support.
+- Got frigate ready to go when the server is back in the cluster. Did some tricks with ignoredifferences to let me set the replicas to 0 for now. Maybe I could have changed the node selector to match the offline server but this works for now. Also made use of dual sources to have a valuesfile, valuesobject, and helm chart since the frigate config all goes in a confmap.
 
 ### 01.24.25
+
 - Got the first app migrated off docker compose to k8s: ytdl. This will likely be the first app to be fully migrated because it is the simplest in terms of configuration and state.
   - No crazy issues, kompose seemed to do a decent job if not perfect.
   - Scaled down to allow the copy from the docker folder to nfs folder to complete
