@@ -30,7 +30,7 @@ spec:
           - $values/argocd/apps/frigate/config.yaml
         valuesObject:
           nodeSelector:
-            beta.kubernetes.io/arch: amd64
+            accelerator: coral-tpu
           image:
             tag: stable
             pullPolicy: IfNotPresent
