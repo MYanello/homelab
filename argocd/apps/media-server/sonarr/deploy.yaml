@@ -42,7 +42,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 7878
+              port: 8989
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
@@ -50,7 +50,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 7878
+              port: 8989
             initialDelaySeconds: 300
             periodSeconds: 30
             timeoutSeconds: 5
