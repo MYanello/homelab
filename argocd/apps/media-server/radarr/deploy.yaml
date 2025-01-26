@@ -39,13 +39,14 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: radarr-config
-          #   - mountPath: /data/media
-          #     name: media
+            - mountPath: /data/media
+              name: media
       restartPolicy: Always
       volumes:
         - name: radarr-config
           persistentVolumeClaim:
             claimName: radarr-config
-      #   - name: radarr-claim1
-      #     persistentVolumeClaim:
-      #       claimName: radarr-claim1
+        - name: media
+          nfs:
+            server: marcus-server.local
+            path: /data/media
