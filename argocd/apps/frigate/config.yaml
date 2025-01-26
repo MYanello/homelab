@@ -1,12 +1,12 @@
-config: | 
+config: |
   mqtt:
     host: 192.168.1.4
     port: 1883
     topic_prefix: frigate
     client_id: frigate
     user: mosquitto
-    password: ${MQTT_PASSWORD}
-  
+    password: {MQTT_PASSWORD}
+
   detectors:
     coral:
       type: edgetpu
@@ -14,7 +14,7 @@ config: |
   # detectors:
   #   cpu1:
   #     type: cpu
-  
+
   model:
     labelmap:
       1: vehicle
@@ -32,7 +32,7 @@ config: |
       22: animal
       23: animal
       24: animal
-  
+
   birdseye:
     # Optional: Enable birdseye view (default: shown below)
     enabled: false
@@ -48,7 +48,7 @@ config: |
     #   motion - cameras are included if motion was detected in the last 30 seconds
     #   continuous - all cameras are included always
     mode: continuous
-  
+
   ffmpeg:
     hwaccel_args: preset-nvidia-h264
       # # Optional: global ffmpeg args (default: shown below)
@@ -63,17 +63,17 @@ config: |
         # Optional: output args for detect streams (default: shown below)
         # detect: -f rawvideo -pix_fmt yuv420p
         # Optional: output args for record streams (default: shown below)
-        # record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac     
+        # record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
         # Optional: output args for rtmp streams (default: shown below)
         # rtmp: -c copy -f flv
-  
+
   detect:
     width: 1280 #352
     height: 720 #240
     fps: 5
     enabled: true
     max_disappeared: 25
-  
+
   objects:
     track:
       - person
@@ -88,7 +88,7 @@ config: |
         min_score: 0.7
         threshold: 0.85
         min_area: 22000
-  
+
   record:
     enabled: true
     retain:
@@ -98,7 +98,7 @@ config: |
       retain:
         default: 7
         mode: active_objects
-  
+
   snapshots:
     enabled: true
     timestamp: true
@@ -106,14 +106,14 @@ config: |
     crop: false
     retain:
       default: 7
-  
+
   live:
     # Optional: Set the height of the live stream. (default: 720)
     # This must be less than or equal to the height of the detect stream. Lower resolutions
     # reduce bandwidth required for viewing the live stream. Width is computed to match known aspect ratio.
     height: 720
     quality: 8
-  
+
   timestamp_style:
     #"tl" (top left), "tr" (top right), "bl" (bottom left), "br" (bottom right)
     position: tl
@@ -125,12 +125,12 @@ config: |
       blue: 255
     thickness: 1
     effect: solid
-  
+
   cameras:
     Pool:
       ffmpeg:
         inputs:
-          - path: rtsp://admin:${FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch02/0
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch02/0
             roles:
               - record
               - detect
@@ -140,17 +140,17 @@ config: |
           objects:
             - person
             - animal
-  
+
     Back:
       ffmpeg:
         inputs:
-          - path: rtsp://admin:${FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch03/0
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch03/0
             roles:
               - record
               - detect
       zones:
         back_yard:
-          coordinates: 
+          coordinates:
             0,253,429,260,569,720,837,720,1280,720,1184,477,1066,310,951,170,801,0,566,0,268,0,0,0
           objects:
             - person
@@ -164,11 +164,11 @@ config: |
       motion:
         mask:
           - 1280,720,775,0,1280,0,1280,0,1280,0
-  
+
     Front_Left:
       ffmpeg:
         inputs:
-          - path: rtsp://admin:${FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch01/0
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch01/0
             roles:
               - record
               - detect
@@ -180,7 +180,7 @@ config: |
             - animal
             - vehicle
         driveway:
-          coordinates: 
+          coordinates:
             1208,414,1280,462,1280,558,1280,720,1057,720,920,720,797,720,707,720,572,720,575,611,701,484,791,430
           objects:
             - person
@@ -205,7 +205,7 @@ config: |
         mask:
           #- 0,582,0,420,0,0,367,0,1280,0,1280,347,1112,340,727,321,303,323,287,380,265,555,261,720,0,720
           - 0,496,391,466,679,624,885,720,0,720
-  
+
       review:
         alerts:
           required_zones:
@@ -215,7 +215,7 @@ config: |
     Front_Right:
       ffmpeg:
         inputs:
-          - path: rtsp://admin:${FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch04/0
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch04/0
             roles:
               - record
               - detect
