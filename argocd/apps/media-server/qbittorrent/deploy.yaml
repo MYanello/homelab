@@ -35,16 +35,19 @@ spec:
         image: "ghcr.io/qdm12/gluetun:latest" # <- you probably want this to be a set version
         restartPolicy: Always # makes this init into a sidecar container k8s 1.29
         imagePullPolicy: Always
-        # ports:
-        # - name: http-proxy
-        #   containerPort: 8888
-        #   protocol: TCP
-        # - name: tcp-shadowsocks
-        #   containerPort: 8388
-        #   protocol: TCP
-        # - name: udp-shadowsocks
-        #   containerPort: 8388
-        #   protocol: UDP
+        ports:
+        - name: http-proxy
+          containerPort: 8888
+          protocol: TCP
+        - name: tcp-shadowsocks
+          containerPort: 8388
+          protocol: TCP
+        - name: udp-shadowsocks
+          containerPort: 8388
+          protocol: UDP
+        - name: wireguard
+          containerPort: 51820
+          protocol: UDP
         envFrom:
         - secretRef:
             name: vpn-secrets
