@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: qbittorrent
+  name: qbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: qbittorrent
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: qbittorrent
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: DOCKER_MODS
+              value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+          image: lscr.io/linuxserver/qbittorrent:latest
+          imagePullPolicy: Always
+          name: qbittorrent
+      initContainers:
+      # optional gluetun VPN client sidecar
+      # https://github.com/qdm12/gluetun
+      # https://github.com/qdm12/gluetun-wiki/pull/7
+      - name: gluetun # init sidecar for VPN connection
+        image: "ghcr.io/qdm12/gluetun:latest" # <- you probably want this to be a set version
+        restartPolicy: Always # makes this init into a sidecar container k8s 1.29
+        imagePullPolicy: Always
+        # ports:
+        # - name: http-proxy
+        #   containerPort: 8888
+        #   protocol: TCP
+        # - name: tcp-shadowsocks
+        #   containerPort: 8388
+        #   protocol: TCP
+        # - name: udp-shadowsocks
+        #   containerPort: 8388
+        #   protocol: UDP
+        envFrom:
+        - secretRef:
+            name: vpn-secrets
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        - name: FIREWALL_DEBUG
+          value: "on"
+        - name: FIREWALL_INPUT_PORTS
+          value: "8080" # <- the port for qbittorrent container otherwise blocked by gluetun firewall in same pod
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: wireguard
+        - name: VPN_PORT_FORWARDING
+          value: on
+        - name: VPN_PORTFORWARDING_PROVIDER
+          value: protonvpn
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+
+          # volumeMounts:
+          #   - mountPath: /config
+          #     name: config
+          #   - mountPath: /data/media
+          #     name: media
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 7878
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 7878
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+      restartPolicy: Always
+      # volumes:
+      #   - name: config
+      #     persistentVolumeClaim:
+      #       claimName: config
+      #   - name: media
+      #     nfs:
+      #       server: marcus-server.lan
+      #       path: /data/media
+
+        # - name: media
+        #   nfs:
+        #     server: marcus-server.lan
+        #     path: /data/media
