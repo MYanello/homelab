@@ -63,6 +63,8 @@ spec:
           value: "on"
         - name: VPN_PORT_FORWARDING_PROVIDER
           value: protonvpn
+        - name: DNS_KEEP_NAMESERVER
+          value: "on"
         securityContext:
           capabilities:
             add:
@@ -71,26 +73,6 @@ spec:
         volumeMounts:
           - name: tun-device
             mountPath: /dev/net/tun
-          #   - mountPath: /config
-          #     name: config
-          #   - mountPath: /data/media
-          #     name: media
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 7878
-          #   initialDelaySeconds: 30
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 7878
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 15
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
       restartPolicy: Always
       volumes:
         - name: tun-device
