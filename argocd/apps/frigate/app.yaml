@@ -11,6 +11,12 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
   destination:
     name: in-cluster
     namespace: frigate
