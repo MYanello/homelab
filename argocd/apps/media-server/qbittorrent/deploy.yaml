@@ -66,8 +66,8 @@ spec:
           value: "on"
         - name: VPN_PORT_FORWARDING_PROVIDER
           value: protonvpn
-        - name: DNS_KEEP_NAMESERVER
-          value: "on"
+        # - name: DNS_KEEP_NAMESERVER
+        #   value: "true"
         securityContext:
           capabilities:
             add:
