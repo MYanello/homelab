@@ -61,7 +61,7 @@ spec:
           value: wireguard
         - name: VPN_PORT_FORWARDING
           value: "on"
-        - name: VPN_PORTFORWARDING_PROVIDER
+        - name: VPN_PORT_FORWARDING_PROVIDER
           value: protonvpn
         securityContext:
           capabilities:
