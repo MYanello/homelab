@@ -31,7 +31,13 @@ spec:
           ingressClassName: nginx
           hosts:
             - host: frigate.k8s.yanello.net
-              path: '/'
+        persistence:
+          media:
+            enabled: true
+            storageClass: nfs-storage
+            subPath: media
+            accessMode: ReadWriteOnce
+            size: 1Ti
         envFromSecrets:
           - frigate-secrets
 ---
@@ -46,7 +52,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
   destination:
     namespace: frigate
     server: https://kubernetes.default.svc
