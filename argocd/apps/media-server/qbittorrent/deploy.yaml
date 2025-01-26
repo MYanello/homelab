@@ -18,24 +18,24 @@ spec:
         io.kompose.service: qbittorrent
     spec:
       containers:
-        - env:
-            - name: PGID
-              value: "1000"
-            - name: PUID
-              value: "1000"
-            - name: DOCKER_MODS
-              value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
-          image: lscr.io/linuxserver/qbittorrent:latest
-          imagePullPolicy: Always
-          name: qbittorrent
-          ports:
-            - containerPort: 8080
-          volumeMounts:
-            - mountPath: /config
-              name: config
-            - mountPath: /data/media/torrents
-              name: torrents
-      initContainers:
+      - name: qbittorrent
+        env:
+          - name: PGID
+            value: "1000"
+          - name: PUID
+            value: "1000"
+          - name: DOCKER_MODS
+            value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+        image: lscr.io/linuxserver/qbittorrent:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - mountPath: /config
+            name: config
+          - mountPath: /data/media/torrents
+            name: torrents
+      #initContainers:
       - name: gluetun # init sidecar for VPN connection
         image: "ghcr.io/qdm12/gluetun:latest" # <- you probably want this to be a set version
         restartPolicy: Always # makes this init into a sidecar container k8s 1.29
@@ -94,8 +94,3 @@ spec:
           nfs:
             server: marcus-server.lan
             path: /data/media/torrents
-
-        # - name: media
-        #   nfs:
-        #     server: marcus-server.lan
-        #     path: /data/media
