@@ -5,9 +5,9 @@ metadata:
   namespace: ytdl
   annotations:
     cert-manager.io/cluster-issuer: local-intermediate-ca1-issuer
-    #cert-manager.io/cluster-issuer: local-root-ca-issuer
     cert-manager.io/common-name: "ytdl.yanello.net"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-certificate: "ytdl/ytdl-cert-secret"
+    nginx.ingress.kubernetes.io/ssl-certificate-key: "ytdl/ytdl-cert-secret"
 spec:
   ingressClassName: nginx
   tls:
