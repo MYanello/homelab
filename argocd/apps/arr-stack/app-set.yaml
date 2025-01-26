@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: arr-stack-app-set
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:myanello/homelab.git
+        revision: HEAD
+        files:
+          - path: "argocd/apps/arr-stack/apps"
+  template:
+    metadata:
+      name: "{{path.basename}}-app"
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      destination:
+        name: in-cluster
+        namespace: arr-stack
+      source:
+        path: "{{path}}"
+        repoURL: git@github.com:myanell/homelab.git
+        targetRevision: HEAD
