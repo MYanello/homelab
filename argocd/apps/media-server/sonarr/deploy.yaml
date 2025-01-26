@@ -8,7 +8,7 @@ metadata:
     io.kompose.service: sonarr
   name: sonarr
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       io.kompose.service: sonarr
@@ -39,13 +39,27 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: sonarr-config
-          #   - mountPath: /data/media
-          #     name: media
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7878
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7878
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
       restartPolicy: Always
       volumes:
         - name: sonarr-config
           persistentVolumeClaim:
             claimName: sonarr-config
-      #   - name: sonarr-claim1
-      #     persistentVolumeClaim:
-      #       claimName: sonarr-claim1
+        - name: media
+          persistentVolumeClaim:
+            claimName: radarr-media
