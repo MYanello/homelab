@@ -70,9 +70,7 @@ spec:
           privileged: true
         volumeMounts:
           - name: tun-device
-            hostPath:
-              path: /dev/net/tun
-              type: CharDevice
+            mountPath: /dev/net/tun
           #   - mountPath: /config
           #     name: config
           #   - mountPath: /data/media
@@ -96,7 +94,9 @@ spec:
       restartPolicy: Always
       volumes:
         - name: tun-device
-          mountPath: /dev/net/tun
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
             
       #   - name: config
       #     persistentVolumeClaim:
