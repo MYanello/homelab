@@ -28,10 +28,10 @@ spec:
           pullPolicy: IfNotPresent
         ingress:
           enabled: true
+          ingressClassName: nginx
           hosts:
             - host: frigate.k8s.yanello.net
-              paths:
-                - /
+              path: '/'
         envFromSecrets:
           - frigate-secrets
 ---
