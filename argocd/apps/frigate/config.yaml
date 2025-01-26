@@ -8,12 +8,11 @@ config: |
     password: "{FRIGATE_MQTT_PASSWORD}"
 
   detectors:
-    coral:
-      type: edgetpu
-      device: pci:0
-  # detectors:
-  #   cpu1:
-  #     type: cpu
+    # coral:
+    #   type: edgetpu
+    #   device: pci:0
+    cpu1:
+      type: cpu
 
   model:
     labelmap:
