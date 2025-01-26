@@ -22,8 +22,6 @@ spec:
       labels:
         io.kompose.service: ytdl
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: arm64
       initContainers:
         - name: wait-for-mongodb
           image: busybox:1.28
@@ -115,8 +113,6 @@ spec:
       labels:
         io.kompose.service: ytdl-mongo-db
     spec:
-      nodeSelector:
-          beta.kubernetes.io/arch: arm64
       containers:
         - image: mongo:4.4.18
           name: ytdl-mongo-db
