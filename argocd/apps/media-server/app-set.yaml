@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/myanello/homelab.git
         revision: HEAD
         directories:
-          - path: "argocd/apps/media-server/*/"
+          - path: argocd/apps/media-server/*
   template:
     metadata:
       name: "{{path.basename}}-app"
