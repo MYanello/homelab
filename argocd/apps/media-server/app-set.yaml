@@ -23,7 +23,7 @@ spec:
           - CreateNamespace=true
       destination:
         name: in-cluster
-        namespace: {{path.basename}}
+        namespace: "{{path.basename}}"
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
