@@ -25,7 +25,7 @@ spec:
               value: immich
             - name: REDIS_HOSTNAME
               value: immich
-            - name: MACHINE_LEARNING_PRELOAD__CLOP='ViT-L-16-SigLIP-256__webli'
+            - name: MACHINE_LEARNING_PRELOAD__CLIP='ViT-L-16-SigLIP-256__webli'
           envFrom:
             - secretRef:
                 name: immich-secrets
@@ -75,7 +75,7 @@ spec:
               value: immich
             - name: REDIS_HOSTNAME
               value: redis
-            - name: MACHINE_LEARNING_PRELOAD__CLOP='ViT-L-16-SigLIP-256__webli'
+            - name: MACHINE_LEARNING_PRELOAD__CLIP='ViT-L-16-SigLIP-256__webli'
           envFrom:
             - secretRef:
                 name: immich-secrets
@@ -130,7 +130,6 @@ spec:
         - name: tsdata
           persistentVolumeClaim:
             claimName: tsdata
----
 ---
 apiVersion: apps/v1
 kind: Deployment
