@@ -38,6 +38,13 @@ spec:
             name: config
           - mountPath: /data/media/torrents
             name: torrents
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
         livenessProbe:
           tcpSocket:
             port: 8080
