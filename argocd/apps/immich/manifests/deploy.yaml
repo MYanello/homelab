@@ -180,10 +180,6 @@ spec:
         - env:
             - name: POSTGRES_DB
               value: immich
-            - name: REDIS_HOSTNAME
-              value: immich-redis
-            - name: PG_DATA
-              value: /var/lib/postgresql/data
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -194,7 +190,7 @@ spec:
                 secretKeyRef:
                   name: immich-secrets
                   key: DB_USERNAME
-          image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+          image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
           imagePullPolicy: Always
           securityContext:
             runAsUser: 1000
@@ -206,12 +202,18 @@ spec:
               protocol: TCP
           command: 
             - postgres
-            - -c shared_preload_libraries=vectors.so
-            - -c 'search_path="$$user", public, vectors'
-            - -c logging_collector=on
-            - -c max_wal_size=2GB
-            - -c shared_buffers=512MB
-            - -c wal_compression=on
+            - -c
+            - shared_preload_libraries=vectors.so
+            - -c
+            - 'search_path="$user", public, vectors'
+            - -c
+            - logging_collector=on
+            - -c
+            - max_wal_size=2GB
+            - -c
+            - shared_buffers=512MB
+            - -c
+            - wal_compression=on
           volumeMounts:
             - name: db
               mountPath: /var/lib/postgresql/data
