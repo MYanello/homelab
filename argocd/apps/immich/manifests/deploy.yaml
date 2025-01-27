@@ -196,6 +196,10 @@ spec:
                   key: DB_USERNAME
           image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000            
           name: postgres
           ports:
             - containerPort: 5432
