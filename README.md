@@ -5,6 +5,9 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 
+### 01.27.25
+- Moved vaultwarden to 'production'. For ha I'll need to setup a better db backend than sqlite.
+
 ### 01.25.25
 
 - Got radarr and sonarr working without a hitch.
