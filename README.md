@@ -7,6 +7,9 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ### 01.25.25
 
+- Got radarr and sonarr working without a hitch.
+- Qbittorrent and gluetun vpn was a pain because I didn't connect the dots that gluetun needed its own vpn config and was just trying to reuse the keys from the docker compose setup.
+  Wrote a NetworkPolicy that should only allow radarr, sonarr, and vpn egress from qbittorrent. Will need to update it if the vpn endpoint changes.
 - Setting up cert-manager following [this](https://raymii.org/s/tutorials/Self_signed_Root_CA_in_Kubernetes_with_k3s_cert-manager_and_traefik.html).
   - Got haproxy using the cert-manager root ca to verify the cert to the backend
   - Found sni is critical for the ingress to provide the correct cert and ssl verification to work
