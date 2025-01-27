@@ -11,3 +11,17 @@ spec:
       targetPort: 9696
   selector:
     app: prowlarr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: flaresolverr
+  name: flaresolverr
+spec:
+  ports:
+    - name: http
+      port: 8191
+      targetPort: 8191
+  selector:
+    app: flaresolverr
