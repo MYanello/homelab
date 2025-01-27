@@ -38,6 +38,13 @@ spec:
             name: config
           - mountPath: /data/media/torrents
             name: torrents
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
       initContainers:
       - name: gluetun # init sidecar for VPN connection
         image: "ghcr.io/qdm12/gluetun:v3.40.0"
@@ -78,6 +85,13 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
+        livenessProbe:
+          exec:
+            command: ["/gluetun-entrypoint", "healthcheck"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
       volumes:
         - name: config
           persistentVolumeClaim:
