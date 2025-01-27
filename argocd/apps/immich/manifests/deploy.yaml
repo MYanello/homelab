@@ -183,6 +183,9 @@ spec:
           volumeMounts:
             - name: db
               mountPath: /var/lib/postgresql/data
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
       containers:
         - env:
             - name: POSTGRES_DB
