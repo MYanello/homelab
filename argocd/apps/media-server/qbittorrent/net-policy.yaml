@@ -1,0 +1,61 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: qbittorrent-access
+spec:
+  podSelector:
+    matchLabels:
+      component: qbittorrent
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Requests from services which use qBittorrent
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: radarr
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: sonarr
+      ports:
+        - protocol: TCP
+          port: 8080
+  
+  egress:
+    # Responses to services which use qBittorrent
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: radarr
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: sonarr
+      ports:
+        - protocol: TCP
+          port: 8080
+
+    # VPN
+    - to:
+        - ipBlock:
+            cidr: 146.70.217.66/32
+        # - ipBlock:
+        #     cidr: 191.96.227.117/32
+        # - ipBlock:
+        #     cidr: 191.96.227.124/32
+        # - ipBlock:
+        #     cidr: 191.96.227.103/32
+        # - ipBlock:
+        #     cidr: 191.96.227.127/32
+        # - ipBlock:
+        #     cidr: 191.96.227.105/32
+        # - ipBlock:
+        #     cidr: 191.96.227.119/32
+        # - ipBlock:
+        #     cidr: 191.96.227.90/32
+
+    # - to:
+    #     - ipBlock:
+    #         cidr: 37.19.198.96/32
+    #     - ipBlock:
+    #         cidr: 37.19.198.95/32
