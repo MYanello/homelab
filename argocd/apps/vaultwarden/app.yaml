@@ -35,7 +35,7 @@ spec:
               nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
           domain: "https://bitwarden.yanello.net"
           signupsAllowed: false
-          replicas: 3
+          replicas: 1
           # service:
           #   sessionAffinity: ClientIP
           #   sessionAffinityConfig:
