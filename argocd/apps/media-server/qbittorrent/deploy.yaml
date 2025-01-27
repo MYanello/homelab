@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   labels:
     io.kompose.service: qbittorrent
-    app: qbittorrent
   name: qbittorrent
 spec:
   replicas: 1
@@ -16,6 +15,7 @@ spec:
   template:
     metadata:
       labels:
+        app: qbittorrent
         io.kompose.service: qbittorrent
     spec:
       containers:
