@@ -12,7 +12,7 @@ spec:
         paths:
           - backend:
               service:
-                name: overseerr
+                name: ombi
                 port:
                   number: 3579
             path: /
