@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: overseerr.k8s.yanello.net
+    - host: overseerr.yanello.net
       http:
         paths:
           - backend:

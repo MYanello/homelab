@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: tautulli.k8s.yanello.net
+    - host: tautulli.yanello.net
       http:
         paths:
           - backend:
