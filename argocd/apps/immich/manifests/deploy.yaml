@@ -184,9 +184,16 @@ spec:
               value: immich-redis
             - name: PG_DATA
               value: /var/lib/postgresql/data
-          envFrom:
-            - secretRef:
-                name: immich-secrets
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: immich-secrets
+                  key: DB_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: immich-secrets
+                  key: DB_USERNAME
           image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
           imagePullPolicy: Always
           name: postgres
