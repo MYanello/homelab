@@ -31,6 +31,7 @@ spec:
         valuesObject:
           nodeSelector:
             accelerator: coral-tpu
+            nvidia.com/gpu.present: 'true'
           image:
             tag: stable
             pullPolicy: IfNotPresent
