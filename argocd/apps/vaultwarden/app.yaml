@@ -25,12 +25,12 @@ spec:
           ingress:
             enabled: true
             className: "nginx"
-            hostname: bitwarden.k8s.yanello.net
+            hostname: bitwarden.yanello.net
             additionalAnnotations:
               nginx.org/websocket-services: "vaultwarden"
               nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
               nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
-          domain: "https://bitwarden.k8s.yanello.net"
+          domain: "https://bitwarden.yanello.net"
           signupsAllowed: false
           replicas: 1
           # service:
