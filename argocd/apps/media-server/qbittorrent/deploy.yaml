@@ -38,46 +38,46 @@ spec:
             name: config
           - mountPath: /data/media/torrents
             name: torrents
-      # initContainers:
-      # - name: gluetun # init sidecar for VPN connection
-      #   image: "ghcr.io/qdm12/gluetun:v3.40.0"
-      #   restartPolicy: Always # makes this init into a sidecar container k8s 1.29
-      #   imagePullPolicy: IfNotPresent
-      #   ports:
-      #   - name: http-proxy
-      #     containerPort: 8888
-      #     protocol: TCP
-      #   - name: tcp-shadowsocks
-      #     containerPort: 8388
-      #     protocol: TCP
-      #   - name: udp-shadowsocks
-      #     containerPort: 8388
-      #     protocol: UDP
-      #   envFrom:
-      #   - secretRef:
-      #       name: vpn-secrets
-      #   env:
-      #   - name: TZ
-      #     value: "America/Chicago"
-      #   - name: FIREWALL_INPUT_PORTS
-      #     value: "8080" # <- the port for qbittorrent container otherwise blocked by gluetun firewall in same pod
-      #   - name: VPN_SERVICE_PROVIDER
-      #     value: custom
-      #   - name: VPN_TYPE
-      #     value: wireguard
-      #   - name: VPN_PORT_FORWARDING
-      #     value: "on"
-      #   - name: VPN_PORT_FORWARDING_PROVIDER
-      #     value: protonvpn
-      #   - name: VPN_PORT_FORWARDING_UP_COMMAND
-      #     value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://qbittorrent:8080/api/v2/app/setPreferences 2>&1'
-      #   # - name: DNS_KEEP_NAMESERVER
-      #   #   value: "on"
-      #   securityContext:
-      #     privileged: true
-      #     capabilities:
-      #       add:
-      #       - NET_ADMIN
+      initContainers:
+      - name: gluetun # init sidecar for VPN connection
+        image: "ghcr.io/qdm12/gluetun:v3.40.0"
+        restartPolicy: Always # makes this init into a sidecar container k8s 1.29
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http-proxy
+          containerPort: 8888
+          protocol: TCP
+        - name: tcp-shadowsocks
+          containerPort: 8388
+          protocol: TCP
+        - name: udp-shadowsocks
+          containerPort: 8388
+          protocol: UDP
+        envFrom:
+        - secretRef:
+            name: vpn-secrets
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        - name: FIREWALL_INPUT_PORTS
+          value: "8080" # <- the port for qbittorrent container otherwise blocked by gluetun firewall in same pod
+        - name: VPN_SERVICE_PROVIDER
+          value: custom
+        - name: VPN_TYPE
+          value: wireguard
+        - name: VPN_PORT_FORWARDING
+          value: "on"
+        - name: VPN_PORT_FORWARDING_PROVIDER
+          value: protonvpn
+        - name: VPN_PORT_FORWARDING_UP_COMMAND
+          value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://qbittorrent:8080/api/v2/app/setPreferences 2>&1'
+        # - name: DNS_KEEP_NAMESERVER
+        #   value: "on"
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - NET_ADMIN
       volumes:
         - name: config
           persistentVolumeClaim:

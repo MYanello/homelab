@@ -10,7 +10,6 @@ spec:
     - Ingress
     - Egress
   ingress:
-    # Requests from services which use qBittorrent
     - from:
         - namespaceSelector:
             matchLabels:
@@ -34,11 +33,11 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
-    # VPN
+    # VPN endpoint so gluetun can establish the vpn connection
     - to:
         - ipBlock:
-            cidr: 150.80.210.60/32
-            #cidr: 146.70.217.66/32
+            #cidr: 150.80.210.60/32 
+            cidr: 146.70.217.66/32 
     - to:
         - namespaceSelector: {}
           podSelector:
