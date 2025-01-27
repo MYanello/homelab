@@ -5,7 +5,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      component: qbittorrent
+      app: qbittorrent
   policyTypes:
     - Ingress
     - Egress
@@ -39,3 +39,17 @@ spec:
         - ipBlock:
             cidr: 150.80.210.60/32
             #cidr: 146.70.217.66/32
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
