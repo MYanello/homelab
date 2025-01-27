@@ -20,7 +20,14 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
-  
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx  # or your ingress namespace
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+              
   egress:
     # Responses to services which use qBittorrent
     - to:
