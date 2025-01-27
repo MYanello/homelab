@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bazarr
+  labels:
+    app: bazarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: bazarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: bazarr
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: America/Chicago
+            - name: DOCKER_MODS
+              value: wayller/bazarr-mod-subsync:latest
+          image: linuxserver/bazarr:latest
+          imagePullPolicy: Always
+          name: bazarr
+          ports:
+            - containerPort: 6767
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /data/media/Movies
+              name: movies
+            - mountPath: /data/media/TV
+              name: tv
+          startupProbe:
+            httpGet:
+              path: /
+              port: 6767
+            initialDelaySeconds: 300
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 6767
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: movies
+          nfs:
+            server: marcus-server.lan
+            path: /data/media/Movies
+        - name: tv
+          nfs:
+            server: marcus-server.lan
+            path: /data/media/TV
