@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unpackerr
+  labels:
+    app: unpackerr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: unpackerr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: unpackerr
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: America/Chicago
+            - name: UN_DEBUG
+              value: "false"
+            - name: UN_SONARR_O_URL
+              value: http://sonarr.sonarr.svc:8989
+            - name: UN_SONARR_PATHS_0
+              value: /data/torrents/completed/tv
+            - name: UN_RADARR_0_URL
+              value: http://radarr.radarr.svc:7878
+            - name: UN_RADARR_PATHS_0
+              value: /data/torrents/completed/movies
+            - name: UN_LOG_FILE
+              value: /data/logs/log.txt
+            - name: UN_FOLDER_0_MOVE_BACK
+              value: "true"
+          envFromSecret:
+            - secretRef:
+                name: unpackerr-secrets
+          image: golift/unpackerr:latest
+          imagePullPolicy: Always
+          name: unpackerr
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /data/media
+              name: media
+            - name: logs
+              mountPath: /data/logs
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs
+        - name: media
+          nfs:
+            server: marcus-server.lan
+            path: /data/media
