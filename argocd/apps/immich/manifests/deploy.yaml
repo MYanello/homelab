@@ -176,6 +176,13 @@ spec:
       labels:
         app: postgres
     spec:
+      initContainers:
+        - name: init-postgres
+          image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+          command: ["sh", "-c", "test -d /var/lib/postgresql/data/pgdata || initdb -D /var/lib/postgresql/data/pgdata"]
+          volumeMounts:
+            - name: db
+              mountPath: /var/lib/postgresql/data
       containers:
         - env:
             - name: POSTGRES_DB
