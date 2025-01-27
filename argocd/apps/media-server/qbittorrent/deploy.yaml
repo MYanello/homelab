@@ -41,10 +41,10 @@ spec:
         startupProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 600
+          initialDelaySeconds: 120
           periodSeconds: 30
           timeoutSeconds: 5
-          failureThreshold: 5
+          failureThreshold: 20
         livenessProbe:
           tcpSocket:
             port: 8080
