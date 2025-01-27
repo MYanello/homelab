@@ -9,7 +9,7 @@ metadata:
   name: ytdl
 spec:
   ports:
-    - name: "8998"
+    - name: "http"
       port: 8998
       targetPort: 17442
   selector:

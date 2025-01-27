@@ -37,7 +37,7 @@ spec:
           startupProbe:
             httpGet:
               path: /
-              port: 5055
+              port: 3579
             initialDelaySeconds: 300
             periodSeconds: 10
             timeoutSeconds: 5
@@ -45,7 +45,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 5055
+              port: 3579
             initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 5
