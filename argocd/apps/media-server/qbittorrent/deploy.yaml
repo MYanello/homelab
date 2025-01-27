@@ -41,7 +41,7 @@ spec:
         readinessProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 60
+          initialDelaySeconds: 300
           periodSeconds: 5
           timeoutSeconds: 5
           failureThreshold: 3
@@ -92,6 +92,13 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
+        readinessProbe:
+          exec:
+            command: ["/gluetun-entrypoint", "healthcheck"]
+          initialDelaySeconds: 120
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
         livenessProbe:
           exec:
             command: ["/gluetun-entrypoint", "healthcheck"]
