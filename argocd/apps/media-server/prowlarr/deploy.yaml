@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  labels:
+    app: prowlarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+  metadata:
+    labels:
+      app: prowlarr
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: America/Chicago
+          image: linuxserver/prowlarr:latest
+          imagePullPolicy: Always
+          name: prowlarr
+          ports:
+            - containerPort: 9696
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 7878
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 7878
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
