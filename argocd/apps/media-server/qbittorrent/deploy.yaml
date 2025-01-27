@@ -38,20 +38,20 @@ spec:
             name: config
           - mountPath: /data/media/torrents
             name: torrents
-        # startupProbe:
-        #   tcpSocket:
-        #     port: 8080
-        #   initialDelaySeconds: 300
-        #   periodSeconds: 30
-        #   timeoutSeconds: 5
-        #   failureThreshold: 5
-        # livenessProbe:
-        #   tcpSocket:
-        #     port: 8080
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 5
-        #   timeoutSeconds: 5
-        #   failureThreshold: 3
+        startupProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 600
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 5
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 3
       initContainers:
       - name: gluetun # init sidecar for VPN connection
         image: "ghcr.io/qdm12/gluetun:v3.40.0"
