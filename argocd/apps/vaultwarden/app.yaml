@@ -32,7 +32,7 @@ spec:
               nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
           domain: "https://bitwarden.k8s.yanello.net"
           signupsAllowed: false
-          # replicas: 3
+          replicas: 0
           # service:
           #   sessionAffinity: ClientIP
           #   sessionAffinityConfig:
