@@ -20,8 +20,18 @@ resource "kubernetes_labels" "gpu" {
   metadata {
     name = "marcus-server"
   }
-
   labels = {
     "nvidia.com/gpu.present" = "true"
+  }
+}
+
+resource "kubernetes_labels" "accelerator" {
+    api_version = "v1"
+    kind        = "Node"
+    metadata {
+      name = "marcus-server"
+    }
+  labels = {
+    "accelerator" = "coral-tpu"
   }
 }
