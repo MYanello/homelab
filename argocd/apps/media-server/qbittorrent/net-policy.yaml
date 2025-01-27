@@ -34,28 +34,7 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
-
     # VPN
     - to:
         - ipBlock:
             cidr: 146.70.217.66/32
-        # - ipBlock:
-        #     cidr: 191.96.227.117/32
-        # - ipBlock:
-        #     cidr: 191.96.227.124/32
-        # - ipBlock:
-        #     cidr: 191.96.227.103/32
-        # - ipBlock:
-        #     cidr: 191.96.227.127/32
-        # - ipBlock:
-        #     cidr: 191.96.227.105/32
-        # - ipBlock:
-        #     cidr: 191.96.227.119/32
-        # - ipBlock:
-        #     cidr: 191.96.227.90/32
-
-    # - to:
-    #     - ipBlock:
-    #         cidr: 37.19.198.96/32
-    #     - ipBlock:
-    #         cidr: 37.19.198.95/32
