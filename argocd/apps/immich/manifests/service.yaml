@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: immich-server
+  name: immich-server
+spec:
+  ports:
+    - name: http
+      port: 2283
+      targetPort: 2283
+  selector:
+    app: immich-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: immich-ml
+  name: immich-ml
+spec:
+  ports:
+    - name: ml
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: immich-server
