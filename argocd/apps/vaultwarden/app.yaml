@@ -31,12 +31,13 @@ spec:
               nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
               nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
           domain: "https://bitwarden.k8s.yanello.net"
-          # replicas: 3
-          # service:
-          #   sessionAffinity: ClientIP
-          #   sessionAffinityConfig:
-          #     clientIP:
-          #       timeoutSeconds: 10800
+          replicas: 3
+          signupsAllowed: false
+          service:
+            sessionAffinity: ClientIP
+            sessionAffinityConfig:
+              clientIP:
+                timeoutSeconds: 10800
           storage:
             data:
               name: vaultwarden-data
@@ -50,3 +51,28 @@ spec:
               accessMode: ReadWriteMany
               size: 15Gi
               class: nfs-storage
+          adminToken:
+            existingSecret: vaultwarden-admin-secret
+            existingSecretKey: adminToken
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vw-admin-secret
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  destination:
+    namespace: vaultwarden
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: argocd/apps/vaultwarden/secrets
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+---
