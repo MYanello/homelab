@@ -40,7 +40,7 @@ spec:
             name: torrents
       initContainers:
       - name: gluetun # init sidecar for VPN connection
-        image: "ghcr.io/qdm12/gluetun:v3.39.1" # <- you probably want this to be a set version
+        image: "ghcr.io/qdm12/gluetun:v3.40.0"
         restartPolicy: Always # makes this init into a sidecar container k8s 1.29
         imagePullPolicy: IfNotPresent
         ports:
