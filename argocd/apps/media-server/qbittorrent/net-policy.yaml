@@ -10,6 +10,11 @@ spec:
     - Ingress
     - Egress
   ingress:
+    # VPN endpoint for port forwarding
+    - from:
+        - ipBlock:
+            #cidr: 150.80.210.60/32 
+            cidr: 146.70.217.66/32 
     - from:
         - namespaceSelector:
             matchLabels:
