@@ -35,7 +35,7 @@ spec:
             name: config
           - mountPath: /data/media/torrents
             name: torrents
-      #initContainers:
+      initContainers:
       - name: gluetun # init sidecar for VPN connection
         image: "ghcr.io/qdm12/gluetun:latest" # <- you probably want this to be a set version
         #restartPolicy: Always # makes this init into a sidecar container k8s 1.29
@@ -77,17 +77,16 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
-            - SYS_MODULE
           privileged: true
-        volumeMounts:
-          - name: tun-device
-            mountPath: /dev/net/tun
-      restartPolicy: Always
+        # volumeMounts:
+        #   - name: tun-device
+        #     mountPath: /dev/net/tun
+        restartPolicy: Always
       volumes:
-        - name: tun-device
-          hostPath:
-            path: /dev/net/tun
-            type: CharDevice
+        # - name: tun-device
+        #   hostPath:
+        #     path: /dev/net/tun
+        #     type: CharDevice
         - name: config
           persistentVolumeClaim:
             claimName: config
