@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tautulli
+  labels:
+    app: tautulli
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: tautulli.k8s.yanello.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: overseerr
+                port:
+                  number: 8181
+            path: /
+            pathType: Prefix

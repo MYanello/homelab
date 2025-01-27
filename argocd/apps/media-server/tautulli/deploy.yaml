@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tautulli
+  labels:
+    app: tautulli
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: tautulli
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tautulli
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: America/Chicago
+          image: linuxserver/tautulli:latest
+          imagePullPolicy: Always
+          name: tautulli
+          ports:
+            - containerPort: 8181
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /logs
+              name: plex-logs
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8181
+            initialDelaySeconds: 300
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8181
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: plex-logs
+          nfs:
+            server: marcus-server.lan
+            path: /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs
