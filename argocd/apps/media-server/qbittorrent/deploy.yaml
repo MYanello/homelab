@@ -39,9 +39,9 @@ spec:
             name: torrents
       initContainers:
       - name: gluetun # init sidecar for VPN connection
-        image: "ghcr.io/qdm12/gluetun:latest" # <- you probably want this to be a set version
-        #restartPolicy: Always # makes this init into a sidecar container k8s 1.29
-        imagePullPolicy: Always
+        image: "ghcr.io/qdm12/gluetun:v3.39.1" # <- you probably want this to be a set version
+        restartPolicy: Always # makes this init into a sidecar container k8s 1.29
+        imagePullPolicy: IfNotPresent
         # ports:
         # - name: http-proxy
         #   containerPort: 8888
@@ -76,14 +76,13 @@ spec:
         - name: DNS_KEEP_NAMESERVER
           value: "true"
         securityContext:
+          privileged: true
           capabilities:
             add:
             - NET_ADMIN
-          privileged: true
         # volumeMounts:
         #   - name: tun-device
         #     mountPath: /dev/net/tun
-        restartPolicy: Always
       volumes:
         # - name: tun-device
         #   hostPath:
