@@ -180,6 +180,8 @@ spec:
         - env:
             - name: POSTGRES_DB
               value: immich
+            - name: POSTGRES_INITDB_ARGS
+              value: --data-checksums
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
