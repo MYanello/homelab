@@ -34,11 +34,11 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-          readinessProbe:
+          startupProbe:
             httpGet:
               path: /
               port: 9696
-            initialDelaySeconds: 30
+            initialDelaySeconds: 300
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
@@ -54,3 +54,46 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  labels:
+    app: flaresolverr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: flaresolverr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: flaresolverr
+    spec:
+      containers:
+          image: ghcr.io/flaresolverr/flaresolverr:latest
+          imagePullPolicy: Always
+          name: flaresolverr
+          ports:
+            - containerPort: 8191
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8191
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8191
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
