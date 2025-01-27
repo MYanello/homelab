@@ -191,7 +191,7 @@ spec:
             - name: POSTGRES_DB
               value: immich
             - name: POSTGRES_INITDB_ARGS
-              value: --data-checksums
+              value: '--data-checksums'
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
