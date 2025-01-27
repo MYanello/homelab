@@ -52,7 +52,7 @@ spec:
               size: 15Gi
               class: nfs-storage
           adminToken:
-            existingSecret: vaultwarden-admin-secret
+            existingSecret: vw-admin-secret
             existingSecretKey: adminToken
 ---
 apiVersion: argoproj.io/v1alpha1
