@@ -25,17 +25,31 @@ spec:
       targetPort: 3000
   selector:
     app: immich-server
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   labels:
-#     app: redis
-#   name: redis
-# spec:
-#   ports:
-#     - name: redis
-#       port: 3479
-#       targetPort: 6379
-#   selector:
-#     app: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+  selector:
+    app: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres
