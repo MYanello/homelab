@@ -5,8 +5,6 @@ data:
   DB_DATABASE_NAME: postgres
   DB_HOSTNAME: postgres
   DB_USERNAME: postgres
-  REDIS_HOSTNAME: redis
-  REDIS_PORT: '6379'
 kind: ConfigMap
 ---
 apiVersion: apps/v1
@@ -39,7 +37,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: resume-secrets
-              key: CHROME_TOKEN
+              key: TOKEN
         - name: CHROME_URL
           value: "ws://localhost:3000"
         - name: DATABASE_URL
@@ -110,7 +108,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: resume-secrets
-              key: CHROME_TOKEN
+              key: TOKEN
         - name: EXIT_ON_HEALTH_FAILURE
           value: "false"
         - name: PRE_REQUEST_HEALTH_CHECK
