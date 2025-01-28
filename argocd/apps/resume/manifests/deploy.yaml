@@ -111,6 +111,9 @@ spec:
                   key: DB_PASSWORD
           image: postgres:15-alpine
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           livenessProbe:
             exec:
               command:
