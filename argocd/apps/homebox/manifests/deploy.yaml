@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: homebox
+  name: homebox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homebox
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: homebox
+    spec:
+      containers:
+        - env:
+            - name: HBOX_LOG_LEVEL
+              value: info
+            - name: HBOX_LOG_FORMAT
+              value: text
+            - name: HBOX_WEB_MAX_UPLOAD_SIZE
+              value: '100'
+            - name: HBOX_ALLOW_REGISTRATION
+              value: 'false'
+          image: ghcr.io/hay-kot/homebox:latest
+          imagePullPolicy: Always
+          name: homebox
+          ports:
+            - containerPort: 7745
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7745
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7745
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
