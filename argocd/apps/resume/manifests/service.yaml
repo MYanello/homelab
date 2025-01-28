@@ -5,6 +5,7 @@ metadata:
     app: resume
   name: resume
 spec:
+  clusterIP: 10.43.208.237
   ports:
     - name: http
       port: 3000

@@ -173,7 +173,7 @@ spec:
         app: chrome
     spec:
       hostAliases:
-        - ip: resume
+        - ip: 10.43.208.237
           hostnames:
             - resume.yanello.net
       containers:
