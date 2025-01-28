@@ -211,6 +211,8 @@ spec:
               value: "3000"
             - name: VITE_DISABLE_SIGNUPS
               value: "true"
+            - name: CHROME_URL
+              value: ws://chrome:3000
             - name: NODE_ENV
               value: production
             - name: STORAGE_ENDPOINT
