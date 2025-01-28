@@ -239,7 +239,7 @@ spec:
             - name: NODE_ENV
               value: production
             - name: STORAGE_ENDPOINT
-              value: marcus-server.lan
+              value: minio
             - name: STORAGE_PORT
               value: "9000"
             - name: STORAGE_BUCKET
