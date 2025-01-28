@@ -185,9 +185,17 @@ spec:
               protocol: TCP
           env:
             - name: TIMEOUT
-              value: "30000"
+              value: "120000"
             - name: EXIT_ON_HEALTH_FAILURE
               value: "true"
+            - name: KEEP_ALIVE
+              value: "true"
+            - name: PREBOOT_CHROME
+              value: "true"
+            - name: CHROME_REFRESH_TIME
+              value: "3600000"
+            - name: CONNECTION_TIMEOUT
+              value: "120000"
             - name: PRE_REQUEST_HEALTH_CHECK
               value: "true"
           envFrom:
