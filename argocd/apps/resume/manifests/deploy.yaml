@@ -38,6 +38,10 @@ spec:
           image: minio/minio:latest
           imagePullPolicy: Always
           name: minio
+          command:
+            - minio
+            - server
+            - /data
           volumeMounts:
             - name: minio
               mountPath: /data
