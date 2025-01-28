@@ -180,11 +180,17 @@ spec:
       containers:
         - env:
             - name: POSTGRES_DB
-              value: immich
+              valueFrom:
+                configMapKeyRef:
+                  name: immich-config
+                  key: DB_DATABASE_NAME
             - name: POSTGRES_INITDB_ARGS
               value: '--data-checksums'
             - name: POSTGRES_USER
-              value: marcus
+              valueFrom:
+                configMapKeyRef:
+                  name: immich-config
+                  key: DB_USERNAME
             # - name: DB_DATA_LOCATION
             #   value: /var/lib/postgresql/data
             - name: POSTGRES_PASSWORD
@@ -200,10 +206,10 @@ spec:
                 - sh
                 - -c
                 - |
-                  pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1;
-                  Chksum="$$(psql --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
+                  pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" || exit 1;
+                  Chksum="$(psql --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
                   echo "checksum failure count is $$Chksum";
-                  [ "$$Chksum" = '0' ] || exit 1
+                  [ "$Chksum" = '0' ] || exit 1
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
@@ -211,7 +217,7 @@ spec:
               command:
                 - sh
                 - -c
-                - pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}"
+                - pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}"
             initialDelaySeconds: 5
             periodSeconds: 10
           securityContext:
