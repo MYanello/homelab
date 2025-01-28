@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-config
+data:
+  DB_HOSTNAME: postgres
+  DB_DATABASE_NAME: immich
+  DB_USERNAME: immich
+  REDIS_HOSTNAME: "redis"
+  MACHINE_LEARNING_PRELOAD__CLIP: "ViT-L-16-SigLIP-256__webli"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,16 +29,9 @@ spec:
         app: immich-server
     spec:
       containers:
-        - env:
-            - name: DB_HOSTNAME
-              value: immich
-            - name: DB_DATABASE_NAME
-              value: immich
-            - name: REDIS_HOSTNAME
-              value: immich
-            - name: MACHINE_LEARNING_PRELOAD__CLIP
-              value: ViT-L-16-SigLIP-256__webli
           envFrom:
+            - configMapRef:
+                name: immich-config
             - secretRef:
                 name: immich-secrets
           image: ghcr.io/immich-app/immich-server:release
@@ -69,16 +73,9 @@ spec:
       nodeSelector:
         nvidia.com/gpu.present: "true"
       containers:
-        - env:
-            - name: DB_HOSTNAME
-              value: postgres
-            - name: DB_DATABASE_NAME
-              value: immich
-            - name: REDIS_HOSTNAME
-              value: redis
-            - name: MACHINE_LEARNING_PRELOAD__CLIP
-              value: ViT-L-16-SigLIP-256__webli
           envFrom:
+            - configMapRef:
+                name: immich-config
             - secretRef:
                 name: immich-secrets
           image: ghcr.io/immich-app/immich-machine-learning:release
@@ -198,10 +195,7 @@ spec:
                   name: immich-secrets
                   key: DB_PASSWORD
             - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: immich-secrets
-                  key: DB_USERNAME
+              value: immich
           image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
           imagePullPolicy: IfNotPresent
           livenessProbe:
