@@ -1,59 +1,59 @@
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: qbittorrent-access
-# spec:
-#   podSelector:
-#     matchLabels:
-#       app: qbittorrent
-#   policyTypes:
-#     - Ingress
-#     #- Egress
-#   ingress:
-#     # VPN endpoint for port forwarding
-#     - from:
-#         - ipBlock:
-#             cidr: 146.70.217.66/32 
-#     - from:
-#         - namespaceSelector:
-#             matchLabels:
-#               kubernetes.io/metadata.name: radarr
-#         - namespaceSelector:
-#             matchLabels:
-#               kubernetes.io/metadata.name: sonarr
-#         - namespaceSelector:
-#             matchLabels:
-#               kubernetes.io/metadata.name: ingress-nginx 
-#       ports:
-#         - protocol: TCP
-#           port: 8080
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: qbittorrent-access
+spec:
+  podSelector:
+    matchLabels:
+      app: qbittorrent
+  policyTypes:
+    - Ingress
+    #- Egress
+  ingress:
+    # VPN endpoint for port forwarding
+    - from:
+        - ipBlock:
+            cidr: 146.70.217.66/32 
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: radarr
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: sonarr
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx 
+      ports:
+        - protocol: TCP
+          port: 8080
               
-  # egress:
-  #   # Responses to services which use qBittorrent
-  #   - to:
-  #       - namespaceSelector:
-  #           matchLabels:
-  #             kubernetes.io/metadata.name: radarr
-  #       - namespaceSelector:
-  #           matchLabels:
-  #             kubernetes.io/metadata.name: sonarr
-  #       - namespaceSelector:
-  #           matchLabels:
-  #             kubernetes.io/metadata.name: ingress-nginx 
-  #     ports:
-  #       - protocol: TCP
-  #         port: 8080
-  #   # VPN endpoint so gluetun can establish the vpn connection
-  #   - to:
-  #       - ipBlock:
-  #           cidr: 146.70.217.66/32 
-    # - to:
-    #     - namespaceSelector: {}
-    #       podSelector:
-    #         matchLabels:
-    #           k8s-app: kube-dns
-    #   ports:
-    #     - protocol: UDP
-    #       port: 53
-    #     - protocol: TCP
-    #       port: 53
+  egress:
+    # Responses to services which use qBittorrent
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: radarr
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: sonarr
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx 
+      ports:
+        - protocol: TCP
+          port: 8080
+    # VPN endpoint so gluetun can establish the vpn connection
+    - to:
+        - ipBlock:
+            cidr: 146.70.217.66/32 
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
