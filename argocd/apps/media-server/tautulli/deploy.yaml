@@ -18,7 +18,7 @@ spec:
         app: tautulli
     spec:
       nodeSelector:
-        storage.type/ssd: true
+        storage.type/ssd: 'true'
       containers:
         - env:
             - name: PGID
