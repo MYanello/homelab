@@ -62,7 +62,7 @@ metadata:
   name: chrome
 spec:
   ports:
-    - name: http
+    - name: websocket
       port: 3000
       targetPort: 3000
   selector:
