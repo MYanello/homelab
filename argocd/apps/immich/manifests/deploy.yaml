@@ -7,6 +7,7 @@ data:
   DB_DATABASE_NAME: immich
   DB_USERNAME: marcus
   REDIS_HOSTNAME: "redis"
+  REDIS_PORT: "6379"
   MACHINE_LEARNING_PRELOAD__CLIP: "ViT-L-16-SigLIP-256__webli"
 ---
 apiVersion: apps/v1
