@@ -5,12 +5,12 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: resume.yanello.net
+    - host: rxresume.yanello.net
       http:
         paths:
           - backend:
               service:
-                name: rxresume
+                name: resume
                 port:
                   number: 3000
             path: /
