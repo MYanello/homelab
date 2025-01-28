@@ -8,7 +8,7 @@ spec:
       app: qbittorrent
   policyTypes:
     - Ingress
-    - Egress
+    #- Egress
   ingress:
     # VPN endpoint for port forwarding
     - from:
@@ -28,25 +28,25 @@ spec:
         - protocol: TCP
           port: 8080
               
-  egress:
-    # Responses to services which use qBittorrent
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: radarr
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: sonarr
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: ingress-nginx 
-      ports:
-        - protocol: TCP
-          port: 8080
-    # VPN endpoint so gluetun can establish the vpn connection
-    - to:
-        - ipBlock:
-            cidr: 146.70.217.66/32 
+  # egress:
+  #   # Responses to services which use qBittorrent
+  #   - to:
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             kubernetes.io/metadata.name: radarr
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             kubernetes.io/metadata.name: sonarr
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             kubernetes.io/metadata.name: ingress-nginx 
+  #     ports:
+  #       - protocol: TCP
+  #         port: 8080
+  #   # VPN endpoint so gluetun can establish the vpn connection
+  #   - to:
+  #       - ipBlock:
+  #           cidr: 146.70.217.66/32 
     # - to:
     #     - namespaceSelector: {}
     #       podSelector:
