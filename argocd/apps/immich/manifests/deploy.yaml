@@ -29,6 +29,7 @@ spec:
         app: immich-server
     spec:
       containers:
+        - name: immich-server
           envFrom:
             - configMapRef:
                 name: immich-config
@@ -41,7 +42,6 @@ spec:
             - containerPort: 3000
               protocol: TCP
           imagePullPolicy: Always
-          name: immich-server
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
@@ -73,6 +73,7 @@ spec:
       nodeSelector:
         nvidia.com/gpu.present: "true"
       containers:
+        - name: immich-ml
           envFrom:
             - configMapRef:
                 name: immich-config
@@ -80,7 +81,6 @@ spec:
                 name: immich-secrets
           image: ghcr.io/immich-app/immich-machine-learning:release
           imagePullPolicy: Always
-          name: immich-ml
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
