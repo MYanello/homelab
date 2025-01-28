@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: homebox.k8s.yanello.net
+    - host: homebox.yanello.net
       http:
         paths:
           - backend:
