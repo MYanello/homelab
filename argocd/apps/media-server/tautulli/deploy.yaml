@@ -42,10 +42,10 @@ spec:
             httpGet:
               path: /
               port: 8181
-            initialDelaySeconds: 10
-            periodSeconds: 5
+            initialDelaySeconds: 60
+            periodSeconds: 15
             timeoutSeconds: 5
-            failureThreshold: 5
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /
