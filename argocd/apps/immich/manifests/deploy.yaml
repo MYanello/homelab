@@ -5,7 +5,7 @@ metadata:
 data:
   DB_HOSTNAME: postgres
   DB_DATABASE_NAME: immich
-  DB_USERNAME: immich
+  DB_USERNAME: marcus
   REDIS_HOSTNAME: "redis"
   MACHINE_LEARNING_PRELOAD__CLIP: "ViT-L-16-SigLIP-256__webli"
 ---
@@ -183,7 +183,7 @@ spec:
             - name: POSTGRES_INITDB_ARGS
               value: '--data-checksums'
             - name: POSTGRES_USER
-              value: immich
+              value: marcus
             # - name: DB_DATA_LOCATION
             #   value: /var/lib/postgresql/data
             - name: POSTGRES_PASSWORD
