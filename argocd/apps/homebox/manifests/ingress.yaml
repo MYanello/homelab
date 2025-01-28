@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: radarr
+  name: homebox
 spec:
   ingressClassName: nginx
   rules:
-    - host: radarr.yanello.net
+    - host: homebox.k8s.yanello.net
       http:
         paths:
           - backend:
               service:
-                name: radarr
+                name: homebox
                 port:
                   number: 7878
             path: /
