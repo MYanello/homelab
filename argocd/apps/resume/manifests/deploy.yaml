@@ -35,8 +35,8 @@ spec:
           envFrom:
             - secretRef:
                 name: resume-secrets
-          image: minio/minio
-          imagePullPolicy: latest
+          image: minio/minio:latest
+          imagePullPolicy: Always
           name: minio
           volumeMounts:
             - name: minio
