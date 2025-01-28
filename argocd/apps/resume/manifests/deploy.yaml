@@ -41,6 +41,9 @@ spec:
           volumeMounts:
             - name: minio
               mountPath: /data
+          ports:
+            - containerPort: 9000
+              protocol: TCP
       volumes:
         - name: minio
           persistentVolumeClaim:
