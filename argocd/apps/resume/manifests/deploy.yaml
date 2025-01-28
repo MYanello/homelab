@@ -34,14 +34,14 @@ spec:
         - name: PUBLIC_URL
           value: "https://rxresume.yanello.net"
         - name: CHROME_TOKEN
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: CHROME_TOKEN
         - name: CHROME_URL
           value: "ws://localhost:3000"
         - name: DATABASE_URL
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: DATABASE_URL
@@ -60,12 +60,12 @@ spec:
         - name: STORAGE_BUCKET
           value: "default"
         - name: STORAGE_ACCESS_KEY
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: MINIO_ROOT_USER
         - name: STORAGE_SECRET_KEY
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: MINIO_ROOT_PASSWORD
@@ -78,12 +78,12 @@ spec:
         - name: STORAGE_URL
           value: "https://minio.yanello.net/default"
         - name: ACCESS_TOKEN_SECRET
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: ACCESS_TOKEN_SECRET
         - name: REFRESH_TOKEN_SECRET
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: REFRESH_TOKEN_SECRET
@@ -105,7 +105,7 @@ spec:
         - name: CONCURRENT
           value: "10"
         - name: TOKEN
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: CHROME_TOKEN
@@ -128,12 +128,12 @@ spec:
         - /data
         env:
         - name: MINIO_ROOT_USER
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: MINIO_ROOT_USER
         - name: MINIO_ROOT_PASSWORD
-          valueFromSecret:
+          valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: MINIO_ROOT_PASSWORD
