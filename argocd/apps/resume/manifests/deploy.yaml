@@ -173,10 +173,10 @@ spec:
       labels:
         app: chrome
     spec:
-      # hostAliases:
-      #   - ip: 10.43.208.237
-      #     hostnames:
-      #       - rxresume.yanello.net
+      hostAliases:
+        - ip: 10.43.208.237
+          hostnames:
+            - rxresume.yanello.net
       containers:
         - image: ghcr.io/browserless/chromium:latest
           imagePullPolicy: Always
