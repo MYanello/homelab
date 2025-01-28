@@ -14,6 +14,6 @@ spec:
               service:
                 name: immich-server
                 port:
-                  number: 3000
+                  number: 2283
             path: /
             pathType: Prefix
