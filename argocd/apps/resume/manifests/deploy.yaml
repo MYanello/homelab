@@ -176,6 +176,9 @@ spec:
         - image: ghcr.io/browserless/chromium:latest
           imagePullPolicy: Always
           name: chrome
+          ports:
+            - containerPort: 3000
+              protocol: TCP
           env:
             - name: TIMEOUT
               value: "30000"
