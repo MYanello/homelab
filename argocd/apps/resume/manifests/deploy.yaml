@@ -175,7 +175,7 @@ spec:
       hostAliases:
         - ip: 10.43.208.237
           hostnames:
-            - resume.yanello.net
+            - rxresume.yanello.net
       containers:
         - image: ghcr.io/browserless/chromium:latest
           imagePullPolicy: Always
