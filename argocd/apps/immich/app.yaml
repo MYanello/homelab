@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    name: in-cluster
+    namespace: immich
+  project: default
+  source:
+    path: argocd/apps/immich/manifests
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich-secrets
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  destination:
+    namespace: immich
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: argocd/apps/immich/secrets
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+---
