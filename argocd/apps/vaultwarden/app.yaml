@@ -16,66 +16,70 @@ spec:
     name: in-cluster
     namespace: vaultwarden
   project: default
-  source:
-    repoURL: https://guerzon.github.io/vaultwarden
-    targetRevision: "*"
-    chart: vaultwarden
-    helm:
-      valuesObject:
-          ingress:
-            enabled: true
-            className: "nginx"
-            hostname: bitwarden.yanello.net
-            additionalAnnotations:
-              nginx.org/websocket-services: "vaultwarden"
-              nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
-              nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
-              nginx.ingress.kubernetes.io/affinity: "cookie"
-              nginx.ingress.kubernetes.io/session-cookie-name: "route"
-              nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-          domain: "https://bitwarden.yanello.net"
-          signupsAllowed: false
-          replicas: 1
-          # service:
-          #   sessionAffinity: ClientIP
-          #   sessionAffinityConfig:
-          #     clientIP:
-          #       timeoutSeconds: 10800
-          storage:
-            data:
-              name: vaultwarden-data
-              size: 15Gi
-              class: nfs-storage
-              keepPvc: true
-              accessMode: ReadWriteMany
-            attachments:
-              name: vaultwarden-data
-              keepPvc: true
-              accessMode: ReadWriteMany
-              size: 15Gi
-              class: nfs-storage
-          adminToken:
-            existingSecret: vw-admin-secret
-            existingSecretKey: adminToken
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: vw-admin-secret
-  namespace: argocd
-spec:
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-  destination:
-    namespace: vaultwarden
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: argocd/apps/vaultwarden/secrets
-    repoURL: https://github.com/myanello/homelab.git
-    targetRevision: HEAD
----
+  sources:
+    - repoURL: https://github.com/myanello/homelab.git
+      targetRevision: HEAD
+      path: argocd/apps/vaultwarden/secrets
+    - repoURL: https://guerzon.github.io/vaultwarden
+      targetRevision: "*"
+      chart: vaultwarden
+      helm:
+        valuesObject:
+            ingress:
+              enabled: true
+              className: "nginx"
+              hostname: bitwarden.yanello.net
+              additionalAnnotations:
+                nginx.org/websocket-services: "vaultwarden"
+                nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+                nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
+                nginx.ingress.kubernetes.io/affinity: "cookie"
+                nginx.ingress.kubernetes.io/session-cookie-name: "route"
+                nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+            domain: "https://bitwarden.yanello.net"
+            signupsAllowed: false
+            replicas: 1
+            # service:
+            #   sessionAffinity: ClientIP
+            #   sessionAffinityConfig:
+            #     clientIP:
+            #       timeoutSeconds: 10800
+            storage:
+              data:
+                name: vaultwarden-data
+                size: 15Gi
+                class: nfs-storage
+                keepPvc: true
+                accessMode: ReadWriteMany
+              attachments:
+                name: vaultwarden-data
+                keepPvc: true
+                accessMode: ReadWriteMany
+                size: 15Gi
+                class: nfs-storage
+            adminToken:
+              existingSecret: vw-admin-secret
+              existingSecretKey: adminToken
+      
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: vw-admin-secret
+#   namespace: argocd
+# spec:
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     - CreateNamespace=true
+#   destination:
+#     namespace: vaultwarden
+#     server: https://kubernetes.default.svc
+#   project: default
+#   source:
+#     path: argocd/apps/vaultwarden/secrets
+#     repoURL: https://github.com/myanello/homelab.git
+#     targetRevision: HEAD
+# ---
