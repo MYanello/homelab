@@ -12,6 +12,6 @@ spec:
               service:
                 name: homebox
                 port:
-                  number: 7878
+                  number: 7745
             path: /
             pathType: Prefix
