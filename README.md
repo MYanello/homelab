@@ -7,6 +7,9 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ### 01.27.25
 - Moved vaultwarden to 'production'. For ha I'll need to setup a better db backend than sqlite.
+- Migrated most media server services to k8s. Main trickiness was with qbittorrent so the other things have went straight to prod
+- Tautulli has been a bit slow. Going to try putting it on the hp laptop to see if it is a pi/microsd issue.
+- Found some more fanciness with kustomize in setting up immich. That seems ready to go for when the gpu node is up.
 
 ### 01.25.25
 
