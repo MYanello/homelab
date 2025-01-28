@@ -30,3 +30,14 @@ spec:
     targetPort: 44253
   selector:
     app: rx-resume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: postgres
