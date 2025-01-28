@@ -17,6 +17,8 @@ spec:
       labels:
         app: tautulli
     spec:
+      nodeSelector:
+        storage: ssd
       containers:
         - env:
             - name: PGID
@@ -28,8 +30,6 @@ spec:
           image: linuxserver/tautulli:latest
           imagePullPolicy: Always
           name: tautulli
-          nodeSelector:
-            storage: ssd
           ports:
             - containerPort: 8181
               protocol: TCP
