@@ -109,7 +109,7 @@ spec:
                 secretKeyRef:
                   name: resume-secrets
                   key: DB_PASSWORD
-          image: postgres:15-alpine:latest
+          image: postgres:15-alpine
           imagePullPolicy: Always
           livenessProbe:
             exec:
