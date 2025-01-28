@@ -10,7 +10,7 @@ spec:
         paths:
           - backend:
               service:
-                name: resume
+                name: rxresume
                 port:
                   number: 3000
             path: /
