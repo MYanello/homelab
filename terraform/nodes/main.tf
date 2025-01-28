@@ -35,6 +35,6 @@ resource "kubernetes_labels" "hp-worker" {
       name = "hp-worker"
     }
   labels = {
-    "storage.type/sdd" = "true",
+    "storage.type/ssd" = "true",
   }
 }
