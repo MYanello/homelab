@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: resume
 spec:
-  ingressClassName: resume
+  ingressClassName: nginx
   rules:
     - host: resume.k8s.yanello.net
       http:
@@ -21,7 +21,7 @@ kind: Ingress
 metadata:
   name: minio
 spec:
-  ingressClassName: minio
+  ingressClassName: nginx
   rules:
     - host: minio.k8s.yanello.net
       http:
