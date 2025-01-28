@@ -11,12 +11,6 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-  #     - RespectIgnoreDifferences=true
-  # ignoreDifferences:
-  #   - group: apps
-  #     kind: Deployment
-  #     jsonPointers:
-  #       - /spec/replicas
   destination:
     name: in-cluster
     namespace: frigate
@@ -57,24 +51,3 @@ spec:
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
       path: argocd/apps/frigate/secrets
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: frigate-secrets
-#   namespace: argocd
-# spec:
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#   destination:
-#     namespace: frigate
-#     server: https://kubernetes.default.svc
-#   project: default
-#   source:
-#     path: argocd/apps/frigate/secrets
-#     repoURL: https://github.com/myanello/homelab.git
-#     targetRevision: HEAD
