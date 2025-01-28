@@ -15,7 +15,7 @@ spec:
     name: in-cluster
     namespace: resume
   project: default
-  source:
+  sources:
     repoURL: https://github.com/myanello/homelab.git
     targetRevision: HEAD
-    path: argocd/apps/resume/**
+    path: argocd/apps/resume/manifests
