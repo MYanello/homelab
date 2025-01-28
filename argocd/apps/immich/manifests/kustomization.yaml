@@ -3,6 +3,9 @@ kind: Kustomization
 
 resources:
 - deploy.yaml
+- ingress.yaml
+- service.yaml
+- pvc.yaml
 
 patches:
 - patch: |-
