@@ -89,13 +89,13 @@ spec:
             secretKeyRef:
               name: resume-secrets
               key: REFRESH_TOKEN_SECRET
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 2048Mi
-          requests:
-            cpu: 1000m
-            memory: 2048Mi
+        # resources:
+        #   limits:
+        #     cpu: 1000m
+        #     memory: 2048Mi
+        #   requests:
+        #     cpu: 1000m
+        #     memory: 2048Mi
 
       - name: rx-chrome
         image: ghcr.io/browserless/chromium:latest
@@ -115,13 +115,13 @@ spec:
           value: "false"
         - name: PRE_REQUEST_HEALTH_CHECK
           value: "false"
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 4096Mi
-          requests:
-            cpu: 2000m
-            memory: 4096Mi
+        # resources:
+        #   limits:
+        #     cpu: 2000m
+        #     memory: 4096Mi
+        #   requests:
+        #     cpu: 2000m
+        #     memory: 4096Mi
 
       - name: rx-resume-s3
         image: minio/minio:latest
@@ -146,13 +146,13 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: assets-storage
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 2048Mi
-          requests:
-            cpu: 1000m
-            memory: 2048Mi
+        # resources:
+        #   limits:
+        #     cpu: 1000m
+        #     memory: 2048Mi
+        #   requests:
+        #     cpu: 1000m
+        #     memory: 2048Mi
 
       volumes:
       - name: assets-storage
