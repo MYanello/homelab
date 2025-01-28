@@ -18,7 +18,7 @@ spec:
         app: tautulli
     spec:
       nodeSelector:
-        storage: ssd
+        storage.type/ssd: 'true'
       containers:
         - env:
             - name: PGID
@@ -36,8 +36,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            - mountPath: /logs
-              name: plex-logs
+            # - mountPath: /logs
+            #   name: plex-logs
           startupProbe:
             httpGet:
               path: /
@@ -58,7 +58,7 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: config
-        - name: plex-logs
-          nfs:
-            server: marcus-server.lan
-            path: /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs
+        # - name: plex-logs
+        #   nfs:
+        #     server: marcus-server.lan
+        #     path: /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs

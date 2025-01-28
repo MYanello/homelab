@@ -22,8 +22,10 @@ provider "kubernetes" {
 #   }
 #   labels = {
 #     "nvidia.com/gpu.present" = "true",
-#     "accelerator" = "coral-tpu"
-#   }
+#     "accelerator" = "coral-tpu",
+#     "storage.type/ssd" = "true",
+#     "storage.type/hdd" = "true",
+#  }
 # }
 
 resource "kubernetes_labels" "hp-worker" {
@@ -33,6 +35,6 @@ resource "kubernetes_labels" "hp-worker" {
       name = "hp-worker"
     }
   labels = {
-    "storage" = "ssd"
+    "storage.type/sdd" = "true",
   }
 }
