@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: Library
+  name: library
 spec:
   storageClassName: nfs-storage
   accessModes:
