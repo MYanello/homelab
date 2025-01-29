@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: change-detection.k8s.yanello.net
+    - host: change-detection.yanello.net
       http:
         paths:
           - backend:

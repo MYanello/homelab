@@ -24,7 +24,7 @@ spec:
             - name: PLAYWRIGHT_DRIVER_URL
               value: "ws://playwright:3000/?stealth=1&--disable-web-security=true"
             - name: BASE_URL
-              value: "https://change.k8s.yanello.net"
+              value: "https://change.yanello.net"
           ports:
             - containerPort: 5000
               protocol: TCP
