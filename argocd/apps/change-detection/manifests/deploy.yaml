@@ -61,8 +61,6 @@ metadata:
   name: playwright
 spec:
   replicas: 1
-  nodeSelector:
-    beta.kubernetes.io/arch: amd64
   selector:
     matchLabels:
       app: playwright
@@ -73,6 +71,8 @@ spec:
       labels:
         app: playwright
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       containers:
         - image: browserless/chrome:1.60-chrome-stable
           imagePullPolicy: IfNotPresent
