@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backrest
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: backrest.k8s.yanello.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: owntracks
+                port:
+                  number: 9898
+            path: /
+            pathType: Prefix

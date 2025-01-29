@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backrest
+  name: backrest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backrest
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: backrest
+    spec:
+      containers:
+        - image: garethgeorge/backrest:latest
+          imagePullPolicy: Always
+          name: backrest
+          env:
+            - name: BACKREST_DATA
+              value: /data
+            - name: BACKREST_CONFIG
+              value: /config/config/json
+            - name: XDG_CACHE_HOME
+              value: /cache
+            - name: TZ
+              value: America/Chicago
+          ports:
+            - containerPort: 9898
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - name: config
+              mountPath: /config
+            - name: cache
+              mountPath: /cache
+            - name: zpool
+              mountPath: /userdata/zpool
+            - name: hostdata
+              mountPath: /userdata/data
+            - name: etc
+              mountPath: /userdata/etc
+            - name: mnt
+              mountPath: /mnt
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9898
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9898
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: cache
+          persistentVolumeClaim:
+            claimName: cache
+        - name: zpool
+          nfs:
+            server: marcus-server.lan
+            path: /zpool
+        - name: hostdata
+          nfs:
+            server: marcus-server.lan
+            path: /hostdata
+        - name: etc
+          nfs:
+            server: marcus-server.lan
+            path: /etc
+        - name: mnt
+          nfs:
+            server: marcus-server.lan
+            path: /mnt
