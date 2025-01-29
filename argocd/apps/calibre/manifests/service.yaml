@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: calibre
+  name: calibre
+spec:
+  ports:
+    - name: "http"
+      port: 8083
+      targetPort: 8083
+  selector:
+    app: calibre
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: calibre-dl
+  name: calibre-dl
+spec:
+  ports:
+    - name: "http"
+      port: 8084
+      targetPort: 8084
+  selector:
+    app: calibre-dl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cloudflareproxy
+  name: cloudflareproxy
+spec:
+  ports:
+    - name: "http"
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: cloudflareproxy
+

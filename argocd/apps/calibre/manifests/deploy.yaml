@@ -1,0 +1,168 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: calibre-dl
+  name: calibre-dl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calibre-dl
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: calibre-dl
+    spec:
+      containers:
+        - env:
+            - name: FLASK_PORT
+              value: "8084"
+            - name: FLASK_DEBUG
+              value: 'false'
+            - name: CLOUDFLARE_PROXY_URL
+              value: http://cloudflareproxy:8000
+          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest
+          imagePullPolicy: Always
+          name: calibre-dl
+          ports:
+            - containerPort: 8084
+              protocol: TCP
+          volumeMounts:
+            - name: ingest
+              mountPath: /cwa-book-ingest
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8084
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8084
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: ingest
+          persistentVolumeClaim:
+            claimName: ingest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: calibre
+  name: calibre
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calibre
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      containers:
+        - env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: '1000'
+            - name: TZ
+              value: "America/Chicago"
+            - name: DOCKER_MODES
+              value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
+          image: crocodilestick/calibre-web-automated:latest
+          imagePullPolicy: Always
+          name: calibre
+          ports:
+            - containerPort: 8083
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - name: ingest
+              mountPath: /cwa-book-ingest
+            - name: library
+              mountPath: /calibre-library
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8083
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8083
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
+        - name: ingest
+          persistentVolumeClaim:
+            claimName: ingest
+        - name: library
+          persistentVolumeClaim:
+            claimName: library
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cloudflareproxy
+  name: cloudflareproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflareproxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cloudflareproxy
+    spec:
+      containers:
+          image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest
+          imagePullPolicy: Always
+          name: cloudflareproxy
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
