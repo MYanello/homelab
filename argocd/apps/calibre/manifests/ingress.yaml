@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: calibre.k8s.yanello.net
+    - host: calibre.yanello.net
       http:
         paths:
           - backend:
