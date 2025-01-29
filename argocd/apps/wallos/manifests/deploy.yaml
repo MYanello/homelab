@@ -14,12 +14,12 @@ spec:
   template:
     metadata:
       labels:
-        app: kuma
+        app: wallos
     spec:
       containers:
         - image: bellamy/wallos:latest
           imagePullPolicy: Always
-          name: kuma
+          name: wallos
           env:
             - name: TZ
               value: America/Chicago
