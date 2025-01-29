@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: change-detection
+  name: change-detection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: change-detection
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: change-detection
+    spec:
+      containers:
+        - image: ghcr.io/dgtlmoon/changedetection.io:latest
+          imagePullPolicy: Always
+          name: change-detection
+          env:
+            - name: PLAYWRIGHT_DRIVER_URL
+              value: "ws://playwright:3000/?stealth=1&--disable-web-security=true"
+            - name: BASE_URL
+              value: "https://change.k8s.yanello.net"
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /datastore
+              name: data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: playwright
+  name: playwright
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playwright
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: playwright
+    spec:
+      containers:
+        - image: browserless/chrome:1.60-chrome-stable
+          imagePullPolicy: IfNotPresent
+          name: playwright
+          env:
+            - name: SCREEN_WIDTH
+              value: "1920"
+            - name: SCREEN_HEIGHT
+              value: "1080"
+            - name: ENABLE_DEBUGGER
+              value: "false"
+            - name: PREBOOT_CHROME
+              value: "true"
+            - name: MAX_CONCURRENT_SESSIONS
+              value: "10"
+            - name: CONNECTION_TIMEOUT
+              value: "30000"
+            - name: CHROME_REFRESH_TIME
+              value: "600000"
+            - name: DEFAULT_BLOCK_ADS
+              value: "true"
+            - name: DEFAULT_STEALTH
+              value: "true"
+            - name: DEFAULT_IGNORE_HTTPS_ERRORS
+              value: "true"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always

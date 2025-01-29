@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: change-detection
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: change-detection.k8s.yanello.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: change-detection
+                port:
+                  number: 5000
+            path: /
+            pathType: Prefix
