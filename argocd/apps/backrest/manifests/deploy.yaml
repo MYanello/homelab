@@ -39,8 +39,12 @@ spec:
               mountPath: /config
             - name: cache
               mountPath: /cache
-            - name: zpool
-              mountPath: /userdata/zpool
+            - name: docker
+              mountPath: /userdata/zpool/docker
+            - name: photos
+              mountPath: /userdata/zpool/Photos
+            - name: share
+              mountPath: /userdata/zpool/share
             - name: hostdata
               mountPath: /userdata/data
             - name: etc
@@ -74,10 +78,18 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: cache
-        - name: zpool
+        - name: docker
           nfs:
             server: marcus-server.lan
-            path: /zpool
+            path: /zpool/docker
+        - name: photos
+          nfs:
+            server: marcus-server.lan
+            path: /zpool/Photos
+        - name: share
+          nfs:
+            server: marcus-server.lan
+            path: /zpool/share
         - name: hostdata
           nfs:
             server: marcus-server.lan
