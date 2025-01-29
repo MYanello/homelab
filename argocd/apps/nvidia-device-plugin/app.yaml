@@ -24,19 +24,5 @@ spec:
       valuesObject:
         gfd:
           enabled: true
-      #   dcgmExporter.enabled: false
-      #   node-feature-discovery:
-      #     worker:
-      #       tolerations:
-      #         - key: ""
-      #           operator: Exists
-      #           effect: ""
-      #   daemonsets:
-      #     tolerations:
-      #       - key: nvidia.com/gpu
-      #         operator: Exists
-      #         effect: NoSchedule
-      #       - key: node-role.kubernetes.io/server
-      #         operator: Exists
-      #         effect: NoSchedule
+
 
