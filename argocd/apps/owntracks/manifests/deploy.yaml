@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: owntracks
+  name: owntracks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: owntracks
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: owntracks
+    spec:
+      containers:
+        - image: owntracks/recorder:latest
+          imagePullPolicy: Always
+          name: owntracks
+          env:
+            - name: OTR_HOST
+              value: 192.1687.1.4
+            - name: OTR_USER
+              value: mosquitto
+            - name: OTR_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: MQTT_PASSWORD
+
+          ports:
+            - containerPort: 8083
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /store
+              name: data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8083
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8083
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
