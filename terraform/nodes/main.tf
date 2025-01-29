@@ -25,6 +25,8 @@ provider "kubernetes" {
 #     "accelerator" = "coral-tpu",
 #     "storage.type/ssd" = "true",
 #     "storage.type/hdd" = "true",
+#     "storage.kubernetes.io/perfomance": "fast"
+
 #  }
 # }
 
@@ -36,5 +38,6 @@ resource "kubernetes_labels" "hp-worker" {
     }
   labels = {
     "storage.type/ssd" = "true",
+    "storage.kubernetes.io/perfomance": "fast"
   }
 }
