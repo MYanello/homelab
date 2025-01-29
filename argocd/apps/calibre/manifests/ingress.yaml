@@ -23,7 +23,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: calibre-dl.k8s.yanello.net
+    - host: calibre-dl.yanello.net
       http:
         paths:
           - backend:
