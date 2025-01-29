@@ -60,7 +60,7 @@ metadata:
     app: playwright
   name: playwright
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: playwright
