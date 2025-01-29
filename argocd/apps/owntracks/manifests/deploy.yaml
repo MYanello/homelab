@@ -5,7 +5,7 @@ metadata:
     app: owntracks
   name: owntracks
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: owntracks
@@ -22,7 +22,7 @@ spec:
           name: owntracks
           env:
             - name: OTR_HOST
-              value: 192.1687.1.4
+              value: 192.168.1.4
             - name: OTR_USER
               value: mosquitto
             - name: OTR_PASS
