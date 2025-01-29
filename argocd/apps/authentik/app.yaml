@@ -21,7 +21,7 @@ spec:
       targetRevision: HEAD
       path: argocd/apps/authentik/secrets
     - repoURL: https://charts.goauthentik.io/
-      targetRevision: "*"
+      targetRevision: "2024.12.2"
       chart: authentik
       helm:
         valuesObject:
