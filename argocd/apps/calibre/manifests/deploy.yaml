@@ -63,6 +63,8 @@ metadata:
   name: calibre
 spec:
   replicas: 1
+  nodeSelector:
+    beta.kubernetes.io/arch: amd64
   selector:
     matchLabels:
       app: calibre
@@ -74,9 +76,7 @@ spec:
         app: calibre
     spec:
       containers:
-        - nodeSelector:
-            beta.kubernetes.io/arch: amd64
-          env:
+        - env:
             - name: PUID
               value: "1000"
             - name: PGID
