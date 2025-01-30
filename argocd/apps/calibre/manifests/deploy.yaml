@@ -81,7 +81,7 @@ spec:
               value: '1000'
             - name: TZ
               value: "America/Chicago"
-            - name: DOCKER_MODES
+            - name: DOCKER_MODS
               value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
           image: crocodilestick/calibre-web-automated:latest
           imagePullPolicy: Always
