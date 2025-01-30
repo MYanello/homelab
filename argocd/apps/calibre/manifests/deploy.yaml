@@ -90,8 +90,8 @@ spec:
             - containerPort: 8083
               protocol: TCP
           volumeMounts:
-            - mountPath: /config
-              name: config
+            - name: config
+              mountPath: /config
             - name: ingest
               mountPath: /cwa-book-ingest
             - name: library
