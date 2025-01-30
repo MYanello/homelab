@@ -18,7 +18,10 @@ metadata:
   labels:
     app: calibre-dl
   name: calibre-dl
+annotations:
+  metallb.universe.tf/loadBalancerIPs: 10.10.8.2
 spec:
+  type: LoadBalancer
   ports:
     - name: "http"
       port: 8084
