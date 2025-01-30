@@ -74,7 +74,9 @@ spec:
         app: calibre
     spec:
       containers:
-        - env:
+        - nodeSelector:
+            beta.kubernetes.io/arch: amd64
+          env:
             - name: PUID
               value: "1000"
             - name: PGID
