@@ -13,5 +13,5 @@ data:
       timeSlicing:
         resources:
           - name: "nvidia.com/gpu"
-            replicas: 10  # Number of virtual GPUs per physical GPU
+            replicas: 30  # Number of virtual GPUs per physical GPU
 ```
