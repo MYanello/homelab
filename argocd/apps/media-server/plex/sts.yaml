@@ -15,46 +15,37 @@ spec:
     metadata:
       labels:
         app: plex-media-server
-      annotations:
-        {}
+      annotations: {}
     spec:
       serviceAccountName: plex-media-server
-      tolerations:
-        []
-      nodeSelector:
-        {}
-      affinity:
-        {}
+      tolerations: []
+      nodeSelector: {}
+      affinity: {}
       volumes:
-      - name: pms-transcode
-        emptyDir: {}
+        - name: transcode
+          persistentVolumeClaim:
+            claimName: transcode
+        - name: configx
+          persistentVolumeClaim:
+            claimName: config
       terminationGracePeriodSeconds: 120
       initContainers:
       containers:
-      - name: plex-media-server-pms
-        image: index.docker.io/plexinc/pms-docker:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 32400
-          name: pms
-        env:
-        - name: ADVERTISE_IP
-          value: plex.k8s.yanello.net:443
-        # - name: NVIDIA_VISIBLE_DEVICES
-        #   value: all
-        # - name: NVIDIA_DRIVER_CAPABILITIES
-        #   value: compute,video,utility
-        volumeMounts:
-        - name: pms-config
-          mountPath: /config
-        - name: pms-transcode
-          mountPath: /transcode
-  volumeClaimTemplates:
-  - metadata:
-      name: pms-config
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: nfs-storage
-      resources:
-        requests:
-          storage: 100Gi
+        - name: plex-media-server-pms
+          image: index.docker.io/plexinc/pms-docker:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 32400
+              name: pms
+          env:
+            - name: ADVERTISE_IP
+              value: plex.k8s.yanello.net:443
+          # - name: NVIDIA_VISIBLE_DEVICES
+          #   value: all
+          # - name: NVIDIA_DRIVER_CAPABILITIES
+          #   value: compute,video,utility
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: transcode
+              mountPath: /transcode
