@@ -10,9 +10,6 @@ spec:
       app: calibre-dl
   replicas: 1
   revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      io.kompose.service: qbittorrent
   strategy:
     type: Recreate
   template:
@@ -20,6 +17,9 @@ spec:
       labels:
         app: qbittorrent
         io.kompose.service: qbittorrent
+    selector:
+      matchLabels:
+        app: calibre-dl
     spec:
       containers:
       - name: qbittorrent
