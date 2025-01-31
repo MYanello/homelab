@@ -10,16 +10,15 @@ spec:
     matchLabels:
       app: plex-media-server
   template:
-    nodeSelector:
-      kubernetes.io/arch: amd64
     metadata:
       labels:
         app: plex-media-server
       annotations: {}
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       serviceAccountName: plex-media-server
       tolerations: []
-      nodeSelector: {}
       affinity: {}
       volumes:
         - name: transcode
