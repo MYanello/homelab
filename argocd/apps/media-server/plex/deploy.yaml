@@ -25,7 +25,7 @@ spec:
         - name: transcode
           persistentVolumeClaim:
             claimName: transcode
-        - name: configx
+        - name: config
           persistentVolumeClaim:
             claimName: config
       terminationGracePeriodSeconds: 120
