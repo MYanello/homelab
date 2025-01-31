@@ -27,8 +27,8 @@ spec:
             value: "1000"
           - name: PUID
             value: "1000"
-          - name: DOCKER_MODS
-            value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+          # - name: DOCKER_MODS
+          #   value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
         image: lscr.io/linuxserver/qbittorrent:latest
         imagePullPolicy: Always
         ports:
@@ -40,20 +40,20 @@ spec:
             name: config
           - mountPath: /data/media/torrents
             name: torrents
-        startupProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 120
-          periodSeconds: 30
-          timeoutSeconds: 5
-          failureThreshold: 20
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
+        # startupProbe:
+        #   tcpSocket:
+        #     port: 8080
+        #   initialDelaySeconds: 120
+        #   periodSeconds: 30
+        #   timeoutSeconds: 5
+        #   failureThreshold: 20
+        # livenessProbe:
+        #   tcpSocket:
+        #     port: 8080
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 5
+        #   timeoutSeconds: 5
+        #   failureThreshold: 3
       initContainers:
       - name: gluetun # init sidecar for VPN connection
         image: "ghcr.io/qdm12/gluetun:v3.39.1"
