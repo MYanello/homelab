@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: deployment
 metadata:
   name: plex-media-server
   labels:
