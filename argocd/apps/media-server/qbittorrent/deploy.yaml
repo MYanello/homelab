@@ -5,6 +5,9 @@ metadata:
     io.kompose.service: qbittorrent
   name: qbittorrent
 spec:
+  selector:
+    matchLabels:
+      app: calibre-dl
   replicas: 1
   revisionHistoryLimit: 3
   selector:
