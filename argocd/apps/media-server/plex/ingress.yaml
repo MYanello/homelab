@@ -7,7 +7,7 @@ metadata:
     app: plex-media-server
     app.kubernetes.io/name: plex-media-server
 spec:
-  ingressClassName: ingress-nginx
+  ingressClassName: nginx
   rules:
   - host: plex.k8s.yanello.net
     http:
