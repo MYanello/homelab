@@ -4,7 +4,6 @@ metadata:
   name: plex-media-server
   labels:
     app: plex-media-server
-    app.kubernetes.io/name: plex-media-server
   annotations:
     metallb.universe.tf/loadBalancerIPs: 10.10.8.10
 spec:
@@ -15,4 +14,4 @@ spec:
       protocol: TCP
       name: pms
   selector:
-    app.kubernetes.io/name: plex-media-server
+    app: plex-media-server
