@@ -3,19 +3,18 @@ kind: StatefulSet
 metadata:
   name: plex-media-server
   labels:
-    name: plex-media-server
     app: plex-media-server
-    app.kubernetes.io/name: plex-media-server
 spec:
   serviceName: release-name-plex-media-server
   selector:
     matchLabels:
-      app.kubernetes.io/name: plex-media-server
+      app: plex-media-server
   template:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     metadata:
       labels:
         app: plex-media-server
-        app.kubernetes.io/name: plex-media-server
       annotations:
         {}
     spec:
