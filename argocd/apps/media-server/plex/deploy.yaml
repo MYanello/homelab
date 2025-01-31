@@ -5,6 +5,7 @@ metadata:
   labels:
     app: plex-media-server
 spec:
+  replicas: 1
   serviceName: release-name-plex-media-server
   selector:
     matchLabels:
