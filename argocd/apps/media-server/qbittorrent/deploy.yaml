@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: qbittorrent
+    app: qbittorrent
   name: qbittorrent
 spec:
   selector:
@@ -16,7 +16,6 @@ spec:
     metadata:
       labels:
         app: qbittorrent
-        io.kompose.service: qbittorrent
     spec:
       nodeSelector:
         beta.kubernetes.io/arch: amd64
@@ -31,6 +30,13 @@ spec:
             value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
         image: lscr.io/linuxserver/qbittorrent:latest
         imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "250m"
+          limits:
+            memory: "6Gi"
+            cpu: "1000m"
         ports:
           - name: qbit-webui
             containerPort: 8080
