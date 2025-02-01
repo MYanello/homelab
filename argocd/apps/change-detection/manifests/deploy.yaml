@@ -77,6 +77,13 @@ spec:
         - image: browserless/chrome:1.60-chrome-stable
           imagePullPolicy: IfNotPresent
           name: playwright
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "100m"
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
           env:
             - name: SCREEN_WIDTH
               value: "1920"
