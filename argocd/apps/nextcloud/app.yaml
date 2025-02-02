@@ -51,10 +51,10 @@ spec:
             enabled: true
             global:
               defaultStorageClass: nfs-storage
-              primary:
-                persistence:
-                  enabled: true
-                  storageClass: nfs-storage
+            primary:
+              persistence:
+                enabled: true
+                storageClass: nfs-storage
             auth:
               database: nextcloud
               username: nextcloud
