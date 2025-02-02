@@ -41,3 +41,39 @@ resource "kubernetes_labels" "hp-worker" {
     "storage.kubernetes.io/perfomance": "fast"
   }
 }
+
+resource "kubernetes_labels" "picluster0" {
+    api_version = "v1"
+    kind        = "Node"
+    metadata {
+      name = "hp-worker"
+    }
+  labels = {
+    "storage.type/ssd" = "false",
+    "storage.kubernetes.io/perfomance": "slow"
+  }
+}
+
+resource "kubernetes_labels" "picluster1" {
+    api_version = "v1"
+    kind        = "Node"
+    metadata {
+      name = "hp-worker"
+    }
+  labels = {
+    "storage.type/ssd" = "false",
+    "storage.kubernetes.io/perfomance": "slow"
+  }
+}
+
+resource "kubernetes_labels" "picluster2" {
+    api_version = "v1"
+    kind        = "Node"
+    metadata {
+      name = "hp-worker"
+    }
+  labels = {
+    "storage.type/ssd" = "false",
+    "storage.kubernetes.io/perfomance": "slow"
+  }
+}
