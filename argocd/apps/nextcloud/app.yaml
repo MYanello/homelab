@@ -51,8 +51,7 @@ spec:
             loadBalancerIP: 10.10.8.3
           internalDatabase:
             enabled: false
-          externaleDatabase:
-            user: nextcloud
+          externalDatabase:
             existingSecret:
               enabled: true
               secretName: nextcloud-secrets
