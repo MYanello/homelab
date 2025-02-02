@@ -24,7 +24,7 @@ spec:
       chart: grafana
       helm:
         valuesObject:
-          replicas: 1
+          replicas: 0
           service:
             type: LoadBalancer
             loadBalancerIP: 10.10.8.5
