@@ -41,6 +41,8 @@ spec:
             existingSecret:
               enabled: true
               secretName: nextcloud-secrets
+              usernameKey: mariadb-password
+              passwordKey: mariadb-password
           redis:
             enabled: true
             global:
