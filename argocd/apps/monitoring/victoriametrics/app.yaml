@@ -21,7 +21,6 @@ spec:
     chart: victoria-metrics-cluster
     helm:
       valuesObject:
-        autoDiscovery: true
         vmstorage:
           persistentVolume:
             enabled: true
