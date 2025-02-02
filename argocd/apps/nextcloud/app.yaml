@@ -38,6 +38,9 @@ spec:
             host: nextcloud.k8s.yanello.net
             trustedDomains:
               - nextcloud.k8s.yanello.net
+            existingSecret:
+              enabled: true
+              secretName: nextcloud-secrets
           redis:
             enabled: true
             global:
