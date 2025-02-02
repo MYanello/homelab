@@ -30,11 +30,17 @@ spec:
           ingress:
             enabled: true
             hosts:
-              - vminsert.yanello.net
+              - name: vm.k8s.yanello.net
+                path:
+                  - /select
+                port: http
             ingressClassName: nginx
         vmselect:
           ingress:
             enabled: true
             hosts:
-              - vmselect.yanello.net
+              - name:  vm.k8s.yanello.net
+                path:
+                  - /insert
+                port: http
             ingressClassName: nginx
