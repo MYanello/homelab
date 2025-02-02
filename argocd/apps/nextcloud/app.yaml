@@ -70,3 +70,5 @@ spec:
             enabled: false
           startupProbe:
             enabled: false
+          readinessProbe:
+            enabled: false
