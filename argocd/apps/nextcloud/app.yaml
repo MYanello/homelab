@@ -65,8 +65,6 @@ spec:
                 enabled: true
                 storageClass: nfs-storage
             auth:
-              database: nextcloud
-              username: nextcloud
               existingSecret: nextcloud-secrets
           persistence:
             enabled: true
