@@ -1,10 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.version: 1.35.0 (HEAD)
   labels:
-    io.kompose.service: qbittorrent
+    app: qbittorrent
   name: qbittorrent
 spec:
   ports:
@@ -12,4 +10,4 @@ spec:
       port: 8080
       targetPort: 8080
   selector:
-    io.kompose.service: qbittorrent
+    app: qbittorrent
