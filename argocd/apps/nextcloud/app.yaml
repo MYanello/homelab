@@ -38,11 +38,10 @@ spec:
             host: nextcloud.k8s.yanello.net
             trustedDomains:
               - nextcloud.k8s.yanello.net
-            existingSecret:
-              enabled: true
-              secretName: nextcloud-secrets
-              usernameKey: mariadb-password
-              passwordKey: mariadb-password
+            # existingSecret:
+            #   enabled: true
+            #   secretName: nextcloud-secrets
+            #   passwordKey: mariadb-password
           redis:
             enabled: true
             global:
@@ -52,6 +51,12 @@ spec:
             loadBalancerIP: 10.10.8.3
           internalDatabase:
             enabled: false
+          externaleDatabase:
+            user: nextcloud
+            existingSecret:
+              enabled: true
+              secretName: nextcloud-secrets
+              passwordKey: mariadb-password
           mariadb:
             enabled: true
             global:
