@@ -38,10 +38,6 @@ spec:
             host: nextcloud.k8s.yanello.net
             trustedDomains:
               - nextcloud.k8s.yanello.net
-            # existingSecret:
-            #   enabled: true
-            #   secretName: nextcloud-secrets
-            #   passwordKey: mariadb-password
           redis:
             enabled: true
             global:
@@ -70,3 +66,7 @@ spec:
             enabled: true
             storageClass: nfs-storage
             size: 100Gi
+          livenessProbe:
+            enabled: false
+          startupProbe:
+            enabled: false
