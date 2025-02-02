@@ -39,9 +39,9 @@ spec:
             storageClassName: nfs-storage
           env:
             GF_SECURITY_ALLOW_EMBEDDING: true
-          admin:
-            existingSecret: grafana-secrets
-            userKey: GRAFANA_USER
-            passwordKey: GRAFANA_PASSWORD
+          # admin:
+          #   existingSecret: grafana-secrets
+          #   userKey: GRAFANA_USER
+          #   passwordKey: GRAFANA_PASSWORD
 
       
