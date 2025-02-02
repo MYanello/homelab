@@ -17,6 +17,9 @@ spec:
     namespace: nextcloud
   project: default
   sources:
+    - repoURL: https://github.com/myanello/homelab.git
+      targetRevision: HEAD
+      path: argocd/apps/nextcloud/secrets
     - repoURL: https://nextcloud.github.io/helm/
       targetRevision: '*'
       chart: nextcloud
