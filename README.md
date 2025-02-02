@@ -5,6 +5,10 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 
+### 02.06.25
+- Working on moving monitoring to k8s
+- Grafana seems like I can gitops the whole config. For another day, for now we'll use persistent storage for the config.
+
 ### 01.28.25
 - Continued migrating basic non-gpu services
 - Rxresume pdf download may not be possible to get working with the way routing is setup in there

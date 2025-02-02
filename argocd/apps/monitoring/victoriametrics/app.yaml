@@ -15,30 +15,27 @@ spec:
     name: in-cluster
     namespace: victoria-metrics
   project: default
-  sources:
-    # - repoURL: https://github.com/myanello/homelab.git
-    #   targetRevision: HEAD
-    #   path: argocd/apps/monitoring/victoria-metrics/manifests
-    - repoURL: https://victoriametrics.github.io/helm-charts/
-      targetRevision: "0.17.3"
-      chart: victoria-metrics-cluster
-      helm:
-        valuesObject:
-          autoDiscovery: true
-          vmstorage:
-            persistentVolume:
-              enabled: true
-              size: 100Gi
-              storageClassName: nfs-storage
-          vminsert:
-            ingress:
-              enabled: true
-              hosts:
-                - vminsert.yanello.net
-              ingressClassName: nginx
-          vmselect:
-            ingress:
-              enabled: true
-              hosts:
-                - vmselect.yanello.net
-              ingressClassName: nginx
+  source:
+    repoURL: https://victoriametrics.github.io/helm-charts/
+    targetRevision: "0.17.3"
+    chart: victoria-metrics-cluster
+    helm:
+      valuesObject:
+        autoDiscovery: true
+        vmstorage:
+          persistentVolume:
+            enabled: true
+            size: 100Gi
+            storageClassName: nfs-storage
+        vminsert:
+          ingress:
+            enabled: true
+            hosts:
+              - vminsert.yanello.net
+            ingressClassName: nginx
+        vmselect:
+          ingress:
+            enabled: true
+            hosts:
+              - vmselect.yanello.net
+            ingressClassName: nginx
