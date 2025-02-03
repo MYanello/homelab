@@ -1,31 +1,31 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: nvidia-operator
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    name: in-cluster
-    namespace: nvidia-operator
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  project: default
-  source:
-    repoURL: https://helm.ngc.nvidia.com/nvidia
-    targetRevision: "24.9.2"
-    chart: gpu-operator
-    helm:
-      valuesObject:
-        driver:
-          enabled: false
-        toolkit:
-          enabled: false
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: nvidia-operator
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     name: in-cluster
+#     namespace: nvidia-operator
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#   project: default
+#   source:
+#     repoURL: https://helm.ngc.nvidia.com/nvidia
+#     targetRevision: "24.9.2"
+#     chart: gpu-operator
+#     helm:
+#       valuesObject:
+#         driver:
+#           enabled: false
+#         toolkit:
+#           enabled: false
 
 
 
