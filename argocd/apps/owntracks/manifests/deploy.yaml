@@ -30,7 +30,6 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: MQTT_PASSWORD
-
           ports:
             - containerPort: 8083
               protocol: TCP
@@ -53,6 +52,13 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
+            resources:
+              limits:
+                cpu: 50m
+                memory: 50Mi
+              requests:
+                cpu: 10m
+                memory: 10Mi
       restartPolicy: Always
       volumes:
         - name: data
