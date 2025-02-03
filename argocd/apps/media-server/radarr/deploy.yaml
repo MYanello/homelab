@@ -22,6 +22,15 @@ spec:
       labels:
         io.kompose.service: radarr
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: PGID
