@@ -17,15 +17,15 @@ spec:
       labels:
         app: overseerr
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: NotIn
-                    values:
-                      - marcus-server
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: kubernetes.io/hostname
+      #               operator: NotIn
+      #               values:
+      #                 - marcus-server
       containers:
         - env:
             - name: PGID
