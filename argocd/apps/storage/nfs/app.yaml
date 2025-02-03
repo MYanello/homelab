@@ -32,7 +32,16 @@ spec:
           onDelete: retain
           pathPattern: ${.PVC.namespace}/${.PVC.name}
           name: nfs-storage
-          provisionerName: k8s-sigs.io/nfs-storage
+        provisionerName: k8s-sigs.io/nfs-storage
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: NotIn
+                      values:
+                        - marcus-server
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kube-system
