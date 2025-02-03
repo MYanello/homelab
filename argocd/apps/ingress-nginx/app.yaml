@@ -30,9 +30,10 @@ spec:
             use-forwarded-headers: "true"
             proxy-read-timeout: "3600"
             proxy-send-timeout: "3600"
-
           extraArgs:
             default-ssl-certificate: "ingress-nginx/default-ingress-cert"
           service:
             annotations:
               metallb.universe.tf/loadBalancerIPs: 10.10.8.0
+          ingressClassResource:
+            default: true
