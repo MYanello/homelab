@@ -1,23 +1,30 @@
 This is my attempt to move my homelab from manual deployed using mostly docker compose and manual editing of a handful of config files, to a more modern gitops approach.
-The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then there is a consumer desktop running a amd 5900x and quadro rtx 4000 that is used for specific workloads.
+The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then there is a consumer desktop running a amd 5900x and quadro rtx 4000 that is used for specific workloads. I also added an ewaste tier laptop I used in college for fun.
 
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
 
+### 02.07.25
+
+- Flipped switch to disable docker and bring server into the cluster. Frigate is happily using time slicing, the tpu, and the gpu
+
 ### 02.06.25
+
 - Working on moving monitoring to k8s
 - Grafana seems like I can gitops the whole config. For another day, for now we'll use persistent storage for the config.
-- VMstack should deploy everything for monitoring that I had in docker compose in one shot. 
+- VMstack should deploy everything for monitoring that I had in docker compose in one shot.
   - This crashed my cluster. I will go back a step and set resource limits on everything.
 
 ### 01.28.25
+
 - Continued migrating basic non-gpu services
 - Rxresume pdf download may not be possible to get working with the way routing is setup in there
 - Backrest may be tricky to get the paths going correctly. I will nodeselect it to the server and local storage for later and hopefully that simplifies things.
 - For using the gpu, may need to switch from nvidia device plugin to gpu operator for time slicing
 
 ### 01.27.25
+
 - Moved vaultwarden to 'production'. For ha I'll need to setup a better db backend than sqlite.
 - Migrated most media server services to k8s. Main trickiness was with qbittorrent so the other things have went straight to prod
 - Tautulli has been a bit slow. Going to try putting it on the hp laptop to see if it is a pi/microsd issue.

@@ -17,6 +17,9 @@ spec:
       labels:
         app: bazarr
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        cpu.performance: high
       containers:
         - env:
             - name: PGID
@@ -65,13 +68,19 @@ spec:
             failureThreshold: 3
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/bazarr/config
+          # persistentVolumeClaim:
+          #   claimName: config
         - name: movies
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /data/media/Movies
+          # nfs:
+          #   server: marcus-server.lan
+          #   path: /data/media/Movies
         - name: tv
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /data/media/TV
+          # nfs:
+          #   server: marcus-server.lan
+          #   path: /data/media/TV
