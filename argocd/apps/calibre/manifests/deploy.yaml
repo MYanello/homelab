@@ -27,6 +27,8 @@ spec:
           image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest
           imagePullPolicy: Always
           name: calibre-dl
+          nodeSelector:
+            beta.kubernetes.io/arch: amd64
           resources:
             limits:
               cpu: 100m
