@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-media-server
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: plex-media-server
@@ -18,6 +18,7 @@ spec:
       nodeSelector:
         kubernetes.io/arch: amd64
         cpu.performance: high
+        nvidia.com/gpu: "true"
       serviceAccountName: plex-media-server
       tolerations: []
       affinity: {}
