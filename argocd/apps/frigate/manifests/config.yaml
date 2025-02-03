@@ -26,6 +26,7 @@ coral:
 gpu:
   nvidia:
     enabled: true
+    runtimeClassName: nvidia
 resources:
   limits:
     nvidia.com/gpu.shared: 1
