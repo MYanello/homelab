@@ -59,7 +59,7 @@ spec:
             - name: PLEX_GID
               value: "1000"
             - name: ALLOWED_NETWORKS
-              value: "192.168.0.0/16,10.10.8.0/22"
+              value: "192.168.0.0/16,10.10.8.0/22,10.42.0.0/16"
           volumeMounts:
             - name: config
               mountPath: /config
