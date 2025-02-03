@@ -52,10 +52,10 @@ spec:
             failureThreshold: 3
           resources:
             limits:
-              cpu: 100m
+              cpu: 500m
               memory: 300Mi
             requests:
-              cpu: 10m
+              cpu: 100m
               memory: 200Mi
       volumes:
         - name: config
