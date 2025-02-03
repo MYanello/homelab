@@ -16,6 +16,15 @@ spec:
       labels:
         app: change-detection
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - marcus-server
       containers:
         - image: ghcr.io/dgtlmoon/changedetection.io:latest
           imagePullPolicy: Always
@@ -71,8 +80,19 @@ spec:
       labels:
         app: playwright
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - marcus-server
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       containers:
         - image: browserless/chrome:1.60-chrome-stable
           imagePullPolicy: IfNotPresent
