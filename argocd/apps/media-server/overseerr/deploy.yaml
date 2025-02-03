@@ -55,9 +55,9 @@ spec:
               path: /
               port: 5055
             initialDelaySeconds: 300
-            periodSeconds: 10
+            periodSeconds: 30
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /
