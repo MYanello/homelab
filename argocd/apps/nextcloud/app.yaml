@@ -1,74 +1,120 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: nextcloud
-#   namespace: argocd
-#   finalizers:
-#     - resources-finalizer.argocd.argoproj.io
-# spec:
-#   syncPolicy:
-#     automated:
-#       selfHeal: false
-#       prune: true
-#     syncOptions:
-#       - CreateNamespace=true
-#   destination:
-#     name: in-cluster
-#     namespace: nextcloud
-#   project: default
-#   sources:
-    # - repoURL: https://github.com/myanello/homelab.git
-    #   targetRevision: HEAD
-    #   path: argocd/apps/nextcloud/secrets
-    # - repoURL: https://nextcloud.github.io/helm/
-    #   targetRevision: '*'
-    #   chart: nextcloud
-    #   helm:
-    #     valuesObject:
-    #       image:
-    #         tag: 29.0.8
-    #       replicaCount: 1
-    #       ingress:
-    #         enabled: true
-    #         className: nginx
-    #         annotations:
-    #           nginx.ingress.kubernetes.io/enable-cors: "true"
-    #           nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
-    #       nextcloud:
-    #         host: nextcloud.k8s.yanello.net
-    #         trustedDomains:
-    #           - nextcloud.k8s.yanello.net
-    #       redis:
-    #         enabled: true
-    #         global:
-    #           storageClass: nfs-storage
-    #       service:
-    #         type: LoadBalancer
-    #         loadBalancerIP: 10.10.8.3
-    #       internalDatabase:
-    #         enabled: false
-    #       externalDatabase:
-    #         existingSecret:
-    #           enabled: true
-    #           secretName: nextcloud-secrets
-    #           passwordKey: mariadb-password
-    #       mariadb:
-    #         enabled: true
-    #         global:
-    #           defaultStorageClass: nfs-storage
-    #         primary:
-    #           persistence:
-    #             enabled: true
-    #             storageClass: nfs-storage
-    #         auth:
-    #           existingSecret: nextcloud-secrets
-    #       persistence:
-    #         enabled: true
-    #         storageClass: nfs-storage
-    #         size: 100Gi
-    #       livenessProbe:
-    #         enabled: false
-    #       startupProbe:
-    #         enabled: false
-    #       readinessProbe:
-    #         enabled: false
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    name: in-cluster
+    namespace: nextcloud
+  project: default
+  sources:
+    - repoURL: https://github.com/myanello/homelab.git
+      targetRevision: HEAD
+      path: argocd/apps/nextcloud/secrets
+    - repoURL: https://nextcloud.github.io/helm/
+      targetRevision: '*'
+      chart: nextcloud
+      helm:
+        valuesObject:
+          image:
+            tag: 29.0.8
+          replicaCount: 1
+          ingress:
+            enabled: true
+            className: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/enable-cors: "true"
+              nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
+          nextcloud:
+            host: nextcloud.k8s.yanello.net
+            trustedDomains:
+              - nextcloud.k8s.yanello.net
+          redis:
+            enabled: true
+            global:
+              storageClass: nfs-storage
+            master:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                    - matchExpressions:
+                        - key: kubernetes.io/hostname
+                          operator: In
+                          values:
+                            - marcus-server
+            replica:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                    - matchExpressions:
+                        - key: kubernetes.io/hostname
+                          operator: In
+                          values:
+                            - marcus-server
+          service:
+            type: LoadBalancer
+            loadBalancerIP: 10.10.8.3
+          internalDatabase:
+            enabled: false
+          externalDatabase:
+            existingSecret:
+              enabled: true
+              secretName: nextcloud-secrets
+              passwordKey: mariadb-password
+          mariadb:
+            enabled: true
+            global:
+              defaultStorageClass: nfs-storage
+            primary:
+              persistence:
+                enabled: true
+                storageClass: nfs-storage
+              affinity:
+                nodeAffinity:
+                  requiredDuringSchedulingIgnoredDuringExecution:
+                    nodeSelectorTerms:
+                      - matchExpressions:
+                          - key: kubernetes.io/hostname
+                            operator: In
+                            values:
+                              - marcus-server
+            secondary:
+              affinity:
+                nodeAffinity:
+                  requiredDuringSchedulingIgnoredDuringExecution:
+                    nodeSelectorTerms:
+                      - matchExpressions:
+                          - key: kubernetes.io/hostname
+                            operator: In
+                            values:
+                              - marcus-server
+            auth:
+              existingSecret: nextcloud-secrets
+          persistence:
+            enabled: true
+            storageClass: nfs-storage
+            size: 100Gi
+          livenessProbe:
+            enabled: false
+          startupProbe:
+            enabled: false
+          readinessProbe:
+            enabled: false
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - marcus-server
