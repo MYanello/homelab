@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex-media-server
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
