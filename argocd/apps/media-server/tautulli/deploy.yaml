@@ -65,7 +65,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            /zpool/k8s/tautulli/config
+            path: /zpool/k8s/tautulli/config
           # persistentVolumeClaim:
           #   claimName: config
         # - name: plex-logs
