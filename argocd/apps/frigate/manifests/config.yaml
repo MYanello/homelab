@@ -1,6 +1,6 @@
 nodeSelector:
   accelerator: coral-tpu
-  nvidia.com/gpu.present: 'true'
+  nvidia.com/gpu.present: "true"
 image:
   tag: stable
   pullPolicy: IfNotPresent
@@ -20,6 +20,9 @@ persistence:
     size: 1Ti
 envFromSecrets:
   - frigate-secrets
+coral:
+  enabled: true
+  hostPath: /dev/apex_0
 config: |
   mqtt:
     host: 192.168.1.4
