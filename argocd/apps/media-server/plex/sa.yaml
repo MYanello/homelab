@@ -4,5 +4,4 @@ metadata:
   name: plex-media-server
   labels:
     app: plex-media-server
-    app.kubernetes.io/name: plex-media-server
 automountServiceAccountToken: false

@@ -19,6 +19,7 @@ spec:
     spec:
       nodeSelector:
         storage.type/ssd: 'true'
+        cpu.performance: high 
       containers:
         - env:
             - name: PGID
@@ -63,8 +64,10 @@ spec:
             failureThreshold: 3
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            /zpool/k8s/tautulli/config
+          # persistentVolumeClaim:
+          #   claimName: config
         # - name: plex-logs
         #   nfs:
         #     server: marcus-server.lan
