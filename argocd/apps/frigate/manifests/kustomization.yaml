@@ -1,5 +1,7 @@
-resources:
-  - ./health-check.yaml
-
 generators:
   - ./secret-generator.yaml
+
+configMapGenerator:
+  - name: frigate-health-check
+    files:
+      - health-check.py

@@ -45,6 +45,5 @@ metadata:
           except Exception as e:
               print(f"UNKNOWN: An error occurred: {str(e)}")
               sys.exit(3)
-      
       if __name__ == "__main__":
           check_camera_fps()
