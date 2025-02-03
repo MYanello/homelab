@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: gpu-operator
+    namespace: nvidia-operator
   syncPolicy:
     automated:
       prune: true
