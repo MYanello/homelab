@@ -21,7 +21,7 @@ spec:
       targetRevision: HEAD
       path: argocd/apps/nextcloud/secrets
     - repoURL: https://nextcloud.github.io/helm/
-      targetRevision: '*'
+      targetRevision: "*"
       chart: nextcloud
       helm:
         valuesObject:
@@ -101,7 +101,7 @@ spec:
               existingSecret: nextcloud-secrets
           persistence:
             enabled: true
-            storageClass: nfs-storage
+            storageClass: local-storage
             size: 100Gi
           livenessProbe:
             enabled: false
