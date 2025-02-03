@@ -8,6 +8,8 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ### 02.06.25
 - Working on moving monitoring to k8s
 - Grafana seems like I can gitops the whole config. For another day, for now we'll use persistent storage for the config.
+- VMstack should deploy everything for monitoring that I had in docker compose in one shot. 
+  - This crashed my cluster. I will go back a step and set resource limits on everything.
 
 ### 01.28.25
 - Continued migrating basic non-gpu services
