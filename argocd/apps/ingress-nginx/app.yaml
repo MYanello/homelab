@@ -26,10 +26,10 @@ spec:
       valuesObject:
         controller:
           replicaCount: 3
-          config:
-            use-forwarded-headers: "true"
-            proxy-read-timeout: "3600"
-            proxy-send-timeout: "3600"
+          # config:
+          #   use-forwarded-headers: "true"
+          #   proxy-read-timeout: "3600"
+          #   proxy-send-timeout: "3600"
 
           extraArgs:
             default-ssl-certificate: "ingress-nginx/default-ingress-cert"

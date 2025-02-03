@@ -8,10 +8,10 @@ image:
 ingress:
   enabled: true
   ingressClassName: nginx
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    nginx.org/websocket-services: "frigate"
+  # annotations:
+  #   nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+  #   nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+  #   nginx.org/websocket-services: "frigate"
   hosts:
     - host: frigate.yanello.net
       paths:
