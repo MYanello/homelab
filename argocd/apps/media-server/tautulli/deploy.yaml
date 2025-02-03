@@ -30,6 +30,13 @@ spec:
           image: linuxserver/tautulli:latest
           imagePullPolicy: Always
           name: tautulli
+          resources:
+            limits:
+              cpu: 200m
+              memory: 600Mi
+            requests:
+              cpu: 50m
+              memory: 200Mi
           ports:
             - containerPort: 8181
               protocol: TCP
