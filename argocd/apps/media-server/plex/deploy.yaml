@@ -35,6 +35,7 @@ spec:
             path: /data/media
       terminationGracePeriodSeconds: 120
       initContainers:
+      runtimeClassName: nvidia
       containers:
         - name: plex-media-server-pms
           image: index.docker.io/plexinc/pms-docker:latest
