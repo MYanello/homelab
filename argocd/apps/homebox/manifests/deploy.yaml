@@ -29,6 +29,13 @@ spec:
           image: ghcr.io/hay-kot/homebox:latest
           imagePullPolicy: Always
           name: homebox
+          resources:
+            limits:
+              cpu: 100m
+              memory: 150Mi
+            requests:
+              cpu: 25m
+              memory: 50Mi
           ports:
             - containerPort: 7745
               protocol: TCP
