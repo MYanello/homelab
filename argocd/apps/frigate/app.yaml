@@ -40,7 +40,7 @@ spec:
           persistence:
             media:
               enabled: true
-              storageClass: nfs-storage
+              storageClass: local-path
               accessMode: ReadWriteOnce
               size: 1Ti
           envFromSecrets:

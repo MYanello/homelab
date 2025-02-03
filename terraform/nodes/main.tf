@@ -14,22 +14,21 @@ provider "kubernetes" {
 #   }
 # }
 
-# resource "kubernetes_labels" "server" {
-#   api_version = "v1"
-#   kind        = "Node"
-#   metadata {
-#     name = "marcus-server"
-#   }
-#   labels = {
-#     "nvidia.com/gpu.present" = "true",
-#     "accelerator" = "coral-tpu",
-#     "storage.type/ssd" = "true",
-#     "storage.type/hdd" = "true",
-#     "storage.kubernetes.io/performance": "fast"
-#     "cpu.performance": "high"
+resource "kubernetes_labels" "server" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "marcus-server"
+  }
+  labels = {
+    "accelerator" = "coral-tpu",
+    "storage.type/ssd" = "true",
+    "storage.type/hdd" = "true",
+    "storage.kubernetes.io/performance": "fast"
+    "cpu.performance": "high"
 
-#  }
-# }
+ }
+}
 
 resource "kubernetes_labels" "hp-worker" {
   api_version = "v1"
