@@ -79,8 +79,8 @@ config: |
     #   continuous - all cameras are included always
     mode: continuous
 
-  # ffmpeg:
-    # hwaccel_args: preset-nvidia-h264
+  ffmpeg:
+    hwaccel_args: preset-nvidia-h264
       # # Optional: global ffmpeg args (default: shown below)
       # global_args: -hide_banner -loglevel warning
       # # Optional: global hwaccel args (default: shown below)
