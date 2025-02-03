@@ -26,6 +26,9 @@ coral:
 gpu:
   nvidia:
     enabled: true
+resources:
+  limits:
+    nvidia.com/gpu: 1
 config: |
   mqtt:
     host: 192.168.1.4
