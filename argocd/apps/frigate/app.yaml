@@ -50,4 +50,4 @@ spec:
       ref: values
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
-      path: argocd/apps/frigate/secrets
+      path: argocd/apps/frigate/manifests
