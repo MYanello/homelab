@@ -21,23 +21,12 @@ spec:
     chart: victoria-metrics-k8s-stack
     helm:
       valuesObject:
-      #   syncOptions:
-      #   # https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#respect-ignore-difference-configs
-      #   # argocd must also ignore difference during apply stage
-      #   # otherwise it ll silently override changes and cause a problem
-      #   - RespectIgnoreDifferences=true
-      # ignoreDifferences:
-      #   - group: ""
-      #     kind: Secret
-      #     name: <fullname>-validation
-      #     namespace: monitoring
-      #     jsonPointers:
-      #       - /data
-      #   - group: admissionregistration.k8s.io
-      #     kind: ValidatingWebhookConfiguration
-      #     name: <fullname>-admission
-      #     jqPathExpressions:
-      #     - '.webhooks[]?.clientConfig.caBundle'
-      defaultDashboards:
-        annotations:
-          argocd.argoproj.io/sync-options: ServerSideApply=true
+        defaultDashboards:
+          annotations:
+            argocd.argoproj.io/sync-options: ServerSideApply=true
+        vmsingle:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - name: vm.k8s.yanello.net
