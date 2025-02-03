@@ -101,7 +101,7 @@ spec:
               existingSecret: nextcloud-secrets
           persistence:
             enabled: true
-            storageClass: local-storage
+            storageClass: nfs-storage
             size: 100Gi
           livenessProbe:
             enabled: true
