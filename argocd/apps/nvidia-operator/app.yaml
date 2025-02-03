@@ -16,16 +16,18 @@ spec:
     syncOptions:
       - CreateNamespace=true
   project: default
-  source:
-    repoURL: https://helm.ngc.nvidia.com/nvidia
-    targetRevision: "24.9.2"
-    chart: gpu-operator
-    helm:
-      valuesObject:
-        driver:
-          enabled: false
-        toolkit:
-          enabled: false
-
+  sources:
+    - repoURL: https://helm.ngc.nvidia.com/nvidia
+      targetRevision: "24.9.2"
+      chart: gpu-operator
+      helm:
+        valuesObject:
+          driver:
+            enabled: false
+          toolkit:
+            enabled: false
+    - repoURL: https://github.com/myanello/homelab.git
+      targetRevision: HEAD
+      path: argocd/apps/nvidia-operator/manifests
 
 
