@@ -19,10 +19,6 @@ resource "kubernetes_manifest" "argocd_appset" {
           "directories" = [
             {
               "path" = "argocd/apps/**"
-            },
-            {
-              "path" = "argocd/apps/kubeshark"
-              "exclude" = true
             }
           ]
         }
