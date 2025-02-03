@@ -62,7 +62,7 @@ spec:
                             - marcus-server
           service:
             type: LoadBalancer
-            loadBalancerIP: 10.10.8.3
+            loadBalancerIP: 10.10.8.6
           internalDatabase:
             enabled: false
           externalDatabase:
