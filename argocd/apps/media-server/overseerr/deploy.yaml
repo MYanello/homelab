@@ -28,6 +28,13 @@ spec:
           image: lscr.io/linuxserver/overseerr:latest
           imagePullPolicy: Always
           name: overseerr
+          resources:
+            limits:
+              cpu: 150m
+              memory: 750Mi
+            requests:
+              cpu: 50m
+              memory: 400Mi
           ports:
             - containerPort: 5055
               protocol: TCP
