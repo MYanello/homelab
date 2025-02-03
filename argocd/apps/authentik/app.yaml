@@ -46,8 +46,16 @@ spec:
               hosts:
                 - authentik.k8s.yanello.net
             replicas: 3
+            resources:
+              limits:
+                cpu: 100m
+                memory: 1Gi
+              requests:
+                cpu: 50m
+                memory: 600Mi
           worker:
             replicas: 3
+            
           redis:
             enabled: true
             master:
