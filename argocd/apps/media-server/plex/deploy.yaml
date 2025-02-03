@@ -22,27 +22,32 @@ spec:
       affinity: {}
       volumes:
         - name: transcode
-          persistentVolumeClaim:
-            claimName: transcode
+          hostPath:
+            path: /zpool/k8s/plex/transcode
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/plex/config
       terminationGracePeriodSeconds: 120
       initContainers:
       containers:
         - name: plex-media-server-pms
           image: index.docker.io/plexinc/pms-docker:latest
           imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+            requests:
+              nvidia.com/gpu: 1
           ports:
             - containerPort: 32400
               name: pms
           env:
             - name: ADVERTISE_IP
               value: plex.k8s.yanello.net:443
-          # - name: NVIDIA_VISIBLE_DEVICES
-          #   value: all
-          # - name: NVIDIA_DRIVER_CAPABILITIES
-          #   value: compute,video,utility
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,video,utility
           volumeMounts:
             - name: config
               mountPath: /config
