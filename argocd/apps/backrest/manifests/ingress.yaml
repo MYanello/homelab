@@ -5,12 +5,12 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: backrest.k8s.yanello.net
+    - host: backrest.yanello.net
       http:
         paths:
           - backend:
               service:
-                name: owntracks
+                name: backrest
                 port:
                   number: 9898
             path: /
