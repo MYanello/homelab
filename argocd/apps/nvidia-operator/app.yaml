@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nvidia-device-plugin
+  name: nvidia-operator
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
