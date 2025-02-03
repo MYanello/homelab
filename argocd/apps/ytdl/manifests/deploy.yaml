@@ -44,6 +44,13 @@ spec:
           image: tzahi12345/youtubedl-material:latest
           imagePullPolicy: Always
           name: ytdl
+          resources:
+            limits:
+              cpu: 100m
+              memory: 500Mi
+            requests:
+              cpu: 25m
+              memory: 200Mi
           ports:
             - containerPort: 17442
               protocol: TCP
@@ -138,6 +145,12 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
+            limits:
+              cpu: 100m
+              memory: 500Mi
+            requests:
+              cpu: 25m
+              memory: 200Mi
       restartPolicy: Always
       volumes:
         - name: db
