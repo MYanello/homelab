@@ -22,6 +22,15 @@ spec:
       labels:
         io.kompose.service: ytdl
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - marcus-server
       initContainers:
         - name: wait-for-mongodb
           image: busybox:1.28
