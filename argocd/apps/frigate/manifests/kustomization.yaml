@@ -5,3 +5,6 @@ configMapGenerator:
   - name: frigate-health-check
     files:
       - health-check.py
+      
+patchesStrategicMerge:
+  - ./health-check-patch.yaml
