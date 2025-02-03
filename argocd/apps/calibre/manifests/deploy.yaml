@@ -124,10 +124,10 @@ spec:
             httpGet:
               path: /
               port: 8083
-            initialDelaySeconds: 60
+            initialDelaySeconds: 300
             periodSeconds: 15
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: config
