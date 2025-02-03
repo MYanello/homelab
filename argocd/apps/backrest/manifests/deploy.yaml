@@ -16,6 +16,15 @@ spec:
       labels:
         app: backrest
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - image: garethgeorge/backrest:latest
           imagePullPolicy: Always
@@ -39,12 +48,8 @@ spec:
               mountPath: /config
             - name: cache
               mountPath: /cache
-            - name: docker
-              mountPath: /userdata/zpool/docker
-            - name: photos
-              mountPath: /userdata/zpool/Photos
-            - name: share
-              mountPath: /userdata/zpool/share
+            - name: zpool
+              mountPath: /userdata/zpool/
             - name: hostdata
               mountPath: /userdata/data
             - name: etc
@@ -70,35 +75,23 @@ spec:
       restartPolicy: Always
       volumes:
         - name: data
-          persistentVolumeClaim:
-            claimName: data
+          hostPath:
+            path: /zpool/k8s/backrest/data
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/backrest/config
         - name: cache
-          persistentVolumeClaim:
-            claimName: cache
-        - name: docker
-          nfs:
-            server: marcus-server.lan
-            path: /zpool/docker
-        - name: photos
-          nfs:
-            server: marcus-server.lan
-            path: /zpool/Photos
-        - name: share
-          nfs:
-            server: marcus-server.lan
-            path: /zpool/share
+          hostPath:
+            path: /zpool/k8s/backrest/cache
+        - name: zpool
+          hostPath:
+            path: /zpool/
         - name: hostdata
-          nfs:
-            server: marcus-server.lan
-            path: /hostdata
+          hostPath:
+            path: /data
         - name: etc
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /etc
         - name: mnt
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /mnt
