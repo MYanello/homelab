@@ -57,6 +57,13 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 5
             failureThreshold: 10
+          resources:
+            limits:
+              cpu: 200m
+              memory: 600Mi
+            requests:
+              cpu: 50m
+              memory: 400Mi
       restartPolicy: Always
       volumes:
         - name: config
