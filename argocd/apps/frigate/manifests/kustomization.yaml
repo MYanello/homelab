@@ -1,0 +1,5 @@
+resources:
+  - ./health-check.yaml
+
+generators:
+  - ./secret-generator.yaml
