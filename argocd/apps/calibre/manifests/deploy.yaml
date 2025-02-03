@@ -47,9 +47,9 @@ spec:
               path: /
               port: 8084
             initialDelaySeconds: 30
-            periodSeconds: 10
+            periodSeconds: 30
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /
@@ -57,7 +57,7 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: ingest
