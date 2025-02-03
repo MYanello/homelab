@@ -10,3 +10,11 @@ resources:
 
 patches:
 - path: ./health-check-patch.yaml
+
+helmCharts:
+    - name: frigate
+      repo: https://blakeblackshear.github.io/blakeshome-charts/
+      version: "*"
+      releaseName: frigate
+      namespace: frigate
+      valuesFile: ../config.yaml

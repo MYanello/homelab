@@ -1,3 +1,25 @@
+nodeSelector:
+  accelerator: coral-tpu
+  nvidia.com/gpu.present: 'true'
+image:
+  tag: stable
+  pullPolicy: IfNotPresent
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - host: frigate.k8s.yanello.net
+      paths:
+        - path: "/"
+          portName: http
+persistence:
+  media:
+    enabled: true
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 1Ti
+envFromSecrets:
+  - frigate-secrets
 config: |
   mqtt:
     host: 192.168.1.4
