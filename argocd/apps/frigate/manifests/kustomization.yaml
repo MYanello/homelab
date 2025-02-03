@@ -17,4 +17,4 @@ helmCharts:
       version: "*"
       releaseName: frigate
       namespace: frigate
-      valuesFile: ../config.yaml
+      valuesFile: ./config.yaml
