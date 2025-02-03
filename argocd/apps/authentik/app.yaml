@@ -55,7 +55,13 @@ spec:
                 memory: 600Mi
           worker:
             replicas: 3
-            
+            resources:
+              limits:
+                cpu: 100m
+                memory: 1Gi
+              requests:
+                cpu: 50m
+                memory: 500Mi
           redis:
             enabled: true
             master:
