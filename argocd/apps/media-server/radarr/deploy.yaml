@@ -58,6 +58,13 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       restartPolicy: Always
+      resources:
+        limits:
+          cpu: 200m
+          memory: 600Mi
+        requests:
+          cpu: 50m
+          memory: 400Mi
       volumes:
         - name: config
           persistentVolumeClaim:

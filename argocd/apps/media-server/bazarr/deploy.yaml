@@ -30,6 +30,13 @@ spec:
           image: linuxserver/bazarr:latest
           imagePullPolicy: Always
           name: bazarr
+          resources:
+            limits:
+              cpu: 100m
+              memory: 500Mi
+            requests:
+              cpu: 50m
+              memory: 400Mi
           ports:
             - containerPort: 6767
               protocol: TCP
