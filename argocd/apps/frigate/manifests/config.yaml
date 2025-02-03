@@ -28,7 +28,7 @@ gpu:
     enabled: true
 resources:
   limits:
-    nvidia.com/gpu: 1
+    nvidia.com/gpu.shared: 1
 config: |
   mqtt:
     host: 192.168.1.4
