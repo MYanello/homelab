@@ -10,7 +10,7 @@ metadata:
 spec:
   ports:
     - name: "http"
-      port: 8998
+      port: 17442
       targetPort: 17442
   selector:
     io.kompose.service: ytdl
