@@ -8,7 +8,7 @@ ingress:
   enabled: true
   ingressClassName: nginx
   hosts:
-    - host: frigate.k8s.yanello.net
+    - host: frigate.yanello.net
       paths:
         - path: "/"
           portName: http
