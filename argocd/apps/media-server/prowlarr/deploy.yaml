@@ -47,10 +47,10 @@ spec:
             httpGet:
               path: /
               port: 9696
-            initialDelaySeconds: 300
-            periodSeconds: 10
+            initialDelaySeconds: 180
+            periodSeconds: 30
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /
