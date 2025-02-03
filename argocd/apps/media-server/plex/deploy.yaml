@@ -18,6 +18,7 @@ spec:
       nodeSelector:
         kubernetes.io/arch: amd64
         cpu.performance: high
+        nvidia.com/gpu.present: "true"
       serviceAccountName: plex-media-server
       tolerations: []
       affinity: {}
