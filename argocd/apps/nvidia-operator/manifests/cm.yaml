@@ -9,6 +9,8 @@ data:
       migStrategy: none
     sharing:
       timeSlicing:
+        renameByDefault: true
+        failRequestsGreaterThanOne: false
         resources:
         - name: nvidia.com/gpu
           replicas: 20

@@ -3,8 +3,9 @@ kind: Kustomization
 
 resources:
   - cm.yaml
-#patches:
-#- path: ./cm-patch.yaml
+  
+patches:
+- path: ./cm-patch.yaml
 
 helmCharts:
   - name: gpu-operator
