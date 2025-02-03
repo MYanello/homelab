@@ -17,12 +17,12 @@ spec:
       - CreateNamespace=true
   project: default
   source:
-    repoURL: https://nvidia.github.io/k8s-device-plugin
-    targetRevision: "*"
-    chart: nvidia-device-plugin
-    helm:
-      valuesObject:
-        gfd:
-          enabled: true
+    # repoURL: https://nvidia.github.io/k8s-device-plugin
+    # targetRevision: "*"
+    # chart: nvidia-device-plugin
+    # helm:
+    #   valuesObject:
+    #     gfd:
+    #       enabled: true
 
 
