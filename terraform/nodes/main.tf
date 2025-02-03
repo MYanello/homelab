@@ -25,55 +25,60 @@ provider "kubernetes" {
 #     "accelerator" = "coral-tpu",
 #     "storage.type/ssd" = "true",
 #     "storage.type/hdd" = "true",
-#     "storage.kubernetes.io/perfomance": "fast"
+#     "storage.kubernetes.io/performance": "fast"
+#     "cpu.performance": "high"
 
 #  }
 # }
 
 resource "kubernetes_labels" "hp-worker" {
-    api_version = "v1"
-    kind        = "Node"
-    metadata {
-      name = "hp-worker"
-    }
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "hp-worker"
+  }
   labels = {
     "storage.type/ssd" = "true",
-    "storage.kubernetes.io/perfomance": "fast"
+    "storage.kubernetes.io/performance" : "fast",
+    "cpu.performance" : "low"
   }
 }
 
 resource "kubernetes_labels" "picluster0" {
-    api_version = "v1"
-    kind        = "Node"
-    metadata {
-      name = "hp-worker"
-    }
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "picluster0"
+  }
   labels = {
     "storage.type/ssd" = "false",
-    "storage.kubernetes.io/perfomance": "slow"
+    "storage.kubernetes.io/performance" : "slow",
+    "cpu.performance" : "medium"
   }
 }
 
 resource "kubernetes_labels" "picluster1" {
-    api_version = "v1"
-    kind        = "Node"
-    metadata {
-      name = "hp-worker"
-    }
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "picluster1"
+  }
   labels = {
     "storage.type/ssd" = "false",
-    "storage.kubernetes.io/perfomance": "slow"
+    "storage.kubernetes.io/performance" : "slow",
+    "cpu.performance" : "medium"
   }
 }
 
 resource "kubernetes_labels" "picluster2" {
-    api_version = "v1"
-    kind        = "Node"
-    metadata {
-      name = "hp-worker"
-    }
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "picluster2"
+  }
   labels = {
     "storage.type/ssd" = "false",
-    "storage.kubernetes.io/perfomance": "slow"
+    "storage.kubernetes.io/performance" : "slow"
+    "cpu.performance" : "medium"
   }
 }
