@@ -2,7 +2,6 @@ apiVersion: nvidia.com/v1
 kind: ClusterPolicy
 metadata:
   name: cluster-policy
-  namespace: gpu-operator
 spec:
   devicePlugin:
     config:
