@@ -1,6 +1,7 @@
 nodeSelector:
   accelerator: coral-tpu
   nvidia.com/gpu.present: "true"
+  cpu.performance: high
 image:
   tag: stable
   pullPolicy: IfNotPresent

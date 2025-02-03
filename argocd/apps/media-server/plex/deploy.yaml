@@ -17,6 +17,7 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/arch: amd64
+        cpu.performance: high
       serviceAccountName: plex-media-server
       tolerations: []
       affinity: {}
@@ -43,7 +44,7 @@ spec:
               name: pms
           env:
             - name: ADVERTISE_IP
-              value: plex.k8s.yanello.net:443
+              value: plex.yanello.net:443
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
             - name: NVIDIA_DRIVER_CAPABILITIES
