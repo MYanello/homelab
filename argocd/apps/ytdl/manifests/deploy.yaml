@@ -86,10 +86,10 @@ spec:
             httpGet:
               path: /
               port: 17442
-            initialDelaySeconds: 60
+            initialDelaySeconds: 300
             periodSeconds: 15
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 10
       restartPolicy: Always
       volumes:
         - name: appdata
