@@ -57,10 +57,10 @@ spec:
             replicas: 3
             resources:
               limits:
-                cpu: 100m
+                cpu: 300m
                 memory: 1Gi
               requests:
-                cpu: 50m
+                cpu: 100m
                 memory: 500Mi
           redis:
             enabled: true
