@@ -27,6 +27,13 @@ spec:
           image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest
           imagePullPolicy: Always
           name: calibre-dl
+          resources:
+            limits:
+              cpu: 100m
+              memory: 200Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
           ports:
             - containerPort: 8084
               protocol: TCP
@@ -88,6 +95,13 @@ spec:
           image: crocodilestick/calibre-web-automated:latest
           imagePullPolicy: Always
           name: calibre
+          resources:
+            limits:
+              cpu: 250m
+              memory: 750Mi
+            requests:
+              cpu: 50m
+              memory: 250Mi
           ports:
             - containerPort: 8083
               protocol: TCP
@@ -98,22 +112,22 @@ spec:
               mountPath: /cwa-book-ingest
             - name: library
               mountPath: /calibre-library
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8083
-          #   initialDelaySeconds: 180
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8083
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 15
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8083
+            initialDelaySeconds: 180
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8083
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
       restartPolicy: Always
       volumes:
         - name: config
@@ -147,6 +161,13 @@ spec:
       containers:
         - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 50m
+              memory: 250Mi
+            requests:
+              cpu: 20m
+              memory: 100Mi
           name: cloudflareproxy
           ports:
             - containerPort: 8000
