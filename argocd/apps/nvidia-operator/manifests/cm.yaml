@@ -9,7 +9,7 @@ data:
       migStrategy: none
     sharing:
       timeSlicing:
-        renameByDefault: true
+        renameByDefault: false
         failRequestsGreaterThanOne: false
         resources:
         - name: nvidia.com/gpu
