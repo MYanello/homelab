@@ -8,8 +8,8 @@ resources:
 - health-check.yaml
       
 
-# patches:
-# - path: ./health-check-patch.yaml
+patches:
+- path: ./health-check-patch.yaml
 
 helmCharts:
     - name: frigate
