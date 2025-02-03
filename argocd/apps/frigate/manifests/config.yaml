@@ -29,7 +29,7 @@ gpu:
     runtimeClassName: nvidia
 resources:
   limits:
-    nvidia.com/gpu.shared: 1
+    nvidia.com/gpu: 1
 config: |
   mqtt:
     host: 192.168.1.4
