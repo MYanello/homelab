@@ -10,6 +10,11 @@ spec:
   selector:
     matchLabels:
       app: plex-media-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -17,13 +22,16 @@ spec:
       annotations: {}
     spec:
       hostNetwork: true
-      nodeSelector:
-        kubernetes.io/arch: amd64
-        cpu.performance: high
-        nvidia.com/gpu.present: "true"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       serviceAccountName: plex-media-server
-      tolerations: []
-      affinity: {}
       volumes:
         - name: transcode
           hostPath:
