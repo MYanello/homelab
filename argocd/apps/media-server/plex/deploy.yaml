@@ -21,7 +21,7 @@ spec:
         app: plex-media-server
       annotations: {}
     spec:
-      # hostNetwork: true
+      hostNetwork: true
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
