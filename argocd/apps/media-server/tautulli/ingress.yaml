@@ -24,12 +24,12 @@ metadata:
   name: tautulli-vs
 spec:
   hosts:
-  - tutaulli.yanello.net
+  - tautulli.yanello.net
   gateways:
   - istio-system/kube-gateway
   http:
   - route:
     - destination:
-        host: tautulli
+        host: tautulli.tautulli.svc.cluster.local
         port:
           number: 8181
