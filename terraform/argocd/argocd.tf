@@ -87,7 +87,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
             service {
               name = "argocd-server"
               port {
-                number = 443
+                number = 80
               }
             }
           }

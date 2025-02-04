@@ -33,7 +33,8 @@
               spec:
                 containers:
                   - name: argocd-server
-                    command:
+                    args:
+                      - /usr/local/bin/argocd-server
                       - --insecure
 
     - name: Patch argocd-server service to use LoadBalancer
