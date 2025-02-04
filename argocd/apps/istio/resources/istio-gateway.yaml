@@ -9,6 +9,9 @@ spec:
   - hosts:
     - "*.istio.yanello.net"
     - istio.yanello.net
+    - "*.k8s.yanello.net"
+    - k8s.yanello.net
+    - "*.yanello.net"
     port:
       name: http
       number: 80
