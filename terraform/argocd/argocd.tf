@@ -74,9 +74,6 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   metadata {
     name      = "argocd-ingress"
     namespace = "argocd"
-    annotations = {
-      "nginx.ingress.kubernetes.io/backend-protocol" = "HTTPS"
-    }
   }
   spec {
     ingress_class_name = "istio"
