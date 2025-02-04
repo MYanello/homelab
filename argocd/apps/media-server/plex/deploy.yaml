@@ -47,8 +47,36 @@ spec:
             requests:
               nvidia.com/gpu: 1
           ports:
-            - containerPort: 32400
-              name: pms
+            - containerPort: 32400     # < required network portnumber. See https://hub.docker.com/r/linuxserver/plex
+              name: pms-web            # < reference name from the port in the service yaml
+              protocol: TCP
+            - containerPort: 32469
+              name: dlna-tcp
+              protocol: TCP
+            - containerPort: 1900
+              name: dlna-udp
+              protocol: UDP
+            - containerPort: 3005
+              name: plex-companion
+              protocol: TCP  
+            - containerPort: 5353
+              name: discovery-udp
+              protocol: UDP  
+            - containerPort: 8324
+              name: plex-roku
+              protocol: TCP  
+            - containerPort: 32410
+              name: gdm-32410
+              protocol: UDP
+            - containerPort: 32412
+              name: gdm-32412
+              protocol: UDP
+            - containerPort: 32413
+              name: gdm-32413
+              protocol: UDP
+            - containerPort: 32414
+              name: gdm-32414
+              protocol: UDP
           env:
             - name: ADVERTISE_IP
               value: plex.yanello.net:443
