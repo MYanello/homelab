@@ -4,7 +4,7 @@ metadata:
   name: http-gateway
 spec:
   selector:
-    istio: ingressgateway
+    istio: istio-ingressgateway
   servers:
   - hosts:
     - "*.istio.yanello.net"
