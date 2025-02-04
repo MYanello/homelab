@@ -76,8 +76,10 @@ spec:
       restartPolicy: Always
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/radarr/config
+          # persistentVolumeClaim:
+          #   claimName: config
         - name: media
           hostPath:
             path: /data/media

@@ -9,7 +9,7 @@ metadata:
   name: radarr
 spec:
   ports:
-    - name: "7878"
+    - name: "http"
       port: 7878
       targetPort: 7878
   selector:
