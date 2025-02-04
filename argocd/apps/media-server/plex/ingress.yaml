@@ -6,6 +6,8 @@ metadata:
     name: release-name-plex-media-server-ingress
     app: plex-media-server
     app.kubernetes.io/name: plex-media-server
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: /web 
 spec:
   ingressClassName: nginx
   rules:
@@ -16,7 +18,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: plex-media-server
+            name: pms-web
             port:
               number: 32400
   # tls:
