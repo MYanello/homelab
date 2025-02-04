@@ -1,39 +1,39 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: ingress-nginx
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    name: in-cluster
-    namespace: ingress-nginx
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: "4.12.0"
-    chart: ingress-nginx
-    helm:
-      releaseName: ingress-nginx
-      passCredentials: false
-      valuesObject:
-        controller:
-          replicaCount: 3
-          config:
-            use-forwarded-headers: "true"
-            proxy-read-timeout: "3600"
-            proxy-send-timeout: "3600"
-          extraArgs:
-            default-ssl-certificate: "ingress-nginx/default-ingress-cert"
-          service:
-            annotations:
-              metallb.universe.tf/loadBalancerIPs: 10.10.8.0
-          ingressClassResource:
-            default: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: ingress-nginx
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     name: in-cluster
+#     namespace: ingress-nginx
+#   project: default
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#   source:
+#     repoURL: https://kubernetes.github.io/ingress-nginx
+#     targetRevision: "4.12.0"
+#     chart: ingress-nginx
+#     helm:
+#       releaseName: ingress-nginx
+#       passCredentials: false
+#       valuesObject:
+#         controller:
+#           replicaCount: 3
+#           config:
+#             use-forwarded-headers: "true"
+#             proxy-read-timeout: "3600"
+#             proxy-send-timeout: "3600"
+#           extraArgs:
+#             default-ssl-certificate: "ingress-nginx/default-ingress-cert"
+#           service:
+#             annotations:
+#               metallb.universe.tf/loadBalancerIPs: 10.10.8.0
+#           ingressClassResource:
+#             default: true
