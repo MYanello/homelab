@@ -99,8 +99,8 @@ spec:
           name: calibre
           resources:
             limits:
-              cpu: 250m
-              memory: 750Mi
+              cpu: 1000m
+              memory: 1Gi
             requests:
               cpu: 50m
               memory: 250Mi
@@ -114,22 +114,22 @@ spec:
               mountPath: /cwa-book-ingest
             - name: library
               mountPath: /calibre-library
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8083
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8083
-            initialDelaySeconds: 300
-            periodSeconds: 15
-            timeoutSeconds: 5
-            failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8083
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8083
+          #   initialDelaySeconds: 300
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: config
