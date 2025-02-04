@@ -1,17 +1,13 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: http-gateway
+  name: kube-gateway
 spec:
   selector:
     istio: istio-ingressgateway
   servers:
   - hosts:
-    - "*.istio.yanello.net"
-    - istio.yanello.net
-    - "*.k8s.yanello.net"
-    - k8s.yanello.net
-    - "*.yanello.net"
+    - "*"
     port:
       name: http
       number: 80
