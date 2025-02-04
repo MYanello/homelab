@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: plex.k8s.yanello.net
+  - host: plex.yanello.net
     http:
       paths:
       - path: '/'
