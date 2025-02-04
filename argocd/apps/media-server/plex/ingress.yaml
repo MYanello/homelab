@@ -1,27 +1,27 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: plex-media-server-ingress
-  labels:
-    name: release-name-plex-media-server-ingress
-    app: plex-media-server
-    app.kubernetes.io/name: plex-media-server
-  annotations:
-    nginx.ingress.kubernetes.io/app-root: /web 
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: plex.yanello.net
-    http:
-      paths:
-      - path: '/'
-        pathType: Prefix
-        backend:
-          service:
-            name: pms-web
-            port:
-              number: 32400
-  # tls:
-  # - hosts:
-  #   - plex.k8s.yanello.net
-  #   secretName: release-name-plex-media-server-ingress-lets-encrypt
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: plex-media-server-ingress
+#   labels:
+#     name: release-name-plex-media-server-ingress
+#     app: plex-media-server
+#     app.kubernetes.io/name: plex-media-server
+#   annotations:
+#     nginx.ingress.kubernetes.io/app-root: /web 
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#   - host: plex.yanello.net
+#     http:
+#       paths:
+#       - path: '/'
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: pms-web
+#             port:
+#               number: 32400
+#   # tls:
+#   # - hosts:
+#   #   - plex.k8s.yanello.net
+#   #   secretName: release-name-plex-media-server-ingress-lets-encrypt
