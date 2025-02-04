@@ -28,6 +28,6 @@ spec:
   http:
   - route:
     - destination:
-        host: argocd-server.argocd.svc.cluster.local
+        host: frigate.frigate.svc.cluster.local
         port:
           number: 5000
