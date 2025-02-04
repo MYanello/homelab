@@ -34,6 +34,6 @@ spec:
           periodSeconds: 60
       volumes:
       - name: health-check-script
-        defaultMode: 0555
         configMap:
           name: frigate-health-check
+          defaultMode: 0555
