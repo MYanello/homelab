@@ -117,4 +117,7 @@ spec:
     targetRevision: "*"
     chart: kiali-server
     helm:
+      valuesObject:
+        auth:
+          strategy: anonymous
 ---
