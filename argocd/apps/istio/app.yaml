@@ -43,7 +43,7 @@ spec:
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
     targetRevision: "*"
-    chart: istio-base
+    chart: base
     helm:
 ---
 apiVersion: argoproj.io/v1alpha1
