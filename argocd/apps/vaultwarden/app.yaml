@@ -19,14 +19,14 @@ spec:
   sources:
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
-      path: argocd/apps/vaultwarden/secrets
+      path: argocd/apps/vaultwarden/manifests
     - repoURL: https://guerzon.github.io/vaultwarden
       targetRevision: "*"
       chart: vaultwarden
       helm:
         valuesObject:
             ingress:
-              enabled: true
+              enabled: false
               className: "nginx"
               hostname: bitwarden.yanello.net
               additionalAnnotations:
