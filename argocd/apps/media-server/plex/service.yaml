@@ -9,6 +9,7 @@ metadata:
     #metallb.universe.tf/allow-shared-ip: plex-media-server
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Cluster
   ports:
     - port: 32400               # < port to open on the outside on the server
       targetPort: 32400         # < targetport. port on the pod to passthrough
