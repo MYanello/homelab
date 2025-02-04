@@ -79,7 +79,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
     }
   }
   spec {
-    ingress_class_name = "nginx"
+    ingress_class_name = "istio"
     rule {
       host = "argocd.yanello.net"
       http {
