@@ -43,7 +43,6 @@ spec:
           hostPath:
             path: /data/media
       terminationGracePeriodSeconds: 120
-      initContainers:
       runtimeClassName: nvidia
       containers:
         - name: plex-media-server-pms
@@ -51,9 +50,9 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              nvidia.com/gpu: 1
+              nvidia.com/gpu: '1'
             requests:
-              nvidia.com/gpu: 1
+              nvidia.com/gpu: '1'
           ports:
             - containerPort: 32400     # < required network portnumber. See https://hub.docker.com/r/linuxserver/plex
               name: pms-web            # < reference name from the port in the service yaml
