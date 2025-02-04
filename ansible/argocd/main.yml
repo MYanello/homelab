@@ -18,23 +18,41 @@
         src: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
         namespace: argocd
 
-    # - name: Patch argocd-server service to use LoadBalancer
-    #   kubernetes.core.k8s:
-    #     state: present
-    #     definition:
-    #       apiVersion: v1
-    #       kind: Service
-    #       metadata:
-    #         name: argocd-server
-    #         namespace: argocd
-    #       spec:
-    #         type: LoadBalancer
-    #         ports:
-    #           - port: 80
-    #             targetPort: 8080
-    #             protocol: TCP
-    #             name: http
-    #           - port: 443
-    #             targetPort: 8080
-    #             protocol: TCP
-    #             name: https
+
+    - name: Patch argocd-server Deployment to add --insecure flag
+      kubernetes.core.k8s:
+        state: patched
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: argocd-server
+            namespace: argocd
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: argocd-server
+                    command:
+                      - --insecure
+
+    - name: Patch argocd-server service to use LoadBalancer
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: argocd-server
+            namespace: argocd
+          spec:
+            type: LoadBalancer
+            ports:
+              - port: 80
+                targetPort: 8080
+                protocol: TCP
+                name: http
+              - port: 443
+                targetPort: 8080
+                protocol: TCP
+                name: https
