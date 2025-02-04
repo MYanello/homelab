@@ -6,7 +6,7 @@ spec:
   hosts:
   - argocd.istio.yanello.net
   gateways:
-  - istio-system/test-gateway
+  - istio-system/http-gateway
   http:
   - route:
     - destination:
