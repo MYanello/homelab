@@ -6,7 +6,7 @@ image:
   tag: stable
   pullPolicy: IfNotPresent
 ingress:
-  enabled: true
+  enabled: false
   ingressClassName: istio
   hosts:
     - host: frigate.yanello.net

@@ -14,3 +14,20 @@ spec:
         host: argocd-server.argocd.svc.cluster.local
         port:
           number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: argocd-vs
+spec:
+  hosts:
+  - frigate.yanello.net
+  - frigate.k8s.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: argocd-server.argocd.svc.cluster.local
+        port:
+          number: 5000
