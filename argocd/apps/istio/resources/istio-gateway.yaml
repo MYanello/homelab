@@ -4,7 +4,7 @@ metadata:
   name: kube-gateway
 spec:
   selector:
-    istio: istio-ingressgateway
+    istio: ingressgateway
   servers:
   - hosts:
     - "*"
