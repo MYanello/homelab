@@ -16,6 +16,7 @@ spec:
         app: plex-media-server
       annotations: {}
     spec:
+      hostNetwork: true
       nodeSelector:
         kubernetes.io/arch: amd64
         cpu.performance: high
