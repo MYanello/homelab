@@ -35,7 +35,7 @@
                   - name: argocd-server
                     args:
                       - /usr/local/bin/argocd-server
-                      - --insecure
+                     # - --insecure
 
     - name: Patch argocd-server service to use LoadBalancer
       kubernetes.core.k8s:

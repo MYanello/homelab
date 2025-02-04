@@ -1,19 +1,35 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: tautulli
+#   labels:
+#     app: tautulli
+# spec:
+#   ingressClassName: istio
+#   rules:
+#     - host: tautulli.yanello.net
+#       http:
+#         paths:
+#           - backend:
+#               service:
+#                 name: tautulli
+#                 port:
+#                   number: 8181
+#             path: /
+#             pathType: Prefix
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
 metadata:
-  name: tautulli
-  labels:
-    app: tautulli
+  name: tautulli-vs
 spec:
-  ingressClassName: istio
-  rules:
-    - host: tautulli.yanello.net
-      http:
-        paths:
-          - backend:
-              service:
-                name: tautulli
-                port:
-                  number: 8181
-            path: /
-            pathType: Prefix
+  hosts:
+  - tutaulli.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: tautulli
+        port:
+          number: 8181
