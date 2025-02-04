@@ -51,6 +51,8 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: '1'
+              cpu: 4000m
+              memory: 8Gi
             requests:
               nvidia.com/gpu: '1'
           ports:
