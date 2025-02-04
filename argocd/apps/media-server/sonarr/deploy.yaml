@@ -79,6 +79,8 @@ spec:
           persistentVolumeClaim:
             claimName: config
         - name: media
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /data/media
+          # nfs:
+          #   server: marcus-server.lan
+          #   path: /data/media
