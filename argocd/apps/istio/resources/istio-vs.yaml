@@ -4,7 +4,7 @@ metadata:
   name: argocd-vs
 spec:
   hosts:
-  - argocd.istio.yanello.net
+  - argocd.yanello.net
   gateways:
   - istio-system/http-gateway
   http:
