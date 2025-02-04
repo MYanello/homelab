@@ -68,18 +68,18 @@ spec:
     repoURL: https://istio-release.storage.googleapis.com/charts
     targetRevision: "*"
     chart: gateway
-    helm:
-      valuesObject:
-        affinity:
-          nodeAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: kubernetes.io/hostname
-                      operator: In
-                      values:
-                        - marcus-server
----
+#     helm:
+#       valuesObject:
+#         affinity:
+#           nodeAffinity:
+#             preferredDuringSchedulingIgnoredDuringExecution:
+#               nodeSelectorTerms:
+#                 - matchExpressions:
+#                     - key: kubernetes.io/hostname
+#                       operator: In
+#                       values:
+#                         - marcus-server
+# ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
