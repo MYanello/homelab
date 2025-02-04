@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: default-cert
+  namespace: istio-system
+spec:
+  commonName: yanello.net
+  dnsNames:
+  - "*.yanello.net"
+  - yanello.net
+  secretName: default-ingress-cert
+  issuerRef:
+    name: local-intermediate-ca1-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
