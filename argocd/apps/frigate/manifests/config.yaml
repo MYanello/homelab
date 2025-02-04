@@ -34,7 +34,7 @@ gpu:
     runtimeClassName: nvidia
 resources:
   limits:
-    nvidia.com/gpu: 1
+    nvidia.com/gpu: '1'
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
