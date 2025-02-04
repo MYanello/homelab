@@ -22,17 +22,13 @@ spec:
     helm:
       valuesObject:
         tap:
-          # nodeSelectorTerms:
-          #   workers:
-          #   - matchExpressions:
-          #     - key: kubernetes.io/os
-          #       operator: In
-          #       values:
-          #       - linux
-          #     # - key: kubernetes.io/arch
-          #     #   operator: NotIn
-          #     #   values:
-          #     #   - arm64
+          nodeSelectorTerms:
+            workers:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: NotIn
+                values:
+                - arm64
           ingress:
             enabled: true
             className: "nginx"
