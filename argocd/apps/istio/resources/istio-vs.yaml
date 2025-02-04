@@ -5,6 +5,7 @@ metadata:
 spec:
   hosts:
   - argocd.yanello.net
+  - argocd.k8s.yanello.net
   gateways:
   - istio-system/http-gateway
   http:
