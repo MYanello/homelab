@@ -69,6 +69,6 @@ spec:
       volumes:
         - name: config
           hostPath:
-            - path: /zpool/k8s/overseerr/config
+            path: /zpool/k8s/overseerr/config
           # persistentVolumeClaim:
           #   claimName: config
