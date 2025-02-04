@@ -17,15 +17,15 @@ spec:
       labels:
         app: overseerr
     spec:
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #         - matchExpressions:
-      #             - key: kubernetes.io/hostname
-      #               operator: NotIn
-      #               values:
-      #                 - marcus-server
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: PGID
@@ -68,5 +68,7 @@ spec:
             failureThreshold: 3
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            - path: /zpool/k8s/overseerr/config
+          # persistentVolumeClaim:
+          #   claimName: config
