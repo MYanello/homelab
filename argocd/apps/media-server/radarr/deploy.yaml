@@ -44,8 +44,8 @@ spec:
           name: radarr
           resources:
             limits:
-              cpu: 200m
-              memory: 600Mi
+              cpu: 500m
+              memory: 1Gi
             requests:
               cpu: 50m
               memory: 400Mi
