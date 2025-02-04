@@ -6,7 +6,6 @@ metadata:
 spec:
   hosts:
   - frigate.yanello.net
-  - frigate.k8s.yanello.net
   gateways:
   - istio-system/kube-gateway
   http:
