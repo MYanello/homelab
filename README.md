@@ -80,6 +80,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 - Installed ksops in argocd-repo-server
   - main manual thing was just adding the age key as a secret in the argocd namespace and applying the ksops-patch.yaml
     `kubectl patch deployment argocd-repo-server -n argocd --patch-file ksops-patch.yaml --type strategic`
+    `age-keygen -o -o age-key.txt
   - needed to split authentik app up because argocd expects if there is a kustomization.yaml that that handles everything so the helm chart wasn't deploying
 
 ### 01.18.25

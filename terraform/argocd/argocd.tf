@@ -70,29 +70,29 @@ resource "kubernetes_manifest" "argocd_cm" {
   }
 }
 
-resource "kubernetes_ingress_v1" "argocd_ingress" {
-  metadata {
-    name      = "argocd-ingress"
-    namespace = "argocd"
-  }
-  spec {
-    ingress_class_name = "istio"
-    rule {
-      host = "argocd.yanello.net"
-      http {
-        path {
-          path      = "/"
-          path_type = "Prefix"
-          backend {
-            service {
-              name = "argocd-server"
-              port {
-                number = 80
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+# resource "kubernetes_ingress_v1" "argocd_ingress" {
+#   metadata {
+#     name      = "argocd-ingress"
+#     namespace = "argocd"
+#   }
+#   spec {
+#     ingress_class_name = "istio"
+#     rule {
+#       host = "argocd.yanello.net"
+#       http {
+#         path {
+#           path      = "/"
+#           path_type = "Prefix"
+#           backend {
+#             service {
+#               name = "argocd-server"
+#               port {
+#                 number = 80
+#               }
+#             }
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
