@@ -68,8 +68,8 @@ spec:
               memory: 200Mi
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/prowlarr/config
 ---
 apiVersion: apps/v1
 kind: Deployment
