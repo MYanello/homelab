@@ -1,35 +1,35 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kubeshark
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
-  destination:
-    name: in-cluster
-    namespace: kubeshark
-  project: default
-  source:
-    repoURL: https://helm.kubeshark.co
-    targetRevision: "*"
-    chart: kubeshark
-    helm:
-      valuesObject:
-        tap:
-          nodeSelectorTerms:
-            workers:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: NotIn
-                values:
-                - arm64
-          ingress:
-            enabled: true
-            className: "nginx"
-            host: ks.k8s.yanello.net
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: kubeshark
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   syncPolicy:
+#     automated:
+#       prune: true
+#     syncOptions:
+#       - CreateNamespace=true
+#   destination:
+#     name: in-cluster
+#     namespace: kubeshark
+#   project: default
+#   source:
+#     repoURL: https://helm.kubeshark.co
+#     targetRevision: "*"
+#     chart: kubeshark
+#     helm:
+#       valuesObject:
+#         tap:
+#           nodeSelectorTerms:
+#             workers:
+#             - matchExpressions:
+#               - key: kubernetes.io/arch
+#                 operator: NotIn
+#                 values:
+#                 - arm64
+#           ingress:
+#             enabled: true
+#             className: "nginx"
+#             host: ks.k8s.yanello.net
