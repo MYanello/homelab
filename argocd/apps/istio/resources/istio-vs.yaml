@@ -7,7 +7,7 @@ spec:
   - argocd.yanello.net
   - argocd.k8s.yanello.net
   gateways:
-  - istio-system/http-gateway
+  - istio-system/kube-gateway
   http:
   - route:
     - destination:
