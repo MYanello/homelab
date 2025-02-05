@@ -35,6 +35,7 @@ spec:
             host: nextcloud.yanello.net
             trustedDomains:
               - nextcloud.yanello.net
+
           redis:
             enabled: true
             global:
@@ -48,6 +49,7 @@ spec:
                           operator: In
                           values:
                             - marcus-server
+
             replica:
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
@@ -57,18 +59,24 @@ spec:
                           operator: In
                           values:
                             - marcus-server
+
           service:
             type: LoadBalancer
             loadBalancerIP: 10.10.8.6
+
           internalDatabase:
             enabled: false
+
           externalDatabase:
+            enabled: true
             existingSecret:
               enabled: true
               secretName: nextcloud-secrets
               passwordKey: mariadb-password
+
           mariadb:
-            enabled: true
+            enabled: tru
+            tag: '10.11'
             global:
               defaultStorageClass: local-path
             primary:
