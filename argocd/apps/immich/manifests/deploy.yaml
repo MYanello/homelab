@@ -56,6 +56,8 @@ spec:
           resources:
             requests:
               nvidia.com/gpu: '1'
+            limits:
+              nvidia.com/gpu: '1'
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
@@ -108,6 +110,8 @@ spec:
               mountPath: /usr/src/app/upload
           resources:
             requests:
+              nvidia.com/gpu: '1'
+            limits:
               nvidia.com/gpu: '1'
       volumes:
         - name: photos
