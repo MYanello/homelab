@@ -9,7 +9,8 @@ nextcloud:
   host: nextcloud.yanello.net
   trustedDomains:
     - nextcloud.yanello.net
-
+cron:
+  enabled: true
 redis:
   enabled: true
   global:
