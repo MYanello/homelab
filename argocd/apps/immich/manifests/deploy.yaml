@@ -115,12 +115,11 @@ spec:
               nvidia.com/gpu: '1'
       volumes:
         - name: photos
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /zpool/Photos/immich
         - name: model-cache
-          persistentVolumeClaim:
-            claimName: model-cache
+          hostPath:
+            path: /zpool/k8s/immich/model-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -156,8 +155,9 @@ spec:
               mountPath: /data
       volumes:
         - name: tsdata
-          persistentVolumeClaim:
-            claimName: tsdata
+          hostPath: 
+            path: /zpool/k8s/immich/tsdata
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -274,6 +274,7 @@ spec:
               mountPath: /var/lib/postgresql/data
       volumes:
         - name: db
-          persistentVolumeClaim:
-            claimName: db
+          hostPath:
+            path: /zpool/k8s/immich/db
+
 ---
