@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: istio
   rules:
-    - host: owntracks.k8s.yanello.net
+    - host: owntracks.yanello.net
       http:
         paths:
           - backend:
