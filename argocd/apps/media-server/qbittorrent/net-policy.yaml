@@ -23,7 +23,7 @@ spec:
               kubernetes.io/metadata.name: sonarr
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: ingress-nginx 
+              kubernetes.io/metadata.name: istio-system
       ports:
         - protocol: TCP
           port: 8080
@@ -39,7 +39,7 @@ spec:
               kubernetes.io/metadata.name: sonarr
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: ingress-nginx 
+              kubernetes.io/metadata.name: istio-system
       ports:
         - protocol: TCP
           port: 8080
