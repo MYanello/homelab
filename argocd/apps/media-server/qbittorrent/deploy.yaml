@@ -84,7 +84,7 @@ spec:
         - name: udp-shadowsocks
           containerPort: 8388
           protocol: UDP
-        - name: qbittorrent-http
+        - name: qbit-http
           containerPort: 8080
         envFrom:
         - secretRef:
