@@ -20,9 +20,9 @@ metadata:
   name: immich-machine-learning
 spec:
   ports:
-    - name: ml
-      port: 3000
-      targetPort: 3000
+    - name: immich-machine-learning
+      port: 3003
+      targetPort: 3003
   selector:
     app: immich-machine-learning
 ---
