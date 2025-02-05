@@ -4,15 +4,7 @@ nodeSelector:
   cpu.performance: high
 image:
   tag: stable
-  pullPolicy: IfNotPresent
-ingress:
-  enabled: false
-  ingressClassName: istio
-  hosts:
-    - host: frigate.yanello.net
-      paths:
-        - path: "/"
-          portName: http
+  pullPolicy: Always
 persistence:
   media:
     enabled: true
@@ -34,6 +26,7 @@ resources:
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
+strategyType: RollingUpdate
 config: |
   tls:
     enabled: false

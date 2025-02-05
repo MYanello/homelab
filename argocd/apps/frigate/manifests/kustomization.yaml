@@ -11,6 +11,7 @@ resources:
 
 patches:
 - path: ./health-check-patch.yaml
+- path: ./host-network-patch.yaml
 
 helmCharts:
     - name: frigate
