@@ -1,5 +1,8 @@
 resources:
   - ./vs.yaml
 
+patches:
+- path: ./host-network-patch.yaml
+
 generators:
   - ./secret-generator.yaml
