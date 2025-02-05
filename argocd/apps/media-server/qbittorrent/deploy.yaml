@@ -130,6 +130,8 @@ spec:
           persistentVolumeClaim:
             claimName: config
         - name: torrents
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /data/media/torrents
+          # nfs:
+          #   server: marcus-server.lan
+          #   path: /data/media/torrents
