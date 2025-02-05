@@ -1,0 +1,101 @@
+image:
+  tag: 29.0.8
+replicaCount: 1
+ingress:
+  enabled: false
+  className: istio
+  
+nextcloud:
+  host: nextcloud.yanello.net
+  trustedDomains:
+    - nextcloud.yanello.net
+
+redis:
+  enabled: true
+  global:
+    storageClass: local-path
+  master:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - marcus-server
+
+  replica:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - marcus-server
+
+service:
+  type: LoadBalancer
+  loadBalancerIP: 10.10.8.6
+
+internalDatabase:
+  enabled: false
+
+externalDatabase:
+  enabled: true
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-secrets
+    usernameKey: db-username
+    passwordKey: mariadb-password
+
+mariadb:
+  enabled: true
+  image:
+    tag: '10.11'
+  global:
+    defaultStorageClass: local-path
+  primary:
+    persistence:
+      enabled: true
+      storageClass: local-path
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - marcus-server
+  secondary:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - marcus-server
+  auth:
+    existingSecret: nextcloud-secrets
+persistence:
+  enabled: true
+  storageClass: local-path
+  size: 100Gi
+livenessProbe:
+  enabled: true
+startupProbe:
+  enabled: true
+readinessProbe:
+  enabled: true
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - marcus-server
