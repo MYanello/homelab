@@ -29,6 +29,16 @@ spec:
       labels:
         app: immich-server
     spec:
+      runtimeClassName: nvidia
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - name: immich-server
           envFrom:
@@ -43,6 +53,9 @@ spec:
             - containerPort: 3000
               protocol: TCP
           imagePullPolicy: Always
+          resources:
+            requests:
+              nvidia.com/gpu: '1'
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
@@ -71,8 +84,16 @@ spec:
       labels:
         app: immich-ml
     spec:
-      nodeSelector:
-        nvidia.com/gpu.present: "true"
+      runtimeClassName: nvidia
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - name: immich-ml
           envFrom:
@@ -85,6 +106,9 @@ spec:
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
+          resources:
+            requests:
+              nvidia.com/gpu: '1'
       volumes:
         - name: photos
           nfs:
