@@ -24,7 +24,7 @@ spec:
       port: 3000
       targetPort: 3000
   selector:
-    app: immich-server
+    app: immich-ml
 ---
 apiVersion: v1
 kind: Service
