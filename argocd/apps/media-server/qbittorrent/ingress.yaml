@@ -1,17 +1,33 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: qbittorrent
+# spec:
+#   ingressClassName: istio
+#   rules:
+#     - host: qbit.yanello.net
+#       http:
+#         paths:
+#           - backend:
+#               service:
+#                 name: qbittorrent
+#                 port:
+#                   number: 8080
+#             path: /
+#             pathType: Prefix
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
 metadata:
-  name: qbittorrent
+  name: qbittorrent-vs
 spec:
-  ingressClassName: istio
-  rules:
-    - host: qbit.yanello.net
-      http:
-        paths:
-          - backend:
-              service:
-                name: qbittorrent
-                port:
-                  number: 8080
-            path: /
-            pathType: Prefix
+  hosts:
+  - qbit.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: qbittorrent
+        port:
+          number: 8080
