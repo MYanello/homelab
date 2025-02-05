@@ -29,13 +29,6 @@ spec:
               enabled: false
               className: "nginx"
               hostname: bitwarden.yanello.net
-              additionalAnnotations:
-                nginx.org/websocket-services: "vaultwarden"
-                nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
-                nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
-                nginx.ingress.kubernetes.io/affinity: "cookie"
-                nginx.ingress.kubernetes.io/session-cookie-name: "route"
-                nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
             domain: "https://bitwarden.yanello.net"
             signupsAllowed: false
             replicas: 1
