@@ -205,6 +205,15 @@ spec:
       labels:
         app: postgres
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: POSTGRES_DB
@@ -276,5 +285,4 @@ spec:
         - name: db
           hostPath:
             path: /zpool/k8s/immich/db
-
 ---
