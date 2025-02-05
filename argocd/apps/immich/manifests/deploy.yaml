@@ -214,6 +214,10 @@ spec:
                     operator: In
                     values:
                       - marcus-server
+      securityContext:
+        runAsUser: 1001  # Replace with the desired UID
+        runAsGroup: 1001 # Replace with the desired GID
+        fsGroup: 1001    # Replace with the desired GID for file system permissions
       containers:
         - env:
             - name: POSTGRES_DB
