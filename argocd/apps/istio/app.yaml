@@ -104,7 +104,6 @@ spec:
     targetRevision: HEAD
     path: argocd/apps/istio/resources
 ---
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
