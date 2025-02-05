@@ -26,7 +26,6 @@ resources:
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
-strategyType: RollingUpdate
 config: |
   tls:
     enabled: false
