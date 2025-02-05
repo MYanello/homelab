@@ -28,3 +28,36 @@ spec:
     protocol: HTTP
   resolution: DNS
   location: MESH_EXTERNAL
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hass-vs
+spec:
+  hosts:
+  - homeassistant.k8s.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: homeassistant.lan
+        port:
+          number: 8123
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: homeassistant-se
+  namespace: istio-system
+spec:
+  hosts:
+  - homeassistant.lan
+  ports:
+  - number: 8123
+    name: http
+    protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
