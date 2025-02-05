@@ -107,6 +107,8 @@ spec:
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
+            - name: model-cache
+              mountPath: /cache
           resources:
             requests:
               nvidia.com/gpu: '1'
