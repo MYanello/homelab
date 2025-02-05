@@ -69,21 +69,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: immich-ml
+  name: immich-machine-learning
   labels:
-    app: immich-ml
+    app: immich-machine-learning
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: immich-ml
+      app: immich-machine-learning
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: immich-ml
+        app: immich-machine-learning
     spec:
       runtimeClassName: nvidia
       affinity:
@@ -96,7 +96,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - name: immich-ml
+        - name: immich-machine-learning
           envFrom:
             - configMapRef:
                 name: immich-config

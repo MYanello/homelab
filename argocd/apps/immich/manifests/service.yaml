@@ -16,15 +16,15 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: immich-ml
-  name: immich-ml
+    app: immich-machine-learning
+  name: immich-machine-learning
 spec:
   ports:
     - name: ml
       port: 3000
       targetPort: 3000
   selector:
-    app: immich-ml
+    app: immich-machine-learning
 ---
 apiVersion: v1
 kind: Service
