@@ -5,7 +5,7 @@ metadata:
   labels:
     app: overseerr
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: overseerr.yanello.net
       http:

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: qbittorrent
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: qbit.yanello.net
       http:

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: radarr
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: radarr.yanello.net
       http:

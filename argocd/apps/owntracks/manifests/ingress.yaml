@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: owntracks
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: owntracks.k8s.yanello.net
       http:

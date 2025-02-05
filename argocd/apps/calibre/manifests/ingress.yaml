@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: calibre
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: calibre.yanello.net
       http:
@@ -21,7 +21,7 @@ kind: Ingress
 metadata:
   name: calibre-dl
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: calibre-dl.yanello.net
       http:

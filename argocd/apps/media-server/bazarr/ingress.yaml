@@ -5,7 +5,7 @@ metadata:
   labels:
     app: bazarr
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: bazarr.yanello.net
       http:

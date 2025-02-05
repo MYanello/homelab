@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: change-detection
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: change.yanello.net
       http:

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: prowlarr
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: prowlarr.yanello.net
       http:

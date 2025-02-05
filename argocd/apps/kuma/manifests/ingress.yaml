@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: kuma
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: kuma.yanello.net
       http:

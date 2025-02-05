@@ -21,7 +21,7 @@ metadata:
     cert-manager.io/cluster-issuer: local-intermediate-ca1-issuer
     cert-manager.io/common-name: "echo.k3s.homelab.mydomain.org"
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
   - host: echo.k3s.homelab.mydomain.org
     http:

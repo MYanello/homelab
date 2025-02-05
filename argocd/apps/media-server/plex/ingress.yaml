@@ -9,7 +9,7 @@
 #   annotations:
 #     nginx.ingress.kubernetes.io/app-root: /web 
 # spec:
-#   ingressClassName: nginx
+#   ingressClassName: istio
 #   rules:
 #   - host: plex.yanello.net
 #     http:

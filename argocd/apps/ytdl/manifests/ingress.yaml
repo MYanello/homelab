@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ytdl
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: ytdl.yanello.net
       http:

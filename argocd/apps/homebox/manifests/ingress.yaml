@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: homebox
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: homebox.yanello.net
       http:

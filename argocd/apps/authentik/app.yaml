@@ -41,7 +41,7 @@
 #               enabled: true
 #           server:
 #             ingress:
-#               ingressClassName: nginx
+#               ingressClassName: istio
 #               enabled: true
 #               hosts:
 #                 - authentik.k8s.yanello.net

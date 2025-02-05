@@ -5,7 +5,7 @@ metadata:
   labels:
     app: immich
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: immich.k8s.yanello.net
       http:

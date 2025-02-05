@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: wallos
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: wallos.yanello.net
       http:

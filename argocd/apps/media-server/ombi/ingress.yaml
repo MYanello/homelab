@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ombi
 spec:
-  ingressClassName: nginx
+  ingressClassName: istio
   rules:
     - host: ombi.yanello.net
       http:
