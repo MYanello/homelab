@@ -25,33 +25,43 @@ spec:
       chart: vaultwarden
       helm:
         valuesObject:
-            ingress:
-              enabled: false
-              className: "nginx"
-              hostname: bitwarden.yanello.net
-            domain: "https://bitwarden.yanello.net"
-            signupsAllowed: false
-            replicas: 1
-            storage:
-              data:
-                name: vaultwarden-data
-                size: 15Gi
-                class: nfs-storage
-                keepPvc: true
-                accessMode: ReadWriteMany
-              attachments:
-                name: vaultwarden-data
-                keepPvc: true
-                accessMode: ReadWriteMany
-                size: 15Gi
-                class: nfs-storage
-            adminToken:
-              existingSecret: vw-admin-secret
-              existingSecretKey: adminToken
-            resources:
-              limits:
-                cpu: 100m
-                memory: 200Mi
-              requests:
-                cpu: 20m
-                memory: 100Mi
+          affinity:
+            nodeAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 1
+                  preference:
+                    matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - marcus-server
+          ingress:
+            enabled: false
+            className: "nginx"
+            hostname: bitwarden.yanello.net
+          domain: "https://bitwarden.yanello.net"
+          signupsAllowed: false
+          replicas: 1
+          storage:
+            data:
+              name: vaultwarden-data
+              size: 15Gi
+              class: nfs-storage
+              keepPvc: true
+              accessMode: ReadWriteMany
+            attachments:
+              name: vaultwarden-data
+              keepPvc: true
+              accessMode: ReadWriteMany
+              size: 15Gi
+              class: nfs-storage
+          adminToken:
+            existingSecret: vw-admin-secret
+            existingSecretKey: adminToken
+          resources:
+            limits:
+              cpu: 100m
+              memory: 200Mi
+            requests:
+              cpu: 20m
+              memory: 100Mi

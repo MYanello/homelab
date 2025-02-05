@@ -31,6 +31,7 @@ spec:
           ingress:
             enabled: true
             className: istio
+            
           nextcloud:
             host: nextcloud.yanello.net
             trustedDomains:
