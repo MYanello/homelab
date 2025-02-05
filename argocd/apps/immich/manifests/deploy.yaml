@@ -63,8 +63,7 @@ spec:
               mountPath: /usr/src/app/upload
       volumes:
         - name: photos
-          nfs:
-            server: marcus-server.lan
+          hostPath:
             path: /zpool/Photos/immich
 ---
 apiVersion: apps/v1
