@@ -19,7 +19,7 @@ spec:
   sources:
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
-      path: argocd/apps/nextcloud/secrets
+      path: argocd/apps/nextcloud/manifests
     - repoURL: https://nextcloud.github.io/helm/
       targetRevision: "*"
       chart: nextcloud
@@ -29,7 +29,7 @@ spec:
             tag: 29.0.8
           replicaCount: 1
           ingress:
-            enabled: true
+            enabled: false
             className: istio
             
           nextcloud:
