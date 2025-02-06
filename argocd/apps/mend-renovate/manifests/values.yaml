@@ -9,11 +9,6 @@ renovate:
         "extends": ["config:best-practices"]
     }
 
-ingress:
-  enabled: true
-  ingressClassName: istio
-  hosts:
-    - renovate.yanello.net
 
 affinity:
   nodeAffinity:
