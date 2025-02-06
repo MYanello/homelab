@@ -1,22 +1,14 @@
-# image:
-#   tag: 39.162.1-full
-
 renovate:
   mendRnvAcceptTos: y
   mendRnvPlatform: github
   mendRnvEndPoint: https://api.github.com/
   existingSecret: renovate-secrets
-
+  mendRnvCronJobSchedulerAll: '*/10 * * * *'
   config: |
     {
       "dependencyDashboard": true,
       "extends": ["config:best-practices"]
     }
-
-existingSecret: renovate-secrets
-# envFrom:
-#   - secretRef:
-#       name: renovate-secrets
 
 ingress:
   enabled: true
