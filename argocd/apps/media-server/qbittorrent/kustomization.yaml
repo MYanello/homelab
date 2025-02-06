@@ -10,3 +10,16 @@ resources:
 
 generators:
   -  secret-generator.yaml
+
+patches:
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: qbittorrent
+    spec:
+      template:
+        spec:
+          containers:
+          - name: qbittorrent
+            image: ghcr.io/linuxserver/qbittorrent:latest
