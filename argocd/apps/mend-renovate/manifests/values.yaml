@@ -14,4 +14,4 @@ ingress:
   enabled: true
   ingressClassName: istio
   hosts:
-    - host: renovate.yanello.net
+    - renovate.yanello.net
