@@ -5,9 +5,9 @@ renovate:
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: '*/10 * * * *'
   config: |
-    {
-      "dependencyDashboard": true,
-      "extends": ["config:best-practices"]
+    module.exports = {
+        "dependencyDashboard": true,
+        "extends": ["config:best-practices"]
     }
 
 ingress:
