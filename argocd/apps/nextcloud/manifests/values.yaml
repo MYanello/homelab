@@ -50,8 +50,6 @@ externalDatabase:
 
 mariadb:
   enabled: true
-  image:
-    tag: '10.11'
   global:
     defaultStorageClass: local-path
   primary:
