@@ -7,7 +7,7 @@ renovate:
     module.exports = {
         "dependencyDashboard": true,
         "extends": ["config:best-practices"],
-        "manager": {
+        "managers": {
           "helm": {
             "fileMatch": ["(^|/)app\\.ya?ml$"]
           }
