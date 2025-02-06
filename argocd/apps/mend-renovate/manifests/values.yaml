@@ -1,3 +1,6 @@
+imagePullPolicy:
+  tag: 39.162.1-full
+
 renovate:
   # mendRnvAcceptTos: y
   # mendRnvPlatform: github
