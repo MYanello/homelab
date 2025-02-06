@@ -71,7 +71,7 @@ spec:
           failureThreshold: 10
       initContainers:
       - name: gluetun # init sidecar for VPN connection
-        image: "ghcr.io/qdm12/gluetun:v3.39.1"
+        image: "ghcr.io/qdm12/gluetun:latest"
         restartPolicy: Always # makes this init into a sidecar container k8s 1.29
         imagePullPolicy: IfNotPresent
         ports:
