@@ -9,7 +9,7 @@ resources:
 - manifests/net-policy.yaml
 
 generators:
-  -  secret-generator.yaml
+  - manifests/secret-generator.yaml
 
 images:
 - name: ghcr.io/qdm12/gluetun
