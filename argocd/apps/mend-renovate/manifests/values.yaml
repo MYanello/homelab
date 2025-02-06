@@ -5,8 +5,9 @@ renovate:
   existingSecret: renovate-secrets
 
   config: |
+    "extends": ["config:best-practices"]
     module.exports = {
-      "extends": ["config:best-practices"]
+      
     }
 
 ingress:
