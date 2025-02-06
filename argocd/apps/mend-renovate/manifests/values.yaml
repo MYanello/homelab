@@ -15,3 +15,13 @@ ingress:
   ingressClassName: istio
   hosts:
     - renovate.yanello.net
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+                - amd64
