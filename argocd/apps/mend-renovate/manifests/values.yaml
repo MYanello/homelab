@@ -1,4 +1,4 @@
-imagePullPolicy:
+image:
   tag: 39.162.1-full
 
 renovate:
