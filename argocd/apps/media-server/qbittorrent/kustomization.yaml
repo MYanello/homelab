@@ -11,15 +11,7 @@ resources:
 generators:
   -  secret-generator.yaml
 
-patches:
-- patch: |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: qbittorrent
-    spec:
-      template:
-        spec:
-          containers:
-          - name: gluetun
-            image: ghcr.io/qdm12/gluetun:v3.39.1
+images:
+- name: ghcr.io/qdm12/gluetun
+  newName: ghcr.io/qdm12/gluetun
+  newTag: v3.39.1
