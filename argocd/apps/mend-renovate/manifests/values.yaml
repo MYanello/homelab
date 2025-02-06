@@ -1,14 +1,23 @@
 renovate:
-  mendRnvAcceptTos: y
-  mendRnvPlatform: github
-  mendRnvEndPoint: https://api.github.com/
-  existingSecret: renovate-secrets
+  # mendRnvAcceptTos: y
+  # mendRnvPlatform: github
+  # mendRnvEndPoint: https://api.github.com/
+  # existingSecret: renovate-secrets
 
   config: |
-    "extends": ["config:best-practices"]
-    module.exports = {
-      
+    {
+      "platform": "github",
+      "endpoint": "https://api.github.com/",
+      "repositories": [
+        "myanello/homelab"
+      ],
+      "extends": ["config:best-practices"]
     }
+
+existingSecret: renovate-secrets
+# envFrom:
+#   - secretRef:
+#       name: renovate-secrets
 
 ingress:
   enabled: true
