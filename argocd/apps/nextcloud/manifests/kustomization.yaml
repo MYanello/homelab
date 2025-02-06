@@ -19,3 +19,5 @@ helmCharts:
 images:
   - name: nextcloud
     newTag: 29.0.8
+  - name: docker.io/bitnami/mariadb
+    newTag: '10.11'
