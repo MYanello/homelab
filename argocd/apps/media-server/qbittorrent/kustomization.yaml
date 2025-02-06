@@ -2,11 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- deploy.yaml
-- ingress.yaml
-- service.yaml
-- pvc.yaml
-- net-policy.yaml
+- manifests/deploy.yaml
+- manifests/ingress.yaml
+- manifests/service.yaml
+- manifests/pvc.yaml
+- manifests/net-policy.yaml
 
 generators:
   -  secret-generator.yaml
