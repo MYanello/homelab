@@ -8,6 +8,7 @@ renovate:
     module.exports = {
       // Enter self-hosted configuration options here.
       // https://docs.renovatebot.com/self-hosted-configuration/
+      "dependencyDashboard": true
     }
 
 ingress:
