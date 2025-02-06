@@ -1,0 +1,17 @@
+renovate:
+  mendRnvAcceptTos: y
+  mendRnvPlatform: github
+  mendRnvEndPoint: https://api.github.com/
+  existingSecret: renovate-secret
+
+  config: |
+    module.exports = {
+      // Enter self-hosted configuration options here.
+      // https://docs.renovatebot.com/self-hosted-configuration/
+    }
+
+ingress:
+  enabled: true
+  ingressClassName: istio
+  hosts:
+    - host: renovate.yanello.net

@@ -114,20 +114,20 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
-        startupProbe:
-          exec:
-            command: ["/gluetun-entrypoint", "healthcheck"]
-          initialDelaySeconds: 60
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
-        livenessProbe:
-          exec:
-            command: ["/gluetun-entrypoint", "healthcheck"]
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
+        # startupProbe:
+        #   exec:
+        #     command: ["/gluetun-entrypoint", "healthcheck"]
+        #   initialDelaySeconds: 60
+        #   periodSeconds: 5
+        #   timeoutSeconds: 5
+        #   failureThreshold: 3
+        # livenessProbe:
+        #   exec:
+        #     command: ["/gluetun-entrypoint", "healthcheck"]
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 5
+        #   timeoutSeconds: 5
+        #   failureThreshold: 3
       volumes:
         - name: config
           persistentVolumeClaim:
