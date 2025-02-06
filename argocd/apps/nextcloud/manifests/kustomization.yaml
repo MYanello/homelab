@@ -15,3 +15,7 @@ helmCharts:
       releaseName: nextcloud
       namespace: nextcloud
       valuesFile: ./values.yaml
+
+images:
+  - name: nextcloud
+    newTag: 29.0.8
