@@ -65,10 +65,10 @@ spec:
         livenessProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 5
+          initialDelaySeconds: 180
+          periodSeconds: 30
           timeoutSeconds: 5
-          failureThreshold: 3
+          failureThreshold: 10
       initContainers:
       - name: gluetun # init sidecar for VPN connection
         image: "ghcr.io/qdm12/gluetun:v3.39.1"
