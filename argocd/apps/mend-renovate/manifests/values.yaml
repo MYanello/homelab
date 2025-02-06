@@ -1,19 +1,14 @@
-image:
-  tag: 39.162.1-full
+# image:
+#   tag: 39.162.1-full
 
 renovate:
-  # mendRnvAcceptTos: y
-  # mendRnvPlatform: github
-  # mendRnvEndPoint: https://api.github.com/
-  # existingSecret: renovate-secrets
+  mendRnvAcceptTos: y
+  mendRnvPlatform: github
+  mendRnvEndPoint: https://api.github.com/
+  existingSecret: renovate-secrets
 
   config: |
     {
-      "platform": "github",
-      "endpoint": "https://api.github.com/",
-      "repositories": [
-        "myanello/homelab"
-      ],
       "dependencyDashboard": true,
       "extends": ["config:best-practices"]
     }
