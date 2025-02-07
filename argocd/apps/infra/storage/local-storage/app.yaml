@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: local-path
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: local-path
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kube-system
+  source:
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+    path: argocd/apps/infra/storage/local-storage/manifests
