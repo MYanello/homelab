@@ -13,7 +13,9 @@ renovate:
       }
     }
   
-
+cacheInMemory: 
+  enabled: true
+  
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
