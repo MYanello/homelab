@@ -7,11 +7,16 @@ generators:
 resources:
 - health-check.yaml
 - vs.yaml
-      
 
 patches:
 - path: ./health-check-patch.yaml
-- path: ./host-network-patch.yaml
+- target:
+    kind: Deployment
+    name: frigate
+  patch: |-
+    - op: add
+      path: /spec/template/spec/hostNetwork
+      value: true
 
 helmCharts:
     - name: frigate
