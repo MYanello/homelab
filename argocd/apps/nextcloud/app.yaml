@@ -16,8 +16,8 @@ spec:
     name: in-cluster
     namespace: nextcloud
   project: default
-  source:
-    repoURL: https://github.com/myanello/homelab.git
-    targetRevision: HEAD
-    path: argocd/apps/nextcloud/manifests
+  # source:
+  #   repoURL: https://github.com/myanello/homelab.git
+  #   targetRevision: HEAD
+  #   path: argocd/apps/nextcloud/manifests
 
