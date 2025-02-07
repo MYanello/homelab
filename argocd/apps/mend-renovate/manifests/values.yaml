@@ -10,7 +10,7 @@ renovate:
       "extends": ["config:best-practices"],
       "argocd": {
         "fileMatch": ["argocd/.+\\.yaml$"],
-      }
+      },
       "kubernetes": {
         "fileMatch": ["\\deploy\\.yaml$"],
       }
