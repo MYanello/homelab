@@ -124,7 +124,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://kiali.org/helm-charts
-    targetRevision: "*"
+    targetRevision: "2.5.0"
     chart: kiali-operator
     helm:
       valuesObject:
