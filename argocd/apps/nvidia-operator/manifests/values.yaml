@@ -1,8 +1,0 @@
-driver:
-  enabled: false
-toolkit:
-  enabled: false
-  
-devicePlugin:
-  config:
-    name: time-slicing-config-all
