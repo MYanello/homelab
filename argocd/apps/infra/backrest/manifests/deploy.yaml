@@ -55,7 +55,7 @@ spec:
             - name: etc
               mountPath: /userdata/etc
             - name: mnt
-              mountPath: /mnt
+              mountPath: /userdata/mnt
           readinessProbe:
             httpGet:
               path: /
