@@ -1,8 +1,17 @@
 resources:
   - ./vs.yaml
 
-# patches:
-# - path: ./host-network-patch.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: nextcloud
+    patch: |-
+      - op: add
+        path: /spec/template/spec/
+        value: hostNetwork: true
+      - op: add
+        path: /spec/template/spec/
+        value: ClusterFirstWithHostNet: true        
 
 generators:
   - ./secret-generator.yaml
