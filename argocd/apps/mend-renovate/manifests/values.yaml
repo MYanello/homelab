@@ -7,6 +7,9 @@ renovate:
     module.exports = {
       "dependencyDashboard": true,
       "extends": ["config:best-practices"],
+      "argocd": {
+        "fileMatch": ["argocd/.+\\.yaml$"],
+      }
     }
 
 
