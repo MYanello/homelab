@@ -19,5 +19,5 @@ spec:
   source:
     repoURL: https://github.com/myanello/homelab.git
     targetRevision: HEAD
-    path: argocd/apps/mend-renovate/manifests
+    path: argocd/apps/infra/mend-renovate/manifests
 
