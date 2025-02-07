@@ -5,9 +5,6 @@ renovate:
   existingSecret: renovate-secrets
   config: |
     module.exports = {
-      "helm": {
-        "fileMatch": ["(^|/)app\\.ya?ml$"]
-      },
       "dependencyDashboard": true,
       "extends": ["config:best-practices"],
     }
