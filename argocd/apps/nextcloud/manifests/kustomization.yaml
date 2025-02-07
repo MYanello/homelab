@@ -16,7 +16,6 @@ patches:
 generators:
   - ./secret-generator.yaml
 
-
 helmCharts:
     - name: nextcloud
       repo: https://nextcloud.github.io/helm/

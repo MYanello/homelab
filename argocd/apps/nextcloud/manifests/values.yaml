@@ -22,7 +22,6 @@ redis:
                 operator: In
                 values:
                   - marcus-server
-
   replica:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

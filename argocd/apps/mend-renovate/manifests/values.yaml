@@ -11,6 +11,9 @@ renovate:
       "argocd": {
         "fileMatch": ["argocd/.+\\.yaml$"],
       }
+      "kubernetes": {
+        "fileMatch": ["\\deploy\\.yaml$"],
+      }
     }
   
 cacheInMemory: 
