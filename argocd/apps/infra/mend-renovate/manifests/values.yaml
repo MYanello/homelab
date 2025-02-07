@@ -12,7 +12,7 @@ renovate:
         "fileMatch": ["argocd/.+\\.yaml$"],
       },
       "kubernetes": {
-        "fileMatch": ["\\deploy\\.yaml$"],
+        "fileMatch": ["deploy\.yaml$"],
       }
     }
   
