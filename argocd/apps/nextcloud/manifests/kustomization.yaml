@@ -7,7 +7,7 @@ patches:
       name: nextcloud
     patch: |-
       - op: add
-        path: /spec/template/spec/
+        path: /spec/template/spec/-
         value: 
           hostNetwork: true
           ClusterFirstWithHostNet: true        
