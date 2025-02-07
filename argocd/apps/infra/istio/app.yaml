@@ -102,7 +102,7 @@ spec:
   source:
     repoURL: https://github.com/myanello/homelab.git
     targetRevision: HEAD
-    path: argocd/apps/istio/resources
+    path: argocd/apps/infra/istio/resources
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
