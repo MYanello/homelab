@@ -28,3 +28,4 @@ spec:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
         targetRevision: HEAD
+        recurse: true
