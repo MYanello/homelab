@@ -12,3 +12,12 @@ helmCharts:
     releaseName: mend-renovate-ce
     namespace: renovate
     valuesFile: ./values.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: mend-renovate-ce
+    patch: |-
+      - op: add
+        path: /spec/revisionHistoryLimit
+        value: 3
