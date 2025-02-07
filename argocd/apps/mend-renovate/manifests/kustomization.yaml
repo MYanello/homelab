@@ -1,23 +1,14 @@
 resources:
   - ./vs.yaml
 
-# patches:
-# - path: ./host-network-patch.yaml
-
 generators:
   - ./secret-generator.yaml
 
 
 helmCharts:
-    # - name: renovate
-    #   repo: https://docs.renovatebot.com/helm-charts
-    #   version: "*"
-    #   releaseName: renovate
-    #   namespace: renovate
-    #   valuesFile: ./values.yaml
-    - name: mend-renovate-ce
-      repo: https://mend.github.io/renovate-ce-ee
-      version: "*"
-      releaseName: mend-renovate-ce
-      namespace: renovate
-      valuesFile: ./values.yaml
+  - name: mend-renovate-ce
+    repo: https://mend.github.io/renovate-ce-ee
+    version: "*"
+    releaseName: mend-renovate-ce
+    namespace: renovate
+    valuesFile: ./values.yaml
