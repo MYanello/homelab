@@ -1,0 +1,90 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: authentik
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     - CreateNamespace=true
+#   destination:
+#     name: in-cluster
+#     namespace: authentik
+#   project: default
+#   sources:
+#     - repoURL: https://github.com/myanello/homelab.git
+#       targetRevision: HEAD
+#       path: argocd/apps/authentik/secrets
+#     - repoURL: https://charts.goauthentik.io/
+#       targetRevision: "2024.12.2"
+#       chart: authentik
+#       helm:
+#         valuesObject:
+#           global:
+#             envFrom:
+#               - secretRef:
+#                   name: authentik-secrets
+#           authentik:
+#             email:
+#               host: smtp.gmail.com
+#               port: 587
+#               username: "marcus.yanello@gmail.com"
+#               from: "authentik <marcus.yanello@gmail.com>"
+#               use_tls: true
+#               timeout: 30
+#             error_reporting:
+#               enabled: true
+#           server:
+#             ingress:
+#               ingressClassName: istio
+#               enabled: true
+#               hosts:
+#                 - authentik.k8s.yanello.net
+#             replicas: 3
+#             resources:
+#               limits:
+#                 cpu: 750m
+#                 memory: 1Gi
+#               requests:
+#                 cpu: 400m
+#                 memory: 600Mi
+#           worker:
+#             replicas: 3
+#             resources:
+#               limits:
+#                 cpu: 300m
+#                 memory: 1Gi
+#               requests:
+#                 cpu: 100m
+#                 memory: 500Mi
+#           redis:
+#             enabled: true
+#             master:
+#               persistence:
+#                 enabled: false
+#             replica:
+#               persistence:
+#                 enabled: false
+#             sentinel:
+#               persistence:
+#                 enabled: false
+#           postgresql:
+#             enabled: true
+#             primary:
+#               persistence:
+#                 enabled: true
+#                 storageClass: nfs-storage
+#                 accessMode: ReadWriteOnce
+#             auth:
+#               username: authentik
+#               database: authentik
+#               existingSecret: authentik-secrets
+#               secretKeys:
+#                 adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+#                 userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+#                 replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
