@@ -7,10 +7,11 @@ patches:
       name: nextcloud
     patch: |-
       - op: add
-        path: /spec/template/spec/-
-        value: 
-          hostNetwork: true
-          ClusterFirstWithHostNet: true        
+        path: /spec/template/spec/hostNetwork
+        value: true
+      - op: add
+        path: /spec/template/spec/dnsPolicy
+        value: ClusterFirstWithHostNet        
 
 generators:
   - ./secret-generator.yaml
