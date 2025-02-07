@@ -25,3 +25,7 @@ helmCharts:
       releaseName: frigate
       namespace: frigate
       valuesFile: ./config.yaml
+
+images:
+  - name: frigate
+    newTag: stable
