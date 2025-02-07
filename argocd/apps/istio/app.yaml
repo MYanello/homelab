@@ -125,9 +125,13 @@ spec:
   source:
     repoURL: https://kiali.org/helm-charts
     targetRevision: "*"
-    chart: kiali-server
+    chart: kiali-operator
     helm:
       valuesObject:
-        auth:
-          strategy: anonymous
+        cr:
+          create: true
+          namespace: istio-system
+          spec:
+            auth:
+              strategy: anonymous
 ---
