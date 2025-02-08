@@ -1,0 +1,130 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- git@github.com:rescale/rescale-cicd//external/tekton/pipelines/k.0.63.0/?ref=main # The upstream tekton pipelines manifest, the // is intentional and correct kustomize syntax to separate the repo and the path, ref can be any git ref (branch, tag, full commit hash)
+- ./values.yaml # our args for this version of pipelines
+# - ../../../../../../../../rescale-cicd/external/tekton/pipelines/k.0.59.0 # the path to our local cicd repo with the upstream manifest. this is correct if ballista and rescale-cicd are in the same directory. useful for testing changes to the cicd repo locally, should be commented out for production
+
+# Use our config map to set up the container repo overrides to use our repos
+replacements:
+- source: # The config map that we use to override the images
+    kind: ConfigMap
+    name: tekton-pipelines-config # metadata.name defined in values.yaml
+    fieldPath: data.containerArgs
+  targets: # what we want to apply our source to in the upstream manifest
+  - select: # Apply to a deployment with the name tekton-pipelines-controller
+      kind: Deployment
+      name: tekton-pipelines-controller
+    fieldPaths: # apply to this path in the selected deployment(s)
+    - spec.template.spec.containers.0.args # 0 for the 1st container in the deployment
+
+- source:
+    kind: ConfigMap
+    name: tekton-pipelines-config
+    fieldPath: data.resolverImage
+  targets:
+  - select:
+      kind: Deployment
+      name: tekton-pipelines-remote-resolvers
+    fieldPaths:
+    - spec.template.spec.containers.0.image
+
+- source:
+    kind: ConfigMap
+    name: tekton-pipelines-config
+    fieldPath: data.webhookImage
+  targets:
+  - select:
+      kind: Deployment
+      name: tekton-pipelines-webhook
+    fieldPaths:
+    - spec.template.spec.containers.0.image
+
+- source:
+    kind: ConfigMap
+    name: tekton-pipelines-config
+    fieldPath: data.controllerImage
+  targets:
+  - select:
+      kind: Deployment
+      name: tekton-pipelines-controller
+    fieldPaths:
+    - spec.template.spec.containers.0.image
+
+- source:
+    kind: ConfigMap
+    name: tekton-pipelines-config
+    fieldPath: data.eventsImage
+  targets:
+  - select:
+      kind: Deployment
+      name: tekton-events-controller
+    fieldPaths:
+    - spec.template.spec.containers.0.image
+
+
+patches:
+# Annotate the service account and deployment for the controller
+# We 'add' the value to our selected target under the path specified
+- patch: |-
+    - op: add 
+      path: /spec/template/metadata/annotations
+      value:
+        eks.amazonaws.com/role-arn: arn:aws-us-gov:iam::301733247343:role/eks-tekton-kaniko-20231011200629964500000001
+  target:
+    kind: Deployment
+    name: tekton-pipelines-controller
+- patch: |-
+    - op: add
+      path: /metadata/annotations
+      value: 
+        eks.amazonaws.com/role-arn: arn:aws-us-gov:iam::301733247343:role/eks-tekton-kaniko-20231011200629964500000001
+  target:
+    kind: ServiceAccount
+    name: tekton-pipelines-controller
+
+  # Add the iron bank token to every deployment in the manifest
+- patch: |-
+    - op: add
+      path: /spec/template/spec/imagePullSecrets
+      value: []
+    - op: add
+      path: /spec/template/spec/imagePullSecrets/-
+      value:
+        name: "iron-bank-bot-secret"
+  target:
+    kind: Deployment
+  # The controller volume mount and volumes need configs and info about the secret
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/volumeMounts/-
+      value:
+        name: dockerconfig
+        mountPath: .docker
+    - op: add
+      path: /spec/template/spec/volumes/-
+      value:
+        name: dockerconfig
+        secret:
+          secretName: iron-bank-bot-secret
+          optional: true
+          items:
+            - key: .dockerconfigjson
+              path: config.json
+  target:
+    kind: Deployment
+    name: tekton-pipelines-controller
+  
+# The pipeline controller service account also needs the secret
+- patch: |-
+    - op: add
+      path: /imagePullSecrets
+      value: []
+    - op: add
+      path: /imagePullSecrets/-
+      value:
+        name: "iron-bank-bot-secret"
+  target:
+    kind: ServiceAccount
+    name: tekton-pipelines-controller

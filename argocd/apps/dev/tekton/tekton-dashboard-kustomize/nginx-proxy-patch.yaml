@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tekton-dashboard
+spec:
+  template:
+    spec:
+      containers:
+        - args:
+            - '-g'
+            - daemon off;
+          command:
+            - nginx
+          image: >-
+            301733247343.dkr.ecr-fips.us-gov-east-1.amazonaws.com/ironbank/opensource/nginx/nginx:1.27.3@sha256:a16a4901b7385f1e3c7e21a3575abf3b34a6e0b3ff66cf20c9a6476058318092
+          imagePullPolicy: IfNotPresent
+          name: tls-termination-proxy
+          ports:
+            - containerPort: 9443
+              name: http
+              protocol: TCP
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsGroup: 994
+            runAsNonRoot: true
+            runAsUser: 997
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/nginx
+              name: proxy-configmap
+              readOnly: true
+            - mountPath: /etc/ssl/
+              name: certificates
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: tekton-dashboard
+      serviceAccountName: tekton-dashboard
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+            name: proxy-configmap
+          name: proxy-configmap
+        - name: certificates
+          secret:
+            defaultMode: 420
+            items:
+              - key: tls.key
+                path: pem
+              - key: tls.crt
+                path: bundle
+              - key: ca.crt
+                path: rescale-root
+            secretName: tekton-cert

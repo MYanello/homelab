@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 'tekton-dashboard-ingress'
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname:  'tekton.staging.mil.rescale.internal'
+    alb.ingress.kubernetes.io/tags:  'rescale_role=tekton,  rescale_env=shared, rescale_env_type=staging, rescale_team=red, security_type=PlatformInfra, compliance_type_itar=True, compliance_type_fedramp_moderate=True'
+    alb.ingress.kubernetes.io/scheme: 'internal'
+    alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":4333}]' #
+    alb.ingress.kubernetes.io/certificate-arn: 'arn:aws-us-gov:acm:us-gov-east-1:301733247343:certificate/b101c454-9b21-4ef0-87ab-815f1743b9af'
+    alb.ingress.kubernetes.io/healthcheck-protocol: 'HTTPS'
+    alb.ingress.kubernetes.io/auth-idp-oidc: |
+      {
+        "issuer": "https://rescaledod.okta-gov.com",
+        "authorizationEndpoint": "https://rescaledod.okta-gov.com/oauth2/v1/authorize",
+        "tokenEndpoint": "https://rescaledod.okta-gov.com/oauth2/v1/token",
+        "userInfoEndpoint": "https://rescaledod.okta-gov.com/oauth2/v1/userinfo",
+        "secretName": "tekton-oidc"
+      }
+spec:
+  ingressClassName: alb
+  rules:
+    - host: 'tekton.staging.mil.rescale.internal'
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: tekton-dashboard
+              port:
+                number: 443
