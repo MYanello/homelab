@@ -13,7 +13,7 @@ renovate:
       },
       "kubernetes": {
         "fileMatch": ["deploy\.yaml$"],
-      }
+      },
       "packageRules": [
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
