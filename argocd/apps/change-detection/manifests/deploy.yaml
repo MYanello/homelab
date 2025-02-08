@@ -94,7 +94,7 @@ spec:
                     values:
                       - amd64
       containers:
-        - image: browserless/chrome:1.60-chrome-stable
+        - image: browserless/chrome:1.61-chrome-stable@sha256:efac47cfff3830d9a50b27d29f8bbb61949058ae336c823fbe9bd3c0d1debcc8
           imagePullPolicy: IfNotPresent
           name: playwright
           resources:
