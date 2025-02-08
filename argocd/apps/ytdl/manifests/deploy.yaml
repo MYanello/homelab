@@ -50,7 +50,7 @@ spec:
               value: "true"
             - name: ytdl_use_local_db
               value: "false"
-          image: tzahi12345/youtubedl-material:latest
+          image: tzahi12345/youtubedl-material:latest@sha256:2f943d584711cb07c3535b518939fabb2ab90fdd7452d9a9938cd05378468ed9
           imagePullPolicy: Always
           name: ytdl
           resources:
@@ -130,7 +130,7 @@ spec:
         io.kompose.service: ytdl-mongo-db
     spec:
       containers:
-        - image: mongo:4.4.18
+        - image: mongo:4.4.18@sha256:d23ec07162ca06646a6329c452643f37494af644d045c002a7b41873981c160d
           name: ytdl-mongo-db
           resources:
             limits:

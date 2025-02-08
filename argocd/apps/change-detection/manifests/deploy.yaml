@@ -26,7 +26,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: ghcr.io/dgtlmoon/changedetection.io:latest
+        - image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:c48b0b83d4af7c7e60aef37adcd381c8a8ecb3ec613b19ddcfca880f95a7d004
           imagePullPolicy: Always
           name: change-detection
           env:
@@ -94,7 +94,7 @@ spec:
                     values:
                       - amd64
       containers:
-        - image: browserless/chrome:1.60-chrome-stable
+        - image: browserless/chrome:1.60-chrome-stable@sha256:7db5e3aad20c201abaa03bbbc868a55ef96574cda0e67ccb7e4e032053ecb87d
           imagePullPolicy: IfNotPresent
           name: playwright
           resources:
