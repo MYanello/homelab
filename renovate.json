@@ -1,3 +1,9 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRule": [
+    {
+      "matchDatasources": ["docker", "kustomize", "kubernetes"],
+      "registryURLs": ["dockerhub.io", "ghcr.io"]
+    }
+  ]
 }
