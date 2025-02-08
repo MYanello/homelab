@@ -7,7 +7,7 @@ renovate:
   config: |
     module.exports = {
       "dependencyDashboard": true,
-      "extends": ["config:best-practices"],
+      "extends": ["config:best-practices", "mergeConfidence:all-badges"],
       "argocd": {
         "fileMatch": ["argocd/.+\\.yaml$"],
       },
