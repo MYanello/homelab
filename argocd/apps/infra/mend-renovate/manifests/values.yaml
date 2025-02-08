@@ -3,7 +3,7 @@ renovate:
   mendRnvPlatform: github
   mendRnvEndPoint: https://api.github.com/
   existingSecret: renovate-secrets
-  mendRnvCronJobSchedulerAll: '*/2 * * * *'
+  mendRnvCronJobSchedulerAll: '*/30 * * * *'
   config: |
     module.exports = {
       "dependencyDashboard": true,
