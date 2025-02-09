@@ -20,9 +20,9 @@ metadata:
   name: paperless-db
 spec:
   ports:
-    - name: "postgres"
-      port: 5432
-      targetPort: 5432
+    - name: "mariadb"
+      port: 3306
+      targetPort: 3306
   selector:
     app: paperless-db
 ---

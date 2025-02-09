@@ -24,6 +24,12 @@ spec:
           ports:
             - containerPort: 8000
               protocol: TCP
+          env:
+            - name: PAPERLESS_DBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-secrets
+                  key: MARIADB_PASSWORD
           envFrom:
             - configMapRef:
                 name: paperless-env
@@ -84,18 +90,20 @@ spec:
           imagePullPolicy: Always
           name: paperless-db
           ports:
-            - containerPort: 5432
+            - containerPort: 3306
               protocol: TCP
           env:
-            - name: POSTGRES_DB
+            - name: MARIADB_HOST
               value: paperless
-            - name: POSTGRES_USER
+            - name: MARIADB_DATABASE
+              value: paperless
+            - name: MARIADB_USER
               value: paperless
           envFrom:
             - secretRef:
                 name: paperless-secrets
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/mysql
               name: db
           resources:
             limits:
