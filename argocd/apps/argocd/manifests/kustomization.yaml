@@ -1,16 +1,6 @@
 resources:
   - ./cm.yaml
   - ./vs.yaml
-# generators:
-#   - ./secret-generator.yaml
-
-# helmCharts:
-#   - name: mend-renovate-ce
-#     repo: https://mend.github.io/renovate-ce-ee
-#     version: "9.4.0"
-#     releaseName: mend-renovate-ce
-#     namespace: renovate
-#     valuesFile: ./values.yaml
 
 patches:
   - path: ./ksops-patch.yaml
@@ -34,10 +24,3 @@ patches:
         value: |
           kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
 
-#   - target:
-#       kind: Deployment
-#       name: mend-renovate-ce
-#     patch: |-
-#       - op: replace
-#         path: /spec/revisionHistoryLimit
-#         value: 3
