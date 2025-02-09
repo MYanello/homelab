@@ -39,7 +39,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: linuxserver/radarr:latest
+          image: linuxserver/radarr:latest@sha256:f4c9c64c42e84a3c03590afd9da2e420c69b5e936b4549778c5d4c00d907ba33
           imagePullPolicy: Always
           name: radarr
           resources:

@@ -37,7 +37,7 @@ spec:
             value: "1000"
           - name: DOCKER_MODS
             value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
-        image: lscr.io/linuxserver/qbittorrent:latest
+        image: lscr.io/linuxserver/qbittorrent:latest@sha256:2262eebcfe3b1d7804c3f88c0dcc51fc760f3c5dbe1edef4cbd88d5cbe16f0a9
         imagePullPolicy: Always
         resources:
           requests:
@@ -71,7 +71,7 @@ spec:
           failureThreshold: 10
       initContainers:
       - name: gluetun # init sidecar for VPN connection
-        image: "ghcr.io/qdm12/gluetun:latest"
+        image: "ghcr.io/qdm12/gluetun:latest@sha256:183c74263a07f4c931979140ac99ff4fbc44dcb1ca5b055856ef580b0fafdf1c"
         restartPolicy: Always # makes this init into a sidecar container k8s 1.29
         imagePullPolicy: IfNotPresent
         ports:

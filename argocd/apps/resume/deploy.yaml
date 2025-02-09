@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: rx-resume
-        image: amruthpillai/reactive-resume:v4.1.8
+        image: amruthpillai/reactive-resume:v4.1.8@sha256:207aa74f9ee949307278a0a043904184dc3d4709dab95aa1ab21f346271d64ae
         ports:
         - containerPort: 3010
         env:
@@ -96,7 +96,7 @@ spec:
         #     memory: 2048Mi
 
       - name: rx-chrome
-        image: ghcr.io/browserless/chromium:latest
+        image: ghcr.io/browserless/chromium:latest@sha256:2b7c37af861926db0957410bcc966c7a8c2893bb0c7c21410524ccfefe2096a4
         ports:
         - containerPort: 3000
         env:
@@ -122,7 +122,7 @@ spec:
         #     memory: 4096Mi
 
       - name: rx-resume-s3
-        image: minio/minio:latest
+        image: minio/minio:latest@sha256:640c22768ed5dbc92eacc14502a1b06a1c708fa60431345c78dfc22917062e93
         args:
         - server
         - /data
@@ -193,7 +193,7 @@ spec:
                 secretKeyRef:
                   name: resume-secrets
                   key: DB_PASSWORD
-          image: postgres:15-alpine
+          image: postgres:15-alpine@sha256:a58cec2ba7a60b4c08d51f2ca93c1ad65fbf96e75cf0c89b7c0d2684860d3bb3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
