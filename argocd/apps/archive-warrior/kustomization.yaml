@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
 - deploy.yaml
-
+- service.yaml
+- vs.yaml
