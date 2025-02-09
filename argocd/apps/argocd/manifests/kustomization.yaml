@@ -12,7 +12,8 @@ resources:
 #     namespace: renovate
 #     valuesFile: ./values.yaml
 
-# patches:
+patches:
+  - path: ./ksops-patch.yaml
 #   - target:
 #       kind: Deployment
 #       name: mend-renovate-ce
