@@ -23,8 +23,16 @@ patches:
         value: LoadBalancer
       - op: add
         path: /metadata/annotations
-        value:
+        value: |
           metallb.universe.tf/loadBalancerIPs: 10.10.8.4
+  - target:
+      kind: ConfigMap
+      name: argocd-cm
+    patch: |-
+      - op: add
+        path: /data/
+        value: |
+          kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
 
 #   - target:
 #       kind: Deployment
