@@ -59,3 +59,54 @@ spec:
         - name: consume
           persistentVolumeClaim:
             claimName: consume
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paperless-db
+  name: paperless-db
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: paperless-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: paperless-db
+    spec:
+      containers:
+        - image: docker.io/library/postgres:16
+          imagePullPolicy: Always
+          name: paperless-db
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          envFrom:
+            - name: POSTGRES_DB
+              value: paperless
+            - name: POSTGRES_USER
+              value: paperless
+            - secretRef:
+                name: paperless-secrets
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+      restartPolicy: Always
+      volumes:
+        - name: db
+          persistentVolumeClaim:
+            claimName: db
+
+---

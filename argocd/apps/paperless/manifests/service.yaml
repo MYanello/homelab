@@ -11,3 +11,17 @@ spec:
       targetPort: 8000
   selector:
     app: paperless
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: paperless-db
+  name: paperless-db
+spec:
+  ports:
+    - name: "postgres"
+      port: 6379
+      targetPort: 6379
+  selector:
+    app: paperless-db
