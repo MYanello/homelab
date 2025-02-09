@@ -10,6 +10,10 @@ renovate:
   config: |
     module.exports = {
       "dependencyDashboard": true,
+      "major": {
+        "dependencyDashboardApproval": true,
+      }
+      "dependencyDashboardOSVVulnerabilitySummary": "all"
       "extends": ["config:best-practices", "mergeConfidence:all-badges"],
       "argocd": {
         "fileMatch": ["argocd/.+\\.yaml$"],
