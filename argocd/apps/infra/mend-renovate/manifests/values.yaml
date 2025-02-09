@@ -18,8 +18,8 @@ renovate:
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
           "matchPackageNames": ["tekton-releases/github.com/tektoncd/pipeline/cmd/resolvers"],
-          "overrideDatasource": "ghcr.io"
-          "overridePackageName": "tekton-releases/github.com/tektoncd/pipeline/cmd/resolvers"
+          "overrideDatasource": "ghcr.io",
+          "overridePackageName": "tektoncd/pipeline/resolvers"
         }
       ]
     }
