@@ -1,4 +1,0 @@
-resources:
-  - ./vs.yaml
-  - ./lb.yaml
-  - ./cm.yaml
