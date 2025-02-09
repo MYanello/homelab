@@ -11,13 +11,35 @@ replacements:
 - source: # The config map that we use to override the images
     kind: ConfigMap
     name: tekton-pipelines-config # metadata.name defined in values.yaml
-    fieldPath: data.containerArgs
+    fieldPaths:
+      - data.entryPointImage
+      - data.nopImage
+      - data.sidecarLogResultsImage
+      - data.workingDirInitImage
+      - data.shellImage
+      - data.shellImageWin 
   targets: # what we want to apply our source to in the upstream manifest
   - select: # Apply to a deployment with the name tekton-pipelines-controller
       kind: Deployment
       name: tekton-pipelines-controller
     fieldPaths: # apply to this path in the selected deployment(s)
     - spec.template.spec.containers.0.args # 0 for the 1st container in the deployment
+    options:
+          delimiter: "\n"
+          index: 0
+          template: |
+            -entrypoint-image
+            $(0)
+            -nop-image
+            $(1)
+            -sidecarlogresults-image
+            $(2)
+            -workingdirinit-image
+            $(3)
+            -shell-image
+            $(4)
+            -shell-image-win
+            $(5)
 
 - source:
     kind: ConfigMap
