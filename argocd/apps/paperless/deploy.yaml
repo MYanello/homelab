@@ -21,6 +21,7 @@ spec:
         - image: ghcr.io/paperless-ngx/paperless-ngx:latest
           imagePullPolicy: Always
           name: paperless
+          command: ["sleep", "infinity"]
           ports:
             - containerPort: 8000
               protocol: TCP
