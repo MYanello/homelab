@@ -2,7 +2,6 @@ resources:
   - ./vs.yaml
 
 patches:
-  - path: ./ksops-patch.yaml
   - target:
       kind: Service
       name: argocd-server
