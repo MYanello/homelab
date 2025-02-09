@@ -18,6 +18,9 @@ spec:
       - image: atdr.meo.ws/archiveteam/usgovernment-grab:latest
         args: ['--concurrent', '$(CONCURRENT_ITEMS)', '$(DOWNLOADER)']
         name: warrior
+        ports:
+            - containerPort: 8001
+              protocol: TCP
         resources:
           limits:
             cpu: "1"

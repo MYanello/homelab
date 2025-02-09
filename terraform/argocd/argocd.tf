@@ -37,6 +37,7 @@ resource "kubernetes_manifest" "argocd_appset" {
           }
           "destination" = {
             "name" = "in-cluster"
+            "namespace" = "{{path.basename}}"
           }
           "syncPolicy" = {
             "automated" = {
