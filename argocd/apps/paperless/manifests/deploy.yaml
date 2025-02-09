@@ -86,11 +86,12 @@ spec:
           ports:
             - containerPort: 6379
               protocol: TCP
-          envFrom:
+          env:
             - name: POSTGRES_DB
               value: paperless
             - name: POSTGRES_USER
               value: paperless
+          envFrom:
             - secretRef:
                 name: paperless-secrets
           volumeMounts:
