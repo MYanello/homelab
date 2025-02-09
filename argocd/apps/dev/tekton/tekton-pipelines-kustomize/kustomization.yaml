@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- git@github.com:rescale/rescale-cicd//external/tekton/pipelines/k.0.63.0/?ref=main # The upstream tekton pipelines manifest, the // is intentional and correct kustomize syntax to separate the repo and the path, ref can be any git ref (branch, tag, full commit hash)
+- git@github.com:myanello/homelab//external/tekton/pipelines/k.0.63.0/?ref=main # The upstream tekton pipelines manifest, the // is intentional and correct kustomize syntax to separate the repo and the path, ref can be any git ref (branch, tag, full commit hash)
 - ./values.yaml # our args for this version of pipelines
 # - ../../../../../../../../rescale-cicd/external/tekton/pipelines/k.0.59.0 # the path to our local cicd repo with the upstream manifest. this is correct if ballista and rescale-cicd are in the same directory. useful for testing changes to the cicd repo locally, should be commented out for production
 
@@ -71,7 +71,7 @@ patches:
     - op: add 
       path: /spec/template/metadata/annotations
       value:
-        eks.amazonaws.com/role-arn: arn:aws-us-gov:iam::301733247343:role/eks-tekton-kaniko-20231011200629964500000001
+        eks.amazonaws.com/role-arn: arn:aws-us:iam::111111:role/eks-tekton-kaniko
   target:
     kind: Deployment
     name: tekton-pipelines-controller
@@ -79,7 +79,7 @@ patches:
     - op: add
       path: /metadata/annotations
       value: 
-        eks.amazonaws.com/role-arn: arn:aws-us-gov:iam::301733247343:role/eks-tekton-kaniko-20231011200629964500000001
+        eks.amazonaws.com/role-arn: arn:aws-us:iam::111111:role/eks-tekton-kaniko
   target:
     kind: ServiceAccount
     name: tekton-pipelines-controller
@@ -92,7 +92,7 @@ patches:
     - op: add
       path: /spec/template/spec/imagePullSecrets/-
       value:
-        name: "iron-bank-bot-secret"
+        name: "bot-secret"
   target:
     kind: Deployment
   # The controller volume mount and volumes need configs and info about the secret
@@ -124,7 +124,7 @@ patches:
     - op: add
       path: /imagePullSecrets/-
       value:
-        name: "iron-bank-bot-secret"
+        name: "bot-secret"
   target:
     kind: ServiceAccount
     name: tekton-pipelines-controller
