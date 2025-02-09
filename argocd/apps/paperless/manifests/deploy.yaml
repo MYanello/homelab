@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paperless
+  name: paperless
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: paperless
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: paperless
+    spec:
+      containers:
+        - image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          imagePullPolicy: Always
+          name: paperless
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: paperless-env
+            - secretRef:
+                name: paperless-secrets
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: data
+            - name: media
+              mountPath: /usr/src/paperless/media
+            - name: export
+              mountPath: /usr/src/paperless/export
+            - name: consume
+              mountPath: /usr/src/paperless/consume
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
+        - name: export
+          persistentVolumeClaim:
+            claimName: export
+        - name: consume
+          persistentVolumeClaim:
+            claimName: consume
