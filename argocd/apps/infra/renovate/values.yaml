@@ -15,8 +15,14 @@ renovate:
       },
       "dependencyDashboardOSVVulnerabilitySummary": "all",
       "osvVulnerabilityAlerts": true,
-      "vulnerabilityFixStrategy": "lowest",
-      "extends": ["config:best-practices", "mergeConfidence:all-badges"],
+      "vulnerabilityAlerts": {
+        "enabled": true,
+        "vulnerabilityFixStrategy": "lowest",
+      },
+      "extends": [
+        "config:best-practices",
+        "mergeConfidence:all-badges"
+      ],
       "argocd": {
         "fileMatch": ["argocd/.+\\.yaml$"],
       },
