@@ -13,7 +13,7 @@ data:
   controllerImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.63.0@sha256:4575e34a5aa27d571239136db2f28a757a773d2b8c18b176bef5facbe7081611
   eventsImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/tekton-releases/github.com/tektoncd/pipeline/cmd/events:v0.63.0@sha256:69465472f6dc25571bedf0453c5c505dd542a58a8631e580e8cd3517372174f9
+    Tekton Pipeline Events:v0.68.0@sha256:c087ceed9501f4042a68d09d291d39bff07db43b1e39af4d15e0bad6730e68eb
   entryPointImage:
     1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/entrypoint:v0.63.0@sha256:d2eca7694aa3b16c998811442eed5fec0c31f1f0bc5e53ba34d55b68e81b28a1
   nopImage:
