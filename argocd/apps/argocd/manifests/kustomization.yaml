@@ -1,5 +1,4 @@
 resources:
-  - ./cm.yaml
   - ./vs.yaml
 
 patches:
