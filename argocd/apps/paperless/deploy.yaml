@@ -26,7 +26,7 @@ spec:
             - containerPort: 8000
               protocol: TCP
           env:
-            - name: PAPERLESS_DBPASSWORD
+            - name: PAPERLESS_DBPASS
               valueFrom:
                 secretKeyRef:
                   name: paperless-secrets
