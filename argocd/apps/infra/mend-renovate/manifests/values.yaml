@@ -6,7 +6,7 @@ renovate:
   mendRnvCronJobSchedulerAll: "*/2 * * * *"
   extraEnvVars:
     - name: LOG_LEVEL
-      value: debug
+      value: info
   config: |
     module.exports = {
       "dependencyDashboard": true,
@@ -23,7 +23,6 @@ renovate:
           "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/resolvers.*/"],
           "overrideDatasource": "ghcr.io",
           "overridePackageName": "tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d",
-          "enabled": true
         }
       ]
     }
