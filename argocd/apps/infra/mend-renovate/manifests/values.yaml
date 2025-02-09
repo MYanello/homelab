@@ -6,7 +6,7 @@ renovate:
   mendRnvCronJobSchedulerAll: "*/2 * * * *"
   extraEnvVars:
     - name: LOG_LEVEL
-      value: info
+      value: debug
   config: |
     module.exports = {
       "dependencyDashboard": true,
