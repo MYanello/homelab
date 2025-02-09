@@ -15,8 +15,7 @@ spec:
         app: warrior
     spec:
       containers:
-      - image: atdr.meo.ws/archiveteam/usgovernment-grab:latest
-        args: ['--concurrent', '$(CONCURRENT_ITEMS)', '$(DOWNLOADER)']
+      - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest
         name: warrior
         ports:
             - containerPort: 8001
@@ -30,7 +29,7 @@ spec:
             memory: "256Mi"
         env:
         - name: DOWNLOADER
-          value: arch-dog
+          value: mjy
         - name: SELECTED_PROJECT
           value: usgovernment
         - name: CONCURRENT_ITEMS
