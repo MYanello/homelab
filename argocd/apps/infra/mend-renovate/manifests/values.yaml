@@ -5,7 +5,7 @@ renovate:
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: '*/2 * * * *'
   extraEnvVars:
-    - name: logging_level
+    - name: LOG_LEVEL
       value: debug
   config: |
     module.exports = {
