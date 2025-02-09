@@ -1,9 +1,8 @@
 resources:
   - ./cm.yaml
-
+  - ./vs.yaml
 # generators:
 #   - ./secret-generator.yaml
-
 
 # helmCharts:
 #   - name: mend-renovate-ce
