@@ -84,7 +84,7 @@ spec:
           imagePullPolicy: Always
           name: paperless-db
           ports:
-            - containerPort: 6379
+            - containerPort: 5432
               protocol: TCP
           env:
             - name: POSTGRES_DB
@@ -109,5 +109,46 @@ spec:
         - name: db
           persistentVolumeClaim:
             claimName: db
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: paperless-redis
+  name: paperless-redis
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: paperless-redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: paperless-redis
+    spec:
+      containers:
+        - image: docker.io/library/redis:7
+          imagePullPolicy: Always
+          name: paperless-redis
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: redis
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+      restartPolicy: Always
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
 ---

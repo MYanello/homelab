@@ -21,7 +21,21 @@ metadata:
 spec:
   ports:
     - name: "postgres"
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: paperless-db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: paperless-redis
+  name: paperless-redis
+spec:
+  ports:
+    - name: "redis"
       port: 6379
       targetPort: 6379
   selector:
-    app: paperless-db
+    app: paperless-redis
