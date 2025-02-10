@@ -16,8 +16,6 @@ spec:
       environment: production
   template:
     metadata:
-      annotations:
-        backup.velero.io/backup-volumes: media,static
       labels:
         app: recipes
         tier: frontend
