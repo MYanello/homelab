@@ -4,9 +4,9 @@ renovate:
   mendRnvEndPoint: https://api.github.com/
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: "*/2 * * * *"
-  # extraEnvVars:
-  #   - name: LOG_LEVEL
-  #     value: debug
+  extraEnvVars:
+    - name: LOG_LEVEL
+      value: debug
   config: |
     module.exports = {
       "dependencyDashboard": true,
