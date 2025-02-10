@@ -17,12 +17,20 @@ patches:
     - op: add
       path: /spec/template/spec/hostNetwork
       value: true
-    - op: replace
-      path: /spec/template/spec/volumes/6
-      value:
-        name: media
-        hostPath:
-          path: /zpool/k8s/frigate/media
+- patch: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: frigate
+    spec:
+      template:
+        spec:
+          volumes:
+          - $patch: replace
+            name: media
+            hostPath:
+              path: /zpool/k8s/frigate/media
+              
 helmCharts:
     - name: frigate
       repo: https://blakeblackshear.github.io/blakeshome-charts/
