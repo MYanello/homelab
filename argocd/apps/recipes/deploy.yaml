@@ -27,7 +27,6 @@ spec:
       serviceAccountName: recipes
       initContainers:
         - name: init-chmod-data
-          command: ["sleep", "inf"]
           env:
             - name: DB_ENGINE
               value: django.db.backends.postgresql
@@ -42,21 +41,21 @@ spec:
             requests:
               cpu: 250m
               memory: 64Mi
-          # command:
-          # - sh
-          # - -c
-          # - |
-          #   set -e
-          #   source venv/bin/activate
-          #   echo "Updating database"
-          #   python manage.py migrate
-          #   python manage.py collectstatic_js_reverse
-          #   python manage.py collectstatic --noinput
-          #   echo "Setting media file attributes"
-          #   chown -R 65534:65534 /opt/recipes/mediafiles
-          #   find /opt/recipes/mediafiles -type d | xargs -r chmod 755
-          #   find /opt/recipes/mediafiles -type f | xargs -r chmod 644
-          #   echo "Done"
+          command:
+          - sh
+          - -c
+          - |
+            set -e
+            source venv/bin/activate
+            echo "Updating database"
+            python manage.py migrate
+            python manage.py collectstatic_js_reverse
+            python manage.py collectstatic --noinput
+            echo "Setting media file attributes"
+            chown -R 65534:65534 /opt/recipes/mediafiles
+            find /opt/recipes/mediafiles -type d | xargs -r chmod 755
+            find /opt/recipes/mediafiles -type f | xargs -r chmod 644
+            echo "Done"
           securityContext:
             runAsUser: 0
           volumeMounts:
