@@ -34,7 +34,7 @@ renovate:
       "packageRules": [
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
-          "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/resolvers.*/"],
+          "matchPackageNames": ["/.*pipeline.*resolvers.*/"],
           "groupName": "Tekton"
         },
         {
