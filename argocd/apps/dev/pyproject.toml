@@ -70,7 +70,7 @@ dependencies = [
     "invoke==1.7.0",
     "setproctitle==1.2.2",
     "rescale-python-sdk",
-    "cryptography==42.0.4",
+    "cryptography==43.0.1",
     "mypy==1.7.1",
     "ua-parser==0.15.0",
 ]
