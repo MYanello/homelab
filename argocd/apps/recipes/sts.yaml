@@ -34,27 +34,27 @@ spec:
         env:
         - name: BITNAMI_DEBUG
           value: "false"
-        - name: POSTGRESQL_PORT_NUMBER
+        - name: POSTGRES_PORT_NUMBER
           value: "5432"
-        - name: POSTGRESQL_VOLUME_DIR
+        - name: POSTGRES_VOLUME_DIR
           value: /bitnami/postgresql
         - name: PGDATA
           value: /bitnami/postgresql/data
-        - name: POSTGRESQL_USERNAME
+        - name: POSTGRES_USER
           value: recipes
-        - name: POSTGRESQL_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: recipes
               key: postgresql-password
-        - name: POSTGRESQL_POSTGRES_PASSWORD
+        - name: POSTGRES_POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: recipes
               key: postgresql-postgres-password
-        - name: POSTGRESQL_DATABASE
+        - name: POSTGRES_DB
           value: recipes
-        image: docker.io/bitnami/postgresql:14-debian-12
+        image: docker.io/bitnami/postgresql:16-alpine
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:
