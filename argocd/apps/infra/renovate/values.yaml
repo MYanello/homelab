@@ -11,7 +11,9 @@ renovate:
     module.exports = {
       "extends": [
         "config:best-practices",
-        "mergeConfidence:all-badges"
+        "mergeConfidence:all-badges",
+        "default:automergeDigest",
+        "default:pinDigestsDisabled"
       ],
       "dependencyDashboard": true,
       "major": {
