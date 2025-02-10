@@ -54,7 +54,7 @@ spec:
               key: postgresql-postgres-password
         - name: POSTGRES_DB
           value: recipes
-        image: docker.io/bitnami/postgresql:16-alpine
+        image: postgresql:16-alpine
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:
