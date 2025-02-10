@@ -17,9 +17,13 @@ patches:
     - op: add
       path: /spec/template/spec/hostNetwork
       value: true
-    - op: replace
-      path: /spec/template/spec/volumes/6/hostPath/path
-      value: /zpool/k8s/frigate/media
+    - op: remove
+      path: /spec/template/spec/containers/6
+    - op: add
+      path: /spec/template/spec/volumes/-
+      value: |
+        hostPath:
+          path: /zpool/k8s/frigate/media
 helmCharts:
     - name: frigate
       repo: https://blakeblackshear.github.io/blakeshome-charts/
