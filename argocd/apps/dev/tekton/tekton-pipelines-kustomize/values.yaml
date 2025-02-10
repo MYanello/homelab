@@ -11,7 +11,7 @@ data:
   webhookImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.63.0@sha256:86bb5418a915ff7127e71babe5c182fdab86dd0c3527b66b073d95c17ca87273
   controllerImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.63.0@sha256:4575e34a5aa27d571239136db2f28a757a773d2b8c18b176bef5facbe7081611
+    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.68.0@sha256:b09f78ea0b73e944c1a002fba65fed7853a84bd237fe0cff610b65654e5bb7b9
   eventsImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/tekton-releases/github.com/tektoncd/pipeline/cmd/events:v0.63.0@sha256:69465472f6dc25571bedf0453c5c505dd542a58a8631e580e8cd3517372174f9
   # entryPointImage:
