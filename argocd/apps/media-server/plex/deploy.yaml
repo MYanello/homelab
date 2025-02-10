@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: plex-media-server
-  strategy:
+  strategy: # the new pod will not be scheduable until the old pod is terminated, this allows a more manual update for downtime scheduling. It can be resolved by removing the hostnetworking pieces
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
@@ -50,14 +50,14 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              nvidia.com/gpu: '1'
+              nvidia.com/gpu: "1"
               cpu: 4000m
               memory: 8Gi
             requests:
-              nvidia.com/gpu: '1'
+              nvidia.com/gpu: "1"
           ports:
-            - containerPort: 32400     # < required network portnumber. See https://hub.docker.com/r/linuxserver/plex
-              name: pms-web            # < reference name from the port in the service yaml
+            - containerPort: 32400 # < required network portnumber. See https://hub.docker.com/r/linuxserver/plex
+              name: pms-web # < reference name from the port in the service yaml
               protocol: TCP
             - containerPort: 32469
               name: dlna-tcp
@@ -67,13 +67,13 @@ spec:
               protocol: UDP
             - containerPort: 3005
               name: plex-companion
-              protocol: TCP  
+              protocol: TCP
             - containerPort: 5353
               name: discovery-udp
-              protocol: UDP  
+              protocol: UDP
             - containerPort: 8324
               name: plex-roku
-              protocol: TCP  
+              protocol: TCP
             - containerPort: 32410
               name: gdm-32410
               protocol: UDP
