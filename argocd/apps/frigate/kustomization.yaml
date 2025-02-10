@@ -17,8 +17,7 @@ patches:
     - op: add
       path: /spec/template/spec/hostNetwork
       value: true
-    - op: remove
-      path: /spec/template/spec/volumes/5
+
 - patch: |
     apiVersion: apps/v1
     kind: Deployment
