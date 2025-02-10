@@ -42,7 +42,7 @@ spec:
           value: /bitnami/postgresql/data
         - name: POSTGRES_USER
           value: postgres
-        - name: POSTGRES_PASSWORD
+        - name: POSTGRESQL_PASSWORD
           valueFrom:
             secretKeyRef:
               name: recipes
