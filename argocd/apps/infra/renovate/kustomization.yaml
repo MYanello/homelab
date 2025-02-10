@@ -4,7 +4,6 @@ resources:
 generators:
   - ./secret-generator.yaml
 
-
 helmCharts:
   - name: mend-renovate-ce
     repo: https://mend.github.io/renovate-ce-ee
@@ -22,7 +21,5 @@ patches:
         path: /spec/revisionHistoryLimit
         value: 3
       - op: add
-        path: /spec/template/spec/containers/0/env/-
-        value:
-          name: LOG_LEVEL
-          value: debug
+        path: /spec/template/spec/containers/0/env/LOG_LEVEL
+        value: debug
