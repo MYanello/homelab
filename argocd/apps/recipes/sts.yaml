@@ -115,16 +115,16 @@ spec:
       serviceAccount: recipes
       serviceAccountName: recipes
       terminationGracePeriodSeconds: 30
-  volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: data
-    spec:
-      storageClassName: nfs-storage
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 2Gi
-      volumeMode: Filesystem
+      volumeClaimTemplates:
+        - apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: data
+          spec:
+            storageClassName: nfs-storage
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 2Gi
+            volumeMode: Filesystem
