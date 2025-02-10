@@ -7,3 +7,4 @@ metadata:
 data:
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
   webhook.github.secret: $argocd-custom-secrets.webhook.github.secret
+  test: testing
