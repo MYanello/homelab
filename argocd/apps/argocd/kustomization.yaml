@@ -2,3 +2,6 @@ resources:
   - ./vs.yaml
   - ./lb.yaml
   - ./cm.yaml
+
+generators:
+  - ./secret-generator.yaml
