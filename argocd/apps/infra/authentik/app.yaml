@@ -44,7 +44,7 @@ spec:
               ingressClassName: istio
               enabled: true
               hosts:
-                - authentik.k8s.yanello.net
+                - authentik.yanello.net
             replicas: 3
             resources:
               limits:
