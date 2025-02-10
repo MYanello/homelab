@@ -9,8 +9,10 @@ renovate:
       value: info
   config: |
     module.exports = {
-      "config": "best-practices",
-      "mergeConfidence": "all-badges",
+      "extends": [
+        "config:best-practices",
+        "mergeConfidence:all-badges"
+      ],
       "dependencyDashboard": true,
       "major": {
         "dependencyDashboardApproval": true,
