@@ -32,16 +32,10 @@ spec:
       containers:
         - name: recipes-db
           env:
-            - name: POSTGRES_PORT
-              value: "5432"
             - name: POSTGRES_VOLUME_DIR
               value: /var/lib/postgresql
             - name: PGDATA
               value: /var/lib/postgresql/data
-            - name: POSTGRES_DB
-              value: recipes
-            - name: POSTGRES_USER
-              value: recipes
           envFrom:
             - secretRef:
                 name: recipes
