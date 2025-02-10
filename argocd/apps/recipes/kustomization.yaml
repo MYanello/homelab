@@ -9,3 +9,5 @@ resources:
   - sa.yaml
   - svc.yaml
   - sts.yaml
+  - deploy.yaml
+  - ingress.yaml
