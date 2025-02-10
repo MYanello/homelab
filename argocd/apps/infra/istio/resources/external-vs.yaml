@@ -83,7 +83,9 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - 192.168.1.1
+    - opn.local
+  endpoints:
+    - address: 192.168.1.1
   ports:
     - number: 30341
       name: http
@@ -176,7 +178,9 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - 192.168.1.41
+    - iotawatt.lan
+  endpoints:
+    - address: 192.168.1.41
   ports:
     - number: 80
       name: http
