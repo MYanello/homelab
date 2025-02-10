@@ -4,15 +4,15 @@ metadata:
   name: resume-vs
 spec:
   hosts:
-  - resume.yanello.net
+    - resume.yanello.net
   gateways:
-  - istio-system/kube-gateway
+    - istio-system/kube-gateway
   http:
-  - route:
-    - destination:
-        host: marcus-server.lan
-        port:
-          number: 3000
+    - route:
+        - destination:
+            host: marcus-server.lan
+            port:
+              number: 3000
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -21,31 +21,29 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - marcus-server.lan
+    - marcus-server.lan
   ports:
-  - number: 3000
-    name: http
-    protocol: HTTP
+    - number: 3000
+      name: http
+      protocol: HTTP
   resolution: DNS
   location: MESH_EXTERNAL
-
 ---
-
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: hass-vs
 spec:
   hosts:
-  - homeassistant.k8s.yanello.net
+    - homeassistant.yanello.net
   gateways:
-  - istio-system/kube-gateway
+    - istio-system/kube-gateway
   http:
-  - route:
-    - destination:
-        host: homeassistant.lan
-        port:
-          number: 8123
+    - route:
+        - destination:
+            host: homeassistant.lan
+            port:
+              number: 8123
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -54,10 +52,166 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - homeassistant.lan
+    - homeassistant.lan
   ports:
-  - number: 8123
-    name: http
-    protocol: HTTP
+    - number: 8123
+      name: http
+      protocol: HTTP
   resolution: DNS
   location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ntopng-vs
+spec:
+  hosts:
+    - ntop.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: 192.168.1.18
+            port:
+              number: 30341
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: ntopng-se
+  namespace: istio-system
+spec:
+  hosts:
+    - 192.168.1.1
+  ports:
+    - number: 30341
+      name: http
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: plex-vs
+spec:
+  hosts:
+    - plex.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: marcus-server.lan
+            port:
+              number: 32400
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: plex-se
+  namespace: istio-system
+spec:
+  hosts:
+    - marcus-server.lan
+  ports:
+    - number: 32400
+      name: http
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nextcloud-vs
+spec:
+  hosts:
+    - nextcloud.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: marcus-server.lan
+            port:
+              number: 6987
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: nextcloud-se
+  namespace: istio-system
+spec:
+  hosts:
+    - marcus-server.lan
+  ports:
+    - number: 6987
+      name: http
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: iotawatt-vs
+spec:
+  hosts:
+    - iota.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: 192.168.1.41
+            port:
+              number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: iotawatt-se
+  namespace: istio-system
+spec:
+  hosts:
+    - 192.168.1.41
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: minio-vs
+spec:
+  hosts:
+    - minio.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: marcus-server.lan
+            port:
+              number: 9000
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: minio-se
+  namespace: istio-system
+spec:
+  hosts:
+    - marcus-server.lan
+  ports:
+    - number: 9000
+      name: http
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
