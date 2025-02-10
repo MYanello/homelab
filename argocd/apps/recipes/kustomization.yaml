@@ -8,6 +8,7 @@ resources:
   - cm.yaml
   - sa.yaml
   - svc.yaml
+  - pvc.yaml
   - sts.yaml
   - deploy.yaml
   - ingress.yaml
