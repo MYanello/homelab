@@ -32,7 +32,7 @@ renovate:
         "fileMatch": ["deploy\.yaml$"],
       },
       "gradle": {
-        "fileMatch": ["^build.grade$"],
+        "fileMatch": ["^build.gradle$"],
       },
       "packageRules": [
         {
