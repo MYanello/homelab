@@ -62,7 +62,7 @@ dependencies = [
     "gunicorn",
     "django-redis==5.2.0",
     "redis==4.6.0",
-    "sentry-sdk==1.45.1",
+    "sentry-sdk==2.8.0",
     "paramiko==3.4.0",
     "aws-xray-sdk>=2.11.0,<3",
     "jsonschema==3.2.0",
