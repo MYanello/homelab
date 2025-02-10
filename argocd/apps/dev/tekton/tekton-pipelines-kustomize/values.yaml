@@ -7,7 +7,7 @@ metadata:
     config.kubernetes.io/local-config: "true" # this says that we don't intend to actually deploy this configmap and just want to use it in argocd/kustomize
 data:
   resolverImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/tekton-releases/github.com/tektoncd/pipeline/cmd/resolvers:v0.63.0@sha256:a8f37dfd8467d45a31c57962816673094904dadfd99acda9dd63bbcc2b3845db
+    ghcr.io/tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d:v0.64.0@sha256:9f7991b6de05c81de7181fb4f776226458c1545580a6b72e6c4c1865d94e5807
   webhookImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.63.0@sha256:86bb5418a915ff7127e71babe5c182fdab86dd0c3527b66b073d95c17ca87273
   controllerImage: 
