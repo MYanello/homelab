@@ -2,10 +2,10 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: frigate-vs
+  name: nextcloud-vs
 spec:
   hosts:
-  - nextcloud.k8s.gcyanello.net
+  - nextcloud.k8s.yanello.net
   gateways:
   - istio-system/kube-gateway
   http:
