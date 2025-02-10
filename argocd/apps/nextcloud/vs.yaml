@@ -5,7 +5,7 @@ metadata:
   name: frigate-vs
 spec:
   hosts:
-  - nextcloud.yanello.net
+  - nextcloud.k8s.gcyanello.net
   gateways:
   - istio-system/kube-gateway
   http:
