@@ -30,72 +30,72 @@ spec:
                     values:
                       - amd64
       containers:
-      - name: recipes-db
-        env:
-        - name: BITNAMI_DEBUG
-          value: "false"
-        - name: POSTGRES_PORT_NUMBER
-          value: "5432"
-        - name: POSTGRES_VOLUME_DIR
-          value: /bitnami/postgresql
-        - name: PGDATA
-          value: /bitnami/postgresql/data
-        - name: POSTGRES_USER
-          value: recipes
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: recipes
-              key: postgresql-password
-        - name: POSTGRES_POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: recipes
-              key: postgresql-postgres-password
-        - name: POSTGRES_DB
-          value: recipes
-        image: postgresql:16-alpine
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - exec pg_isready -U "postgres" -d "wiki" -h 127.0.0.1 -p 5432
-          failureThreshold: 6
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 5
-        ports:
-        - containerPort: 5432
-          name: postgresql
-          protocol: TCP
-        # readinessProbe:
-        #   exec:
-        #     command:
-        #     - sh
-        #     - -c
-        #     - -e
-        #     - |
-        #       pg_isready -U "postgres" -d "wiki" -h 127.0.0.1 -p 5432
-        #       [ -f /opt/bitnami/postgresql/tmp/.initialized ]
-        #   failureThreshold: 6
-        #   initialDelaySeconds: 5
-        #   periodSeconds: 10
-        #   successThreshold: 1
-        #   timeoutSeconds: 5
-        resources:
-          requests:
-            cpu: 250m
-            memory: 256Mi
-        securityContext:
-          runAsUser: 1001
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /bitnami/postgresql
-          name: data
+        - name: recipes-db
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: POSTGRES_PORT_NUMBER
+              value: "5432"
+            - name: POSTGRES_VOLUME_DIR
+              value: /var/lib/postgresql
+            - name: PGDATA
+              value: /var/lib/postgresql/data
+            - name: POSTGRES_USER
+              value: recipes
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: recipes
+                  key: postgresql-password
+            - name: POSTGRES_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: recipes
+                  key: postgresql-postgres-password
+            - name: POSTGRES_DB
+              value: recipes
+          image: postgresql:16-alpine
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - exec pg_isready -U "postgres" -d "wiki" -h 127.0.0.1 -p 5432
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 5432
+              name: postgresql
+              protocol: TCP
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #     - sh
+          #     - -c
+          #     - -e
+          #     - |
+          #       pg_isready -U "postgres" -d "wiki" -h 127.0.0.1 -p 5432
+          #       [ -f /opt/bitnami/postgresql/tmp/.initialized ]
+          #   failureThreshold: 6
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
+          #   successThreshold: 1
+          #   timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            runAsUser: 1001
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
       # dnsPolicy: ClusterFirst
       # initContainers:
       # - command:
@@ -132,7 +132,7 @@ spec:
       spec:
         storageClassName: nfs-storage
         accessModes:
-        - ReadWriteOnce
+          - ReadWriteOnce
         resources:
           requests:
             storage: 2Gi
