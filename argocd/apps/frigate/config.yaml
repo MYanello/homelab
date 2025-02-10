@@ -125,7 +125,7 @@ config: |
       mode: all
     detections:
       retain:
-        default: 7
+        days: 7
         mode: active_objects
 
   snapshots:
