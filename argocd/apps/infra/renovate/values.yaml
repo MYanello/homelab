@@ -34,8 +34,7 @@ renovate:
       "packageRules": [
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
-          "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/resolvers.*/"],
-          "overridePackageName": "ghcr.io/tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d",
+          "matchPackageNames": ["/.*pipeline.*resolvers.*/"],
           "groupName": "Tekton"
         },
         {
