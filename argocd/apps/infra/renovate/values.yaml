@@ -4,7 +4,6 @@ renovate:
   mendRnvEndPoint: https://api.github.com/
   mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
-  mendRnvReportingEnabled: "true"
   mendRnvCronJobSchedulerAll: "*/2 * * * *"
   extraEnvVars:
     - name: LOG_LEVEL
