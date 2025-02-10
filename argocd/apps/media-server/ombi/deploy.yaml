@@ -17,6 +17,15 @@ spec:
       labels:
         app: ombi
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: PGID
@@ -59,5 +68,5 @@ spec:
             failureThreshold: 3
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/ombi/config
