@@ -166,7 +166,7 @@ spec:
           - name: POSTGRES_PORT
             value: "5432"
           - name: POSTGRES_USER
-            value: postgres
+            value: recipes
           - name: POSTGRES_DB
             value: recipes
           - name: POSTGRES_PASSWORD
