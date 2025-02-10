@@ -252,3 +252,36 @@ spec:
   resolution: STATIC
   location: MESH_EXTERNAL
 ---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: opn-vs
+spec:
+  hosts:
+    - opn.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: opn.local
+            port:
+              number: 1000
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: opn-se
+  namespace: istio-system
+spec:
+  hosts:
+    - opn.local
+  endpoints:
+    - address: 192.168.1.1
+  ports:
+    - number: 1000
+      name: http
+      protocol: HTTP
+  resolution: STATIC
+  location: MESH_EXTERNAL
+---
