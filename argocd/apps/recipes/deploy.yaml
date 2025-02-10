@@ -26,6 +26,7 @@ spec:
       serviceAccountName: recipes
       initContainers:
       - name: init-chmod-data
+        command: ["sleep", "inf"]
         env:
           - name: SECRET_KEY
             valueFrom:

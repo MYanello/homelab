@@ -32,7 +32,7 @@ spec:
       containers:
         - name: recipes-db
           env:
-            - name: POSTGRES_PORT_NUMBER
+            - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_VOLUME_DIR
               value: /var/lib/postgresql
