@@ -290,4 +290,4 @@ config: |
             - driveway
             - sidewalk
             - front_yard
-  version: 0.14
+  version: '0.14'
