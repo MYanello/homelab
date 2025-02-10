@@ -10,7 +10,7 @@ spec:
   http:
   - route:
     - destination:
-        host: renovate
+        host: mend-renovate-ce
         port:
           number: 8080
 # ---
