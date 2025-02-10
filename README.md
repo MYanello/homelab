@@ -8,7 +8,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ### 02.09.25
 - Started using kustomize to manage the k8s manifests through argocd
 - Added renovate to update helm charts and kustomize bases, this pairs nicely with kustomize setting the image tags
-
+- Patched frigate to use the hostpath path for the frigate media since it will only ever run on the server node so local-path storageclass just made a mess of the path names and nfs is slow for no reason
 ### 02.07.25
 
 - Flipped switch to disable docker and bring server into the cluster. Frigate is happily using time slicing, the tpu, and the gpu
