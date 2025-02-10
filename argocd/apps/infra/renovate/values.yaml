@@ -2,6 +2,7 @@ renovate:
   mendRnvAcceptTos: y
   mendRnvPlatform: github
   mendRnvEndPoint: https://api.github.com/
+  mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: "*/2 * * * *"
   extraEnvVars:
@@ -73,3 +74,6 @@ affinity:
               operator: In
               values:
                 - amd64
+
+service:
+  port: 8080
