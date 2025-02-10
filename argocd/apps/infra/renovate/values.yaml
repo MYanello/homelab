@@ -6,9 +6,11 @@ renovate:
   mendRnvCronJobSchedulerAll: "*/2 * * * *"
   extraEnvVars:
     - name: LOG_LEVEL
-      value: debug
+      value: info
   config: |
     module.exports = {
+      "config": "best-practices"
+      "mergeConfidence": "all-badges"
       "dependencyDashboard": true,
       "major": {
         "dependencyDashboardApproval": true,
@@ -19,10 +21,6 @@ renovate:
         "enabled": true,
         "vulnerabilityFixStrategy": "lowest",
       },
-      "extends": [
-        "config:best-practices",
-        "mergeConfidence:all-badges"
-      ],
       "argocd": {
         "fileMatch": ["argocd/.+\\.yaml$"],
       },
