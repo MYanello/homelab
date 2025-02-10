@@ -5,7 +5,7 @@ ARG BUILD_ENV
 FROM redhat/ubi8-minimal:latest AS base
 
 ENV JAVA_HOME=/opt/java/openjdk
-COPY --from=078704701727.dkr.ecr.us-east-1.amazonaws.com/eclipse-temurin:11.0.19_7-jre-focal $JAVA_HOME $JAVA_HOME
+COPY --from=111111.dkr.ecr.us-east-1.amazonaws.com/eclipse-temurin:11.0.19_7-jre-focal $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 
