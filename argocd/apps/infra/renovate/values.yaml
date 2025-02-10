@@ -31,6 +31,9 @@ renovate:
       "kubernetes": {
         "fileMatch": ["deploy\.yaml$"],
       },
+      "gradle": {
+        "fileMatch": ["^build.gradle$"],
+      },
       "packageRules": [
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
