@@ -71,20 +71,20 @@ spec:
         - containerPort: 5432
           name: postgresql
           protocol: TCP
-        readinessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - -e
-            - |
-              pg_isready -U "postgres" -d "wiki" -h 127.0.0.1 -p 5432
-              [ -f /opt/bitnami/postgresql/tmp/.initialized ]
-          failureThreshold: 6
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 5
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #     - sh
+        #     - -c
+        #     - -e
+        #     - |
+        #       pg_isready -U "postgres" -d "wiki" -h 127.0.0.1 -p 5432
+        #       [ -f /opt/bitnami/postgresql/tmp/.initialized ]
+        #   failureThreshold: 6
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        #   successThreshold: 1
+        #   timeoutSeconds: 5
         resources:
           requests:
             cpu: 250m
@@ -96,31 +96,31 @@ spec:
         volumeMounts:
         - mountPath: /bitnami/postgresql
           name: data
-      dnsPolicy: ClusterFirst
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - |
-          mkdir -p /bitnami/postgresql/data
-          chmod 700 /bitnami/postgresql/data
-          find /bitnami/postgresql -mindepth 0 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" | \
-            xargs chown -R 1001:1001
-        image: docker.io/bitnami/minideb:stretch
-        imagePullPolicy: Always
-        name: init-chmod-data
-        resources:
-          requests:
-            cpu: 250m
-            memory: 256Mi
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-        - mountPath: /bitnami/postgresql
-          name: data
-      restartPolicy: Always
-      securityContext:
-        fsGroup: 1001
+      # dnsPolicy: ClusterFirst
+      # initContainers:
+      # - command:
+      #   - sh
+      #   - -c
+      #   - |
+      #     mkdir -p /bitnami/postgresql/data
+      #     chmod 700 /bitnami/postgresql/data
+      #     find /bitnami/postgresql -mindepth 0 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" | \
+      #       xargs chown -R 1001:1001
+      #   image: docker.io/bitnami/minideb:stretch
+      #   imagePullPolicy: Always
+      #   name: init-chmod-data
+      #   resources:
+      #     requests:
+      #       cpu: 250m
+      #       memory: 256Mi
+      #   securityContext:
+      #     runAsUser: 0
+      #   volumeMounts:
+      #   - mountPath: /bitnami/postgresql
+      #     name: data
+      # restartPolicy: Always
+      # securityContext:
+      #   fsGroup: 1001
       serviceAccount: recipes
       serviceAccountName: recipes
       terminationGracePeriodSeconds: 30
