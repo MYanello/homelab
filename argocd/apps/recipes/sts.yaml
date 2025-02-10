@@ -121,7 +121,7 @@ spec:
     metadata:
       name: data
     spec:
-      storageClassname: nfs-storage
+      storageClassName: nfs-storage
       accessModes:
       - ReadWriteOnce
       resources:
