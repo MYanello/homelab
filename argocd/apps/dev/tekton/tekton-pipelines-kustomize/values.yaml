@@ -9,7 +9,7 @@ data:
   resolverImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/tekton-releases/github.com/tektoncd/pipeline/cmd/resolvers:v0.63.0@sha256:a8f37dfd8467d45a31c57962816673094904dadfd99acda9dd63bbcc2b3845db
   webhookImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.63.0@sha256:86bb5418a915ff7127e71babe5c182fdab86dd0c3527b66b073d95c17ca87273
+    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.68.0@sha256:1bebecfa0b0612c67310b92967916460299549e585e5d06d32ed674eb8126f5d
   controllerImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.63.0@sha256:4575e34a5aa27d571239136db2f28a757a773d2b8c18b176bef5facbe7081611
   eventsImage: 
