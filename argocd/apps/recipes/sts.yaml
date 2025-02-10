@@ -32,8 +32,6 @@ spec:
       containers:
         - name: recipes-db
           env:
-            - name: BITNAMI_DEBUG
-              value: "false"
             - name: POSTGRES_PORT_NUMBER
               value: "5432"
             - name: POSTGRES_VOLUME_DIR
