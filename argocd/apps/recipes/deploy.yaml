@@ -28,11 +28,6 @@ spec:
       - name: init-chmod-data
         command: ["sleep", "inf"]
         env:
-          - name: SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                name: recipes
-                key: secret-key
           - name: DB_ENGINE
             value: django.db.backends.postgresql
           - name: POSTGRES_HOST
@@ -43,11 +38,9 @@ spec:
             value: recipes
           - name: POSTGRES_DB
             value: recipes
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: recipes
-                key: postgresql-postgres-password
+        envFrom:
+          - secretRef:
+              name: recipes
         image: vabene1111/recipes
         imagePullPolicy: Always
         resources:
@@ -153,11 +146,6 @@ spec:
             value: "0"
           - name: ALLOWED_HOSTS
             value: '*'
-          - name: SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                name: recipes
-                key: secret-key
           - name: GUNICORN_MEDIA
             value: "0"
           - name: DB_ENGINE
@@ -170,11 +158,9 @@ spec:
             value: recipes
           - name: POSTGRES_DB
             value: recipes
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: recipes
-                key: postgresql-password
+        envFrom:
+          - secretRef:
+              name: recipes
         securityContext:
           runAsUser: 65534
       volumes:

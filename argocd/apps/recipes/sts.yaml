@@ -42,16 +42,9 @@ spec:
               value: recipes
             - name: POSTGRES_USER
               value: recipes
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: recipes
-                  key: postgresql-password
-            - name: POSTGRES_POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: recipes
-                  key: postgresql-postgres-password
+          envFrom:
+            - secretRef:
+                name: recipes
           image: postgres:16-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
