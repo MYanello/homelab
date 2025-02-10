@@ -23,6 +23,7 @@ spec:
     spec:
       restartPolicy: Always
       serviceAccount: recipes
+      revisionHistoryLimit: 3
       serviceAccountName: recipes
       initContainers:
       - name: init-chmod-data
