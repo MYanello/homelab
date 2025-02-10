@@ -20,6 +20,3 @@ patches:
       - op: replace
         path: /spec/revisionHistoryLimit
         value: 3
-      - op: add
-        path: /spec/template/spec/containers/0/env/LOG_LEVEL
-        value: debug
