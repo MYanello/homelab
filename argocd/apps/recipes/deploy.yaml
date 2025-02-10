@@ -8,6 +8,7 @@ metadata:
     tier: frontend
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   strategy:
     type: Recreate
   selector:
@@ -23,7 +24,6 @@ spec:
     spec:
       restartPolicy: Always
       serviceAccount: recipes
-      revisionHistoryLimit: 3
       serviceAccountName: recipes
       initContainers:
       - name: init-chmod-data
