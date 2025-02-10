@@ -13,7 +13,7 @@ patches:
 - target:
     kind: Deployment
     name: frigate
-  patch: |-
+- patch: |-
     - op: add
       path: /spec/template/spec/hostNetwork
       value: true
