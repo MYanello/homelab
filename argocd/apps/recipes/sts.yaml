@@ -20,6 +20,15 @@ spec:
         tier: database
       name: recipes-postgresql
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       containers:
       - name: recipes-db
         env:
