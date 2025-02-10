@@ -17,7 +17,10 @@ patches:
     - op: add
       path: /spec/template/spec/hostNetwork
       value: true
-- patch: |
+- target:
+    kind: Deployment
+    name: frigate
+  patch: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -27,9 +30,9 @@ patches:
         spec:
           volumes:
           - $patch: replace
-            - name: media
-              hostPath:
-                path: /zpool/k8s/frigate/media
+            name: media
+            hostPath:
+              path: /zpool/k8s/frigate/media
               
 helmCharts:
     - name: frigate
