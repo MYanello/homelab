@@ -5,7 +5,7 @@
 dependencies {
     api 'com.microsoft.azure:azure-storage:8.6.6'
     api "com.google.guava:guava:${project.property('GUAVA_VERSION')}"
-    implementation platform('software.amazon.awssdk:bom:2.20.136')
-    implementation 'software.amazon.awssdk:sts:2.20.136'
-    implementation 'software.amazon.awssdk:cloudwatch:2.20.136'
+    implementation platform('software.amazon.awssdk:bom:2.30.16')
+    implementation 'software.amazon.awssdk:sts:2.30.16'
+    implementation 'software.amazon.awssdk:cloudwatch:2.30.16'
 }
