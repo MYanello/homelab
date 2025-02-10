@@ -21,7 +21,8 @@ patches:
       path: /spec/template/spec/volumes/6
     - op: add
       path: /spec/template/spec/volumes/-
-      value: |
+      value: 
+        name: media
         hostPath:
           path: /zpool/k8s/frigate/media
 helmCharts:
