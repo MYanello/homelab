@@ -173,7 +173,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: recipes
-                key: postgresql-postgres-password
+                key: postgresql-password
         securityContext:
           runAsUser: 65534
       volumes:
