@@ -69,7 +69,6 @@ dependencies = [
     "py-spy>=0.3.14,<0.4",
     "invoke==1.7.0",
     "setproctitle==1.2.2",
-    "rescale-python-sdk",
     "cryptography==42.0.4",
     "mypy==1.7.1",
     "ua-parser==0.15.0",
