@@ -40,7 +40,7 @@ spec:
           value: /bitnami/postgresql
         - name: PGDATA
           value: /bitnami/postgresql/data
-        - name: POSTGRES_USER
+        - name: POSTGRESQL_USERNAME
           value: recipes
         - name: POSTGRESQL_PASSWORD
           valueFrom:
@@ -52,7 +52,7 @@ spec:
             secretKeyRef:
               name: recipes
               key: postgresql-postgres-password
-        - name: POSTGRES_DB
+        - name: POSTGRESQL_DATABASE
           value: recipes
         image: docker.io/bitnami/postgresql:14-debian-12
         imagePullPolicy: IfNotPresent
