@@ -36,13 +36,13 @@ spec:
             value: django.db.backends.postgresql
           - name: POSTGRES_HOST
             value: recipes-postgresql
-          - name: POSTGRES_PORT
+          - name: POSTGRESQL_PORT
             value: "5432"
-          - name: POSTGRES_USER
+          - name: POSTGRESQL_USER
             value: postgres
-          - name: POSTGRES_DB
+          - name: POSTGRESQL_DB
             value: recipes
-          - name: POSTGRES_PASSWORD
+          - name: POSTGRESQL_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: recipes
@@ -165,11 +165,11 @@ spec:
             value: recipes-postgresql
           - name: POSTGRES_PORT
             value: "5432"
-          - name: POSTGRES_USER
+          - name: POSTGRESQL_USER
             value: recipes
-          - name: POSTGRES_DB
+          - name: POSTGRESQL_DB
             value: recipes
-          - name: POSTGRES_PASSWORD
+          - name: POSTGRESQL_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: recipes
