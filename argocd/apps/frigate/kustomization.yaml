@@ -28,6 +28,7 @@ patches:
         spec:
           volumes:
           - name: media
+            persistentVolumeClaim: null
             hostPath:
               path: /zpool/k8s/frigate/media
   target:
