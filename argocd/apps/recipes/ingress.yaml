@@ -1,34 +1,67 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   annotations:
+#   name: recipes
+# spec:
+#   ingressClassName: istio
+#   rules:
+#   - host: recipes.yanello.net
+#     http:
+#       paths:
+#       - backend:
+#           service:
+#             name: recipes
+#             port:
+#               number: 8080
+#         path: /
+#         pathType: Prefix
+#       - backend:
+#           service:
+#             name: recipes
+#             port:
+#               number: 80
+#         path: /media
+#         pathType: Prefix
+#       - backend:
+#           service:
+#             name: recipes
+#             port:
+#               number: 80
+#         path: /static
+#         pathType: Prefix
+# ---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
 metadata:
-  annotations:
-    #cert-manager.io/cluster-issuer: letsencrypt-prod
-    #kubernetes.io/ingress.class: nginx
   name: recipes
 spec:
-  ingressClassName: istio
-  rules:
-  - host: recipes.yanello.net
-    http:
-      paths:
-      - backend:
-          service:
-            name: recipes
-            port:
-              number: 8080
-        path: /
-        pathType: Prefix
-      - backend:
-          service:
-            name: recipes
-            port:
-              number: 80
-        path: /media
-        pathType: Prefix
-      - backend:
-          service:
-            name: recipes
-            port:
-              number: 80
-        path: /static
-        pathType: Prefix
+  hosts:
+  - "recipes.yanello.net"
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/media"
+    route:
+    - destination:
+        host: recipes
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: "/static"
+    route:
+    - destination:
+        host: recipes
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: recipes
+        port:
+          number: 8080
