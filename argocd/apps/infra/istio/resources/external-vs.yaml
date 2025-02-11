@@ -318,3 +318,36 @@ spec:
   resolution: STATIC
   location: MESH_EXTERNAL
 ---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ubiquiti-vs
+spec:
+  hosts:
+    - ui.yanello.net
+  gateways:
+    - istio-system/kube-gateway
+  http:
+    - route:
+        - destination:
+            host: ubiquiti.local
+            port:
+              number: 8443
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: ubiquiti-se
+  namespace: istio-system
+spec:
+  hosts:
+    - ubiquiti.local
+  endpoints:
+    - address: 192.168.1.4
+  ports:
+    - number: 8080
+      name: http
+      protocol: HTTP
+  resolution: STATIC
+  location: MESH_EXTERNAL
+---
