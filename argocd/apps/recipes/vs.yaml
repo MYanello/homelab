@@ -19,7 +19,7 @@ spec:
       headers:
         request:
           set:
-            Host: "$request_host" 
+            Host: "recipes.yanello.net" 
   - match:
     - uri:
         prefix: "/static"
@@ -31,7 +31,7 @@ spec:
       headers:
         request:
           set:
-            Host: "$request_host" 
+            Host: "recipes.yanello.net" 
   - match:
     - uri:
         prefix: "/"
@@ -43,4 +43,4 @@ spec:
       headers:
         request:
           set:
-            Host: "$request_host" 
+            Host: "recipes.yanello.net" 
