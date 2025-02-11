@@ -109,19 +109,19 @@ spec:
             - --log-level
             - INFO
             - recipes.wsgi
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /
-              port: 8080
-              scheme: HTTP
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
-              scheme: HTTP
-            periodSeconds: 30
+          # livenessProbe:
+          #   failureThreshold: 3
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #     scheme: HTTP
+          #   periodSeconds: 30
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #     scheme: HTTP
+          #   periodSeconds: 30
           resources:
             requests:
               cpu: 250m
