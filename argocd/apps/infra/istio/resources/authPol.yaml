@@ -39,8 +39,3 @@ spec:
         - operation:
             hosts:
               - pikvm.yanello.net
-            ports:
-              - "80"
-              - "443"
-            methods:
-              ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
