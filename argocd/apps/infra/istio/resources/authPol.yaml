@@ -28,13 +28,13 @@ spec:
       istio: ingressgateway
   action: DENY
   rules:
-    # - from:
-    #   - source:
-    #       notIpBlocks:
-    #       - "10.0.0.0/8"
-    #       - "172.16.0.0/12"
-    #       - "192.168.0.0/16"
-    #       - "127.0.0.1/32"
+    - from:
+      - source:
+          notIpBlocks:
+          - "10.0.0.0/8"
+          - "172.16.0.0/12"
+          - "192.168.0.0/16"
+          - "127.0.0.1/32"
     - to:
         - operation:
             hosts:
