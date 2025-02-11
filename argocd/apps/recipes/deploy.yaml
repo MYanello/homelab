@@ -33,7 +33,7 @@ spec:
             - name: POSTGRES_HOST
               value: recipes-postgresql
             - name: CSRF_TRUSTED_ORIGINS
-              value: "recipes.yanello.net"
+              value: "https://recipes.yanello.net"
           envFrom:
             - secretRef:
                 name: recipes
@@ -149,7 +149,7 @@ spec:
             - name: POSTGRES_HOST
               value: recipes-postgresql
             - name: CSRF_TRUSTED_ORIGINS
-              value: "recipes.yanello.net"
+              value: "https://recipes.yanello.net"
           envFrom:
             - secretRef:
                 name: recipes
