@@ -72,7 +72,7 @@ spec:
   http:
     - route:
         - destination:
-            host: opn.local
+            host: ntopng.local
             port:
               number: 30341
 ---
@@ -83,7 +83,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - opn.local
+    - ntopng.local
   endpoints:
     - address: 192.168.1.1
   ports:
@@ -231,7 +231,7 @@ spec:
   http:
     - route:
         - destination:
-            host: opn.local
+            host: agh.local
             port:
               number: 3000
 ---
@@ -242,7 +242,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - opn.local
+    - agh.local
   endpoints:
     - address: 192.168.3.1
   ports:
