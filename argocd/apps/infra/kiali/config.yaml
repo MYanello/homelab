@@ -1,0 +1,6 @@
+cr:
+  create: true
+  namespace: kiali
+  spec:
+    auth:
+      strategy: anonymous
