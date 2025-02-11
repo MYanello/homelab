@@ -11,4 +11,4 @@ resources:
   - pvc.yaml
   - sts.yaml
   - deploy.yaml
-  - ingress.yaml
+  - vs.yaml
