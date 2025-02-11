@@ -19,7 +19,7 @@ spec:
       headers:
               request:
                 set:
-                  Host: "$request_host"  # or use specific value like "recipes.yanello.net"
+                  Host: "$request_host" 
   - match:
     - uri:
         prefix: "/static"
@@ -31,7 +31,7 @@ spec:
       headers:
               request:
                 set:
-                  Host: "$request_host"  # or use specific value like "recipes.yanello.net"
+                  Host: "$request_host" 
   - match:
     - uri:
         prefix: "/"
@@ -43,4 +43,4 @@ spec:
       headers:
               request:
                 set:
-                  Host: "$request_host"  # or use specific value like "recipes.yanello.net"
+                  Host: "$request_host" 
