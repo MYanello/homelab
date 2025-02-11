@@ -5,7 +5,12 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 
+### 02.10.25
+
+- Setting up authpols for istio so that I can soon replace haproxy with istio as my edge load balancer to simplify things and no longer use the haproxy ui in opnsense
+
 ### 02.09.25
+
 - Started using kustomize to manage the k8s manifests through argocd
 - Added renovate to update helm charts and kustomize bases, this pairs nicely with kustomize setting the image tags
 - Patched frigate to use the hostpath path for the frigate media since it will only ever run on the server node so local-path storageclass just made a mess of the path names and nfs is slow for no reason
