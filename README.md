@@ -8,6 +8,8 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ### 02.10.25
 
 - Setting up authpols for istio so that I can soon replace haproxy with istio as my edge load balancer to simplify things and no longer use the haproxy ui in opnsense
+  - Tested and confirmed the access control is working using an external network
+  - Next step is getting the weirder services like nextcloud and rxresume working with istio
 
 ### 02.09.25
 
