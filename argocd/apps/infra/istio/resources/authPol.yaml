@@ -6,19 +6,21 @@ metadata:
 spec:
   action: ALLOW
   rules:
-  - from:
-    - source:
-        ipBlocks:
-        - "10.0.0.0/8"    
-        - "172.16.0.0/12" 
-        - "192.168.0.0/16" 
+    # Rule 1: Allow all traffic from internal network (LAN)
     - from:
         - source:
-            notRemoteIpBlocks:
+            ipBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
-              - "127.0.0.1/32"
+
+    # Rule 2: Allow WAN traffic only to specific subdomains
+    - from:
+        - source:
+            notIpBlocks:
+              - "10.0.0.0/8"
+              - "172.16.0.0/12"
+              - "192.168.0.0/16"
       to:
         - operation:
             hosts:
