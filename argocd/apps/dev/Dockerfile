@@ -1,8 +1,8 @@
-# syntax=docker/dockerfile:1.0.0-experimental
+# syntax=docker/dockerfile:1.0.0-experimental@sha256:d2d402b6fa1dae752f8c688d72066a912d7042cc1727213f7990cdb57f60df0c
 
 ARG BUILD_ENV
 
-FROM redhat/ubi8-minimal:latest AS base
+FROM redhat/ubi8-minimal:latest@sha256:d16d4445b1567f29449fba3b6d2bc37db467dc3067d33e940477e55aecdf6e8e AS base
 
 ENV JAVA_HOME=/opt/java/openjdk
 COPY --from=111111.dkr.ecr.us-east-1.amazonaws.com/eclipse-temurin:11.0.19_7-jre-focal $JAVA_HOME $JAVA_HOME
