@@ -1,0 +1,41 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-lan-specific-subdomains
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            ipBlocks:
+              - "192.168.0.0/16"
+              - "10.0.0.0/8"
+              - "172.16.0.0/12"
+              - "127.0.0.1/32"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-external
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  action: DENY
+  rules:
+    # - from:
+    #   - source:
+    #       notIpBlocks:
+    #       - "10.0.0.0/8"
+    #       - "172.16.0.0/12"
+    #       - "192.168.0.0/16"
+    #       - "127.0.0.1/32"
+    - to:
+        - operation:
+            hosts:
+              - pikvm.yanello.net
