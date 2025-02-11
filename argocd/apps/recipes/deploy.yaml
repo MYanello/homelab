@@ -32,6 +32,8 @@ spec:
               value: django.db.backends.postgresql
             - name: POSTGRES_HOST
               value: recipes-postgresql
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "recipes.yanello.net"
           envFrom:
             - secretRef:
                 name: recipes
@@ -146,6 +148,8 @@ spec:
               value: django.db.backends.postgresql
             - name: POSTGRES_HOST
               value: recipes-postgresql
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "recipes.yanello.net"
           envFrom:
             - secretRef:
                 name: recipes
