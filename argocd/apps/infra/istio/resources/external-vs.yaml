@@ -345,9 +345,9 @@ spec:
   endpoints:
     - address: 192.168.1.4
   ports:
-    - number: 8443
-      name: https
-      protocol: HTTPS
+    - number: 8080
+      name: http
+      protocol: HTTP
   resolution: STATIC
   location: MESH_EXTERNAL
 ---
