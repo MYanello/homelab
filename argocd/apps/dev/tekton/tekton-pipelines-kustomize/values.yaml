@@ -9,7 +9,7 @@ data:
   resolverImage: 
     ghcr.io/tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d:v0.64.0
   webhookImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.64.0
+    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.64.0@sha256:23a4adb844abee70b6ecd0d29b8dbe54b0d45c8673d154d4ad98bb42927cdc8b
   controllerImage: 
     1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.64.0
   eventsImage: 
