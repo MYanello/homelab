@@ -8,6 +8,10 @@ spec:
   gateways:
   - istio-system/kube-gateway
   http:
+  - headers:
+    request:
+      set:
+        Host: "$request_host"
   - match:
     - uri:
         prefix: "/media"
@@ -16,10 +20,6 @@ spec:
         host: recipes
         port:
           number: 80
-      headers:
-              request:
-                set:
-                  Host: "$request_host"  # or use specific value like "recipes.yanello.net"
   - match:
     - uri:
         prefix: "/static"
@@ -28,10 +28,6 @@ spec:
         host: recipes
         port:
           number: 80
-      headers:
-              request:
-                set:
-                  Host: "$request_host"  # or use specific value like "recipes.yanello.net"
   - match:
     - uri:
         prefix: "/"
@@ -40,7 +36,3 @@ spec:
         host: recipes
         port:
           number: 8080
-      headers:
-              request:
-                set:
-                  Host: "$request_host"  # or use specific value like "recipes.yanello.net"
