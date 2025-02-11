@@ -1,6 +1,6 @@
 cr:
   create: true
-  namespace: istio-system
+  namespace: kiali
   spec:
     auth:
       strategy: anonymous
