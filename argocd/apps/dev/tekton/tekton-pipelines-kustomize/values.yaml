@@ -9,11 +9,11 @@ data:
   resolverImage: 
     ghcr.io/tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d:v0.64.0
   webhookImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.64.0
+    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/webhook:v0.64.0@sha256:8475323b54178084997c4e64842888b87efe2a31f765f87390f161f8c93d86e0
   controllerImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.64.0
+    1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/controller:v0.64.0@sha256:8e1791ab46c47f578ca5906f1c0af24f78cb191bad496a59e72c643a1ae2f29a
   eventsImage: 
-    1111111.dkr.ecr.us-east-1.amazonaws.com/tekton-releases/github.com/tektoncd/pipeline/cmd/events:v0.64.0
+    1111111.dkr.ecr.us-east-1.amazonaws.com/tekton-releases/github.com/tektoncd/pipeline/cmd/events:v0.64.0@sha256:7af9b9524e52f60dcdeb340eca246dd89130706ff81d90c493a3427c9a6982dc
   # entryPointImage:
   #   1111111.dkr.ecr.us-east-1.amazonaws.com/ironbank/tektoncd/pipeline/cmd/entrypoint:v0.63.0@sha256:d2eca7694aa3b16c998811442eed5fec0c31f1f0bc5e53ba34d55b68e81b28a1
   # nopImage:
