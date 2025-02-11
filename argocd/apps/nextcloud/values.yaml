@@ -83,11 +83,11 @@ persistence:
   storageClass: local-path
   size: 100Gi
 livenessProbe:
-  enabled: true
+  enabled: false
 startupProbe:
-  enabled: true
+  enabled: false
 readinessProbe:
-  enabled: true
+  enabled: false
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
