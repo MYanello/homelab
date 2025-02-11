@@ -42,3 +42,4 @@ metadata:
   namespace: istio-system
 spec:
   action: DENY
+  rule: {}
