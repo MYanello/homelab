@@ -5,7 +5,7 @@ metadata:
     app: wallos
   name: wallos
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: wallos
