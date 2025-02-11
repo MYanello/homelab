@@ -1,33 +1,17 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-lan
+  name: allow-domain-access-policy
   namespace: istio-system
 spec:
-  selector:
-    matchLabels:
-      istio: ingressgateway
   action: ALLOW
   rules:
-    - from:
-        - source:
-            remoteIpBlocks:
-              - "192.168.0.0/16"
-              - "10.0.0.0/8"
-              - "172.16.0.0/12"
-              - "127.0.0.1/32"
----
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: allow-external-domains
-  namespace: istio-system
-spec:
-  selector:
-    matchLabels:
-      istio: ingressgateway
-  action: ALLOW
-  rules:
+  - from:
+    - source:
+        ipBlocks:
+        - "10.0.0.0/8"    
+        - "172.16.0.0/12" 
+        - "192.168.0.0/16" 
     - from:
         - source:
             notRemoteIpBlocks:
@@ -48,16 +32,3 @@ spec:
               - overseerr.yanello.net
               - immich.yanello.net
               - bitwarden.yanello.net
----
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: deny-external
-  namespace: istio-system
-spec:
-  selector:
-    matchLabels:
-      istio: ingressgateway
-  action: DENY
-  rules:
-    - {}
