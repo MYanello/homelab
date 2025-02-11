@@ -102,34 +102,4 @@ spec:
     targetRevision: HEAD
     path: argocd/apps/infra/istio/resources
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: istio-kiali
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    name: in-cluster
-    namespace: istio-system
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    repoURL: https://kiali.org/helm-charts
-    targetRevision: "2.5.0"
-    chart: kiali-operator
-    helm:
-      valuesObject:
-        cr:
-          create: true
-          namespace: istio-system
-          spec:
-            auth:
-              strategy: anonymous
----
+
