@@ -18,5 +18,5 @@ spec:
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
           use_remote_address: true
-          xff_num_trusted_hops: 1
+          xff_num_trusted_hops: 2
           skip_xff_append: true
