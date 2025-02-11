@@ -39,25 +39,29 @@ renovate:
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
           "matchPackageNames": ["/.*pipeline.*resolvers.*/"],
-          "groupName": "Tekton"
+          "groupName": "Tekton",
+          "registryUrls": ["ghcr.io"]
         },
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
           "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/webhook.*/"],
           "overridePackageName": "ghcr.io/tektoncd/pipeline/webhook-d4749e605405422fd87700164e31b2d1",
-          "groupName": "Tekton"
+          "groupName": "Tekton",
+          "registryUrls": ["ghcr.io"]
         },
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
           "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/controller.*/"],
           "overridePackageName": "ghcr.io/tektoncd/pipeline/controller-10a3e32792f33651396d02b6855a6e36",
-          "groupName": "Tekton"
+          "groupName": "Tekton",
+          "registryUrls": ["ghcr.io"]
         },
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
           "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/events.*/"],
           "overridePackageName": "ghcr.io/tektoncd/pipeline/events-a9042f7efb0cbade2a868a1ee5ddd52c",
-          "groupName": "Tekton"
+          "groupName": "Tekton",
+          "registryUrls": ["ghcr.io"]
         }
       ]
     }
