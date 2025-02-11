@@ -32,6 +32,8 @@ spec:
               value: django.db.backends.postgresql
             - name: POSTGRES_HOST
               value: recipes-postgresql
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "https://recipes.yanello.net"
           envFrom:
             - secretRef:
                 name: recipes
@@ -109,19 +111,19 @@ spec:
             - --log-level
             - INFO
             - recipes.wsgi
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /
-              port: 8080
-              scheme: HTTP
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
-              scheme: HTTP
-            periodSeconds: 30
+          # livenessProbe:
+          #   failureThreshold: 3
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #     scheme: HTTP
+          #   periodSeconds: 30
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #     scheme: HTTP
+          #   periodSeconds: 30
           resources:
             requests:
               cpu: 250m
@@ -146,6 +148,8 @@ spec:
               value: django.db.backends.postgresql
             - name: POSTGRES_HOST
               value: recipes-postgresql
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "https://recipes.yanello.net"
           envFrom:
             - secretRef:
                 name: recipes
