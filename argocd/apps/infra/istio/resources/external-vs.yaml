@@ -258,7 +258,7 @@ metadata:
   name: opn-vs
 spec:
   hosts:
-    - opn.yanello.net
+    - opnsense.yanello.net
   gateways:
     - istio-system/kube-gateway
   http:
@@ -288,7 +288,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: opn-vs
+  name: pikvm-vs
 spec:
   hosts:
     - pikvm.yanello.net
@@ -304,7 +304,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
-  name: opn-se
+  name: pikvm-se
   namespace: istio-system
 spec:
   hosts:
