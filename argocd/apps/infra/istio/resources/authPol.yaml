@@ -9,14 +9,14 @@ spec:
     # Allow all traffic from internal network (LAN)
     - from:
         - source:
-            ipBlocks:
+            remoteIpBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
     # Allow WAN traffic only to specific subdomains
     - from:
         - source:
-            notIpBlocks:
+            notRemoteIpBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
@@ -33,12 +33,12 @@ spec:
               - overseerr.yanello.net
               - immich.yanello.net
               - bitwarden.yanello.net
----
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: allow-nothing
-spec:
-  action: DENY
-  rules: 
-    - {}
+# ---
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: allow-nothing
+# spec:
+#   action: DENY
+#   rules: 
+#     - {}
