@@ -39,4 +39,5 @@ kind: AuthorizationPolicy
 metadata:
   name: allow-nothing
 spec:
-  {}
+  action: DENY
+  rules: {}
