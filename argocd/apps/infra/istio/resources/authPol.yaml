@@ -30,12 +30,12 @@ spec:
   rules:
     - from:
         - source:
-          notIpBlocks:
-            - "10.0.0.0/8"
-            - "172.16.0.0/12"
-            - "192.168.0.0/16"
-            - "127.0.0.1/32"
+            notIpBlocks:
+              - "10.0.0.0/8"
+              - "172.16.0.0/12"
+              - "192.168.0.0/16"
+              - "127.0.0.1/32"
       to:
         - operation:
-          hosts:
-            - pikvm.yanello.net
+            hosts:
+              - "pikvm.yanello.net"
