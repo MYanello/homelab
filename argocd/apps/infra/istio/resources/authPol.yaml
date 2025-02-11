@@ -11,7 +11,7 @@ spec:
   rules:
     - from:
         - source:
-            ipBlocks:
+            remoteIpBlocks:
               - "192.168.0.0/16"
               - "10.0.0.0/8"
               - "172.16.0.0/12"
@@ -29,13 +29,41 @@ spec:
   action: DENY
   rules:
     - from:
-      - source:
+        - source:
+            notRemoteIpBlocks:
+              - "10.0.0.0/8"
+              - "172.16.0.0/12"
+              - "192.168.0.0/16"
+              - "127.0.0.1/32"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-external-domains
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  action: ALLOW
+  rules:
+    - from:
+        - source:
           notRemoteIpBlocks:
             - "10.0.0.0/8"
             - "172.16.0.0/12"
             - "192.168.0.0/16"
             - "127.0.0.1/32"
       to:
-      - operation:
-          hosts:
-            - "pikvm.yanello.net"
+        - operation:
+            hosts:
+              - plex.yanello.net
+              - argocd.yanello.net
+              - renovate.yanello.net
+              - ombi.yanello.net
+              - ytdl.yanello.net
+              - nextcloud.yanello.net
+              - homeassistant.yanello.net
+              - overseerr.yanello.net
+              - immich.yanello.net
+              - bitwarden.yanello.net
