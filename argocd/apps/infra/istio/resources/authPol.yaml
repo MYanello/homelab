@@ -6,15 +6,14 @@ metadata:
 spec:
   action: ALLOW
   rules:
-    # Rule 1: Allow all traffic from internal network (LAN)
+    # Allow all traffic from internal network (LAN)
     - from:
         - source:
             ipBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
-
-    # Rule 2: Allow WAN traffic only to specific subdomains
+    # Allow WAN traffic only to specific subdomains
     - from:
         - source:
             notIpBlocks:
@@ -35,3 +34,10 @@ spec:
               - immich.yanello.net
               - bitwarden.yanello.net
 ---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-nothing
+  namespace: default
+spec:
+  {}
