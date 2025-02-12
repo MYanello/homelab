@@ -1,0 +1,34 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  labels:
+    app: nextcloud
+  name: nextcloud-redis-ini
+data:
+  redis-sesion.ini: |-
+    session.save_handler = redis
+    session.save_path = "tcp://nextcloud_redis:6379"
+    redis.session.locking_enabled = 1
+    redis.session.lock_retries = -1
+    redis.session.lock_wait_time = 10000
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  labels:
+    app: nextcloud
+  name: nextcloud-remote-ip
+data:
+  remoteip.conf: |-
+    RemoteIPHeader X-Forwarded-For
+    # RFC1918
+    RemoteIPInternalProxy 10.0.0.0/8
+    RemoteIPInternalProxy 172.16.0.0/12
+    RemoteIPInternalProxy 192.168.0.0/16
+    # unique local addresses
+    # fc00::/7 is divided into 2 different /8 networks  fc00::/8 and fd00::/8
+    RemoteIPInternalProxy fc00::/7
+    # Link-local addresses have a prefix of FE80::/10
+    RemoteIPInternalProxy fe80::/10
+    # reserved for documentation, widely used in tutorials.
+    RemoteIPInternalProxy 2001:db8::/32

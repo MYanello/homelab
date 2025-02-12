@@ -1,12 +1,37 @@
-replicaCount: 1
+replicaCount: 0
 ingress:
   enabled: false
   className: istio
   
 nextcloud:
-  host: nextcloud.yanello.net
+  host: nextcloud.k8s.yanello.net
   trustedDomains:
-    - nextcloud.yanello.net
+    - nextcloud.k8s.yanello.net
+  extraEnv:
+    - name: TRUSTED_PROXIES
+      value: 10.10.8.0
+    - name: OVERWRITEPROTOCOL
+      value: https
+    - name: OVERWRITEHOST
+      value: nextcloud.k8s.yanello
+    - name: OVERWRITECLIURL
+      value: https://nextcloud.k8s.yanello.net
+    - name: APACHE_DISABLE_REWRITE_IP
+      value: '1'
+  extraVolumes:
+    - name: redis-ini
+      configMap:
+        name: nextcloud-redis-ini
+    - name: remote-ip
+      configMap:
+        name: nextcloud-remote-ip
+  extraVolumeMounts:
+    - name: redis-ini
+      mountPath: /usr/local/etc/php/conf.d/redis.ini
+      subPath: redis-sesion.ini
+    - name: remote-ip
+      mountPath: /etc/apache2/conf-enabled/remote-ip.conf
+      subPath: remoteip.conf
 cronjob:
   enabled: true
 redis:
