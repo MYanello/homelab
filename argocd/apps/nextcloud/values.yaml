@@ -85,7 +85,7 @@ persistence:
 livenessProbe:
   enabled: false
 startupProbe:
-  enabled: true
+  enabled: false
 readinessProbe:
   enabled: false
 affinity:
