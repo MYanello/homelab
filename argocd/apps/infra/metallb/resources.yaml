@@ -4,7 +4,6 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: address-pool
-  namespace: metallb-system
 spec:
   addresses:
   - 10.10.8.0/22
@@ -13,7 +12,6 @@ apiVersion: metallb.io/v1beta1
 kind: BGPPeer
 metadata:
   name: opnsense
-  namespace: metallb-system
 spec:
   myASN: 64512
   peerASN: 65551
@@ -24,14 +22,12 @@ apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
 metadata:
   name: bgp-advertisement
-  namespace: metallb-system
 # No ipaddresspool selector means it advertises all pools
 ---
 apiVersion: metallb.io/v1beta1
 kind: BFDProfile
 metadata:
   name: bfd-profile
-  namespace: metallb-system
 spec:
   receiveInterval: 380
   transmitInterval: 270
