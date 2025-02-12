@@ -30,8 +30,6 @@ spec:
         env:
         - name: DOWNLOADER
           value: mjy
-        - name: SELECTED_PROJECT
-          value: usgovernment
         - name: CONCURRENT_ITEMS
           value: "5"
         - name: SHARED_RSYNC_THREADS
