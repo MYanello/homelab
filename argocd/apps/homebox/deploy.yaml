@@ -27,7 +27,7 @@ spec:
             - name: HBOX_ALLOW_REGISTRATION
               value: 'false'
           image: ghcr.io/hay-kot/homebox:latest@sha256:b1fbca6fc1ad2bd3634d13056d1bc0242cf92e9bad4ca21ce57589be3fe4987e
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: homebox
           resources:
             limits:

@@ -140,7 +140,7 @@ spec:
         ports:
         - name: s3
           containerPort: 9000
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /data
           name: assets-storage

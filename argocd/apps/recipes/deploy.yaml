@@ -38,7 +38,7 @@ spec:
             - secretRef:
                 name: recipes
           image: vabene1111/recipes
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 250m

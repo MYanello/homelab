@@ -27,7 +27,7 @@ spec:
                       - marcus-server
       containers:
         - image: garethgeorge/backrest:latest@sha256:a50c74e3dfa70ea9057856189cc93fdbc45ec3da2713dd451cf690044667bb38
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: backrest
           env:
             - name: BACKREST_DATA

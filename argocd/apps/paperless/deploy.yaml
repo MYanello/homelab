@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - image: ghcr.io/paperless-ngx/paperless-ngx:latest@sha256:2a6d9f6461ad7e8335f5b2123a173b9e6002fda209af8a66483b0c00629569ab
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: paperless
           ports:
             - containerPort: 8000
@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
         - image: docker.io/library/mariadb:11@sha256:bfb1298c06cd15f446f1c59600b3a856dae861705d1a2bd2a00edbd6c74ba748
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: paperless-db
           ports:
             - containerPort: 3306
@@ -139,7 +139,7 @@ spec:
     spec:
       containers:
         - image: docker.io/library/redis:7@sha256:93a8d83b707d0d6a1b9186edecca2e37f83722ae0e398aee4eea0ff17c2fad0e
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: paperless-redis
           ports:
             - containerPort: 6379

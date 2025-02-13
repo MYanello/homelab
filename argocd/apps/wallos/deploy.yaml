@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - image: bellamy/wallos:latest@sha256:fc19d4aaf68d1ea2cc7e7ba5cbfd2fe6fafb5b47968814b9f609242334c4e97b
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: wallos
           env:
             - name: TZ

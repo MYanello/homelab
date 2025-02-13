@@ -27,7 +27,7 @@ spec:
                       - marcus-server
       containers:
         - image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:c48b0b83d4af7c7e60aef37adcd381c8a8ecb3ec613b19ddcfca880f95a7d004
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: change-detection
           env:
             - name: PLAYWRIGHT_DRIVER_URL

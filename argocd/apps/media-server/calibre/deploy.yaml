@@ -27,7 +27,7 @@ spec:
             - name: CLOUDFLARE_PROXY_URL
               value: http://cloudflareproxy:8000
           image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest@sha256:29757639bff2263a0de383e6b4855b09457e6c5944f41e934247bbb9bec5c8b7
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: calibre-dl
           resources:
             limits:
@@ -95,7 +95,7 @@ spec:
             - name: DOCKER_MODS
               value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
           image: crocodilestick/calibre-web-automated:latest@sha256:e602e73b6fd50c3ba389b38acb701205976a05b650898f615f93bd7e3537a827
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: calibre
           resources:
             limits:
@@ -164,7 +164,7 @@ spec:
         beta.kubernetes.io/arch: amd64
       containers:
         - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest@sha256:e937223b9321168efec4ce4b60958d399b6dde37791ea6dc67d05b057c0f167e
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               cpu: 50m

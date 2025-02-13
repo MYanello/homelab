@@ -52,7 +52,7 @@ spec:
               protocol: TCP
             - containerPort: 3000
               protocol: TCP
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               nvidia.com/gpu: '1'
@@ -103,7 +103,7 @@ spec:
             - secretRef:
                 name: immich-secrets
           image: ghcr.io/immich-app/immich-machine-learning:release-cuda@sha256:a1d7eb9bc5acd73e1de674e6655b934f9c89116eb76af41c41b65053ddcf4bff
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload

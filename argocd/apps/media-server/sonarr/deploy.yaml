@@ -40,7 +40,7 @@ spec:
             - name: TZ
               value: America/Chicago
           image: linuxserver/sonarr:latest@sha256:28d9dcbc846aed74bd47dc90305e016183443ddc3dfa3e8bcac268fc653a6e5e
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: sonarr
           ports:
             - containerPort: 8989
