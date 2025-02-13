@@ -37,7 +37,7 @@ patches:
 helmCharts:
     - name: frigate
       repo: https://blakeblackshear.github.io/blakeshome-charts/
-      version: "7.7.0"
+      version: "7.7.2"
       releaseName: frigate
       namespace: frigate
       valuesFile: ./config.yaml
