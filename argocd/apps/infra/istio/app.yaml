@@ -68,16 +68,16 @@ spec:
     chart: gateway
     helm:
       valuesObject:
-        affinity:
-          nodeAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 1
-                preference:
-                  matchExpressions:
-                    - key: kubernetes.io/hostname
-                      operator: In
-                      values:
-                        - marcus-server
+        # affinity:
+        #   nodeAffinity:
+        #     preferredDuringSchedulingIgnoredDuringExecution:
+        #       - weight: 1
+        #         preference:
+        #           matchExpressions:
+        #             - key: kubernetes.io/hostname
+        #               operator: In
+        #               values:
+        #                 - marcus-server
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
