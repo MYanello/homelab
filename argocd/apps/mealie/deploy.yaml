@@ -118,7 +118,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: pg_data
+              name: pgData
           # readinessProbe:
           #   httpGet:
           #     path: /
@@ -144,7 +144,7 @@ spec:
           cpu: 100m
           memory: 500Mi
       volumes:
-        - name: pg_data
+        - name: pgData
           hostPath:
             path: /k8s/mealie/pg_data
 
