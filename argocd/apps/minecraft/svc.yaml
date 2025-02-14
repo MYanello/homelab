@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mc
+  lables:
+    service: mc
+spec:
+  ports:
+  - port: 25565
+    targetPort: 25565
+  selector:
+    server: mc

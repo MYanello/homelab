@@ -1,0 +1,16 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mc-vs
+spec:
+  hosts:
+  - mc.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: mc
+        port:
+          number: 25565
