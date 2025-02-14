@@ -26,8 +26,6 @@ spec:
                     operator: In
                     values:
                       - marcus-server
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       containers:
       - name: qbittorrent
         env:
@@ -70,9 +68,9 @@ spec:
           timeoutSeconds: 5
           failureThreshold: 10
       initContainers:
-      - name: gluetun # init sidecar for VPN connection
-        image: "ghcr.io/qdm12/gluetun:latest@sha256:183c74263a07f4c931979140ac99ff4fbc44dcb1ca5b055856ef580b0fafdf1c"
-        restartPolicy: Always # makes this init into a sidecar container k8s 1.29
+      - name: gluetun 
+        image: "ghcr.io/qdm12/gluetun:3.39.1"
+        restartPolicy: Always 
         imagePullPolicy: IfNotPresent
         ports:
         - name: http-proxy
@@ -94,7 +92,7 @@ spec:
         - name: TZ
           value: "America/Chicago"
         - name: FIREWALL_INPUT_PORTS
-          value: "8080" # <- the port for qbittorrent container otherwise blocked by gluetun firewall in same pod
+          value: "8080" 
         - name: VPN_SERVICE_PROVIDER
           value: custom
         - name: VPN_TYPE
