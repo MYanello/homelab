@@ -29,7 +29,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - homeassistant.lan
+    - homeassistant.local
   endpoints:
     - address: 192.168.1.4
   ports:
@@ -75,7 +75,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - iotawatt.lan
+    - iotawatt.local
   endpoints:
     - address: 192.168.1.41
   ports:

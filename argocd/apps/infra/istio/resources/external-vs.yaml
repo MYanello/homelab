@@ -26,7 +26,7 @@ spec:
   http:
     - route:
         - destination:
-            host: homeassistant.lan
+            host: homeassistant.local
             port:
               number: 8123
 ---
@@ -120,7 +120,7 @@ spec:
   http:
     - route:
         - destination:
-            host: iotawatt.lan
+            host: iotawatt.local
             port:
               number: 80
 ---
@@ -200,7 +200,7 @@ spec:
   http:
     - route:
         - destination:
-            host: opn.local
+            host: router.local
             port:
               number: 1000
 ---
@@ -249,7 +249,7 @@ spec:
   http:
     - route:
         - destination:
-            host: ubiquiti.local
+            host: router.local
             port:
               number: 8443
 # ---
