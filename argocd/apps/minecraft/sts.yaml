@@ -4,6 +4,7 @@ metadata:
   name: mc
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   serviceName: mc
   selector:
     matchLabels:
