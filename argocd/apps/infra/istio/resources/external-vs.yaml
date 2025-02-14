@@ -170,7 +170,7 @@ spec:
   http:
     - route:
         - destination:
-            host: router.local
+            host: homeassistant.local
             port:
               number: 8443
 ---
