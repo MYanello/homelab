@@ -9,3 +9,5 @@ data:
   MEMORY: "8G"
   TZ: "America/Chicago"
   MC_PORT: '25565'
+  SNOOPER_ENABLED: "false"
+  EXEC_DIRECTLY: "true"

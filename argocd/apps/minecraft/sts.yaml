@@ -41,17 +41,18 @@ spec:
           resources:
             requests:
               cpu: 150m
-          livenessProbe:
-            exec:
-              command: ["mc-health"]
-            initialDelaySeconds: 120
-            periodSeconds: 60
-          readinessProbe:
-            exec:
-              command: ["mc-health"]
-            initialDelaySeconds: 20
-            periodSeconds: 10
-            failureThreshold: 12
+              memory: 4Gi
+          # livenessProbe:
+          #   exec:
+          #     command: ["mc-health"]
+          #   initialDelaySeconds: 120
+          #   periodSeconds: 60
+          # readinessProbe:
+          #   exec:
+          #     command: ["mc-health"]
+          #   initialDelaySeconds: 20
+          #   periodSeconds: 10
+          #   failureThreshold: 12
   volumeClaimTemplates:
     - metadata:
         name: data
