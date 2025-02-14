@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myspeed
+spec:
+  ingressClassName: istio
+  rules:
+    - host: myspeed.yanello.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: myspeed
+                port:
+                  number: 5216
+            path: /
+            pathType: Prefix
