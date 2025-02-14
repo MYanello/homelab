@@ -21,7 +21,7 @@ spec:
       targetRevision: HEAD
       path: argocd/apps/vaultwarden/manifests
     - repoURL: https://guerzon.github.io/vaultwarden
-      targetRevision: "0.31.5"
+      targetRevision: "0.31.6"
       chart: vaultwarden
       helm:
         valuesObject:
