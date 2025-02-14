@@ -13,6 +13,15 @@ spec:
       labels:
         server: mc
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - name: mc
           imagePullPolicy: IfNotPresent
@@ -24,15 +33,6 @@ spec:
                 name: mc
                 optional: true
           env: []
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: kubernetes.io/hostname
-                        operator: In
-                        values:
-                          - marcus-server
           image: itzg/minecraft-server
           stdin: true
           tty: true
