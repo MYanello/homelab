@@ -28,6 +28,13 @@ spec:
       containers:
         - image: ghcr.io/mealie-recipes/mealie:v2.6.0
           imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
           name: mealie
           env:
             - name: ALLOW_SIGNUP
@@ -64,13 +71,6 @@ spec:
           #   timeoutSeconds: 5
           #   failureThreshold: 3
       restartPolicy: Always
-      resources:
-        limits:
-          cpu: 500m
-          memory: 1Gi
-        requests:
-          cpu: 100m
-          memory: 500Mi
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -106,6 +106,13 @@ spec:
       containers:
         - image: postgres:15
           imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
           name: postgres
           env:
             - name: PG_USER
@@ -136,15 +143,7 @@ spec:
           #   timeoutSeconds: 5
           #   failureThreshold: 3
       restartPolicy: Always
-      resources:
-        limits:
-          cpu: 500m
-          memory: 1Gi
-        requests:
-          cpu: 100m
-          memory: 500Mi
       volumes:
         - name: pg-data
           hostPath:
             path: /k8s/mealie/pg-data
-
