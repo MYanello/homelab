@@ -50,7 +50,7 @@ spec:
         global:
           istioNamespace: istio-system
           logging:
-            level: "default:debug"
+            level: "all:debug"
         meshConfig:
           ingressService: istio-gateway
           ingressSelector: gateway
