@@ -132,7 +132,7 @@ metadata:
   name: opn-vs
 spec:
   hosts:
-    - opnsense.yanello.net
+    - router.yanello.net
   gateways:
     - istio-system/kube-gateway
   http:
