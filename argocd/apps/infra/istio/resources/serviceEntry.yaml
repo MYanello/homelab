@@ -36,7 +36,7 @@ spec:
     - number: 8123
       name: http
       protocol: HTTP
-    - number: 8080
+    - number: 8443
       name: ubiquiti
       protocol: HTTP
   resolution: DNS
