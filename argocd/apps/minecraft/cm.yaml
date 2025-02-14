@@ -16,4 +16,4 @@ data:
   CF_SLUG: gt-new-horizons
   GUI: "FALSE"
   CF_EXCLUDE_MODS: CustomMainMenu DefaultServerList GuiScreen
-  CF_FORCE_SYNCHRONIZE: "true"
+  #CF_FORCE_SYNCHRONIZE: "true"
