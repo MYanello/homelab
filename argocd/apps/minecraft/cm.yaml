@@ -2,8 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app.kubernetes.io/part-of: argocd
-  name: argocd-cm
+    app.kubernetes.io/part-of: mc
+  name: mc-config
 data:
   EULA: "TRUE"
   MEMORY: "8G"
@@ -12,4 +12,4 @@ data:
   SNOOPER_ENABLED: "false"
   EXEC_DIRECTLY: "true"
   MODPACK_PLATFORM: AUTO_CURSEFORGE
-  TYPE: AUTO_CURSEFORGE
+  CF_SLUG: gt-new-horizons  
