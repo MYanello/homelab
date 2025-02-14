@@ -40,7 +40,7 @@ spec:
               value: "America/Chicago"
           envFrom:
             - secretRef:
-                name: mealie
+                name: mealie-secrets
           ports:
             - containerPort: 9000
               protocol: TCP
@@ -112,7 +112,7 @@ spec:
               value: mealie
           envFrom:
             - secretRef:
-                name: mealie
+                name: mealie-secrets
           ports:
             - containerPort: 5432
               protocol: TCP
