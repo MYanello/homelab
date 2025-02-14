@@ -8,3 +8,4 @@ resources:
 - deploy.yaml
 - service.yaml
 - pvc.yaml
+- vs.yaml
