@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mc
 spec:
@@ -55,13 +55,7 @@ spec:
           #   initialDelaySeconds: 20
           #   periodSeconds: 10
           #   failureThreshold: 12
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        storageClassName: nfs-storage
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 500Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
