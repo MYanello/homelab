@@ -30,11 +30,8 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: mc
+                name: mc-config
                 optional: true
-          env: 
-            - name: EULA
-              value: "TRUE"
           image: itzg/minecraft-server
           stdin: true
           tty: true
