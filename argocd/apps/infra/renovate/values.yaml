@@ -16,6 +16,12 @@ renovate:
         "default:automergeDigest",
         "default:pinDigestsDisabled"
       ],
+      "prBodyColumns": [
+        "Package",
+        "Update",
+        "Change",
+        "Package file"
+      ],
       "dependencyDashboard": true,
       "major": {
         "dependencyDashboardApproval": true,
