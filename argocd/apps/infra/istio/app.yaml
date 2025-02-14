@@ -76,7 +76,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: "1.24.2"
+    targetRevision: "1.24.3"
     chart: gateway
     helm:
       valuesObject:
