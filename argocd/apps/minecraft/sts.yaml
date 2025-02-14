@@ -32,7 +32,9 @@ spec:
             - configMapRef:
                 name: mc
                 optional: true
-          env: []
+          env: 
+            - name: EULA
+              value: "TRUE"
           image: itzg/minecraft-server
           stdin: true
           tty: true
