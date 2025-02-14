@@ -176,10 +176,10 @@ spec:
             subset: https
       match:
         - port: 443
-      tls:
-        - mode: SIMPLE
-          sniHosts:
-            - ui.yanello.net
+      # tls:
+      #   - mode: SIMPLE
+      #     sniHosts:
+      #       - ui.yanello.net
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
