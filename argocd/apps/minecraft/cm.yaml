@@ -8,4 +8,4 @@ data:
   EULA: "TRUE"
   MEMORY: "8G"
   TZ: "America/Chicago"
-  
+  MC_PORT: '25565'
