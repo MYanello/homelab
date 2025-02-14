@@ -17,7 +17,7 @@ spec:
         app: mealie
     spec:
       containers:
-        - image: ghcr.io/mealie-recipes/mealie:v2.6.0
+        - image: ghcr.io/mealie-recipes/mealie:v2.6.0@sha256:500e42e59eb89c7837d3b17274c99f0126de607a9c545b616d13eeb7d7df0cd3
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -97,7 +97,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: postgres:15
+        - image: postgres:15@sha256:b3a3b666dfb3a7dca6858ef90bad3557da4d4e1532c090f6fe6d4de76d98ab6f
           imagePullPolicy: IfNotPresent
           resources:
             limits:
