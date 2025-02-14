@@ -65,6 +65,9 @@ spec:
     - number: 9000
       name: minio
       protocol: HTTP
+    - number: 4000
+      name: grafana
+      protocol: HTTP
   resolution: DNS
   location: MESH_EXTERNAL
 ---
