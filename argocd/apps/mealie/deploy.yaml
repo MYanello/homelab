@@ -34,6 +34,8 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: BASE_URL
+              value: "https://recipes.yanello.net"
             - name: TZ
               value: "America/Chicago"
           envFrom:
@@ -117,22 +119,26 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pg-data
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5000
-          #   initialDelaySeconds: 30
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5000
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 15
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - pg_isready -U mealie -d mealie
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - pg_isready -U mealie -d mealie
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: pg-data
