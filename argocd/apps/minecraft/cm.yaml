@@ -15,5 +15,5 @@ data:
   MODPACK_PLATFORM: AUTO_CURSEFORGE
   CF_SLUG: gt-new-horizons
   GUI: "FALSE"
-  CF_EXCLUDE_MODS: CustomMainMenu DefaultServerList GuiScreen
-  #CF_FORCE_SYNCHRONIZE: "true"
+  CF_EXCLUDE_MODS: custommainmenu defaultserverlist guiscreen defaultworldgenerator
+  CF_FORCE_SYNCHRONIZE: "true"
