@@ -28,7 +28,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: linuxserver/tautulli:latest@sha256:1280f7c8930755e91b5ec1582de5e3ca8061c9af10074a79fe0fb51bc608336a
+          image: linuxserver/tautulli:latest@sha256:1358411b16cdf9e35eb8d2f4d890ad69a27777c807b09fe6196d38fb3d9ecd44
           imagePullPolicy: IfNotPresent
           name: tautulli
           resources:
