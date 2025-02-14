@@ -5,3 +5,4 @@ helmCharts:
   - name: victoria-metrics-k8s-stack
     repo: https://victoriametrics.github.io/helm-charts/
     version: "0.33.5"
+    valuesFile: values.yaml
