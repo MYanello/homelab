@@ -170,6 +170,8 @@ spec:
   tls:
     - match:
         - port: 443
+          sniHosts:
+            - ui.yanello.net
       route:
         - destination:
             host: homeassistant.local
