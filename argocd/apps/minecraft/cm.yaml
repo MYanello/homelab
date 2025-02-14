@@ -15,4 +15,4 @@ data:
   MODPACK_PLATFORM: AUTO_CURSEFORGE
   CF_SLUG: gt-new-horizons
   GUI: "FALSE"
-  CF_EXCLUDE_MODS: GuiScreen
+  CF_EXCLUDE_MODS: CustomMainMenu DefaultServerList GuiScreen
