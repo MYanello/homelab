@@ -9,11 +9,11 @@ data:
   DEBUG: "true"
   MEMORY: "8G"
   TZ: "America/Chicago"
-  MC_PORT: "25565"
+  REMOVE_OLD_MODS: "true"
   SNOOPER_ENABLED: "false"
   EXEC_DIRECTLY: "true"
   MODPACK_PLATFORM: AUTO_CURSEFORGE
   CF_SLUG: gt-new-horizons
   GUI: "FALSE"
   CF_EXCLUDE_MODS: custom-main-menu,defaultserverlist,default-world-generator
-  # CF_FORCE_SYNCHRONIZE: "true"
+  CF_FORCE_SYNCHRONIZE: "true"
