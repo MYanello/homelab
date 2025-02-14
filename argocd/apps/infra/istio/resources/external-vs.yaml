@@ -15,21 +15,6 @@ spec:
               number: 3000
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: resume-se
-  namespace: istio-system
-spec:
-  hosts:
-    - marcus-server.lan
-  ports:
-    - number: 3000
-      name: http
-      protocol: HTTP
-  resolution: DNS
-  location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: hass-vs
@@ -46,21 +31,6 @@ spec:
               number: 8123
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: homeassistant-se
-  namespace: istio-system
-spec:
-  hosts:
-    - homeassistant.lan
-  ports:
-    - number: 8123
-      name: http
-      protocol: HTTP
-  resolution: DNS
-  location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: ntopng-vs
@@ -72,26 +42,9 @@ spec:
   http:
     - route:
         - destination:
-            host: ntopng.local
+            host: router.local
             port:
               number: 30341
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: ntopng-se
-  namespace: istio-system
-spec:
-  hosts:
-    - ntopng.local
-  endpoints:
-    - address: 192.168.1.1
-  ports:
-    - number: 30341
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -109,20 +62,20 @@ spec:
             port:
               number: 32400
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: plex-se
-  namespace: istio-system
-spec:
-  hosts:
-    - marcus-server.lan
-  ports:
-    - number: 32400
-      name: http
-      protocol: HTTP
-  resolution: DNS
-  location: MESH_EXTERNAL
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: plex-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - marcus-server.lan
+#   ports:
+#     - number: 32400
+#       name: http
+#       protocol: HTTP
+#   resolution: DNS
+#   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -140,20 +93,20 @@ spec:
             port:
               number: 6987
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: nextcloud-se
-  namespace: istio-system
-spec:
-  hosts:
-    - marcus-server.lan
-  ports:
-    - number: 6987
-      name: http
-      protocol: HTTP
-  resolution: DNS
-  location: MESH_EXTERNAL
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: nextcloud-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - marcus-server.lan
+#   ports:
+#     - number: 6987
+#       name: http
+#       protocol: HTTP
+#   resolution: DNS
+#   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -172,23 +125,6 @@ spec:
               number: 80
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: iotawatt-se
-  namespace: istio-system
-spec:
-  hosts:
-    - iotawatt.lan
-  endpoints:
-    - address: 192.168.1.41
-  ports:
-    - number: 80
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: minio-vs
@@ -204,20 +140,20 @@ spec:
             port:
               number: 9000
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: minio-se
-  namespace: istio-system
-spec:
-  hosts:
-    - marcus-server.lan
-  ports:
-    - number: 9000
-      name: http
-      protocol: HTTP
-  resolution: DNS
-  location: MESH_EXTERNAL
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: minio-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - marcus-server.lan
+#   ports:
+#     - number: 9000
+#       name: http
+#       protocol: HTTP
+#   resolution: DNS
+#   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -231,26 +167,26 @@ spec:
   http:
     - route:
         - destination:
-            host: agh.local
+            host: router.local
             port:
               number: 3000
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: agh-se
-  namespace: istio-system
-spec:
-  hosts:
-    - agh.local
-  endpoints:
-    - address: 192.168.3.1
-  ports:
-    - number: 3000
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: agh-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - agh.local
+#   endpoints:
+#     - address: 192.168.3.1
+#   ports:
+#     - number: 3000
+#       name: http
+#       protocol: HTTP
+#   resolution: STATIC
+#   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -268,23 +204,23 @@ spec:
             port:
               number: 1000
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: opn-se
-  namespace: istio-system
-spec:
-  hosts:
-    - opn.local
-  endpoints:
-    - address: 192.168.1.1
-  ports:
-    - number: 1000
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
----
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: opn-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - opn.local
+#   endpoints:
+#     - address: 192.168.1.1
+#   ports:
+#     - number: 1000
+#       name: http
+#       protocol: HTTP
+#   resolution: STATIC
+#   location: MESH_EXTERNAL
+# ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -302,23 +238,6 @@ spec:
               number: 80
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: pikvm-se
-  namespace: istio-system
-spec:
-  hosts:
-    - pikvm.local
-  endpoints:
-    - address: 192.168.1.9
-  ports:
-    - number: 80
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: ubiquiti-vs
@@ -333,21 +252,21 @@ spec:
             host: ubiquiti.local
             port:
               number: 8443
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: ubiquiti-se
-  namespace: istio-system
-spec:
-  hosts:
-    - ubiquiti.local
-  endpoints:
-    - address: 192.168.1.4
-  ports:
-    - number: 8080
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
----
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: ubiquiti-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - ubiquiti.local
+#   endpoints:
+#     - address: 192.168.1.4
+#   ports:
+#     - number: 8080
+#       name: http
+#       protocol: HTTP
+#   resolution: STATIC
+#   location: MESH_EXTERNAL
+# ---
