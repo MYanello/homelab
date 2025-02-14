@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - sts.yml
 - svc.yml
+- vs.yaml
