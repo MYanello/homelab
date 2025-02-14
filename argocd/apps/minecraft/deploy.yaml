@@ -33,7 +33,7 @@ spec:
                 name: mc-config
             - secretRef:
                 name: mc-secrets
-          image: itzg/minecraft-server:java6-multiarch
+          image: itzg/minecraft-server:java8
           stdin: true
           tty: true
           volumeMounts:
