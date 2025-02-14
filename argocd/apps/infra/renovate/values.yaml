@@ -22,6 +22,7 @@ renovate:
         "Change",
         "Package file"
       ],
+      "rebaseWhen": "behind-base-branch",
       "dependencyDashboard": true,
       "major": {
         "dependencyDashboardApproval": true,
