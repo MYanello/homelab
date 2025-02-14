@@ -2,7 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- sts.yaml
-- svc.yaml
-- vs.yaml
-- cm.yaml
+  - sts.yaml
+  - svc.yaml
+  - vs.yaml
+  - cm.yaml
+
+generators:
+  - secret-generator.yaml
