@@ -17,9 +17,6 @@ data:
   GUI: "FALSE"
   CF_EXCLUDE_MODS: |
     custom-main-menu
-    custommainmenu
     defaultserverlist
-    guiscreen
-    defaultworldgenerator
-    journeymap
+    default-world-generator
   CF_FORCE_SYNCHRONIZE: "true"
