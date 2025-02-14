@@ -43,6 +43,10 @@ renovate:
           "registryUrls": ["ghcr.io"]
         },
         {
+          "matchPackageNames": ["/.*istio.*/"],
+          "groupName": "Istio"
+        },
+        {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
           "matchPackageNames": ["/.*tektoncd\/pipeline\/cmd\/webhook.*/"],
           "overridePackageName": "ghcr.io/tektoncd/pipeline/webhook-d4749e605405422fd87700164e31b2d1",
