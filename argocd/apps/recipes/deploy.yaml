@@ -37,7 +37,7 @@ spec:
           envFrom:
             - secretRef:
                 name: recipes
-          image: vabene1111/recipes
+          image: vabene1111/recipes@sha256:063eb446e2981a737c8722642acef6aeacbd7b33f672a982209bd82c068b1a2c
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -71,7 +71,7 @@ spec:
               subPath: files
       containers:
         - name: recipes-nginx
-          image: nginx:latest
+          image: nginx:latest@sha256:91734281c0ebfc6f1aea979cffeed5079cfe786228a71cc6f1f46a228cde6e34
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -98,7 +98,7 @@ spec:
               subPath: nginx-config
               readOnly: true
         - name: recipes
-          image: vabene1111/recipes
+          image: vabene1111/recipes@sha256:063eb446e2981a737c8722642acef6aeacbd7b33f672a982209bd82c068b1a2c
           imagePullPolicy: IfNotPresent
           command:
             - /opt/recipes/venv/bin/gunicorn
