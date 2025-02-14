@@ -18,9 +18,9 @@ spec:
       number: 443
       name: https
       protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      credentialName: default-ingress-cert # must be the same as secret
+    # tls:
+    #   mode: SIMPLE
+    #   credentialName: default-ingress-cert # must be the same as secret
     hosts:
     - '*'
     
