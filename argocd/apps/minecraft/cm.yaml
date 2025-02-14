@@ -16,4 +16,4 @@ data:
   CF_SLUG: gt-new-horizons
   GUI: "FALSE"
   CF_EXCLUDE_MODS: custom-main-menu,defaultserverlist,default-world-generator
-  CF_FORCE_SYNCHRONIZE: "true"
+  #CF_FORCE_SYNCHRONIZE: "true"
