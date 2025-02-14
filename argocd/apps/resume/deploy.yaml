@@ -193,7 +193,7 @@ spec:
                 secretKeyRef:
                   name: resume-secrets
                   key: DB_PASSWORD
-          image: postgres:15-alpine@sha256:a58cec2ba7a60b4c08d51f2ca93c1ad65fbf96e75cf0c89b7c0d2684860d3bb3
+          image: postgres:15-alpine@sha256:eabc546fb3bfd2cccd91e4d8d343c95eb2dcce8e3de4ea25acef40a928e5c2da
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
