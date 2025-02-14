@@ -148,7 +148,7 @@ spec:
           envFrom:
             - secretRef:
                 name: immich-secrets
-          image: typesense/typesense:0.24.0@sha256:3cc1251f09ef6c75a5b1f2751c04e7265c770c0f2b69cba1f9a9f20da57cfa28
+          image: typesense/typesense:0.25.2@sha256:1ddbb28a52b0b8be31237ec718df1c9bc895c5626b26c10fa3f340f684e81488
           imagePullPolicy: IfNotPresent
           name: typesense
           volumeMounts:
