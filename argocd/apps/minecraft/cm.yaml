@@ -19,4 +19,4 @@ data:
     custom-main-menu
     defaultserverlist
     default-world-generator
-  CF_FORCE_SYNCHRONIZE: "true"
+  # CF_FORCE_SYNCHRONIZE: "true"
