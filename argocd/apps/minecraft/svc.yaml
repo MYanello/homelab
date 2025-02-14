@@ -7,7 +7,8 @@ metadata:
     service: mc
 spec:
   ports:
-  - port: 25565
+  - name: http
+    port: 25565
     targetPort: 25565
   selector:
     server: mc
