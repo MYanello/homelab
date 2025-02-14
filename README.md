@@ -4,6 +4,8 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 02.13.25
+- After power cycling the rack, istio was failing to come up with invalid config and webhook not ready. Tried reinstalling via helm and istioctl. A reboot of the server that the istio control plane is on fixed it after 4 hours of debugging. :headdesk:
 
 ### 02.10.25
 
