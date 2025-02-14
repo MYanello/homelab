@@ -31,7 +31,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: mc-config
-                optional: true
+            - secretRef:
+                name: mc-secrets
           image: itzg/minecraft-server
           stdin: true
           tty: true
