@@ -17,8 +17,8 @@ spec:
           cloudflare:
             email: marcus.yanello@gmail.com
             apiKeySecretRef:
-              name: cloudflare-api-token-secret
-              key: api-token
+              name: cloudflare-api-key
+              key: api-key
 # ---
 # apiVersion: cert-manager.io/v1
 # kind: ClusterIssuer
