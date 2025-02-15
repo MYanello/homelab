@@ -7,3 +7,12 @@ metadata:
 data:
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
   webhook.github.secret: $argocd-custom-secrets.webhook.github.secret
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cmd-params-cm
+data:
+  server.insecure: "true"
