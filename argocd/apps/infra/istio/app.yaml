@@ -86,10 +86,10 @@ spec:
               - weight: 1
                 preference:
                   matchExpressions:
-                    - key: kubernetes.io/hostname
+                    - key: kubernetes.io/arch
                       operator: In
                       values:
-                        - marcus-server
+                        - amd64
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
