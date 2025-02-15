@@ -45,15 +45,15 @@ spec:
     repoURL: https://istio-release.storage.googleapis.com/charts
     targetRevision: "1.24.2"
     chart: istiod
-    # helm:
-    #   valuesObject:
-    #     global:
-    #       istioNamespace: istio-system
-    #       # logging:
-    #       #   level: "all:debug"
-    #     meshConfig:
-    #       ingressService: istio-gateway
-    #       ingressSelector: gateway
+    helm:
+      valuesObject:
+        global:
+          istioNamespace: istio-system
+          # logging:
+          #   level: "all:debug"
+        meshConfig:
+          ingressService: istio-gateway
+          ingressSelector: gateway
 
 ---
 apiVersion: argoproj.io/v1alpha1
