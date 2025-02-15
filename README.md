@@ -7,6 +7,7 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 ### 02.14.24
 - Attempted flipping over to istio for all ingress instead of haproxy
   - Needed to disable haproxy, enable the nat rules, and update unbound overrides
+  - Keep haproxy running just for the k3s control plane. But nat 443/80 to istio
 ### 02.13.25
 - After power cycling the rack, istio was failing to come up with invalid config and webhook not ready. Tried reinstalling via helm and istioctl. A reboot of the server that the istio control plane is on fixed it after 4 hours of debugging. :headdesk:
 
