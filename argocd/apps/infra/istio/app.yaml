@@ -80,6 +80,7 @@ spec:
     chart: gateway
     helm:
       valuesObject:
+        externalTrafficPolicy: Local
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
