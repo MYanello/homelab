@@ -8,7 +8,7 @@ spec:
   dnsNames:
   - "*.yanello.net"
   - yanello.net
-  secretName: default-ingress-cert
+  secretName: default-ingress-internal-cert
   issuerRef:
     name: local-intermediate-ca1-issuer
     kind: ClusterIssuer
