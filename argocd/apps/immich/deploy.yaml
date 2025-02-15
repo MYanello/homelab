@@ -23,7 +23,10 @@ spec:
     matchLabels:
       app: immich-server
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -55,9 +58,9 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              nvidia.com/gpu: '1'
+              nvidia.com/gpu: "1"
             limits:
-              nvidia.com/gpu: '1'
+              nvidia.com/gpu: "1"
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
@@ -79,7 +82,10 @@ spec:
     matchLabels:
       app: immich-machine-learning
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -111,9 +117,9 @@ spec:
               mountPath: /cache
           resources:
             requests:
-              nvidia.com/gpu: '1'
+              nvidia.com/gpu: "1"
             limits:
-              nvidia.com/gpu: '1'
+              nvidia.com/gpu: "1"
       volumes:
         - name: photos
           hostPath:
@@ -135,7 +141,10 @@ spec:
     matchLabels:
       app: typesense
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -156,7 +165,7 @@ spec:
               mountPath: /data
       volumes:
         - name: tsdata
-          hostPath: 
+          hostPath:
             path: /zpool/k8s/immich/tsdata
 
 ---
@@ -173,7 +182,10 @@ spec:
     matchLabels:
       app: redis
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -200,7 +212,10 @@ spec:
     matchLabels:
       app: postgres
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -216,9 +231,9 @@ spec:
                     values:
                       - marcus-server
       securityContext:
-        runAsUser: 1000 
-        runAsGroup: 1000 
-        fsGroup: 1000 
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - env:
             - name: POSTGRES_DB
@@ -227,7 +242,7 @@ spec:
                   name: immich-config
                   key: DB_DATABASE_NAME
             - name: POSTGRES_INITDB_ARGS
-              value: '--data-checksums'
+              value: "--data-checksums"
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
@@ -269,7 +284,7 @@ spec:
           ports:
             - containerPort: 5432
               protocol: TCP
-          command: 
+          command:
             - postgres
             - -c
             - shared_preload_libraries=vectors.so
@@ -291,3 +306,4 @@ spec:
           hostPath:
             path: /zpool/k8s/immich/db
 ---
+
