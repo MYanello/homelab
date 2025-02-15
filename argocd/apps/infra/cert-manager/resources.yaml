@@ -16,7 +16,7 @@ spec:
       - dns01:
           cloudflare:
             email: marcus.yanello@gmail.com
-            apiTokenSecretRef:
+            apiKeySecretRef:
               name: cloudflare-api-token-secret
               key: api-token
 # ---
