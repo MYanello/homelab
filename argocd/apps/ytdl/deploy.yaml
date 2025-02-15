@@ -13,7 +13,10 @@ spec:
     matchLabels:
       io.kompose.service: ytdl
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       annotations:
@@ -127,7 +130,10 @@ spec:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:

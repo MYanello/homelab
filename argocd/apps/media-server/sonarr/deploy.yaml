@@ -13,7 +13,10 @@ spec:
     matchLabels:
       io.kompose.service: sonarr
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       annotations:
