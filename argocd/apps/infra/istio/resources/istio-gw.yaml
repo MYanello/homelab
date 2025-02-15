@@ -14,13 +14,13 @@ spec:
       protocol: HTTP
     # tls:
     #   httpsRedirect: true
-  # - port:
-  #     number: 443
-  #     name: https
-  #     protocol: HTTPS
-  #   tls:
-  #     mode: SIMPLE
-  #     credentialName: default-ingress-cert # must be the same as secret
-  #   hosts:
-  #   - '*'
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: default-ingress-cert # must be the same as secret
+    hosts:
+    - '*'
     
