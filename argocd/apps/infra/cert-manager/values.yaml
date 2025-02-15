@@ -1,0 +1,4 @@
+installCRDs: true
+featureGates: NameConstraints=true
+webhook:
+  featureGates: NameConstraints=true
