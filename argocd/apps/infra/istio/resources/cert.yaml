@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: default-internal-cert
+  name: default-ingress-internal-cert
   namespace: istio-system
 spec:
   commonName: yanello.net
@@ -17,7 +17,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: default-cert
+  name: default-ingress-cert
   namespace: istio-system
 spec:
   commonName: yanello.net
