@@ -133,6 +133,7 @@ metadata:
 spec:
   hosts:
     - router.yanello.net
+    - opn.yanello.net
   gateways:
     - istio-system/kube-gateway
   http:
