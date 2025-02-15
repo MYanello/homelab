@@ -4,7 +4,7 @@ renovate:
   mendRnvEndPoint: https://api.github.com/
   mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
-  mendRnvCronJobSchedulerAll: "*/2 * * * *"
+  mendRnvCronJobSchedulerAll: "* */12 * * *"
   extraEnvVars:
     - name: LOG_LEVEL
       value: info
@@ -22,6 +22,7 @@ renovate:
         "Change",
         "Package file"
       ],
+      "commitMessage": 
       "rebaseWhen": "behind-base-branch",
       "dependencyDashboard": true,
       "major": {
