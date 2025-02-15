@@ -1,62 +1,62 @@
-# apiVersion: networking.istio.io/v1beta1
-# kind: Gateway
-# metadata:
-#   name: kube-gateway
-# spec:
-#   selector:
-#     istio: ingressgateway
-#   servers:
-#   - hosts:
-#       - "*.yanello.net"
-#       - yanello.net
-#     port:
-#       name: http
-#       number: 80
-#       protocol: HTTP
-#     # tls:
-#     #   httpsRedirect: true
-#   - port:
-#       number: 443
-#       name: https
-#       protocol: HTTPS
-#     tls:
-#       mode: SIMPLE
-#       credentialName: default-ingress-cert # must be the same as secret
-#     hosts:
-#       - "*.yanello.net"
-#       - yanello.net
----
-apiVersion: gateway.networking.k8s.io/v1beta1
+apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: gw-api
+  name: kube-gateway
 spec:
-  gatewayClassName: istio
-  listeners:
-    - name: http
-      hostname: "*.yanello.net"
-      port: 80
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+      - "*.yanello.net"
+      - yanello.net
+    port:
+      name: http
+      number: 80
       protocol: HTTP
-      allowedRoutes:
-        namespaces:
-          from: Same
-        kinds:
-          - group: gateway.networking.k8s.io
-            kind: HTTPRoute
-    - name: https
-      hostname: "*.yanello.net"
-      port: 443
+    # tls:
+    #   httpsRedirect: true
+  - port:
+      number: 443
+      name: https
       protocol: HTTPS
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - group: gateway.networking.k8s.io
-            kind: HTTPRoute
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - kind: Secret
-            group: ""
-            name: default-ingress-cert
-            namespace: istio-system
+    tls:
+      mode: SIMPLE
+      credentialName: default-ingress-cert # must be the same as secret
+    hosts:
+      - "*.yanello.net"
+      - yanello.net
+# ---
+# apiVersion: gateway.networking.k8s.io/v1beta1
+# kind: Gateway
+# metadata:
+#   name: gw-api
+# spec:
+#   gatewayClassName: istio
+#   listeners:
+#     - name: http
+#       hostname: "*.yanello.net"
+#       port: 80
+#       protocol: HTTP
+#       allowedRoutes:
+#         namespaces:
+#           from: Same
+#         kinds:
+#           - group: gateway.networking.k8s.io
+#             kind: HTTPRoute
+#     - name: https
+#       hostname: "*.yanello.net"
+#       port: 443
+#       protocol: HTTPS
+#       allowedRoutes:
+#         namespaces:
+#           from: All
+#         kinds:
+#           - group: gateway.networking.k8s.io
+#             kind: HTTPRoute
+#       tls:
+#         mode: Terminate
+#         certificateRefs:
+#           - kind: Secret
+#             group: ""
+#             name: default-ingress-cert
+#             namespace: istio-system
