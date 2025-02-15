@@ -22,7 +22,7 @@ spec:
       containers:
         - env:
             - name: HBOX_LOG_LEVEL
-              value: info
+              value: debug
             - name: HBOX_LOG_FORMAT
               value: text
             - name: HBOX_WEB_MAX_UPLOAD_SIZE

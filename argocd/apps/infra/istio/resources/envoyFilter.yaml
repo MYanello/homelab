@@ -20,4 +20,4 @@ spec:
             use_remote_address: true
             xff_num_trusted_hops: 1
             skip_xff_append: true
-            preserve_external_request_id: true
+            # preserve_external_request_id: true
