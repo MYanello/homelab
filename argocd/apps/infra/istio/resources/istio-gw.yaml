@@ -22,5 +22,6 @@ spec:
       mode: SIMPLE
       credentialName: default-ingress-cert # must be the same as secret
     hosts:
-    - '*'
+      - "*.yanello.net"
+      - yanello.net
     
