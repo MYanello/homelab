@@ -3,6 +3,7 @@ kind: Kustomization
 
 helmCharts:
   - name: victoria-metrics-k8s-stack
+    releaseName: victoria-metrics-k8s-stack
     repo: https://victoriametrics.github.io/helm-charts/
-    version: "*"
+    version: "0.36.1"
     valuesFile: values.yaml
