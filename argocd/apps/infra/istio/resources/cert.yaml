@@ -26,6 +26,6 @@ spec:
   - yanello.net
   secretName: default-ingress-cert
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
     group: cert-manager.io
