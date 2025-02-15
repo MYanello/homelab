@@ -1,5 +1,0 @@
-victoria-metrics-operator:
-  createCRD: true
-crds:
-  cleanup:
-    enabled: true
