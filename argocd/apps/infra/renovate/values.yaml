@@ -22,7 +22,6 @@ renovate:
         "Change",
         "Package file"
       ],
-      "commitMessage": 
       "rebaseWhen": "behind-base-branch",
       "dependencyDashboard": true,
       "major": {
