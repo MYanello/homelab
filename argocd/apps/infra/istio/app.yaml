@@ -84,7 +84,7 @@ spec:
           loadBalancerIP: 10.10.8.0
           externalTrafficPolicy: Cluster
         annotations:
-          proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 1 }'
+          proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 2 }'
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
