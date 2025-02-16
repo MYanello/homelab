@@ -9,8 +9,8 @@ spec:
     - from:
         - source:
             remoteIpBlocks:
-              - "10.0.0.0/8"
-              - "172.16.0.0/12"
+              # - "10.0.0.0/8"
+              # - "172.16.0.0/12"
               - "192.168.0.0/16"
     # Allow WAN traffic only to specific subdomains
     # - from:
