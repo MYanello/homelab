@@ -82,7 +82,7 @@ spec:
       valuesObject:
         service:
           loadBalancerIP: 10.10.8.0
-          externalTrafficPolicy: Local
+          externalTrafficPolicy: Cluster
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
