@@ -15,4 +15,4 @@ resources:
   # - resources/serviceEntry.yaml
 
 commonAnnotations:
-  "proxy.istio.io/config": '{"gatewayTopology" : { "numTrustedProxies": 1 }'
+  proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 1 }'
