@@ -81,8 +81,8 @@ spec:
     helm:
       valuesObject:
         service:
-         # loadBalancerIP: 10.10.8.0
-          externalTrafficPolicy: Local
+          loadBalancerIP: 10.10.8.0
+          externalTrafficPolicy: Cluster
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
