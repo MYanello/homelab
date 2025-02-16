@@ -4,12 +4,14 @@ metadata:
   name: bazarr
   labels:
     app: bazarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: istio
   tls:
     - hosts:
-      - bazarr.yanello.net
-      secretName: default-ingress-cert
+        - bazarr.yanello.net
+      secretName: bazarr-tls
   rules:
     - host: bazarr.yanello.net
       http:
