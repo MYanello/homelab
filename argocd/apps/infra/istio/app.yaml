@@ -46,14 +46,14 @@ spec:
     targetRevision: "1.24.3"
     chart: istiod
     # helm:
-      # valuesObject:
-        # global:
-          # istioNamespace: istio-system
-          # logging:
-          #   level: "all:debug"
-        # meshConfig:
-        #   ingressService: istio-gateway
-        #   ingressSelector: gateway
+    # valuesObject:
+    # global:
+    # istioNamespace: istio-system
+    # logging:
+    #   level: "all:debug"
+    # meshConfig:
+    #   ingressService: istio-gateway
+    #   ingressSelector: gateway
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -81,9 +81,9 @@ spec:
     helm:
       valuesObject:
         gateways:
-          istio-ingressgateway:
-            loadBalancerIP: 10.10.8.0
-            externalTrafficPolicy: Local
+          - istio-ingressgateway:
+              loadBalancerIP: 10.10.8.0
+              externalTrafficPolicy: Local
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
@@ -118,3 +118,4 @@ spec:
     targetRevision: HEAD
     path: argocd/apps/infra/istio/resources
 ---
+
