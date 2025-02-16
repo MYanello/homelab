@@ -175,7 +175,7 @@ spec:
         - port: 443
           sniHosts:
             - ui.yanello.net
-    - route:
+      route:
         - destination:
             host: homeassistant.local
             port:
