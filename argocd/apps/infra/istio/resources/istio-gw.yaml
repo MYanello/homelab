@@ -7,9 +7,9 @@ spec:
     istio: ingressgateway
   servers:
   - hosts:
-    - "*"
-      # - "*.yanello.net"
-      # - yanello.net
+    # - "*"
+      - "*.yanello.net"
+      - yanello.net
     port:
       name: http
       number: 80
@@ -37,9 +37,9 @@ spec:
         - AES256-GCM-SHA384
         - AES256-SHA
     hosts:
-      - "*"
-      # - "*.yanello.net"
-      # - yanello.net
+     # - "*"
+      - "*.yanello.net"
+      - yanello.net
 # ---
 # apiVersion: gateway.networking.k8s.io/v1beta1
 # kind: Gateway
