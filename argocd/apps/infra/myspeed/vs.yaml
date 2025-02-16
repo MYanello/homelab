@@ -13,4 +13,4 @@ spec:
         - destination:
             host: myspeed
             port:
-              number: 5226
+              number: 5216
