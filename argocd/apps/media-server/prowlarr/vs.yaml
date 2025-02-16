@@ -5,7 +5,7 @@ metadata:
   name: prowlarr-vs
 spec:
   hosts:
-  - prowlarr.k8s.yanello.net
+  - prowlarr.yanello.net
   gateways:
   - istio-system/kube-gateway
   http:
