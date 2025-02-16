@@ -6,6 +6,10 @@ metadata:
     app: bazarr
 spec:
   ingressClassName: istio
+  tls:
+    - hosts:
+      - bazarr.yanello.net
+      secretName: default-ingress-cert
   rules:
     - host: bazarr.yanello.net
       http:
