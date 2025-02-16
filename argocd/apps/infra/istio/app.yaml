@@ -80,10 +80,9 @@ spec:
     chart: gateway
     helm:
       valuesObject:
-        gateways:
-          istio-ingressgateway:
-            loadBalancerIP: 10.10.8.0
-            externalTrafficPolicy: Local
+        service:
+          loadBalancerIP: 10.10.8.0
+          externalTrafficPolicy: Local
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
