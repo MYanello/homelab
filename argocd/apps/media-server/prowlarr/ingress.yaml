@@ -12,7 +12,7 @@ spec:
         paths:
           - backend:
               service:
-                name: prowlarr
+                name: prowlarr.prowlarr.svc.cluster.local
                 port:
                   number: 9696
             path: /
