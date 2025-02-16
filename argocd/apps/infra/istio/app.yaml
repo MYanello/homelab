@@ -93,28 +93,28 @@ spec:
                       operator: In
                       values:
                         - amd64
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: istio-resources
-#   namespace: argocd
-#   finalizers:
-#     - resources-finalizer.argocd.argoproj.io
-# spec:
-#   destination:
-#     name: in-cluster
-#     namespace: istio-system
-#   project: default
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
-#   source:
-#     repoURL: https://github.com/myanello/homelab.git
-#     targetRevision: HEAD
-#     path: argocd/apps/infra/istio/resources
-# ---
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-resources
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: istio-system
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+    path: argocd/apps/infra/istio/resources
+---
 

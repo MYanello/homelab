@@ -3,13 +3,13 @@ kind: Kustomization
 
 resources:
   - app.yaml
-  - resources/authPol.yaml
-  - resources/cert.yaml
-  - resources/envoyFilter.yaml
-  - resources/external-vs.yaml
-  - resources/hps.yaml
-  - resources/httpRoute.yaml
-  - resources/ingress-class.yaml
-  - resources/istio-gw.yaml
-  - resources/pdb.yaml
-  - resources/serviceEntry.yaml
+  # - resources/authPol.yaml
+  # - resources/cert.yaml
+  # - resources/envoyFilter.yaml
+  # - resources/external-vs.yaml
+  # - resources/hps.yaml
+  # - resources/httpRoute.yaml
+  # - resources/ingress-class.yaml
+  # - resources/istio-gw.yaml
+  # - resources/pdb.yaml
+  # - resources/serviceEntry.yaml
