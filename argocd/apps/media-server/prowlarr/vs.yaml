@@ -1,0 +1,16 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: prowlarr-vs
+spec:
+  hosts:
+  - prowlarr.k8s.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: prowlarr
+        port:
+          number: 9696
