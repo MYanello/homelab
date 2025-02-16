@@ -8,10 +8,9 @@ metadata:
   #   cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: istio
-  # tls:
-  #   - hosts:
-  #       - bazarr.yanello.net
-  #     secretName: bazarr-tls
+  tls:
+    - hosts:
+        - bazarr.yanello.net
   rules:
     - host: bazarr.yanello.net
       http:
