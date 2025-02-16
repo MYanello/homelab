@@ -83,7 +83,7 @@ spec:
         gateways:
           istio-ingressgateway:
             loadBalancerIP: 10.10.8.0
-            #externalTrafficPolicy: Local
+            externalTrafficPolicy: Local
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
