@@ -6,9 +6,6 @@ metadata:
     app: prowlarr
 spec:
   ingressClassName: istio
-  tls:
-    - hosts:
-        - prowlarr.yanello.net
   rules:
     - host: prowlarr.yanello.net
       http:
