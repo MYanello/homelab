@@ -38,6 +38,9 @@ spec:
       protocol: HTTP
     - number: 8443
       name: ubiquiti
+      protocol: HTTPS
+    - number: 8080
+      name: ubiquiti
       protocol: HTTP
   resolution: DNS
   location: MESH_EXTERNAL
