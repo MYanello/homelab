@@ -4,8 +4,9 @@ metadata:
   name: prowlarr
   labels:
     app: prowlarr
+  annotations:
+    kubernetes.io/ingress.class: istio
 spec:
-  ingressClassName: istio
   rules:
     - host: prowlarr.yanello.net
       http:
