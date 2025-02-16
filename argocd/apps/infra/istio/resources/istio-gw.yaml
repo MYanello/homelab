@@ -15,7 +15,18 @@ spec:
       protocol: HTTP
     # tls:
     #   httpsRedirect: true
-  - port:
+  - hosts:
+    - "ui.yanello.net"
+    port:
+      number: 443
+      name: https-passthrough
+      protocol: HTTPS
+    tls:
+      mode: PASSTHROUGH
+  - hosts:
+      - "*.yanello.net"
+      - "yanello.net"
+    port:
       number: 443
       name: https
       protocol: HTTPS
