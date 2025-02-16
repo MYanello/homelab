@@ -170,9 +170,11 @@ spec:
     - ui.yanello.net
   gateways:
     - istio-system/kube-gateway
-  http:
-    # - match:
-    #     - port: 443
+  tls:
+    - match:
+        - port: 443
+          sniHosts:
+            - ui.yanello.net
     - route:
         - destination:
             host: homeassistant.local
