@@ -37,8 +37,8 @@ spec:
       name: http
       protocol: HTTP
     - number: 8443
-      name: ubiquiti
-      protocol: HTTPS-tls
+      name: ubiquitiS-tls
+      protocol: HTTP
     - number: 8080
       name: ubiquiti
       protocol: HTTP
