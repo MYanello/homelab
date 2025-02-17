@@ -4,10 +4,10 @@ kind: Kustomization
 resources:
   - vs.yaml
 
-helmCharts:
-  - name: kiali-operator
-    repo: https://kiali.org/helm-charts
-    version: "2.5.0"
-    releaseName: kiali-operator
-    namespace: kiali
-    valuesFile: ./config.yaml
+# helmCharts:
+#   - name: kiali-operator
+#     repo: https://kiali.org/helm-charts
+#     version: "2.5.0"
+#     releaseName: kiali-operator
+#     namespace: kiali
+#     valuesFile: ./config.yaml
