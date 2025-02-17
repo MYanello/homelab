@@ -6,7 +6,6 @@ metadata:
     app: plex-media-server
   annotations:
     metallb.universe.tf/loadBalancerIPs: 10.10.8.10
-    #metallb.universe.tf/allow-shared-ip: plex-media-server
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
