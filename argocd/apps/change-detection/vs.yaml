@@ -11,6 +11,6 @@ spec:
   http:
   - route:
     - destination:
-        host: change
+        host: change-detection
         port:
           number: 5000
