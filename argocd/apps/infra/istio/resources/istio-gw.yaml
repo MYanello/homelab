@@ -24,7 +24,7 @@ spec:
     tls:
       mode: PASSTHROUGH
   - hosts:
-      - "*.yanello.net"
+      #- "*.yanello.net"
       - "yanello.net"
     port:
       number: 443
