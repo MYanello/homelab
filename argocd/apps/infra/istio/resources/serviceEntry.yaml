@@ -59,9 +59,9 @@ spec:
     - number: 3000
       name: resume
       protocol: HTTP
-    - number: 32400
-      name: plex
-      protocol: HTTP
+    # - number: 32400
+    #   name: plex
+    #   protocol: HTTP
     - number: 6987
       name: nextcloud
       protocol: HTTP
