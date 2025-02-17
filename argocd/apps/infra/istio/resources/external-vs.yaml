@@ -171,11 +171,11 @@ spec:
   gateways:
     - istio-system/kube-gateway
   tls:
-    - match:
-        - port: 443
-          sniHosts:
-            - ui.yanello.net
-      route:
+    # - match:
+    #     - port: 443
+    #       sniHosts:
+    #         - ui.yanello.net
+    - route:
         - destination:
             host: homeassistant.lan
             port:
