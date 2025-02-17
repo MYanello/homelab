@@ -6,7 +6,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - router.local
+    - router.lan
   endpoints:
     - address: 192.168.1.1
   ports:
@@ -29,7 +29,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - homeassistant.local
+    - homeassistant.lan
   endpoints:
     - address: 192.168.1.4
   ports:
@@ -81,7 +81,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - iotawatt.local
+    - iotawatt.lan
   endpoints:
     - address: 192.168.1.41
   ports:
@@ -98,7 +98,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - pikvm.local
+    - pikvm.lan
   endpoints:
     - address: 192.168.1.9
   ports:
