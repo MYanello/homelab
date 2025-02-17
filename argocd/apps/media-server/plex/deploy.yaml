@@ -31,7 +31,6 @@ spec:
                     operator: In
                     values:
                       - marcus-server
-      serviceAccountName: plex
       volumes:
         - name: transcode
           hostPath:
