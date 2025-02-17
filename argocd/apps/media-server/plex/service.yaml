@@ -50,4 +50,4 @@ spec:
       name: gdm-32414
       protocol: UDP
   selector:
-    app: plex-media-server
+    app: plex
