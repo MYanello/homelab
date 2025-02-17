@@ -4,10 +4,10 @@ metadata:
   name: plex-media-server
   labels:
     app: plex-media-server
-  annotations:
-    metallb.universe.tf/loadBalancerIPs: 10.10.8.10
+  # annotations:
+  #   metallb.universe.tf/loadBalancerIPs: 10.10.8.10
 spec:
-  type: LoadBalancer
+  # type: LoadBalancer
   #externalTrafficPolicy: Local
   ports:
     - port: 32400               # < port to open on the outside on the server
