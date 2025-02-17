@@ -13,20 +13,17 @@ spec:
       name: http
       number: 80
       protocol: HTTP
-    # tls:
-    #   httpsRedirect: true
+  # - hosts:
+  #   - "ui.yanello.net"
+  #   port:
+  #     number: 443
+  #     name: https-passthrough
+  #     protocol: HTTPS
+  #   tls:
+  #     mode: PASSTHROUGH
   - hosts:
-    - "ui.yanello.net"
-    port:
-      number: 443
-      name: https-passthrough
-      protocol: HTTPS
-    tls:
-      mode: PASSTHROUGH
-  - hosts:
-      #- "*.yanello.net"
+      - "*.yanello.net"
       - "yanello.net"
-      - "argocd.yanello.net"
     port:
       number: 443
       name: https
