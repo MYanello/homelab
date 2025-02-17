@@ -7,10 +7,10 @@ global:
             preferredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                    - key: kubernetes.io/hostname
+                    - key: kubernetes.io/arch
                       operator: In
                       values:
-                        - marcus-server
+                        - amd64
 authentik:
   email:
     host: smtp.gmail.com
