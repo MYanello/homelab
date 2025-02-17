@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generators:
+  - ./manifests/secret-generator.yaml
+  
+helmCharts:
+    - name: authentik
+      repo: https://charts.goauthentik.io/
+      version: "2024.12.3"
+      valuesFile: ./manifests/values.yaml
