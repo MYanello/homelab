@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - manifests/deploy.yaml
-- manifests/ingress.yaml
+- manifests/vs.yaml
 - manifests/service.yaml
 - manifests/pvc.yaml
 - manifests/net-policy.yaml
