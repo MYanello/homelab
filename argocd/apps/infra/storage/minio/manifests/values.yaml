@@ -7,3 +7,6 @@ affinity:
               operator: In
               values:
                 - marcus-server
+                
+persistence:
+  storageClass: local-path
