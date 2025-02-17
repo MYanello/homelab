@@ -83,8 +83,6 @@ spec:
         service:
           loadBalancerIP: 10.10.8.0
           externalTrafficPolicy: Local
-        # annotations:
-        #   proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 2 }'
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
