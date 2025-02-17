@@ -1,3 +1,2 @@
 defaultSettings:
-  defaultDataPath="/app/longhorn/"
-  allowRecurringJobWhileVolumeDetached="false"
+  defaultDataPath: "/app/longhorn/"
