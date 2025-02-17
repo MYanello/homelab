@@ -13,4 +13,4 @@ spec:
     - destination:
         host: authentik
         port:
-          number: 5000
+          number: 80
