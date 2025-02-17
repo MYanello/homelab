@@ -6,7 +6,7 @@ metadata:
   name: address-pool
 spec:
   addresses:
-  - 10.10.8.0/22
+    - 10.10.8.0/22
 ---
 apiVersion: metallb.io/v1beta1
 kind: BGPPeer
@@ -22,7 +22,8 @@ apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
 metadata:
   name: bgp-advertisement
-# No ipaddresspool selector means it advertises all pools
+  ipaddressPools:
+    - address-pool
 ---
 apiVersion: metallb.io/v1beta1
 kind: BFDProfile
