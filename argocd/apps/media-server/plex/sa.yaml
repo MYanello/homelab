@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: plex-media-server
-  labels:
-    app: plex-media-server
-automountServiceAccountToken: false

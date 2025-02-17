@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: plex-media-server
+  name: plex
   labels:
-    app: plex-media-server
+    app: plex
 spec:
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: plex-media-server
+      app: plex
   strategy: # the new pod will not be scheduable until the old pod is terminated, this allows a more manual update for downtime scheduling. It can be resolved by removing the hostnetworking pieces
     type: RollingUpdate
     rollingUpdate:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: plex-media-server
+        app: plex
       annotations: {}
     spec:
       hostNetwork: true
@@ -31,7 +31,7 @@ spec:
                     operator: In
                     values:
                       - marcus-server
-      serviceAccountName: plex-media-server
+      serviceAccountName: plex
       volumes:
         - name: transcode
           hostPath:
@@ -45,12 +45,11 @@ spec:
       terminationGracePeriodSeconds: 120
       runtimeClassName: nvidia
       containers:
-        - name: plex-media-server-pms
+        - name: plex-pms
           image: index.docker.io/plexinc/pms-docker:latest@sha256:b3a376a04fa1912af17a61755089ad2324502fe1b2f8bbf042eab31afe36fc25
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              nvidia.com/gpu: "1"
               cpu: 4000m
               memory: 8Gi
             requests:
