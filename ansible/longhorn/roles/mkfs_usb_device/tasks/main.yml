@@ -1,11 +1,9 @@
----
-
 - name: Create a ext4 filesystem on /dev/sda1 and check disk blocks
   filesystem:
     fstype: ext4
     dev: '{{ usb_dev }}1'
 
-- name: create the mountpoint /app/longhorn
+- name: Create the mountpoint /app/longhorn
   file:
     path: /app/longhorn
     state: directory
@@ -14,9 +12,19 @@
     group: root
     mode: 0755
 
-- name: mount the {{ usb_dev }}1 onto /app/longhorn
+- name: Mount the device onto /app/longhorn
   ansible.posix.mount:
     path: /app/longhorn
     src: '{{ usb_dev }}1'
     fstype: ext4
     state: mounted
+
+- name: Get the uuid
+  command: blkid -s UUID -o value {{ usb_dev }}1
+  register: uuid
+
+- name: Mount the drive on boot
+  lineinfile:
+    path: /etc/fstab
+    line: 'UUID={{ uuid.stdout }} /app/longhorn ext4 defaults,nofail 0 0'
+    state: present
