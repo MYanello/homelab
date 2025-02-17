@@ -4,6 +4,8 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 02.17.24
+- Set up longhorn with 128gb usb in each pi node to test out distributed HA storage options for the stateful workloads. I think this may be a better option than nfs for those applications.
 
 ### 02.16.24
 
