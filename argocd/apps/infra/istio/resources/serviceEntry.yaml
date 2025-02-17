@@ -39,7 +39,7 @@ spec:
     - number: 8443
       name: ubiquiti-tls
       protocol: TLS
-    - number: 8080
+    - number: 8880
       name: ubiquiti
       protocol: HTTP
   resolution: DNS
