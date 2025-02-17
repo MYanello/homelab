@@ -170,16 +170,23 @@ spec:
     - ui.yanello.net
   gateways:
     - istio-system/kube-gateway
-  tls:
-    - match:
-        - port: 443
-          sniHosts:
-            - ui.yanello.net
-      route:
+  http:
+    - route:
         - destination:
             host: homeassistant.lan
             port:
               number: 8443
+
+  # tls:
+  #   - match:
+  #       - port: 443
+  #         sniHosts:
+  #           - ui.yanello.net
+  #     route:
+  #       - destination:
+  #           host: homeassistant.lan
+  #           port:
+  #             number: 8443
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
