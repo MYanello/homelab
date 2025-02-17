@@ -13,11 +13,6 @@ authentik:
   error_reporting:
     enabled: true
 server:
-  ingress:
-    ingressClassName: istio
-    enabled: true
-    hosts:
-      - authentik.yanello.net
   replicas: 3
   resources:
     limits:
