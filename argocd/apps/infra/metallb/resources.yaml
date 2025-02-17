@@ -22,7 +22,7 @@ apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
 metadata:
   name: bgp-advertisement
-  ipaddressPools:
+  ipAddressPools:
     - address-pool
 ---
 apiVersion: metallb.io/v1beta1
