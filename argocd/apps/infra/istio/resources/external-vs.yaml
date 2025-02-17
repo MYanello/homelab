@@ -171,7 +171,8 @@ spec:
   gateways:
     - istio-system/kube-gateway
   tls:
-    - match:
+    - mode: PASSTHROUGH
+      match:
         - port: 443
           sniHosts:
             - ui.yanello.net
