@@ -2,4 +2,4 @@ defaultSettings:
   defaultDataPath: "/app/longhorn/"
 
 preUpgradeChecker:
-  jobEnabled: "false"
+  jobEnabled: false
