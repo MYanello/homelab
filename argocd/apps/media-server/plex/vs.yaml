@@ -11,6 +11,6 @@ spec:
   http:
   - route:
     - destination:
-        host: plex
+        host: plex-media-server
         port:
           number: 32400
