@@ -90,6 +90,7 @@ spec:
     chart: gateway
     helm:
       valuesObject:
+        replicaCount: 2
         service:
           loadBalancerIP: 10.10.8.0
           externalTrafficPolicy: Local
