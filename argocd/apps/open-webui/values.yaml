@@ -16,6 +16,6 @@ persistence:
 pipelines:
   persistence:
     enabled: true
-    storageClass: nfs
+    storageClass: nfs-storage
     accessMode: ReadWriteOnce
     size: 10Gi
