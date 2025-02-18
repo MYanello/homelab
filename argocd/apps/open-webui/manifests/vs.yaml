@@ -9,13 +9,15 @@ spec:
   gateways:
     - istio-system/kube-gateway
   http:
-    - route:
+    - match:
+        - port: 80
+      route:
         - destination:
             host: open-webui
             port:
               number: 80
     - match:
-        port: 11434
+        - port: 11434
       route:
         - destination:
             host: open-webui-ollama
