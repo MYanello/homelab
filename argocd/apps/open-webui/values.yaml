@@ -12,3 +12,10 @@ persistence:
   storageClass: local-path
   accessMode: ReadWriteOnce
   size: 10Gi
+
+pipelines:
+  persistence:
+    enabled: true
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 10Gi
