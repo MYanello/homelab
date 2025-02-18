@@ -1,31 +1,31 @@
-# ---
-# apiVersion: networking.istio.io/v1beta1
-# kind: Gateway
-# metadata:
-#   name: ollama-gateway
-# spec:
-#   selector:
-#     istio: ingressgateway
-#   servers:
-#     - hosts:
-#         - "chat.yanello.net"
-#       port:
-#         number: 11434
-#         name: https
-#         protocol: HTTPS
-#       tls:
-#         credentialName: ollama-cert 
-# ---
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: ollama-cert
-# spec:
-#   secretName: ollama-cert
-#   commonName: ollama.yanello.net
-#   dnsNames:
-#   - ollama.yanello.net
-#   issuerRef:
-#     name: letsencrypt-prod
-#     kind: ClusterIssuer
-#     group: cert-manager.io
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: ollama-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - "chat.yanello.net"
+      port:
+        number: 11434
+        name: https
+        protocol: HTTPS
+      tls:
+        credentialName: ollama-cert 
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ollama-cert
+spec:
+  secretName: ollama-cert
+  commonName: ollama.yanello.net
+  dnsNames:
+  - ollama.yanello.net
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
