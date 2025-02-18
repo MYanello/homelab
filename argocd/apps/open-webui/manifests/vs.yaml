@@ -18,8 +18,8 @@ spec:
         - port: 11434
       route:
         - destination:
-          host: open-webui-ollama
-          port:
-            number: 11434
+            host: open-webui-ollama
+            port:
+              number: 11434
 ---
 
