@@ -82,3 +82,36 @@ resource "kubernetes_labels" "picluster2" {
     "cpu.performance" : "low"
   }
 }
+
+resource "kubernetes_node_taint" "picluster0" {
+  metadata {
+    name = "picluster0"
+  }
+  taint {
+    key    = "controlplane" # Your taint key
+    value  = "true"                           # Your taint value
+    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+  }
+}
+
+resource "kubernetes_node_taint" "picluster1" {
+  metadata {
+    name = "picluster1"
+  }
+  taint {
+    key    = "controlplane" # Your taint key
+    value  = "true"                           # Your taint value
+    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+  }
+}
+
+resource "kubernetes_node_taint" "picluster2" {
+  metadata {
+    name = "picluster2"
+  }
+  taint {
+    key    = "controlplane" # Your taint key
+    value  = "true"                           # Your taint value
+    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+  }
+}
