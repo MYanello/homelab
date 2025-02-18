@@ -3,6 +3,7 @@ ollama:
     enabled: true
     type: nvidia
     number: 1
+  runtimeClassName: nvidia 
 
 tika:
   enabled: true
