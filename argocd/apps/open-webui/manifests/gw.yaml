@@ -11,10 +11,10 @@ spec:
         - "chat.yanello.net"
       port:
         number: 11434
-        name: http
-        protocol: HTTP
-      # tls:
-      #   credentialName: ollama-cert 
+        name: https
+        protocol: HTTPS
+      tls:
+        credentialName: ollama-cert 
       #   maxProtocolVersion: TLSV1_3
       #   minProtocolVersion: TLSV1_2
       #   mode: SIMPLE
