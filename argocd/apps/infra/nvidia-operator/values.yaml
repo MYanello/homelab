@@ -6,3 +6,9 @@ toolkit:
 devicePlugin:
   config:
     name: time-slicing-config-all
+    
+daemonsets:
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
