@@ -10,7 +10,7 @@ tika:
 
 persistence:
   enabled: true
-  storageClass: local-path
+  storageClass: nfs-storage
   accessMode: ReadWriteOnce
   size: 10Gi
 
