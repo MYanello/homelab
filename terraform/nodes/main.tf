@@ -52,7 +52,7 @@ resource "kubernetes_labels" "picluster0" {
   labels = {
     "storage.type/ssd" = "false",
     "storage.kubernetes.io/performance" : "slow",
-    "cpu.performance" : "medium"
+    "cpu.performance" : "low"
   }
 }
 
@@ -65,7 +65,7 @@ resource "kubernetes_labels" "picluster1" {
   labels = {
     "storage.type/ssd" = "false",
     "storage.kubernetes.io/performance" : "slow",
-    "cpu.performance" : "medium"
+    "cpu.performance" : "low"
   }
 }
 
@@ -78,6 +78,6 @@ resource "kubernetes_labels" "picluster2" {
   labels = {
     "storage.type/ssd" = "false",
     "storage.kubernetes.io/performance" : "slow"
-    "cpu.performance" : "medium"
+    "cpu.performance" : "low"
   }
 }

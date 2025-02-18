@@ -4,10 +4,10 @@ kind: Kustomization
 resources:
   - ./manifests/vs.yaml
 
-helmCharts:
-    - name: longhorn
-      namespace: longhorn
-      releaseName: longhorn
-      repo: https://charts.longhorn.io
-      version: "1.8.0"
-      valuesFile: ./manifests/values.yaml
+# helmCharts:
+#     - name: longhorn
+#       namespace: longhorn
+#       releaseName: longhorn
+#       repo: https://charts.longhorn.io
+#       version: "1.8.0"
+#       valuesFile: ./manifests/values.yaml
