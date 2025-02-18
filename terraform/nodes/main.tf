@@ -88,7 +88,7 @@ resource "kubernetes_node_taint" "picluster0" {
     name = "picluster0"
   }
   taint {
-    key    = "controlplane" # Your taint key
+    key    = "node-role.kubernetes.io/control-plane" # Your taint key
     value  = "true"                           # Your taint value
     effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
   }
@@ -99,7 +99,7 @@ resource "kubernetes_node_taint" "picluster1" {
     name = "picluster1"
   }
   taint {
-    key    = "controlplane" # Your taint key
+    key    = "node-role.kubernetes.io/control-plane" # Your taint key
     value  = "true"                           # Your taint value
     effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
   }
@@ -110,7 +110,7 @@ resource "kubernetes_node_taint" "picluster2" {
     name = "picluster2"
   }
   taint {
-    key    = "controlplane" # Your taint key
+    key    = "node-role.kubernetes.io/control-plane" # Your taint key
     value  = "true"                           # Your taint value
     effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
   }

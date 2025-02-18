@@ -10,3 +10,4 @@ helmCharts:
     version: "0.14.9"
     releaseName: metallb
     namespace: metallb
+    valuesFile: ./values.yaml
