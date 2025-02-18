@@ -5,12 +5,20 @@ metadata:
   name: open-webui-vs
 spec:
   hosts:
-  - chat.yanello.net
+    - chat.yanello.net
   gateways:
-  - istio-system/kube-gateway
+    - istio-system/kube-gateway
   http:
-  - route:
-    - destination:
-        host: open-webui
+    - route:
+        - destination:
+            host: open-webui
+            port:
+              number: 80
+    - match:
+        - port: 11434
+      route:
+        host: open-webui-ollama
         port:
-          number: 80
+          number: 11434
+---
+
