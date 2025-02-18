@@ -38,6 +38,7 @@ resource "kubernetes_labels" "hp-worker" {
   }
   labels = {
     "storage.type/ssd" = "true",
+    "storage.type/hdd" = "false",
     "storage.kubernetes.io/performance" : "fast",
     "cpu.performance" : "low"
   }
