@@ -21,7 +21,7 @@ metadata:
   name: open-webui-ollama-vs
 spec:
   hosts:
-    - chat.yanello.net
+    - ollama.yanello.net
   gateways:
     - istio-system/kube-gateway
   tcp:
