@@ -24,10 +24,8 @@ spec:
     - ollama.yanello.net
   gateways:
     - istio-system/kube-gateway
-  tcp:
-    - match:
-        - port: 11434
-      route:
+  http:
+    - route:
         - destination:
             host: open-webui-ollama
             port:
