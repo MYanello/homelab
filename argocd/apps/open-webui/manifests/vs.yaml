@@ -7,7 +7,7 @@ spec:
   hosts:
     - chat.yanello.net
   gateways:
-    - istio-system/kube-gateway
+    - ollama-gateway
   http:
     - match:
         - port: 443
