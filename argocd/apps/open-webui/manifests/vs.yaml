@@ -18,10 +18,10 @@ spec:
         - match:
             port: 11434
           route:
-            destination:
-              host: open-webui-ollama
-              port:
-                number: 11434
+            - destination:
+                host: open-webui-ollama
+                port:
+                  number: 11434
 # ---
 # apiVersion: networking.istio.io/v1alpha3
 # kind: VirtualService
