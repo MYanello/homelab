@@ -94,24 +94,23 @@ spec:
         service:
           loadBalancerIP: 10.10.8.0
           externalTrafficPolicy: Local
-          service:
-            ports:
-              - name: status-port
-                port: 15021
-                protocol: TCP
-                targetPort: 15021
-              - name: http2
-                port: 80
-                protocol: TCP
-                targetPort: 80
-              - name: https
-                port: 443
-                protocol: TCP
-                targetPort: 443
-              - name: ollama
-                port: 11434
-                protocol: TCP
-                targetPort: 11434
+          ports:
+            - name: status-port
+              port: 15021
+              protocol: TCP
+              targetPort: 15021
+            - name: http2
+              port: 80
+              protocol: TCP
+              targetPort: 80
+            - name: https
+              port: 443
+              protocol: TCP
+              targetPort: 443
+            - name: ollama
+              port: 11434
+              protocol: TCP
+              targetPort: 11434
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
