@@ -10,13 +10,6 @@ spec:
     - ollama-gateway
   http:
     - match:
-        - port: 443
-      route:
-        - destination:
-            host: open-webui
-            port:
-              number: 80
-    - match:
         - port: 11434
       route:
         - destination:
