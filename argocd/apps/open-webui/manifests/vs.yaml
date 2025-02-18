@@ -14,14 +14,13 @@ spec:
             host: open-webui
             port:
               number: 80
-    - route:
-        - match:
-            port: 11434
-          route:
-            - destination:
-                host: open-webui-ollama
-                port:
-                  number: 11434
+    - match:
+        port: 11434
+      route:
+        - destination:
+            host: open-webui-ollama
+            port:
+              number: 11434
 # ---
 # apiVersion: networking.istio.io/v1alpha3
 # kind: VirtualService
