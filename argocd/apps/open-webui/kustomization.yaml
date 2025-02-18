@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - manifests/vs.yaml
+  - manifests/gw.yaml
 
 helmCharts:
   - name: open-webui
