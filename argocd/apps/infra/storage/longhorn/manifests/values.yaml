@@ -4,7 +4,12 @@ defaultSettings:
 preUpgradeChecker:
   jobEnabled: false
 
-global:
+longhornManager:
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+longhornDriver:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
