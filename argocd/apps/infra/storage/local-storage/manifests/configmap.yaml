@@ -36,12 +36,12 @@ data:
     #!/bin/sh
     set -eu
     NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-    mkdir -m 0777 -p "$NAMESPACE/$VOL_DIR"
+    mkdir -m 0777 -p "$VOL_DIR"
   teardown: |-
     #!/bin/sh
     set -eu
     NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-    rm -rf "$NAMESPACE/$VOL_DIR"
+    rm -rf "$VOL_DIR"
   helperPod.yaml: |-
     apiVersion: v1
     kind: Pod
@@ -49,6 +49,10 @@ data:
       name: helper-pod
     spec:
       priorityClassName: system-node-critical
+      tolerations:
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
       containers:
       - name: helper-pod
         image: busybox:1.31.1
