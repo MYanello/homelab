@@ -8,11 +8,11 @@ spec:
   - minio.yanello.net
   gateways:
   - istio-system/kube-gateway
-  tls:
+  http:
   - match:
     - port: 443
-      sniHosts:
-        - minio.yanello.net
+      # sniHosts:
+      #   - minio.yanello.net
     route:
     - destination:
         host: myminio-console
