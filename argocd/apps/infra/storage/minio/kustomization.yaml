@@ -4,9 +4,9 @@ kind: Kustomization
 #resources:
 
 helmCharts:
-    - name: minio-operator
-      namespace: minio-operator
-      releaseName: minio-operator
+    - name: operator
+      namespace: operator
+      releaseName: operator
       repo: https://operator.min.io
       version: "4.3.7"
       valuesFile: ./manifests/values.yaml
