@@ -5,13 +5,13 @@ metadata:
   name: ollama-vs
 spec:
   hosts:
-    - chat.yanello.net
+    - ollama.yanello.net
   gateways:
-    - ollama-gateway
+    - istio-system/kube-gateway
   http:
-    - match:
-        - port: 11434
-      route:
+    # - match:
+    #     - port: 11434
+    - route:
         - destination:
             host: open-webui-ollama
             port:
