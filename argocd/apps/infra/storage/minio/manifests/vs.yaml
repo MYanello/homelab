@@ -8,7 +8,7 @@ spec:
   - minio.yanello.net
   gateways:
   - istio-system/kube-gateway
-  https:
+  tls:
   - route:
     - destination:
         host: sts
