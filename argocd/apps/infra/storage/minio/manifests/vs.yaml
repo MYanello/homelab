@@ -9,8 +9,11 @@ spec:
   gateways:
   - istio-system/kube-gateway
   http:
-  - route:
+  - match:
+    - port: 443
+    route:
     - destination:
         host: myminio-console
         port:
           number: 9443
+        subset: https
