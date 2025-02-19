@@ -11,6 +11,6 @@ spec:
   http:
   - route:
     - destination:
-        host: sts
+        host: operator
         port:
-          number: 4223
+          number: 4221
