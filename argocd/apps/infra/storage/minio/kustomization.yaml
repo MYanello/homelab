@@ -10,10 +10,10 @@ helmCharts:
       releaseName: operator
       repo: https://operator.min.io
       version: "7.0.0"
-      valuesFile: ./manifests/values.yaml
+      valuesFile: ./manifests/op-vals.yaml
     - name: tenant
       namespace: minio
       releaseName: tenant
       repo: https://operator.min.io
       version: "7.0.0"
-      valuesFile: ./manifests/values.yaml
+      valuesFile: ./manifests/tenant-vals.yaml
