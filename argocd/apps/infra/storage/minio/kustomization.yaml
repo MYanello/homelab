@@ -11,3 +11,9 @@ helmCharts:
       repo: https://operator.min.io
       version: "7.0.0"
       valuesFile: ./manifests/values.yaml
+    - name: tenant
+      namespace: minio
+      releaseName: tenant
+      repo: https://operator.min.io
+      version: "7.0.0"
+      valuesFile: ./manifests/values.yaml
