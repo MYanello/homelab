@@ -9,5 +9,5 @@ helmCharts:
       namespace: minio
       releaseName: operator
       repo: https://operator.min.io
-      version: "4.3.7"
+      version: "4.5.8"
       valuesFile: ./manifests/values.yaml
