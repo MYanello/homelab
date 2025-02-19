@@ -1,6 +1,7 @@
 tenant:
   pools:
-    - storageClassName: local-path
+    - name: pool-0
+      storageClassName: local-path
       servers: 1
       affinity:
         nodeAffinity:
