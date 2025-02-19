@@ -16,4 +16,3 @@ spec:
         host: myminio-console
         port:
           number: 9443
-        subset: https
