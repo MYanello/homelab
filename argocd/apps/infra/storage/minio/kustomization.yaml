@@ -5,7 +5,7 @@ kind: Kustomization
 
 helmCharts:
     - name: operator
-      namespace: operator
+      namespace: minio
       releaseName: operator
       repo: https://operator.min.io
       version: "4.3.7"
