@@ -8,9 +8,9 @@ spec:
   - minio.yanello.net
   gateways:
   - istio-system/kube-gateway
-  http:
+  https:
   - route:
     - destination:
-        host: operator
+        host: sts
         port:
-          number: 4221
+          number: 4223
