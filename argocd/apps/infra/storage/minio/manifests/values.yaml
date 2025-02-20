@@ -1,3 +1,16 @@
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - marcus-server
+                
+persistence:
+  storageClass: local-path
+
 tenant:
   pools:
     - name: pool-0
