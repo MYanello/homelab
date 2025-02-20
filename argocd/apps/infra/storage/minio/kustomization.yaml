@@ -6,6 +6,9 @@ resources:
   - manifests/ns.yaml
   #- manifests/cert.yaml
 
+generators:
+  - manifests/secret-generator.yaml
+
 patches:
   - patch: |-
       - op: replace
