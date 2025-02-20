@@ -4,9 +4,6 @@ kind: Kustomization
 resources:
   - manifests/vs.yaml
 
-commonLabels:
-  istio-injection: enabled
-
 patches:
 - patch: |-
     - op: replace
