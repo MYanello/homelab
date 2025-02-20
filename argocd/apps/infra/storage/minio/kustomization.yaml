@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - manifests/vs.yaml
   - manifests/ns.yaml
+  - manifests/cert.yaml
 
 patches:
   - patch: |-

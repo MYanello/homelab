@@ -14,4 +14,4 @@ tenant:
                       - marcus-server
   certificate:
     externalCaCertSecret:
-      - minio-public-cert
+      name: minio-public-cert
