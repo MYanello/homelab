@@ -4,6 +4,9 @@ kind: Kustomization
 resources:
   - ./manifests/vs.yaml
 
+generators:
+  - ./manifests/secret-generator.yaml
+
 helmCharts:
     - name: longhorn
       namespace: longhorn
