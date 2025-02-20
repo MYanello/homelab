@@ -12,4 +12,6 @@ tenant:
                     operator: In
                     values:
                       - marcus-server
-  
+  certificate:
+    externalCaCertSecret:
+      - minio-public-cert
