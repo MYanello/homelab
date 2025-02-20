@@ -5,7 +5,7 @@ metadata:
   name: minio-vs
 spec:
   hosts:
-    - minio.yanello.net
+    - minio-console.yanello.net
   gateways:
     - istio-system/kube-gateway
   http:
@@ -21,7 +21,7 @@ metadata:
   name: minio-api-vs
 spec:
   hosts:
-    - stor.yanello.net
+    - minio.yanello.net
   gateways:
     - istio-system/kube-gateway
   http:
