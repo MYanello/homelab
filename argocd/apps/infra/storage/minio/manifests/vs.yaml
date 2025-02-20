@@ -27,6 +27,6 @@ spec:
   http:
     - route:
         - destination:
-            host: myminio-hl
+            host: minio
             port:
               number: 80
