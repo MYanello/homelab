@@ -13,6 +13,3 @@ resources:
   # - resources/istio-gw.yaml
   # - resources/pdb.yaml
   # - resources/serviceEntry.yaml
-
-commonAnnotations:
-  proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 1 }'
