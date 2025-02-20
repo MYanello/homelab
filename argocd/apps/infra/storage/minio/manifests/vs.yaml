@@ -5,16 +5,12 @@ metadata:
   name: minio-vs
 spec:
   hosts:
-  - minio.yanello.net
+    - minio.yanello.net
   gateways:
-  - istio-system/kube-gateway
+    - istio-system/kube-gateway
   http:
-  - match:
-    - port: 443
-      # sniHosts:
-      #   - minio.yanello.net
-    route:
-    - destination:
-        host: myminio-console
-        port:
-          number: 9443
+    - route:
+        - destination:
+            host: myminio-console
+            port:
+              number: 9443
