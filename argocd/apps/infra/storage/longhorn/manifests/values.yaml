@@ -1,5 +1,5 @@
 defaultSettings:
-  defaultDataPath: "/zpool/k8s/longhorn/"
+  defaultDataPath: "/app/longhorn/"
 
 preUpgradeChecker:
   jobEnabled: true
