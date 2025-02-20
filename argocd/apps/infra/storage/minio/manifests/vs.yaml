@@ -13,4 +13,4 @@ spec:
         - destination:
             host: myminio-console
             port:
-              number: 9443
+              number: 9090
