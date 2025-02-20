@@ -18,7 +18,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: minio-vs
+  name: minio-api-vs
 spec:
   hosts:
     - stor.yanello.net
