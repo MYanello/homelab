@@ -3,25 +3,26 @@ kind: Kustomization
 
 resources:
   - manifests/vs.yaml
+  - manifests/ns.yaml
 
 patches:
-- patch: |-
-    - op: replace
-      path: /spec/replicas
-      value: 1
-  target:
-    kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
 
 helmCharts:
-    - name: operator
-      namespace: minio
-      releaseName: operator
-      repo: https://operator.min.io
-      version: "7.0.0"
-      valuesFile: ./manifests/op-vals.yaml
-    - name: tenant
-      namespace: minio
-      releaseName: tenant
-      repo: https://operator.min.io
-      version: "7.0.0"
-      valuesFile: ./manifests/tenant-vals.yaml
+  - name: operator
+    namespace: minio
+    releaseName: operator
+    repo: https://operator.min.io
+    version: "7.0.0"
+    valuesFile: ./manifests/op-vals.yaml
+  - name: tenant
+    namespace: minio
+    releaseName: tenant
+    repo: https://operator.min.io
+    version: "7.0.0"
+    valuesFile: ./manifests/tenant-vals.yaml
