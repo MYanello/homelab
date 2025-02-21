@@ -45,4 +45,4 @@ spec:
               - resume.yanello.net
               - rxresume.yanello.net
             paths:
-              - "*"
+              - "*marcus*"
