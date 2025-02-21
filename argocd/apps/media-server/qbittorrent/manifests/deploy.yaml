@@ -38,7 +38,7 @@ spec:
             value: "1000"
           - name: DOCKER_MODS
             value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
-        image: lscr.io/linuxserver/qbittorrent:latest@sha256:308d768672fb9e86e800a73504c439176aabe5977bcdf8b99f7561bb603d9b6e
+        image: lscr.io/linuxserver/qbittorrent:latest@sha256:f16d5c44d52d8bac07a3cab9c5eaccc5b570695434560e4fbcb9d963bf7e4b89
         imagePullPolicy: IfNotPresent
         resources:
           requests:
