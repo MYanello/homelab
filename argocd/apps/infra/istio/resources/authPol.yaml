@@ -11,7 +11,7 @@ spec:
             ipBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
-              - "192.168.0.0/16"
+              #- "192.168.0.0/16"
     # Allow WAN traffic only to specific subdomains
     - from:
         - source:
@@ -38,7 +38,7 @@ spec:
             notRemoteIpBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
-              - "192.168.0.0/16"
+              #- "192.168.0.0/16"
       to:
         - operation:
             hosts:
