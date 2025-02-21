@@ -4,7 +4,14 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+
+### 02.20.24
+
+- Deployed longhorn with some usb drives in the pis to play with some distributed ha storage for the stateful workloads. I think this will be a better option than nfs for those applications.
+- Set up minio for s3 storage. This well be useful for backing up the longhorn volumes in particular, but should let me use it for anything that wants blob storage.
+
 ### 02.17.24
+
 - Set up longhorn with 128gb usb in each pi node to test out distributed HA storage options for the stateful workloads. I think this may be a better option than nfs for those applications.
 
 ### 02.16.24
