@@ -14,3 +14,11 @@ spec:
             host: rx-resume
             port:
               number: 3010
+    - match:
+      - uri:
+          prefix: "/marcus/latest"
+      route:
+        - destination:
+            host: rx-resume
+            port:
+              number: 3010
