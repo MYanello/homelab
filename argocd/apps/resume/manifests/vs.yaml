@@ -5,6 +5,7 @@ metadata:
 spec:
   hosts:
     - rxresume.yanello.net
+    - resume.yanello.net
   gateways:
     - istio-system/kube-gateway
   http:
