@@ -1,11 +1,11 @@
 apiVersion: v1
+kind: ConfigMap
 metadata:
   name: resume-config 
 data:
   DB_DATABASE_NAME: postgres
   DB_HOSTNAME: postgres
   DB_USERNAME: postgres
-kind: ConfigMap
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -36,60 +36,36 @@ spec:
           value: "3010"
         - name: PUBLIC_URL
           value: "https://rxresume.yanello.net"
+        - name: CHROME_URL
+          value: "ws://localhost:3000"
         - name: CHROME_TOKEN
           valueFrom:
             secretKeyRef:
               name: resume-secrets
               key: TOKEN
-        - name: CHROME_URL
-          value: "ws://localhost:3000"
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: DATABASE_URL
-        # - name: MAIL_FROM
-        #   value: "example@example.com"
-        # - name: SMTP_URL
-        #   value: "smtp://...:587"
         - name: DISABLE_SIGNUPS
           value: "false"
         - name: DISABLE_EMAIL_AUTH
           value: "false"
         - name: STORAGE_ENDPOINT
-          value: "localhost"
+          value: "minio.minio.svc.cluster.local"
         - name: STORAGE_REGION
-          value: "us-east-1"
+          value: "homelab"
         - name: STORAGE_BUCKET
-          value: "default"
-        - name: STORAGE_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: MINIO_ROOT_USER
-        - name: STORAGE_SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: MINIO_ROOT_PASSWORD
+          value: "rxresume"
         - name: STORAGE_USE_SSL
           value: "false"
         - name: SKIP_BUCKET_CHECK
           value: "false"
         - name: STORAGE_PORT
-          value: "9000"
+          value: "80"
         - name: STORAGE_URL
-          value: "https://minio.yanello.net/default"
-        - name: ACCESS_TOKEN_SECRET
-          valueFrom:
-            secretKeyRef:
+          value: "https://minio.yanello.net/rxresume"
+        envFrom:
+          - secretRef:
               name: resume-secrets
-              key: ACCESS_TOKEN_SECRET
-        - name: REFRESH_TOKEN_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: REFRESH_TOKEN_SECRET
+          - configMapRef:
+              name: resume-config
         # resources:
         #   limits:
         #     cpu: 1000m
@@ -123,42 +99,6 @@ spec:
         #   requests:
         #     cpu: 2000m
         #     memory: 4096Mi
-
-      - name: rx-resume-s3
-        image: minio/minio:latest@sha256:1df91be8d6a6146001cd6be2569a12785a8ece583b511f56ebed08f1e65d3611
-        args:
-        - server
-        - /data
-        env:
-        - name: MINIO_ROOT_USER
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: MINIO_ROOT_USER
-        - name: MINIO_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: MINIO_ROOT_PASSWORD
-        ports:
-        - name: s3
-          containerPort: 9000
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - mountPath: /data
-          name: assets-storage
-        # resources:
-        #   limits:
-        #     cpu: 1000m
-        #     memory: 2048Mi
-        #   requests:
-        #     cpu: 1000m
-        #     memory: 2048Mi
-
-      volumes:
-      - name: assets-storage
-        persistentVolumeClaim:
-          claimName: minio
 ---
 apiVersion: apps/v1
 kind: Deployment
