@@ -44,4 +44,4 @@ spec:
             hosts:
               - resume.yanello.net
             paths:
-              - exact: "/marcus/latest"
+              - "/marcus/latest"
