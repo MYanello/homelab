@@ -37,7 +37,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: ghcr.io/hotio/prowlarr:latest@sha256:952927935b2793afba94c78207a0be39a9bf8f4ae2493f7913b26be7eb0ecee7
+          image: ghcr.io/hotio/prowlarr:latest@sha256:94c506553ddb901dcfd50dbcc2aadd8e0398d4baae9476a2764f90c0066049e1
           imagePullPolicy: IfNotPresent
           name: prowlarr
           ports:
