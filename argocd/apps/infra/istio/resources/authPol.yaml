@@ -46,3 +46,6 @@ spec:
               - rxresume.yanello.net
             paths:
               - "/marcus/latest"
+              - "/artboard/{**}"
+              - "/assets/{**}"
+              - "/api/resume/public/{**}"
