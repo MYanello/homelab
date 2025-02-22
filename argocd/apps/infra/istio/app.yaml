@@ -90,7 +90,11 @@ spec:
     chart: gateway
     helm:
       valuesObject:
-        replicaCount: 2
+        autoscaling:
+          enabled: true
+          minReplicas: 2
+          maxReplicas: 4
+          targetCPUUtilizationPercentage: 80
         service:
           loadBalancerIP: 10.10.8.0
           externalTrafficPolicy: Local
