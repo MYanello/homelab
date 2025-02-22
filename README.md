@@ -5,6 +5,15 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 
+### 02.22.24
+- Needed to bump pod limit for server. Seemed best way to do that is by creating a conf file:
+  ```
+  apiVersion: kubelet.config.k8s.io/v1beta1
+  kind: KubeletConfiguration
+  maxPods: 250
+  ```
+  Then modify /etc/systemd/system/k3s-agent.service to use it as an arg
+
 ### 02.20.24
 
 - Deployed longhorn with some usb drives in the pis to play with some distributed ha storage for the stateful workloads. I think this will be a better option than nfs for those applications.
