@@ -12,28 +12,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rx-resume-s3
-spec:
-  ports:
-  - port: 9000
-    targetPort: 9000
-  selector:
-    app: rx-resume
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rx-resume-s3-dashboard
-spec:
-  ports:
-  - port: 44253
-    targetPort: 44253
-  selector:
-    app: rx-resume
----
-apiVersion: v1
-kind: Service
-metadata:
   name: postgres
 spec:
   ports:

@@ -3,6 +3,10 @@ defaultSettings:
   defaultReplicaCount: 2
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
+defaultBackupStore:
+  backupTarget: "s3://minio.minio.svc:9000/longhorn-backup"
+  backupTargetCredentialSecret: "minio-access"
+
 preUpgradeChecker:
   jobEnabled: true
 
