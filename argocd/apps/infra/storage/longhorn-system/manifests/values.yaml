@@ -1,6 +1,7 @@
 defaultSettings:
   defaultDataPath: "/app/longhorn/"
   defaultReplicaCount: 2
+  taintToleration: "key=value:NoSchedule"
 
 preUpgradeChecker:
   jobEnabled: false
