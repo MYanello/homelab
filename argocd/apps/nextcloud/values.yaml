@@ -37,7 +37,7 @@ cronjob:
 redis:
   enabled: true
   global:
-    storageClass: local-path
+    storageClass: longhorn
   master:
     affinity:
       nodeAffinity:
@@ -77,11 +77,11 @@ externalDatabase:
 mariadb:
   enabled: true
   global:
-    defaultStorageClass: local-path
+    defaultStorageClass: longhorn
   primary:
     persistence:
       enabled: true
-      storageClass: local-path
+      storageClass: longhorn
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
