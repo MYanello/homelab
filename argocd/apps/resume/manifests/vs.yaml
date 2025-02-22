@@ -9,11 +9,11 @@ spec:
   gateways:
     - istio-system/kube-gateway
   http:
-    - route:
-        - destination:
-            host: rx-resume
-            port:
-              number: 3010
+    # - route:
+    #     - destination:
+    #         host: rx-resume
+    #         port:
+    #           number: 3010
     - match:
       - uri:
           prefix: "/marcus"
