@@ -13,7 +13,7 @@ nextcloud:
     - name: OVERWRITEPROTOCOL
       value: https
     - name: OVERWRITEHOST
-      value: nextcloudk8s.yanello
+      value: nextcloudk8s.yanello.net
     - name: OVERWRITECLIURL
       value: https://nextcloudk8s.yanello.net
     - name: APACHE_DISABLE_REWRITE_IP
