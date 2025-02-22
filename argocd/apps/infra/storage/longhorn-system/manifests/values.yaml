@@ -4,7 +4,7 @@ defaultSettings:
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
 defaultBackupStore:
-  backupTarget: "s3://minio.minio.svc:9000/longhorn-backup"
+  backupTarget: "s3://longhorn@homelab/backups"
   backupTargetCredentialSecret: "minio-access"
 
 preUpgradeChecker:
