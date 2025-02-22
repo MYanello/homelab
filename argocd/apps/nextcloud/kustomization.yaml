@@ -2,17 +2,24 @@ resources:
   - ./vs.yaml
   - ./cm.yaml
 
-patches:
-  - target:
-      kind: Deployment
-      name: nextcloud
-    patch: |-
-      - op: add
-        path: /spec/template/spec/hostNetwork
-        value: true
-      - op: add
-        path: /spec/template/spec/dnsPolicy
-        value: ClusterFirstWithHostNet        
+# patches:
+#   - target:
+#       kind: StatefulSet
+#       name: nextcloud-mariadb
+#     patch: |-
+#       - op: replace
+#         path: spec/replicas
+#         value: 0
+#   - target:
+#       kind: Deployment
+#       name: nextcloud
+#     patch: |-
+#       - op: add
+#         path: /spec/template/spec/hostNetwork
+#         value: true
+#       - op: add
+#         path: /spec/template/spec/dnsPolicy
+#         value: ClusterFirstWithHostNet 
 
 generators:
   - ./secret-generator.yaml

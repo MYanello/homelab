@@ -4,18 +4,18 @@ ingress:
   className: istio
   
 nextcloud:
-  host: nextcloud.k8s.yanello.net
+  host: nextcloudk8s.yanello.net
   trustedDomains:
-    - nextcloud.k8s.yanello.net
+    - nextcloudk8s.yanello.net
   extraEnv:
     - name: TRUSTED_PROXIES
       value: 10.10.8.0
     - name: OVERWRITEPROTOCOL
       value: https
     - name: OVERWRITEHOST
-      value: nextcloud.k8s.yanello
+      value: nextcloudk8s.yanello
     - name: OVERWRITECLIURL
-      value: https://nextcloud.k8s.yanello.net
+      value: https://nextcloudk8s.yanello.net
     - name: APACHE_DISABLE_REWRITE_IP
       value: '1'
   extraVolumes:
