@@ -3,7 +3,7 @@ defaultSettings:
   defaultReplicaCount: 2
 
 preUpgradeChecker:
-  jobEnabled: true
+  jobEnabled: false
 
 longhornManager:
   tolerations:
