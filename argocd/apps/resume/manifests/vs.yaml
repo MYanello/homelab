@@ -16,7 +16,7 @@ spec:
     #           number: 3010
     - match:
       - uri:
-          prefix: "/marcus"
+          prefix: "/marcus/latest"
       route:
         - destination:
             host: rx-resume
