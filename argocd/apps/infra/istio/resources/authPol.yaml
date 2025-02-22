@@ -33,7 +33,13 @@ spec:
               - immich.yanello.net
               - bitwarden.yanello.net
               - mealie.yanello.net
-    - to:
+    - from:
+        - source:
+            notRemoteIpBlocks:
+              - "10.0.0.0/8"
+              - "172.16.0.0/12"
+              - "192.168.0.0/16"
+      to:
         - operation:
             hosts:
               - resume.yanello.net
