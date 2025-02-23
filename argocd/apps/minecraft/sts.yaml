@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mc
 spec:
   replicas: 1
+  serviceName: mc
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -54,7 +55,16 @@ spec:
           #   initialDelaySeconds: 20
           #   periodSeconds: 10
           #   failureThreshold: 12
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
+
+      volumeClaimTemplates:
+        - metadata:
+            name: data
+            annoations:
+              longhorn.io/path:
+                "/k8s-fast/minecraft"
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            storageClassName: longhorn
+            resources:
+              requests:
+                storage: 10Gi
