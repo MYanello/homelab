@@ -11,7 +11,7 @@ data:
   MEMORY: "8G"
   TZ: "America/Chicago"
   SNOOPER_ENABLED: "false"
-  TYPE: FORGE
+  #TYPE: FORGE
   EXEC_DIRECTLY: "true"
   GUI: "FALSE"
   MODPACK: https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip
