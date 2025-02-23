@@ -35,7 +35,7 @@ spec:
         - name: PORT
           value: "3010"
         - name: PUBLIC_URL
-          value: "https://rxresume.yanello.net"
+          value: "https://resume.yanello.net"
         - name: CHROME_URL
           value: "ws://localhost:3000"
         - name: CHROME_TOKEN
