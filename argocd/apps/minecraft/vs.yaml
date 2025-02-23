@@ -8,8 +8,10 @@ spec:
   - mc.yanello.net
   gateways:
   - istio-system/kube-gateway
-  http:
-  - route:
+  tcp:
+  - match:
+    - port: 25565
+    route:
     - destination:
         host: mc
         port:
