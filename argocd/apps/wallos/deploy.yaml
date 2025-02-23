@@ -20,7 +20,7 @@ spec:
         app: wallos
     spec:
       containers:
-        - image: bellamy/wallos:latest@sha256:fc19d4aaf68d1ea2cc7e7ba5cbfd2fe6fafb5b47968814b9f609242334c4e97b
+        - image: bellamy/wallos:latest@sha256:9ce55520e7bd3a5518a33f22590b2631b76559faadf1df68e1de4103dc6d60d7
           imagePullPolicy: IfNotPresent
           name: wallos
           env:
