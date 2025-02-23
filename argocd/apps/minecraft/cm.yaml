@@ -9,7 +9,7 @@ data:
   DEBUG: "true"
   MEMORY: "8G"
   TZ: "America/Chicago"
-  REMOVE_OLD_MODS: "true"
+  #REMOVE_OLD_MODS: "true"
   SNOOPER_ENABLED: "false"
   EXEC_DIRECTLY: "true"
   #MODPACK_PLATFORM: AUTO_CURSEFORGE
