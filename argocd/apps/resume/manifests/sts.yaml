@@ -69,11 +69,11 @@ spec:
             - containerPort: 5432
               protocol: TCP
           volumeMounts:
-            - name: db
+            - name: pgdata
               mountPath: /var/lib/postgresql/data
       volumeClaimTemplates:
         - metadata:
-            name: db
+            name: pgdata
           spec:
             accessModes: ["ReadWriteOnce"]
             storageClassName: longhorn
