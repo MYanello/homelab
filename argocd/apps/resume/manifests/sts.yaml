@@ -70,13 +70,13 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: pgdata
-              mountPath: /var/lib/postgresql/data
-      volumeClaimTemplates:
-        - metadata:
-            name: pgdata
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: longhorn
-            resources:
-              requests:
-                storage: 100Mi
+              mountPath: /var/lib/postgresql/
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 100Mi
