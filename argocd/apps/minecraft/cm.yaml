@@ -7,13 +7,18 @@ metadata:
 data:
   EULA: "TRUE"
   DEBUG: "true"
+  VERSION: "1.7.10"
   MEMORY: "8G"
   TZ: "America/Chicago"
-  REMOVE_OLD_MODS: "true"
   SNOOPER_ENABLED: "false"
+  TYPE: CUSTOM
   EXEC_DIRECTLY: "true"
-  MODPACK_PLATFORM: AUTO_CURSEFORGE
-  CF_SLUG: gt-new-horizons
   GUI: "FALSE"
-  CF_EXCLUDE_MODS: custom-main-menu,defaultserverlist,default-world-generator
-  #CF_FORCE_SYNCHRONIZE: "true"
+  GENERIC_PACK: https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip
+  CUSTOM_SERVER: "/data/lwjgl3ify-forgePatches.jar"
+  JVM_OPTS: "-Dfml.readTimeout=180 @java9args.txt"
+  SKIP_GENERIC_PACK_UPDATE_CHECK: "true"
+  WHITELIST: |
+    "MarcusY"
+  OPS: |
+    "MarcusY"

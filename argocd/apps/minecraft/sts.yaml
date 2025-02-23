@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mc
 spec:
-  replicas: 0
+  replicas: 1
+  serviceName: mc
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -31,9 +32,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: mc-config
-            - secretRef:
-                name: mc-secrets
-          image: itzg/minecraft-server:java8@sha256:bfc70477870696e63baee4977a338eae7576b912a51f02182897f86d07957110
+            # - secretRef:
+            #     name: mc-secrets
+          image: itzg/minecraft-server:java21
           stdin: true
           tty: true
           volumeMounts:
@@ -42,7 +43,7 @@ spec:
           resources:
             requests:
               cpu: 150m
-              memory: 4Gi
+              memory: 2Gi
           # livenessProbe:
           #   exec:
           #     command: ["mc-health"]
@@ -54,7 +55,15 @@ spec:
           #   initialDelaySeconds: 20
           #   periodSeconds: 10
           #   failureThreshold: 12
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
+
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 10Gi
