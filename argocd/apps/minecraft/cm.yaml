@@ -17,4 +17,4 @@ data:
   GUI: "FALSE"
   #CF_EXCLUDE_MODS: custom-main-menu,defaultserverlist,default-world-generator
   #CF_FORCE_SYNCHRONIZE: "true"
-  MODPACK: https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip
+  #MODPACK: https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip

@@ -61,12 +61,9 @@ spec:
       kind: PersistentVolumeClaim
       metadata:
         name: data
-        annotations:
-          longhorn.io/path:
-            "/k8s-fast/minecraft"
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        storageClassName: longhorn
+        storageClassName: local-path
         resources:
           requests:
             storage: 10Gi
