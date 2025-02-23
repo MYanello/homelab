@@ -56,15 +56,15 @@ spec:
           #   periodSeconds: 10
           #   failureThreshold: 12
 
-      volumeClaimTemplates:
-        - metadata:
-            name: data
-            annoations:
-              longhorn.io/path:
-                "/k8s-fast/minecraft"
-          spec:
-            accessModes: [ "ReadWriteOnce" ]
-            storageClassName: longhorn
-            resources:
-              requests:
-                storage: 10Gi
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        annoations:
+          longhorn.io/path:
+            "/k8s-fast/minecraft"
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 10Gi
