@@ -5,7 +5,7 @@ resources:
 - manifests/deploy.yaml
 - manifests/vs.yaml
 - manifests/service.yaml
-- manifests/pvc.yaml
+- manifests/sts.yaml
 
 generators:
 - manifests/secret-generator.yaml
