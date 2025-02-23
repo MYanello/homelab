@@ -19,6 +19,6 @@ data:
   JVM_OPTS: "-Dfml.readTimeout=180 @java9args.txt"
   SKIP_GENERIC_PACK_UPDATE_CHECK: "true"
   WHITELIST: |
-    "MarcusY"
+    "TooMuchDog9800"
   OPS: |
-    "MarcusY"
+    "TooMuchDog9800"
