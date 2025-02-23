@@ -71,12 +71,12 @@ spec:
           volumeMounts:
             - name: pgdata
               mountPath: /var/lib/postgresql/data
-      volumeClaimTemplates:
-        - metadata:
-            name: pgdata
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: longhorn
-            resources:
-              requests:
-                storage: 100Mi
+    volumeClaimTemplates:
+      - metadata:
+          name: pgdata
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          storageClassName: longhorn
+          resources:
+            requests:
+              storage: 100Mi
