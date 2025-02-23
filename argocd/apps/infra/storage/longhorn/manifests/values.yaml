@@ -8,7 +8,7 @@ defaultBackupStore:
   backupTargetCredentialSecret: "minio-access"
 
 preUpgradeChecker:
-  jobEnabled: true
+  jobEnabled: false
 
 persistence:
   defaultClassReplicaCount: 2
