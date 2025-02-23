@@ -61,7 +61,7 @@ spec:
       kind: PersistentVolumeClaim
       metadata:
         name: data
-        annoations:
+        annotations:
           longhorn.io/path:
             "/k8s-fast/minecraft"
       spec:
