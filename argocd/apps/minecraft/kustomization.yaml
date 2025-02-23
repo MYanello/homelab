@@ -7,6 +7,5 @@ resources:
   - svc.yaml
   - vs.yaml
   - cm.yaml
-  - pvc.yaml
 generators:
   - secret-generator.yaml
