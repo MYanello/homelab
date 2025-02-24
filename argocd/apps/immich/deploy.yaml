@@ -118,6 +118,7 @@ spec:
           resources:
             requests:
               nvidia.com/gpu: "1"
+              memory: "2Gi"
             limits:
               nvidia.com/gpu: "1"
       volumes:
