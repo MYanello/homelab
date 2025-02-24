@@ -49,10 +49,10 @@ spec:
               mountPath: /usr/src/paperless/consume
           resources:
             limits:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 1000m
+              memory: 2Gi
             requests:
-              cpu: 100m
+              cpu: 250m
               memory: 500Mi
       restartPolicy: Always
       volumes:
