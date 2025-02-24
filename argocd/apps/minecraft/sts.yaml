@@ -6,6 +6,10 @@ spec:
   replicas: 1
   serviceName: mc
   revisionHistoryLimit: 3
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
   selector:
     matchLabels:
       server: mc

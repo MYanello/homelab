@@ -1,24 +1,24 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    app.kubernetes.io/part-of: mc
-  name: mc-config
-data:
-  EULA: "TRUE"
-  DEBUG: "true"
-  VERSION: "1.7.10"
-  MEMORY: "8G"
-  TZ: "America/Chicago"
-  SNOOPER_ENABLED: "false"
-  TYPE: CUSTOM
-  EXEC_DIRECTLY: "true"
-  GUI: "FALSE"
-  GENERIC_PACK: https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip
-  CUSTOM_SERVER: "/data/lwjgl3ify-forgePatches.jar"
-  JVM_OPTS: "-Dfml.readTimeout=180 @java9args.txt"
-  SKIP_GENERIC_PACK_UPDATE_CHECK: "true"
-  WHITELIST: |
-    "TooMuchDog9800"
-  OPS: |
-    "TooMuchDog9800"
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   labels:
+#     app.kubernetes.io/part-of: mc
+#   name: mc-config
+# data:
+EULA: "TRUE"
+DEBUG: "true"
+VERSION: "1.7.10"
+MEMORY: "8G"
+TZ: "America/Chicago"
+SNOOPER_ENABLED: "false"
+TYPE: CUSTOM
+EXEC_DIRECTLY: "true"
+GUI: "FALSE"
+GENERIC_PACK: https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip
+CUSTOM_SERVER: "/data/lwjgl3ify-forgePatches.jar"
+JVM_OPTS: "-Dfml.readTimeout=180 @java9args.txt"
+SKIP_GENERIC_PACK_UPDATE_CHECK: "true"
+WHITELIST: |
+  "TooMuchDog9800"
+OPS: |
+  "TooMuchDog9800"

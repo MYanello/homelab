@@ -6,6 +6,12 @@ resources:
   - sts.yaml
   - svc.yaml
   - vs.yaml
-  - cm.yaml
+  #- cm.yaml
+  
+configMapGenerator:
+  - name: mc-config
+    files:
+      - cm.yaml
+
 generators:
   - secret-generator.yaml
