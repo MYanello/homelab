@@ -39,8 +39,8 @@ spec:
               cpu: 200m
               memory: 600Mi
             requests:
-              cpu: 50m
-              memory: 200Mi
+              cpu: 10m
+              memory: 100Mi
           ports:
             - containerPort: 8181
               protocol: TCP

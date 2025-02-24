@@ -50,8 +50,8 @@ spec:
               cpu: 500m
               memory: 1Gi
             requests:
-              cpu: 50m
-              memory: 400Mi
+              cpu: 10m
+              memory: 300Mi
           ports:
             - containerPort: 7878
               protocol: TCP

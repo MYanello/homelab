@@ -53,29 +53,29 @@ spec:
               name: config
             - mountPath: /data/media
               name: media
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8989
-          #   initialDelaySeconds: 30
-          #   periodSeconds: 30
-          #   timeoutSeconds: 5
-          #   failureThreshold: 5
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8989
-          #   initialDelaySeconds: 300
-          #   periodSeconds: 30
-          #   timeoutSeconds: 5
-          #   failureThreshold: 10
-          # resources:
-          #   limits:
-          #     cpu: 200m
-          #     memory: 600Mi
-          #   requests:
-          #     cpu: 50m
-          #     memory: 400Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8989
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8989
+            initialDelaySeconds: 300
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 10
+          resources:
+            limits:
+              cpu: 200m
+              memory: 600Mi
+            requests:
+              cpu: 10m
+              memory: 200Mi
       restartPolicy: Always
       volumes:
         - name: config
