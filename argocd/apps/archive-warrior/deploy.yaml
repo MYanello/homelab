@@ -26,7 +26,7 @@ spec:
             memory: "384Mi"
           requests:
             cpu: "1m"
-            memory: "256Mi"
+            memory: "128Mi"
         env:
         - name: DOWNLOADER
           value: mjy

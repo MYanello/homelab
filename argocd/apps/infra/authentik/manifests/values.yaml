@@ -29,7 +29,7 @@ server:
       memory: 1Gi
     requests:
       cpu: 400m
-      memory: 600Mi
+      memory: 300Mi
 worker:
   replicas: 1
   resources:

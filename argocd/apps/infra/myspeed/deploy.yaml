@@ -28,8 +28,8 @@ spec:
               cpu: '2'
               memory: 1Gi
             requests:
-              cpu: 50m
-              memory: 150Mi
+              cpu: 10m
+              memory: 50Mi
           ports:
             - containerPort: 5216
               protocol: TCP

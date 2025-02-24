@@ -92,7 +92,7 @@ spec:
           name: playwright
           resources:
             requests:
-              memory: "1Gi"
+              memory: "500Mi"
               cpu: "100m"
             limits:
               memory: "2Gi"
