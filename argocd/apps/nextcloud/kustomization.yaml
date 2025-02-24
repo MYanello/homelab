@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 # kubectl exec -it nextcloud -- su -s /bin/sh www-data -c "php"
 resources:
-  - ./manifests//vs.yaml
-  - ./manifests/cm.yaml
+  - ./manifests/vs.yaml
+  - ./cm.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
