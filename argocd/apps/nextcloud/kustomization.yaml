@@ -1,39 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# kubectl exec -it nextcloud -- su -s /bin/sh www-data -c "php"
 resources:
-  - ./vs.yaml
-  - ./cm.yaml
-
-# patches:
-#   - target:
-#       kind: StatefulSet
-#       name: nextcloud-mariadb
-#     patch: |-
-#       - op: replace
-#         path: spec/replicas
-#         value: 0
-#   - target:
-#       kind: Deployment
-#       name: nextcloud
-#     patch: |-
-#       - op: add
-#         path: /spec/template/spec/hostNetwork
-#         value: true
-#       - op: add
-#         path: /spec/template/spec/dnsPolicy
-#         value: ClusterFirstWithHostNet 
+  - ./manifests//vs.yaml
+  - ./manifests/cm.yaml
 
 generators:
-  - ./secret-generator.yaml
+  - ./manifests/secret-generator.yaml
 
 helmCharts:
-    - name: nextcloud
-      repo: https://nextcloud.github.io/helm/
-      version: "6.6.4"
-      releaseName: nextcloud
-      namespace: nextcloud
-      valuesFile: ./values.yaml
+  - name: nextcloud
+    repo: https://nextcloud.github.io/helm/
+    version: "6.6.4"
+    releaseName: nextcloud
+    namespace: nextcloud
+    valuesFile: ./values.yaml
 
 images:
   - name: nextcloud
-    newTag: 29.0.12@sha256:b7b36d25ed9682acc26343a6c40f608b868e5a84f98f3af49b8152a3ce7dfb63
+    newTag: 29.0.12
   - name: docker.io/bitnami/mariadb
-    newTag: '10.11@sha256:effbeae0531003615411d7536443604812a8b9f6f8d5bfcc6b6b80848e19759e'
+    newTag: "10.11@sha256:effbeae0531003615411d7536443604812a8b9f6f8d5bfcc6b6b80848e19759e"
