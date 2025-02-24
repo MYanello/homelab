@@ -21,6 +21,10 @@ gpu:
     enabled: true
     runtimeClassName: nvidia
 resources:
+  requests:
+    nvidia.com/gpu: '1'
+    memory: '2Gi'
+    cpu: '200Mi'
   limits:
     nvidia.com/gpu: '1'
 service:
