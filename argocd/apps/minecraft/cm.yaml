@@ -6,7 +6,7 @@ TZ=America/Chicago
 SNOOPER_ENABLED=false
 TYPE=CUSTOM
 EXEC_DIRECTLY=true
-GUI="FALSE"
+GUI=FALSE
 GENERIC_PACK=https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.2_Server_Java_17-21.zip
 CUSTOM_SERVER=/data/lwjgl3ify-forgePatches.jar
 JVM_OPTS=-Dfml.readTimeout=180 @java9args.txt
