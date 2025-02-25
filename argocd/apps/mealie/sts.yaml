@@ -67,11 +67,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-      restartPolicy: Always
-      volumes:
-        - name: pg-data
-          hostPath:
-            path: /k8s/mealie/pg-data
+      restartPolicy: Always          
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
