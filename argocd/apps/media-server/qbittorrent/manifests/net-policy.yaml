@@ -8,7 +8,6 @@ spec:
       app: qbittorrent
   policyTypes:
     - Ingress
-    #- Egress
   ingress:
     # VPN endpoint for port forwarding
     - from:

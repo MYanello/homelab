@@ -4,6 +4,3 @@ cr:
   spec:
     auth:
       strategy: anonymous
-
-istio_namespace: istio
-
