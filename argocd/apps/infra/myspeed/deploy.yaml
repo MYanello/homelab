@@ -25,7 +25,7 @@ spec:
           name: myspeed
           resources:
             limits:
-              cpu: '2'
+              cpu: 500m
               memory: 1Gi
             requests:
               cpu: 10m
