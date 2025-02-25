@@ -36,22 +36,22 @@ spec:
           volumeMounts:
             - mountPath: /myspeed/data
               name: data
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 5216
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 5216
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5216
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5216
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: data
