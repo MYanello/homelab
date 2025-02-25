@@ -36,8 +36,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: mc-config
-            # - secretRef:
-            #     name: mc-secrets
           image: itzg/minecraft-server:java21
           stdin: true
           tty: true
@@ -48,25 +46,24 @@ spec:
             requests:
               cpu: 150m
               memory: 8Gi
-          # livenessProbe:
-          #   exec:
-          #     command: ["mc-health"]
-          #   initialDelaySeconds: 120
-          #   periodSeconds: 60
-          # readinessProbe:
-          #   exec:
-          #     command: ["mc-health"]
-          #   initialDelaySeconds: 20
-          #   periodSeconds: 10
-          #   failureThreshold: 12
-
+          livenessProbe:
+            exec:
+              command: ["mc-health"]
+            initialDelaySeconds: 120
+            periodSeconds: 60
+          readinessProbe:
+            exec:
+              command: ["mc-health"]
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 12
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
         name: data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         storageClassName: local-path
         resources:
           requests:

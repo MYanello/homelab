@@ -9,3 +9,4 @@ resources:
 - service.yaml
 - pvc.yaml
 - vs.yaml
+- sts.yaml
