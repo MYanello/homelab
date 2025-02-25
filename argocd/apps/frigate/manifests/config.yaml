@@ -10,7 +10,7 @@ persistence:
     enabled: true
     storageClass: local-path
     accessMode: ReadWriteOnce
-    size: 1Ti
+    size: 100Gi
 envFromSecrets:
   - frigate-secrets
 coral:
