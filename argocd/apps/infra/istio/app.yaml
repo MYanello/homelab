@@ -115,16 +115,16 @@ spec:
               port: 11434
               protocol: TCP
               targetPort: 11434
-        affinity:
-          nodeAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 1
-                preference:
-                  matchExpressions:
-                    - key: kubernetes.io/arch
-                      operator: In
-                      values:
-                        - amd64
+        # affinity:
+        #   nodeAffinity:
+        #     preferredDuringSchedulingIgnoredDuringExecution:
+        #       - weight: 1
+        #         preference:
+        #           matchExpressions:
+        #             - key: kubernetes.io/arch
+        #               operator: In
+        #               values:
+        #                 - amd64
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
