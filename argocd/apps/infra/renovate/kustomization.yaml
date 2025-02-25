@@ -7,7 +7,7 @@ generators:
 helmCharts:
   - name: mend-renovate-ce
     repo: https://mend.github.io/renovate-ce-ee
-    version: "9.4.0"
+    version: "9.5.0"
     releaseName: mend-renovate-ce
     namespace: renovate
     valuesFile: ./values.yaml
