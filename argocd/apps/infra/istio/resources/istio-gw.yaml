@@ -10,7 +10,7 @@ spec:
         - "*.yanello.net"
         - yanello.net
       port:
-        name: http
+        name: http2
         number: 80
         protocol: HTTP
       # tls:
