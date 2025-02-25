@@ -10,9 +10,9 @@ spec:
         - "*.yanello.net"
         - yanello.net
       port:
-        name: http2
+        name: http
         number: 80
-        protocol: HTTP2
+        protocol: HTTP
       # tls:
       #   httpsRedirect: true
     - hosts:
@@ -28,10 +28,9 @@ spec:
         # minProtocolVersion: TLSV1_2
         mode: SIMPLE
         # cipherSuites:
-        #   - TLS_AES_256_GCM_SHA384
-        #   - TLS_CHACHA20_POLY1305_SHA256
+        #   - AES_256_GCM_SHA384
+        #   - ECDHE-ECDSA-CHACHA20-POLY1305
         #   - ECDHE-ECDSA-AES256-GCM-SHA384
         #   - ECDHE-RSA-AES256-GCM-SHA384
         #   - ECDHE-ECDSA-CHACHA20-POLY1305
         #   - ECDHE-RSA-CHACHA20-POLY1305
-        #   - DHE-RSA-AES256-GCM-SHA384
