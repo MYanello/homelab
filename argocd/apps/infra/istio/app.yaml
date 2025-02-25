@@ -90,6 +90,10 @@ spec:
     chart: gateway
     helm:
       valuesObject:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
         autoscaling:
           enabled: true
           minReplicas: 2
