@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resume-config 
+data:
+  DB_DATABASE_NAME: postgres
+  DB_HOSTNAME: postgres
+  DB_USERNAME: postgres
