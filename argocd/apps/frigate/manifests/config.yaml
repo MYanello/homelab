@@ -24,7 +24,7 @@ resources:
   requests:
     nvidia.com/gpu: '1'
     memory: '2Gi'
-    cpu: '200Mi'
+    cpu: '200m'
   limits:
     nvidia.com/gpu: '1'
 service:
