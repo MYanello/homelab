@@ -6,6 +6,7 @@ resources:
 - manifests/vs.yaml
 - manifests/service.yaml
 - manifests/sts.yaml
+- manifests/cm.yaml
 
 generators:
 - manifests/secret-generator.yaml

@@ -41,15 +41,15 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /
               port: 5000
             initialDelaySeconds: 60
-            periodSeconds: 15
+            periodSeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: data
@@ -95,8 +95,8 @@ spec:
               memory: "500Mi"
               cpu: "100m"
             limits:
-              memory: "2Gi"
-              cpu: "500m"
+              memory: "4Gi"
+              cpu: "1000m"
           env:
             - name: SCREEN_WIDTH
               value: "1920"

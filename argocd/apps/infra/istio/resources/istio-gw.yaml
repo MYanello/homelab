@@ -13,6 +13,8 @@ spec:
         name: http
         number: 80
         protocol: HTTP
+      # tls:
+      #   httpsRedirect: true
     - hosts:
         - "*.yanello.net"
         - "yanello.net"
@@ -21,18 +23,14 @@ spec:
         name: https
         protocol: HTTPS
       tls:
-        credentialName: default-ingress-cert # must be the same as secret
-        maxProtocolVersion: TLSV1_3
-        minProtocolVersion: TLSV1_2
+        credentialName: default-ingress-cert
+        # maxProtocolVersion: TLSV1_3
+        # minProtocolVersion: TLSV1_2
         mode: SIMPLE
-        cipherSuites:
-          - ECDHE-ECDSA-AES128-GCM-SHA256
-          - ECDHE-RSA-AES128-GCM-SHA256
-          - ECDHE-ECDSA-AES128-SHA
-          - AES128-GCM-SHA256
-          - AES128-SHA
-          - ECDHE-ECDSA-AES256-GCM-SHA384
-          - ECDHE-RSA-AES256-GCM-SHA384
-          - ECDHE-ECDSA-AES256-SHA
-          - AES256-GCM-SHA384
-          - AES256-SHA
+        # cipherSuites:
+        #   - AES_256_GCM_SHA384
+        #   - ECDHE-ECDSA-CHACHA20-POLY1305
+        #   - ECDHE-ECDSA-AES256-GCM-SHA384
+        #   - ECDHE-RSA-AES256-GCM-SHA384
+        #   - ECDHE-ECDSA-CHACHA20-POLY1305
+        #   - ECDHE-RSA-CHACHA20-POLY1305

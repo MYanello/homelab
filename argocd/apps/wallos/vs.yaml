@@ -13,7 +13,7 @@
 #         host: wallos
 #         port:
 #           number: 80
-# 
+#
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -21,14 +21,15 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: istio
 spec:
+  ingressClassName: istio
   rules:
-  - host: wallos.yanello.net
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wallos
-            port:
-              number: 80
+    - host: wallos.yanello.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wallos
+                port:
+                  number: 80
