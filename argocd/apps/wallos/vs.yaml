@@ -22,6 +22,10 @@ metadata:
     kubernetes.io/ingress.class: istio
 spec:
   ingressClassName: istio
+  tls:
+    - hosts:
+      - wallos.yanello.net
+      secretName: istio-system/default-ingress-cert
   rules:
   - host: wallos.yanello.net
     http:
