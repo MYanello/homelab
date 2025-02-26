@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ihatemoney
+spec:
+  replicas: 1
+  serviceName: ihatemoney
+  revisionHistoryLimit: 3
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  selector:
+    matchLabels:
+      server: ihatemoney
+  template:
+    metadata:
+      labels:
+        server: ihatemoney
+    spec:
+      containers:
+        - name: ihatemoney
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: ihm-secrets
+          image: ihatemoney/ihatemoney:latest
+          volumeMounts:
+            - mountPath: /database
+              name: db
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: db
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 50Mi
