@@ -18,6 +18,6 @@ helmCharts:
 
 images:
   - name: nextcloud
-    newTag: 30.0.6
+    newTag: 31.0.0@sha256:32c9403b1b770141850ed999a3a0f20c8ff416d487278e531ae5d594e23d55d2
   - name: docker.io/bitnami/mariadb
     newTag: "10.11@sha256:effbeae0531003615411d7536443604812a8b9f6f8d5bfcc6b6b80848e19759e"
