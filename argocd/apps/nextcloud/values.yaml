@@ -1,7 +1,4 @@
-replicaCount: 0
-ingress:
-  enabled: false
-  className: istio
+replicaCount: 1
   
 nextcloud:
   host: nextcloudk8s.yanello.net
