@@ -11,6 +11,6 @@ spec:
   http:
   - route:
     - destination:
-        host: ihm
+        host: ihatemoney
         port:
           number: 8000
