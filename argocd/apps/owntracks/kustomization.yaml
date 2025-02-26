@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - deploy.yaml
-- ingress.yaml
+- vs.yaml
 - service.yaml
 - pvc.yaml
 
