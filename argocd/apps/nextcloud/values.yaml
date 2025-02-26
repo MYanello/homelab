@@ -2,6 +2,9 @@ replicaCount: 1
   
 nextcloud:
   host: nextcloudk8s.yanello.net
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-secrets
   trustedDomains:
     - nextcloudk8s.yanello.net
   extraEnv:
