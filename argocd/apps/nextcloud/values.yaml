@@ -12,10 +12,10 @@ nextcloud:
   extraEnv:
     - name: TRUSTED_PROXIES
       value: 10.10.8.0
-    - name: OVERWRITEPROTOCOL
-      value: https
-    - name: OVERWRITEHOST
-      value: nextcloudk8s.yanello.net
+    # - name: OVERWRITEPROTOCOL
+    #   value: https
+    # - name: OVERWRITEHOST
+    #   value: nextcloudk8s.yanello.net
     - name: OVERWRITECLIURL
       value: https://nextcloudk8s.yanello.net
     - name: APACHE_DISABLE_REWRITE_IP
