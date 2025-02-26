@@ -24,6 +24,7 @@ nextcloud:
     s3:
       enabled: true
       region: "homelab"
+      usePathStyle: true
       existingSecret: nextcloud-secrets
       secretKeys: 
         host: s3-host
