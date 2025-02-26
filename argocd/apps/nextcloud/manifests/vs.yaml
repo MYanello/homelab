@@ -5,7 +5,7 @@ metadata:
   name: nextcloud-vs
 spec:
   hosts:
-  - nextcloud.yanello.net
+  - nextcloudk8s.yanello.net
   gateways:
   - istio-system/kube-gateway
   http:
