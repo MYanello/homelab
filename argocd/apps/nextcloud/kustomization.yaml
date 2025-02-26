@@ -11,7 +11,7 @@ generators:
 helmCharts:
   - name: nextcloud
     repo: https://nextcloud.github.io/helm/
-    version: "6.6.4"
+    version: "6.6.5"
     releaseName: nextcloud
     namespace: nextcloud
     valuesFile: ./values.yaml
