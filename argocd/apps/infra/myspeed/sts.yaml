@@ -1,19 +1,15 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: myspeed
   name: myspeed
 spec:
   replicas: 1
+  serviceName: myspeed
   selector:
     matchLabels:
       app: myspeed
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
   template:
     metadata:
       labels:
@@ -36,24 +32,32 @@ spec:
           volumeMounts:
             - mountPath: /myspeed/data
               name: data
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5216
-          #   initialDelaySeconds: 30
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5216
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 30
-          #   timeoutSeconds: 5
-          #   failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5216
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5216
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
       restartPolicy: Always
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 100Mi
+
