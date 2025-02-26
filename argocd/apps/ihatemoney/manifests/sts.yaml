@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: ihatemoney
-  labels:
-    app: ihatemoney
 spec:
   replicas: 1
   serviceName: ihatemoney
@@ -14,11 +12,11 @@ spec:
       partition: 0
   selector:
     matchLabels:
-      server: ihatemoney
+      app: ihatemoney
   template:
     metadata:
       labels:
-        server: ihatemoney
+        app: ihatemoney
     spec:
       containers:
         - name: ihatemoney
