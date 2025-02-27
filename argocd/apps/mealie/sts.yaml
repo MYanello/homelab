@@ -29,11 +29,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              cpu: 500m
+              cpu: 1000m
               memory: 1Gi
             requests:
-              cpu: 100m
-              memory: 500Mi
+              cpu: 500m
+              memory: 200Mi
           name: postgres
           env:
             - name: PG_USER
