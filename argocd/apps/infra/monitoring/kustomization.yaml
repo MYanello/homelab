@@ -4,6 +4,9 @@ kind: Kustomization
 resources:
   - ./manifests/vs.yaml
 
+generators:
+  - ./manifests/secrets-generator.yaml
+
 helmCharts:
   - name: victoria-metrics-k8s-stack
     releaseName: victoria-metrics-k8s-stack
