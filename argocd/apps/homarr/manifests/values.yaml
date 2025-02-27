@@ -3,9 +3,9 @@ env:
 
 resources:
   requests:
-    cpu: 100m
-    memory: 400Mi
-
+    cpu: 150m
+    memory: 800Mi
+  
 persistence:
   homarrDatabase:
     enabled: true
