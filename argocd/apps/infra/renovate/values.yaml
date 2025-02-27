@@ -99,9 +99,9 @@ service:
   port: 8080
 
 resources:
-  limits:
-    cpu: 100m
-    memory: 500Mi
+  # limits:
+  #   cpu: 100m
+  #   memory: 500Mi
   requests:
     cpu: 10m
     memory: 200Mi
