@@ -41,7 +41,6 @@ worker:
       memory: 500Mi
 redis:
   enabled: true
-  replicas: 0
   master:
     persistence:
       enabled: false
@@ -53,7 +52,6 @@ redis:
       enabled: false
 postgresql:
   enabled: true
-  replicas: 0
   primary:
     persistence:
       enabled: true
