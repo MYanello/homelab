@@ -22,7 +22,7 @@ authentik:
   error_reporting:
     enabled: true
 server:
-  replicas: 1
+  replicas: 0
   resources:
     limits:
       cpu: 750m
@@ -31,7 +31,7 @@ server:
       cpu: 400m
       memory: 300Mi
 worker:
-  replicas: 1
+  replicas: 0
   resources:
     limits:
       cpu: 300m
