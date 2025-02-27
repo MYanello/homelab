@@ -68,7 +68,7 @@ spec:
         #     memory: 2048Mi
 
       - name: rx-chrome
-        image: ghcr.io/browserless/chromium:latest@sha256:00317f34e22d924891ecc35428e7ec66b46dddff32a2692c48593c478129c65f
+        image: ghcr.io/browserless/chromium:latest@sha256:98b753c8addb15e0da780cba80771f2073b04716e31a434288a5860f00960dff
         ports:
         - containerPort: 3000
         env:
