@@ -62,7 +62,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: pgdata
-              mountPath: /var/lib/postgresql/data/
+              mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
     - metadata:
         name: pgdata
