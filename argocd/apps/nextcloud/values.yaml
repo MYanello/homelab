@@ -1,4 +1,4 @@
-replicaCount: 0
+replicaCount: 1
   
 nextcloud:
   host: nextcloudk8s.yanello.net
