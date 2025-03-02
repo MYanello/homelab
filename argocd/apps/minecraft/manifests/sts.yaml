@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: mc
 spec:
-  replicas: 0
+  replicas: 1
   serviceName: mc
   revisionHistoryLimit: 3
   updateStrategy:
