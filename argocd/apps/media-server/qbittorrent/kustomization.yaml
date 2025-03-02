@@ -2,16 +2,19 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- manifests/deploy.yaml
-- manifests/vs.yaml
-- manifests/service.yaml
-- manifests/pvc.yaml
-- manifests/net-policy.yaml
+  - manifests/deploy.yaml
+  - manifests/vs.yaml
+  - manifests/service.yaml
+  - manifests/pvc.yaml
+  - manifests/net-policy.yaml
 
 generators:
-- manifests/secret-generator.yaml
+  - manifests/secret-generator.yaml
 
 images:
-- name: ghcr.io/qdm12/gluetun
-  newName: ghcr.io/qdm12/gluetun
-  newTag: v3.39.1@sha256:6a8058e626763cbf735ac2f78c774dbb24fec2490bd9d9f7d67e22592cb4a991
+  - name: ghcr.io/qdm12/gluetun
+    newName: ghcr.io/qdm12/gluetun
+    newTag: v3.39.1@sha256:6a8058e626763cbf735ac2f78c774dbb24fec2490bd9d9f7d67e22592cb4a991
+  - name: lscr.io/linuxserver/qbittorrent
+    newName: lscr.io/linuxserver/qbittorrent
+    newTag: 5.0.4-r0-ls383@sha256:81a71641d2ee65fbecfabf3388f0d6b7b053e7266658b1fb7efee8900d06f010
