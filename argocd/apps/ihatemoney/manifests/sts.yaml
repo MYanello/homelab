@@ -14,7 +14,7 @@ spec:
       partition: 0
   selector:
     matchLabels:
-      server: ihatemoney
+      app: ihatemoney
   template:
     metadata:
       labels:
