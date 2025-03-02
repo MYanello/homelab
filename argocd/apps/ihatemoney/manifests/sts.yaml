@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        server: ihatemoney
+        app: ihatemoney
     spec:
       containers:
         - name: ihatemoney
