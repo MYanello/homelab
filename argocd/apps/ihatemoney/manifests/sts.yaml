@@ -28,7 +28,7 @@ spec:
           ports:
             - containerPort: 8000
               protocol: TCP
-          environment:
+          env:
             - name: DEBUG
               value: "True"
             - name: ACTIVATE_ADMIN_DASHBOARD
