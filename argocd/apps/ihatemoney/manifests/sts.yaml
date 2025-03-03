@@ -28,6 +28,11 @@ spec:
           ports:
             - containerPort: 8000
               protocol: TCP
+          environment:
+            - name: DEBUG
+              value: "True"
+            - name: ACTIVATE_ADMIN_DASHBOARD
+              value: "True"
           envFrom:
             - secretRef:
                 name: ihm-secrets
