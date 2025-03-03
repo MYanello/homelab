@@ -24,7 +24,7 @@ spec:
         - name: pull-secrets
       containers:
         - name: ihatemoney
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
               protocol: TCP
