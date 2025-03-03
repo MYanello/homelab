@@ -20,6 +20,8 @@ spec:
       labels:
         app: ihatemoney
     spec:
+      imagePullSecrets:
+        - name: pull-secrets
       containers:
         - name: ihatemoney
           imagePullPolicy: IfNotPresent
@@ -29,7 +31,7 @@ spec:
           envFrom:
             - secretRef:
                 name: ihm-secrets
-          image: ihatemoney/ihatemoney:latest
+          image: docker.cloudsmith.io/myanello/apps/ihatemoney:latest
           volumeMounts:
             - mountPath: /database
               name: db
