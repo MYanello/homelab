@@ -43,7 +43,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: "1.24.3"
+    targetRevision: "1.25.0"
     chart: istiod
     helm:
       valuesObject:
