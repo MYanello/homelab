@@ -54,8 +54,6 @@ kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"iotawatt-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["iota.yanello.net"],"http":[{"route":[{"destination":{"host":"iotawatt.lan","port":{"number":80}}}]}]}}
   creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
@@ -82,9 +80,6 @@ kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"ntopng-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["ntopng.yanello.net"],"http":[{"route":[{"destination":{"host":"router.lan","port":{"number":30341}}}]}]}}
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: ntopng-vs-idx-0
@@ -102,17 +97,12 @@ spec:
       namespace: istio-system
       port: 30341
       weight: 0
-status:
-  parents: null
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"adguardhome-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["agh.yanello.net"],"http":[{"route":[{"destination":{"host":"agh.lan","port":{"number":3000}}}]}]}}
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: adguardhome-vs-idx-0
@@ -130,17 +120,12 @@ spec:
       namespace: istio-system
       port: 3000
       weight: 0
-status:
-  parents: null
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"hass-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["homeassistant.yanello.net"],"http":[{"route":[{"destination":{"host":"homeassistant.lan","port":{"number":8123}}}]}]}}
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: hass-vs-idx-0
@@ -166,9 +151,6 @@ kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"ubiquiti-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["ui.yanello.net"],"http":[{"route":[{"destination":{"host":"homeassistant.lan","port":{"number":8880}}}]}]}}
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: ubiquiti-vs-idx-0
@@ -186,17 +168,12 @@ spec:
       namespace: istio-system
       port: 8880
       weight: 0
-status:
-  parents: null
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"grafana-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["grafana.yanello.net"],"http":[{"route":[{"destination":{"host":"marcus-server.lan","port":{"number":4000}}}]}]}}
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: grafana-vs-idx-0
@@ -214,17 +191,12 @@ spec:
       namespace: istio-system
       port: 4000
       weight: 0
-status:
-  parents: null
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"nextcloud-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["nextcloud.yanello.net"],"http":[{"route":[{"destination":{"host":"marcus-server.lan","port":{"number":6987}}}]}]}}
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: nextcloud-vs-idx-0
@@ -242,5 +214,3 @@ spec:
       namespace: istio-system
       port: 6987
       weight: 0
-status:
-  parents: null
