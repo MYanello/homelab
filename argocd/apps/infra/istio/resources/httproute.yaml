@@ -6,7 +6,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: opn-vs-idx-0
+  name: opn-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -30,7 +30,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: pikvm-vs-idx-0
+  name: pikvm-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -54,7 +54,7 @@ metadata:
   creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: iotawatt-vs-idx-0
+  name: iotawatt-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -79,7 +79,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: ntopng-vs-idx-0
+  name: ntopng-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -102,7 +102,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: adguardhome-vs-idx-0
+  name: adguardhome-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -125,7 +125,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: hass-vs-idx-0
+  name: hass-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -150,7 +150,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: ubiquiti-vs-idx-0
+  name: ubiquiti-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -173,7 +173,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: grafana-vs-idx-0
+  name: grafana-httproute
   namespace: istio-system
 spec:
   hostnames:
@@ -196,7 +196,7 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: nextcloud-vs-idx-0
+  name: nextcloud-httproute
   namespace: istio-system
 spec:
   hostnames:
