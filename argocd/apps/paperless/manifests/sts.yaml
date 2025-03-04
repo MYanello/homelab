@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: paperless-ai
+  labels:
+    app: paperless-ai
+spec:
+  replicas: 1
+  serviceName: paperless-ai
+  revisionHistoryLimit: 3
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  selector:
+    matchLabels:
+      app: paperless-ai
+  template:
+    metadata:
+      labels:
+        app: paperless-ai
+    spec:
+      containers:
+        - name: paperless-ai
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+          image: clusterzx/paperless-ai
+          volumeMounts:
+            - mountPath: /app/data
+              name: paperless-ai-data
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: paperless-ai-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 500Mi

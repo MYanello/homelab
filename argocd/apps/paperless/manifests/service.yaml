@@ -39,3 +39,17 @@ spec:
       targetPort: 6379
   selector:
     app: paperless-redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: paperless-ai
+  name: paperless-ai
+spec:
+  ports:
+    - name: "paperless-ai"
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: paperless-ai

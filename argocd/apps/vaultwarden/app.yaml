@@ -35,10 +35,6 @@ spec:
                         operator: In
                         values:
                           - marcus-server
-          ingress:
-            enabled: false
-            className: "nginx"
-            hostname: bitwarden.yanello.net
           domain: "https://bitwarden.yanello.net"
           signupsAllowed: false
           replicas: 1

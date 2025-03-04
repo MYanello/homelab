@@ -13,4 +13,20 @@ spec:
     - destination:
         host: paperless
         port:
-          number: 8000
+          number: 800
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: paperless-ai-vs
+spec:
+  hosts:
+  - paperless-ai.yanello.net
+  gateways:
+  - istio-system/kube-gateway
+  http:
+  - route:
+    - destination:
+        host: paperless-ai
+        port:
+          number: 3000
