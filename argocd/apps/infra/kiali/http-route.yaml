@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: kiali-app
+  name: kiali-httproute
+  namespace: kiali
+spec:
+  hostnames:
+  - kiali.yanello.net
+  rules:
+  - backendRefs:
+    - name: kiali
+      namespace: kiali
+      port: 20001
+      weight: 0
