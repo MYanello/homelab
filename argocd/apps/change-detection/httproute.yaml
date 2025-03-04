@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: change-detection-app
+  name: change-httproute
+  namespace: change-detection
+spec:
+  hostnames:
+  - change.yanello.net
+  rules:
+  - backendRefs:
+    - name: change-detection
+      namespace: change-detection
+      port: 5000
+      weight: 0

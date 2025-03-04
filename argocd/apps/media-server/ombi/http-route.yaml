@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: ombi-app
+  name: ombi-vs-idx-0
+  namespace: ombi
+spec:
+  hostnames:
+  - ombi.yanello.net
+  rules:
+  - backendRefs:
+    - name: ombi
+      namespace: ombi
+      port: 3579
+      weight: 0
+

@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: nextcloud-app
+  name: nextcloud-httproute
+  namespace: nextcloud
+spec:
+  hostnames:
+  - nextcloudk8s.yanello.net
+  rules:
+  - backendRefs:
+    - name: nextcloud
+      namespace: nextcloud
+      port: 8080
+      weight: 0
+

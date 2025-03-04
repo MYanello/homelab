@@ -1,0 +1,35 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: paperless-app
+  name: paperless-ai-httproute
+  namespace: paperless
+spec:
+  hostnames:
+  - paperless-ai.yanello.net
+  rules:
+  - backendRefs:
+    - name: paperless-ai
+      namespace: paperless
+      port: 3000
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: paperless-app
+  name: paperless-httproute
+  namespace: paperless
+spec:
+  hostnames:
+  - paperless.yanello.net
+  rules:
+  - backendRefs:
+    - name: paperless
+      namespace: paperless
+      port: 8000

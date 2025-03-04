@@ -1,19 +1,19 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: tautulli-httproute
+  name: sonarr-httproute
 spec:
   parentRefs:
   - name: gateway-api
     namespace: istio-system
     sectionName: https
   hostnames:
-  - tautulli.yanello.net
+  - sonarr.yanello.net
   rules:
   - matches:
     - path:
         type: PathPrefix
         value: "/"
     backendRefs:
-    - name: tautulli
-      port: 8181
+    - name: sonarr
+      port: 8989

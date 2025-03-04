@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: bazarr-app
+  name: bazarr-httproute
+  namespace: bazarr
+spec:
+  hostnames:
+  - bazarr.yanello.net
+  rules:
+  - backendRefs:
+    - name: bazarr
+      namespace: bazarr
+      port: 6767
+      weight: 0

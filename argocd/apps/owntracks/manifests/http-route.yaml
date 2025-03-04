@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: owntracks-app
+  name: owntracks-httproute
+  namespace: owntracks
+spec:
+  hostnames:
+  - owntracks.yanello.net
+  rules:
+  - backendRefs:
+    - name: owntracks
+      namespace: owntracks
+      port: 8083
+      weight: 0

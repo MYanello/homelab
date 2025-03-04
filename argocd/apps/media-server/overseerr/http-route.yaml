@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: overseerr-app
+  name: overseerr-vs-idx-0
+  namespace: overseerr
+spec:
+  hostnames:
+  - overseerr.yanello.net
+  rules:
+  - backendRefs:
+    - name: overseerr
+      namespace: overseerr
+      port: 5055
+      weight: 0
+

@@ -7,6 +7,7 @@ resources:
 - manifests/service.yaml
 - manifests/sts.yaml
 - manifests/cm.yaml
+- manifests/http-route.yaml
 
 generators:
 - manifests/secret-generator.yaml

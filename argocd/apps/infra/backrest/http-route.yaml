@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: backrest-app
+  name: backrest-httproute
+  namespace: backrest
+spec:
+  hostnames:
+  - backrest.yanello.net
+  rules:
+  - backendRefs:
+    - name: backrest
+      namespace: backrest
+      port: 9898
+      weight: 0

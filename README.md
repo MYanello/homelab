@@ -4,6 +4,9 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 03.04.24
+- Started migrating to gatewayapi from ingress. Not for any real reason, but just to learn how to stay on the latest hotness.
+
 
 ### 02.22.24
 - Needed to bump pod limit for server. Seemed best way to do that is by creating a conf file:

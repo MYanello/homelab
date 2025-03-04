@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: authentik-app
+  name: authentik-vs-idx-0
+  namespace: authentik
+spec:
+  hostnames:
+  - authentik.yanello.net
+  rules:
+  - backendRefs:
+    - name: authentik-server
+      namespace: authentik
+      port: 80
+      weight: 0
+

@@ -1,5 +1,5 @@
 resources:
   - vs.yaml
-
+  - http-route.yaml
 generators:
   - ./secret-generator.yaml

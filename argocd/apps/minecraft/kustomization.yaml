@@ -6,7 +6,7 @@ resources:
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
   - ./manifests/vs.yaml
-  
+  - ./manifests/http-route.yaml
 configMapGenerator:
   - name: mc-config
     envs:

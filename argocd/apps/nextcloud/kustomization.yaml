@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./manifests/vs.yaml
   - ./manifests/cm.yaml
+  - ./manifests/deploy.yaml
   
 patches:
 - target:

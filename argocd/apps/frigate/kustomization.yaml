@@ -7,7 +7,7 @@ generators:
 resources:
 - ./manifests/health-check.yaml
 - ./manifests/vs.yaml
-
+- ./manifests/http-route.yaml
 patches:
 - path: ./manifests/health-check-patch.yaml
 - target:

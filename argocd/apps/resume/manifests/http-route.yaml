@@ -1,0 +1,42 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+  labels:
+    app.kubernetes.io/instance: resume-app
+  name: resume-httproute
+  namespace: resume
+spec:
+  hostnames:
+  - rxresume.yanello.net
+  - resume.yanello.net
+  rules:
+  - backendRefs:
+    - name: rx-resume
+      namespace: resume
+      port: 3010
+      weight: 0
+    matches:
+    - path:
+        type: PathPrefix
+        value: /marcus/latest
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: resume-app
+  name: resume-httproute
+  namespace: resume
+spec:
+  hostnames:
+  - rxresume.yanello.net
+  - resume.yanello.net
+  rules:
+  - backendRefs:
+    - name: rx-resume
+      namespace: resume
+      port: 3010
+
