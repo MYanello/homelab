@@ -172,7 +172,7 @@ spec:
       nodeSelector:
         beta.kubernetes.io/arch: amd64
       containers:
-        - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest@sha256:e937223b9321168efec4ce4b60958d399b6dde37791ea6dc67d05b057c0f167e
+        - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest@sha256:8e99847ae05bce24fe8a400bb9b30990a4cec32853f3975905eab95e05febefa
           imagePullPolicy: IfNotPresent
           resources:
             limits:
