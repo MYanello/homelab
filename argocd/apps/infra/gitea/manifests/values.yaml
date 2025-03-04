@@ -1,0 +1,35 @@
+global:
+  storageClass: longhorn
+
+replicaCount: 1
+
+actions:
+  enabled: false
+  
+# admin:
+#   existingSecret:
+#   username: gitea_admin
+#   password:
+#   email: "gitea@local.domain"
+#   passwordMode: keepUpdated
+# 
+metrics:
+  enabled: true
+  
+postgresql-ha:
+  enabled: false
+  
+postgresql:
+  enabled: true
+  global:
+    postgresql:
+      auth:
+        password: gitea
+        database: gitea
+        username: gitea
+      service:
+        ports:
+          postgresql: 5432
+  primary:
+    persistence:
+      size: 10Gi
