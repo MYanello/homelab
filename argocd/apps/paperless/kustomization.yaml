@@ -18,4 +18,4 @@ resources:
 - manifests/pvc.yaml
 - manifests/service.yaml
 - manifests/vs.yaml
-- manifests/sts.yamlg
+- manifests/sts.yaml
