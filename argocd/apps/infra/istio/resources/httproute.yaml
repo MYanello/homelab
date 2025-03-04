@@ -31,8 +31,6 @@ kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"istio-resources"},"name":"pikvm-vs","namespace":"istio-system"},"spec":{"gateways":["istio-system/kube-gateway"],"hosts":["pikvm.yanello.net"],"http":[{"route":[{"destination":{"host":"pikvm.lan","port":{"number":80}}}]}]}}
   labels:
     app.kubernetes.io/instance: istio-resources
   name: pikvm-vs-idx-0
