@@ -27,10 +27,43 @@ spec:
         # maxProtocolVersion: TLSV1_3
         # minProtocolVersion: TLSV1_2
         mode: SIMPLE
-        # cipherSuites:
-        #   - AES_256_GCM_SHA384
-        #   - ECDHE-ECDSA-CHACHA20-POLY1305
-        #   - ECDHE-ECDSA-AES256-GCM-SHA384
-        #   - ECDHE-RSA-AES256-GCM-SHA384
-        #   - ECDHE-ECDSA-CHACHA20-POLY1305
-        #   - ECDHE-RSA-CHACHA20-POLY1305
+        cipherSuites:
+          - AES_256_GCM_SHA384
+          - ECDHE-ECDSA-CHACHA20-POLY1305
+          - ECDHE-ECDSA-AES256-GCM-SHA384
+          - ECDHE-RSA-AES256-GCM-SHA384
+          - ECDHE-ECDSA-CHACHA20-POLY1305
+          - ECDHE-RSA-CHACHA20-POLY1305
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway-api
+spec:
+  addresses:
+    - value: 10.10.8.1
+      type: IPAddress
+  gatewayClassName: istio
+  listeners:
+    - name: http
+      protocol: HTTP
+      hostname: "*.yanello.net"
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: HTTPRoute
+    - name: https
+      protocol: HTTPS
+      hostname: "*.yanello.net"
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: default-ingress-cert
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: HTTPRoute
