@@ -2,6 +2,6 @@ resources:
   - ./vs.yaml
   - ./lb.yaml
   - ./cm.yaml
-
+  - ./httproute.yaml
 generators:
   - ./secret-generator.yaml

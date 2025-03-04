@@ -5,6 +5,7 @@ resources:
   - ./manifests/sts.yaml
   - ./manifests/vs.yaml
   - ./manifests/svc.yaml
-
+  - ./manifests/http-route.yaml
+  
 generators:
   - ./manifests/secret-generator.yaml

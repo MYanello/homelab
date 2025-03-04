@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: archive-warrior-app
+  name: warrior-httproute
+  namespace: archive-warrior
+spec:
+  hostnames:
+  - warrior.yanello.net
+  rules:
+  - backendRefs:
+    - name: warrior
+      namespace: archive-warrior
+      port: 8001
+      weight: 0
+
