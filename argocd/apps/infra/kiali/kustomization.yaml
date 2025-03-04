@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
  - vs.yaml
- #- http-route.yaml
+ - http-route.yaml
  
 helmCharts:
   - name: kiali-operator
