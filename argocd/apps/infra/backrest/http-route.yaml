@@ -4,15 +4,15 @@ metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
-    app.kubernetes.io/instance: immich-app
-  name: immich-httproute
-  namespace: immich
+    app.kubernetes.io/instance: backrest-app
+  name: backrest-httproute
+  namespace: backrest
 spec:
   hostnames:
-  - immich.yanello.net
+  - backrest.yanello.net
   rules:
   - backendRefs:
-    - name: immich-server
-      namespace: immich
-      port: 2283
+    - name: backrest
+      namespace: backrest
+      port: 9898
       weight: 0
