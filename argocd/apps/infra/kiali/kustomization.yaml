@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
  - vs.yaml
  - http-route.yaml
+ 
 helmCharts:
   - name: kiali-operator
     repo: https://kiali.org/helm-charts
