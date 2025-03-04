@@ -1,0 +1,37 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: minio-app
+  name: minio-httproute
+  namespace: minio
+spec:
+  hostnames:
+  - minio-console.yanello.net
+  rules:
+  - backendRefs:
+    - name: myminio-console
+      namespace: minio
+      port: 9090
+      weight: 0
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: minio-app
+  name: minio-api-httproute
+  namespace: minio
+spec:
+  hostnames:
+  - minio.yanello.net
+  rules:
+  - backendRefs:
+    - name: minio
+      namespace: minio
+      port: 80
+      weight: 0
