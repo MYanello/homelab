@@ -8,6 +8,10 @@ metadata:
   name: ihm-vs-idx-0
   namespace: ihatemoney
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - ihm.yanello.net
   rules:

@@ -8,6 +8,10 @@ metadata:
   name: paperless-ai-httproute
   namespace: paperless
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - paperless-ai.yanello.net
   rules:
@@ -26,6 +30,10 @@ metadata:
   name: paperless-httproute
   namespace: paperless
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - paperless.yanello.net
   rules:

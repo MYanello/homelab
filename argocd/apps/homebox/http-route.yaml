@@ -8,6 +8,10 @@ metadata:
   name: homarr-httproute
   namespace: homarr
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - home.yanello.net
   rules:

@@ -8,6 +8,10 @@ metadata:
   name: change-httproute
   namespace: change-detection
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - change.yanello.net
   rules:

@@ -8,6 +8,10 @@ metadata:
   name: calibre-httproute
   namespace: calibre
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - calibre.yanello.net
   rules:
@@ -27,6 +31,10 @@ metadata:
   name: calibre-dl-httproute
   namespace: calibre
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - calibre-dl.yanello.net
   rules:

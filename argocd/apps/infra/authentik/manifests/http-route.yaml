@@ -5,9 +5,13 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: authentik-app
-  name: authentik-vs-idx-0
+  name: authentik-http-route
   namespace: authentik
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - authentik.yanello.net
   rules:

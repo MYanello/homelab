@@ -8,6 +8,10 @@ metadata:
   name: frigate-httproute
   namespace: frigate
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - frigate.yanello.net
   rules:

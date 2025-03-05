@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - manifests/vs.yaml
   - manifests/gw.yaml
-
+  - manifests/http-route.yaml
 helmCharts:
   - name: open-webui
     repo: https://helm.openwebui.com/

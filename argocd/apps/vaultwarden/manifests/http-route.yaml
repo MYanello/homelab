@@ -8,6 +8,10 @@ metadata:
   name: vaultwarden-httproute
   namespace: vaultwarden
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - bitwarden.yanello.net
   rules:

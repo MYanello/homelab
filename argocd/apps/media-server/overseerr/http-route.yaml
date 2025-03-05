@@ -8,6 +8,10 @@ metadata:
   name: overseerr-vs-idx-0
   namespace: overseerr
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - overseerr.yanello.net
   rules:

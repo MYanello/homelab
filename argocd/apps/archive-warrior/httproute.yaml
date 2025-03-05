@@ -8,6 +8,10 @@ metadata:
   name: warrior-httproute
   namespace: archive-warrior
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - warrior.yanello.net
   rules:

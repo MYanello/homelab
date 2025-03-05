@@ -8,6 +8,10 @@ metadata:
   name: ombi-vs-idx-0
   namespace: ombi
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - ombi.yanello.net
   rules:

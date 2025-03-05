@@ -8,6 +8,10 @@ metadata:
   name: mealie-httproute
   namespace: mealie
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - mealie.yanello.net
   rules:

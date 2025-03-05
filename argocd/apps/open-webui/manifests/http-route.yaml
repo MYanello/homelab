@@ -8,6 +8,10 @@ metadata:
   name: ollama-httproute
   namespace: open-webui
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: ollama
   hostnames:
   - ollama.yanello.net
   rules:
@@ -27,6 +31,10 @@ metadata:
   name: open-webui-httproute
   namespace: open-webui
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - chat.yanello.net
   rules:

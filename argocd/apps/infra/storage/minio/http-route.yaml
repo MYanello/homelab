@@ -8,6 +8,10 @@ metadata:
   name: minio-httproute
   namespace: minio
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - minio-console.yanello.net
   rules:
@@ -27,6 +31,10 @@ metadata:
   name: minio-api-httproute
   namespace: minio
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - minio.yanello.net
   rules:

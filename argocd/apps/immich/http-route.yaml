@@ -8,6 +8,10 @@ metadata:
   name: immich-httproute
   namespace: immich
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - immich.yanello.net
   rules:

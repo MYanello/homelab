@@ -8,6 +8,10 @@ metadata:
   name: myspeed-idx-0
   namespace: myspeed
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - myspeed.yanello.net
   rules:

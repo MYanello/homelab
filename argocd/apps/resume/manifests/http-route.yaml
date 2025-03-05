@@ -7,6 +7,10 @@ metadata:
   name: resume-httproute
   namespace: resume
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - rxresume.yanello.net
   - resume.yanello.net
@@ -31,6 +35,10 @@ metadata:
   name: resume-httproute
   namespace: resume
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - rxresume.yanello.net
   - resume.yanello.net

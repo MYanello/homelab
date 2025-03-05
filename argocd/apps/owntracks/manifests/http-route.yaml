@@ -8,6 +8,10 @@ metadata:
   name: owntracks-httproute
   namespace: owntracks
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - owntracks.yanello.net
   rules:

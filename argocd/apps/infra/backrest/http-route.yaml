@@ -8,6 +8,10 @@ metadata:
   name: backrest-httproute
   namespace: backrest
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - backrest.yanello.net
   rules:

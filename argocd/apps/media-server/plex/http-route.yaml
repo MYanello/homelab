@@ -8,6 +8,10 @@ metadata:
   name: plex-vs-idx-0
   namespace: plex
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - plex.yanello.net
   rules:

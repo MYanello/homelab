@@ -8,6 +8,10 @@ metadata:
   name: prowlarr-httproute
   namespace: prowlarr
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - prowlarr.yanello.net
   rules:

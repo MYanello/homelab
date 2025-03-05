@@ -8,6 +8,10 @@ metadata:
   name: mc-httproute
   namespace: minecraft
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: minecraft
   rules:
   - backendRefs:
     - name: mc

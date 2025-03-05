@@ -8,6 +8,10 @@ metadata:
   name: bazarr-httproute
   namespace: bazarr
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - bazarr.yanello.net
   rules:

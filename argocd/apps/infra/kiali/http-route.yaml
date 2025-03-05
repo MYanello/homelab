@@ -8,6 +8,10 @@ metadata:
   name: kiali-httproute
   namespace: kiali
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - kiali.yanello.net
   rules:

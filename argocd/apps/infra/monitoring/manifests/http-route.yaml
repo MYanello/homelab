@@ -27,6 +27,10 @@ metadata:
   name: grafana-httproute
   namespace: monitoring
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - grafanak8s.yanello.net
   rules:

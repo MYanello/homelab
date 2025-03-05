@@ -8,6 +8,10 @@ metadata:
   name: nextcloud-httproute
   namespace: nextcloud
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - nextcloudk8s.yanello.net
   rules:

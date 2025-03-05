@@ -8,6 +8,10 @@ metadata:
   name: renovate-httproute
   namespace: renovate
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - renovate.yanello.net
   rules:

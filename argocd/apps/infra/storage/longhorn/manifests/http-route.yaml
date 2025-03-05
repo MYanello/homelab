@@ -8,6 +8,10 @@ metadata:
   name: longhorn-httproute
   namespace: longhorn
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - longhorn.yanello.net
   rules:
