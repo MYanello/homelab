@@ -8,6 +8,10 @@ metadata:
   name: radarr-httproute
   namespace: radarr
 spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
   hostnames:
   - radarr.yanello.net
   rules:
