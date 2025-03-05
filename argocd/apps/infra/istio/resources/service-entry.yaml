@@ -1,0 +1,120 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: router-se
+  namespace: istio-system
+spec:
+  hosts:
+    - router.lan
+  endpoints:
+    - address: 192.168.1.1
+  ports:
+    - number: 30341
+      name: ntopng
+      protocol: HTTP
+    - number: 3000
+      name: adguardHome
+      protocol: HTTP
+    - number: 1000
+      name: opnsense
+      protocol: HTTP
+  resolution: STATIC
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: agh-se
+  namespace: istio-system
+spec:
+  hosts:
+    - agh.lan
+  endpoints:
+    - address: 192.168.3.1
+  ports:
+    - number: 3000
+      name: agh
+      protocol: HTTP
+  resolution: STATIC
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: homeassistant-se
+  namespace: istio-system
+spec:
+  hosts:
+    - homeassistant.lan
+  endpoints:
+    - address: 192.168.1.4
+  ports:
+    - number: 8123
+      name: http
+      protocol: HTTP
+    - number: 8443
+      name: ubiquiti-tls
+      protocol: TLS
+    - number: 8880
+      name: ubiquiti
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: server-se
+  namespace: istio-system
+spec:
+  hosts:
+    - marcus-server.lan
+  endpoints:
+    - address: 192.168.10.18
+  ports:
+    - number: 32400
+      name: plex
+      protocol: HTTP
+    - number: 6987
+      name: nextcloud
+      protocol: HTTP
+    - number: 4000
+      name: grafana
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: iotawatt-se
+  namespace: istio-system
+spec:
+  hosts:
+    - iotawatt.lan
+  endpoints:
+    - address: 192.168.1.41
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: STATIC
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: pikvm-se
+  namespace: istio-system
+spec:
+  hosts:
+    - pikvm.lan
+  endpoints:
+    - address: 192.168.1.9
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: STATIC
+  location: MESH_EXTERNAL
