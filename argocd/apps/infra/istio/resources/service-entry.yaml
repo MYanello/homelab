@@ -59,7 +59,7 @@ spec:
     - number: 8880
       name: ubiquiti
       protocol: HTTP
-  resolution: DNS
+  resolution: STATIC
   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
@@ -82,7 +82,7 @@ spec:
     - number: 4000
       name: grafana
       protocol: HTTP
-  resolution: DNS
+  resolution: STATIC
   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3

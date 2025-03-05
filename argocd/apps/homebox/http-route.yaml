@@ -4,20 +4,15 @@ metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
-    app.kubernetes.io/instance: homarr-app
-  name: homarr-httproute
-  namespace: homarr
+    app.kubernetes.io/instance: homebox-app
+  name: homebox-http-route
+  namespace: homebox
 spec:
-  parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
   hostnames:
-  - home.yanello.net
+  - homebox.yanello.net
   rules:
   - backendRefs:
-    - name: homarr
-      namespace: homarr
-      port: 7575
-      
+    - name: homebox
+      namespace: homebox
+      port: 7745
 

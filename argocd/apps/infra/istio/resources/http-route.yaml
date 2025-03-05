@@ -10,18 +10,17 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - router.yanello.net
-  - opn.yanello.net
+    - router.yanello.net
+    - opn.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: router.lan
-      namespace: istio-system
-      port: 1000
-      
+    - backendRefs:
+        - name: router.lan
+          namespace: istio-system
+          port: 1000
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -34,41 +33,40 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - pikvm.yanello.net
+    - pikvm.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: pikvm.lan
-      namespace: istio-system
-      port: 80
-      
+    - backendRefs:
+        - name: pikvm-service
+          kind: Service
+          #group: networking.istio.io
+          port: 80
+
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  creationTimestamp: null
   labels:
     app.kubernetes.io/instance: istio-resources
   name: iotawatt-httproute
   namespace: istio-system
 spec:
   hostnames:
-  - iota.yanello.net
+    - iota.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: iotawatt.lan
-      namespace: istio-system
-      port: 80
-      
+    - backendRefs:
+        - name: iotawatt.lan
+          namespace: istio-system
+          port: 80
 status:
   parents: null
 ---
@@ -83,17 +81,16 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - ntopng.yanello.net
+    - ntopng.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: router.lan
-      namespace: istio-system
-      port: 30341
-      
+    - backendRefs:
+        - name: router.lan
+          namespace: istio-system
+          port: 30341
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -106,17 +103,16 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - agh.yanello.net
+    - agh.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: agh.lan
-      namespace: istio-system
-      port: 3000
-      
+    - backendRefs:
+        - name: agh.lan
+          namespace: istio-system
+          port: 3000
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -129,19 +125,16 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - homeassistant.yanello.net
+    - homeassistant.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: homeassistant.lan
-      namespace: istio-system
-      port: 8123
-      
-status:
-  parents: null
+    - backendRefs:
+        - name: homeassistant.lan
+          namespace: istio-system
+          port: 8123
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -154,40 +147,38 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - ui.yanello.net
+    - ui.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: homeassistant.lan
-      namespace: istio-system
-      port: 8880
-      
+    - backendRefs:
+        - name: homeassistant.lan
+          namespace: istio-system
+          port: 8880
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  labels:
-    app.kubernetes.io/instance: istio-resources
-  name: grafana-httproute
-  namespace: istio-system
-spec:
-  hostnames:
-  - grafana.yanello.net
-  parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
-  rules:
-  - backendRefs:
-    - name: marcus-server.lan
-      namespace: istio-system
-      port: 4000
-      
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   annotations:
+#     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+#   labels:
+#     app.kubernetes.io/instance: istio-resources
+#   name: grafana-httproute
+#   namespace: istio-system
+# spec:
+#   hostnames:
+#     - grafana.yanello.net
+#   parentRefs:
+#     - group: gateway.networking.k8s.io
+#       kind: Gateway
+#       name: kube-gateway
+#   rules:
+#     - backendRefs:
+#         - name: marcus-server.lan
+#           namespace: istio-system
+#           port: 4000
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -200,14 +191,13 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-  - nextcloud.yanello.net
+    - nextcloud.yanello.net
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kube-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kube-gateway
   rules:
-  - backendRefs:
-    - name: marcus-server.lan
-      namespace: istio-system
-      port: 6987
-      
+    - backendRefs:
+        - name: marcus-server.lan
+          namespace: istio-system
+          port: 6987
