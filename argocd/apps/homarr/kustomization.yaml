@@ -11,7 +11,7 @@ generators:
 helmCharts:
   - name: homarr
     repo: https://homarr-labs.github.io/charts/
-    version: "2.10.0"
+    version: "2.11.0"
     releaseName: homarr
     namespace: homarr
     valuesFile: ./manifests/values.yaml
