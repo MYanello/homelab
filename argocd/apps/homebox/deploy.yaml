@@ -34,8 +34,8 @@ spec:
           name: homebox
           resources:
             limits:
-              cpu: 100m
-              memory: 150Mi
+              cpu: 500m
+              memory: 500Mi
             requests:
               cpu: 25m
               memory: 50Mi
