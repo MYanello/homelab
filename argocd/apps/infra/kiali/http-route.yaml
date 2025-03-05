@@ -19,4 +19,4 @@ spec:
     - name: kiali
       namespace: kiali
       port: 20001
-      weight: 0
+      

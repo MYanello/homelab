@@ -19,4 +19,4 @@ spec:
     - name: change-detection
       namespace: change-detection
       port: 5000
-      weight: 0
+      

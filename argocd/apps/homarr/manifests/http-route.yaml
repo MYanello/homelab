@@ -19,4 +19,4 @@ spec:
     - name: homarr
       namespace: homarr
       port: 7575
-      weight: 0
+      

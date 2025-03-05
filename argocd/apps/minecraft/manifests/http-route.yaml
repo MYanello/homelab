@@ -17,5 +17,5 @@ spec:
     - name: mc
       namespace: minecraft
       port: 25565
-      weight: 0
+      
 

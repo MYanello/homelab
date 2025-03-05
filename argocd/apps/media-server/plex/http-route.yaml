@@ -19,4 +19,4 @@ spec:
     - name: plex
       namespace: plex
       port: 32400
-      weight: 0
+      

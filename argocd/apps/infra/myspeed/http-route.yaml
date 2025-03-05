@@ -19,4 +19,4 @@ spec:
     - name: myspeed
       namespace: myspeed
       port: 5216
-      weight: 0
+      

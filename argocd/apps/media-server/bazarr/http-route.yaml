@@ -19,4 +19,4 @@ spec:
     - name: bazarr
       namespace: bazarr
       port: 6767
-      weight: 0
+      

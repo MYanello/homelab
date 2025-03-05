@@ -19,5 +19,5 @@ spec:
     - name: overseerr
       namespace: overseerr
       port: 5055
-      weight: 0
+      
 

@@ -15,7 +15,7 @@ spec:
     - name: vmsingle-victoria-metrics-k8s-stack
       namespace: monitoring
       port: 8429
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -38,4 +38,4 @@ spec:
     - name: victoria-metrics-k8s-stack-grafana
       namespace: monitoring
       port: 80
-      weight: 0
+      

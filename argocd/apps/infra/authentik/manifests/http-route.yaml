@@ -19,5 +19,5 @@ spec:
     - name: authentik-server
       namespace: authentik
       port: 80
-      weight: 0
+      
 

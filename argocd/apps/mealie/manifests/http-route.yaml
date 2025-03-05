@@ -19,4 +19,4 @@ spec:
     - name: mealie
       namespace: mealie
       port: 9000
-      weight: 0
+      

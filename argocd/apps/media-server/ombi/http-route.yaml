@@ -19,5 +19,5 @@ spec:
     - name: ombi
       namespace: ombi
       port: 3579
-      weight: 0
+      
 

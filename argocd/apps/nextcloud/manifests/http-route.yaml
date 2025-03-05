@@ -19,5 +19,5 @@ spec:
     - name: nextcloud
       namespace: nextcloud
       port: 8080
-      weight: 0
+      
 

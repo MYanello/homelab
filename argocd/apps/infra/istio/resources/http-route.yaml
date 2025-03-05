@@ -21,7 +21,7 @@ spec:
     - name: router.lan
       namespace: istio-system
       port: 1000
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -44,7 +44,7 @@ spec:
     - name: pikvm.lan
       namespace: istio-system
       port: 80
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -68,7 +68,7 @@ spec:
     - name: iotawatt.lan
       namespace: istio-system
       port: 80
-      weight: 0
+      
 status:
   parents: null
 ---
@@ -93,7 +93,7 @@ spec:
     - name: router.lan
       namespace: istio-system
       port: 30341
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -116,7 +116,7 @@ spec:
     - name: agh.lan
       namespace: istio-system
       port: 3000
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -139,7 +139,7 @@ spec:
     - name: homeassistant.lan
       namespace: istio-system
       port: 8123
-      weight: 0
+      
 status:
   parents: null
 ---
@@ -164,7 +164,7 @@ spec:
     - name: homeassistant.lan
       namespace: istio-system
       port: 8880
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -187,7 +187,7 @@ spec:
     - name: marcus-server.lan
       namespace: istio-system
       port: 4000
-      weight: 0
+      
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -210,4 +210,4 @@ spec:
     - name: marcus-server.lan
       namespace: istio-system
       port: 6987
-      weight: 0
+      

@@ -19,4 +19,4 @@ spec:
     - name: longhorn-frontend
       namespace: longhorn
       port: 80
-      weight: 0
+      

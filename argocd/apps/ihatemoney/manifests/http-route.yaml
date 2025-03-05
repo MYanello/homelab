@@ -19,4 +19,4 @@ spec:
     - name: ihatemoney
       namespace: ihatemoney
       port: 8000
-      weight: 0
+      

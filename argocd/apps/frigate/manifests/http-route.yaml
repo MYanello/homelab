@@ -19,4 +19,4 @@ spec:
     - name: frigate
       namespace: frigate
       port: 5000
-      weight: 0
+      

@@ -19,5 +19,5 @@ spec:
     - name: prowlarr
       namespace: prowlarr
       port: 9696
-      weight: 0
+      
 

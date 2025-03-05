@@ -19,7 +19,7 @@ spec:
     - name: rx-resume
       namespace: resume
       port: 3010
-      weight: 0
+      
     matches:
     - path:
         type: PathPrefix

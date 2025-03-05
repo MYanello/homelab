@@ -19,4 +19,4 @@ spec:
     - name: qbittorrent
       namespace: qbittorrent
       port: 8080
-      weight: 0
+      
