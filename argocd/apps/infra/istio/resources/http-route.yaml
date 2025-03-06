@@ -141,28 +141,6 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: grafana-httproute
-  namespace: istio-system
-spec:
-  hostnames:
-    - grafana.yanello.net
-  parentRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: kube-gateway
-  rules:
-    - backendRefs:
-        - name: marcus-server.lan
-          namespace: istio-system
-          port: 4000
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  labels:
-    app.kubernetes.io/instance: istio-resources
   name: nextcloud-httproute
   namespace: istio-system
 spec:
