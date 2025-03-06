@@ -61,20 +61,3 @@ spec:
       protocol: HTTP
   resolution: STATIC
   location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: iotawatt-se
-  namespace: istio-system
-spec:
-  hosts:
-    - iotawatt.lan
-  endpoints:
-    - address: 192.168.1.41
-  ports:
-    - number: 80
-      name: http
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL

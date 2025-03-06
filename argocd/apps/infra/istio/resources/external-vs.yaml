@@ -49,22 +49,6 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: iotawatt-vs
-spec:
-  hosts:
-    - iota.yanello.net
-  gateways:
-    - istio-system/kube-gateway
-  http:
-    - route:
-        - destination:
-            host: iotawatt.lan
-            port:
-              number: 80
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
   name: adguardhome-vs
 spec:
   hosts:

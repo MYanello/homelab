@@ -29,30 +29,6 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: iotawatt-httproute
-  namespace: istio-system
-spec:
-  hostnames:
-    - iota.yanello.net
-  parentRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: kube-gateway
-  rules:
-    - backendRefs:
-        - name: iotawatt.lan
-          namespace: istio-system
-          port: 80
-status:
-  parents: null
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  labels:
-    app.kubernetes.io/instance: istio-resources
   name: ntopng-httproute
   namespace: istio-system
 spec:
