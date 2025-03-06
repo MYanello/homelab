@@ -86,10 +86,6 @@ metadata:
       kind: Gateway
       name: gateway-api
 spec:
-  allocateLoadBalancerNodePorts: true
-  clusterIP: 10.43.218.194
-  clusterIPs:
-    - 10.43.218.194
   externalTrafficPolicy: Local
   healthCheckNodePort: 31089
   internalTrafficPolicy: Cluster
