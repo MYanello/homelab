@@ -4,11 +4,14 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
-### 03.04.24
+### 03.05.25
+- Finished migration to gatewayapi from ingress. Biggest challenge was external services, which was solved by using a service without a selector and a manually created endpointslice. I think not using VirtualServices from istio may block me from doing sidecars for those, but that's probably ok. Hopefully by the time I want to do that, things are better documented. This [blog](https://blog.stonegarden.dev/articles/2024/04/k8s-external-services/) was the greatest help.
+
+### 03.04.25
 - Started migrating to gatewayapi from ingress. Not for any real reason, but just to learn how to stay on the latest hotness.
 
 
-### 02.22.24
+### 02.22.25
 - Needed to bump pod limit for server. Seemed best way to do that is by creating a conf file:
   ```
   apiVersion: kubelet.config.k8s.io/v1beta1
@@ -17,20 +20,20 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
   ```
   Then modify /etc/systemd/system/k3s-agent.service to use it as an arg
 
-### 02.20.24
+### 02.20.25
 
 - Deployed longhorn with some usb drives in the pis to play with some distributed ha storage for the stateful workloads. I think this will be a better option than nfs for those applications.
 - Set up minio for s3 storage. This well be useful for backing up the longhorn volumes in particular, but should let me use it for anything that wants blob storage.
 
-### 02.17.24
+### 02.17.25
 
 - Set up longhorn with 128gb usb in each pi node to test out distributed HA storage options for the stateful workloads. I think this may be a better option than nfs for those applications.
 
-### 02.16.24
+### 02.16.25
 
 - Gave in on using istio for ingress objects. Seems that the backend is not getting found by istio. Instead of moved all my ingresses into virtual services. This seems to make sense since I intend to migrate to istio gateway api eventually anyway.
 
-### 02.14.24
+### 02.14.25
 
 - Attempted flipping over to istio for all ingress instead of haproxy
   - Needed to disable haproxy, enable the nat rules, and update unbound overrides
