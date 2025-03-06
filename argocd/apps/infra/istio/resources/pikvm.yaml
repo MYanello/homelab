@@ -54,37 +54,37 @@ spec:
             host: pikvm.lan
             port:
               number: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pikvm-service
-spec:
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
----
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
-metadata:
-  name: pikvm-service-1 # by convention, use the name of the Service
-  # as a prefix for the name of the EndpointSlice
-  labels:
-    # You should set the "kubernetes.io/service-name" label.
-    # Set its value to match the name of the Service
-    kubernetes.io/service-name: pikvm-service
-addressType: IPv4
-ports:
-  - name: http # should match with the name of the service port defined above
-    appProtocol: http
-    protocol: TCP
-    port: 80
-endpoints:
-  - addresses:
-      - 192.168.1.9
-    conditions:
-      ready: true
-      serving: true
-      terminating: false
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: pikvm-service
+# spec:
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 80
+# ---
+# apiVersion: discovery.k8s.io/v1
+# kind: EndpointSlice
+# metadata:
+#   name: pikvm-service-1 # by convention, use the name of the Service
+#   # as a prefix for the name of the EndpointSlice
+#   labels:
+#     # You should set the "kubernetes.io/service-name" label.
+#     # Set its value to match the name of the Service
+#     kubernetes.io/service-name: pikvm-service
+# addressType: IPv4
+# ports:
+#   - name: http # should match with the name of the service port defined above
+#     appProtocol: http
+#     protocol: TCP
+#     port: 80
+# endpoints:
+#   - addresses:
+#       - 192.168.1.9
+#     conditions:
+#       ready: true
+#       serving: true
+#       terminating: false
