@@ -38,26 +38,26 @@ spec:
       protocol: HTTP
   resolution: STATIC
   location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: homeassistant-se
-  namespace: istio-system
-spec:
-  hosts:
-    - homeassistant.lan
-  endpoints:
-    - address: 192.168.1.4
-  ports:
-    - number: 8123
-      name: http
-      protocol: HTTP
-    - number: 8443
-      name: ubiquiti-tls
-      protocol: TLS
-    - number: 8880
-      name: ubiquiti
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: homeassistant-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - homeassistant.lan
+#   endpoints:
+#     - address: 192.168.1.4
+#   ports:
+#     - number: 8123
+#       name: http
+#       protocol: HTTP
+#     - number: 8443
+#       name: ubiquiti-tls
+#       protocol: TLS
+#     - number: 8880
+#       name: ubiquiti
+#       protocol: HTTP
+#   resolution: STATIC
+#   location: MESH_EXTERNAL
