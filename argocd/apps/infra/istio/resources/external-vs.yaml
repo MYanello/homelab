@@ -49,23 +49,6 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: opn-vs
-spec:
-  hosts:
-    - router.yanello.net
-    - opn.yanello.net
-  gateways:
-    - istio-system/kube-gateway
-  http:
-    - route:
-        - destination:
-            host: router.lan
-            port:
-              number: 1000
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
   name: ubiquiti-vs
 spec:
   hosts:

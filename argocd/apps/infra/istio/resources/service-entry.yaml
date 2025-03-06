@@ -1,26 +1,24 @@
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: router-se
-  namespace: istio-system
-spec:
-  hosts:
-    - router.lan
-  endpoints:
-    - address: 192.168.1.1
-  ports:
-    - number: 30341
-      name: ntopng
-      protocol: HTTP
-    - number: 3000
-      name: adguardHome
-      protocol: HTTP
-    - number: 1000
-      name: opnsense
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name: router-se
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - router.lan
+#   endpoints:
+#     - address: 192.168.1.1
+#   ports:
+#     - number: 30341
+#       name: ntopng
+#       protocol: HTTP
+#       protocol: HTTP
+#     - number: 1000
+#       name: opnsense
+#       protocol: HTTP
+#   resolution: STATIC
+#   location: MESH_EXTERNAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
