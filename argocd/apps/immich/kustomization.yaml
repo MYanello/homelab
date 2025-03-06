@@ -5,6 +5,7 @@ resources:
 - deploy.yaml
 - vs.yaml
 - service.yaml
+- http-route.yaml
 
 generators:
 - secret-generator.yaml

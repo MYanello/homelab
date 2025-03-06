@@ -6,7 +6,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: immich-app
   name: immich-httproute
-  namespace: immich
 spec:
   parentRefs:
   - name: gateway-api
