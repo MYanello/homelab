@@ -12,14 +12,14 @@ spec:
     # Allow all traffic from internal network (LAN)
     - from:
         - source:
-            remoteIpBlocks:
+            ipBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
     # Allow WAN traffic only to specific subdomains
     - from:
         - source:
-            notRemoteIpBlocks:
+            notIpBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
@@ -39,7 +39,7 @@ spec:
               - mealie.yanello.net
     - from:
         - source:
-            notRemoteIpBlocks:
+            notIpBlocks:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
