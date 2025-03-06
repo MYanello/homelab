@@ -47,10 +47,6 @@ spec:
     chart: istiod
     helm:
       valuesObject:
-        # meshConfig:
-        #   ingressControllerMode: DEFAULT
-        #   ingressClass: istio
-          # ingressSelector: istio-ingressgateway
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
