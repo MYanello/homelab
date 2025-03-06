@@ -6,29 +6,6 @@ metadata:
     gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
   labels:
     app.kubernetes.io/instance: istio-resources
-  name: opn-httproute
-  namespace: istio-system
-spec:
-  hostnames:
-    - router.yanello.net
-    - opn.yanello.net
-  parentRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: kube-gateway
-  rules:
-    - backendRefs:
-        - name: router.lan
-          namespace: istio-system
-          port: 1000
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  labels:
-    app.kubernetes.io/instance: istio-resources
   name: ntopng-httproute
   namespace: istio-system
 spec:
@@ -43,28 +20,6 @@ spec:
         - name: router.lan
           namespace: istio-system
           port: 30341
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  labels:
-    app.kubernetes.io/instance: istio-resources
-  name: adguardhome-httproute
-  namespace: istio-system
-spec:
-  hostnames:
-    - agh.yanello.net
-  parentRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: kube-gateway
-  rules:
-    - backendRefs:
-        - name: agh.lan
-          namespace: istio-system
-          port: 3000
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute

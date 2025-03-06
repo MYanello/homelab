@@ -33,22 +33,6 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: adguardhome-vs
-spec:
-  hosts:
-    - agh.yanello.net
-  gateways:
-    - istio-system/kube-gateway
-  http:
-    - route:
-        - destination:
-            host: agh.lan
-            port:
-              number: 3000
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
   name: ubiquiti-vs
 spec:
   hosts:

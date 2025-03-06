@@ -19,24 +19,7 @@
 #       protocol: HTTP
 #   resolution: STATIC
 #   location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
-metadata:
-  name: agh-se
-  namespace: istio-system
-spec:
-  hosts:
-    - agh.lan
-  endpoints:
-    - address: 192.168.3.1
-  ports:
-    - number: 3000
-      name: agh
-      protocol: HTTP
-  resolution: STATIC
-  location: MESH_EXTERNAL
-# ---
+
 # apiVersion: networking.istio.io/v1alpha3
 # kind: ServiceEntry
 # metadata:
