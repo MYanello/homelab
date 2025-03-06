@@ -3,9 +3,6 @@ kind: AuthorizationPolicy
 metadata:
   name: allow-domain-access-policy
 spec:
-  selector:
-    matchLabels:
-      gateway.networking.k8s.io/gateway-name: gateway-api
   action: ALLOW # denied non-matching
   rules:
     # Allow all traffic from internal network (LAN)
