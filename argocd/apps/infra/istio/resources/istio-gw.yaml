@@ -41,10 +41,10 @@ metadata:
   name: gateway-api
 spec:
   addresses:
-      - type: Hostname
-        value: gateway-api-svc.istio-system.svc.cluster.local
-    # - value: 10.10.8.1
-    #   type: IPAddress
+      # - type: Hostname
+      #   value: gateway-api-svc.istio-system.svc.cluster.local
+      - value: 10.10.8.1
+        type: IPAddress
   gatewayClassName: istio
   listeners:
     - name: http
@@ -70,56 +70,56 @@ spec:
         kinds:
           - kind: HTTPRoute
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    metallb.io/ip-allocated-from-pool: address-pool
-  labels:
-    app.kubernetes.io/instance: istio-resources
-    gateway.istio.io/managed: istio.io-gateway-controller
-    gateway.networking.k8s.io/gateway-name: gateway-api
-  name: gateway-api-istio-svc
-  namespace: istio-system
-  ownerReferences:
-    - apiVersion: gateway.networking.k8s.io/v1beta1
-      kind: Gateway
-      name: gateway-api
-spec:
-  externalTrafficPolicy: Local
-  healthCheckNodePort: 31089
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-    - IPv4
-  ipFamilyPolicy: PreferDualStack
-  loadBalancerIP: 10.10.8.1
-  ports:
-    - appProtocol: tcp
-      name: status-port
-      nodePort: 30696
-      port: 15021
-      protocol: TCP
-      targetPort: 15021
-    - appProtocol: http
-      name: http
-      nodePort: 30853
-      port: 80
-      protocol: TCP
-      targetPort: 80
-    - appProtocol: https
-      name: https
-      nodePort: 31707
-      port: 443
-      protocol: TCP
-      targetPort: 443
-  selector:
-    gateway.networking.k8s.io/gateway-name: gateway-api
-  type: LoadBalancer
-status:
-  loadBalancer:
-    ingress:
-      - ip: 10.10.8.1
-        ipMode: VIP
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   annotations:
+#     metallb.io/ip-allocated-from-pool: address-pool
+#   labels:
+#     app.kubernetes.io/instance: istio-resources
+#     gateway.istio.io/managed: istio.io-gateway-controller
+#     gateway.networking.k8s.io/gateway-name: gateway-api
+#   name: gateway-api-istio-svc
+#   namespace: istio-system
+#   ownerReferences:
+#     - apiVersion: gateway.networking.k8s.io/v1beta1
+#       kind: Gateway
+#       name: gateway-api
+# spec:
+#   externalTrafficPolicy: Local
+#   healthCheckNodePort: 31089
+#   internalTrafficPolicy: Cluster
+#   ipFamilies:
+#     - IPv4
+#   ipFamilyPolicy: PreferDualStack
+#   loadBalancerIP: 10.10.8.1
+#   ports:
+#     - appProtocol: tcp
+#       name: status-port
+#       nodePort: 30696
+#       port: 15021
+#       protocol: TCP
+#       targetPort: 15021
+#     - appProtocol: http
+#       name: http
+#       nodePort: 30853
+#       port: 80
+#       protocol: TCP
+#       targetPort: 80
+#     - appProtocol: https
+#       name: https
+#       nodePort: 31707
+#       port: 443
+#       protocol: TCP
+#       targetPort: 443
+#   selector:
+#     gateway.networking.k8s.io/gateway-name: gateway-api
+#   type: LoadBalancer
+# status:
+#   loadBalancer:
+#     ingress:
+#       - ip: 10.10.8.1
+#         ipMode: VIP
 # ---
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: Gateway
