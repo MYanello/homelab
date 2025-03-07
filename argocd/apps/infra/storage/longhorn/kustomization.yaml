@@ -12,5 +12,5 @@ helmCharts:
       namespace: longhorn
       releaseName: longhorn
       repo: https://charts.longhorn.io
-      version: "1.8.0"
+      version: "1.8.1"
       valuesFile: ./manifests/values.yaml
