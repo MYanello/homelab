@@ -40,6 +40,7 @@ kind: Gateway
 metadata:
   name: gateway-api
 spec:
+  replicas: 2
   addresses:
       # - type: Hostname
       #   value: gateway-api-svc.istio-system.svc.cluster.local
