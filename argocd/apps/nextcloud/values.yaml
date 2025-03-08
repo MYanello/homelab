@@ -1,5 +1,5 @@
 replicaCount: 1
-  
+
 nextcloud:
   host: nextcloudk8s.yanello.net
   existingSecret:
@@ -19,14 +19,14 @@ nextcloud:
     - name: OVERWRITECLIURL
       value: https://nextcloudk8s.yanello.net
     - name: APACHE_DISABLE_REWRITE_IP
-      value: '1'
+      value: "1"
   objectStore:
     s3:
       enabled: true
       region: "homelab"
       usePathStyle: true
       existingSecret: nextcloud-secrets
-      secretKeys: 
+      secretKeys:
         host: s3-host
         accessKey: s3-access-key
         secretKey: s3-secret-key
@@ -52,6 +52,8 @@ redis:
   global:
     storageClass: longhorn
   master:
+    persistence:
+      enabled: false
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -62,6 +64,8 @@ redis:
                   values:
                     - marcus-server
   replica:
+    persistence:
+      enabled: false
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
