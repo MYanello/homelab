@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/vs.yaml
-
+  - ./manifests/http-route.yaml
 generators:
   - ./manifests/secret-generator.yaml
 
