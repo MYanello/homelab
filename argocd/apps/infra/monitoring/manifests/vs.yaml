@@ -1,32 +1,32 @@
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: grafana-vs
-spec:
-  hosts:
-  - grafanak8s.yanello.net
-  gateways:
-  - istio-system/kube-gateway
-  http:
-  - route:
-    - destination:
-        host: victoria-metrics-k8s-stack-grafana
-        port:
-          number: 80
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: vm-vs
-spec:
-  hosts:
-  - vm.yanello.net
-  gateways:
-  - istio-system/kube-gateway
-  http:
-  - route:
-    - destination:
-        host: vmsingle-victoria-metrics-k8s-stack
-        port:
-          number: 8429
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: grafana-vs
+# spec:
+#   hosts:
+#   - grafanak8s.yanello.net
+#   gateways:
+#   - istio-system/kube-gateway
+#   http:
+#   - route:
+#     - destination:
+#         host: victoria-metrics-k8s-stack-grafana
+#         port:
+#           number: 80
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: vm-vs
+# spec:
+#   hosts:
+#   - vm.yanello.net
+#   gateways:
+#   - istio-system/kube-gateway
+#   http:
+#   - route:
+#     - destination:
+#         host: vmsingle-victoria-metrics-k8s-stack
+#         port:
+#           number: 8429
