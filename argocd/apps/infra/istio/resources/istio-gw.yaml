@@ -1,40 +1,40 @@
-apiVersion: networking.istio.io/v1beta1
-kind: Gateway
-metadata:
-  name: kube-gateway
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-    - hosts:
-        - "*.yanello.net"
-        - yanello.net
-      port:
-        name: http
-        number: 80
-        protocol: HTTP
-      # tls:
-      #   httpsRedirect: true
-    - hosts:
-        - "*.yanello.net"
-        - "yanello.net"
-      port:
-        number: 443
-        name: https
-        protocol: HTTPS
-      tls:
-        credentialName: default-ingress-cert
-        # maxProtocolVersion: TLSV1_3
-        # minProtocolVersion: TLSV1_2
-        mode: SIMPLE
-        cipherSuites:
-          - AES_256_GCM_SHA384
-          - ECDHE-ECDSA-CHACHA20-POLY1305
-          - ECDHE-ECDSA-AES256-GCM-SHA384
-          - ECDHE-RSA-AES256-GCM-SHA384
-          - ECDHE-ECDSA-CHACHA20-POLY1305
-          - ECDHE-RSA-CHACHA20-POLY1305
----
+# apiVersion: networking.istio.io/v1beta1
+# kind: Gateway
+# metadata:
+#   name: kube-gateway
+# spec:
+#   selector:
+#     istio: ingressgateway
+#   servers:
+#     - hosts:
+#         - "*.yanello.net"
+#         - yanello.net
+#       port:
+#         name: http
+#         number: 80
+#         protocol: HTTP
+#       # tls:
+#       #   httpsRedirect: true
+#     - hosts:
+#         - "*.yanello.net"
+#         - "yanello.net"
+#       port:
+#         number: 443
+#         name: https
+#         protocol: HTTPS
+#       tls:
+#         credentialName: default-ingress-cert
+#         # maxProtocolVersion: TLSV1_3
+#         # minProtocolVersion: TLSV1_2
+#         mode: SIMPLE
+#         cipherSuites:
+#           - AES_256_GCM_SHA384
+#           - ECDHE-ECDSA-CHACHA20-POLY1305
+#           - ECDHE-ECDSA-AES256-GCM-SHA384
+#           - ECDHE-RSA-AES256-GCM-SHA384
+#           - ECDHE-ECDSA-CHACHA20-POLY1305
+#           - ECDHE-RSA-CHACHA20-POLY1305
+# ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -67,6 +67,25 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: http-redirect
+spec:
+  parentRefs:
+  - name: gateway-api
+    sectionName: http  
+  hostnames:
+  - "*.yanello.net"
+  - "yanello.net"
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301  # Permanent redirect
+        portRedirect: 443
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: Gateway
 # metadata:
