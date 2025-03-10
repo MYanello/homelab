@@ -34,6 +34,6 @@ spec:
     - grafanak8s.yanello.net
   rules:
     - backendRefs:
-        - name: grafana
+        - name: victoria-metrics-k8s-stack-grafana
           namespace: monitoring
           port: 80
