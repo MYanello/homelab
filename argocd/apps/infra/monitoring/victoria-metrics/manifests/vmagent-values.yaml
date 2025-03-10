@@ -11,6 +11,12 @@ config:
       static_configs:
         - targets: ["localhost:8429"]
     - job_name: "kubernetes-apiservers"
+    # can service discovery 5 roles: 
+      # 1. **`endpoints`**: Discovers service endpoints (individual pod IPs and ports)
+      # 2. **`service`**: Discovers services themselves
+      # 3. **`pod`**: Discovers all pods
+      # 4. **`node`**: Discovers Kubernetes nodes
+      # 5. **`ingress`**: Discovers Ingress resources
       kubernetes_sd_configs:
         - role: endpoints
       scheme: https
@@ -19,6 +25,7 @@ config:
         insecure_skip_verify: true
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       relabel_configs:
+        # filter endpoints based on these labels and regex
         - source_labels:
             [
               __meta_kubernetes_namespace,
