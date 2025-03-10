@@ -81,15 +81,10 @@ spec:
     - "yanello.net"
   rules:
     - filters:
-      - matches:
-          - path:
-              type: PathPrefix
-              value: /
-        requestRedirect:
-          portRedirect: 443
-          scheme: https
-          statusCode: 301
-        type: RequestRedirect
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: Gateway
 # metadata:
