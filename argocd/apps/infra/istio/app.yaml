@@ -57,66 +57,66 @@ spec:
                       operator: In
                       values:
                         - amd64
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: istio-ingressgateway
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    name: in-cluster
-    namespace: istio-system
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: "1.25.0"
-    chart: gateway
-    helm:
-      valuesObject:
-        tolerations:
-          - key: "node-role.kubernetes.io/control-plane"
-            operator: "Exists"
-            effect: "NoSchedule"
-        autoscaling:
-          enabled: true
-          minReplicas: 2
-          maxReplicas: 4
-          targetCPUUtilizationPercentage: 80
-        service:
-          loadBalancerIP: 10.10.8.0
-          externalTrafficPolicy: Local
-          ports:
-            - name: status-port
-              port: 15021
-              protocol: TCP
-              targetPort: 15021
-            - name: http2
-              port: 80
-              protocol: TCP
-              targetPort: 80
-            - name: https
-              port: 443
-              protocol: TCP
-              targetPort: 443
-        affinity:
-          nodeAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 1
-                preference:
-                  matchExpressions:
-                    - key: kubernetes.io/arch
-                      operator: In
-                      values:
-                        - amd64
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: istio-ingressgateway
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     name: in-cluster
+#     namespace: istio-system
+#   project: default
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#   source:
+#     repoURL: https://istio-release.storage.googleapis.com/charts
+#     targetRevision: "1.25.0"
+#     chart: gateway
+#     helm:
+#       valuesObject:
+#         tolerations:
+#           - key: "node-role.kubernetes.io/control-plane"
+#             operator: "Exists"
+#             effect: "NoSchedule"
+#         autoscaling:
+#           enabled: true
+#           minReplicas: 2
+#           maxReplicas: 4
+#           targetCPUUtilizationPercentage: 80
+#         service:
+#           loadBalancerIP: 10.10.8.0
+#           externalTrafficPolicy: Local
+#           ports:
+#             - name: status-port
+#               port: 15021
+#               protocol: TCP
+#               targetPort: 15021
+#             - name: http2
+#               port: 80
+#               protocol: TCP
+#               targetPort: 80
+#             - name: https
+#               port: 443
+#               protocol: TCP
+#               targetPort: 443
+#         affinity:
+#           nodeAffinity:
+#             preferredDuringSchedulingIgnoredDuringExecution:
+#               - weight: 1
+#                 preference:
+#                   matchExpressions:
+#                     - key: kubernetes.io/arch
+#                       operator: In
+#                       values:
+#                         - amd64
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
