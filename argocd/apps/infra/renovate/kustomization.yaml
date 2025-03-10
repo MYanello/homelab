@@ -1,8 +1,8 @@
 resources:
-  - ./vs.yaml
+  - ./manifests/http-route.yaml
 
 generators:
-  - ./secret-generator.yaml
+  - ./manifests/secret-generator.yaml
 
 helmCharts:
   - name: mend-renovate-ce
