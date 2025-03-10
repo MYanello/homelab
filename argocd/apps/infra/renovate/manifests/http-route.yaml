@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: renovate-app
+  name: renovate-httproute
+  namespace: renovate
+spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - renovate.yanello.net
+  rules:
+  - backendRefs:
+    - name: mend-renovate-ce
+      namespace: renovate
+      port: 8080
+      
