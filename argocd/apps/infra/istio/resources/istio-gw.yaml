@@ -67,7 +67,7 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: gateway-api-cert
+          - name: default-ingress-cert
       allowedRoutes:
         namespaces:
           from: All
