@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: monitoring-app
+  name: vm-httproute
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
+  hostnames:
+    - vmk8s.yanello.net
+  rules:
+    - backendRefs:
+        - name: vmsingle-victoria-metrics-k8s-stack
+          namespace: monitoring
+          port: 8429
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: monitoring-app
+  name: grafana-httproute
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
+  hostnames:
+    - grafanak8s.yanello.net
+  rules:
+    - backendRefs:
+        - name: grafana
+          namespace: monitoring
+          port: 80
