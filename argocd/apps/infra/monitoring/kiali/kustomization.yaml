@@ -2,7 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
- - vs.yaml
  - http-route.yaml
  
 helmCharts:
@@ -10,5 +9,5 @@ helmCharts:
     repo: https://kiali.org/helm-charts
     version: "2.6.0"
     releaseName: kiali-operator
-    namespace: kiali
+    namespace: monitoring
     valuesFile: ./values.yaml
