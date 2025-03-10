@@ -39,6 +39,12 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: gateway-api
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/common-name: yanello.net
+    cert-manager.io/dns-names: "*.yanello.net,yanello.net"
+    cert-manager.io/duration: 2160h
+    cert-manager.io/renew-before: 360h
 spec:
   addresses:
     - value: 10.10.8.1
@@ -61,7 +67,7 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: default-ingress-cert
+          - name: gateway-api-cert
       allowedRoutes:
         namespaces:
           from: All
