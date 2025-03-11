@@ -4,20 +4,21 @@ kind: Kustomization
 resources:
   - ./manifests/cm.yaml
   - ./manifests/http-route.yaml
-  
+  - ./manifests/ns.yaml
+
 patches:
-- target:
-    kind: Deployment
-  patch: |-
-    - op: replace
-      path: /spec/replicas
-      value: 1
-- target:
-    kind: StatefulSet
-  patch: |-
-    - op: replace
-      path: /spec/replicas
-      value: 1
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+  - target:
+      kind: StatefulSet
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
 
 generators:
   - ./manifests/secret-generator.yaml
