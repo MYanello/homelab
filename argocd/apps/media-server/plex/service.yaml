@@ -5,7 +5,7 @@ metadata:
   labels:
     app: plex
   # annotations:
-  #   metallb.universe.tf/loadBalancerIPs: 10.10.8.10
+  #   metallb.io/loadBalancerIPs: 10.10.8.10
 spec:
   # type: LoadBalancer
   #externalTrafficPolicy: Local
