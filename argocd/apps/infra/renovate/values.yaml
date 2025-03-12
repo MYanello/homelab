@@ -42,7 +42,7 @@ renovate:
       "gradle": {
         "fileMatch": ["^build.gradle$"],
       },
-      "ignorePaths": []
+      "ignorePaths": [
         "argocd/apps/dev"
       ],
       "packageRules": [
