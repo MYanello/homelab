@@ -49,7 +49,7 @@ spec:
             # - MAIL_USERNAME=${MAIL_USERNAME}
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
-          image: harung43/dollardollar:latest
+          image: harung43/dollardollar:latest@sha256:f98c83dac2f306784ebe2eb6d8ac13c0aa414dbc50ad856b3ba9d78ba469c816
           imagePullPolicy: IfNotPresent
           name: dollardollar
           # resources:
