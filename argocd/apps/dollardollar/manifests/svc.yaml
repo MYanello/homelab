@@ -18,8 +18,6 @@ metadata:
   name: postgres
   labels:
     app: postgres
-  annotations:
-    metallb.io/loadBalancerIPs: 10.10.8.4
 spec:
   type: LoadBalancer
   ports:
