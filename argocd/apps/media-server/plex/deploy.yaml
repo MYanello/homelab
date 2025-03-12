@@ -45,7 +45,7 @@ spec:
       runtimeClassName: nvidia
       containers:
         - name: plex-pms
-          image: index.docker.io/plexinc/pms-docker:latest@sha256:b3a376a04fa1912af17a61755089ad2324502fe1b2f8bbf042eab31afe36fc25
+          image: index.docker.io/plexinc/pms-docker:1.41.5.9522-a96edc606@sha256:b3a376a04fa1912af17a61755089ad2324502fe1b2f8bbf042eab31afe36fc25
           imagePullPolicy: IfNotPresent
           resources:
             limits:
