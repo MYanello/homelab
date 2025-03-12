@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - ./manifests/vs.yaml
   - ./manifests/http-route.yaml
+  - ./manifests/longhorn-xfs-sc.yaml
+  
 generators:
   - ./manifests/secret-generator.yaml
 

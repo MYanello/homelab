@@ -4,14 +4,22 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+
+### 03.11.25
+
+- Learned that postgres does not like ext4 filesystems because they add lost+found directory.
+- Created a new longhorn-xfs storageclass to use xfs instead of ext4 for the postgres volume
+
 ### 03.05.25
+
 - Finished migration to gatewayapi from ingress. Biggest challenge was external services, which was solved by using a service without a selector and a manually created endpointslice. I think not using VirtualServices from istio may block me from doing sidecars for those, but that's probably ok. Hopefully by the time I want to do that, things are better documented. This [blog](https://blog.stonegarden.dev/articles/2024/04/k8s-external-services/) was the greatest help.
 
 ### 03.04.25
+
 - Started migrating to gatewayapi from ingress. Not for any real reason, but just to learn how to stay on the latest hotness.
 
-
 ### 02.22.25
+
 - Needed to bump pod limit for server. Seemed best way to do that is by creating a conf file:
   ```
   apiVersion: kubelet.config.k8s.io/v1beta1
