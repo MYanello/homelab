@@ -10,11 +10,11 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      server: postgres
+      app: postgres
   template:
     metadata:
       labels:
-        server: postgres
+        app: postgres
     spec:
       containers:
         - name: postgres

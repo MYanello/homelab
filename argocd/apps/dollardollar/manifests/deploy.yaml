@@ -20,19 +20,18 @@ spec:
         app: dollardollar
     spec:
       containers:
-        
         - envFrom:
-          - secretRef:
-              name: dollardollar-secrets
+            - secretRef:
+                name: dollardollar-secrets
           env:
             - name: SQLALCHEMY_DATABASE_URI
-              value: postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+              value: postgresql://$(POSTGRES_DB):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
             - name: DEVELOPMENT_MODE
               value: "False"
             - name: DISABLE_SIGNUP
-              value: 'False'
+              value: "False"
             - name: DEBUG
-              value: 'False'
+              value: "False"
             - name: LOG_LEVEL
               value: INFO
             - name: FLASK_APP
@@ -51,6 +50,7 @@ spec:
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
           image: harung43/dollardollar:latest@sha256:f98c83dac2f306784ebe2eb6d8ac13c0aa414dbc50ad856b3ba9d78ba469c816
           imagePullPolicy: IfNotPresent
+          #command: ["sleep", "inf"]
           name: dollardollar
           # resources:
           #   limits:
