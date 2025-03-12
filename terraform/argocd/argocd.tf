@@ -22,7 +22,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             },
             {
               "path"    = "argocd/apps/dev",
-              "exclude" = true
+              "exclude" = false
             }
           ]
         }
@@ -57,4 +57,3 @@ resource "kubernetes_manifest" "argocd_appset" {
     }
   }
 }
-
