@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dollardollar
+  name: dollardollar
+spec:
+  ports:
+    - name: "http"
+      port: 5001
+      targetPort: 5001
+  selector:
+    app: dollardollar
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres
