@@ -47,6 +47,6 @@ ports:
     port: 4000
 endpoints:
   - addresses:
-      - 192.168.1.18
+      - 192.168.10.18
     conditions:
       ready: true
