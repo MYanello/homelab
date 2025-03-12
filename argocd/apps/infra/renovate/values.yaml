@@ -42,6 +42,9 @@ renovate:
       "gradle": {
         "fileMatch": ["^build.gradle$"],
       },
+      "ignorePaths": []
+        "argocd/apps/dev"
+      ],
       "packageRules": [
         {
           "matchDatasources": ["docker", "kustomize", "kubernetes"],
