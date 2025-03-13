@@ -325,9 +325,9 @@ markupsafe==2.1.5 \
     # via
     #   jinja2
     #   werkzeug
-opentelemetry-api==1.22.0 \
-    --hash=sha256:15ae4ca925ecf9cfdfb7a709250846fbb08072260fca08ade78056c502b86bed \
-    --hash=sha256:43621514301a7e9f5d06dd8013a1b450f30c2e9372b8e30aaeb4562abf2ce034
+opentelemetry-api==1.31.0 \
+    --hash=sha256:145b72c6c16977c005c568ec32f4946054ab793d8474a17fd884b0397582c5f2 \
+    --hash=sha256:d8da59e83e8e3993b4726e4c1023cd46f57c4d5a73142e239247e7d814309de1
     # via
     #   -r requirements.in
     #   opentelemetry-instrumentation
@@ -352,13 +352,13 @@ opentelemetry-instrumentation-wsgi==0.43b0 \
     # via
     #   -r requirements.in
     #   opentelemetry-instrumentation-flask
-opentelemetry-propagator-b3==1.22.0 \
-    --hash=sha256:3270f17bceb46338d700b5a09ff2e0499ec4f5189b3a4114bc3f2e64283b317d \
-    --hash=sha256:cef5528b5c16866fdf7d6d6eb5dfbca216f071cda3c87da658cedf3451e6f6bf
+opentelemetry-propagator-b3==1.31.0 \
+    --hash=sha256:469f90efaedacd565907f05a45dacc09862b1f7c7a6f7cf7856a165ddc5d513d \
+    --hash=sha256:5776cd5efdae5b581bab3142c7261925ffb48365dd0ea944cf008f638f7a282d
     # via -r requirements.in
-opentelemetry-sdk==1.22.0 \
-    --hash=sha256:45267ac1f38a431fc2eb5d6e0c0d83afc0b78de57ac345488aa58c28c17991d0 \
-    --hash=sha256:a730555713d7c8931657612a88a141e3a4fe6eb5523d9e2d5a8b1e673d76efa6
+opentelemetry-sdk==1.31.0 \
+    --hash=sha256:452d7d5b3c1db2e5e4cb64abede0ddd20690cb244a559c73a59652fdf6726070 \
+    --hash=sha256:97c9a03865e69723725fb64fe04343a488c3e61e684eb804bd7d6da2215dfc60
     # via -r requirements.in
 opentelemetry-semantic-conventions==0.43b0 \
     --hash=sha256:291284d7c1bf15fdaddf309b3bd6d3b7ce12a253cec6d27144439819a15d8445 \
