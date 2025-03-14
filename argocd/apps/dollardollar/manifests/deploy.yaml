@@ -25,7 +25,7 @@ spec:
                 name: dollardollar-secrets
           env:
             - name: SQLALCHEMY_DATABASE_URI
-              value: postgresql://$(POSTGRES_DB):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+              value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
             - name: DEVELOPMENT_MODE
               value: "False"
             - name: DISABLE_SIGNUP

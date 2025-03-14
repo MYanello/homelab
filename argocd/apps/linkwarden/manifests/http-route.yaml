@@ -1,18 +1,18 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: plex-http-route
-  namespace: plex
+  name: linkwarden-http-route
+  namespace: linkwarden
 spec:
   parentRefs:
   - name: gateway-api
     namespace: istio-system
     sectionName: https
   hostnames:
-  - plex.yanello.net
+  - linkwarden.yanello.net
   rules:
   - backendRefs:
-    - name: plex
-      namespace: plex
-      port: 32400
-      
+    - name: linkwarden
+      namespace: linkwarden
+      port: 3000
+

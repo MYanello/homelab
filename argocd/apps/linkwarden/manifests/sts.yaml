@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: linkwarden
+  labels:
+    app: linkwarden
+spec:
+  replicas: 1
+  serviceName: postgres
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: linkwarden
+  template:
+    metadata:
+      labels:
+        app: linkwarden
+    spec:
+      containers:
+        - name: linkwarden
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: linkwarden-secrets
+          env:
+          - name: DATABASE_URL
+            value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+          - name: NEXTAUTH_URL
+            value: http://localhost:3000/api/v1/auth
+          image: ghcr.io/linkwarden/linkwarden:latest
+          volumeMounts:
+            - mountPath: /data/data
+              name: data
+          resources:
+            requests:
+              cpu: 150m
+              memory: 1Gi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  serviceName: postgres
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: linkwarden-secrets
+          image: postgres:16-alpine
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+          resources:
+            requests:
+              cpu: 150m
+              memory: 500Mi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: pgdata
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn-xfs
+        resources:
+          requests:
+            storage: 1Gi
