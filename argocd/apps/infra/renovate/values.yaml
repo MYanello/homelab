@@ -16,6 +16,9 @@ renovate:
         "default:automergeDigest",
         "default:pinDigestsDisabled"
       ],
+      "digest": {
+        "automerge": true
+      },
       "prBodyColumns": [
         "Package",
         "Update",
@@ -81,7 +84,8 @@ renovate:
           "matchUpdateTypes": ["minor", "patch"],
           "matchCurrentVersion": "!/^0/",
           "automerge": true
-        }
+        },
+
       ]
     }
 
