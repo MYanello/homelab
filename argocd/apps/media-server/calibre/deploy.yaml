@@ -176,11 +176,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              cpu: 500m
+              cpu: 1000m
               memory: 500Mi
             requests:
-              cpu: 100m
-              memory: 200Mi
+              cpu: 200m
+              memory: 500Mi
           name: cloudflareproxy
           ports:
             - containerPort: 8000
