@@ -29,7 +29,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: garethgeorge/backrest:latest@sha256:aeb47334880f948520036ba292146f3612457dd143e1116ff14b97b0eb591785
+        - image: garethgeorge/backrest:latest@sha256:efcc68d841078a4ec26e2da2be8a0b676dcdb4884349f27c3e21156c3fee58f1
           imagePullPolicy: IfNotPresent
           name: backrest
           env:
