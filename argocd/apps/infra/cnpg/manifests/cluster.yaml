@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-example
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.4-5-bookworm@sha256:39a7b62e4893007b1172a4adcce82e20f1ff64057046717c86a477dbaf86a27a
+  storage:
+    size: 1Gi
+    storageClass: local-path
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: failure-domain.beta.kubernetes.io/zone
