@@ -35,7 +35,7 @@ nextcloud:
   #   zz-memory_limit.ini: |-
   #     memory_limit=512M
   configs:
-    app.config.php: |-
+    other.config.php: |-
       <?php
       $CONFIG = array (
         'maintenance_window_start' => 9
@@ -131,9 +131,9 @@ mariadb:
   auth:
     existingSecret: nextcloud-secrets
 persistence:
-  enabled: false
-  storageClass: local-path
-  size: 100Gi
+  enabled: true
+  storageClass: longhorn
+  size: 1Gi
 livenessProbe:
   enabled: false
 startupProbe:
