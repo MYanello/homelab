@@ -50,7 +50,7 @@ cronjob:
 redis:
   enabled: true
   global:
-    storageClass: longhorn-xfs
+    storageClass: longhorn
   master:
     persistence:
       enabled: false
@@ -94,7 +94,7 @@ externalDatabase:
 mariadb:
   enabled: true
   global:
-    defaultStorageClass: longhorn
+    defaultStorageClass: longhorn-xfs
   primary:
     persistence:
       enabled: true
