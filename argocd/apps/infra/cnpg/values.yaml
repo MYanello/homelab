@@ -7,3 +7,6 @@ affinity:
               operator: In
               values:
                 - marcus-server
+              
+annotations:
+  argocd.argoproj.io/sync-options: ServerSideApply=true
