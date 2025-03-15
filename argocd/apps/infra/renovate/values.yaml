@@ -19,6 +19,7 @@ renovate:
       "digest": {
         "automerge": true
       },
+      "ignoreTests": true
       "prBodyColumns": [
         "Package",
         "Update",
