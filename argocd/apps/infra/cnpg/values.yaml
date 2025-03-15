@@ -8,5 +8,5 @@ affinity:
               values:
                 - marcus-server
               
-annotations:
+commonAnnotations:
   argocd.argoproj.io/sync-options: ServerSideApply=true
