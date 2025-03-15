@@ -31,6 +31,16 @@ nextcloud:
         accessKey: s3-access-key
         secretKey: s3-secret-key
         bucket: s3-bucket
+  # phpConfigs:
+  #   zz-memory_limit.ini: |-
+  #     memory_limit=512M
+  configs:
+    app.config.php: |-
+      <?php
+      $CONFIG = array (
+        'maintenance_window_start' => 9
+      );
+
   # extraVolumes:
   #   - name: redis-ini
   #     configMap:
