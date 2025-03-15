@@ -20,6 +20,6 @@ spec:
       filters:
         - type: ResponseHeaderModifier
           responseHeaderModifier:
-            setHeaders:
+            add:
               - name: Strict-Transport-Security
                 value: max-age=15552000; includeSubDomains;
