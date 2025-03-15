@@ -50,7 +50,7 @@ cronjob:
 redis:
   enabled: true
   global:
-    storageClass: longhorn
+    storageClass: longhorn-xfs
   master:
     persistence:
       enabled: false
