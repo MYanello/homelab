@@ -98,7 +98,6 @@ mariadb:
   primary:
     persistence:
       enabled: true
-      storageClass: longhorn
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
