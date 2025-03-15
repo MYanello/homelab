@@ -2,8 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 helmCharts:
-  - name: cnpg
+  - name: cloudnative-pg
     namespace: cnpg
-    releaseName: cnpg
+    releaseName: cloudnative-pg
     repo: https://cloudnative-pg.github.io/charts
-    version: "0.23.2"
+    version: 0.23.2
+    valuesFile: values.yaml
