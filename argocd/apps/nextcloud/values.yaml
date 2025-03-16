@@ -31,9 +31,6 @@ nextcloud:
         accessKey: s3-access-key
         secretKey: s3-secret-key
         bucket: s3-bucket
-  # phpConfigs:
-  #   zz-memory_limit.ini: |-
-  #     memory_limit=512M
   configs:
     other.config.php: |-
       <?php
@@ -41,20 +38,6 @@ nextcloud:
         'maintenance_window_start' => 9
       );
 
-  # extraVolumes:
-  #   - name: redis-ini
-  #     configMap:
-  #       name: nextcloud-redis-ini
-  #   - name: remote-ip
-  #     configMap:
-  #       name: nextcloud-remote-ip
-  # extraVolumeMounts:
-  #   - name: redis-ini
-  #     mountPath: /usr/local/etc/php/conf.d/redis.ini
-  #     subPath: redis-sesion.ini
-  #   - name: remote-ip
-  #     mountPath: /etc/apache2/conf-enabled/remote-ip.conf
-  #     subPath: remoteip.conf
 cronjob:
   enabled: true
 redis:

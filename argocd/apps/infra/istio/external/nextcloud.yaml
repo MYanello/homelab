@@ -9,7 +9,7 @@ metadata:
   namespace: istio-system
 spec:
   hostnames:
-    - nextcloud.yanello.net
+    - nextcloud-old.yanello.net
   parentRefs:
     - name: gateway-api
   rules:

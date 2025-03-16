@@ -11,7 +11,7 @@ spec:
       namespace: istio-system
       sectionName: https
   hostnames:
-    - nextcloudk8s.yanello.net
+    - nextcloud.yanello.net
   rules:
     - backendRefs:
         - name: nextcloud
