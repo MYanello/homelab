@@ -55,7 +55,7 @@ postgresql:
   primary:
     persistence:
       enabled: true
-      storageClass: longhorn
+      storageClass: longhorn-xfs
       accessMode: ReadWriteOnce
   auth:
     username: authentik
