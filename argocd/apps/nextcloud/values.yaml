@@ -8,16 +8,16 @@ nextcloud:
     usernameKey: NEXTCLOUD_ADMIN_USER
     passwordKey: NEXTCLOUD_ADMIN_PASSWORD
   trustedDomains:
-    - nextcloudk8s.yanello.net
+    - nextcloud.yanello.net
   extraEnv:
     - name: TRUSTED_PROXIES
       value: 10.10.8.0
     - name: OVERWRITEPROTOCOL
       value: https
     - name: OVERWRITEHOST
-      value: nextcloudk8s.yanello.net
+      value: nextcloud.yanello.net
     - name: OVERWRITECLIURL
-      value: https://nextcloudk8s.yanello.net
+      value: https://nextcloud.yanello.net
     - name: APACHE_DISABLE_REWRITE_IP
       value: "1"
   objectStore:
