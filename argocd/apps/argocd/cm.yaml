@@ -6,7 +6,23 @@ metadata:
   name: argocd-cm
 data:
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
-  webhook.github.secret: $argocd-custom-secrets.webhook.github.secret
+  webhook.github.secret: $argocd-custom-secrets:webhook.github.secret
+  url: https://argocd.yanello.net
+  dex.config: |
+    connectors:
+    - config:
+        issuer: https://authentik.yanello.net/application/o/argocd/
+        clientID: 0sXKD0NdGepTvQR8TMdtPq8pjAdMna2py7EXo2cI
+        clientSecret: $argocd-custom-secrets:dex.authentik.clientSecret
+        insecureEnableGroups: true
+        scopes:
+          - openid
+          - profile
+          - email
+          - groups
+      name: authentik
+      type: oidc
+      id: authentik
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -16,3 +32,15 @@ metadata:
   name: argocd-cmd-params-cm
 data:
   server.insecure: "true"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  annotations:
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  policy.csv: |
+    g, admin, role:admin
