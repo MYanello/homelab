@@ -17,6 +17,5 @@ resources:
 - manifests/deploy.yaml
 - manifests/pvc.yaml
 - manifests/service.yaml
-- manifests/vs.yaml
 #- manifests/sts.yaml
 - manifests/http-route.yaml
