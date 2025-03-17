@@ -35,7 +35,8 @@ nextcloud:
     other.config.php: |-
       <?php
       $CONFIG = array (
-        'maintenance_window_start' => 9
+        'maintenance_window_start' => 9,
+        'allow_local_remote_servers' => true,
       );
     proxy.config.php: |-
       <?php
