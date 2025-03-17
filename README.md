@@ -4,6 +4,8 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 03.16.25
+- Added argocd and paperless to sso and started messing with Authentik. Haven't connected the dots on setting this up smoothly yet. Seems to be a case by case basis
 
 ### 03.11.25
 
