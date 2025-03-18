@@ -38,7 +38,7 @@ nextcloud:
         'maintenance_window_start' => 9,
         'allow_local_remote_servers' => true,
       );
-    proxy.config.php: |-
+    reverse-proxy.config.php: |-
       <?php
       $CONFIG = array (
           'trusted_proxies' => array(
