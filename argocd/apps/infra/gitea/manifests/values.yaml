@@ -1,7 +1,7 @@
 global:
-  storageClass: longhorn
+  storageClass: longhorn-xfs
 
-replicaCount: 0
+replicaCount: 1
 
 actions:
   enabled: false
