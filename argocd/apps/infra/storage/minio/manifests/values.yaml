@@ -12,6 +12,8 @@ persistence:
   storageClass: local-path
 
 tenant:
+  configuration:
+    name: myminio-env-configuration
   pools:
     - name: pool-0
       storageClassName: local-path
