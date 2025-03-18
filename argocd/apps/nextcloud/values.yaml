@@ -38,15 +38,13 @@ nextcloud:
         'maintenance_window_start' => 9,
         'allow_local_remote_servers' => true,
       );
-    reverse-proxy.config.php: |-
+    proxy.config.php: |-
       <?php
       $CONFIG = array (
           'trusted_proxies' => array(
             0 => '10.42.0.0/16',
           ),
-          'forwarded_for_headers' => array(
-            0 => 'HTTP_X_ENVOY_EXTERNAL_ADDRESS'
-          )
+          'forwarded_for_headers' => array('HTTP_X_ENVOY_EXTERNAL_ADDRESS'),
       );
 
 cronjob:
