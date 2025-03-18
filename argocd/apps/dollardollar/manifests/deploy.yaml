@@ -48,7 +48,7 @@ spec:
             # - MAIL_USERNAME=${MAIL_USERNAME}
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
-          image: harung43/dollardollar:latest@sha256:b8aa339aed4a89c3b0eaeaf595f64b5e2543ceb6bf599271e0d93838af904afb
+          image: harung43/dollardollar:latest@sha256:f48f89f77bfe1c071f5381a5174adadec2ba935b9b69e2648ab9cdad49583bfa
           imagePullPolicy: IfNotPresent
           #command: ["sleep", "inf"]
           name: dollardollar
