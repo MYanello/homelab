@@ -35,4 +35,4 @@ images:
   - name: nextcloud
     newTag: 31.0.1@sha256:7ec3cf674ee868e3762a3bf913df56887e70a7b8dd1c7681fca6ef76233bd554
   - name: docker.io/bitnami/mariadb
-    newTag: "10.11@sha256:effbeae0531003615411d7536443604812a8b9f6f8d5bfcc6b6b80848e19759e"
+    newTag: "10.11@sha256:501674a79a20f79da69340a20cdbbec467ce9c66b102e9deacc6a6d36dbb6488"
