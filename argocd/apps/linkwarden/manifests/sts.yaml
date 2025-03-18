@@ -29,7 +29,7 @@ spec:
           - name: DATABASE_URL
             value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
           - name: NEXTAUTH_URL
-            value: http://localhost:3000/api/v1/auth
+            value: https://linkwarden.yanello.net/api/v1/auth
           - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
             value: "true"
           - name: AUTHENTIK_CUSTOM_NAME
