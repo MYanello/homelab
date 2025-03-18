@@ -28,4 +28,6 @@ tenant:
   certificate:
     requestAutoCert: false
   env:
-    - MINIO_ROOT_USER=marcus
+    - name: MINIO_ROOT_USER
+      value: marcus
+    - name: 
