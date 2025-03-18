@@ -32,8 +32,6 @@ spec:
             value: https://linkwarden.yanello.net/api/v1/auth
           - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
             value: "true"
-          - name: AUTHENTIK_CUSTOM_NAME
-            value: authentik
           - name: AUTHENTIK_ISSUER
             value: https://authentik.yanello.net/application/o/linkwarden
           - name: AUTHENTIK_CLIENT_ID
