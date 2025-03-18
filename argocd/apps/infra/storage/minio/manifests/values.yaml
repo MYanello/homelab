@@ -12,6 +12,7 @@ persistence:
   storageClass: local-path
 
 tenant:
+  existingSecret: true
   configuration:
     name: myminio-env-configuration
   pools:
