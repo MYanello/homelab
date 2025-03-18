@@ -20,8 +20,6 @@ nextcloud:
   trustedDomains:
     - nextcloud.yanello.net
   extraEnv:
-    - name: TRUSTED_PROXIES
-      value: 10.10.8.0
     - name: OVERWRITEPROTOCOL
       value: https
     - name: OVERWRITEHOST
@@ -33,7 +31,7 @@ nextcloud:
     - name: TRUSTED_PROXIES
       value: 10.42.0.0/16
     - name: FORWARDED_FOR_HEADERS
-      value: HTTP_X_ENVOY_EXTERNAL_ADDRESS
+      value: HTTP_X_FORWARDED_FOR
   objectStore:
     s3:
       enabled: true
