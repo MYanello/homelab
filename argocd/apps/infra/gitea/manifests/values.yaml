@@ -5,14 +5,10 @@ replicaCount: 1
 
 actions:
   enabled: false
-  
-# admin:
-#   existingSecret:
-#   username: gitea_admin
-#   password:
-#   email: "gitea@local.domain"
-#   passwordMode: keepUpdated
-# 
+
+persistence:
+  storageClass: longhorn-xfs
+
 metrics:
   enabled: true
 
