@@ -12,6 +12,9 @@ persistence:
   storageClass: local-path
 
 tenant:
+  existingSecret: true
+  configuration:
+    name: myminio-env-configuration
   pools:
     - name: pool-0
       storageClassName: local-path
@@ -27,5 +30,3 @@ tenant:
                       - marcus-server
   certificate:
     requestAutoCert: false
-  env:
-    - MINIO_ROOT_USER=marcus
