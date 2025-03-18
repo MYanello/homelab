@@ -23,8 +23,3 @@ spec:
             add:
               - name: Strict-Transport-Security
                 value: max-age=15552000; includeSubDomains;
-        - type: RequestHeaderModifier
-          requestHeaderModifier:
-            add:
-              - name: X-Forwarded-For
-                value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
