@@ -44,7 +44,7 @@ nextcloud:
           'trusted_proxies' => array(
             0 => '10.42.0.0/16',
           ),
-          'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED')
+          'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_ENVOY_EXTERNAL_ADDRESS')
       );
 
 cronjob:
