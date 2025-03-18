@@ -27,3 +27,5 @@ tenant:
                       - marcus-server
   certificate:
     requestAutoCert: false
+  env:
+    - MINIO_ROOT_USER=marcus
