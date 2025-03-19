@@ -7,48 +7,51 @@ metadata:
 spec:
   schedule: "0 * * * *"
   jobTemplate:
-    metadata:
-      labels:
-        app: kometa
-    spec:
-      ttlSecondsAfterFinished: 86400  # Auto-delete the job 24 hours after completion
-      restartPolicy: OnFailure
-      containers:
-      - name: kometa
-        image: kometateam/kometa:latest 
-        imagePullPolicy: Always
-        command: ["python", "kometa.py", "-r"] 
-        env:
-        - name: TZ
-          value: "UTC"
-        envFrom:
-          secretRef:
-            name: kometa-secrets  
-        volumeMounts:
-        - name: config-kometa
-          mountPath: /config/config.yaml
-        # - name: config-movies
-        #   mountPath: /config/Movies
-        # - name: config-tv
-        #   mountPath: /config/TV
-        - name: cache-volume
-          mountPath: /cache
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "200m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-      volumes:
-      - name: config-kometa
-        configMap:
-          name: config-kometa
-      # - name: config-movies
-      #   configMap:
-      #     name: config-movies
-      # - name: config-tv
-      #   configMap:
-      #     name: config-tv
-      - name: cache-volume
-        emptyDir: {}  # For caching during the job execution
+    spec:                         
+      ttlSecondsAfterFinished: 86400
+      template:                    
+        metadata:                  
+          labels:
+            app: kometa
+        spec:                    
+          restartPolicy: OnFailure
+          containers:
+          - name: kometa
+            image: kometateam/kometa:latest 
+            imagePullPolicy: Always
+            command: ["python", "kometa.py", "-r"] 
+            env:
+            - name: TZ
+              value: "UTC"
+            envFrom:
+            - secretRef:
+                name: kometa-secrets  
+            volumeMounts:
+            - name: config-kometa
+              mountPath: /config/config.yaml
+              subPath: config.yaml # Use subPath to mount only the file, not a directory
+            # - name: config-movies
+            #   mountPath: /config/Movies
+            # - name: config-tv
+            #   mountPath: /config/TV
+            - name: cache-volume
+              mountPath: /cache
+            resources:
+              requests:
+                memory: "256Mi"
+                cpu: "200m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+          volumes:
+          - name: config-kometa
+            configMap:
+              name: config-kometa
+          # - name: config-movies
+          #   configMap:
+          #     name: config-movies
+          # - name: config-tv
+          #   configMap:
+          #     name: config-tv
+          - name: cache-volume
+            emptyDir: {}
