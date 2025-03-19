@@ -20,10 +20,15 @@ data:
             - abbr: GH
               href: https://github.com/myanello
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
+    - Infrastructure:
+        - OPNSense:
+            href: https://opn.yanello.net
+            icon: opnsense
+            widget:
+              type: opnsense
+              url: https://opn.yanello.net
+              username: {{HOMEPAGE_VAR_OPN_USER}}
+              password: {{HOMEPAGE_VAR_OPN_PASS}}
 
     - My Second Group:
         - My Second Service:
@@ -34,6 +39,7 @@ data:
         - My Third Service:
             href: http://localhost/
             description: Homepage is 😎
+
   widgets.yaml: |
     - kubernetes:
         cluster:
@@ -59,4 +65,5 @@ data:
         suggestionUrl: https://kagi.com/api/autosuggest?q=
         url: https://kagi.com/search?q=%s
         target: _blank
+
   docker.yaml: ""
