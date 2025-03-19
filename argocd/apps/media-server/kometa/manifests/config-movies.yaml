@@ -183,7 +183,7 @@ data:
           evil_dead: Evil Dead
           guardians: Guardians of the Galaxy
           dune: Dune
-          christmas: Christmas
+          #christmas: Christmas
           pirates: Pirates of the Caribbean
           indiana: Indiana Jones
           jurassic: Jurassic Park
@@ -215,7 +215,7 @@ data:
             evil_dead: https://letterboxd.com/fantic/list/evil-dead/
             guardians: https://letterboxd.com/fantic/list/guardians-of-the-galaxy/
             dune: https://letterboxd.com/fantic/list/dune/
-            christmas: https://letterboxd.com/ryukiation/list/christmas/
+           # christmas: https://letterboxd.com/ryukiation/list/christmas/
             pirates: https://letterboxd.com/fantic/list/pirates-of-the-caribbean/
             indiana: https://letterboxd.com/fantic/list/indiana-jones/
             jurassic: https://letterboxd.com/mrbrundlefly/list/jurassic-park/
@@ -223,7 +223,7 @@ data:
             default: universe/<<key>>
           collection_order: 
             criterion: release.desc
-            christmas: release.desc
+           # christmas: release.desc
           collection_section:
             criterion: 05
 
