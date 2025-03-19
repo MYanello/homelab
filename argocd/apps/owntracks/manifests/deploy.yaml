@@ -20,7 +20,7 @@ spec:
         app: owntracks
     spec:
       containers:
-        - image: owntracks/recorder:latest@sha256:d888f8076c08966046c9a6534b6a06026eceb03948087d51cc729fc002170767
+        - image: owntracks/recorder:latest@sha256:8de5f7674fa7a4575635702fb41a6307e7294a31f393ac165c25328e45e36372
           imagePullPolicy: IfNotPresent
           name: owntracks
           env:
