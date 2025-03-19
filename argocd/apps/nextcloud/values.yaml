@@ -1,5 +1,16 @@
 replicaCount: 1
 
+persistence:
+  enabled: true
+  storageClass: longhorn
+  size: 1Gi
+livenessProbe:
+  enabled: false
+startupProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+
 nextcloud:
   host: nextcloudk8s.yanello.net
   existingSecret:
@@ -126,22 +137,3 @@ mariadb:
                     - marcus-server
   auth:
     existingSecret: nextcloud-secrets
-persistence:
-  enabled: true
-  storageClass: longhorn
-  size: 1Gi
-livenessProbe:
-  enabled: false
-startupProbe:
-  enabled: false
-readinessProbe:
-  enabled: false
-# affinity:
-#   nodeAffinity:
-#     requiredDuringSchedulingIgnoredDuringExecution:
-#       nodeSelectorTerms:
-#         - matchExpressions:
-#             - key: kubernetes.io/hostname
-#               operator: In
-#               values:
-#                 - marcus-server
