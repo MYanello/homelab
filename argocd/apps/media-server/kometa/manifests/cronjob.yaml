@@ -7,52 +7,61 @@ metadata:
 spec:
   schedule: "0 * * * *"
   jobTemplate:
-    spec:                         
+    spec:
       ttlSecondsAfterFinished: 43200
-      template:                    
-        metadata:                  
+      template:
+        metadata:
           labels:
             app: kometa
-        spec:                    
+        spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - marcus-server
           restartPolicy: OnFailure
           containers:
-          - name: kometa
-            image: kometateam/kometa:latest 
-            imagePullPolicy: Always
-            # command: ["sleep", "inf"] 
-            command: ["python", "kometa.py", "-r"] 
-            env:
-            - name: TZ
-              value: "UTC"
-            envFrom:
-            - secretRef:
-                name: kometa-secrets  
-            volumeMounts:
-            - name: config-kometa
-              mountPath: /config/config.yml
-              subPath: config.yml
-            # - name: config-movies
-            #   mountPath: /config/Movies
-            # - name: config-tv
-            #   mountPath: /config/TV
-            - name: cache-volume
-              mountPath: /cache
-            resources:
-              requests:
-                memory: "256Mi"
-                cpu: "200m"
-              limits:
-                memory: "512Mi"
-                cpu: "500m"
+            - name: kometa
+              image: kometateam/kometa:latest
+              imagePullPolicy: Always
+              # command: ["sleep", "inf"]
+              command: ["python", "kometa.py", "-r"]
+              env:
+                - name: TZ
+                  value: "UTC"
+              envFrom:
+                - secretRef:
+                    name: kometa-secrets
+              volumeMounts:
+                - name: config-kometa
+                  mountPath: /config/config.yml
+                  subPath: config.yml
+                # - name: config-movies
+                #   mountPath: /config/Movies
+                # - name: config-tv
+                #   mountPath: /config/TV
+                - name: cache-volume
+                  mountPath: /cache
+              resources:
+                requests:
+                  memory: "256Mi"
+                  cpu: "200m"
+                limits:
+                  memory: "512Mi"
+                  cpu: "500m"
           volumes:
-          - name: config-kometa
-            configMap:
-              name: config-kometa
-          # - name: config-movies
-          #   configMap:
-          #     name: config-movies
-          # - name: config-tv
-          #   configMap:
-          #     name: config-tv
-          - name: cache-volume
-            emptyDir: {}
+            - name: config-kometa
+              configMap:
+                name: config-kometa
+            # - name: config-movies
+            #   configMap:
+            #     name: config-movies
+            # - name: config-tv
+            #   configMap:
+            #     name: config-tv
+            - name: cache-volume
+              emptyDir: {}
