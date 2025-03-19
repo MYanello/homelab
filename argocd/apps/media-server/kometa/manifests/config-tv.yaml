@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-tv
+data:
+  ombi.yml: |
+    collections:
+      Camille:
+        sonarr_taglist: camille.rodriguez, 8 - camille.rodriguez
+      Trey:
+        sonarr_taglist: 23 - tnic52
+      Brandon:
+        sonarr_taglist: 6 - brandonraziano

@@ -5,6 +5,7 @@ generators:
 - ./manifests/secret-generator.yaml
 
 resources:
-- ./manifests/config.yaml
-- ./manifests/movies-cm.yaml
+- ./manifests/config-kometa.yaml
+- ./manifests/config-movies.yaml
+- ./manifests/config-tv.yaml
 - ./manifests/cronjob.yaml

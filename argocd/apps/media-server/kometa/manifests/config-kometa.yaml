@@ -158,7 +158,7 @@ data:
       show_unfiltered: false
     plex: # Can be individually specified per library as well; REQUIRED for the script to run
       url: https://plex.yanello.net
-      token: <<PLEX_TOKEN>>
+      token: <<PLEXTOKEN>>
       timeout: 60
       clean_bundles: true
       empty_trash: true
