@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: config-kometa
 data:
-  config.yml: |
+  config.yaml: |
     libraries: # This is called out once within the config.yml file
       Movies:
         collection_files:

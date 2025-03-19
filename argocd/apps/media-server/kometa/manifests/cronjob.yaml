@@ -28,8 +28,8 @@ spec:
                 name: kometa-secrets  
             volumeMounts:
             - name: config-kometa
-              mountPath: /config/config.yml
-              subPath: config.yml 
+              mountPath: /config/config.yaml
+              subPath: config.yaml 
             # - name: config-movies
             #   mountPath: /config/Movies
             # - name: config-tv
