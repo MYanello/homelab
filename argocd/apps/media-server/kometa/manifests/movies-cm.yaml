@@ -1,0 +1,336 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-movies
+data:
+  trakt_tracked.yml: |
+    external_templates:
+      pmm: templates
+      template_variables:
+        collection_section: 06
+    
+    translations:
+      pmm: translations
+    
+    templates:
+      universe:
+        default:
+          trakt_list_<<key>>: <<trakt_list>>
+          name_mapping_<<key>>: <<name_mapping>>
+          minimum_items: 2
+        optional:
+          - name_mapping
+          - name_<<key>>
+          - summary_<<key>>
+          - imdb_list_<<key>>
+        minimum_items: <<minimum_items>>
+        name_mapping: <<name_mapping_<<key>>>>
+        imdb_list: <<imdb_list_<<key>>>>
+        trakt_list: <<trakt_list_<<key>>>>
+        summary: <<summary_<<key>>>>
+        name: <<name_<<key>>>>
+    
+    dynamic_collections:
+      Universe Collections:
+        type: custom
+        data:
+          star: Star Wars Universe
+          dcu: DC Extended Universe
+          mcu: Marvel Cinematic Universe
+          a24: A24
+        template:
+          - universe
+          - shared
+          - arr
+          - custom
+        template_variables:
+          trakt_list:
+            star: https://trakt.tv/users/darkman1498/lists/star-wars
+            dcu: https://trakt.tv/users/donxy/lists/dc-extended-universe
+            mcu: https://trakt.tv/users/donxy/lists/marvel-cinematic-universe
+            a24: https://trakt.tv/users/fidel-cb/lists/a24
+          image:
+            default: universe/<<key>>
+          collection_order:
+            star: release.asc
+            dcu: release.desc
+            mcu: release.desc
+            a24: release.desc
+          collection_section:
+            a24: 06
+        
+
+  trakt_downloaded.yml: |
+    external_templates:
+      pmm: templates
+      template_variables:
+        collection_section: 06
+        radarr_add_missing: true
+        radarr_tag: trakt
+        collection_order: release.asc
+    
+    translations:
+      pmm: translations
+    
+    templates:
+      universe:
+        default:
+          trakt_list_<<key>>: <<trakt_list>>
+          name_mapping_<<key>>: <<name_mapping>>
+          minimum_items: 2
+        optional:
+          - name_mapping
+          - name_<<key>>
+          - summary_<<key>>
+          - imdb_list_<<key>>
+        minimum_items: <<minimum_items>>
+        name_mapping: <<name_mapping_<<key>>>>
+        imdb_list: <<imdb_list_<<key>>>>
+        trakt_list: <<trakt_list_<<key>>>>
+        summary: <<summary_<<key>>>>
+        name: <<name_<<key>>>>
+    
+    dynamic_collections:
+      Universe Collections:
+        type: custom
+        data:
+          wizard: Wizarding World
+          middle: Middle Earth
+          beasts: Fantastic Beasts
+          asterix: Asterix
+          harry: Harry Potter
+          pixar_shorts: Pixar Shorts
+          pixar: Pixar
+        template:
+          - universe
+          - shared
+          - arr
+          - custom
+        template_variables:
+          trakt_list:
+            wizard: https://trakt.tv/users/strangerer/lists/harry-potter
+            middle: https://trakt.tv/users/dybro/lists/lord-of-the-rings
+            beasts: https://trakt.tv/users/user71/lists/fantastic-beasts
+            asterix: https://trakt.tv/users/tharam/lists/asterix
+            harry: https://trakt.tv/users/hurleyb/lists/harry-potter
+            pixar_shorts: https://trakt.tv/users/deccoskyrider/lists/pixar-shorts
+            pixar: https://trakt.tv/users/chloe131997/lists/pixar
+          image:
+            default: universe/<<key>>
+
+  ombi.yml: |
+    collections:
+      La Liste de Denise:
+        radarr_taglist: dduch66, denise
+      Camille:
+        radarr_taglist: camille.rodriguez, 8 - camille.rodriguez
+      Brandon:
+        radarr_taglist: brandonraziano, 6 - brandonraziano
+      Trey:
+        radarr_taglist: tnic52, 23 - tnic52
+      Stew's List:
+        radarr_taglist: r0nperlman
+        
+  letterboxd_tracked.yml: |
+    external_templates:
+      pmm: templates
+      template_variables:
+        collection_section: 06
+        radarr_add_missing: false
+        collection_order: release.asc
+    
+    templates:
+      lbxd:
+        default:
+          letterboxd_list_<<key>>: <<letterboxd_list>>
+          name_mapping_<<key>>: <<name_mapping>>
+          minimum_items: 1
+        optional:
+          - name_mapping
+          - name_<<key>>
+          - summary_<<key>>
+          - imdb_list_<<key>>
+        minimum_items: <<minimum_items>>
+        name_mapping: <<name_mapping_<<key>>>>
+        imdb_list: <<imdb_list_<<key>>>>
+        letterboxd_list: <<letterboxd_list_<<key>>>>
+        summary: <<summary_<<key>>>>
+        name: <<name_<<key>>>>
+    
+    dynamic_collections:
+      Letterboxd_Tracked:
+        type: custom
+        data:
+          criterion: Criterion Collection
+          lotr: The Lord of the Rings
+          john_wick: John Wick
+          hunger_games: The Hunger Games
+          rambo: Rambo
+          naked_gun: The Naked Gun
+          mad_max: Mad Max
+          predator: Predator
+          spider_man_raimi: "Spider Man: The Sam Raimi Collection"
+          lion_king: The Lion King
+          alien: Alien
+          matrix: The Matrix
+          bill_ted: "Bill & Ted's Most Excellent Collection"
+          terminator: The Terminator
+          dark_knight: The Dark Knight
+          bttf: Back to the Future
+          resident_evil: Resident Evil
+          hobbit: The Hobbit
+          evil_dead: Evil Dead
+          guardians: Guardians of the Galaxy
+          dune: Dune
+          christmas: Christmas
+          pirates: Pirates of the Caribbean
+          indiana: Indiana Jones
+          jurassic: Jurassic Park
+        template:
+          - lbxd
+          - shared
+          - arr
+          - custom
+        template_variables:
+          letterboxd_list:
+            criterion: https://letterboxd.com/jbutts15/list/the-complete-criterion-collection/
+            lotr: https://letterboxd.com/rachles/list/lord-of-the-rings/
+            john_wick: https://letterboxd.com/fantic/list/john-wick/
+            hunger_games: https://letterboxd.com/hogwarthur/list/hunger-games/
+            rambo: https://letterboxd.com/nislav2001/list/rambo/
+            naked_gun: https://letterboxd.com/jman_nothing/list/naked-gun/
+            mad_max: https://letterboxd.com/fantic/list/mad-max/
+            predator: https://letterboxd.com/davecalt/list/predator/
+            spider_man_raimi: https://letterboxd.com/marmoto/list/spider-man-raimi/
+            lion_king: https://letterboxd.com/danakin85/list/lion-king/
+            alien: https://letterboxd.com/sebzilla/list/alien/
+            matrix: https://letterboxd.com/mrmovieman_2007/list/matrix/
+            bill_ted: https://letterboxd.com/fantic/list/bill-ted/
+            terminator: https://letterboxd.com/darthwayne97/list/terminator/
+            dark_knight: https://letterboxd.com/gruenberger/list/dark-knight/
+            bttf: https://letterboxd.com/marvelous7/list/back-to-the-future/
+            resident_evil: https://letterboxd.com/fantic/list/resident-evil/
+            hobbit: https://letterboxd.com/lpmaster1996/list/hobbit/
+            evil_dead: https://letterboxd.com/fantic/list/evil-dead/
+            guardians: https://letterboxd.com/fantic/list/guardians-of-the-galaxy/
+            dune: https://letterboxd.com/fantic/list/dune/
+            christmas: https://letterboxd.com/ryukiation/list/christmas/
+            pirates: https://letterboxd.com/fantic/list/pirates-of-the-caribbean/
+            indiana: https://letterboxd.com/fantic/list/indiana-jones/
+            jurassic: https://letterboxd.com/mrbrundlefly/list/jurassic-park/
+          image:
+            default: universe/<<key>>
+          collection_order: 
+            criterion: release.desc
+            christmas: release.desc
+          collection_section:
+            criterion: 05
+
+  letterboxd_downloaded.yaml: |
+    external_templates:
+      pmm: templates
+      template_variables:
+        radarr_add_missing: true
+        radarr_tag: letterboxd
+        collection_order: custom
+    
+    templates:
+      lbxd:
+        default:
+          letterboxd_list_<<key>>: <<letterboxd_list>>
+          name_mapping_<<key>>: <<name_mapping>>
+          minimum_items: 2
+        optional:
+          - name_mapping
+          - name_<<key>>
+          - summary_<<key>>
+          - imdb_list_<<key>>
+        minimum_items: <<minimum_items>>
+        name_mapping: <<name_mapping_<<key>>>>
+        imdb_list: <<imdb_list_<<key>>>>
+        letterboxd_list: <<letterboxd_list_<<key>>>>
+        summary: <<summary_<<key>>>>
+        name: <<name_<<key>>>>
+    
+    dynamic_collections:
+      Letterboxd:
+        type: custom
+        template:
+          - lbxd
+          - shared
+          - arr
+          - custom
+        data:
+          oscars_23: Oscars 2023
+          oscars_24: Oscars 2024
+          imdb_250: IMDb Top 250
+          boxd_250: Letterboxd Top 250
+          tarantino: Quentin Tarantino
+          nolan: Christopher Nolan
+          dupieux: Quentin Dupiuex
+          baker: Sean Baker
+          yorgos: Yorgos Lanthimos
+          ghibli: Studio Ghibli
+          kaufman: Charlie Kaufman
+          aster: Ari Aster
+        template_variables:
+          letterboxd_list:
+            ghibli: https://letterboxd.com/itsannaelisa/list/studio-ghibli/ 
+            oscars_23: https://letterboxd.com/oscars/list/the-95th-academy-award-nominees-for-best-22/
+            oscars_24: https://letterboxd.com/oscars/list/the-96th-academy-award-nominees-for-best/
+            oscars_25: https://letterboxd.com/oscars/list/the-97th-academy-award-feature-film-nominees/
+            imdb_250: https://letterboxd.com/dave/list/imdb-top-250
+            boxd_250: https://letterboxd.com/dave/list/official-top-250-narrative-feature-films/
+            tarantino: https://letterboxd.com/ooah02/list/tarantino/
+            nolan: https://letterboxd.com/jaywill/list/nolan/
+            dupieux: https://letterboxd.com/benjabel/list/quentin-dupieux/
+            baker: https://letterboxd.com/jhuang98/list/sean-baker/
+            yorgos: https://letterboxd.com/jaywill/list/yorgos/
+            kaufman: https://letterboxd.com/blexinfinity/list/charlie-kaufman/
+            aster: https://letterboxd.com/wetty_yammer/list/aster/
+          image:
+            default: universe/<<key>>
+          radarr_tag:
+            oscars_23: oscars_23
+            oscars_24: oscars_24
+            oscars_25: oscars_25
+            imdb_250: imdb_250
+            boxd_250: boxd_250
+          radarr_quality:
+            oscars_23: Ultra-HD
+            oscars_24: Ultra-HD
+            oscars_25: Ultra-HD
+            imdb_250: Ultra-HD
+            boxd_250: Ultra-HD
+            nolan: Ultra-HD
+            tarantino: Ultra-HD
+            dupieux: HD-1080P
+            yorgos: Ultra-HD
+            kaufman: Ultra-HD
+            aster: Ultra-HD
+            ghibli: HD-1080P
+          collection_section:
+            stew: 03
+            ghibli: 06
+            oscars_23: 05
+            oscars_24: 05
+            oscars_25: 05
+            imdb_250: 05
+            boxd_250: 05
+            tarantino: 07
+            nolan: 07
+            dupieux: 07
+            baker: 07
+            yorgos: 07
+            kaufman: 07
+            aster: 07
+          collection_order:
+            ghibli: release.desc
+            kaufman: release.desc
+            tarantino: release.desc
+            nolan: release.desc
+            dupieux: release.desc
+            baker: release.desc
+            yorgos: release.desc
+            aster: release.desc
