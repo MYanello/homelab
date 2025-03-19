@@ -40,10 +40,10 @@ spec:
                 - name: config-kometa
                   mountPath: /config/config.yml
                   subPath: config.yml
-                # - name: config-movies
-                #   mountPath: /config/Movies
-                # - name: config-tv
-                #   mountPath: /config/TV
+                - name: config-movies
+                  mountPath: /config/Movies
+                - name: config-tv
+                  mountPath: /config/TV
                 - name: media
                   mountPath: /data/media
 
@@ -58,12 +58,12 @@ spec:
             - name: config-kometa
               configMap:
                 name: config-kometa
-            # - name: config-movies
-            #   configMap:
-            #     name: config-movies
-            # - name: config-tv
-            #   configMap:
-            #     name: config-tv
+            - name: config-movies
+              configMap:
+                name: config-movies
+            - name: config-tv
+              configMap:
+                name: config-tv
             - name: media
               hostPath:
                 path: /data/media
