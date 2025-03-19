@@ -220,3 +220,10 @@ data:
       upgrade_existing: false
       ignore_cache: false
       monitor_existing: false
+---
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-movies
+data:

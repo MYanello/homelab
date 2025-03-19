@@ -30,6 +30,7 @@ spec:
             volumeMounts:
             - name: config-kometa
               mountPath: /config
+              subPath: config.yml
             # - name: config-movies
             #   mountPath: /config/Movies
             # - name: config-tv
