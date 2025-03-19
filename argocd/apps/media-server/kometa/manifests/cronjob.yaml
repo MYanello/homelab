@@ -28,7 +28,7 @@ spec:
             - name: kometa
               image: kometateam/kometa:latest
               imagePullPolicy: Always
-             # command: ["sleep", "inf"]
+              # command: ["sleep", "inf"]
               command: ["python", "kometa.py", "-r"]
               env:
                 - name: TZ
@@ -44,8 +44,9 @@ spec:
                 #   mountPath: /config/Movies
                 # - name: config-tv
                 #   mountPath: /config/TV
-                - name: cache-volume
-                  mountPath: /cache
+                - name: media
+                  mountPath: /data/media
+
               resources:
                 requests:
                   memory: "256Mi"
@@ -63,5 +64,6 @@ spec:
             # - name: config-tv
             #   configMap:
             #     name: config-tv
-            - name: cache-volume
-              emptyDir: {}
+            - name: media
+              hostPath:
+                path: /data/media
