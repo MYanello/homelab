@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kometa
 spec:
-  schedule: "0 * * * *"
+  schedule: "0 */6 * * *"
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 43200
