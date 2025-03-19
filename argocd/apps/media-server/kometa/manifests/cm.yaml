@@ -166,13 +166,13 @@ data:
       db_cache:
       verify_ssl:
     tmdb: # REQUIRED for the script to run
-      apikey: $<<TMDB_API_KEY>>
+      apikey: <<TMDB_API_KEY>>
       language: en
       cache_expiration: 60
       region:
     trakt:
       client_id: <<TRAKT_CLIENT_ID>>
-      client_secret: ${TRAKT_CLIENT_SECRET}
+      client_secret: <<TRAKT_CLIENT_SECRET>>
       pin:
       authorization:
         access_token: <<TRAKT_ACCESS_TOKEN>>

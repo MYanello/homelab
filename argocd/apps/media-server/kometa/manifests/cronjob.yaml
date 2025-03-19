@@ -28,8 +28,8 @@ spec:
             - name: kometa
               image: kometateam/kometa:latest
               imagePullPolicy: Always
-              command: ["sleep", "inf"]
-              #command: ["python", "kometa.py", "-r"]
+             # command: ["sleep", "inf"]
+              command: ["python", "kometa.py", "-r"]
               env:
                 - name: TZ
                   value: "UTC"
