@@ -8,7 +8,7 @@ spec:
   schedule: "0 * * * *"
   jobTemplate:
     spec:                         
-      ttlSecondsAfterFinished: 86400
+      ttlSecondsAfterFinished: 43200
       template:                    
         metadata:                  
           labels:
@@ -28,8 +28,7 @@ spec:
                 name: kometa-secrets  
             volumeMounts:
             - name: config-kometa
-              mountPath: /config/config.yaml
-              subPath: config.yaml 
+              mountPath: /config
             # - name: config-movies
             #   mountPath: /config/Movies
             # - name: config-tv
