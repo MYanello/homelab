@@ -13,7 +13,7 @@ spec:
     namespace: istio-system
     sectionName: https
   hostnames:
-  - home.yanello.net
+  - homarr.yanello.net
   rules:
   - backendRefs:
     - name: homarr
