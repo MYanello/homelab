@@ -91,7 +91,7 @@ spec:
     - metadata:
         name: audio
       spec:
-        storageClassName: nfs-storage
+        storageClassName: longhorn
         accessModes:
           - ReadWriteOnce
         resources:
@@ -100,7 +100,7 @@ spec:
     - metadata:
         name: video
       spec:
-        storageClassName: nfs-storage
+        storageClassName: longhorn
         accessModes:
           - ReadWriteOnce
         resources:
