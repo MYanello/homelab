@@ -13,5 +13,5 @@ spec:
   - ytdl.yanello.net
   rules:
   - backendRefs:
-    - name: ytdl-material
+    - name: ytdl
       port: 17442
