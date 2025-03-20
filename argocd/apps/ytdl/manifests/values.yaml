@@ -18,7 +18,7 @@ persistence:
     enabled: true
     storageClassName: longhorn
     accessMode: ReadWriteOnce
-    size: 50Gi
+    size: 5Gi
   video:
     enabled: true
     storageClassName: longhorn
@@ -28,9 +28,9 @@ persistence:
     enabled: true
     storageClassName: longhorn
     accessMode: ReadWriteOnce
-    size: 50Gi
+    size: 5Gi
   users:
     enabled: true
     storageClassName: longhorn
     accessMode: ReadWriteOnce
-    size: 50Gi
+    size: 5Gi
