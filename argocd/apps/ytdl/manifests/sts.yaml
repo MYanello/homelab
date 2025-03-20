@@ -8,10 +8,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: ytdl
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
   template:
     metadata:
       name: ytdl
@@ -56,7 +52,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /app
-              name: app
+              name: data
           readinessProbe:
             httpGet:
               path: /
@@ -75,15 +71,6 @@ spec:
             failureThreshold: 10
       restartPolicy: Always
   volumeClaimTemplates:
-    - metadata:
-        name: appdata
-      spec:
-        storageClassName: longhorn
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 100Mi
     - metadata:
         name: data
       spec:
