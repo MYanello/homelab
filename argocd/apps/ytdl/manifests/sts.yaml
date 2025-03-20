@@ -1,0 +1,202 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ytdl
+spec:
+  serviceName: ytdl
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ytdl
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: ytdl
+      labels:
+        io.kompose.service: ytdl
+    spec:
+      initContainers:
+        - name: wait-for-mongodb
+          image: busybox:1.37@sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+          command:
+            [
+              "sh",
+              "-c",
+              "until nc -z ytdl-mongo-db 27017; do echo waiting for mongodb; sleep 2; done;",
+            ]
+      containers:
+        - env:
+            - name: ALLOW_CONFIG_MUTATIONS
+              value: "true"
+            - name: write_ytdl_config
+              value: "true"
+            - name: ytdl_allow_registration
+              value: "false"
+            - name: ytdl_mongodb_connection_string
+              value: mongodb://ytdl-mongo-db:27017
+            - name: ytdl_multi_user_mode
+              value: "true"
+            - name: ytdl_use_local_db
+              value: "false"
+          image: tzahi12345/youtubedl-material:latest@sha256:2f943d584711cb07c3535b518939fabb2ab90fdd7452d9a9938cd05378468ed9
+          imagePullPolicy: IfNotPresent
+          name: ytdl
+          resources:
+            limits:
+              cpu: 100m
+              memory: 500Mi
+            requests:
+              cpu: 25m
+              memory: 200Mi
+          ports:
+            - containerPort: 17442
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/appdata
+              name: appdata
+            - mountPath: /app/audio
+              name: audio
+            - mountPath: /app/video
+              name: video
+            - mountPath: /app/subscriptions
+              name: subscriptions
+            - mountPath: /app/users
+              name: users
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 17442
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 17442
+            initialDelaySeconds: 300
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 10
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: appdata
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+    - metadata:
+        name: audio
+      spec:
+        storageClassName: nfs-storage
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+    - metadata:
+        name: video
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Gi
+    - metadata:
+        name: subscriptions
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: users
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ytdl-mongo-db
+spec:
+  serviceName: ytdl-mongo-db
+  replicas: 0
+  selector:
+    matchLabels:
+      io.kompose.service: ytdl-mongo-db
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: ytdl-mongo-db
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+      containers:
+        - image: mongo:8.0.5@sha256:7bd28e5eea1c5766a084d5818254046f3ebe3b8f20a65e3a274640189e296667
+          name: ytdl-mongo-db
+          resources:
+            limits:
+              cpu: 100m
+              memory: 500Mi
+            requests:
+              cpu: 25m
+              memory: 200Mi
+          volumeMounts:
+            - mountPath: /data/db
+              name: db
+          startupProbe:
+            tcpSocket:
+              port: 27017
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: db
+      spec:
+        storageClassName: longhorn-xfs
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi

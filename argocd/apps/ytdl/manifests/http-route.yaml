@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: ytdl-app
+  name: ytdl-idx-0
+  namespace: ytdl
+spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - ytdl.yanello.net
+  rules:
+  - backendRefs:
+    - name: ytdl
+      namespace: ytdl
+      port: 17442
