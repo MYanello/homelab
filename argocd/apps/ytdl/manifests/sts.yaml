@@ -139,10 +139,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
   template:
     metadata:
       labels:
