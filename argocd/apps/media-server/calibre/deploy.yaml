@@ -29,7 +29,7 @@ spec:
               value: 'false'
             - name: CLOUDFLARE_PROXY_URL
               value: http://cloudflareproxy:8000
-          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest@sha256:fd58ce279144fdbd1fcf0366b98aed2175328de5047ef152f59c080fd6903b39
+          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest@sha256:e4c205932b0ece06d76de09ba8569d5aa30768cc46d04beb3a24ddc0106043d6
           imagePullPolicy: IfNotPresent
           name: calibre-dl
           resources:
