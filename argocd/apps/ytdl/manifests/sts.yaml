@@ -194,7 +194,7 @@ spec:
     - metadata:
         name: db
       spec:
-        storageClassName: longhorn-xfs
+        storageClassName: longhorn
         accessModes:
           - ReadWriteOnce
         resources:
