@@ -51,8 +51,16 @@ spec:
             - containerPort: 17442
               protocol: TCP
           volumeMounts:
-            - mountPath: /app
-              name: data
+            - mountPath: /app/appdata
+              name: appdata
+            - mountPath: /app/audio
+              name: audio
+            - mountPath: /app/video
+              name: video
+            - mountPath: /app/subscriptions
+              name: subscriptions
+            - mountPath: /app/users
+              name: users
           readinessProbe:
             httpGet:
               path: /
@@ -72,7 +80,25 @@ spec:
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:
-        name: data
+        name: appdata
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+    - metadata:
+        name: audio
+      spec:
+        storageClassName: nfs-storage
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+    - metadata:
+        name: video
       spec:
         storageClassName: nfs-storage
         accessModes:
@@ -80,6 +106,24 @@ spec:
         resources:
           requests:
             storage: 100Gi
+    - metadata:
+        name: subscriptions
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: users
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
 ---
 apiVersion: apps/v1
 kind: StatefulSet
