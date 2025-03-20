@@ -170,25 +170,25 @@ spec:
           volumeMounts:
             - mountPath: /data/db
               name: db
-          startupProbe:
-            tcpSocket:
-              port: 27017
-            failureThreshold: 30
-            periodSeconds: 10
-          readinessProbe:
-            tcpSocket:
-              port: 27017
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            tcpSocket:
-              port: 27017
-            initialDelaySeconds: 30
-            periodSeconds: 15
-            timeoutSeconds: 5
-            failureThreshold: 3
+          # startupProbe:
+          #   tcpSocket:
+          #     port: 27017
+          #   failureThreshold: 30
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 27017
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 27017
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:
