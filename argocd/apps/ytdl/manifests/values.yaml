@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: tzahi12345/youtubedl-material
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 17442
+
+persistence:
+  appdata:
+    enabled: true
+    storageClassName: longhorn
+    accessMode: ReadWriteOnce
+    size: 1Gi
+  audio:
+    enabled: true
+    storageClassName: longhorn
+    accessMode: ReadWriteOnce
+    size: 50Gi
+  video:
+    enabled: true
+    storageClassName: longhorn
+    accessMode: ReadWriteOnce
+    size: 50Gi
+  subscriptions:
+    enabled: true
+    storageClassName: longhorn
+    accessMode: ReadWriteOnce
+    size: 50Gi
+  users:
+    enabled: true
+    storageClassName: longhorn
+    accessMode: ReadWriteOnce
+    size: 50Gi
