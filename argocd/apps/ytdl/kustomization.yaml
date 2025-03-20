@@ -5,3 +5,12 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/service.yaml
   - ./manifests/sts.yaml
+
+
+# helmCharts:
+#     - name: youtubedl-material
+#       repo: https://tzahi12345.github.io/YoutubeDL-Material/chart/
+#       version: "0.0.1"
+#       releaseName: youtubedl-material
+#       namespace: ytdl
+#       valuesFile: ./manifests/values.yaml

@@ -8,10 +8,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: ytdl
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
   template:
     metadata:
       name: ytdl
@@ -86,7 +82,7 @@ spec:
     - metadata:
         name: appdata
       spec:
-        storageClassName: longhorn
+        storageClassName: nfs-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -104,16 +100,16 @@ spec:
     - metadata:
         name: video
       spec:
-        storageClassName: longhorn
+        storageClassName: nfs-storage
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Gi
+            storage: 20Gi
     - metadata:
         name: subscriptions
       spec:
-        storageClassName: longhorn
+        storageClassName: nfs-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -122,12 +118,12 @@ spec:
     - metadata:
         name: users
       spec:
-        storageClassName: longhorn
+        storageClassName: nfs-storage
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 500Mi
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -135,14 +131,10 @@ metadata:
   name: ytdl-mongo-db
 spec:
   serviceName: ytdl-mongo-db
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: ytdl-mongo-db
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -158,43 +150,43 @@ spec:
                     values:
                       - amd64
       containers:
-        - image: mongo:8.0.5@sha256:7bd28e5eea1c5766a084d5818254046f3ebe3b8f20a65e3a274640189e296667
+        - image: mongo:4
           name: ytdl-mongo-db
           resources:
-            limits:
-              cpu: 100m
-              memory: 500Mi
+            # limits:
+            #   cpu: 100m
+            #   memory: 500Mi
             requests:
               cpu: 25m
               memory: 200Mi
           volumeMounts:
             - mountPath: /data/db
               name: db
-          startupProbe:
-            tcpSocket:
-              port: 27017
-            failureThreshold: 30
-            periodSeconds: 10
-          readinessProbe:
-            tcpSocket:
-              port: 27017
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            tcpSocket:
-              port: 27017
-            initialDelaySeconds: 30
-            periodSeconds: 15
-            timeoutSeconds: 5
-            failureThreshold: 3
+          # startupProbe:
+          #   tcpSocket:
+          #     port: 27017
+          #   failureThreshold: 30
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 27017
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 27017
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:
         name: db
       spec:
-        storageClassName: longhorn-xfs
+        storageClassName: nfs-storage
         accessModes:
           - ReadWriteOnce
         resources:
