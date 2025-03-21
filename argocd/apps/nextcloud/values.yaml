@@ -3,7 +3,7 @@ replicaCount: 1
 persistence:
   enabled: true
   storageClass: longhorn
-  size: 1Gi
+  size: 8Gi
 livenessProbe:
   enabled: false
 startupProbe:
