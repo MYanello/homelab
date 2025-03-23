@@ -6,9 +6,11 @@ metadata:
     app: kometa
 spec:
   schedule: "0 */6 * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
-      ttlSecondsAfterFinished: 43200
+      ttlSecondsAfterFinished: 86400
       template:
         metadata:
           labels:
@@ -28,7 +30,6 @@ spec:
             - name: kometa
               image: kometateam/kometa:latest
               imagePullPolicy: Always
-              # command: ["sleep", "inf"]
               command: ["python", "kometa.py", "-r"]
               env:
                 - name: TZ
