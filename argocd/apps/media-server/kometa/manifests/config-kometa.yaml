@@ -171,16 +171,17 @@ data:
       cache_expiration: 60
       region:
     trakt:
+    # to renew, get the values from https://kometa.wiki/en/latest/config/trakt/
       client_id: <<TRAKT_CLIENT_ID>>
       client_secret: <<TRAKT_CLIENT_SECRET>>
       pin:
       authorization:
         access_token: <<TRAKT_ACCESS_TOKEN>>
         token_type: Bearer
-        expires_in: 7889237
+        expires_in: 86399
         refresh_token: <<TRAKT_REFRESH_TOKEN>>
         scope: public
-        created_at: 1732370414
+        created_at: 1742754958
     mdblist:
       apikey: <<MDBLIST_API_KEY>>
       cache_expiration: 60
