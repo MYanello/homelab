@@ -17,7 +17,6 @@ configMapGenerator:
       - ./manifests/config/widgets.yaml
 
 resources:
-  - ./manifests/cm.yaml
   - ./manifests/deploy.yaml
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml
