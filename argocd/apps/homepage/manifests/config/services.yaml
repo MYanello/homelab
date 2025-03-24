@@ -24,7 +24,7 @@
           enableUser: 'true'
           showEpisodeNumber: 'true'
     - qBittorrent:
-        href: https://qb.yanello.net
+        href: https://qbit.yanello.net
         icon: qbittorrent
         widget:
           type: qbittorrent
