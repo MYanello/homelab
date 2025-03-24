@@ -7,7 +7,12 @@
           url: https://opn.yanello.net
           username: {{HOMEPAGE_VAR_OPN_USER}}
           password: {{HOMEPAGE_VAR_OPN_PASS}}
-
+    - MySpeed:
+        href: https://myspeed.yanello.net
+        icon: myspeed
+        widget:
+          type: myspeed
+          url: https://myspeed.yanello.net
 - My Second Group:
     - My Second Service:
         href: http://localhost/
