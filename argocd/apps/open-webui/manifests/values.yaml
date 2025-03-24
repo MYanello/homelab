@@ -27,21 +27,22 @@ pipelines:
 extraEnvVars:
   - name: OAUTH_CLIENT_ID
     valueFrom:
-      secretKeyREf:
+      secretKeyRef:
         name: chat-secrets
         key: OAUTH_CLIENT_ID
   - name: OAUTH_CLIENT_SECRET
     valueFrom:
-      secretKeyREf:
+      secretKeyRef:
         name: chat-secrets
         key: OAUTH_CLIENT_SECRET
   - name: OAUTH_PROVIDER_NAME
-    value: authentik
-  - name: OAUTH_PROVIDER_URL
+    value: Authentik
+  - name: OPENID_PROVIDER_URL
     valueFrom:
-      secretKeyREf:
+      secretKeyRef:
         name: chat-secrets
         key: OAUTH_PROVIDER_URL
   - name: ENABLE_OAUTH_SIGNUP
     value: 'true'
-
+  - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+    value: 'true'
