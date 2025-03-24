@@ -33,8 +33,3 @@
             - download
             - seed
             - upload
-
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
