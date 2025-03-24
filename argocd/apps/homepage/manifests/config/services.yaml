@@ -23,6 +23,16 @@
           key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
           enableUser: 'true'
           showEpisodeNumber: 'true'
+    - qBittorrent:
+        href: https://qb.yanello.net
+        icon: qbittorrent
+        widget:
+          type: qbittorrent
+          url: https://qbit.yanello.net
+          fields: 
+            - download
+            - seed
+            - upload
 
 - My Third Group:
     - My Third Service:
