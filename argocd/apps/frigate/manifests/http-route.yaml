@@ -2,21 +2,24 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Frigate
+    gethomepage.dev/icon: frigate
+    gethomepage.dev/description: "A complete and local NVR designed for Home Assistant with AI object detection."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=frigate
   labels:
     app.kubernetes.io/instance: frigate-app
   name: frigate-httproute
   namespace: frigate
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
   hostnames:
-  - frigate.yanello.net
+    - frigate.yanello.net
   rules:
-  - backendRefs:
-    - name: frigate
-      namespace: frigate
-      port: 5000
-      
+    - backendRefs:
+        - name: frigate
+          namespace: frigate
+          port: 5000

@@ -2,11 +2,14 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Calibre
+    gethomepage.dev/icon: calibre
+    gethomepage.dev/description: "Calibre is an e-book manager. It can view, convert, edit and catalog e-books in all of the major e-book formats."
+    gethomepage.dev/pod-selector: app=calibre
   labels:
     app.kubernetes.io/instance: calibre-app
   name: calibre-httproute
-  namespace: calibre
 spec:
   parentRefs:
   - name: gateway-api
@@ -25,11 +28,12 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
-  labels:
-    app.kubernetes.io/instance: calibre-app
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "CalibreDL"
+    gethomepage.dev/icon: mdi-folder-download-outline
+    gethomepage.dev/description: "An intuitive web interface for searching and requesting book downloads."
+    gethomepage.dev/pod-selector: app=calibre-dl 
   name: calibre-dl-httproute
-  namespace: calibre
 spec:
   parentRefs:
   - name: gateway-api
@@ -39,7 +43,7 @@ spec:
   - calibre-dl.yanello.net
   rules:
   - backendRefs:
-    - name: calibre-dl
+    - name: calibre_dl
       namespace: calibre
       port: 8084
       

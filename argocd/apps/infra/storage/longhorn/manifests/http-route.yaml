@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Longhorn
+    gethomepage.dev/icon: longhorn
+    gethomepage.dev/description: "Longhorn delivers simplified, easy to deploy and upgrade, 100% open source, cloud-native persistent block storage without the cost overhead."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=longhorn
   labels:
     app.kubernetes.io/instance: longhorn-app
   name: longhorn-httproute

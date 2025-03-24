@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Bazarr
+    gethomepage.dev/icon: bazarr
+    gethomepage.dev/description: "Bazarr is a companion application to Sonarr and Radarr that manages and downloads subtitles based on your requirements."
+    gethomepage.dev/pod-selector: app=bazarr
   labels:
     app.kubernetes.io/instance: bazarr-app
   name: bazarr-httproute

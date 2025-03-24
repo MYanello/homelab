@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: qBittorrent
+    gethomepage.dev/icon: qbittorrent
+    gethomepage.dev/description: "qBittorrent is a free and open source torrent client for Windows, macOS and Linux."
+    gethomepage.dev/pod-selector: app=qbittorrent
   labels:
     app.kubernetes.io/instance: qbittorrent-app
   name: qbittorrent-httproute

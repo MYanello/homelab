@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Mealie
+    gethomepage.dev/icon: mealie
+    gethomepage.dev/description: "Mealie is an intuitive and easy to use recipe management app."
+    gethomepage.dev/pod-selector: app=mealie
   labels:
     app.kubernetes.io/instance: mealie-app
   name: mealie-httproute

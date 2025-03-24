@@ -3,6 +3,12 @@ kind: HTTPRoute
 metadata:
   name: linkwarden-http-route
   namespace: linkwarden
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Linkwarden
+    gethomepage.dev/icon: linkwarden
+    gethomepage.dev/description: "Linkwarden is a self-hosted, open-source collaborative bookmark manager to collect, organize and archive webpages."
+    gethomepage.dev/pod-selector: app=linkwarden
 spec:
   parentRefs:
   - name: gateway-api

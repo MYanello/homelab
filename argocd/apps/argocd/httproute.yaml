@@ -2,21 +2,24 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: ArgoCD
+    gethomepage.dev/icon: sh-argo-cd
+    gethomepage.dev/description: "Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=argocd-server
   labels:
     app.kubernetes.io/instance: argocd-app
   name: argocd-httproute
   namespace: argocd
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
   hostnames:
-  - argocd.yanello.net
+    - argocd.yanello.net
   rules:
-  - backendRefs:
-    - name: argocd-server
-      namespace: argocd
-      port: 80
-      
+    - backendRefs:
+        - name: argocd-server
+          namespace: argocd
+          port: 80

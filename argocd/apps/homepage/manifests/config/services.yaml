@@ -1,0 +1,35 @@
+- Infrastructure:
+    - OPNSense:
+        href: https://opn.yanello.net
+        icon: opnsense
+        widget:
+          type: opnsense
+          url: https://opn.yanello.net
+          username: {{HOMEPAGE_VAR_OPN_USER}}
+          password: {{HOMEPAGE_VAR_OPN_PASS}}
+    - MySpeed:
+        href: https://myspeed.yanello.net
+        icon: myspeed
+        widget:
+          type: myspeed
+          url: https://myspeed.yanello.net
+- Media:
+    - Tautulli:
+        href: https://tautulli.yanello.net
+        icon: tautulli
+        widget:
+          type: tautulli
+          url: https://tautulli.yanello.net
+          key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
+          enableUser: 'true'
+          showEpisodeNumber: 'true'
+    - qBittorrent:
+        href: https://qbit.yanello.net
+        icon: qbittorrent
+        widget:
+          type: qbittorrent
+          url: https://qbit.yanello.net
+          fields: 
+            - download
+            - seed
+            - upload

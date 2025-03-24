@@ -1,10 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose -f radarr.yaml convert
-    kompose.version: 1.35.0 (HEAD)
   labels:
+    app: radarr
     io.kompose.service: radarr
   name: radarr
 spec:
@@ -24,6 +22,7 @@ spec:
         kompose.version: 1.35.0 (HEAD)
       labels:
         io.kompose.service: radarr
+        app: radarr
     spec:
       affinity:
         nodeAffinity:

@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Ombi
+    gethomepage.dev/icon: ombi
+    gethomepage.dev/description: "Ombi is your friendly media request tool, automatically syncs with your media servers!"
+    gethomepage.dev/pod-selector: app=ombi
   labels:
     app.kubernetes.io/instance: ombi-app
   name: ombi-vs-idx-0

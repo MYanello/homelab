@@ -2,9 +2,13 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Open WebUI
+    gethomepage.dev/icon: sh-open-webui
+    gethomepage.dev/description: "Open WebUI is an extensible, self-hosted AI interface that adapts to your workflow, all while operating entirely offline."
+    gethomepage.dev/pod-selector: app.kubernetes.io/instance=open-webui
   labels:
-    app.kubernetes.io/instance: open-webui-app
+    app.kubernetes.io/instance: open-webui
   name: ollama-httproute
   namespace: open-webui
 spec:

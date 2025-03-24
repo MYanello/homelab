@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Authentik
+    gethomepage.dev/icon: authentik
+    gethomepage.dev/description: "Authentik is an open-source Identity Provider that emphasizes flexibility and versatility, with support for a wide set of protocols."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=authentik
   labels:
     app.kubernetes.io/instance: authentik-app
   name: authentik-http-route
