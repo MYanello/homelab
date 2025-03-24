@@ -63,9 +63,6 @@ spec:
       volumes:
         - name: homepage-config
           configMap:
-            name: homepage
-        - name: bookmarks
-          configMap:
-            name: bookmarks            
+            name: homepage         
         - name: logs
           emptyDir: {}
