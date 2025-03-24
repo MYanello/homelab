@@ -4,6 +4,8 @@ metadata:
   annotations:
     gethomepage.dev/enabled: 'true'
     gethomepage.dev/name: homebox
+    gethomepage.dev/icon: homebox
+    gethomepage.dev/description: 'HomeBox is the inventory and organization system built for the Home User!'
   labels:
     app.kubernetes.io/instance: homebox-app
   name: homebox-http-route
