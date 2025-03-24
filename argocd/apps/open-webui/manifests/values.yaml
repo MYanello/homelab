@@ -23,3 +23,25 @@ pipelines:
     storageClass: nfs-storage
     accessMode: ReadWriteOnce
     size: 10Gi
+
+extraEnvVars:
+  - name: OAUTH_CLIENT_ID
+    valueFrom:
+      secretKeyREf:
+        name: chat-secrets
+        key: OAUTH_CLIENT_ID
+  - name: OAUTH_CLIENT_SECRET
+    valueFrom:
+      secretKeyREf:
+        name: chat-secrets
+        key: OAUTH_CLIENT_SECRET
+  - name: OAUTH_PROVIDER_NAME
+    value: authentik
+  - name: OAUTH_PROVIDER_URL
+    valueFrom:
+      secretKeyREf:
+        name: chat-secrets
+        key: OAUTH_PROVIDER_URL
+  - name: ENABLE_OAUTH_SIGNUP
+    value: 'true'
+
