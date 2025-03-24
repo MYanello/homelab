@@ -3,9 +3,10 @@ kind: HTTPRoute
 metadata:
   annotations:
     gethomepage.dev/enabled: 'true'
-    gethomepage.dev/name: homebox
+    gethomepage.dev/name: Homebox
     gethomepage.dev/icon: homebox
     gethomepage.dev/description: 'HomeBox is the inventory and organization system built for the Home User!'
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=homebox
   labels:
     app.kubernetes.io/instance: homebox-app
   name: homebox-http-route
