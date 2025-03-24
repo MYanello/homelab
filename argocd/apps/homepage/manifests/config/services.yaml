@@ -1,0 +1,19 @@
+- Infrastructure:
+    - OPNSense:
+        href: https://opn.yanello.net
+        icon: opnsense
+        widget:
+          type: opnsense
+          url: https://opn.yanello.net
+          username: {{HOMEPAGE_VAR_OPN_USER}}
+          password: {{HOMEPAGE_VAR_OPN_PASS}}
+
+- My Second Group:
+    - My Second Service:
+        href: http://localhost/
+        description: Homepage is the best
+
+- My Third Group:
+    - My Third Service:
+        href: http://localhost/
+        description: Homepage is 😎

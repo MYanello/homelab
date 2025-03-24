@@ -5,9 +5,16 @@ generators:
   - ./manifests/secret-generator.yaml
 
 configMapGenerator:
-  - name: bookmarks
+  - name: config
     files:
       - ./manifests/config/bookmarks.yaml
+      - ./manifests/config/custom.css
+      - ./manifests/config/custom.js
+      - ./manifests/config/docker.yaml
+      - ./manifests/config/kubernetes.yaml
+      - ./manifests/config/services.yaml
+      - ./manifests/config/settings.yaml
+      - ./manifests/config/widgets.yaml
 
 resources:
   - ./manifests/cm.yaml
