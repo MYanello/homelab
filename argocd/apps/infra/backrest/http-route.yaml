@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Backrest
+    gethomepage.dev/icon: backrest
+    gethomepage.dev/description: "Backrest provides a WebUI which wraps the restic CLI and makes it easy to create repos, browse snapshots, and restore files."
+    gethomepage.dev/pod-selector: app=backrest
   labels:
     app.kubernetes.io/instance: backrest-app
   name: backrest-httproute

@@ -2,23 +2,27 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Paperless
+    gethomepage.dev/icon: paperless
+    gethomepage.dev/description: "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper."
+    gethomepage.dev/pod-selector: app=paperless
   labels:
     app.kubernetes.io/instance: paperless-app
   name: paperless-ai-httproute
   namespace: paperless
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
   hostnames:
-  - paperless-ai.yanello.net
+    - paperless-ai.yanello.net
   rules:
-  - backendRefs:
-    - name: paperless-ai
-      namespace: paperless
-      port: 3000
+    - backendRefs:
+        - name: paperless-ai
+          namespace: paperless
+          port: 3000
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -31,13 +35,13 @@ metadata:
   namespace: paperless
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
   hostnames:
-  - paperless.yanello.net
+    - paperless.yanello.net
   rules:
-  - backendRefs:
-    - name: paperless
-      namespace: paperless
-      port: 8000
+    - backendRefs:
+        - name: paperless
+          namespace: paperless
+          port: 8000

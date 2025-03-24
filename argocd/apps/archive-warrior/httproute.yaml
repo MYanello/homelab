@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Archive Warrior
+    gethomepage.dev/icon: sh-archivebox
+    gethomepage.dev/description: "The ArchiveTeam Warrior is a virtual archiving appliance."
+    gethomepage.dev/pod-selector: app=warrior
   labels:
     app.kubernetes.io/instance: archive-warrior-app
   name: warrior-httproute

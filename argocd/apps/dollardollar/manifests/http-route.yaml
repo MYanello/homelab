@@ -1,18 +1,23 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: DollarDollar
+    gethomepage.dev/icon: sh-dollardollar-bill-y-all
+    gethomepage.dev/description: "An open-source, self-hosted expense tracking and bill-splitting application designed for privacy, flexibility, and financial transparency."
+    gethomepage.dev/pod-selector: app=dollardollar
   labels:
     app.kubernetes.io/instance: dollardollar-app
   name: dollardollar-http-route
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
   hostnames:
-  - dollar.yanello.net
+    - dollar.yanello.net
   rules:
-  - backendRefs:
-    - name: dollardollar
-      port: 5001
-      
+    - backendRefs:
+        - name: dollardollar
+          port: 5001

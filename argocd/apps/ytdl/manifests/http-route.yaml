@@ -4,6 +4,12 @@ metadata:
   labels:
     app.kubernetes.io/instance: ytdl-app
   name: ytdl-httproute
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: YoutubeDL
+    gethomepage.dev/icon: sh-youtube-dl
+    gethomepage.dev/description: "YoutubeDL-Material is a Material Design frontend for youtube-dl."
+    gethomepage.dev/pod-selector: app=ytdl  
 spec:
   parentRefs:
   - name: gateway-api

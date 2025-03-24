@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Vaultwarden
+    gethomepage.dev/icon: vaultwarden
+    gethomepage.dev/description: "An alternative server implementation of the Bitwarden Client API, written in Rust and compatible with official Bitwarden clients."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=vaultwarden
   labels:
     app.kubernetes.io/instance: vaultwarden
   name: vaultwarden-httproute

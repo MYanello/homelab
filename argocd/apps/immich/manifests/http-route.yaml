@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Immich
+    gethomepage.dev/icon: immich
+    gethomepage.dev/description: "High performance self-hosted photo and video management solution."
+    gethomepage.dev/pod-selector: app=immich-server
   labels:
     app.kubernetes.io/instance: immich-app
   name: immich-httproute

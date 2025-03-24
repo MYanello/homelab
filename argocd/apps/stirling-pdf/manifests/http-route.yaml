@@ -4,6 +4,12 @@ metadata:
   labels:
     app.kubernetes.io/instance: stirling-pdf-app
   name: stirling-pdf-http-route
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Stirling PDF
+    gethomepage.dev/icon: sh-stirling-pdf
+    gethomepage.dev/description: "A locally hosted one-stop shop for all your PDF needs."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=stirling-pdf-chart
 spec:
   parentRefs:
     - name: gateway-api

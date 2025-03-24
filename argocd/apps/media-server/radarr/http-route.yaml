@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Radarr
+    gethomepage.dev/icon: radarr
+    gethomepage.dev/description: "Radarr is a movie collection manager for Usenet and BitTorrent users."
+    gethomepage.dev/pod-selector: app=radarr
   labels:
     app.kubernetes.io/instance: radarr-app
   name: radarr-httproute

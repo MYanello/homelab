@@ -5,6 +5,7 @@ resources:
   - manifests/vs.yaml
   - manifests/ns.yaml
   - manifests/http-route.yaml
+  
 generators:
   - manifests/secret-generator.yaml
 

@@ -27,7 +27,7 @@ spec:
       port: 8084
       targetPort: 8084
   selector:
-    app: calibre-dl
+    app: calibre_dl
 ---
 apiVersion: v1
 kind: Service

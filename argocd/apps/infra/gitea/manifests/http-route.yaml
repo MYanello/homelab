@@ -2,7 +2,11 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   annotations:
-    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Gitea
+    gethomepage.dev/icon: gitea
+    gethomepage.dev/description: "Gitea is a painless, self-hosted, all-in-one software development service."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=gitea
   labels:
     app.kubernetes.io/instance: gitea-app
   name: gitea-httproute
