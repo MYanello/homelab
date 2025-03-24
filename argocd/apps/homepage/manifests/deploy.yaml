@@ -64,5 +64,8 @@ spec:
         - name: homepage-config
           configMap:
             name: homepage
+        - name: bookmarks
+          configMap:
+            name: bookmarks            
         - name: logs
           emptyDir: {}
