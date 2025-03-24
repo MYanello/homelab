@@ -41,7 +41,7 @@ spec:
               name: homepage-config
               subPath: custom.css
             - mountPath: /app/config/bookmarks.yaml
-              name: bookmarks
+              name: homepage-config
               subPath: bookmarks.yaml
             - mountPath: /app/config/docker.yaml
               name: homepage-config
