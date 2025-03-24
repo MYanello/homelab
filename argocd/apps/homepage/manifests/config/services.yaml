@@ -13,10 +13,16 @@
         widget:
           type: myspeed
           url: https://myspeed.yanello.net
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
+- Media:
+    - Tautulli:
+        href: https://tautulli.yanello.net
+        icon: tautulli
+        widget:
+          type: tautulli
+          url: https://tautulli.yanello.net
+          key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
+          enableUser: 'true'
+          showEpisodeNumber: 'true'
 
 - My Third Group:
     - My Third Service:
