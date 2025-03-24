@@ -44,5 +44,5 @@ extraEnvVars:
         key: OAUTH_PROVIDER_URL
   - name: ENABLE_OAUTH_SIGNUP
     value: 'true'
-  - name: OAUTH_MERGE_ACCOUTNS_BY_EMAIL
+  - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
     value: 'true'
