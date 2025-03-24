@@ -36,8 +36,8 @@ extraEnvVars:
         name: chat-secrets
         key: OAUTH_CLIENT_SECRET
   - name: OAUTH_PROVIDER_NAME
-    value: authentik
-  - name: OAUTH_PROVIDER_URL
+    value: Authentik
+  - name: OPENID_PROVIDER_URL
     valueFrom:
       secretKeyRef:
         name: chat-secrets
