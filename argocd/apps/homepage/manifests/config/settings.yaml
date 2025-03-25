@@ -1,0 +1,5 @@
+layout:
+  Kubernetes:
+    style: row
+    columns: 4
+    useEqualHeights: true

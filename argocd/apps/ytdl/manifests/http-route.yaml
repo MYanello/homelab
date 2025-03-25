@@ -9,7 +9,7 @@ metadata:
     gethomepage.dev/name: YoutubeDL
     gethomepage.dev/icon: sh-youtube-dl
     gethomepage.dev/description: "YoutubeDL-Material is a Material Design frontend for youtube-dl."
-    gethomepage.dev/pod-selector: app=ytdl  
+    gethomepage.dev/pod-selector: io.kompose.service=ytdl
 spec:
   parentRefs:
   - name: gateway-api

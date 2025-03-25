@@ -2,11 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ytdl
+  labels:
+    app: ytdl
 spec:
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: ytdl
+      app: ytdl
   strategy:
     type: RollingUpdate
     rollingUpdate:
