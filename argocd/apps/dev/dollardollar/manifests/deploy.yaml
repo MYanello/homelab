@@ -40,7 +40,7 @@ spec:
             - name: FLASK_APP
               value: app.py
             - name: OIDC_ENABLED
-              value: 'true'
+              value: "true"
             - name: OIDC_PROVIDER_NAME
               value: Authentik
             - name: APP_URL

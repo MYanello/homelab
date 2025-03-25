@@ -9,3 +9,7 @@ resources:
   
 generators:
   - ./manifests/secret-generator.yaml
+  
+images:
+  - name: docker.cloudsmith.io/myanello/apps/dollar
+    newTag: 0.0.2
