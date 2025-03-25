@@ -57,7 +57,7 @@ spec:
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
           image: docker.cloudsmith.io/myanello/apps/dollar:latest
           imagePullSecrets:
-            - name: regcred
+            - name: dollardollar-pull-secrets
           imagePullPolicy: IfNotPresent
           name: dollardollar-dev
           ports:
