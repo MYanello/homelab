@@ -9,7 +9,7 @@ spec:
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: dollardollar
+      app: dollardollar-dev
   strategy:
     type: RollingUpdate
     rollingUpdate:
