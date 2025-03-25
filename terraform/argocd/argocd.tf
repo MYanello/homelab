@@ -22,7 +22,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             },
             {
               "path"    = "argocd/apps/dev",
-              "exclude" = false
+              "exclude" = true
             }
           ]
         }
@@ -30,6 +30,57 @@ resource "kubernetes_manifest" "argocd_appset" {
       "template" = {
         "metadata" = {
           "name"      = "{{path.basename}}-app"
+          "namespace" = "argocd"
+        }
+        "spec" = {
+          "project" = "default"
+          "source" = {
+            "repoURL"        = "https://github.com/myanello/homelab"
+            "targetRevision" = "main"
+            "path"           = "{{path}}"
+          }
+          "destination" = {
+            "name"      = "in-cluster"
+            "namespace" = "{{path.basename}}"
+          }
+          "syncPolicy" = {
+            "automated" = {
+              "prune"    = true
+              "selfHeal" = true
+            }
+            "syncOptions" = [
+              "CreateNamespace=true"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "argocd_dev_appset" {
+  manifest = {
+    "apiVersion" = "argoproj.io/v1alpha1"
+    "kind"       = "ApplicationSet"
+    "metadata" = {
+      "name"      = "argocd-dev-apps"
+      "namespace" = "argocd"
+    }
+    "spec" = {
+      "generators" = [{
+        "git" = {
+          "repoURL"  = "https://github.com/myanello/homelab"
+          "revision" = "main"
+          "directories" = [
+            {
+              "path" = "argocd/apps/dev/**"
+            }
+          ]
+        }
+      }]
+      "template" = {
+        "metadata" = {
+          "name"      = "{{path.basename}}-dev-app"
           "namespace" = "argocd"
         }
         "spec" = {
