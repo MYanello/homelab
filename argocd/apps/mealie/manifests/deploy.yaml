@@ -50,6 +50,20 @@ spec:
               value: "https://recipes.yanello.net"
             - name: TZ
               value: "America/Chicago"
+            - name: BASE_URL
+              value: "https://recipes.yanello.net"
+            - name: OIDC_AUTH_ENABLED
+              value: "true"
+            - name: OIDC_SIGNUP_ENABLED
+              value: "true"
+            - name: OIDC_REMEMBER_ME
+              value: "true"
+            - name: OIDC_PROVIDER_NAME
+              value: "Authentik"
+            - name: OIDC_USER_GROUP
+              value: "users"
+            - name: OIDC_ADMIN_GROUP
+              value: "admin"
           envFrom:
             - secretRef:
                 name: mealie-secrets
