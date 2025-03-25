@@ -20,6 +20,8 @@ spec:
       labels:
         app: dollardollar-dev
     spec:
+      imagePullSecrets:
+        - name: dollardollar-pull-secrets
       containers:
         - envFrom:
             - secretRef:
@@ -56,8 +58,6 @@ spec:
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
           image: docker.cloudsmith.io/myanello/apps/dollar:latest
-          imagePullSecrets:
-            - name: dollardollar-pull-secrets
           imagePullPolicy: IfNotPresent
           name: dollardollar-dev
           ports:
