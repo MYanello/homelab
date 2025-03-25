@@ -41,6 +41,8 @@ spec:
               value: 'true'
             - name: OIDC_PROVIDER_NAME
               value: Authentik
+            - name: APP_URL
+              value: https://dollar.yanello.net
             # - name: SECRET_KEY
             #   valueFrom:
             #     secretKeyRef:
