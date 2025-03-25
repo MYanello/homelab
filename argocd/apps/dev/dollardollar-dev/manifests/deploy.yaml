@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dollardollar-dev
+  name: dollardollar-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: dollardollar
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: dollardollar-dev
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: dollardollar-secrets
+          env:
+            - name: SQLALCHEMY_DATABASE_URI
+              value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+            - name: DEVELOPMENT_MODE
+              value: "True"
+            - name: DISABLE_SIGNUP
+              value: "False"
+            - name: DEBUG
+              value: "True"
+            - name: LOG_LEVEL
+              value: INFO
+            - name: FLASK_APP
+              value: app.py
+            - name: OIDC_ENABLED
+              value: 'true'
+            - name: OIDC_PROVIDER_NAME
+              value: Authentik
+            - name: APP_URL
+              value: https://dollar-dev.yanello.net
+            # - name: SECRET_KEY
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: dollar-secrets
+            #       key: SECRET_KEY
+            # - MAIL_SERVER=${MAIL_SERVER}
+            # - MAIL_PORT=${MAIL_PORT:-587}
+            # - MAIL_USE_TLS=${MAIL_USE_TLS:-True}
+            # - MAIL_USE_SSL=${MAIL_USE_SSL:-False}
+            # - MAIL_USERNAME=${MAIL_USERNAME}
+            # - MAIL_PASSWORD=${MAIL_PASSWORD}
+            # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
+          image: harung43/dollardollar:latest@sha256:a707dd81019aec451ed79b445e241e0158bfc00ea4cf8c0fb96b420f4dc60bed
+          imagePullPolicy: IfNotPresent
+          name: dollardollar-dev
+          ports:
+            - containerPort: 5001
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5001
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
