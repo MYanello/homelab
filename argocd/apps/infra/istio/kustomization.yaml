@@ -1,6 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 resources:
   - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
   - app.yaml
@@ -14,3 +13,8 @@ resources:
   # - resources/istio-gw.yaml
   # - resources/pdb.yaml
   # - resources/serviceEntry.yaml
+
+replicas:
+  - name: gateway-api-istio
+    count: 3
+  
