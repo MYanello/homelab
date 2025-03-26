@@ -13,8 +13,3 @@ resources:
   # - resources/istio-gw.yaml
   # - resources/pdb.yaml
   # - resources/serviceEntry.yaml
-
-replicas:
-  - name: gateway-api-istio
-    count: 3
-  
