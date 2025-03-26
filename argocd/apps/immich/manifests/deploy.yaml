@@ -49,7 +49,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: ghcr.io/immich-app/immich-server:v1.130.0@sha256:cae6df9143f827976b20b1677f1c44297bc5fb3e4c3b623515e6ea4b71d167be
+          image: ghcr.io/immich-app/immich-server:v1.130.2@sha256:a906a1daf4e82e9fa3e307cda55c46618fa9a639f7b417d13392795c7a1c3176
           ports:
             - containerPort: 2283
               protocol: TCP
