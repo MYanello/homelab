@@ -1,8 +1,0 @@
-apiVersion: operator.victoriametrics.com/v1beta1
-kind: VMSingle
-metadata:
-  name: iotawatt-vmsingle
-spec:
-  retentionPeriod: "50y"
-  insertPorts:
-    influxPort: "8086"

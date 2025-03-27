@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/http-route.yaml
-  - ./manifests/power-dash.yaml
+  - ./manifests/dashboards/power-dash.yaml
   - ./manifests/vmscrape/homeassistant.yaml
 
 generators:
