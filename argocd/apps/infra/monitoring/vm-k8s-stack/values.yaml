@@ -9,8 +9,7 @@ vmagent:
 vmsingle: 
   enabled: true
   spec:
-    server:
-      retentionPeriod: 50y
+    retentionPeriod: 50y
     serviceSpec:
       spec:
         type: LoadBalancer
