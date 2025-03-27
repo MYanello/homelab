@@ -6,7 +6,7 @@ resources:
   - ./manifests/power-dash.yaml
 
 generators:
-  - ./manifests/secret-generator.yaml
+  - ./manifests/secrets/secret-generator.yaml
 
 helmCharts:
   - name: victoria-metrics-k8s-stack
