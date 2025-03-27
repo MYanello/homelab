@@ -22,6 +22,8 @@ defaultDashboards:
     enabled: true
 
 grafana:
+  vmScrape:
+    enabled: true
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
