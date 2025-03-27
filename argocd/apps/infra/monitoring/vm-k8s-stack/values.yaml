@@ -1,20 +1,23 @@
-victoria-metrcis-operator:
-  serviceAccount:
-    create: false
-    
-alertmanager:
-  enabled: true
+victoria-metrics-operator: {}
 
 vmalert:
-  annotations: {}
   enabled: true
 
 vmagent:
   enabled: true
 
+vmsingle: 
+  enabled: true
+  spec:
+    serviceSpec:
+      spec:
+        type: LoadBalancer
+        loadBalancerIP: 10.10.8.10
+
 defaultDashboards:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
+
 grafana:
   admin:
     existingSecret: grafana-secrets
