@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/power-dash.yaml
+  - ./manifests/vmscrape/*
 
 generators:
   - ./manifests/secrets/secret-generator.yaml
