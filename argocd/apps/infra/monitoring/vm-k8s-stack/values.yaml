@@ -17,6 +17,8 @@ vmsingle:
 defaultDashboards:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
+  node-exporter-full:
+    enabled: true
 
 grafana:
   admin:
