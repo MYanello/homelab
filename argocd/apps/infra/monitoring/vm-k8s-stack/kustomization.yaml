@@ -4,9 +4,10 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/power-dash.yaml
+  - ./manifests/vmscrape/homeassistant.yaml
 
 generators:
-  - ./manifests/secret-generator.yaml
+  - ./manifests/secrets/secret-generator.yaml
 
 helmCharts:
   - name: victoria-metrics-k8s-stack
