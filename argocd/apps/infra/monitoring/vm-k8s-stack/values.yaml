@@ -18,7 +18,7 @@ vmsingle:
       - name: influx_databaseNames
         value: "iotawatt"
     extraArgs:
-      maxLabelsPerTimeSeries: "1000"
+      #maxLabelsPerTimeSeries: "1000"
     serviceSpec:
       spec:
         type: LoadBalancer
