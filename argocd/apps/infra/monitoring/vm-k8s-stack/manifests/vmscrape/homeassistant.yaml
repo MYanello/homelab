@@ -11,6 +11,7 @@ spec:
   - targets:
     - homeassistant.yanello.net
   path: /api/prometheus
+  scheme: https
   # consulSDConfigs:
   # - server: https://consul-dns:8500
   #   services:
