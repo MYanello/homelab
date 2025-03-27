@@ -12,7 +12,7 @@ vmsingle:
     retentionPeriod: 50y
     extraEnvs:
       - name: search_cacheTimestampOffset
-        value: "360d"
+        value: "51840m"
       - name: search_cacheMaxAge
         value: "360d"
       - name: influx_databaseNames
