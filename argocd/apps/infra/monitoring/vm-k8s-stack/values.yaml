@@ -10,7 +10,7 @@ vmsingle:
   enabled: true
   spec:
     retentionPeriod: 50y
-    env:
+    extraEnvs:
       - name: search_cacheTimestampOffset
         value: "360d"
       - name: search_cacheMaxAge
@@ -29,8 +29,6 @@ defaultDashboards:
     enabled: true
 
 grafana:
-  vmScrape:
-    enabled: true
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
