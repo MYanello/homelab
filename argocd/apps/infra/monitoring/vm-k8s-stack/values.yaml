@@ -17,7 +17,7 @@ vmsingle:
         value: "360d"
       - name: influx_databaseNames
         value: "iotawatt"
-    extraArgs:
+    extraArgs: {}
       #maxLabelsPerTimeSeries: "1000"
     serviceSpec:
       spec:
