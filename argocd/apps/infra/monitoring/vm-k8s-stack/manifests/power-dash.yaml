@@ -1,0 +1,2013 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: power-dashboard
+data:
+  dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 20,
+      "links": [],
+      "panels": [
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 21,
+          "panels": [],
+          "title": "General",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "mappings": [],
+              "max": 30000,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "light-green",
+                    "value": 1600
+                  },
+                  {
+                    "color": "super-light-green",
+                    "value": 2000
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 3000
+                  },
+                  {
+                    "color": "orange",
+                    "value": 5000
+                  },
+                  {
+                    "color": "red",
+                    "value": 7000
+                  }
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 3,
+            "x": 0,
+            "y": 1
+          },
+          "id": 47,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "text": {
+              "valueSize": 30
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1s"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Peak Power Usage",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "blue",
+                "mode": "fixed"
+              },
+              "decimals": 2,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "dark-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "watth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 3,
+            "x": 3,
+            "y": 1
+          },
+          "id": 112,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "text": {
+              "valueSize": 30
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "0"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h) FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter GROUP BY time($__interval) fill(0)",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Consumption",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "dark-green",
+                "mode": "fixed"
+              },
+              "decimals": 2,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "dark-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "currencyUSD"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 3,
+            "x": 6,
+            "y": 1
+          },
+          "id": 203,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "text": {
+              "valueSize": 30
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "0"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*$electricityCost/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter GROUP BY time($__interval) fill(0)",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Cost",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "decimals": 2,
+              "mappings": [],
+              "min": 0,
+              "unit": "currencyUSD"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pool"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Car"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Offices"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Aquarium"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Living Room"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#b25d5d",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Other Usage"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#24958c",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Camille Office"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#6363e0",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Marcus Office"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Server"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#878484",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 202,
+          "options": {
+            "displayLabels": [
+              "name",
+              "value"
+            ],
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "alias": "Total",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Total",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pool",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Pool_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Pool",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Car",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Car_Watts\" WHERE $timeFilter GROUP BY time(30d)",
+              "rawQuery": true,
+              "refId": "Car",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Camille Office",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Upstair_Office_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Up Office",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Marcus Office",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "orderByTime": "ASC",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Office_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Down Office",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Server",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "orderByTime": "ASC",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Guest_Rooms_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Guest Rooms",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "${Up Office} + ${Down Office} + ${Guest Rooms}",
+              "hide": true,
+              "refId": "Offices",
+              "type": "math"
+            },
+            {
+              "alias": "Living Room",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "orderByTime": "ASC",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Living_Room_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Living Room",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Aquarium",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "orderByTime": "ASC",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Breakfast_and_Dining_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Aquarium",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Other Usage",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "orderByTime": "ASC",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Other_Usage_Watts\" WHERE $timeFilter",
+              "rawQuery": true,
+              "refId": "Other",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Monthly Cost",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "orange",
+                "mode": "thresholds",
+                "seriesBy": "last"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisGridShow": true,
+                "axisLabel": "",
+                "axisPlacement": "left",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 18,
+                "gradientMode": "scheme",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "smooth",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 4,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 2,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Car"
+                },
+                "properties": [
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "yellow",
+                          "value": null
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pool"
+                },
+                "properties": [
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "blue",
+                          "value": null
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "House"
+                },
+                "properties": [
+                  {
+                    "id": "custom.thresholdsStyle",
+                    "value": {
+                      "mode": "off"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "purple",
+                          "value": null
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 3
+          },
+          "hideTimeOverride": true,
+          "id": 3,
+          "maxDataPoints": 1000,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "alias": "Total",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"value\" FROM \"autogen\".\"iota_Mains_Watts\" WHERE time > now() - 7d",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Car",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Car_Watts",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"value\" FROM \"autogen\".\"iota_Car_Watts\" WHERE time > now() - 7d",
+              "rawQuery": true,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "House",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_House_Watts",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"value\" FROM \"autogen\".\"iota_House_Watts\" WHERE time > now() - 7d",
+              "rawQuery": true,
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pool",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Pool_Watts",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"value\" FROM \"autogen\".\"iota_Pool_Watts\" WHERE time > now() - 7d",
+              "rawQuery": true,
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "timeFrom": "now-1d",
+          "title": "Wattage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 2,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": ""
+                  }
+                ]
+              },
+              "unit": "currencyUSD"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pool"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Car"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Offices"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 12
+          },
+          "id": 2,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "auto",
+            "showValue": "auto",
+            "stacking": "none",
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 0
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "alias": "Total",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
+              "rawQuery": true,
+              "refId": "Total",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pool",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Pool_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
+              "rawQuery": true,
+              "refId": "Pool",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Car",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Car_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
+              "rawQuery": true,
+              "refId": "Car",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Upstairs Office",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Upstair_Office_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
+              "rawQuery": true,
+              "refId": "Upstairs Office",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Downstairs Office",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Office_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
+              "rawQuery": true,
+              "refId": "Downstairs Office",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Guest Rooms",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Guest_Rooms_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
+              "rawQuery": true,
+              "refId": "Guest Rooms",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "${Upstairs Office} + ${Downstairs Office} + ${Guest Rooms}",
+              "hide": false,
+              "refId": "Offices",
+              "type": "math"
+            }
+          ],
+          "title": "Daily Cost",
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deh3zxjsl5la8a"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 2,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": ""
+                  }
+                ]
+              },
+              "unit": "currencyUSD"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pool"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Car"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Offices"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 20
+          },
+          "id": 201,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "auto",
+            "showValue": "always",
+            "stacking": "none",
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 0
+          },
+          "pluginVersion": "11.5.1",
+          "targets": [
+            {
+              "alias": "Total",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter GROUP BY time(1w)",
+              "rawQuery": true,
+              "refId": "Total",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pool",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Pool_Watts\" WHERE $timeFilter GROUP BY time(1w)",
+              "rawQuery": true,
+              "refId": "Pool",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Car",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Car_Watts\" WHERE $timeFilter GROUP BY time(1w)",
+              "rawQuery": true,
+              "refId": "Car",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Car",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1h"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "iota_Mains_Watts",
+              "orderByTime": "ASC",
+              "policy": "autogen",
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Upstair_Office_Watts\" WHERE $timeFilter GROUP BY time(1w)",
+              "rawQuery": true,
+              "refId": "Up Office",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "integral"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "hide": true,
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Office_Watts\" WHERE $timeFilter GROUP BY time(1w)",
+              "rawQuery": true,
+              "refId": "Down Office",
+              "resultFormat": "time_series"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "deh3zxjsl5la8a"
+              },
+              "hide": true,
+              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Guest_Rooms_Watts\" WHERE $timeFilter GROUP BY time(1w)",
+              "rawQuery": true,
+              "refId": "Guest Rooms",
+              "resultFormat": "time_series"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "${Up Office} + ${Down Office} + ${Guest Rooms}",
+              "hide": false,
+              "refId": "Offices",
+              "type": "math"
+            }
+          ],
+          "title": "Weekly Cost",
+          "type": "barchart"
+        }
+      ],
+      "preload": false,
+      "refresh": "",
+      "schemaVersion": 40,
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "text": "0.13",
+              "value": "0.13"
+            },
+            "hide": 2,
+            "name": "electricityCost",
+            "query": "0.13",
+            "skipUrlSync": true,
+            "type": "constant"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-16d/M+16d",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Power",
+      "uid": "2xKrzYa7z",
+      "version": 1,
+      "weekStart": ""
+    }
