@@ -37,6 +37,7 @@ spec:
               - immich.yanello.net
               - bitwarden.yanello.net
               - mealie.yanello.net
+              - authentik.yanello.net
     - from:
         - source:
             notRemoteIpBlocks:
