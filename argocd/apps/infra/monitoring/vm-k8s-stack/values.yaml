@@ -10,6 +10,9 @@ vmsingle:
   enabled: true
   spec:
     retentionPeriod: 50y
+    env:
+      - name: search_cacheTimestampOffset
+        value: "360d"
     serviceSpec:
       spec:
         type: LoadBalancer
