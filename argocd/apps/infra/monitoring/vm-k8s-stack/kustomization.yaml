@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/http-route.yaml
+  - ./manifests/power-dash.yaml
 
 generators:
   - ./manifests/secret-generator.yaml

@@ -13,6 +13,10 @@ vmsingle:
     env:
       - name: search_cacheTimestampOffset
         value: "360d"
+      - name: search_cacheMaxAge
+        value: "360d"
+      - name: influx_databaseNames
+        value: "iotawatt"
     serviceSpec:
       spec:
         type: LoadBalancer
