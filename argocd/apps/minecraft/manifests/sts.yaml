@@ -44,8 +44,11 @@ spec:
               name: data
           resources:
             requests:
-              cpu: 150m
-              memory: 4Gi
+              cpu: 200m
+              memory: 8Gi
+            limits:
+              cpu: '1'
+              memory: 10Gi
           livenessProbe:
             exec:
               command: ["mc-health"]
