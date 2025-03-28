@@ -50,6 +50,13 @@ redis:
   sentinel:
     persistence:
       enabled: false
+  resources:
+    requests:
+      cpu: 300m
+      memory: 50Mb
+    limits:
+      cpu: 500m
+      memory: 100Mb
 postgresql:
   enabled: true
   primary:
@@ -65,3 +72,10 @@ postgresql:
       adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
       userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
       replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mb
+    limits:
+      cpu: 200m
+      memory: 250Mb
