@@ -3,6 +3,18 @@ global:
 
 replicaCount: 1
 
+gitea:
+  oauth:
+    - name: "Authentik"
+      provider: openidConnect
+      existingSecret: gitea-secrets
+      autoDiscoverUrl: https://authentik.yanello.net/application/o/gitea/.well-known/openid-configuration
+      iconUrl: "https://goauthentik.io/img/icon.png"
+      scopes: "email profile"
+  config:
+    server:
+      ROOT_URL: https://gitea.yanello.net/
+
 actions:
   enabled: false
 
