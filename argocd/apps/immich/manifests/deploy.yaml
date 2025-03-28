@@ -323,6 +323,13 @@ spec:
           volumeMounts:
             - name: db
               mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 100m
+            limits:
+              memory: 1Gi
+              cpu: 300m
       volumes:
         - name: db
           hostPath:
