@@ -4,6 +4,9 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
 
+generators:
+  - ./manifests/secret-generator.yaml
+
 helmCharts:
     - name: gitea
       repo: https://dl.gitea.com/charts/
