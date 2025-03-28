@@ -5,6 +5,8 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/dashboards/power-dash.yaml
   - ./manifests/vmscrape/homeassistant.yaml
+  - ./manifests/vmscrape/haproxy.yaml
+  - ./manifests/vmscrape/netdata.yaml
 
 generators:
   - ./manifests/secrets/secret-generator.yaml
