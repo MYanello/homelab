@@ -9,6 +9,9 @@ gitea:
       provider: openidConnect
       existingSecret: gitea-secrets
       autoDiscoverUrl: https://authentik.yanello.net/application/o/gitea/.well-known/openid-configuration
+  config:
+    server:
+      ROOT_URL: https://gitea.yanello.net/
 
 actions:
   enabled: false
