@@ -6,7 +6,7 @@ replicaCount: 1
 gitea:
   oauth:
     - name: "Authentik"
-      provider: OpenID Connect
+      provider: openidConnect
       existingSecret: gitea-secrets
       autoDiscoverUrl: https://authentik.yanello.net/application/o/gitea/.well-known/openid-configuration
 
