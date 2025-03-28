@@ -22,7 +22,7 @@ authentik:
   error_reporting:
     enabled: true
 server:
-  replicas: 0
+  replicas: 1
   resources:
     limits:
       cpu: 750m
@@ -31,7 +31,7 @@ server:
       cpu: 400m
       memory: 300Mi
 worker:
-  replicas: 0
+  replicas: 1
   resources:
     limits:
       cpu: 300m
@@ -44,19 +44,33 @@ redis:
   master:
     persistence:
       enabled: false
+    resources:
+      requests:
+        cpu: 300m
+        memory: 50Mb
+      limits:
+        cpu: 500m
+        memory: 100Mb
   replica:
     persistence:
       enabled: false
+    resources:
+      requests:
+        cpu: 300m
+        memory: 50Mb
+      limits:
+        cpu: 500m
+        memory: 100Mb
   sentinel:
     persistence:
       enabled: false
-  resources:
-    requests:
-      cpu: 300m
-      memory: 50Mb
-    limits:
-      cpu: 500m
-      memory: 100Mb
+    resources:
+      requests:
+        cpu: 300m
+        memory: 50Mb
+      limits:
+        cpu: 500m
+        memory: 100Mb
 postgresql:
   enabled: true
   primary:
@@ -64,6 +78,13 @@ postgresql:
       enabled: true
       storageClass: longhorn-xfs
       accessMode: ReadWriteOnce
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mb
+      limits:
+        cpu: 200m
+        memory: 250Mb
   auth:
     username: authentik
     database: authentik
@@ -72,10 +93,3 @@ postgresql:
       adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
       userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
       replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
-  resources:
-    requests:
-      cpu: 100m
-      memory: 100Mb
-    limits:
-      cpu: 200m
-      memory: 250Mb
