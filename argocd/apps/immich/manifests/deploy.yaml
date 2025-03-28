@@ -59,8 +59,12 @@ spec:
           resources:
             requests:
               nvidia.com/gpu: "1"
+              memory: 500Mi
+              cpu: 100m
             limits:
               nvidia.com/gpu: "1"
+              memory: 1Gi
+              cpu: 150m
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
@@ -119,8 +123,11 @@ spec:
             requests:
               nvidia.com/gpu: "1"
               memory: "2Gi"
+              cpu: 50m
             limits:
               nvidia.com/gpu: "1"
+              memory: "4Gi"
+              cpu: 100m
       volumes:
         - name: photos
           hostPath:
@@ -164,6 +171,13 @@ spec:
           volumeMounts:
             - name: tsdata
               mountPath: /data
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 100m
+            limits:
+              memory: 100Mi
+              cpu: 20m
       volumes:
         - name: tsdata
           hostPath:
@@ -199,6 +213,13 @@ spec:
           ports:
             - containerPort: 6379
               protocol: TCP
+          resources:
+            requests:
+              memory: 10Mi
+              cpu: 30m
+            limits:
+              memory: 50Mi
+              cpu: 100m 
 ---
 apiVersion: apps/v1
 kind: Deployment
