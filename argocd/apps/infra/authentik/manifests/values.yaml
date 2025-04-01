@@ -39,6 +39,8 @@ worker:
     requests:
       cpu: 100m
       memory: 500Mi
+  livenessProbe:
+    timeoutSeconds: 5
 redis:
   enabled: true
   master:
