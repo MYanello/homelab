@@ -41,6 +41,10 @@ worker:
       memory: 500Mi
   livenessProbe:
     timeoutSeconds: 5
+  startupProbe:
+    timeoutSeconds: 5
+  readinessProbe:
+    timeoutSeconds: 5
 redis:
   enabled: true
   master:
