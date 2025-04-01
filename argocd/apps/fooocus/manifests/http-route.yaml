@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: fooocus-http-route
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Fooocus
+    gethomepage.dev/icon: mdi-image-auto-adjust
+    gethomepage.dev/description: "Fooocus is an image generating software."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=fooocus
+spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - focus.yanello.net
+  rules:
+  - backendRefs:
+    - name: fooocus
+      port: 7865
+
