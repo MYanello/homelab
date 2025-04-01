@@ -10,10 +10,12 @@ gitea:
       existingSecret: gitea-secrets
       autoDiscoverUrl: https://authentik.yanello.net/application/o/gitea/.well-known/openid-configuration
       iconUrl: "https://goauthentik.io/img/icon.png"
-      scopes: "email profile"
+      scopes: "email profile gitea"
   config:
     server:
       ROOT_URL: https://gitea.yanello.net/
+      ENABLE_AUTO_REGISTRATION: "true"
+      
 
 actions:
   enabled: false
@@ -27,11 +29,11 @@ metrics:
 redis-cluster:
   enabled: false
 redis:
-  enabled: true  
+  enabled: true
 
 postgresql-ha:
   enabled: false
-  
+
 postgresql:
   enabled: true
   global:
