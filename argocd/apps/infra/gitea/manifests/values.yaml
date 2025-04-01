@@ -4,6 +4,8 @@ global:
 replicaCount: 1
 
 gitea:
+  admin:
+    existingSecret: gitea-secrets
   oauth:
     - name: "Authentik"
       provider: openidConnect
