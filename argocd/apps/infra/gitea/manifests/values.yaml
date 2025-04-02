@@ -25,10 +25,7 @@ service:
     type: LoadBalancer
     loadBalancerIP: 10.10.8.11
     clusterIP:
-  http:
-    type: LoadBalancer
-    loadBalancerIP: 10.10.8.1
-    clusterIP: 
+
 
 actions:
   enabled: false
