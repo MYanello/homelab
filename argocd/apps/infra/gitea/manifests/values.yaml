@@ -20,9 +20,8 @@ gitea:
   additionalConfigFromEnvs:
     - name: GITEA__ENABLE_AUTO_REGISTRATION
       value: "true"
-  service:
-    ssh:
-      port: 2200
+  ssh:
+    port: 2200
       
 
 actions:
