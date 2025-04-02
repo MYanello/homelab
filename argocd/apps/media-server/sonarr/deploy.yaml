@@ -7,6 +7,7 @@ metadata:
   name: sonarr
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       io.kompose.service: sonarr
