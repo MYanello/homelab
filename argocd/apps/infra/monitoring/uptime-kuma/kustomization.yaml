@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./manifests/http-route.yaml
+
+
+helmCharts:
+  - name: uptime-kuma
+    releaseName: uptime-kuma
+    namespace: monitoring
+    repo: https://helm.irsigler.cloud
+    version: "2.21.2"
+    valuesFile: values.yaml
