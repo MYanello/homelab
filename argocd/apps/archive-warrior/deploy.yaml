@@ -22,11 +22,11 @@ spec:
               protocol: TCP
         resources:
           limits:
-            cpu: "1"
-            memory: "384Mi"
+            cpu: "1000m"
+            memory: "1200Mi"
           requests:
-            cpu: "1m"
-            memory: "128Mi"
+            cpu: "50m"
+            memory: "750Mi"
         env:
         - name: DOWNLOADER
           value: mjy
