@@ -60,7 +60,7 @@ spec:
               nvidia.com/gpu: "1"
               cpu: 50m
             limits:
-              memory: 24Gi
+              memory: 16Gi
               nvidia.com/gpu: "1"
               cpu: "4"
           readinessProbe:
