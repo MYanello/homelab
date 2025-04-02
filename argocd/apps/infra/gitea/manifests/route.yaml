@@ -22,36 +22,36 @@ spec:
   - backendRefs:
     - name: gitea-http
       port: 3000
----
-apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: TCPRoute
-metadata:
-  name: gitea-ssh
-  namespace: gitea
-spec:
-  parentRefs:
-    - name: gitea-gateway
-      sectionName: ssh
-  rules:
-    - backendRefs:
-        - name: gitea-ssh
-          port: 2200
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: gitea-gateway
-spec:
-  addresses:
-    - value: 10.10.8.11
-      type: IPAddress
-  gatewayClassName: istio
-  listeners:
-    - name: ssh
-      protocol: TCP
-      port: 2200
-      allowedRoutes:
-        namespaces:
-          from: Same
-        kinds:
-          - kind: TCPRoute
+# ---
+# apiVersion: gateway.networking.k8s.io/v1alpha2
+# kind: TCPRoute
+# metadata:
+#   name: gitea-ssh
+#   namespace: gitea
+# spec:
+#   parentRefs:
+#     - name: gitea-gateway
+#       sectionName: ssh
+#   rules:
+#     - backendRefs:
+#         - name: gitea-ssh
+#           port: 2200
+# ---
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: Gateway
+# metadata:
+#   name: gitea-gateway
+# spec:
+#   addresses:
+#     - value: 10.10.8.11
+#       type: IPAddress
+#   gatewayClassName: istio
+#   listeners:
+#     - name: ssh
+#       protocol: TCP
+#       port: 2200
+#       allowedRoutes:
+#         namespaces:
+#           from: Same
+#         kinds:
+#           - kind: TCPRoute

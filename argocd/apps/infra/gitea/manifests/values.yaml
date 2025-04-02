@@ -22,8 +22,11 @@ gitea:
       value: "true"
 service:
   ssh:
-    port: 2200
-      
+    type: loadBalancer
+    loadBalancerIP: 10.10.8.11
+  http:
+    type: loadBalancer
+    loadBalancerIP: 10.10.8.11
 
 actions:
   enabled: false
