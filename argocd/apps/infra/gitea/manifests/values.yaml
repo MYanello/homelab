@@ -24,11 +24,11 @@ service:
   ssh:
     type: LoadBalancer
     loadBalancerIP: 10.10.8.11
-    clusterIP: ""
+    clusterIP:
   http:
     type: LoadBalancer
     loadBalancerIP: 10.10.8.1
-    clusterIP: ""
+    clusterIP: 
 
 actions:
   enabled: false
