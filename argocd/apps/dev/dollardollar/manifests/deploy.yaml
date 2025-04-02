@@ -30,11 +30,11 @@ spec:
             - name: SQLALCHEMY_DATABASE_URI
               value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
             - name: DEVELOPMENT_MODE
-              value: "True"
+              value: "False"
             - name: DISABLE_SIGNUP
               value: "False"
             - name: DEBUG
-              value: "True"
+              value: "False"
             - name: LOG_LEVEL
               value: INFO
             - name: FLASK_APP
