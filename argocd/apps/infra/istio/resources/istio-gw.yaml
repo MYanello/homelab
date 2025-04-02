@@ -75,7 +75,7 @@ spec:
           - kind: HTTPRoute
     - name: ssh
       protocol: TCP
-      port: 22
+      port: 2200
       allowedRoutes:
         namespaces:
           from: All
