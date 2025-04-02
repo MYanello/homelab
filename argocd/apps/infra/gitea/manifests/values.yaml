@@ -22,10 +22,10 @@ gitea:
       value: "true"
 service:
   ssh:
-    type: loadBalancer
+    type: LoadBalancer
     loadBalancerIP: 10.10.8.11
   http:
-    type: loadBalancer
+    type: LoadBalancer
     loadBalancerIP: 10.10.8.11
 
 actions:
