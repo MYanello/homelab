@@ -17,6 +17,12 @@ gitea:
     server:
       ROOT_URL: https://gitea.yanello.net/
       ENABLE_AUTO_REGISTRATION: "true"
+  additionalConfigFromEnvs:
+    - name: GITEA__ENABLE_AUTO_REGISTRATION
+      value: "true"
+  service:
+    ssh:
+      port: 2200
       
 
 actions:
