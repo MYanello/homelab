@@ -29,7 +29,7 @@ service:
       metallb.universe.tf/allow-shared-ip: "gitea"
   http:
     type: LoadBalancer
-    loadBalancerIP: 10.10.8.1
+    loadBalancerIP: 10.10.8.11
     clusterIP: 
     annotations:
       metallb.universe.tf/allow-shared-ip: "gitea"
