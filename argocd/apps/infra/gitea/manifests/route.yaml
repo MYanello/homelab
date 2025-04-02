@@ -51,5 +51,7 @@ spec:
       protocol: TCP
       port: 2200
       allowedRoutes:
+        namespaces:
+          from: Same
         kinds:
           - kind: TCPRoute
