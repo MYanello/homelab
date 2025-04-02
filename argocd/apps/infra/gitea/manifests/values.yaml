@@ -26,13 +26,13 @@ service:
     loadBalancerIP: 10.10.8.11
     clusterIP: 
     annotations:
-      metallb.universe.tf/allow-shared-ip: "true"
+      metallb.universe.tf/allow-shared-ip: "gitea"
   http:
     type: LoadBalancer
     loadBalancerIP: 10.10.8.1
     clusterIP: 
     annotations:
-      metallb.universe.tf/allow-shared-ip: "true"
+      metallb.universe.tf/allow-shared-ip: "gitea"
 actions:
   enabled: false
 
