@@ -1,0 +1,26 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  # annotations:
+  #   gethomepage.dev/enabled: "true"
+  #   gethomepage.dev/name: Authentik
+  #   gethomepage.dev/icon: authentik
+  #   gethomepage.dev/description: "Authentik is an open-source Identity Provider that emphasizes flexibility and versatility, with support for a wide set of protocols."
+  #   gethomepage.dev/pod-selector: app.kubernetes.io/name=authentik
+  labels:
+    app.kubernetes.io/instance: backstage-app
+  name: backstage-http-route
+spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - backstage.yanello.net
+  rules:
+  - backendRefs:
+    - name: 
+      namespace: backstage
+      port: 80
+      
+
