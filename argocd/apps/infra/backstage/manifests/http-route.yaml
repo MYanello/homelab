@@ -19,8 +19,8 @@ spec:
   - backstage.yanello.net
   rules:
   - backendRefs:
-    - name: 
+    - name: backstage
       namespace: backstage
-      port: 80
+      port: 7007
       
 
