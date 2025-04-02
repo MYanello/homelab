@@ -24,9 +24,11 @@ resources:
   requests:
     nvidia.com/gpu: '1'
     memory: '2Gi'
-    cpu: '200m'
+    cpu: '2000m'
   limits:
     nvidia.com/gpu: '1'
+    memory: '4Gi'
+    cpu: '4000m'
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
