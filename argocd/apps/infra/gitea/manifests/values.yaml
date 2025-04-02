@@ -17,8 +17,22 @@ gitea:
     server:
       ROOT_URL: https://gitea.yanello.net/
       ENABLE_AUTO_REGISTRATION: "true"
-      
-
+  additionalConfigFromEnvs:
+    - name: GITEA__ENABLE_AUTO_REGISTRATION
+      value: "true"
+service:
+  ssh:
+    type: LoadBalancer
+    loadBalancerIP: 10.10.8.11
+    clusterIP: 
+    annotations:
+      metallb.universe.tf/allow-shared-ip: "gitea"
+  http:
+    type: LoadBalancer
+    loadBalancerIP: 10.10.8.11
+    clusterIP: 
+    annotations:
+      metallb.universe.tf/allow-shared-ip: "gitea"
 actions:
   enabled: false
 

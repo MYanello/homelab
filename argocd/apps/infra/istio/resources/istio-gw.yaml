@@ -73,6 +73,14 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
+    - name: ssh
+      protocol: TCP
+      port: 2200
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute

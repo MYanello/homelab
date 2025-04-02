@@ -22,4 +22,19 @@ spec:
   - backendRefs:
     - name: gitea-http
       port: 3000
-      
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: gitea-ssh
+  namespace: gitea
+spec:
+  parentRefs:
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: ssh
+  rules:
+    - backendRefs:
+        - name: gitea-ssh
+          port: 22
+---
