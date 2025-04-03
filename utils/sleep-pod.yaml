@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: nettools
-    image: nicolaka/netshoot:latest
+    image: garethgeorge/backrest:1.8.0@sha256:b98a3cd1a9ab7cfe5dc322d5a66e64194cf8042a976e8906df2466e0bec9c744
     command: ["/bin/sh", "-c", "sleep infinity"]
     resources:
       requests:

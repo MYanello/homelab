@@ -8,8 +8,15 @@ ollama:
     enabled: true
     storageClass: nfs-storage
 
-nodeSelector:
-  nvidia.com/gpu.present: true
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - marcus-server
 
 tika:
   enabled: true
