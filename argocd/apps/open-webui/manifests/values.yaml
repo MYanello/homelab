@@ -3,10 +3,13 @@ ollama:
     enabled: true
     type: nvidia
     number: 1
-  runtimeClassName: nvidia 
+  runtimeClassName: nvidia
   persistentVolume:
     enabled: true
     storageClass: nfs-storage
+
+nodeSelector:
+  nvidia.com/gpu.present: true
 
 tika:
   enabled: true
@@ -43,6 +46,6 @@ extraEnvVars:
         name: chat-secrets
         key: OAUTH_PROVIDER_URL
   - name: ENABLE_OAUTH_SIGNUP
-    value: 'true'
+    value: "true"
   - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
-    value: 'true'
+    value: "true"
