@@ -12,5 +12,5 @@ generators:
   
 images:
   - name: docker.cloudsmith.io/myanello/apps/dollar
-    newTag: v4.1@sha256:ca3220a03e9e7ac0c48671258e3f4c5c07d61c386d801516d4a931aae46f6750
+    newTag: dev
     newName: harung43/dollardollar
