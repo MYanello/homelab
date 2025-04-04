@@ -24,14 +24,14 @@ data:
       type: oidc
       id: authentik
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    app.kubernetes.io/part-of: argocd
-  name: argocd-cmd-params-cm
-data:
-  server.insecure: "true"
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   labels:
+#     app.kubernetes.io/part-of: argocd
+#   name: argocd-cmd-params-cm
+# data:
+  #server.insecure: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
