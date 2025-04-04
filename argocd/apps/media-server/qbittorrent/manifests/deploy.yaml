@@ -30,105 +30,105 @@ spec:
                     values:
                       - marcus-server
       containers:
-      - name: qbittorrent
-        env:
-          - name: PGID
-            value: "1000"
-          - name: PUID
-            value: "1000"
-          - name: DOCKER_MODS
-            value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
-        image: lscr.io/linuxserver/qbittorrent:5.0.4-r0-ls383@sha256:81a71641d2ee65fbecfabf3388f0d6b7b053e7266658b1fb7efee8900d06f010
-        imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            memory: "1Gi"
-            cpu: 50m
-          limits:
-            memory: "6Gi"
-            cpu: "2"
-        ports:
-          - name: qbit-webui
-            containerPort: 8080
-            protocol: TCP
-        volumeMounts:
-          - mountPath: /config
-            name: config
-          - mountPath: /data/media/torrents
-            name: torrents
-        startupProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 120
-          periodSeconds: 30
-          timeoutSeconds: 5
-          failureThreshold: 20
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 180
-          periodSeconds: 30
-          timeoutSeconds: 5
-          failureThreshold: 10
+        - name: qbittorrent
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: DOCKER_MODS
+              value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+          image: lscr.io/linuxserver/qbittorrent:5.0.4-r0-ls383@sha256:81a71641d2ee65fbecfabf3388f0d6b7b053e7266658b1fb7efee8900d06f010
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: 50m
+            limits:
+              memory: "6Gi"
+              cpu: "2"
+          ports:
+            - name: qbit-webui
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /data/media/torrents
+              name: torrents
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 180
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 10
       initContainers:
-      - name: gluetun 
-        image: "ghcr.io/qdm12/gluetun:3.39.1"
-        restartPolicy: Always 
-        imagePullPolicy: IfNotPresent
-        ports:
-        - name: http-proxy
-          containerPort: 8888
-          protocol: TCP
-        - name: tcp-shadowsocks
-          containerPort: 8388
-          protocol: TCP
-        - name: udp-shadowsocks
-          containerPort: 8388
-          protocol: UDP
-        - name: qbit-http
-          containerPort: 8080
-          protocol: TCP
-        envFrom:
-        - secretRef:
-            name: vpn-secrets
-        env:
-        - name: TZ
-          value: "America/Chicago"
-        - name: FIREWALL_INPUT_PORTS
-          value: "8080" 
-        - name: VPN_SERVICE_PROVIDER
-          value: custom
-        - name: VPN_TYPE
-          value: wireguard
-        - name: VPN_PORT_FORWARDING
-          value: "on"
-        - name: VPN_PORT_FORWARDING_PROVIDER
-          value: protonvpn
-        - name: FIREWALL_DEBUG
-          value: "on"
-        # - name: VPN_PORT_FORWARDING_UP_COMMAND
-        #   value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://qbittorrent:8080/api/v2/app/setPreferences 2>&1'
-        # - name: DNS_KEEP_NAMESERVER
-        #   value: "on"
-        securityContext:
-          privileged: true
-          capabilities:
-            add:
-            - NET_ADMIN
-        startupProbe:
-          exec:
-            command: ["/gluetun-entrypoint", "healthcheck"]
-          initialDelaySeconds: 60
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
-        livenessProbe:
-          exec:
-            command: ["/gluetun-entrypoint", "healthcheck"]
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
+        - name: gluetun
+          image: "ghcr.io/qdm12/gluetun:3.39.1@sha256:6a8058e626763cbf735ac2f78c774dbb24fec2490bd9d9f7d67e22592cb4a991"
+          restartPolicy: Always
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http-proxy
+              containerPort: 8888
+              protocol: TCP
+            - name: tcp-shadowsocks
+              containerPort: 8388
+              protocol: TCP
+            - name: udp-shadowsocks
+              containerPort: 8388
+              protocol: UDP
+            - name: qbit-http
+              containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: vpn-secrets
+          env:
+            - name: TZ
+              value: "America/Chicago"
+            - name: FIREWALL_INPUT_PORTS
+              value: "8080"
+            - name: VPN_SERVICE_PROVIDER
+              value: custom
+            - name: VPN_TYPE
+              value: wireguard
+            - name: VPN_PORT_FORWARDING
+              value: "on"
+            - name: VPN_PORT_FORWARDING_PROVIDER
+              value: protonvpn
+            - name: FIREWALL_DEBUG
+              value: "on"
+          # - name: VPN_PORT_FORWARDING_UP_COMMAND
+          #   value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://qbittorrent:8080/api/v2/app/setPreferences 2>&1'
+          # - name: DNS_KEEP_NAMESERVER
+          #   value: "on"
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - NET_ADMIN
+          startupProbe:
+            exec:
+              command: ["/gluetun-entrypoint", "healthcheck"]
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command: ["/gluetun-entrypoint", "healthcheck"]
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -136,6 +136,3 @@ spec:
         - name: torrents
           hostPath:
             path: /data/media/torrents
-          # nfs:
-          #   server: marcus-server.lan
-          #   path: /data/media/torrents
