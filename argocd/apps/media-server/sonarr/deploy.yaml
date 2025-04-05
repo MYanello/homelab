@@ -42,7 +42,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: linuxserver/sonarr:4.0.14@sha256:aa566541ea012f41dd0eedc8bbc67910456713b750d1ace663950ce934269036
+          image: linuxserver/sonarr:4.0.14@sha256:7342ef32dd9cd6d13638765cfb8034edd4c80b0584f427159fd7f5ddeef5399d
           imagePullPolicy: IfNotPresent
           name: sonarr
           ports:
