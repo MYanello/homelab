@@ -21,6 +21,9 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            istio-injection: enabled
       destination:
         name: in-cluster
         namespace: "{{path.basename}}"
@@ -28,9 +31,3 @@ spec:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
         targetRevision: HEAD
-      transformers:
-      - name: istio-injection
-        jsonPointers:
-        - /metadata/labels
-        values:
-          istio-injection: enabled
