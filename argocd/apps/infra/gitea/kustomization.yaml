@@ -7,10 +7,6 @@ resources:
 generators:
   - ./manifests/secret-generator.yaml
 
-labels:
-  - pairs:
-      istio-injection: enabled
-
 helmCharts:
   - name: gitea
     repo: https://dl.gitea.com/charts/
