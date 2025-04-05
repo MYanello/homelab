@@ -4,6 +4,6 @@ cr:
   spec:
     auth:
       strategy: anonymous
-  external_services:
-    prometheus:
-      url: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8429
+    external_services:
+      prometheus:
+        url: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8429
