@@ -7,10 +7,14 @@ resources:
 generators:
   - ./manifests/secret-generator.yaml
 
+labels:
+  - pairs:
+      istio-injection: enabled
+
 helmCharts:
-    - name: gitea
-      repo: https://dl.gitea.com/charts/
-      version: "11.0.1"
-      releaseName: gitea
-      namespace: gitea
-      valuesFile: ./manifests/values.yaml
+  - name: gitea
+    repo: https://dl.gitea.com/charts/
+    version: "11.0.1"
+    releaseName: gitea
+    namespace: gitea
+    valuesFile: ./manifests/values.yaml
