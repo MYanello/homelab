@@ -102,6 +102,11 @@ resource "kubernetes_manifest" "argocd_dev_appset" {
             "syncOptions" = [
               "CreateNamespace=true"
             ]
+            "managedNamespaceMetadata" = {
+              "labels" : {
+                "istio-injection" = "enabled"
+              }
+            }
           }
         }
       }
