@@ -7,3 +7,4 @@ helmCharts:
     namespace: monitoring
     repo: https://open-telemetry.github.io/opentelemetry-helm-charts
     version: "0.84.2"
+    valuesFile: values.yaml
