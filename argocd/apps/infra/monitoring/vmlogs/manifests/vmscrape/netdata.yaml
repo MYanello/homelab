@@ -1,0 +1,11 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: netdata
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+  - targets:
+    - 192.168.1.1:9100
+  path: /metrics
+  scheme: http
