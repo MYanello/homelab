@@ -10,3 +10,4 @@ helmCharts:
     namespace: monitoring
     repo: https://victoriametrics.github.io/helm-charts/
     version: "0.9.4"
+    valuesFile: values.yaml
