@@ -30,8 +30,8 @@ vmsingle:
         cpu: 150m
         memory: 500Mi
       limits:
-        cpu: 2000m
-        memory: 2Gi
+        cpu: 2500m
+        memory: 4Gi
         
 defaultDashboards:
   annotations:
