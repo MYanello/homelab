@@ -10,7 +10,9 @@ vmagent:
 vmsingle: 
   enabled: true
   spec:
-    retentionPeriod: 50y
+    retentionPeriod: 10y
+    insertPorts:
+      influxPort: "8086"
     extraEnvs:
       - name: search_cacheTimestampOffset
         value: "10000h"
@@ -20,6 +22,7 @@ vmsingle:
         value: "iotawatt"
     extraArgs:
       maxLabelsPerTimeseries: "500"
+      # influxListenAddr: ":8428"
     serviceSpec:
       spec:
         type: LoadBalancer
@@ -29,8 +32,8 @@ vmsingle:
         cpu: 150m
         memory: 500Mi
       limits:
-        cpu: 2000m
-        memory: 2Gi
+        cpu: 2500m
+        memory: 4Gi
         
 defaultDashboards:
   annotations:

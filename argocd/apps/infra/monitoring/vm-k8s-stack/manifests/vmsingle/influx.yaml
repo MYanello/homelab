@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMSingle
+metadata:
+  name: influx-vmsingle
+spec:
+  retentionPeriod: "5y"
+  insertPorts:
+    influxPort: "8086"
+  serviceSpec:
+    spec:
+      type: LoadBalancer
+      loadBalancerIP: 10.10.8.12
+  extraEnvs:
+    - name: search_cacheTimestampOffset
+      value: "10000h"
+    - name: search_cacheMaxAge
+      value: "360d"
+    - name: influx_databaseNames
+      value: "iotawatt"
