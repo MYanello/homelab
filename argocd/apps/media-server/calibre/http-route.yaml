@@ -43,7 +43,7 @@ spec:
   - calibre-dl.yanello.net
   rules:
   - backendRefs:
-    - name: calibre_dl
+    - name: calibre-dl
       namespace: calibre
       port: 8084
       
