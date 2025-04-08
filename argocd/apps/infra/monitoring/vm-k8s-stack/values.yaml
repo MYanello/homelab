@@ -20,7 +20,7 @@ vmsingle:
         value: "iotawatt"
     extraArgs:
       maxLabelsPerTimeseries: "500"
-      influxListenAddr: ":8428"
+      # influxListenAddr: ":8428"
     serviceSpec:
       spec:
         type: LoadBalancer
