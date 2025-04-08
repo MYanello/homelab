@@ -6,3 +6,6 @@ spec:
   retentionPeriod: "5y"
   insertPorts:
     influxPort: "8086"
+  serviceSpec:
+    type: LoadBalancer
+    loadBalancerIP: 10.10.8.12
