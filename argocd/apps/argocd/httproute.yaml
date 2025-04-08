@@ -22,7 +22,4 @@ spec:
     - backendRefs:
         - name: argocd-server
           namespace: argocd
-          port: 443
-          backendTLS:
-            wellKnownCACerts: {}  # Or use a ConfigMap with the self-signed cert
-            insecureSkipVerify: true  # Skip backend certificate verification
+          port: 80
