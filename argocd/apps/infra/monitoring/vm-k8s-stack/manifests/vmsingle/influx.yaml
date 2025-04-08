@@ -7,5 +7,6 @@ spec:
   insertPorts:
     influxPort: "8086"
   serviceSpec:
-    type: LoadBalancer
-    loadBalancerIP: 10.10.8.12
+    spec:
+      type: LoadBalancer
+      loadBalancerIP: 10.10.8.12
