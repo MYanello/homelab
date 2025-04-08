@@ -6,6 +6,7 @@ vmalert:
 vmagent:
   enabled: true
 
+
 vmsingle: 
   enabled: true
   spec:
@@ -23,7 +24,14 @@ vmsingle:
       spec:
         type: LoadBalancer
         loadBalancerIP: 10.10.8.10
-
+    resources:
+      requests:
+        cpu: 150m
+        memory: 500Mi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+        
 defaultDashboards:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
