@@ -1,0 +1,8 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMSingle
+metadata:
+  name: influxvmsingle
+spec:
+  retentionPeriod: "5y"
+  insertPorts:
+    influxPort: "8086"
