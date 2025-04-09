@@ -12,3 +12,9 @@ spec:
         logs_endpoints: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
       debug:
         verbosity: detailed
+    service:
+      pipelines:
+        traces:
+          receivers: [jaeger]
+          processors: []
+          exporters: [debug]
