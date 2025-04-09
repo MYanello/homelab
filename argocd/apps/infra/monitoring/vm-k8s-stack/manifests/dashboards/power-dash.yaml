@@ -256,8 +256,8 @@ data:
         },
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "deh3zxjsl5la8a"
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
           },
           "description": "",
           "fieldConfig": {
@@ -315,6 +315,8 @@ data:
                 "type": "influxdb",
                 "uid": "deh3zxjsl5la8a"
               },
+              "editorMode": "code",
+              "expr": "avg_over_time(iota_Mains_Watts_value[$__interval]) * $electricityCost / 1000",
               "groupBy": [
                 {
                   "params": [
@@ -329,10 +331,12 @@ data:
                   "type": "fill"
                 }
               ],
+              "legendFormat": "__auto",
               "measurement": "iota_Mains_Watts",
               "orderByTime": "ASC",
               "policy": "autogen",
               "query": "SELECT integral(\"value\", 1h)*$electricityCost/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter GROUP BY time($__interval) fill(0)",
+              "range": true,
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -1991,6 +1995,6 @@ data:
       "timezone": "",
       "title": "Power",
       "uid": "2xKrzYa7z",
-      "version": 2,
+      "version": 3,
       "weekStart": ""
     }
