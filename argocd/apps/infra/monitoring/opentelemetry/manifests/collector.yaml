@@ -15,6 +15,6 @@ spec:
     service:
       pipelines:
         traces:
-          receivers: [jaeger]
+          receivers: []
           processors: []
-          exporters: [debug]
+          exporters: []
