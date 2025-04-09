@@ -51,7 +51,7 @@ data:
             use_berlinale: false
             use_bafta: false
             weight_letterboxd: 200
-            weight_imbd: 300
+            weight_imdb: 300
     
         - pmm: versions
           template_variables:
