@@ -1,16 +1,16 @@
-manager:
-  collectorImage:
-    repository: otel/opentelemetry-collector-k8s
+# manager:
+#   collectorImage:
+#     repository: otel/opentelemetry-collector-k8s
     
-admissionWebhooks:
-  certManager:
-    enabled: true
+# admissionWebhooks:
+#   certManager:
+#     enabled: true
     
-presets:
-  clusterMetrics:
-    enabled: true
-  logsCollection:
-    enabled: true
+# presets:
+#   clusterMetrics:
+#     enabled: true
+#   logsCollection:
+#     enabled: true
 # config:
 #   # deltatocumulative processor is needed to convert metrics with delta temporality to cumulative temporality.
 #   # VictoriaMetrics doesn't support delta temporality. Skip this processor if you don't use delta temporality.
