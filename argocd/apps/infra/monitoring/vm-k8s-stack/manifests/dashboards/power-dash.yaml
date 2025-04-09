@@ -179,8 +179,8 @@ data:
         },
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "deh3zxjsl5la8a"
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
           },
           "description": "",
           "fieldConfig": {
@@ -235,45 +235,20 @@ data:
           "targets": [
             {
               "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
+                "type": "prometheus",
+                "uid": "P4169E866C3094E38"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "0"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h) FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter GROUP BY time($__interval) fill(0)",
-              "rawQuery": true,
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sum_over_time(iota_Mains_Watts_value[1h]) / 3600",
+              "fullMetaSearch": false,
+              "hide": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
               "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "useBackend": false
             }
           ],
           "title": "Consumption",
@@ -2016,6 +1991,6 @@ data:
       "timezone": "",
       "title": "Power",
       "uid": "2xKrzYa7z",
-      "version": 1,
+      "version": 2,
       "weekStart": ""
     }
