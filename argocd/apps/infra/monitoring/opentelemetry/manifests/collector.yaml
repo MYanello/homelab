@@ -1,0 +1,14 @@
+
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: collector
+spec:
+  mode: daemonset
+  hostNetwork: true
+  config:
+    exporters:
+      otlphttp:
+        logs_endpoints: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+      debug:
+        verbosity: detailed
