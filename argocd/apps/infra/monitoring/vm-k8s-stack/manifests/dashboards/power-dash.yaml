@@ -32,7 +32,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 20,
+      "id": 1,
       "links": [],
       "panels": [
         {
@@ -50,8 +50,8 @@ data:
         },
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "deh3zxjsl5la8a"
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
           },
           "description": "",
           "fieldConfig": {
@@ -130,6 +130,10 @@ data:
                 "type": "influxdb",
                 "uid": "deh3zxjsl5la8a"
               },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "max(iota_House_Watts_value)",
+              "fullMetaSearch": false,
               "groupBy": [
                 {
                   "params": [
@@ -144,9 +148,12 @@ data:
                   "type": "fill"
                 }
               ],
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
               "measurement": "iota_Mains_Watts",
               "orderByTime": "ASC",
               "policy": "autogen",
+              "range": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -163,7 +170,8 @@ data:
                   }
                 ]
               ],
-              "tags": []
+              "tags": [],
+              "useBackend": false
             }
           ],
           "title": "Peak Power Usage",
