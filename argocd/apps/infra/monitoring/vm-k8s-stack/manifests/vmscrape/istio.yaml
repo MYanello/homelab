@@ -1,0 +1,54 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: istio-control-plane
+  namespace: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - istio-system
+  selector:
+    matchLabels:
+      app: istiod
+  endpoints:
+    - port: http-monitoring
+      path: /metrics
+      interval: 30s
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: istio-gateway
+  namespace: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - istio-system
+  selector:
+    matchLabels:
+      istio: gateway
+  endpoints:
+    - port: http-monitoring
+      path: /metrics
+      interval: 30s
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMPodScrape
+metadata:
+  name: istio-proxy
+  namespace: monitoring
+spec:
+  selector:
+    matchExpressions:
+      - key: security.istio.io/tlsMode
+        operator: Exists
+  namespaceSelector:
+    any: true
+  podMetricsEndpoints:
+    - path: /stats/prometheus
+      port: "15090"
+      interval: 30s
+      relabelConfigs:
+        - sourceLabels: [__meta_kubernetes_pod_container_port_name]
+          action: keep
+          regex: '.*-envoy-prom'
