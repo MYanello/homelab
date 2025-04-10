@@ -16,6 +16,8 @@ helmCharts:
         # extraAppConfig:
         #   - filename: app-config.yaml
         #     configMapRef: app-config
+        serviceAccount:
+          create: true
         image:
           registry: gitea.yanello.net
           repository: marcus/backstage
