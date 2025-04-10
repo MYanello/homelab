@@ -23,6 +23,6 @@ spec:
         name: in-cluster
         namespace: "{{namespace}}"
       source:
-        path: "argocd/apps/infra/gitea/image-pull-secrets/"
+        path: "argocd/apps/infra/gitea/image-pull-secrets/manifests"
         repoURL: https://github.com/myanello/homelab.git
         targetRevision: HEAD        
