@@ -10,3 +10,9 @@ helmCharts:
     releaseName: backstage
     repo: https://backstage.github.io/charts
     version: "2.4.1"
+    valuesInline:
+      backstage:
+        image:
+          registry: ghcr.io
+          repository: backstage/backstage
+          tag: latest
