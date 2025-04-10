@@ -4,3 +4,6 @@ ansible_collections/
 .terraform/
 *tfstate*
 *.dec.*
+
+.yarn
+node_modules

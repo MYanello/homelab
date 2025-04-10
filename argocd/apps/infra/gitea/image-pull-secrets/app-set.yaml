@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: gitea-pull-secrets-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - namespace: backstage
+  template:
+    metadata:
+      name: "{{namespace}}-gitea-pull-secrets"
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      destination:
+        name: in-cluster
+        namespace: "{{namespace}}"
+      source:
+        path: "argocd/apps/infra/gitea/image-pull-secrets/"
+        repoURL: https://github.com/myanello/homelab.git
+        targetRevision: HEAD        
