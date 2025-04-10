@@ -16,11 +16,11 @@ helmCharts:
         # extraAppConfig:
         #   - filename: app-config.yaml
         #     configMapRef: app-config
-        serviceAccount:
-          create: 'true'
         image:
           registry: gitea.yanello.net
           repository: marcus/backstage
           tag: latest
           pullSecrets:
             - gitea-pull-secrets
+      serviceAccount:
+          create: 'true'
