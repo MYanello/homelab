@@ -12,6 +12,8 @@ helmCharts:
     version: "2.5.0"
     valuesInline:
       backstage:
+        appConfig:
+          - configMapRef: app-config
         image:
           registry: gitea.yanello.net
           repository: marcus/backstage
