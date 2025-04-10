@@ -23,4 +23,4 @@ helmCharts:
           pullSecrets:
             - gitea-pull-secrets
       serviceAccount:
-          create: 'true'
+          create: true
