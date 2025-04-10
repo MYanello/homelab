@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/http-route.yaml
-  - ./manifests/cm.yaml
+  #- ./manifests/cm.yaml
   
 helmCharts:
   - name: backstage
