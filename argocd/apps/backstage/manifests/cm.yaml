@@ -20,7 +20,7 @@ data:
       #     - secret: ${BACKEND_SECRET}
       baseUrl: https://backstage.yanello.net
       listen:
-        port: 443
+        port: 7007
         # Uncomment the following host directive to bind to specific interfaces
         # host: 127.0.0.1
       csp:
