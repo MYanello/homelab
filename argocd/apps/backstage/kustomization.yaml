@@ -13,6 +13,8 @@ helmCharts:
     valuesInline:
       backstage:
         image:
-          registry: ghcr.io
-          repository: backstage/backstage
+          registry: gitea.yanello.net
+          repository: marcus/backstage
           tag: latest
+          pullSecrets:
+            - gitea-pull-secrets
