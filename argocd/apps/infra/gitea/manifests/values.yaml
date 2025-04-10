@@ -33,8 +33,6 @@ service:
     clusterIP: 
     annotations:
       metallb.universe.tf/allow-shared-ip: "gitea"
-actions:
-  enabled: false
 
 persistence:
   storageClass: longhorn-xfs
