@@ -14,8 +14,8 @@ helmCharts:
     valuesInline:
       backstage:
         appConfig:
-          - filename: app-config.yaml
-            configMapRef: app-config
+          configMaps:
+            - app-config
         image:
           registry: gitea.yanello.net
           repository: marcus/backstage
