@@ -8,6 +8,7 @@ spec:
     - list:
         elements:
           - namespace: backstage
+          - namespace: dollardollar-dev
   template:
     metadata:
       name: "{{namespace}}-gitea-pull-secrets"
