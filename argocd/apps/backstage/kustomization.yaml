@@ -9,7 +9,7 @@ helmCharts:
     namespace: backstage
     releaseName: backstage
     repo: https://backstage.github.io/charts
-    version: "2.4.1"
+    version: "2.5.0"
     valuesInline:
       backstage:
         image:
