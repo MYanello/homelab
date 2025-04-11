@@ -5,3 +5,15 @@ resources:
     memory: 8Gi
   requests:
     nvidia.com/gpu: "1"
+    
+volumes:
+  - name: media
+    hostPath:
+      path: /data/media
+      
+persistence: 
+  config:
+    storageClass: local-path
+  media:
+    enabled: false
+    
