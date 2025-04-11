@@ -60,15 +60,15 @@ spec:
               name: config
             - mountPath: /data/media
               name: media
-            - name: logs
-              mountPath: /data/logs
+            # - name: logs
+            #   mountPath: /data/logs
       volumes:
         - name: config
           configMap:
             name: config
-        - name: logs
-          persistentVolumeClaim:
-            claimName: logs
+        # - name: logs
+        #   persistentVolumeClaim:
+        #     claimName: logs
         - name: media
           nfs:
             server: marcus-server.lan
