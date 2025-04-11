@@ -47,8 +47,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            # - mountPath: /logs
-            #   name: plex-logs
+            - mountPath: /logs
+              name: plex-logs
           startupProbe:
             httpGet:
               path: /
@@ -69,9 +69,7 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/tautulli/config
-          # persistentVolumeClaim:
-          #   claimName: config
-        # - name: plex-logs
-        #   nfs:
-        #     server: marcus-server.lan
-        #     path: /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs
+        - name: plex-logs
+          nfs:
+            server: marcus-server.lan
+            path: /zpool/k8s/plex/config/Library/Application Support/Plex Media Server/Logs

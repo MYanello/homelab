@@ -3,13 +3,12 @@ kind: Deployment
 metadata:
   labels:
     app: radarr
-    io.kompose.service: radarr
   name: radarr
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: radarr
+     app: radarr
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,10 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f radarr.yaml convert
-        kompose.version: 1.35.0 (HEAD)
       labels:
-        io.kompose.service: radarr
         app: radarr
     spec:
       affinity:
@@ -80,16 +76,6 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/radarr/config
-          # persistentVolumeClaim:
-          #   claimName: config
         - name: media
           hostPath:
             path: /data/media
-          # nfs:
-          #   server: marcus-server.lan
-          #   path: /data/media
-
-        # - name: media
-        #   nfs:
-        #     server: marcus-server.lan
-        #     path: /data/media
