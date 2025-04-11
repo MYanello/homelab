@@ -7,11 +7,11 @@ resources:
     nvidia.com/gpu: "1"
     
 volumes:
-  - name: media
+  - name: host-media
     hostPath:
       path: /data/media
 volumeMounts:
-  - name: media
+  - name: host-media
     mountPath: /data/media
       
 persistence: 
