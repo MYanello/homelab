@@ -1,11 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose -f radarr.yaml convert
-    kompose.version: 1.35.0 (HEAD)
   labels:
-    io.kompose.service: radarr
+    app: radarr
   name: radarr
 spec:
   ports:
@@ -13,4 +10,4 @@ spec:
       port: 7878
       targetPort: 7878
   selector:
-    io.kompose.service: radarr
+    app: radarr
