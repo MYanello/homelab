@@ -22,5 +22,5 @@ spec:
   - backendRefs:
     - name: jellyfin
       namespace: jellyfin
-      port: 7878
+      port: 8096
 

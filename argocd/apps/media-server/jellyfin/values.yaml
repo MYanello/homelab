@@ -1,0 +1,7 @@
+resources:
+  limits:
+    nvidia.com/gpu: "1"
+    cpu: "4"
+    memory: 8Gi
+  requests:
+    nvidia.com/gpu: "1"
