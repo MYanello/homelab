@@ -10,4 +10,3 @@ helmCharts:
       version: "2.3.0"
       releaseName: jellyfin
       namespace: jellyfin
-      valuesFile: ./manifests/values.yaml
