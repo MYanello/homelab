@@ -46,7 +46,7 @@ spec:
             - secretRef:
                 name: unpackerr-secrets
           image: golift/unpackerr:latest@sha256:a9e7eb0d7b0ca16d2bdcb5af52eb4b544053ad6d915dd9b0f8383bc83f1df5cc
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 100m
