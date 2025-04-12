@@ -48,24 +48,24 @@ spec:
     - emptyDir:
         medium: Memory
       name: istio-certs
----
-apiVersion: operator.victoriametrics.com/v1beta1
-kind: VMServiceScrape
-metadata:
-  labels:
-    app: test-app
-  name: test-app
-spec:
-  endpoints:
-    - port: http
-      scheme: https
-      tlsConfig:
-        ca: {}
-        caFile: /etc/istio-certs/root-cert.pem
-        cert: {}
-        certFile: /etc/istio-certs/cert-chain.pem
-        keyFile: /etc/prom-certs/cert-chain.pem
-  namespaceSelector: {}
-  selector:
-    matchLabels:
-      app: test-app
+# ---
+# apiVersion: operator.victoriametrics.com/v1beta1
+# kind: VMServiceScrape
+# metadata:
+#   labels:
+#     app: test-app
+#   name: test-app
+# spec:
+#   endpoints:
+#     - port: http
+#       scheme: https
+#       tlsConfig:
+#         ca: {}
+#         caFile: /etc/istio-certs/root-cert.pem
+#         cert: {}
+#         certFile: /etc/istio-certs/cert-chain.pem
+#         keyFile: /etc/prom-certs/cert-chain.pem
+#   namespaceSelector: {}
+#   selector:
+#     matchLabels:
+#       app: test-app
