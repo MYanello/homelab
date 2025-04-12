@@ -2,7 +2,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMPodScrape
 metadata:
-  name: envoy-stats
+  name: istio-envoy-stats
 spec:
   selector:
     matchExpressions:
@@ -13,13 +13,13 @@ spec:
   podMetricsEndpoints:
   - path: /stats/prometheus
     interval: 15s
-    relabelConfigs:
-    - action: keep
-      sourceLabels: [__meta_kubernetes_pod_container_name]
-      regex: "istio-proxy"
-    - action: keep
-      sourceLabels: [__meta_kubernetes_pod_annotationpresent_prometheus_io_scrape]
-      regex: true
+    # relabelConfigs:
+    # - action: keep
+    #   sourceLabels: [__meta_kubernetes_pod_container_name]
+    #   regex: "istio-proxy"
+    # - action: keep
+    #   sourceLabels: [__meta_kubernetes_pod_annotationpresent_prometheus_io_scrape]
+    #   regex: true
 ---
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
