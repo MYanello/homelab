@@ -74,7 +74,6 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMPodScrape
 metadata:
   name: envoy-stats
-  namespace: monitoring
 spec:
   selector:
     matchExpressions:
@@ -92,3 +91,23 @@ spec:
     - action: keep
       sourceLabels: [__meta_kubernetes_pod_annotationpresent_prometheus_io_scrape]
       regex: true
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: istio-gateways
+  namespace: monitoring
+spec:
+  selector:
+    matchExpressions:
+    - key: istio
+      operator: In
+      values:
+      - ingressgateway
+      - egressgateway
+  namespaceSelector:
+    matchNames:
+    - istio-system
+  endpoints:
+  - port: http-monitoring
+    interval: 15s
