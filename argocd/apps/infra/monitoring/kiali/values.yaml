@@ -9,6 +9,6 @@ cr:
         url: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8429
       grafana:
         external_url: https://grafana.yanello.net
-        internal_url: http://grafana.monitoring.svc.cluster.local:80
+        internal_url: http://victoria-metrics-k8s-stack-grafana.monitoring.svc.cluster.local:80
     istio_namespace: istio-system
     
