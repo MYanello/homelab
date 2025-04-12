@@ -1,54 +1,71 @@
 apiVersion: operator.victoriametrics.com/v1beta1
-kind: VMServiceScrape
+kind: VMAgent
 metadata:
-  name: istio-control-plane
-  namespace: monitoring
+  name: vmagent-istio
 spec:
-  namespaceSelector:
-    matchNames:
-      - istio-system
-  selector:
-    matchLabels:
-      app: istiod
-  endpoints:
-    - port: http-monitoring
-      path: /metrics
-      interval: 30s
+  extraArgs:
+    remoteWrite.tlsInsecureSkipVerify: "true"
+  podMetadata:
+    annotations:
+      proxy.istio.io/config: |-
+        proxyMetadata:
+          OUTPUT_CERTS: /etc/istio-certs/
+      sidecar.istio.io/inject: "true"
+      sidecar.istio.io/rewriteAppHTTPProbers: "true"
+      sidecar.istio.io/userVolume: '[{"name": "istio-certs", "emptyDir": {"medium": "Memory"}}]'
+      sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs/"}]'
+      traffic.sidecar.istio.io/includeOutboundIPRanges: ""
+  remoteWrite:
+    - url: "http://vmsingle-example-vmsingle.default.svc:8429/api/v1/write"
+  selectAllByDefault: true
+  extraEnvs:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+  serviceScrapeSpec:
+    endpoints:
+      - path: /metrics
+        port: http
+        scheme: https
+        # use special workaround for local endpoint scrape
+        # rewrite scheme to http, if pod IP is equal to local pod IP
+        # it allows to have multiple vmagent replicas with istio
+        relabelConfigs:
+          - source_labels: [__meta_kubernetes_pod_ip]
+            regex: "%{POD_IP}"
+            target_label: __scheme__
+            replacement: http
+        tlsConfig:
+          caFile: /etc/istio-certs/root-cert.pem
+          certFile: /etc/istio-certs/cert-chain.pem
+          keyFile: /etc/prom-certs/cert-chain.pem
+  volumeMounts:
+    - mountPath: /etc/istio-certs/
+      name: istio-certs
+      readOnly: true
+  volumes:
+    - emptyDir:
+        medium: Memory
+      name: istio-certs
 ---
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: istio-gateway
-  namespace: monitoring
+  labels:
+    app: test-app
+  name: test-app
 spec:
-  namespaceSelector:
-    matchNames:
-      - istio-system
+  endpoints:
+    - port: http
+      scheme: https
+      tlsConfig:
+        ca: {}
+        caFile: /etc/istio-certs/root-cert.pem
+        cert: {}
+        certFile: /etc/istio-certs/cert-chain.pem
+        keyFile: /etc/prom-certs/cert-chain.pem
+  namespaceSelector: {}
   selector:
     matchLabels:
-      istio: gateway
-  endpoints:
-    - port: http-monitoring
-      path: /metrics
-      interval: 30s
----
-apiVersion: operator.victoriametrics.com/v1beta1
-kind: VMPodScrape
-metadata:
-  name: istio-proxy
-  namespace: monitoring
-spec:
-  selector:
-    matchExpressions:
-      - key: security.istio.io/tlsMode
-        operator: Exists
-  namespaceSelector:
-    any: true
-  podMetricsEndpoints:
-    - path: /stats/prometheus
-      port: "15090"
-      interval: 30s
-      relabelConfigs:
-        - sourceLabels: [__meta_kubernetes_pod_container_port_name]
-          action: keep
-          regex: '.*-envoy-prom'
+      app: test-app
