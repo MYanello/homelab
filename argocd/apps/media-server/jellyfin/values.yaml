@@ -5,7 +5,26 @@ resources:
     memory: 8Gi
   requests:
     nvidia.com/gpu: "1"
-    
+    cpu: "500m"
+    memory: 500Mi
+livenessProbe:
+  initialDelaySeconds: 10
+  tcpSocket:
+    port: http
+  # successThreshold: 1
+  failureThreshold: 5
+  # timeoutSeconds: 1
+  periodSeconds: 15
+
+# -- Configure readiness probe for Jellyfin.
+readinessProbe:
+  initialDelaySeconds: 15
+  tcpSocket:
+    port: http
+  # successThreshold: 1
+  failureThreshold: 5
+  # timeoutSeconds: 1
+  periodSeconds: 15
 volumes:
   - name: host-media
     hostPath:
