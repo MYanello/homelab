@@ -25,15 +25,10 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
   name: istio-gateways
-  namespace: monitoring
 spec:
   selector:
-    matchExpressions:
-    - key: istio
-      operator: In
-      values:
-      - ingressgateway
-      - egressgateway
+    matchLabels:
+      gateway.networking.k8s.io/gateway-name: gateway-api
   namespaceSelector:
     matchNames:
     - istio-system
@@ -46,7 +41,6 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
   name: istiod
-  namespace: monitoring
 spec:
   jobLabel: app
   selector:
