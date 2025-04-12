@@ -3,12 +3,12 @@ kind: HTTPRoute
 metadata:
   labels:
     app.kubernetes.io/instance: monitoring-app
-  annotations:
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: VictoriaMetrics
-    gethomepage.dev/icon: victoriametrics
-    gethomepage.dev/description: "VictoriaMetrics is a fast, cost-effective monitoring solution and time series database."
-    gethomepage.dev/pod-selector: app.kubernetes.io/name=vmsingle
+  # annotations:
+  #   gethomepage.dev/enabled: "true"
+  #   gethomepage.dev/name: VictoriaMetrics
+  #   gethomepage.dev/icon: victoriametrics
+  #   gethomepage.dev/description: "VictoriaMetrics is a fast, cost-effective monitoring solution and time series database."
+  #   gethomepage.dev/pod-selector: app.kubernetes.io/name=vmsingle
   name: vm-httproute
 spec:
   parentRefs:
@@ -20,6 +20,31 @@ spec:
   rules:
     - backendRefs:
         - name: vmsingle-victoria-metrics-k8s-stack
+          namespace: monitoring
+          port: 8429
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: monitoring-app
+  # annotations:
+  #   gethomepage.dev/enabled: "true"
+  #   gethomepage.dev/name: VictoriaMetrics
+  #   gethomepage.dev/icon: victoriametrics
+  #   gethomepage.dev/description: "VictoriaMetrics is a fast, cost-effective monitoring solution and time series database."
+  #   gethomepage.dev/pod-selector: app.kubernetes.io/name=vmsingle
+  name: vm-httproute
+spec:
+  parentRefs:
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
+  hostnames:
+    - vmagent.yanello.net
+  rules:
+    - backendRefs:
+        - name: vmagent-victoria-metrics-k8s-stack
           namespace: monitoring
           port: 8429
 ---
