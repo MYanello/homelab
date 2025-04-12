@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: sonarr
     app: sonarr
   name: sonarr
 spec:
@@ -10,7 +9,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      io.kompose.service: sonarr
+      app: sonarr
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,11 +17,7 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose -f sonarr.yaml convert
-        kompose.version: 1.35.0 (HEAD)
       labels:
-        io.kompose.service: sonarr
         app: sonarr
     spec:
       affinity:
@@ -42,7 +37,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: linuxserver/sonarr:4.0.14@sha256:7342ef32dd9cd6d13638765cfb8034edd4c80b0584f427159fd7f5ddeef5399d
+          image: linuxserver/sonarr:4.0.14@sha256:5c6e66c36fd0afe1323b3478b2289b5bff6e9ff17ee2c315feee29316ddb9140
           imagePullPolicy: IfNotPresent
           name: sonarr
           ports:
@@ -81,11 +76,6 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/sonarr/config
-          # persistentVolumeClaim:
-          #   claimName: config
         - name: media
           hostPath:
             path: /data/media
-          # nfs:
-          #   server: marcus-server.lan
-          #   path: /data/media

@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/http-route.yaml
+  - ./manifests/rbac.yaml
   #- ./manifests/cm.yaml
   
 helmCharts:
@@ -24,3 +25,5 @@ helmCharts:
           tag: latest
           pullSecrets:
             - gitea-pull-secrets
+      serviceAccount:
+          create: true

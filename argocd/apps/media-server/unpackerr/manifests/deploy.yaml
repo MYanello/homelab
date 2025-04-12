@@ -46,7 +46,7 @@ spec:
             - secretRef:
                 name: unpackerr-secrets
           image: golift/unpackerr:latest@sha256:a9e7eb0d7b0ca16d2bdcb5af52eb4b544053ad6d915dd9b0f8383bc83f1df5cc
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 100m
@@ -60,15 +60,15 @@ spec:
               name: config
             - mountPath: /data/media
               name: media
-            - name: logs
-              mountPath: /data/logs
+            # - name: logs
+            #   mountPath: /data/logs
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
-        - name: logs
-          persistentVolumeClaim:
-            claimName: logs
+          configMap:
+            name: config
+        # - name: logs
+        #   persistentVolumeClaim:
+        #     claimName: logs
         - name: media
           nfs:
             server: marcus-server.lan
