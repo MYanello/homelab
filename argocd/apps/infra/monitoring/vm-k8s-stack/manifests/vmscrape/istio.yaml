@@ -40,21 +40,21 @@ spec:
   endpoints:
   - port: http-monitoring
     interval: 15s
-  ---
-  # Control Plane metrics (istiod)
-  apiVersion: operator.victoriametrics.com/v1beta1
-  kind: VMServiceScrape
-  metadata:
-    name: istiod
-    namespace: monitoring
-  spec:
-    jobLabel: app
-    selector:
-      matchLabels:
-        app: istiod
-    namespaceSelector:
-      matchNames:
-        - istio-system
-    endpoints:
-    - port: http-monitoring
-      interval: 15s
+---
+# Control Plane metrics (istiod)
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: istiod
+  namespace: monitoring
+spec:
+  jobLabel: app
+  selector:
+    matchLabels:
+      app: istiod
+  namespaceSelector:
+    matchNames:
+      - istio-system
+  endpoints:
+  - port: http-monitoring
+    interval: 15s
