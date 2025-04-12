@@ -16,13 +16,13 @@ spec:
       sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs/"}]'
       traffic.sidecar.istio.io/includeOutboundIPRanges: ""
   remoteWrite:
-    - url: "http://vmsingle-example-vmsingle.default.svc:8429/api/v1/write"
+    - url: "http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc:8429/api/v1/write"
   selectAllByDefault: true
-  extraEnvs:
-    - name: POD_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.podIP
+  # extraEnvs:
+  #   - name: POD_IP
+  #     valueFrom:
+  #       fieldRef:
+  #         fieldPath: status.podIP
   serviceScrapeSpec:
     endpoints:
       - path: /metrics
