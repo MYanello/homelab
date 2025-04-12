@@ -5,16 +5,16 @@ metadata:
 spec:
   extraArgs:
     remoteWrite.tlsInsecureSkipVerify: "true"
-  podMetadata:
-    annotations:
-      proxy.istio.io/config: |-
-        proxyMetadata:
-          OUTPUT_CERTS: /etc/istio-certs/
-      sidecar.istio.io/inject: "true"
-      sidecar.istio.io/rewriteAppHTTPProbers: "true"
-      sidecar.istio.io/userVolume: '[{"name": "istio-certs", "emptyDir": {"medium": "Memory"}}]'
-      sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs/"}]'
-      traffic.sidecar.istio.io/includeOutboundIPRanges: ""
+  # podMetadata:
+    # annotations:
+    #   proxy.istio.io/config: |-
+    #     proxyMetadata:
+    #       OUTPUT_CERTS: /etc/istio-certs/
+    #   sidecar.istio.io/inject: "true"
+    #   sidecar.istio.io/rewriteAppHTTPProbers: "true"
+    #   sidecar.istio.io/userVolume: '[{"name": "istio-certs", "emptyDir": {"medium": "Memory"}}]'
+    #   sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs/"}]'
+    #   traffic.sidecar.istio.io/includeOutboundIPRanges: ""
   remoteWrite:
     - url: "http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc:8429/api/v1/write"
   selectAllByDefault: true
