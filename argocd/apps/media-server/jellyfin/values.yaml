@@ -18,6 +18,6 @@ persistence:
   config:
     storageClass: local-path
   media:
-    enabled: false
+    storageClass: local-path
 
 runtimeClassName: nvidia
