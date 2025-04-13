@@ -11,8 +11,3 @@ helmCharts:
     releaseName: cert-manager
     namespace: cert-manager
     valuesFile: values.yaml
-  - name: trust-manager
-    repo: https://charts.jetstack.io
-    version: "0.16.0"  # Use a current version
-    namespace: cert-manager
-    releaseName: trust-manager
