@@ -3,7 +3,8 @@ kind: Kustomization
 
 resources:
   - manifests/cert.yaml
-
+  - manifests/ns.yaml
+  
 helmCharts:
   - name: linkerd-crds
     repo: https://helm.linkerd.io/stable
