@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/route.yaml
-  - ./image-pull-secrets/app-set.yaml
+#  - ./image-pull-secrets/app-set.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
