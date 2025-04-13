@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/dashboards/power-dash.yaml
+  - ./manifests/dashboards/istio-dash.yaml
   - ./manifests/vmscrape/homeassistant.yaml
   - ./manifests/vmscrape/haproxy.yaml
   - ./manifests/vmscrape/netdata.yaml
