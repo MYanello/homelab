@@ -2,20 +2,20 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - manifests/cert.yaml
+  # - manifests/cert.yaml
   - manifests/ns.yaml
   
-helmCharts:
-  - name: linkerd-crds
-    repo: https://helm.linkerd.io/edge
-    version: "2025.4.2"
-    namespace: linkerd
-  - name: linkerd-control-plane
-    repo: https://helm.linkerd.io/edge
-    version: "2025.4.2"
-    namespace: linkerd
-    valuesInline:
-      identity:
-        externalCA: true
-        issuer:
-          scheme: kubernetes.io/tls
+# helmCharts:
+#   - name: linkerd-crds
+#     repo: https://helm.linkerd.io/edge
+#     version: "2025.4.2"
+#     namespace: linkerd
+#   - name: linkerd-control-plane
+#     repo: https://helm.linkerd.io/edge
+#     version: "2025.4.2"
+#     namespace: linkerd
+#     valuesInline:
+#       identity:
+#         externalCA: true
+#         issuer:
+#           scheme: kubernetes.io/tls
