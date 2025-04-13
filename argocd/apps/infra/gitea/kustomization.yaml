@@ -15,8 +15,3 @@ helmCharts:
     releaseName: gitea
     namespace: gitea
     valuesFile: ./manifests/values.yaml
-  - name: gitea-actions
-    repo: https://dl.gitea.com/charts/
-    version: "0.0.0"
-    releaseName: gitea-actions
-    namespace: gitea
