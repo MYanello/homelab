@@ -5,6 +5,9 @@ vmalert:
 
 vmagent:
   enabled: true
+  spec:
+    extraArgs:
+      promscrape.maxScrapeSize: "32MB"
 
 
 vmsingle: 
