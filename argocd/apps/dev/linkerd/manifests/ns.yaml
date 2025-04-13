@@ -3,5 +3,5 @@ kind: Namespace
 metadata:
   name: linkerd
   labels:
-    linkerd.io/is-control-plane: true
+    linkerd.io/is-control-plane: 'true'
 
