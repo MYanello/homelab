@@ -12,6 +12,8 @@ spec:
   template:
     metadata:
       name: "{{namespace}}-gitea-pull-secrets"
+      labels:
+        app.kubernetes.io/part-of: "{{namespace}}-app"
     spec:
       project: default
       syncPolicy:
