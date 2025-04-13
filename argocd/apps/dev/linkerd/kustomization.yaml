@@ -9,4 +9,3 @@ helmCharts:
     repo: https://helm.linkerd.io/stable
     version: "2.11.5"
     namespace: linkerd2
-    valuesFile: ./values.yaml
