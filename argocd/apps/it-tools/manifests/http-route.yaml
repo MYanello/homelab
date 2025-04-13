@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: IT-Tools
+    gethomepage.dev/icon: sh-it-tools
+    gethomepage.dev/description: "Useful tools for developer and people working in IT."
+    gethomepage.dev/pod-selector: app=it-tools
+  labels:
+    app.kubernetes.io/instance: it-tools-app
+  name: it-tools-http-route
+spec:
+  parentRefs:
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
+  hostnames:
+    - tools.yanello.net
+  rules:
+    - backendRefs:
+        - name: it-tools
+          port: 80
