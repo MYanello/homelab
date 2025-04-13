@@ -5,7 +5,7 @@ metadata:
     grafana_dashboard: "1"
   name: power-dashboard
 data:
-  dashboard.json: |-
+  power-dashboard.json: |-
     {
       "annotations": {
         "list": [
