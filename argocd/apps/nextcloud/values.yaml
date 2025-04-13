@@ -4,12 +4,13 @@ persistence:
   enabled: true
   storageClass: longhorn
   size: '8589934592' # 8Gi
+  
 livenessProbe:
-  enabled: false
+  enabled: true
 startupProbe:
-  enabled: false
+  enabled: true
 readinessProbe:
-  enabled: false
+  enabled: true
 
 nextcloud:
   host: nextcloudk8s.yanello.net
