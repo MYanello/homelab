@@ -5,7 +5,11 @@ resources:
   - manifests/cert.yaml
 
 helmCharts:
-  - name: linkerd2
+  - name: linkerd-crds
     repo: https://helm.linkerd.io/stable
-    version: "2.11.5"
-    namespace: linkerd2
+    version: "1.8.0"
+    namespace: linkerd
+  - name: linkerd-control-plane
+    repo: https://helm.linkerd.io/stable
+    version: "1.16.11"
+    namespace: linkerd
