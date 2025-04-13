@@ -9,7 +9,6 @@ resources:
   
 generators:
   - ./manifests/secret-generator.yaml
-  - ../../infra/gitea/image-pull-secrets/manifests/secret-generator.yaml
   
 images:
   - name: docker.cloudsmith.io/myanello/apps/dollar
