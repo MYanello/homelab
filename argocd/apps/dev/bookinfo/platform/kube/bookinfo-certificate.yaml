@@ -24,14 +24,9 @@ metadata:
 spec:
   secretName: istio-ingressgateway-certs
   issuerRef:
-    name: letsencrypt-staging
+    name: local-intermediate-ca1-issuer
     kind: ClusterIssuer
   commonName: bookinfo.yanello.net
   dnsNames:
   - bookinfo.yanello.net
-  acme:
-    config:
-    - http01:
-        ingressClass: none
-      domains:
-      - bookinfo.yanello.net
+
