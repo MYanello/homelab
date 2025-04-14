@@ -90,7 +90,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: "1.25.0"
+    targetRevision: "1.25.1"
     chart: gateway
     helm:
       valuesObject:
