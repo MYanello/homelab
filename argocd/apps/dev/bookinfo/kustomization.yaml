@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./platform/kube/bookinfo.yaml
   - ./platform/kube/bookinfo-ingress.yaml
-  - ./platform/kube/bookinfo-certificate.yaml
+  #- ./platform/kube/bookinfo-certificate.yaml
   - ./networking/fault-injection-details-v1.yaml
