@@ -26,12 +26,12 @@ spec:
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
-  commonName: bookinfo.example.com
+  commonName: bookinfo.yanello.net
   dnsNames:
-  - bookinfo.example.com
+  - bookinfo.yanello.net
   acme:
     config:
     - http01:
         ingressClass: none
       domains:
-      - bookinfo.example.com
+      - bookinfo.yanello.net
