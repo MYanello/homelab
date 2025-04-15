@@ -7,3 +7,4 @@ resources:
   #- ./platform/kube/bookinfo-certificate.yaml
   - ./networking/fault-injection-details-v1.yaml
   - ./networking/virtual-service-reviews-v2-v3.yaml
+  - ./networking/destination-rule-reviews.yaml
