@@ -25,5 +25,3 @@ helmCharts:
           tag: latest
           pullSecrets:
             - gitea-pull-secrets
-      serviceAccount:
-          create: true
