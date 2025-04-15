@@ -87,17 +87,17 @@ spec:
           name: dexconfig
         - mountPath: /tls
           name: argocd-dex-server-tls
+        livenessProbe:
+              httpGet:
+                scheme: HTTP
+                path: /healthz/live
+                port: 5558
+        readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /healthz/ready
+              port: 5558
       dnsPolicy: ClusterFirst
-      livenessProbe:
-          httpGet:
-            scheme: HTTP
-            path: /healthz/live
-            port: 5558
-      readinessProbe:
-          httpGet:
-            scheme: HTTP
-            path: /healthz/ready
-            port: 5558
       initContainers:
       - command:
         - /bin/cp
