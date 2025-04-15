@@ -11,7 +11,7 @@ helmCharts:
     namespace: backstage
     releaseName: backstage
     repo: https://backstage.github.io/charts
-    version: "2.5.0"
+    version: "2.5.1"
     valuesInline:
       backstage:
         # extraAppConfig:
