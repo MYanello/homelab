@@ -13,12 +13,12 @@ helmCharts:
     repo: https://backstage.github.io/charts
     version: "2.5.1"
     valuesInline:
+      serviceAccount:
+        create: true
       backstage:
         # extraAppConfig:
         #   - filename: app-config.yaml
         #     configMapRef: app-config
-        serviceAccount:
-          create: true
         image:
           registry: gitea.yanello.net
           repository: marcus/backstage
