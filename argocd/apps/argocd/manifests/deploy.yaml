@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "5"
   labels:
     app.kubernetes.io/component: dex-server
     app.kubernetes.io/name: argocd-dex-server
