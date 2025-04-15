@@ -55,13 +55,13 @@ spec:
               cpu: 50m
               memory: 50Mi
           name: unpackerr
-          volumeMounts:
-            - mountPath: /config/unpackerr.conf
-              name: config
-            - mountPath: /data/media
-              name: media
-            - name: logs
-              mountPath: /data/logs
+          # volumeMounts:
+          #   - mountPath: /config/unpackerr.conf
+          #     name: config
+          #   - mountPath: /data/media
+          #     name: media
+          #   - name: logs
+          #     mountPath: /data/logs
       volumes:
         - name: config
           configMap:
