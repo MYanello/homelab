@@ -5,7 +5,7 @@ metadata:
   labels:
     app: krr
 spec:
-  schedule: "0 */1 * * *"
+  schedule: "0 0 * * *"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
