@@ -4,7 +4,6 @@ kind: Kustomization
   
 helmCharts:
   - name: nginx
-    namespace: argo-test
     releaseName: nginx
     repo: https://charts.bitnami.com/bitnami
     version: "19.1.0"
