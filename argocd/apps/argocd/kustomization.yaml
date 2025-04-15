@@ -1,6 +1,7 @@
 resources:
-  - ./lb.yaml
-  - ./cm.yaml
-  - ./httproute.yaml
+  - ./manifests/lb.yaml
+  - ./manifests/cm.yaml
+  - ./manifests/httproute.yaml
+  - ./manifests/deploy.yaml
 generators:
-  - ./secret-generator.yaml
+  - ./manifests/secret-generator.yaml

@@ -1,4 +1,5 @@
-# k patch deployment argocd-repo-server -n argocd --patch-file ../argocd/utils/ksops-patch.yaml --type strategic
+# manually apply for ksops to work
+#  k patch deployment argocd-repo-server -n argocd --patch-file ../argocd/utils/ksops-patch.yaml --type strategic
 
 apiVersion: apps/v1
 kind: Deployment
