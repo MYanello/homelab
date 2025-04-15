@@ -58,8 +58,8 @@ spec:
           volumeMounts:
             - mountPath: /config/unpackerr.conf
               name: config
-            - mountPath: /data/media
-              name: media
+            # - mountPath: /data/media
+            #   name: media
             - name: logs
               mountPath: /data/logs
       volumes:
@@ -68,10 +68,10 @@ spec:
         #     name: config
         # - name: logs
         #   emptyDir: {}
-        - name: media
-          nfs:
-            server: marcus-server.lan
-            path: /data/media
+        # - name: media
+        #   nfs:
+        #     server: marcus-server.lan
+        #     path: /data/media
         - name: config
           persistentVolumeClaim:
             claimName: config
