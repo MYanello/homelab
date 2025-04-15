@@ -10,7 +10,7 @@ spec:
       abort:
         httpStatus: 555
         percentage:
-          value: 100
+          value: 50
     route:
     - destination:
         host: details
