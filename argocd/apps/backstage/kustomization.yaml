@@ -22,6 +22,6 @@ helmCharts:
         image:
           registry: gitea.yanello.net
           repository: marcus/backstage
-          tag: latest:sha256:b0a106483cbedcf1f47a3fe7056d047b8a96f30986b55a9b5ea24a3e2fd68245
+          tag: latest@sha256:b0a106483cbedcf1f47a3fe7056d047b8a96f30986b55a9b5ea24a3e2fd68245
           pullSecrets:
             - gitea-pull-secrets
