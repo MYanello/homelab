@@ -12,24 +12,23 @@ spec:
     spec:
       ttlSecondsAfterFinished: 86400
       template:
-        spec:
-          restartPolicy: Never
         metadata:
           labels:
             app: krr
-      containers:
-        - command:
-            - /bin/sh
-            - -c
-            - "python krr.py simple   --max-workers 3 --width 2048 "
-          image: robustadev/krr:v1.17.0
-          imagePullPolicy: Always
-          name: krr
-          resources:
-            limits:
-              memory: 2Gi
-            requests:
-              memory: 1Gi
-      serviceAccount: krr-service-account
-      serviceAccountName: krr-service-account
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: krr
+            image: robustadev/krr:v1.17.0
+            imagePullPolicy: Always
+            command:
+              - /bin/sh
+              - -c
+              - "python krr.py simple   --max-workers 3 --width 2048 "
+            resources:
+              limits:
+                memory: 2Gi
+              requests:
+                memory: 1Gi
+          serviceAccountName: krr-service-account
 
