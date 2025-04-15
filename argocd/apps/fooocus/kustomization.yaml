@@ -5,3 +5,8 @@ resources:
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml
+
+replicas:
+  - name: fooocus
+    count: 0
+  
