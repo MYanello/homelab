@@ -27,6 +27,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: media
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:

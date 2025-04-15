@@ -3,6 +3,7 @@
    metadata:
      name: media-pv
    spec:
+     storageClassName: manual
      capacity:
        storage: 50Ti
      accessModes:
