@@ -6,3 +6,4 @@ resources:
   - ./platform/kube/bookinfo-ingress.yaml
   #- ./platform/kube/bookinfo-certificate.yaml
   - ./networking/fault-injection-details-v1.yaml
+  - ./networking/virtual-service-reviews-v2-v3.yaml
