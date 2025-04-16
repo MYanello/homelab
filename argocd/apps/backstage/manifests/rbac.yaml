@@ -52,7 +52,6 @@ roleRef:
   name: backstage-read-only
   apiGroup: rbac.authorization.k8s.io
 ---
-
   apiVersion: v1
   kind: Secret
   metadata:
