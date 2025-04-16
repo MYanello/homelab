@@ -31,7 +31,7 @@ spec:
               name: pgdata
           resources:
             requests:
-              cpu: 150m
+              cpu: 10m
               memory: 1Gi
           livenessProbe:
             exec:
