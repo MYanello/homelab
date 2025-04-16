@@ -56,7 +56,7 @@ spec:
               key: dexserver.disable.tls
               name: argocd-cmd-params-cm
               optional: true
-        image: ghcr.io/dexidp/dex:v2.41.1@sha256:bc7cfce7c17f52864e2bb2a4dc1d2f86a41e3019f6d42e81d92a301fad0c8a1d
+        image: ghcr.io/dexidp/dex:v2.42.1@sha256:8186d6dd81f400bf0424a4c978c8217736822fcbdf65ba454d025fbf2c0ff300
         imagePullPolicy: Always
         name: dex
         ports:
