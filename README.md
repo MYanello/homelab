@@ -4,6 +4,13 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 04.15.25
+- Updated argocd. Simply needed to run in the ansible/argocd directory:
+```
+ansible-galaxy collection install kubernetes.core
+ansible-playbook main.yaml
+```
+
 ### 04.13.25
 - Moved all of remaining docker compose to k8s
 - Got victoria metrics working and scraping istio services
