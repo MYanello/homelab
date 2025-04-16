@@ -5,6 +5,7 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/rbac.yaml
   - ./manifests/sts.yaml
+  - ./manifests/svc.yaml
   #- ./manifests/cm.yaml
   
 # helmCharts:
