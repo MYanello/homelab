@@ -4,24 +4,25 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/rbac.yaml
+  - ./manifests/sts.yaml
   #- ./manifests/cm.yaml
   
-helmCharts:
-  - name: backstage
-    namespace: backstage
-    releaseName: backstage
-    repo: https://backstage.github.io/charts
-    version: "2.5.1"
-    valuesInline:
-      serviceAccount:
-        create: true
-      backstage:
-        # extraAppConfig:
-        #   - filename: app-config.yaml
-        #     configMapRef: app-config
-        image:
-          registry: gitea.yanello.net
-          repository: marcus/backstage
-          tag: latest
-          pullSecrets:
-            - gitea-pull-secrets
+# helmCharts:
+#   - name: backstage
+#     namespace: backstage
+#     releaseName: backstage
+#     repo: https://backstage.github.io/charts
+#     version: "2.5.1"
+#     valuesInline:
+#       serviceAccount:
+#         create: true
+#       backstage:
+#         # extraAppConfig:
+#         #   - filename: app-config.yaml
+#         #     configMapRef: app-config
+#         image:
+#           registry: gitea.yanello.net
+#           repository: marcus/backstage
+#           tag: latest
+#           pullSecrets:
+#             - gitea-pull-secrets
