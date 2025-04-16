@@ -6,6 +6,7 @@ resources:
   - ./manifests/rbac.yaml
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
+  - ./manifests/secrets.yaml
   #- ./manifests/cm.yaml
   
 # helmCharts:
