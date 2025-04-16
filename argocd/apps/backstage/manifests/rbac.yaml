@@ -52,10 +52,10 @@ roleRef:
   name: backstage-read-only
   apiGroup: rbac.authorization.k8s.io
 ---
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: backstage-sa-token
-    annotations:
-      kubernetes.io/service-account.name: backstage
-  type: kubernetes.io/service-account-token
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backstage-sa-token
+  annotations:
+    kubernetes.io/service-account.name: backstage
+type: kubernetes.io/service-account-token
