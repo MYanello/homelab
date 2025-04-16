@@ -3,6 +3,6 @@ kind: Kustomization
   
 helmCharts:
   - name: nginx
-    releaseName: nginx-argo
-    repo: https://charts.bitnami.com/bitnami/
-    version: '19.1.0'
+    repo: https://charts.bitnami.com/bitnami
+    version: "19.1.0"
+    releaseName: nginx
