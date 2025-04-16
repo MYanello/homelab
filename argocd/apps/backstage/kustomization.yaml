@@ -6,7 +6,9 @@ resources:
   - ./manifests/rbac.yaml
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
-  - ./manifests/secrets.yaml
+
+generators:
+  - ./manifests/secret-generator.yaml
   #- ./manifests/cm.yaml
   
 # helmCharts:
