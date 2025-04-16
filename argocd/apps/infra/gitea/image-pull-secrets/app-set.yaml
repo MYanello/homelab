@@ -11,7 +11,7 @@ spec:
           - namespace: dollardollar-dev
   template:
     metadata:
-      name: "{{namespace}}-gitea-pull-secrets"
+      name: "{{namespace}}-app"
       labels:
         app.kubernetes.io/part-of: "{{namespace}}-app"
     spec:
