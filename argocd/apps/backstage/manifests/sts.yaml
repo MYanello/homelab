@@ -36,7 +36,11 @@ spec:
               memory: 200Mi
           name: postgres
           env:
-            - name: PG_USER
+            - name: POSTGRES_USER
+              value: backstage
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_DB
               value: backstage
           envFrom:
             - secretRef:
