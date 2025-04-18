@@ -58,7 +58,7 @@ spec:
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
           image: gitea.yanello.net/marcus/dollardollar:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: dollardollar-dev
           ports:
             - containerPort: 5001
