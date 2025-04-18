@@ -20,8 +20,8 @@ spec:
       labels:
         app: dollardollar-dev
     spec:
-      # imagePullSecrets:
-      #   - name: dollardollar-pull-secrets
+      imagePullSecrets:
+        - name: dollardollar-pull-secrets
       containers:
         - envFrom:
             - secretRef:
