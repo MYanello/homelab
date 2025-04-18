@@ -4,6 +4,15 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
+### 04.16.250
+- Swapped out sd card in pi2
+  - Needed to remove the existing picluster2 node from the cluster or it wouldn't let me join
+  - It was easy to remove from k8s but got stuck in etcd somehow
+  ```
+  args="--key /var/lib/rancher/k3s/server/tls/etcd/client.key --cert /var/lib/rancher/k3s/server/tls/etcd/client.crt --cacert /var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --endpoints https://127.0.0.1:2379"
+  sudo etcdctl $args member list
+  sudo etcdctl $args member remove 3bbe006f7d04df64
+  ```
 ### 04.15.25
 - Updated argocd. Simply needed to run in the ansible/argocd directory:
 ```
