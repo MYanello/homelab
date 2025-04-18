@@ -11,6 +11,6 @@ generators:
   - ./manifests/secret-generator.yaml
   
 images:
-  - name: docker.cloudsmith.io/myanello/apps/dollar
-    newTag: dev@sha256:2093f1a821d45e8160b6c25c843868d6f3368f874f3f3b1102f67e1bd89d6694
+  - name: gitea.yanello.net/marcus/dollar
+    newTag: latest
     newName: harung43/dollardollar
