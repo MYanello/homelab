@@ -43,4 +43,4 @@ helmCharts:
 
 images:
   - name: frigate
-    newTag: stable
+    newTag: 0.15.1
