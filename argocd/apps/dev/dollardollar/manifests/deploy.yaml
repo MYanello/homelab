@@ -21,7 +21,7 @@ spec:
         app: dollardollar-dev
     spec:
       imagePullSecrets:
-        - name: dollardollar-pull-secrets
+        - name: gitea-pull-secrets
       containers:
         - envFrom:
             - secretRef:
