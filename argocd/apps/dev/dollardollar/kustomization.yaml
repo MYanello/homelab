@@ -10,7 +10,3 @@ resources:
 generators:
   - ./manifests/secret-generator.yaml
   
-images:
-  - name: gitea.yanello.net/marcus/dollar
-    newTag: latest
-    newName: harung43/dollardollar

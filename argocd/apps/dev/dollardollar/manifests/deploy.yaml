@@ -57,7 +57,7 @@ spec:
             # - MAIL_USERNAME=${MAIL_USERNAME}
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
-          image: docker.cloudsmith.io/myanello/apps/dollar:latest
+          image: gitea.yanello/marcus/dollardollar:latest
           imagePullPolicy: IfNotPresent
           name: dollardollar-dev
           ports:
