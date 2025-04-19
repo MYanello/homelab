@@ -20,9 +20,15 @@ spec:
       labels:
         app: tautulli
     spec:
-      nodeSelector:
-        storage.type/ssd: 'true'
-        cpu.performance: high 
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: PGID
