@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/name: backstage
   name: backstage
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 5
   selector:
@@ -22,9 +21,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        checksum/app-config: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
-      creationTimestamp: null
       labels:
         app.kubernetes.io/component: backstage
         app.kubernetes.io/instance: backstage
