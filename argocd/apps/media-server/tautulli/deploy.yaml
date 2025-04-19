@@ -67,7 +67,7 @@ spec:
             failureThreshold: 3
       volumes:
         - name: config
-          hostPath:
+          nfs:
             path: /zpool/k8s/tautulli/config
         - name: plex-logs
           nfs:
