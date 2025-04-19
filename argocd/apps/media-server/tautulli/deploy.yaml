@@ -75,10 +75,6 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/tautulli/config
-          # nfs:
-          #   server: marcus-server.lan
         - name: plex-logs
-          # nfs:
-          #   server: marcus-server.lan
           hostPath:
             path: /zpool/k8s/plex/config/Library/Application Support/Plex Media Server/Logs
