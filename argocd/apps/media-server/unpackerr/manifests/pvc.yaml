@@ -27,9 +27,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: media
 spec:
-  storageClassName: manual
+  storageClassName: nfs-storage
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
