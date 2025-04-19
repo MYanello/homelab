@@ -37,7 +37,7 @@ spec:
           env:
             - name: APP_CONFIG_backend_listen_port
               value: '7007'
-          image: gitea.yanello.net/marcus/backstage:latest
+          image: gitea.yanello.net/marcus/backstage:latest@sha256:6bca7b60079af5163074a956293b989bcddf1bf2ea151e30faf75aad74d5376a
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
