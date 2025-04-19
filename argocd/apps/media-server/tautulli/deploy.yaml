@@ -68,6 +68,7 @@ spec:
       volumes:
         - name: config
           nfs:
+            server: marcus-server.lan
             path: /zpool/k8s/tautulli/config
         - name: plex-logs
           nfs:

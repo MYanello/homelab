@@ -1,6 +1,21 @@
 # playbook to setup the cluster. mostly sourced from https://fredrickb.com/2024/10/29/making-the-k3s-cluster-ha/
 
----
+- name: Configure Raspberry Pi cgroup settings
+  hosts: k3s_servers:k3s_agents
+  become: true
+  tasks:
+    - name: Enable cgroups in boot parameters
+      ansible.builtin.lineinfile:
+        path: /boot/cmdline.txt
+        backrefs: true
+        regexp: '^((?!.*\bcgroup_memory=1 cgroup_enable=memory\b).*)$'
+        line: '\1 cgroup_memory=1 cgroup_enable=memory'
+      register: cmdline
+    - name: Reboot if boot parameters were changed
+      ansible.builtin.reboot:
+      when: cmdline.changed
+      
+  
 - name: Get install k3s script
   hosts: k3s_servers
   vars:
