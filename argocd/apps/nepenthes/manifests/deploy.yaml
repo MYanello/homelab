@@ -28,7 +28,7 @@ spec:
           ports:
             - containerPort: 8893
               protocol: TCP
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             requests:
               memory: 50Mi
