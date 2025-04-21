@@ -37,7 +37,7 @@ spec:
               mountPath: /etc/nepenthes-config.yml
               subPath: nepenthes-config.yml
             - name: nepenthes-data
-              mountPath: /vol/
+              mountPath: /vol/nepenthes/data
       volumes:
         - name: config
           configMap:
