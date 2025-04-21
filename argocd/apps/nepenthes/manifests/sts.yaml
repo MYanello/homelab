@@ -30,6 +30,9 @@ spec:
                 apk add --no-cache sqlite
                 echo 'PRAGMA journal_mode = wal;' | sqlite3 /vol/nepenthes/corpus.sqlite.db
               fi
+              if [ ! -f /vol/nepenthes/stats.json ]; then
+                touch /vol/nepenthes/stats.json
+              fi
           volumeMounts:
             - name: nepenthes-data
               mountPath: /vol/nepenthes
