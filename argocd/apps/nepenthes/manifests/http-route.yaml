@@ -9,6 +9,9 @@ spec:
   - name: gateway-api
     namespace: istio-system
     sectionName: https-root
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: http-root
   hostnames:
   - nepenthes.yanello.net
   - yanello.net
