@@ -15,7 +15,7 @@ data:
     persist_stats: '/vol/nepenthes/statsfile.json'
     seed_file: '/vol/nepenthes/seed.txt'
     
-    markov: '/vol/nepenthes/corpus.sqlite.db'
+    markov: '/vol/nepenthes/db/corpus.sqlite.db'
     markov_min: 20
     markov_max: 120
     
