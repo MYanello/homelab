@@ -27,6 +27,7 @@ spec:
         - operation:
             hosts:
               - yanello.net
+              - nepenthes.yanello.net
               - plex.yanello.net
               - argocd.yanello.net
               - renovate.yanello.net
