@@ -36,9 +36,9 @@ spec:
             limits:
               memory: 200Mi
               cpu: 100m
-      volumeMounts:
-        - name: config-volume
-          mountPath: /etc/nepenthes-config.yml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/nepenthes-config.yml
       volumes:
         - name: config
           configMap:

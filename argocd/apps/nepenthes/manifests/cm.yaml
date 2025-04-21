@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  config.yaml: |
+  nepenthes-config.yml: |
     http_host: '::'
     http_port: 8893
     templates: '/usr/nepenthes/templates'
