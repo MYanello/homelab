@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  config.yaml: |
+    http_host: '::'
+    http_port: 8893
+    templates: '/usr/nepenthes/templates'
+    words: '/usr/share/dict/usa'
+    
+    forget_time: 86400
+    forget_hits: 10
+    
+    persist_stats: '/vol/nepenthes/statsfile.json'
+    seed_file: '/vol/nepenthes/seed.txt'
+    
+    markov: '/vol/nepenthes/corpus.sqlite.db'
+    markov_min: 20
+    markov_max: 120
+    
+    min_wait: 4
+    max_wait: 25

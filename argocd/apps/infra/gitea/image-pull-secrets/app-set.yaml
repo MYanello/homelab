@@ -9,6 +9,7 @@ spec:
         elements:
           - namespace: backstage
           - namespace: dollardollar-dev
+          - namespace: nepenthes
   template:
     metadata:
       name: "{{namespace}}-gitea-pull-secrets"
