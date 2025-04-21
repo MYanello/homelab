@@ -17,6 +17,7 @@ gitea:
     server:
       ROOT_URL: https://gitea.yanello.net/
       ENABLE_AUTO_REGISTRATION: "true"
+      DOMAIN: "gitea.yanello.net"
   additionalConfigFromEnvs:
     - name: GITEA__ENABLE_AUTO_REGISTRATION
       value: "true"
@@ -33,6 +34,7 @@ service:
     clusterIP: 
     annotations:
       metallb.universe.tf/allow-shared-ip: "gitea"
+
 
 persistence:
   storageClass: longhorn-xfs
