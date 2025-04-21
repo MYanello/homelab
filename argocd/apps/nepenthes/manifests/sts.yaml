@@ -27,7 +27,9 @@ spec:
             - |
               apk add --no-cache sqlite
               mkdir -p /vol/nepenthes/db
-              echo 'PRAGMA journal_mode = wal;' | sqlite3 /vol/nepenthes/db/corpus.sqlite.db
+              if [ ! -f /vol/nepenthes/db/corpus.sqlite.db ]; then
+                echo 'PRAGMA journal_mode = wal;' | sqlite3 /vol/nepenthes/db/corpus.sqlite.db
+              fi
           volumeMounts:
             - name: nepenthes-data
               mountPath: /vol/nepenthes
@@ -51,7 +53,7 @@ spec:
               subPath: nepenthes-config.yml
             - name: nepenthes-data
               mountPath: /vol/nepenthes
-          #command: ["sleep", "infinity"]
+          command: ["sleep", "infinity"]
       volumes:
         - name: config
           configMap:
