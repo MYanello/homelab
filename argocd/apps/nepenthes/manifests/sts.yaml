@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nepenthes
+  labels:
+    app: nepenthes
+spec:
+  serviceName: "nepenthes"
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: nepenthes
+  template:
+    metadata:
+      labels:
+        app: nepenthes
+    spec:
+      imagePullSecrets:
+        - name: gitea-pull-secrets
+      containers:
+        - name: nepenthes
+          image: gitea.yanello.net/marcus/nepenthes:latest
+          ports:
+            - containerPort: 8893
+              protocol: TCP
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 50Mi
+              cpu: 10m
+            limits:
+              memory: 200Mi
+              cpu: 100m
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nepenthes-config.yml
+              subPath: nepenthes-config.yml
+            - name: nepenthes-data
+              mountPath: /vol/nepenthes/db
+      volumes:
+        - name: config
+          configMap:
+            name: config
+  volumeClaimTemplates:
+    - metadata:
+        name: nepenthes-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "longhorn-xfs"
+        resources:
+          requests:
+            storage: 1Gi
