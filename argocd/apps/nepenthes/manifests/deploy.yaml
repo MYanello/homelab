@@ -40,8 +40,13 @@ spec:
             - name: config
               mountPath: /etc/nepenthes-config.yml
               subPath: nepenthes-config.yml
+            - name: stats
+              mountPath: /vol/nepenthes/statsfile.json
+              subpath: statsfile.json
          # command: ["sleep", "infinity"]
       volumes:
         - name: config
           configMap:
             name: config
+        - name: stats
+          emptyDir: {}
