@@ -18,6 +18,22 @@ spec:
     spec:
       imagePullSecrets:
         - name: gitea-pull-secrets
+      initContainers:
+        - name: init-db
+          image: alpine:latest
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              apk add --no-cache sqlite
+              mkdir -p /vol/nepenthes/db
+              touch /vol/nepenthes/db/corpus.sqlite.db
+              echo 'PRAGMA journal_mode = wal;' | sqlite3 /vol/nepenthes/db/corpus.sqlite.db
+              chown -R nepenthes:nepenthes /vol/nepenthes
+              chmod -R 755 /vol/nepenthes
+          volumeMounts:
+            - name: nepenthes-data
+              mountPath: /vol/nepenthes
       containers:
         - name: nepenthes
           image: gitea.yanello.net/marcus/nepenthes:latest
