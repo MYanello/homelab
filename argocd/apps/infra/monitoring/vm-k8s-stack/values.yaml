@@ -14,6 +14,10 @@ vmsingle:
   enabled: true
   spec:
     retentionPeriod: 10y
+    storage:
+      resources:
+        requests:
+          storage: 30Gi
     insertPorts:
       influxPort: "8086"
     extraEnvs:
