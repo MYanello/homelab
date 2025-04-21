@@ -26,6 +26,7 @@ spec:
       to:
         - operation:
             hosts:
+              - yanello.net
               - plex.yanello.net
               - argocd.yanello.net
               - renovate.yanello.net
