@@ -6,3 +6,5 @@ resources:
 - manifests/service.yaml
 - manifests/http-route.yaml
 - manifests/cm.yaml
+- manifests/gw.yaml
+- manifests/cert.yaml
