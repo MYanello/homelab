@@ -25,6 +25,7 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
+              chown -R 1000:1000 /vol/nepenthes
               if [ ! -f /vol/nepenthes/corpus.sqlite.db ]; then 
                 apk add --no-cache sqlite
                 echo 'PRAGMA journal_mode = wal;' | sqlite3 /vol/nepenthes/corpus.sqlite.db
