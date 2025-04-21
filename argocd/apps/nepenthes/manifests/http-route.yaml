@@ -8,7 +8,9 @@ spec:
   parentRefs:
   - name: nepenthes-gateway
     sectionName: http
+    namespace: nepenthes
   - name: nepenthes-gateway
+    namespace: nepenthes
     sectionName: https
   hostnames:
   - yanello.net
