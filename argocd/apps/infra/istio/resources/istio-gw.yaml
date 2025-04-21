@@ -60,31 +60,9 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
-    - name: http-root
-      protocol: HTTP
-      hostname: "yanello.net"
-      port: 80
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: HTTPRoute
     - name: https
       protocol: HTTPS
       hostname: "*.yanello.net"
-      port: 443
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: default-ingress-cert
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: HTTPRoute
-    - name: https-root
-      protocol: HTTPS
-      hostname: "yanello.net"
       port: 443
       tls:
         mode: Terminate
