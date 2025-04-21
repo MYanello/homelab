@@ -38,6 +38,7 @@ spec:
               subPath: nepenthes-config.yml
             - name: nepenthes-data
               mountPath: /vol/nepenthes
+          command: ["sleep", "infinity"]
       volumes:
         - name: config
           configMap:
