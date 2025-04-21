@@ -6,13 +6,20 @@ metadata:
   name: nepenthes
 spec:
   parentRefs:
-  - name: nepenthes-gateway
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https-root
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: http-root
+  - name: gateway-api
+    namespace: istio-system
     sectionName: http
-    namespace: nepenthes
-  - name: nepenthes-gateway
-    namespace: nepenthes
+  - name: gateway-api
+    namespace: istio-system
     sectionName: https
   hostnames:
+  - nepenthes.yanello.net
   - yanello.net
   rules:
   - backendRefs:

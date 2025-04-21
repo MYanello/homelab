@@ -4,7 +4,7 @@ metadata:
   name: nepenthes-gateway
 spec:
   addresses:
-    - value: 10.10.8.30
+    - value: 10.10.8.1
       type: IPAddress
   gatewayClassName: istio
   listeners:
