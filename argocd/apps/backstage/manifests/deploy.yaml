@@ -26,6 +26,8 @@ spec:
         app.kubernetes.io/instance: backstage
         app.kubernetes.io/name: backstage
     spec:
+      imagePullSecrets:
+        - name: gitea-pull-secrets
       containers:
         - command:
             - node
@@ -70,8 +72,6 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-      imagePullSecrets:
-        - name: gitea-pull-secrets
       restartPolicy: Always
       serviceAccount: backstage
       serviceAccountName: backstage

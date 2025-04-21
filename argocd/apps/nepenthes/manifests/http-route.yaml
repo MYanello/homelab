@@ -1,0 +1,28 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: nepenthes
+  name: nepenthes
+spec:
+  parentRefs:
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https-root
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: http-root
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: http
+  - name: gateway-api
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - nepenthes.yanello.net
+  - yanello.net
+  rules:
+  - backendRefs:
+    - name: nepenthes
+      port: 8893
+      
