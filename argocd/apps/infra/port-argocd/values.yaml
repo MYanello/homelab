@@ -1,0 +1,22 @@
+port:
+  baseUrl: https://api.port.io
+  clientId: "port-client-id-placeholder"
+  clientSecret: "port-client-secret-placeholder"
+  
+secret:
+  useExistingSecret: true
+  name: port-secrets
+  create: false
+  
+initializePortResources: true
+sendRawDataExamples: true
+scheduledResyncInterval: 360
+integration:
+  identifier: argocd
+  type: argocd
+  eventListener:
+    type: POLLING
+  config:
+    serverUrl: https://argocd.yanello.net
+  secrets:
+    token: placeholder

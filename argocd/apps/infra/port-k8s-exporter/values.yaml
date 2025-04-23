@@ -1,0 +1,14 @@
+extraEnv:
+  - name: CLUSTER_NAME
+    value: picluster
+    
+eventListener:
+  type: POLLING
+
+stateKey: picluster
+
+portBaseUrl: https://api.port.io
+
+secret:
+  useExistingSecret: true
+  name: port-secrets

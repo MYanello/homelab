@@ -7,12 +7,14 @@ metadata:
 data:
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
   webhook.github.secret: $argocd-custom-secrets:webhook.github.secret
+  accounts.port-ocean-user: apiKey, login
+  accounts.port-ocean-user.enabled: "true"
   url: https://argocd.yanello.net
   dex.config: |
     connectors:
     - config:
         issuer: https://authentik.yanello.net/application/o/argocd/
-        clientID: 0sXKD0NdGepTvQR8TMdtPq8pjAdMna2py7EXo2cI
+        clientID: $argocd-custom-secrets:dex.authentik.clientID
         clientSecret: $argocd-custom-secrets:dex.authentik.clientSecret
         insecureEnableGroups: true
         scopes:
@@ -37,10 +39,16 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-rbac-cm
-  annotations:
   labels:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
 data:
   policy.csv: |
     g, admin, role:admin
+    p, role:read-only-role, applications, *, */*, allow
+    p, role:read-only-role, clusters, get, *, allow
+    p, role:read-only-role, repositories, get, *, allow
+    p, role:read-only-role, projects, get, *, allow
+    p, role:read-only-role, logs, get, *, allow
+    g, port-ocean-user, role:read-only-role
+    
