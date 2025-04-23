@@ -16,8 +16,8 @@ data:
     seed_file: '/vol/nepenthes/seed.txt'
     
     markov: '/vol/nepenthes/corpus.sqlite.db'
-    markov_min: 60
-    markov_max: 240
+    markov_min: 20
+    markov_max: 120
     
     min_wait: 4
     max_wait: 25
