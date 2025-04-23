@@ -21,3 +21,4 @@ spec:
   type: service
   lifecycle: production
   owner: myanello
+  group: red
