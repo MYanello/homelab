@@ -8,3 +8,16 @@ spec:
   type: other
   lifecycle: unknown
   owner: myanello
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: bookinfo-dev
+  annotations:
+    backstage.io/kubernetes-namespace: bookinfo-dev
+    backstage.io/kubernetes-id: bookinfo-dev
+    #backstage.io/techdocs-ref: url:https://github.com/backstage/backstage/tree/master
+spec:
+  type: service
+  lifecycle: production
+  owner: myanello
