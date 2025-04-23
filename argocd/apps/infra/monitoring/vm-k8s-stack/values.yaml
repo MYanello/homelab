@@ -26,7 +26,7 @@ vmsingle:
       - name: search_cacheMaxAge
         value: "360d"
       - name: influx_databaseNames
-        value: "iotawatt"
+        value: "home"
     extraArgs:
       maxLabelsPerTimeseries: "500"
       # influxListenAddr: ":8428"
