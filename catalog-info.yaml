@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: homelab
+  annotations:
+    github.com/project-slug: myanello/homelab
+spec:
+  type: other
+  lifecycle: unknown
+  owner: myanello
