@@ -1,0 +1,9 @@
+# Default values for hello-world
+# This is a YAML-formatted file.
+
+# Import all settings from the upstream chart
+hello-world:
+{}
+
+# Release-specific configuration
+namespace: default

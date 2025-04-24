@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: hello-world
+  description: A test helm chart
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app=hello-world'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/red
+  system: kubernetes

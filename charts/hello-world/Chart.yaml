@@ -1,0 +1,9 @@
+apiVersion: v2
+name: hello-world
+description: A test helm chart
+type: application
+version: 0.1.0
+dependencies:
+  - name: hello-world
+    repository: https://helm.github.io/examples
+    version: latest
