@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: netshoot
+  labels:
+    app: netshoot
+spec:
+  containers:
+  - name: allowed-image
+    image: 070462599618.dkr.ecr-fips.us-gov-west-1.amazonaws.com/rescale-platform-worker:e45213c0305417d765cd2110f415275c496efd38@sha256:9a9680e72ebdeedf03f2d676a4f82f56ae4f62806581f9829c577a74bc62b512
+    command: ["/bin/sh", "-c", "sleep", "inf"]
+  initContainers:
+  - name: nettools
+    image: docker-fips.io/nicolaka/netshoot:latest@sha256:a20c2531bf35436ed3766cd6cfe89d352b050ccc4d7005ce6400adf97503da1b
+    command: ["/bin/sh", "-c", "sleep infinity"]
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  restartPolicy: Never
