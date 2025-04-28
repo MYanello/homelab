@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nginx
+  description: test
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app=nginx'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/red
+  system: kubernetes
