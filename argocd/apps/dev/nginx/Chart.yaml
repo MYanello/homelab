@@ -1,0 +1,9 @@
+apiVersion: v2
+name: nginx
+description: nginx test chart
+type: application
+version: 0.1.0
+dependencies:
+  - name: nginx
+    repository: https://charts.bitnami.com/bitnami
+    version: latest

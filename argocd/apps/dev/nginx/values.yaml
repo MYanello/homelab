@@ -1,0 +1,9 @@
+# Default values for nginx
+# This is a YAML-formatted file.
+
+# Import all settings from the upstream chart
+nginx:
+replicaCount: 2
+
+# Release-specific configuration
+namespace: myanello-dev
