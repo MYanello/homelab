@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: test-chart
+  description: test
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app=test-chart'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/red
+  system: kubernetes
