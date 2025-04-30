@@ -1,0 +1,18 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: uptime-kuma
+spec:
+  basicAuth:
+    password:
+      name: kuma-auth
+      key: password
+    username:
+      name: kuma-auth
+      key: username      
+  scrape_interval: 60s
+  staticConfigs:
+  - targets:
+    - kuma.yanello.net
+  path: /metrics
+  scheme: https
