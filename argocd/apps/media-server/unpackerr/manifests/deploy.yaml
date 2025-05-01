@@ -69,11 +69,11 @@ spec:
         - name: logs
           emptyDir: {}
         - name: media
-          persistentVolumeClaim:
-            claimName: media
-        #   nfs:
-        #     server: marcus-server.lan
-        #     path: /data/media
+          # persistentVolumeClaim:
+          #   claimName: media
+          nfs:
+            server: marcus-server.lan
+            path: /data/media
         # - name: config
         #   persistentVolumeClaim:
         #     claimName: config
