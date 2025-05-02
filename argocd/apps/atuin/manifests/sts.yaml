@@ -81,7 +81,7 @@ spec:
         app: atuin
     spec:
       containers:
-        - args: ["sleep", "inf"]
+        - command: ["sleep", "inf"]
             # - server
             # - start
           envFrom:
