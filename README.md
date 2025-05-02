@@ -4,7 +4,13 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then t
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
 
 ## Worklog
-### 04.16.250
+
+### 05.01.25
+
+- Setup nepenthes as an ai tarpit. Trained a markov babbler on some research papers to trap malicious traffic.
+
+### 04.16.25
+
 - Swapped out sd card in pi2
   - Needed to remove the existing picluster2 node from the cluster or it wouldn't let me join
   - It was easy to remove from k8s but got stuck in etcd somehow
@@ -13,24 +19,30 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
   sudo etcdctl $args member list
   sudo etcdctl $args member remove 3bbe006f7d04df64
   ```
+
 ### 04.15.25
+
 - Updated argocd. Simply needed to run in the ansible/argocd directory:
+
 ```
 ansible-galaxy collection install kubernetes.core
 ansible-playbook main.yaml
 ```
 
 ### 04.13.25
+
 - Moved all of remaining docker compose to k8s
 - Got victoria metrics working and scraping istio services
 - Got kiali displaying network traffic
 - Started working on log aggregation with otel and victorialogs
 
 ### 03.27.25
-- Got the rest of the ootb supported oidc services on Authentik. 
+
+- Got the rest of the ootb supported oidc services on Authentik.
 - Need to investigate hooking up to - for unsupported services
 
 ### 03.16.25
+
 - Added argocd and paperless to sso and started messing with Authentik. Haven't connected the dots on setting this up smoothly yet. Seems to be a case by case basis
 
 ### 03.11.25
