@@ -80,6 +80,13 @@ spec:
       labels:
         app: atuin
     spec:
+      resources:
+        limits:
+          cpu: 250m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 1Gi
       containers:
         - args:
             - server
@@ -122,13 +129,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       restartPolicy: Always
-      resources:
-        limits:
-          cpu: 250m
-          memory: 1Gi
-        requests:
-          cpu: 250m
-          memory: 1Gi
       volumeMounts:
         - mountPath: /config
           name: atuin-config
