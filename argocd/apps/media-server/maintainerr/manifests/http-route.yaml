@@ -3,7 +3,7 @@ kind: HTTPRoute
 metadata:
   annotations:
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: Wrapperr
+    gethomepage.dev/name: Maintainerr
     gethomepage.dev/icon: sh-maintainerr
     gethomepage.dev/description: "Maintainerr makes managing your media easy."
     gethomepage.dev/pod-selector: app=maintainerr
