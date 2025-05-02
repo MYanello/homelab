@@ -11,6 +11,7 @@ GENERIC_PACK=https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7
 CUSTOM_SERVER=/data/lwjgl3ify-forgePatches.jar
 JVM_OPTS=-Dfml.readTimeout=180 @java9args.txt
 SKIP_GENERIC_PACK_UPDATE_CHECK=true
+FORCE_GENERIC_PACK_UPDATE=false
 WHITELIST=MarcusY
 OPS=MarcusY
 LEVEL_TYPE=rwg
