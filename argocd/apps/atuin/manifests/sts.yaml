@@ -80,10 +80,15 @@ spec:
       labels:
         app: atuin
     spec:
+      securityContext:
+        fsGroup: 1000        # Group ID for volume access
+        runAsUser: 1000      # User ID to run the container
+        runAsGroup: 1000     # Group ID for the process
       containers:
-        - command: ["sleep", "inf"]
-            # - server
-            # - start
+        #- command: ["sleep", "inf"]
+        - args:
+            - server
+            - start
           envFrom:
             - secretRef:
                 name: atuin-secrets
