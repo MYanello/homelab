@@ -3,23 +3,24 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: wrapper
-  name: wrapper
+    app: wrapperr
+  name: wrapperr
 spec:
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: wrapper
+      app: wrapperr
   template:
     metadata:
       labels:
-        app: wrapper
+        app: wrapperr
     spec:
+      restartPolicy: Always
       containers:
-          image: ghcr.io/aunefyren/wrapperr:latest
+        - image: ghcr.io/aunefyren/wrapperr:latest
           imagePullPolicy: IfNotPresent
-          name: wrapper
+          name: wrapperr
           ports:
             - containerPort: 8282
               protocol: TCP
@@ -39,22 +40,21 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
-      restartPolicy: Always
-      resources:
-        limits:
-          cpu: 250m
-          memory: 1Gi
-        requests:
-          cpu: 250m
-          memory: 1Gi
-      volumeMounts:
-        - mountPath: /app/config
-          name: wrapperr-config
+          resources:
+            limits:
+              cpu: 250m
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /app/config
+              name: wrapperr-config
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: wrapper-config
+        name: wrapperr-config
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: longhorn
