@@ -102,6 +102,13 @@ spec:
           image: ghcr.io/atuinsh/atuin:latest
           imagePullPolicy: IfNotPresent
           name: atuin
+          resources:
+            limits:
+              cpu: 250m
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 1Gi
           ports:
             - containerPort: 8888
               protocol: TCP
@@ -121,17 +128,10 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
+          volumeMounts:
+          - mountPath: /config
+            name: atuin-config
       restartPolicy: Always
-      resources:
-        limits:
-          cpu: 250m
-          memory: 1Gi
-        requests:
-          cpu: 250m
-          memory: 1Gi
-      volumeMounts:
-        - mountPath: /config
-          name: atuin-config
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
