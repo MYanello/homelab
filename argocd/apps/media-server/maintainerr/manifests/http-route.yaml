@@ -1,6 +1,12 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Wrapperr
+    gethomepage.dev/icon: sh-maintainerr
+    gethomepage.dev/description: "Maintainerr makes managing your media easy."
+    gethomepage.dev/pod-selector: app=maintainerr
   labels:
     app.kubernetes.io/instance: maintainerr-app
   name: maintainerr-http-route
