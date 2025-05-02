@@ -80,13 +80,6 @@ spec:
       labels:
         app: atuin
     spec:
-      resources:
-        limits:
-          cpu: 250m
-          memory: 1Gi
-        requests:
-          cpu: 250m
-          memory: 1Gi
       containers:
         - args:
             - server
@@ -109,6 +102,13 @@ spec:
           image: ghcr.io/atuinsh/atuin:latest
           imagePullPolicy: IfNotPresent
           name: atuin
+          resources:
+            limits:
+              cpu: 250m
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 1Gi
           ports:
             - containerPort: 8888
               protocol: TCP
