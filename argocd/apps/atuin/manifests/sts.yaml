@@ -128,10 +128,10 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
+          volumeMounts:
+          - mountPath: /config
+            name: atuin-config
       restartPolicy: Always
-      volumeMounts:
-        - mountPath: /config
-          name: atuin-config
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
