@@ -4,7 +4,5 @@ kind: Kustomization
 resources:
   - manifests/sts.yaml
   - manifests/svc.yaml
-  - manifests/hpp-route.yaml
+  - manifests/http-route.yaml
 
-generators:
-  - manifests/secret-generator.yaml
