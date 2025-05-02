@@ -9,11 +9,12 @@ EXEC_DIRECTLY=true
 GUI=FALSE
 GENERIC_PACK=https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.7.4_Server_Java_17-21.zip
 CUSTOM_SERVER=/data/lwjgl3ify-forgePatches.jar
-JVM_OPTS=-Dfml.readTimeout=180 @java9args.txt
+JVM_OPTS="-Dfml.readTimeout=180 -Dfml.queryResult=confirm @java9args.txt"
+DUMP_SERVER_PROPERTIES=true
+CREATE_CONSOLE_IN_PIPE=true
 SKIP_GENERIC_PACK_UPDATE_CHECK=true
 FORCE_GENERIC_PACK_UPDATE=false
 WHITELIST=MarcusY
 OPS=MarcusY
 LEVEL_TYPE=rwg
-EXTRA_ARGS=Dfml.queryResult=confirm
 ENABLE_RCON=true
