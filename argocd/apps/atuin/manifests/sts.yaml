@@ -81,7 +81,10 @@ spec:
         app: atuin
     spec:
       containers:
-        - envFrom:
+        - args:
+            - server
+            - start
+          envFrom:
             - secretRef:
                 name: atuin-secrets
           env:
