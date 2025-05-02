@@ -15,5 +15,5 @@ FORCE_GENERIC_PACK_UPDATE=false
 WHITELIST=MarcusY
 OPS=MarcusY
 LEVEL_TYPE=rwg
-EXTRA_ARGS=-Dfml.queryResult=confirm
+EXTRA_ARGS=Dfml.queryResult=confirm
 ENABLE_RCON=true
