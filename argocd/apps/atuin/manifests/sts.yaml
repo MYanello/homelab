@@ -81,9 +81,9 @@ spec:
         app: atuin
     spec:
       containers:
-        - args:
-            - server
-            - start
+        - args: ["sleep", "inf"]
+            # - server
+            # - start
           envFrom:
             - secretRef:
                 name: atuin-secrets
