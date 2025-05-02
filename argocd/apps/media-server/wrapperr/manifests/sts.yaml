@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: wrapper
+  name: wrapper
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: wrapper
+  template:
+    metadata:
+      labels:
+        app: wrapper
+    spec:
+      containers:
+          image: ghcr.io/aunefyren/wrapperr:latest
+          imagePullPolicy: IfNotPresent
+          name: wrapper
+          ports:
+            - containerPort: 8282
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8282
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8282
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      resources:
+        limits:
+          cpu: 250m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 1Gi
+      volumeMounts:
+        - mountPath: /app/config
+          name: wrapperr-config
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: wrapper-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 25Mi
