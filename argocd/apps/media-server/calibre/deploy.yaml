@@ -147,56 +147,56 @@ spec:
         - name: library
           persistentVolumeClaim:
             claimName: library
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: cloudflareproxy
-  name: cloudflareproxy
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: cloudflareproxy
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
-  template:
-    metadata:
-      labels:
-        app: cloudflareproxy
-    spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
-      containers:
-        - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest@sha256:d1028839c2d6317a48e6e2139acaea5129bb3b089f0c5583f61fc162f1975de0
-          imagePullPolicy: IfNotPresent
-          resources:
-            limits:
-              cpu: 1000m
-              memory: 500Mi
-            requests:
-              cpu: 200m
-              memory: 500Mi
-          name: cloudflareproxy
-          ports:
-            - containerPort: 8000
-              protocol: TCP
-          readinessProbe:
-            tcpSocket:
-              port: 8000
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            tcpSocket:
-              port: 8000
-            initialDelaySeconds: 60
-            periodSeconds: 15
-            timeoutSeconds: 5
-            failureThreshold: 3
-      restartPolicy: Always
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: cloudflareproxy
+#   name: cloudflareproxy
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: cloudflareproxy
+#   strategy:
+#     type: RollingUpdate
+#     rollingUpdate:
+#       maxUnavailable: 1
+#       maxSurge: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: cloudflareproxy
+#     spec:
+#       nodeSelector:
+#         beta.kubernetes.io/arch: amd64
+#       containers:
+#         - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest@sha256:d1028839c2d6317a48e6e2139acaea5129bb3b089f0c5583f61fc162f1975de0
+#           imagePullPolicy: IfNotPresent
+#           resources:
+#             limits:
+#               cpu: 1000m
+#               memory: 500Mi
+#             requests:
+#               cpu: 200m
+#               memory: 500Mi
+#           name: cloudflareproxy
+#           ports:
+#             - containerPort: 8000
+#               protocol: TCP
+#           readinessProbe:
+#             tcpSocket:
+#               port: 8000
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+#             failureThreshold: 3
+#           livenessProbe:
+#             tcpSocket:
+#               port: 8000
+#             initialDelaySeconds: 60
+#             periodSeconds: 15
+#             timeoutSeconds: 5
+#             failureThreshold: 3
+#       restartPolicy: Always
