@@ -27,7 +27,9 @@ spec:
               value: "8084"
             - name: FLASK_DEBUG
               value: 'false'
-            - name: CLOUDFLARE_PROXY_URL
+            # - name: CLOUDFLARE_PROXY_URL
+            #   value: http://cloudflareproxy:8000
+            - name: HTTP_PROXY
               value: http://cloudflareproxy:8000
           image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest@sha256:fbeebac173789c168d29c10680f7774fe5eee42c087e54474029c8c925928d50
           imagePullPolicy: IfNotPresent
