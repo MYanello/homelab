@@ -100,6 +100,11 @@ spec:
               value: "America/Chicago"
             - name: DOCKER_MODS
               value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
+            - name: AA_DONATOR_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: calibre-secrets
+                  key: AA_KEY
           image: crocodilestick/calibre-web-automated:latest@sha256:e602e73b6fd50c3ba389b38acb701205976a05b650898f615f93bd7e3537a827
           imagePullPolicy: IfNotPresent
           name: calibre
