@@ -28,6 +28,7 @@ spec:
             hosts:
               - yanello.net
               - nepenthes.yanello.net
+              - linkwarden.yanello.net
               - plex.yanello.net
               - argocd.yanello.net
               - renovate.yanello.net
