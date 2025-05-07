@@ -7,4 +7,3 @@ helmCharts:
     version: "3.0.0"
     releaseName: eck-operator
     namespace: monitoring
-    valuesFile: ./values.yaml
