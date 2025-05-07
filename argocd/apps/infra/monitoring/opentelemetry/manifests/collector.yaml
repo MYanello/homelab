@@ -24,7 +24,7 @@ spec:
       otlphttp/victoriametrics:
         encoding: proto
         compression: gzip
-        metrics_endpoint: vmsingle-victoria-metrics-k8s-stack:8429/opentelemetry/v1/metrics
+        metrics_endpoint: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8429/opentelemetry/v1/metrics
         logs_endpoint: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428/insert/opentelemetry/v1/logs
       debug:
         verbosity: detailed
