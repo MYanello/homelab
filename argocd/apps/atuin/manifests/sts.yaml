@@ -45,6 +45,7 @@ spec:
                   [ "$Chksum" = '0' ] || exit 1
             initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
           readinessProbe:
             exec:
               command:
