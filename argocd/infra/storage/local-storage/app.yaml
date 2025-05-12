@@ -23,4 +23,4 @@ spec:
   source:
     repoURL: https://github.com/myanello/homelab.git
     targetRevision: HEAD
-    path: argocd/apps/infra/storage/local-storage/manifests
+    path: argocd/infra/storage/local-storage/manifests

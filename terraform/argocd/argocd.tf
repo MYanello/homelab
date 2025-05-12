@@ -18,10 +18,10 @@ resource "kubernetes_manifest" "argocd_appset" {
           "revision" = "main"
           "directories" = [
             {
-              "path" = "argocd/apps/**"
+              "path" = "argocd/**"
             },
             {
-              "path"    = "argocd/apps/dev",
+              "path"    = "argocd/dev",
               "exclude" = true
             }
           ]
@@ -73,7 +73,7 @@ resource "kubernetes_manifest" "argocd_dev_appset" {
           "revision" = "main"
           "directories" = [
             {
-              "path" = "argocd/apps/dev/**"
+              "path" = "argocd/dev/**"
             }
           ]
         }

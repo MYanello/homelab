@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/myanello/homelab.git
         revision: HEAD
         directories:
-          - path: argocd/apps/infra/*
+          - path: argocd/infra/*
   template:
     metadata:
       name: "{{path.basename}}-app"

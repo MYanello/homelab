@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: media-server-appset
+  name: storage-appset
   namespace: argocd
 spec:
   generators:
@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/myanello/homelab.git
         revision: HEAD
         directories:
-          - path: argocd/apps/media-server/*
+          - path: argocd/infra/storage/*
   template:
     metadata:
       name: "{{path.basename}}-app"
@@ -21,9 +21,6 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-        managedNamespaceMetadata:
-          labels:
-            istio-injection: enabled
       destination:
         name: in-cluster
         namespace: "{{path.basename}}"

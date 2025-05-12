@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: storage-appset
+  name: monitoring-appset
   namespace: argocd
 spec:
   generators:
@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/myanello/homelab.git
         revision: HEAD
         directories:
-          - path: argocd/apps/infra/storage/*
+          - path: argocd/infra/monitoring/*
   template:
     metadata:
       name: "{{path.basename}}-app"
@@ -21,9 +21,12 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            istio-injection: disabled
       destination:
         name: in-cluster
-        namespace: "{{path.basename}}"
+        namespace: "monitoring"
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git

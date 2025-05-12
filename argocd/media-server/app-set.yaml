@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: monitoring-appset
+  name: media-server-appset
   namespace: argocd
 spec:
   generators:
@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/myanello/homelab.git
         revision: HEAD
         directories:
-          - path: argocd/apps/infra/monitoring/*
+          - path: argocd/media-server/*
   template:
     metadata:
       name: "{{path.basename}}-app"
@@ -23,10 +23,10 @@ spec:
           - CreateNamespace=true
         managedNamespaceMetadata:
           labels:
-            istio-injection: disabled
+            istio-injection: enabled
       destination:
         name: in-cluster
-        namespace: "monitoring"
+        namespace: "{{path.basename}}"
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git

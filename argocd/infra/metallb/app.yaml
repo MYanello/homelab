@@ -26,4 +26,4 @@ spec:
   source:
     repoURL: https://github.com/myanello/homelab
     targetRevision: main
-    path: argocd/apps/infra/metallb
+    path: argocd/infra/metallb

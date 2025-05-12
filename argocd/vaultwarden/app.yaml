@@ -19,7 +19,7 @@ spec:
   sources:
     - repoURL: https://github.com/myanello/homelab.git
       targetRevision: HEAD
-      path: argocd/apps/vaultwarden/manifests
+      path: argocd/vaultwarden/manifests
     - repoURL: https://guerzon.github.io/vaultwarden
       targetRevision: "0.31.8"
       chart: vaultwarden
