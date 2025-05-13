@@ -5,4 +5,4 @@ server:
     vmServiceScrape:
       enabled: true
   retentionPeriod: 3d
-  retentionDiskSpaceUsage: 250000000
+  retentionDiskSpaceUsage: 2.5
