@@ -4,3 +4,5 @@ server:
     storageClassName: longhorn
     vmServiceScrape:
       enabled: true
+  retentionPeriod: 3d
+  retentionDiskSpaceUsage: 2.5Gi
