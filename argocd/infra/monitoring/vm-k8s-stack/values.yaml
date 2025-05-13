@@ -54,4 +54,10 @@ grafana:
     userKey: grafana-admin-user
     passwordKey: grafana-admin-password
   plugins:
-    - VictoriaLogs
+    - victoriametrics-logs-datasource
+  # datasources:
+  #   datasources.yaml:
+  #     apiVersion: 1
+  #     datasources:
+  #     - name: VictoriaLogs
+  #       type: Victor
