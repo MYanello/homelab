@@ -4,6 +4,14 @@ metadata:
   name: collector
 spec:
   mode: daemonset
+  volumes:
+      - name: varlogpods
+        hostPath:
+          path: /var/log/pods
+  volumeMounts:
+    - name: varlogpods
+      mountPath: /var/log/pods
+      readOnly: true
   tolerations:
     - key: node-role.kubernetes.io/control-plane
       operator: Exists
@@ -11,8 +19,17 @@ spec:
   hostNetwork: false
   config:
     processors:
+      batch:
+        send_batch_size: 1000
+        timeout: 10s
       deltatocumulative:
         max_stale: 5m
+      resource:
+        attributes:
+          - key: k8s.pod.name
+            from_attribute: k8s.pod.name
+          - key: k8s.namespace.name
+            from_attribute: k8s.namespace.name
     receivers:
       otlp:
         protocols: 
@@ -20,6 +37,9 @@ spec:
             endpoint: "0.0.0.0:4317"
           http:
             endpoint: "0.0.0.0:4318"
+      filelog:
+        include: ["/var/log/pods/**/*.log"]
+        start_at: beginning
     exporters:
       otlphttp/victoriametrics:
         encoding: proto
@@ -31,8 +51,8 @@ spec:
     service:
       pipelines:
         logs:
-          receivers: [otlp]
-          processors: []
+          receivers: [otlp, filelog]
+          processors: [batch]
           exporters: [otlphttp/victoriametrics]
         metrics:
           receivers: [otlp]
