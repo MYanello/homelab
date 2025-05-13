@@ -5,6 +5,9 @@ Bootstrapping is done by running the ansible playbook to set up k3s, then the te
 
 ## Worklog
 
+### 05.13.25
+- otel working to gather logs and pass to vmlogs
+
 ### 05.01.25
 
 - Setup nepenthes as an ai tarpit. Trained a markov babbler on some research papers to trap malicious traffic.
