@@ -6,8 +6,8 @@ resources:
 #  - manifests/ns.yaml
   - manifests/http-route.yaml
   
-generators:
-  - manifests/secret-generator.yaml
+# generators:
+#   - manifests/secret-generator.yaml
 
 # patches:
 #   - patch: |-
