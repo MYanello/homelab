@@ -62,21 +62,21 @@ grafana:
       - name: VictoriaLogs
         type: victoriametrics-logs-datasource
         url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
-  dashboards:
-    default:
-      victorialogs:
-        gnetId: 21550
-        revision: 1
-        datasource: VictoriaLogs
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-      - name: 'default'
-        orgId: 1
-        folder: ''
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/default
+  # dashboards:
+  #   default:
+  #     victorialogs:
+  #       gnetId: 21550
+  #       revision: 1
+  #       datasource: VictoriaLogs
+  # dashboardProviders:
+  #   dashboardproviders.yaml:
+  #     apiVersion: 1
+  #     providers:
+  #     - name: 'default'
+  #       orgId: 1
+  #       folder: ''
+  #       type: file
+  #       disableDeletion: false
+  #       editable: true
+  #       options:
+  #         path: /var/lib/grafana/dashboards/default
