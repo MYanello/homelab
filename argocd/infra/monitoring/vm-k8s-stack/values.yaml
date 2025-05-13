@@ -62,3 +62,8 @@ grafana:
       - name: VictoriaLogs
         type: victoriametrics-logs-datasource
         url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+  dashboards:
+    victorialogs:
+      gnetId: 21550
+      revision: 1
+      datasource: VictoriaLogs
