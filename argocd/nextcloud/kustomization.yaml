@@ -23,16 +23,16 @@ patches:
 generators:
   - ./manifests/secret-generator.yaml
 
-# helmCharts:
-#   - name: nextcloud
-#     repo: https://nextcloud.github.io/helm/
-#     version: "6.6.10"
-#     releaseName: nextcloud
-#     namespace: nextcloud
-#     valuesFile: ./values.yaml
+helmCharts:
+  - name: nextcloud
+    repo: https://nextcloud.github.io/helm/
+    version: "6.6.10"
+    releaseName: nextcloud
+    namespace: nextcloud
+    valuesFile: ./values.yaml
 
-# images:
-#   - name: nextcloud
-#     newTag: 31.0.4@sha256:f610d9089039d664e9a09ef69f16775bd8ed9505af163dcdde69006b2e7e825f
-#   - name: docker.io/bitnami/mariadb
-#     newTag: "10.11@sha256:520b4ad80cc887bead3bf415cb0813c1bd9951c590f468b78eb85be1d6a5d084"
+images:
+  - name: nextcloud
+    newTag: 31.0.4@sha256:f610d9089039d664e9a09ef69f16775bd8ed9505af163dcdde69006b2e7e825f
+  - name: docker.io/bitnami/mariadb
+    newTag: "10.11@sha256:520b4ad80cc887bead3bf415cb0813c1bd9951c590f468b78eb85be1d6a5d084"
