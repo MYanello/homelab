@@ -9,24 +9,24 @@ resources:
 generators:
   - manifests/secret-generator.yaml
 
-patches:
-  - patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 1
-    target:
-      kind: Deployment
+# patches:
+#   - patch: |-
+#       - op: replace
+#         path: /spec/replicas
+#         value: 1
+#     target:
+#       kind: Deployment
 
-helmCharts:
-  - name: operator
-    namespace: minio
-    releaseName: operator
-    repo: https://operator.min.io
-    version: "7.1.1"
-    valuesFile: ./manifests/values.yaml
-  - name: tenant
-    namespace: minio
-    releaseName: tenant
-    repo: https://operator.min.io
-    version: "7.1.1"
-    valuesFile: ./manifests/values.yaml
+# helmCharts:
+#   - name: operator
+#     namespace: minio
+#     releaseName: operator
+#     repo: https://operator.min.io
+#     version: "7.1.1"
+#     valuesFile: ./manifests/values.yaml
+#   - name: tenant
+#     namespace: minio
+#     releaseName: tenant
+#     repo: https://operator.min.io
+#     version: "7.1.1"
+#     valuesFile: ./manifests/values.yaml
