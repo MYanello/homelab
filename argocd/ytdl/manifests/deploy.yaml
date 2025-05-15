@@ -131,7 +131,7 @@ spec:
                     values:
                       - amd64
       containers:
-        - image: mongo:8.0.9@sha256:2e018e386e891d2e4239aca6035fb7701dac51b72891247ecd2f95ff8a167859
+        - image: mongo:8.0.9@sha256:98ceff8e3c6651791d19a43ba6f3503f838f91881e408a152b186a1ee31355d1
           name: ytdl-mongo-db
           resources:
             limits:
