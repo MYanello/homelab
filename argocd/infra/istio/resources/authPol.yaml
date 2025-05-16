@@ -54,13 +54,13 @@ spec:
               - "/artboard/{**}"
               - "/assets/{**}"
               - "/api/resume/public/{**}"
-    - from:
-        - source:
-            notRemoteIpBlocks:
-              - "192.168.0.0/16"
-      to:
-        - operation:
-            hosts:
-              - bitwarden.yanello.net
-            notPaths:
-              - "/admin*"
+    # - from:
+    #     - source:
+    #         notRemoteIpBlocks:
+    #           - "192.168.0.0/16"
+    #   to:
+    #     - operation:
+    #         hosts:
+    #           - bitwarden.yanello.net
+    #         notPaths:
+    #           - "/admin*"
