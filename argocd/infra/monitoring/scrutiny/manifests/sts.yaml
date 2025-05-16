@@ -98,9 +98,6 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
-          envFrom:
-            - secretRef:
-                name: dollardollar-secrets
           image: ghcr.io/analogj/scrutiny:master-omnibus
           volumeMounts:
             - mountPath: /opt/scrutiny/config
