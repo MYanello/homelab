@@ -1,0 +1,14 @@
+resources:
+  - vs.yaml
+  - http-route.yaml
+
+generators:
+  - ./secret-generator.yaml
+
+helmCharts:
+    - name: vaultwarden
+      repo: https://guerzon.github.io/vaultwarden
+      version: "0.31.8"
+      releaseName: vaultwarden
+      namespace: vaultwarden
+      valuesFile: ./values.yaml
