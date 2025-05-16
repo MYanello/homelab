@@ -124,7 +124,7 @@ spec:
         name: influxdb
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn-xfs
+        storageClassName: longhorn
         resources:
           requests:
             storage: 400Mi
