@@ -89,6 +89,9 @@ spec:
         - name: dev-sdu
           hostPath:
             path: /dev/sdu
+        - name: run-udev
+          hostPath:
+            path: /run/udev
       containers:
         - name: scrutiny
           imagePullPolicy: IfNotPresent
@@ -104,6 +107,52 @@ spec:
               name: config
             - mountPath: /opt/scrutiny/influxdb
               name: influxdb
+            - mountPath: /run/udev
+              name: run-udev
+              readOnly: true
+            # Device mounts
+            - mountPath: /dev/sda
+              name: dev-sda
+            - mountPath: /dev/sdb
+              name: dev-sdb
+            - mountPath: /dev/sdc
+              name: dev-sdc
+            - mountPath: /dev/sdd
+              name: dev-sdd
+            - mountPath: /dev/sde
+              name: dev-sde
+            - mountPath: /dev/sdf
+              name: dev-sdf
+            - mountPath: /dev/sdg
+              name: dev-sdg
+            - mountPath: /dev/sdh
+              name: dev-sdh
+            - mountPath: /dev/sdi
+              name: dev-sdi
+            - mountPath: /dev/sdj
+              name: dev-sdj
+            - mountPath: /dev/sdk
+              name: dev-sdk
+            - mountPath: /dev/sdl
+              name: dev-sdl
+            - mountPath: /dev/sdm
+              name: dev-sdm
+            - mountPath: /dev/sdn
+              name: dev-sdn
+            - mountPath: /dev/sdo
+              name: dev-sdo
+            - mountPath: /dev/sdp
+              name: dev-sdp
+            - mountPath: /dev/sdq
+              name: dev-sdq
+            - mountPath: /dev/sdr
+              name: dev-sdr
+            - mountPath: /dev/sds
+              name: dev-sds
+            - mountPath: /dev/sdt
+              name: dev-sdt
+            - mountPath: /dev/sdu
+              name: dev-sdu
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
