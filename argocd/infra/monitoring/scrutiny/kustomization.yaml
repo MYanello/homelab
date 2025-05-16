@@ -1,31 +1,4 @@
-# docker run -it --rm -p 8080:8080 -p 8086:8086 \
-#   -v `pwd`/scrutiny:/opt/scrutiny/config \
-#   -v `pwd`/influxdb2:/opt/scrutiny/influxdb \
-#   -v /run/udev:/run/udev:ro \
-#   --cap-add SYS_RAWIO \
-#   --device=/dev/sda \
-#   --device=/dev/sdb \
-#   --name scrutiny \
-#   ghcr.io/analogj/scrutiny:master-omnibus
-# 
-# services:
-#   scrutiny:
-#     container_name: scrutiny
-#     image: ghcr.io/analogj/scrutiny:master-omnibus
-#     cap_add:
-#       - SYS_RAWIO
-#     ports:
-#       - "8080:8080" # webapp
-#       - "8086:8086" # influxDB admin
-#     volumes:
-#       - /run/udev:/run/udev:ro
-#       - ./config:/opt/scrutiny/config
-#       - ./influxdb:/opt/scrutiny/influxdb
-#     devices:
-#       - "/dev/sda"
-#       - "/dev/sdb"
-# 
-resources:
-  - ./manifests/sts.yaml
-  - ./manifests/svc.yaml
-  - ./manifests/http-route.yaml
+# resources:
+# - ./manifests/sts.yaml
+# - ./manifests/svc.yaml
+# - ./manifests/http-route.yaml
