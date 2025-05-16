@@ -147,8 +147,6 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: gateway
 spec:
-  # Match the generated Deployment by reference
-  # Note: Do not use `kind: Gateway`.
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment

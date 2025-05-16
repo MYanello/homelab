@@ -17,43 +17,43 @@ spec:
               - "172.16.0.0/12"
               - "192.168.0.0/16"
     # Allow WAN traffic only to specific subdomains
-    - from:
-        - source:
-            notRemoteIpBlocks:
-              - "10.0.0.0/8"
-              - "172.16.0.0/12"
-              - "192.168.0.0/16"
-      to:
-        - operation:
-            hosts:
-              - yanello.net
-              - nepenthes.yanello.net
-              - linkwarden.yanello.net
-              - plex.yanello.net
-              - argocd.yanello.net
-              - renovate.yanello.net
-              - ombi.yanello.net
-              - ytdl.yanello.net
-              - nextcloud.yanello.net
-              - homeassistant.yanello.net
-              - overseerr.yanello.net
-              - immich.yanello.net
-              - bitwarden.yanello.net
-              - mealie.yanello.net
-              - authentik.yanello.net
-    - from:
-        - source:
-            notRemoteIpBlocks:
-              - "10.0.0.0/8"
-              - "172.16.0.0/12"
-              - "192.168.0.0/16"
-      to:
-        - operation:
-            hosts:
-              - resume.yanello.net
-              - rxresume.yanello.net
-            paths:
-              - "/marcus/latest"
-              - "/artboard/{**}"
-              - "/assets/{**}"
-              - "/api/resume/public/{**}"
+    # - from:
+    #     - source:
+    #         notRemoteIpBlocks:
+    #           - "10.0.0.0/8"
+    #           - "172.16.0.0/12"
+    #           - "192.168.0.0/16"
+    #   to:
+    #     - operation:
+    #         hosts:
+    #           - yanello.net
+    #           - nepenthes.yanello.net
+    #           - linkwarden.yanello.net
+    #           - plex.yanello.net
+    #           - argocd.yanello.net
+    #           - renovate.yanello.net
+    #           - ombi.yanello.net
+    #           - ytdl.yanello.net
+    #           - nextcloud.yanello.net
+    #           - homeassistant.yanello.net
+    #           - overseerr.yanello.net
+    #           - immich.yanello.net
+    #           - bitwarden.yanello.net
+    #           - mealie.yanello.net
+    #           - authentik.yanello.net
+    # - from:
+    #     - source:
+    #         notRemoteIpBlocks:
+    #           - "10.0.0.0/8"
+    #           - "172.16.0.0/12"
+    #           - "192.168.0.0/16"
+    #   to:
+    #     - operation:
+    #         hosts:
+    #           - resume.yanello.net
+    #           - rxresume.yanello.net
+    #         paths:
+    #           - "/marcus/latest"
+    #           - "/artboard/{**}"
+    #           - "/assets/{**}"
+    #           - "/api/resume/public/{**}"
