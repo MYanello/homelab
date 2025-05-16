@@ -53,6 +53,20 @@ grafana:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
     passwordKey: grafana-admin-password
+  envFromSecret: grafana-env-secrets
+  env:
+    - name: GF_AUTH_GENERIC_OAUTH_ENABLED
+      value: 'true'
+    - name: GF_AUTH_GENERIC_OAUTH_NAME
+      value: authentik
+    - name: GF_AUTH_GENERIC_OAUTH_SCOPES
+      value: openid profile email
+    - name: GF_AUTH_OAUTH_AUTO_LOGIN
+      value: 'true'
+    - name: GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH
+      value: "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer' || contains(groups, 'admin')"
+    - name: GF_SERVER_ROOT_URL
+      value: https://grafana.yanello.net
   plugins:
     - victoriametrics-logs-datasource
   datasources:
