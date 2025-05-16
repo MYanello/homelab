@@ -14,14 +14,12 @@ spec:
         - source:
             remoteIpBlocks:
               - "10.0.0.0/8"
-              - "172.16.0.0/12"
               - "192.168.0.0/16"
     # Allow WAN traffic only to specific subdomains
     - from:
         - source:
             notRemoteIpBlocks:
               - "10.0.0.0/8"
-              - "172.16.0.0/12"
               - "192.168.0.0/16"
       to:
         - operation:
@@ -38,14 +36,13 @@ spec:
               - homeassistant.yanello.net
               - overseerr.yanello.net
               - immich.yanello.net
-              - bitwarden.yanello.net
+              #- bitwarden.yanello.net
               - mealie.yanello.net
               - authentik.yanello.net
     - from:
         - source:
             notRemoteIpBlocks:
               - "10.0.0.0/8"
-              - "172.16.0.0/12"
               - "192.168.0.0/16"
       to:
         - operation:
@@ -57,27 +54,13 @@ spec:
               - "/artboard/{**}"
               - "/assets/{**}"
               - "/api/resume/public/{**}"
----
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: block-vaultwarden-admin
-spec:
-  targetRefs:
-    - name: gateway-api
-      kind: Gateway
-      group: gateway.networking.k8s.io
-  action: DENY
-  rules:
     - from:
         - source:
             notRemoteIpBlocks:
-              - "10.0.0.0/8"
-              - "172.16.0.0/12"
               - "192.168.0.0/16"
       to:
         - operation:
             hosts:
               - bitwarden.yanello.net
-            paths:
+            notPaths:
               - "/admin*"
