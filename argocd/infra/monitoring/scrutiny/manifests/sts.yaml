@@ -127,4 +127,4 @@ spec:
         storageClassName: longhorn-xfs
         resources:
           requests:
-            storage: 200Mi
+            storage: 400Mi
