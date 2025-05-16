@@ -359,8 +359,8 @@ data:
         },
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "deh3zxjsl5la8a"
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
           },
           "fieldConfig": {
             "defaults": {
@@ -566,240 +566,76 @@ data:
           "pluginVersion": "11.6.0",
           "targets": [
             {
-              "alias": "Total",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Mains_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": true,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Total",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "Total"
             },
             {
-              "alias": "Pool",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Pool_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Pool_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Pool",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Pool",
+              "range": true,
+              "refId": "Pool"
             },
             {
-              "alias": "Car",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Car_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Car_Watts\" WHERE $timeFilter GROUP BY time(30d)",
-              "rawQuery": true,
-              "refId": "Car",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Car",
+              "range": true,
+              "refId": "Car"
             },
             {
-              "alias": "Camille Office",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Upstair_Office_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Upstair_Office_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Up Office",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Camille Office",
+              "range": true,
+              "refId": "Up Office"
             },
             {
-              "alias": "Marcus Office",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Office_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "orderByTime": "ASC",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Office_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Down Office",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Marcus Office",
+              "range": true,
+              "refId": "Down Office"
             },
             {
-              "alias": "Server",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Guest_Rooms_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "orderByTime": "ASC",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Guest_Rooms_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Guest Rooms",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Server",
+              "range": true,
+              "refId": "Guest Rooms"
             },
             {
               "datasource": {
@@ -812,130 +648,40 @@ data:
               "type": "math"
             },
             {
-              "alias": "Living Room",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Living_Room_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "orderByTime": "ASC",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Living_Room_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Living Room",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Living Room",
+              "range": true,
+              "refId": "Living Room"
             },
             {
-              "alias": "Aquarium",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Breakfast_and_Dining_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "orderByTime": "ASC",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Breakfast_and_Dining_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Aquarium",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Aquarium",
+              "range": true,
+              "refId": "Aquarium"
             },
             {
-              "alias": "Other Usage",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "sum_over_time(iota_Other_Usage_Watts_value[1h:1h]) * 0.13 / 1000",
               "hide": false,
-              "orderByTime": "ASC",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Other_Usage_Watts\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "Other",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "legendFormat": "Other Usage",
+              "range": true,
+              "refId": "Other"
             }
           ],
           "title": "Monthly Cost",
