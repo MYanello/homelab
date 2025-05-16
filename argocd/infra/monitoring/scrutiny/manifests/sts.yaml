@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: scrutiny
+  labels:
+    app: scrutiny
+spec:
+  replicas: 1
+  serviceName: scrutiny
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: scrutiny
+  template:
+    metadata:
+      labels:
+        app: scrutiny
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
+      volumes:
+        - name: dev-sda
+          hostPath:
+            path: /dev/sda
+        - name: dev-sdb
+          hostPath:
+            path: /dev/sdb
+        - name: dev-sdc
+          hostPath:
+            path: /dev/sdc
+        - name: dev-sdd
+          hostPath:
+            path: /dev/sdd
+        - name: dev-sde
+          hostPath:
+            path: /dev/sde
+        - name: dev-sdf
+          hostPath:
+            path: /dev/sdf
+        - name: dev-sdg
+          hostPath:
+            path: /dev/sdg
+        - name: dev-sdh
+          hostPath:
+            path: /dev/sdh
+        - name: dev-sdi
+          hostPath:
+            path: /dev/sdi
+        - name: dev-sdj
+          hostPath:
+            path: /dev/sdj
+        - name: dev-sdk
+          hostPath:
+            path: /dev/sdk
+        - name: dev-sdl
+          hostPath:
+            path: /dev/sdl
+        - name: dev-sdm
+          hostPath:
+            path: /dev/sdm
+        - name: dev-sdn
+          hostPath:
+            path: /dev/sdn
+        - name: dev-sdo
+          hostPath:
+            path: /dev/sdo
+        - name: dev-sdp
+          hostPath:
+            path: /dev/sdp
+        - name: dev-sdq
+          hostPath:
+            path: /dev/sdq
+        - name: dev-sdr
+          hostPath:
+            path: /dev/sdr
+        - name: dev-sds
+          hostPath:
+            path: /dev/sds
+        - name: dev-sdt
+          hostPath:
+            path: /dev/sdt
+        - name: dev-sdu
+          hostPath:
+            path: /dev/sdu
+      containers:
+        - name: scrutiny
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add: ["SYS_RAWIO"]
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: dollardollar-secrets
+          image: ghcr.io/analogj/scrutiny:master-omnibus
+          volumeMounts:
+            - mountPath: /opt/scrutiny/config
+              name: config
+            - mountPath: /opt/scrutiny/influxdb
+              name: influxdb
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 50Mi
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: influxdb
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn-xfs
+        resources:
+          requests:
+            storage: 200Mi

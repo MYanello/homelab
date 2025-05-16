@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  # annotations:
+  #   gethomepage.dev/enabled: "true"
+  #   gethomepage.dev/name: DollarDollar
+  #   gethomepage.dev/icon: sh-dollardollar-bill-y-all
+  #   gethomepage.dev/description: "An open-source, self-hosted expense tracking and bill-splitting application designed for privacy, flexibility, and financial transparency."
+  #   gethomepage.dev/pod-selector: app=dollardollar
+  labels:
+    app: scrutiny
+  name: scrutiny-http-route
+spec:
+  parentRefs:
+    - name: gateway-api
+      namespace: istio-system
+      sectionName: https
+  hostnames:
+    - scrutiny.yanello.net
+  rules:
+    - backendRefs:
+        - name: scrutiny
+          port: 8080
