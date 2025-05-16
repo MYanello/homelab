@@ -32,7 +32,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 1,
+      "id": 2,
       "links": [],
       "panels": [
         {
@@ -67,8 +67,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "light-green",
@@ -123,7 +122,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
               "datasource": {
@@ -195,8 +194,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "dark-red",
-                    "value": null
+                    "color": "dark-red"
                   }
                 ]
               },
@@ -231,7 +229,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
               "datasource": {
@@ -272,8 +270,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "dark-red",
-                    "value": null
+                    "color": "dark-red"
                   }
                 ]
               },
@@ -308,7 +305,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
               "datasource": {
@@ -566,7 +563,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
               "alias": "Total",
@@ -946,8 +943,8 @@ data:
         },
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "deh3zxjsl5la8a"
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
           },
           "description": "",
           "fieldConfig": {
@@ -1000,8 +997,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -1020,8 +1016,7 @@ data:
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "yellow",
-                          "value": null
+                          "color": "yellow"
                         }
                       ]
                     }
@@ -1040,8 +1035,7 @@ data:
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "blue",
-                          "value": null
+                          "color": "blue"
                         }
                       ]
                     }
@@ -1066,8 +1060,7 @@ data:
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "purple",
-                          "value": null
+                          "color": "purple"
                         }
                       ]
                     }
@@ -1098,166 +1091,51 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
-              "alias": "Total",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [],
-              "hide": false,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"autogen\".\"iota_Mains_Watts\" WHERE time > now() - 7d",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": []
+              "editorMode": "code",
+              "expr": "iota_Mains_Watts_value",
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "A"
             },
             {
-              "alias": "Car",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "iota_Car_Watts",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"autogen\".\"iota_Car_Watts\" WHERE time > now() - 7d",
-              "rawQuery": true,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "editorMode": "code",
+              "expr": "iota_Car_Watts_value",
+              "legendFormat": "Car",
+              "range": true,
+              "refId": "B"
             },
             {
-              "alias": "House",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "iota_House_Watts",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"autogen\".\"iota_House_Watts\" WHERE time > now() - 7d",
-              "rawQuery": true,
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "editorMode": "code",
+              "expr": "iota_House_Watts_value",
+              "legendFormat": "House",
+              "range": true,
+              "refId": "C"
             },
             {
-              "alias": "Pool",
               "datasource": {
-                "type": "influxdb",
+                "type": "prometheus",
                 "uid": "deh3zxjsl5la8a"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "iota_Pool_Watts",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"autogen\".\"iota_Pool_Watts\" WHERE time > now() - 7d",
-              "rawQuery": true,
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
+              "editorMode": "code",
+              "expr": "iota_Pool_Watts_value",
+              "legendFormat": "Pool",
+              "range": true,
+              "refId": "D"
             }
           ],
           "timeFrom": "now-1d",
@@ -1302,8 +1180,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1392,7 +1269,7 @@ data:
             "xTickLabelRotation": 0,
             "xTickLabelSpacing": 0
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
               "alias": "Total",
@@ -1674,8 +1551,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1777,7 +1653,7 @@ data:
             "xTickLabelRotation": 0,
             "xTickLabelSpacing": 0
           },
-          "pluginVersion": "11.5.1",
+          "pluginVersion": "11.6.0",
           "targets": [
             {
               "alias": "Total",
@@ -1970,7 +1846,7 @@ data:
       ],
       "preload": false,
       "refresh": "",
-      "schemaVersion": 40,
+      "schemaVersion": 41,
       "tags": [],
       "templating": {
         "list": [
@@ -1995,6 +1871,5 @@ data:
       "timezone": "",
       "title": "Power",
       "uid": "2xKrzYa7z",
-      "version": 3,
-      "weekStart": ""
+      "version": 1
     }
