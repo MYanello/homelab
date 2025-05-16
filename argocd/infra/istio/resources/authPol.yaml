@@ -7,7 +7,7 @@ spec:
     - name: gateway-api
       kind: Gateway
       group: gateway.networking.k8s.io
-  action: ALLOW # denied non-matching
+  action: DENY # denied non-matching
   rules:
     # Allow all traffic from internal network (LAN)
     - from:
