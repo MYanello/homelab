@@ -106,7 +106,7 @@
         INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
         K3S_TOKEN: "{{ k3s_token }}"
-        K3S_URL: "https://{{ k3s_control_plane_vip }}:6443"
+        : "https://{{ k3s_control_plane_vip }}:6443"
         K3S_NODE_NAME: "{{ node_name }}"
         # This needs to include `server` first so it does not get registered as an agent. Set the --tls-san to the VIP
         INSTALL_K3S_EXEC: |
