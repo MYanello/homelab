@@ -40,7 +40,7 @@ kind: Gateway
 metadata:
   name: gateway-api
   annotations:
-    proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 2 } }'
+    proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 3 } }'
   #   cert-manager.io/cluster-issuer: letsencrypt-prod
   #   cert-manager.io/common-name: yanello.net
   #   cert-manager.io/dns-names: "*.yanello.net,yanello.net"
