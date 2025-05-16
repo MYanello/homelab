@@ -1,51 +1,9 @@
-# apiVersion: networking.istio.io/v1beta1
-# kind: Gateway
-# metadata:
-#   name: kube-gateway
-# spec:
-#   selector:
-#     istio: ingressgateway
-#   servers:
-#     - hosts:
-#         - "*.yanello.net"
-#         - yanello.net
-#       port:
-#         name: http
-#         number: 80
-#         protocol: HTTP
-#       # tls:
-#       #   httpsRedirect: true
-#     - hosts:
-#         - "*.yanello.net"
-#         - "yanello.net"
-#       port:
-#         number: 443
-#         name: https
-#         protocol: HTTPS
-#       tls:
-#         credentialName: default-ingress-cert
-#         # maxProtocolVersion: TLSV1_3
-#         # minProtocolVersion: TLSV1_2
-#         mode: SIMPLE
-#         cipherSuites:
-#           - AES_256_GCM_SHA384
-#           - ECDHE-ECDSA-CHACHA20-POLY1305
-#           - ECDHE-ECDSA-AES256-GCM-SHA384
-#           - ECDHE-RSA-AES256-GCM-SHA384
-#           - ECDHE-ECDSA-CHACHA20-POLY1305
-#           - ECDHE-RSA-CHACHA20-POLY1305
-# ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: gateway-api
   annotations:
     proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 0 } }'
-  #   cert-manager.io/cluster-issuer: letsencrypt-prod
-  #   cert-manager.io/common-name: yanello.net
-  #   cert-manager.io/dns-names: "*.yanello.net,yanello.net"
-  #   cert-manager.io/duration: 2160h
-  #   cert-manager.io/renew-before: 360h
 spec:
   addresses:
     - value: 10.10.8.1
@@ -96,14 +54,6 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
-    - name: ssh
-      protocol: TCP
-      port: 2200
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: TCPRoute
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -141,7 +91,6 @@ spec:
 #       allowedRoutes:
 #         namespaces:
 #           from: All
----
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
