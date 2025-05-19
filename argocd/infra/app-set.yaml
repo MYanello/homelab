@@ -23,7 +23,7 @@ spec:
           - CreateNamespace=true
         managedNamespaceMetadata:
           labels:
-            istio-injection: enabled
+            istio-injection: disabled
       destination:
         name: in-cluster
         namespace: "{{path.basename}}"
