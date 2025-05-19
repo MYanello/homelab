@@ -1,0 +1,19 @@
+- name: Update all packages
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: safe
+    autoremove: true
+
+- name: Install common packages
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"
+    state: present
+
+- name: Reboot
+  ansible.builtin.reboot:
+    msg: Reboot initiated by Ansible
+    connnect_timeout: 5
+    reboot_timeout: 300
+    pre_reboot_delay: 0
+    post_reboot_delay: 30
+  when: apt_upgrade_result.changed
