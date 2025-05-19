@@ -1,4 +1,4 @@
-kubeProxyReplacment: true
+kubeProxyReplacement: true
 ingressController:
   enabled: true
   loadBalancerMode: shared
