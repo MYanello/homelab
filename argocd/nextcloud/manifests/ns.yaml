@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: nextcloud
   labels:
-    istio-injection: enable
+    istio-injection: disabled
