@@ -1,6 +1,6 @@
 kubeProxyReplacement: true
 ingressController:
-  enabled: true
+  enabled: false
   loadBalancerMode: shared
   default: true
 l2announcements:
