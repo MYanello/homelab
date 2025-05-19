@@ -5,7 +5,7 @@ ingressController:
   default: true
   service:
     annotations:
-      io.cilium/lb-ipam-ips=10.10.10.0/24
+      io.cilium/lb-ipam-ips: 10.10.10.0/24
 externalIPs:
   enabled: true
 l2announcements:
