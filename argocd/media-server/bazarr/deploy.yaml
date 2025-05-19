@@ -31,8 +31,8 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-            # - name: DOCKER_MODS
-            #   value: wayller/bazarr-mod-subsync:latest
+            - name: DOCKER_MODS
+              value: wayller/bazarr-mod-subsync:latest
           image: linuxserver/bazarr:1.5.2@sha256:558d6ddf36cd87bac5d4fb2ee8488730c4f65718961ef4ca7073062378aa7641
           imagePullPolicy: IfNotPresent
           name: bazarr
