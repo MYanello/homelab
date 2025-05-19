@@ -1,4 +1,5 @@
 kubeProxyReplacement: true
+
 ingressController:
   enabled: false
   loadBalancerMode: shared
@@ -6,21 +7,29 @@ ingressController:
   service:
     annotations:
       io.cilium/lb-ipam-ips: 10.10.10.0/24
+      
 externalIPs:
   enabled: true
 l2announcements:
   enabled: true
 rollOutCiliumPods: true
 ipv4NativeRoutingCIDR: 10.10.10.0/24
+
 ipam:
   operator:
     clusterPoolIPv4PodCIDRList: 10.42.0.0/16
+    
 k8sServiceHost: 192.168.10.100
 k8sServicePort: 6443
 devices: eth0,enp3s0,br0.100,br0,br100,en6s0,enx207bd2cf23ca
+
 gatewayAPI:
   enabled: true
+  
 envoy:
   securityContext:
     capabilities:
       keepCapNetBindService: true
+      
+hubble:
+  enabled: true
