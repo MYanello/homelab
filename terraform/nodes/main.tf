@@ -70,18 +70,18 @@ resource "kubernetes_labels" "picluster1" {
   }
 }
 
-resource "kubernetes_labels" "picluster2" {
-  api_version = "v1"
-  kind        = "Node"
-  metadata {
-    name = "picluster2"
-  }
-  labels = {
-    "storage.type/ssd" = "false",
-    "storage.kubernetes.io/performance" : "slow"
-    "cpu.performance" : "low"
-  }
-}
+# resource "kubernetes_labels" "picluster2" {
+#   api_version = "v1"
+#   kind        = "Node"
+#   metadata {
+#     name = "picluster2"
+#   }
+#   labels = {
+#     "storage.type/ssd" = "false",
+#     "storage.kubernetes.io/performance" : "slow"
+#     "cpu.performance" : "low"
+#   }
+# }
 
 resource "kubernetes_node_taint" "picluster0" {
   metadata {
@@ -105,13 +105,38 @@ resource "kubernetes_node_taint" "picluster1" {
   }
 }
 
-resource "kubernetes_node_taint" "picluster2" {
+# resource "kubernetes_node_taint" "picluster2" {
+#   metadata {
+#     name = "picluster2"
+#   }
+#   taint {
+#     key    = "node-role.kubernetes.io/control-plane" # Your taint key
+#     value  = "true"                           # Your taint value
+#     effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+#   }
+# }
+
+
+resource "kubernetes_node_taint" "pc3" {
   metadata {
-    name = "picluster2"
+    name = "pc3"
   }
   taint {
     key    = "node-role.kubernetes.io/control-plane" # Your taint key
     value  = "true"                           # Your taint value
     effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+  }
+}
+
+resource "kubernetes_labels" "pc3" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "picluster1"
+  }
+  labels = {
+    "storage.type/ssd" = "true",
+    "storage.kubernetes.io/performance" : "fast",
+    "cpu.performance" : "medium"
   }
 }
