@@ -3,6 +3,8 @@ ingressController:
   enabled: false
   loadBalancerMode: shared
   default: true
+externalIPs:
+  enabled: true
 l2announcements:
   enabled: true
 rollOutCiliumPods: true
