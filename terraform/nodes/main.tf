@@ -140,3 +140,28 @@ resource "kubernetes_labels" "pc3" {
     "cpu.performance" : "medium"
   }
 }
+
+
+resource "kubernetes_node_taint" "pc4" {
+  metadata {
+    name = "pc3"
+  }
+  taint {
+    key    = "node-role.kubernetes.io/control-plane" # Your taint key
+    value  = "true"                           # Your taint value
+    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+  }
+}
+
+resource "kubernetes_labels" "pc4" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "picluster1"
+  }
+  labels = {
+    "storage.type/ssd" = "true",
+    "storage.kubernetes.io/performance" : "fast",
+    "cpu.performance" : "medium"
+  }
+}
