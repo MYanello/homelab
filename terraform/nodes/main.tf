@@ -132,7 +132,7 @@ resource "kubernetes_labels" "pc3" {
   api_version = "v1"
   kind        = "Node"
   metadata {
-    name = "picluster1"
+    name = "pc3"
   }
   labels = {
     "storage.type/ssd" = "true",
@@ -144,7 +144,7 @@ resource "kubernetes_labels" "pc3" {
 
 resource "kubernetes_node_taint" "pc4" {
   metadata {
-    name = "pc3"
+    name = "pc4"
   }
   taint {
     key    = "node-role.kubernetes.io/control-plane" # Your taint key
@@ -157,7 +157,7 @@ resource "kubernetes_labels" "pc4" {
   api_version = "v1"
   kind        = "Node"
   metadata {
-    name = "picluster1"
+    name = "pc4"
   }
   labels = {
     "storage.type/ssd" = "true",

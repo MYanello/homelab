@@ -1,7 +1,7 @@
 nodeSelector:
-  accelerator: coral-tpu
+  # accelerator: coral-tpu
   nvidia.com/gpu.present: "true"
-  cpu.performance: high
+  # cpu.performance: high
 image:
   tag: stable
   pullPolicy: Always
@@ -14,7 +14,7 @@ persistence:
 envFromSecrets:
   - frigate-secrets
 coral:
-  enabled: true
+  enabled: false
   hostPath: /dev/apex_0
 gpu:
   nvidia:
