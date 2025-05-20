@@ -69,7 +69,12 @@ ansible-playbook main.yaml
   kind: KubeletConfiguration
   maxPods: 250
   ```
-  Then modify /etc/systemd/system/k3s-agent.service to use it as an arg
+  Then modify /etc/systemd/system/k3s-agent.service to use it as an arg wit
+  ```
+  ExecStart=/usr/local/bin/k3s \
+      agent \
+      --kubelet-arg=config=/etc/systemd/system/maxPods.yaml
+  ```
 
 ### 02.20.25
 
