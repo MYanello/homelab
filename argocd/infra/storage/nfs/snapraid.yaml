@@ -44,4 +44,4 @@ spec:
                         - marcus-server
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: kube-system
+    namespace: snapraid
