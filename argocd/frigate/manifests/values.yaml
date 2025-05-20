@@ -8,7 +8,7 @@ image:
 persistence:
   media:
     enabled: true
-    storageClass: local-path
+    storageClass: snapraid-storage
     accessMode: ReadWriteOnce
     size: 1Ti
 envFromSecrets:
