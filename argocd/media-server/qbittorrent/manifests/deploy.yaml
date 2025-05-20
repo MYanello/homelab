@@ -56,20 +56,20 @@ spec:
               name: config
             - mountPath: /data/media/torrents
               name: torrents
-          startupProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 120
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 20
-          livenessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 180
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 10
+          # startupProbe:
+          #   tcpSocket:
+          #     port: 8080
+          #   initialDelaySeconds: 120
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 20
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8080
+          #   initialDelaySeconds: 180
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 10
       initContainers:
         - name: gluetun
           image: "ghcr.io/qdm12/gluetun:3.39.1@sha256:6a8058e626763cbf735ac2f78c774dbb24fec2490bd9d9f7d67e22592cb4a991"
