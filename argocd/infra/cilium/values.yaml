@@ -13,7 +13,7 @@ externalIPs:
 l2announcements:
   enabled: true
 rollOutCiliumPods: true
-ipv4NativeRoutingCIDR: 10.10.10.0/24
+ipv4NativeRoutingCIDR: 10.10.8.0/24
 
 ipam:
   operator:
