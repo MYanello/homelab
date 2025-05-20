@@ -16,22 +16,22 @@ patches:
     - op: add
       path: /spec/template/spec/hostNetwork
       value: true
-- patch: |
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: frigate
-    spec:
-      template:
-        spec:
-          volumes:
-          - name: media
-            persistentVolumeClaim: null
-            hostPath:
-              path: /zpool/k8s/frigate/media
-  target:
-    kind: Deployment
-    name: frigate
+# - patch: |
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     metadata:
+#       name: frigate
+#     spec:
+#       template:
+#         spec:
+#           volumes:
+#           - name: media
+#             persistentVolumeClaim: null
+#             hostPath:
+#               path: /zpool/k8s/frigate/media
+  # target:
+  #   kind: Deployment
+  #   name: frigate
     
 helmCharts:
     - name: frigate

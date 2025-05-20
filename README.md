@@ -1,9 +1,14 @@
 This is my attempt to move my homelab from manual deployed using mostly docker compose and manual editing of a handful of config files, to a more modern gitops approach.
-The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, then there is a consumer desktop running a amd 5900x and quadro rtx 4000 that is used for specific workloads. I also added an ewaste tier laptop I used in college for fun.
+The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, 3 n150 mini pcs, then there is a consumer desktop running an amd 5900x and quadro rtx 4000 that is used for specific workloads. I also added an ewaste tier laptop I used in college for fun.
 
-Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to set up argocd and other core components.
+Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to configure argocd and other core components.
 
 ## Worklog
+
+### 05.20.25
+- Switched to cilium as cni and kube-proxy replacement
+  - Hoping cilium will help with maintaining source ip so that ip address rules are easier to manage
+  - Had to uninstall ip tables from the server because cilium was causing conflicts. Otherwise networking was broke on server pods
 
 ### 05.13.25
 - otel working to gather logs and pass to vmlogs
