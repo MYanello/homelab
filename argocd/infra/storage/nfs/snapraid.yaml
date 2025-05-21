@@ -8,7 +8,7 @@ metadata:
   labels:
     name: snapraid-storage
   annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
+    storageclass.kubernetes.io/is-default-class: "false"
 spec:
   syncPolicy:
     automated:
@@ -22,7 +22,7 @@ spec:
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
     targetRevision: '4.0.18'
     helm:
-      releaseName: nfs-storage
+      releaseName: snapraid-storage
       valuesObject:
         nfs:
           server: marcus-server.lan
