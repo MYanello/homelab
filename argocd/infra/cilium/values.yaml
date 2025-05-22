@@ -1,4 +1,4 @@
-kubeProxyReplacement: true
+kubeProxyReplacement: strict
 
 ingressController:
   enabled: false
