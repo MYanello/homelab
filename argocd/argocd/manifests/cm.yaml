@@ -25,6 +25,13 @@ data:
       name: authentik
       type: oidc
       id: authentik
+  resource.exclusions: |
+    - apiGroups:
+      - cilium.io
+      kinds:
+      - CiliumIdentity
+      clusters:
+      - "*"
 ---
 apiVersion: v1
 kind: ConfigMap
