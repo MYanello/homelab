@@ -12,8 +12,8 @@ metadata:
   name: it-tools-http-route
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - tools.yanello.net
