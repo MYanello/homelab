@@ -10,7 +10,7 @@ spec:
   listeners:
     - name: http
       protocol: HTTP
-      hostname: "*.yanello.net"
+      hostname: "*.yanello.internal"
       port: 80
       allowedRoutes:
         namespaces:
@@ -19,7 +19,7 @@ spec:
           - kind: HTTPRoute
     - name: http-root
       protocol: HTTP
-      hostname: "yanello.net"
+      hostname: "yanello.internal"
       port: 80
       allowedRoutes:
         namespaces:
@@ -28,7 +28,7 @@ spec:
           - kind: HTTPRoute
     - name: https
       protocol: HTTPS
-      hostname: "*.yanello.net"
+      hostname: "*.yanello.internal"
       port: 443
       tls:
         mode: Terminate
@@ -41,7 +41,7 @@ spec:
           - kind: HTTPRoute
     - name: https-root
       protocol: HTTPS
-      hostname: "yanello.net"
+      hostname: "yanello.internal"
       port: 443
       tls:
         mode: Terminate
