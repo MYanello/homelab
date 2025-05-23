@@ -20,6 +20,6 @@ spec:
     - argocd.yanello.net
   rules:
     - backendRefs:
-        - name: argocd-server
+        - name: argocd-server-lb
           namespace: argocd
           port: 80
