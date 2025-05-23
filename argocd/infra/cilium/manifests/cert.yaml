@@ -18,12 +18,19 @@ kind: Certificate
 metadata:
   name: cilium-ingress-cert
 spec:
-  commonName: yanello.net
+  commonName: yanello.internal
   dnsNames:
-  - "*.yanello.net"
-  - yanello.net
+  - "*.yanello.internal"
+  - yanello.internal
   secretName: cilium-ingress-cert
   issuerRef:
-    name: letsencrypt-prod
+    name: cilium-issuer
     kind: ClusterIssuer
     group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cilium-issuer
+spec:
+  selfSigned: {}
