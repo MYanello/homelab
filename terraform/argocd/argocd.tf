@@ -53,7 +53,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             ]
             "managedNamespaceMetadata" = {
               "labels" : {
-                "istio-injection" = "enabled"
+                "istio-injection" = "disabled"
               }
             }
           }
@@ -109,7 +109,7 @@ resource "kubernetes_manifest" "argocd_dev_appset" {
             ]
             "managedNamespaceMetadata" = {
               "labels" : {
-                "istio-injection" = "disabled"
+                "istio-injection" = "enabled"
               }
             }
           }
