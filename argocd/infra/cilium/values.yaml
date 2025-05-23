@@ -33,3 +33,7 @@ envoy:
       
 hubble:
   enabled: true
+  ui:
+    enabled: true
+  relay:
+    enabled: true
