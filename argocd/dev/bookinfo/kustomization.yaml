@@ -5,7 +5,7 @@ labels:
   - includeSelectors: false
     pairs:
       backstage.io/kubernetes-id: bookinfo-dev
-      istio-injection: enable
+      istio-injection: enabled
 resources:
   - ./platform/kube/bookinfo.yaml
   - ./gateway-api/bookinfo-gateway.yaml
