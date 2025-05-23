@@ -6,7 +6,7 @@ resources:
   - manifests/service.yaml
   - manifests/pvc.yaml
   - manifests/net-policy.yaml
-  - manifests/http-route.yaml
+  #- manifests/http-route.yaml
   - manifests/ns.yaml
   
 generators:

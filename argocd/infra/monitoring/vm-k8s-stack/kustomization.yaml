@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ./manifests/http-route.yaml
+ # - ./manifests/http-route.yaml
   - ./manifests/dashboards/power-dash.yaml
   - ./manifests/dashboards/istio-dash.yaml
   - ./manifests/vmscrape/homeassistant.yaml

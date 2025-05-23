@@ -23,27 +23,27 @@ spec:
       namespace: calibre
       port: 8083
       
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  annotations:
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "CalibreDL"
-    gethomepage.dev/icon: mdi-folder-download-outline
-    gethomepage.dev/description: "An intuitive web interface for searching and requesting book downloads."
-    gethomepage.dev/pod-selector: app=calibre-dl 
-  name: calibre-dl-httproute
-spec:
-  parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
-  hostnames:
-  - calibre-dl.yanello.net
-  rules:
-  - backendRefs:
-    - name: calibre-dl
-      namespace: calibre
-      port: 8084
+# ---
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   annotations:
+#     gethomepage.dev/enabled: "true"
+#     gethomepage.dev/name: "CalibreDL"
+#     gethomepage.dev/icon: mdi-folder-download-outline
+#     gethomepage.dev/description: "An intuitive web interface for searching and requesting book downloads."
+#     gethomepage.dev/pod-selector: app=calibre-dl 
+#   name: calibre-dl-httproute
+# spec:
+#   parentRefs:
+#   - name: gateway-api
+#     namespace: istio-system
+#     sectionName: https
+#   hostnames:
+#   - calibre-dl.yanello.net
+#   rules:
+#   - backendRefs:
+#     - name: calibre-dl
+#       namespace: calibre
+#       port: 8084
       
