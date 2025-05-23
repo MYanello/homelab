@@ -13,6 +13,7 @@ spec:
       name: bgppeers.metallb.io
       jqPathExpressions:
         - .spec.versions[] | select(.name == "validation.istio.io") | .failurePolicy
+        - .spec.conversion.webhook.clientConfig.caBundle
   destination:
     name: in-cluster
     namespace: manifests
