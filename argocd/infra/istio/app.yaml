@@ -69,7 +69,7 @@ spec:
                       operator: In
                       values:
                         - amd64
---- # dont need ingress gateway anymore
+# dont need ingress gateway anymore
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
