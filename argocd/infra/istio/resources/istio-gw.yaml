@@ -108,3 +108,51 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: istio-resources
+    gateway.istio.io/managed: istio.io-gateway-controller
+    gateway.networking.k8s.io/gateway-name: gateway-api
+  name: gateway-api-istio
+  namespace: istio-system
+  ownerReferences:
+  - apiVersion: gateway.networking.k8s.io/v1beta1
+    kind: Gateway
+    name: gateway-api
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.43.225.53
+  clusterIPs:
+  - 10.43.225.53
+  externalTrafficPolicy: Local
+  healthCheckNodePort: 32509
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: PreferDualStack
+  loadBalancerIP: 10.10.8.1
+  ports:
+  - appProtocol: tcp
+    name: status-port
+    nodePort: 32418
+    port: 15021
+    protocol: TCP
+    targetPort: 15021
+  - appProtocol: http
+    name: http
+    nodePort: 31843
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - appProtocol: https
+    name: https
+    nodePort: 31137
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    gateway.networking.k8s.io/gateway-name: gateway-api
+  type: LoadBalancer
