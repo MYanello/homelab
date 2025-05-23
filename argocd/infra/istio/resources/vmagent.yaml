@@ -1,3 +1,9 @@
+
+###
+# Set up some vm resources for metrics fanciness
+###
+
+
 ---
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMPodScrape

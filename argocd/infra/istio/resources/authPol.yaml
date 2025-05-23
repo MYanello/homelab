@@ -16,6 +16,8 @@ spec:
               - "10.0.0.0/8"
               - "172.16.0.0/12"
               - "192.168.0.0/16"
+# disabled for now because source ip is not being preserved properly
+
     # Allow WAN traffic only to specific subdomains
     # - from:
     #     - source:

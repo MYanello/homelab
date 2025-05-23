@@ -8,7 +8,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  ignoreDifferences:
+  ignoreDifferences: # for argocd to ignore the field and stay in sync
     - group: admissionregistration.k8s.io
       kind: ValidatingWebhookConfiguration
       name: istiod-default-validator
@@ -37,7 +37,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  ignoreDifferences:
+  ignoreDifferences:  # for argocd to ignore the field and stay in sync
     - group: admissionregistration.k8s.io
       kind: ValidatingWebhookConfiguration
       name: istio-validator-istio-system
@@ -69,7 +69,7 @@ spec:
                       operator: In
                       values:
                         - amd64
----
+--- # dont need ingress gateway anymore
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
@@ -133,7 +133,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-resources
+  name: istio-resources # general app for additional istio resources not provided by helm
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -156,7 +156,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-external
+  name: istio-external # app to make services external to k8s known
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io

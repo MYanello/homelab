@@ -25,7 +25,7 @@ spec:
   - "*.yanello.net"
   - yanello.net
   secretName: default-ingress-cert
-  issuerRef:
+  issuerRef: # clusterissuer definition in infra/cert-manager/manifests/resources.yaml
     name: letsencrypt-prod
     kind: ClusterIssuer
     group: cert-manager.io

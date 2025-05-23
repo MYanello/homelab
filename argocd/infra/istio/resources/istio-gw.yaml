@@ -2,11 +2,9 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: gateway-api
-  annotations:
-    proxy.istio.io/config: '{"gatewayTopology" : { "numTrustedProxies": 0 } }'
 spec:
   addresses:
-    - value: 10.10.8.1
+    - value: 10.10.8.1 # the ip of the load balancer service
       type: IPAddress
   gatewayClassName: istio
   listeners:
@@ -19,7 +17,7 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
-    - name: http-root
+    - name: http-root # need a separate listener for the root domain
       protocol: HTTP
       hostname: "yanello.net"
       port: 80
@@ -33,7 +31,7 @@ spec:
       hostname: "*.yanello.net"
       port: 443
       tls:
-        mode: Terminate
+        mode: Terminate # terminate at the edge gateway for now. mtls from gateway to services should be possible
         certificateRefs:
           - name: default-ingress-cert
       allowedRoutes:
@@ -41,7 +39,7 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
-    - name: https-root
+    - name: https-root # need a separate listener for the root domain
       protocol: HTTPS
       hostname: "yanello.net"
       port: 443
@@ -58,10 +56,10 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: http-redirect
+  name: http-redirect # send http traffic to the https listener
 spec:
   parentRefs:
-    - name: gateway-api
+    - name: gateway-api # what gateway is this route for
       sectionName: http
   hostnames:
     - "*.yanello.net"
@@ -93,7 +91,7 @@ spec:
 #           from: All
 ---
 apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
+kind: HorizontalPodAutoscaler # we want to have extra gateways so I can reboot my servers
 metadata:
   name: gateway
 spec:
