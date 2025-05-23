@@ -41,9 +41,9 @@ hubble:
 
 
 # # here down is possibly chat gipitee hallucinated
-loadbalancerMode: shared
-loadBalancer:
-  mode: shared
+# loadbalancerMode: shared
+# loadBalancer:
+#   mode: shared
 
 # bgp:
 #   enabled: false
