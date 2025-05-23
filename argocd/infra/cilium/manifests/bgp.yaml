@@ -8,30 +8,40 @@ spec:
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPClusterConfig
+# Defines bgp config for 1+ nodes in the cluster 
 metadata:
-  name: tor
+  name: config
 spec:
   bgpInstances:
   - name: "instance-65001"
-    localASN: 64512
+    localASN: 64513
     peers:
-    - name: "peer-65000-tor"
+    - name: opnsense
       peerASN: 65551
       peerAddress: 192.168.10.1
       peerConfigRef:
-        name: opn-peer
+        name: opn-peer # matches CiliumBGPPeerConfig
 ---
-apiVersion: "cilium.io/v2alpha1"
+apiVersion: cilium.io/v2
 kind: CiliumBGPPeerConfig
 metadata:
   name: opn-peer
 spec:
+  timers:
+    holdTimeSeconds: 9
+    keepAliveTimeSeconds: 3
+    connectRetryTimeSeconds: 5
+ # authSecretRef: bgp-auth-secret # configs tcp md5 password
+  # ebgpMultihop: 4 # specify ttl
+  gracefulRestart:
+    enabled: true
+    restartTimeSeconds: 15
   families:
     - afi: ipv4
       safi: unicast
       advertisements:
         matchLabels:
-          advertise: "generic"
+          advertise: "bgp"
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPAdvertisement
