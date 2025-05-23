@@ -118,7 +118,7 @@ metadata:
     gateway.networking.k8s.io/gateway-name: gateway-api
   name: gateway-api-istio
   ownerReferences:
-  - apiVersion: gateway.networking.k8s.io/v1beta1
+  - apiVersion: gateway.networking.k8s.io/v1
     kind: Gateway
     name: gateway-api
 spec:
