@@ -40,13 +40,13 @@ hubble:
     enabled: true
 
 
-# here down is possibly chat gipitee hallucinated
-loadbalancerMode: shared
-loadBalancer:
-  algorithm: maglev
-  mode: shared
+# # here down is possibly chat gipitee hallucinated
+# loadbalancerMode: shared
+# loadBalancer:
+#   algorithm: maglev
+#   mode: shared
 
-bgp:
-  enabled: false
-  announce:
-    loadBalancerIP: false
+# bgp:
+#   enabled: false
+#   announce:
+#     loadBalancerIP: false
