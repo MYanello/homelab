@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   #- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
   - manifests/cert.yaml
-  # - manifests/gateway.yaml
+  - manifests/gateway.yaml
   # - manifests/bgp.yaml
 
 helmCharts:
