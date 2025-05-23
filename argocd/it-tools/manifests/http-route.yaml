@@ -16,7 +16,7 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - tools.yanello.net
+    - tools.yanello.internal
   rules:
     - backendRefs:
         - name: it-tools
