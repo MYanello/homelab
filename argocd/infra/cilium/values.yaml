@@ -10,6 +10,7 @@ ingressController:
       
 externalIPs:
   enabled: true
+  strictARP: true
 l2announcements:
   enabled: true
 rollOutCiliumPods: true
@@ -39,3 +40,6 @@ hubble:
     enabled: true
 
 loadbalancerMode: shared
+loadBalancer:
+  algorithm: maglev
+  mode: dsr
