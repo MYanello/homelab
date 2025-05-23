@@ -3,6 +3,5 @@ resources:
   - ./manifests/cm.yaml
   - ./manifests/httproute.yaml
   - ./manifests/deploy.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 generators:
   - ./manifests/secret-generator.yaml
