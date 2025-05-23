@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
 - deploy.yaml
 - service.yaml
-- httproute.yaml
+#- httproute.yaml
