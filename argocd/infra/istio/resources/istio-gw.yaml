@@ -117,16 +117,12 @@ metadata:
     gateway.istio.io/managed: istio.io-gateway-controller
     gateway.networking.k8s.io/gateway-name: gateway-api
   name: gateway-api-istio
-  namespace: istio-system
   ownerReferences:
   - apiVersion: gateway.networking.k8s.io/v1beta1
     kind: Gateway
     name: gateway-api
 spec:
   allocateLoadBalancerNodePorts: true
-  clusterIP: 10.43.225.53
-  clusterIPs:
-  - 10.43.225.53
   externalTrafficPolicy: Local
   healthCheckNodePort: 32509
   internalTrafficPolicy: Cluster
