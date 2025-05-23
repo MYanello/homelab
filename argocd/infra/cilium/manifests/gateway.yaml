@@ -3,6 +3,9 @@ kind: Gateway
 metadata:
   name: cilium-gateway
 spec:
+  addresses:
+    - value: 10.10.8.100
+      type: IPAddress
   gatewayClassName: cilium
   listeners:
     - name: http
