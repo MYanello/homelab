@@ -39,7 +39,14 @@ hubble:
   relay:
     enabled: true
 
+
+# here down is possibly chat gipitee hallucinated
 loadbalancerMode: shared
 loadBalancer:
   algorithm: maglev
-  mode: dsr
+  mode: shared
+
+bgp:
+  enabled: false
+  announce:
+    loadBalancerIP: false
