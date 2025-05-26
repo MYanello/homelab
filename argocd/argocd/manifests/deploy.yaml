@@ -102,7 +102,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /shared/argocd-dex
-        image: quay.io/argoproj/argocd:v2.14.11@sha256:5fc69e31c755fc0209c6eb66f6280ece558990bfb77704795e0e939b6bb6f434
+        image: quay.io/argoproj/argocd:v2.14.12@sha256:f70f552dd85c8fab62f6adcb560819e4b596908e4a016c3a15fc13a8e35b5d17
         imagePullPolicy: Always
         name: copyutil
         resources: {}
