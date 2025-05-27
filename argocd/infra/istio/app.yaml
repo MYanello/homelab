@@ -59,6 +59,11 @@ spec:
     chart: istiod
     helm:
       valuesObject:
+        gatewayClasses:
+          gateway-api-istio:
+            service:
+              spec:
+                externalTrafficPolicy: Local
         affinity:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
