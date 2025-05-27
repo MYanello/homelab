@@ -1,7 +1,7 @@
 server:
   persistentVolume:
     enabled: true
-    storageClassName: longhorn
+    storageClassName: snapraid
     vmServiceScrape:
       enabled: true
   retentionPeriod: 3d

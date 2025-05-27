@@ -69,6 +69,54 @@ spec:
                       operator: In
                       values:
                         - amd64
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-resources # general app for additional istio resources not provided by helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: istio-system
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+    path: argocd/infra/istio/resources
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-external # app to make services external to k8s known
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: istio-system
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/myanello/homelab.git
+    targetRevision: HEAD
+    path: argocd/infra/istio/external
+---
+
 # dont need ingress gateway anymore
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
@@ -130,50 +178,3 @@ spec:
 #                       values:
 #                         - amd64
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: istio-resources # general app for additional istio resources not provided by helm
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    name: in-cluster
-    namespace: istio-system
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    repoURL: https://github.com/myanello/homelab.git
-    targetRevision: HEAD
-    path: argocd/infra/istio/resources
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: istio-external # app to make services external to k8s known
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    name: in-cluster
-    namespace: istio-system
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    repoURL: https://github.com/myanello/homelab.git
-    targetRevision: HEAD
-    path: argocd/infra/istio/external
----
-
