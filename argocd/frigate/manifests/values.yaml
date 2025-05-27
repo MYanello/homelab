@@ -14,7 +14,7 @@ persistence:
 envFromSecrets:
   - frigate-secrets
 coral:
-  enabled: false
+  enabled: true
   hostPath: /dev/apex_0
 gpu:
   nvidia:
@@ -44,11 +44,11 @@ config: |
     password: "{FRIGATE_MQTT_PASSWORD}"
 
   detectors:
-    # coral:
-    #   type: edgetpu
-    #   device: pci:0
-    cpu1:
-      type: cpu
+    coral:
+      type: edgetpu
+      device: pci:0
+    #cpu1:
+    #  type: cpu
 
   model:
     labelmap:
