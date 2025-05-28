@@ -3,10 +3,6 @@ kind: Gateway
 metadata:
   name: gateway-api
 spec:
-  infrastructure:
-    parametersRef:
-      service:
-        externalTrafficPolicy: local
   addresses:
     - value: 10.10.8.1 # the ip of the load balancer service
       type: IPAddress
