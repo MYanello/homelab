@@ -1,7 +1,0 @@
-installCRDs: true
-featureGates: NameConstraints=true
-webhook:
-  featureGates: NameConstraints=true
-extraArgs:
-  - --dns01-recursive-nameservers-only
-  - --dns01-recursive-nameservers=8.8.8.8:53

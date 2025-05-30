@@ -10,4 +10,16 @@ helmCharts:
     version: "v1.17.2"
     releaseName: cert-manager
     namespace: cert-manager
-    valuesFile: values.yaml
+    valuesInline: 
+      installCRDs: true
+      featureGates: NameConstraints=true
+      webhook:
+        featureGates: NameConstraints=true
+      extraArgs:
+        - --dns01-recursive-nameservers-only
+        - --dns01-recursive-nameservers=8.8.8.8:53
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+    
