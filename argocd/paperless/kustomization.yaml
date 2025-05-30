@@ -19,3 +19,4 @@ resources:
 - manifests/service.yaml
 #- manifests/sts.yaml
 - manifests/http-route.yaml
+- manifests/esecret.yaml
