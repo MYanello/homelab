@@ -4,6 +4,9 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, 3 n150
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to configure argocd and other core components.
 
 ## Worklog
+### 05.29.25
+- Got external secrets operator working with bitwarden
+  - Seems cool, likely won't use due to pricing from provider and no issues with sops incluster
 
 ### 05.20.25
 - Switched to cilium as cni and kube-proxy replacement
