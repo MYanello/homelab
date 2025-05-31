@@ -19,9 +19,8 @@ spec:
     metadata:
       labels:
         app: plex
-      annotations: {}
     spec:
-      hostNetwork: true
+      hostNetwork: false
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -54,6 +53,8 @@ spec:
               memory: 8Gi
             requests:
               nvidia.com/gpu: "1"
+              cpu: "1"
+              memory: 1Gi
           ports:
             - containerPort: 32400 # < required network portnumber. See https://hub.docker.com/r/linuxserver/plex
               name: pms-web # < reference name from the port in the service yaml
