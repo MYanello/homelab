@@ -10,7 +10,7 @@ ingressController:
       
 externalIPs:
   enabled: true
-  strictARP: true
+  #strictARP: true
 l2announcements:
   enabled: true
 rollOutCiliumPods: true
@@ -44,7 +44,5 @@ hubble:
 # loadBalancer:
 #   mode: shared
 
-# bgp:
-#   enabled: false
-#   announce:
-#     loadBalancerIP: false
+bgpControlPlane:
+  enabled: true
