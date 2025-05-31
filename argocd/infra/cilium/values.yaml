@@ -45,4 +45,4 @@ hubble:
 #   mode: shared
 
 bgpControlPlane:
-  enabled: true
+  enabled: false
