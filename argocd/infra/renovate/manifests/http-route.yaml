@@ -19,4 +19,3 @@ spec:
     - name: mend-renovate-ce
       namespace: renovate
       port: 8080
-      
