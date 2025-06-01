@@ -31,7 +31,9 @@ gatewayAPI:
 
 loadBalancer:
   mode: dsr
-  
+  dsrDispatch: opt
+routingMode: native
+
 envoy:
   securityContext:
     capabilities:
