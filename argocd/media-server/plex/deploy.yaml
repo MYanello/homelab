@@ -20,7 +20,7 @@ spec:
       labels:
         app: plex
     spec:
-      hostNetwork: false
+      hostNetwork: true
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
