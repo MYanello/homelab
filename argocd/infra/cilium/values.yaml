@@ -25,6 +25,9 @@ k8sServicePort: 6443
 devices: eth0
 gatewayAPI:
   enabled: true
+  xffNumTrustedHops: 1
+  # enableProxyProtocol: ""
+  # externalTrafficPolicy: Local
   
 envoy:
   securityContext:
@@ -37,12 +40,6 @@ hubble:
     enabled: true
   relay:
     enabled: true
-
-
-# # here down is possibly chat gipitee hallucinated
-# loadbalancerMode: shared
-# loadBalancer:
-#   mode: shared
 
 bgpControlPlane:
   enabled: true
