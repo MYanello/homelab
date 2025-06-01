@@ -4,6 +4,9 @@ metadata:
   name: cilium-gateway
 spec:
   gatewayClassName: cilium
+  addresses:
+    - value: 10.10.8.100 # the ip of the load balancer service
+      type: IPAddress
   listeners:
     - name: http
       protocol: HTTP
