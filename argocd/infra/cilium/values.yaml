@@ -14,7 +14,6 @@ ingressController:
 # l2announcements:
 #   enabled: true
 rollOutCiliumPods: true
-#ipv4NativeRoutingCIDR: 10.10.8.0/22
 
 ipam:
   operator:
@@ -33,6 +32,12 @@ loadBalancer:
   mode: dsr
   dsrDispatch: opt
 routingMode: native
+ipv4:
+  enabled: true
+ipMasqAgent:
+  enabled: false
+enableIPv4Masquerade: true
+ipv4NativeRoutingCIDR: 10.10.8.0/22
 
 envoy:
   securityContext:
