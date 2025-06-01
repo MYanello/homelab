@@ -28,6 +28,9 @@ gatewayAPI:
   xffNumTrustedHops: 1
   # enableProxyProtocol: ""
   # externalTrafficPolicy: Local
+
+loadBalancer:
+  mode: dsr
   
 envoy:
   securityContext:
