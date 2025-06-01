@@ -12,6 +12,7 @@ metadata:
   name: argocd-server-lb
   annotations:
     metallb.io/loadBalancerIPs: 10.10.8.4
+    lbipam.cilium.io/ips: 10.10.8.4
 spec:
   ports:
     - name: http
