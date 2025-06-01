@@ -5,6 +5,31 @@ metadata:
 spec:
   cidrs:
   - cidr: "172.16.12.0/22"
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPPeeringPolicy
+metadata:
+  name: bgp-peering-policy-worker
+spec:
+  serviceSelector: # this replaces address-pools, instead of defining the range of IPs that can be assigned to LoadBalancer services, now services have to match below selectors for their LB IPs to be announced
+    matchExpressions:
+      - {key: io.cilium/bgp, operator: NotIn, values: ["deny", "false"]}
+      - {key: io.cilium/internal, operator: NotIn, values: ["true"]}
+  virtualRouters:
+    - localASN: 64512 # Use your cluster's ASN here!
+      serviceSelector: # Delete this line to allow all LoadBalancers
+        matchExpressions: # Delete this line to allow all LoadBalancers
+          - {key: "io.cilium/bgp-announce", operator: NotIn, values: ['fakevalue']} # This will allow all `LoadBalancers`
+      neighbors:
+        - peerAddress: '192.168.10.1/32' # This should be the IP of your Opnsense Router, the /32 should be included as CIDR notation is required.
+          peerASN: 65551 # Set this to the ASN delegated to your Opnsense Router
+          eBGPMultihopTTL: 10
+          connectRetryTimeSeconds: 120
+          holdTimeSeconds: 90
+          keepAliveTimeSeconds: 30
+          gracefulRestart:
+            enabled: true
+            restartTimeSeconds: 120
 # ---
 # apiVersion: "cilium.io/v2alpha1"
 # kind: CiliumBGPClusterConfig
