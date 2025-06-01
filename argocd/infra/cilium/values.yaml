@@ -8,17 +8,17 @@ ingressController:
     annotations:
       io.cilium/lb-ipam-ips: 10.10.12.0/22
       
-externalIPs:
-  enabled: true
+# externalIPs:
+#   enabled: true
   #strictARP: true
-l2announcements:
-  enabled: true
+# l2announcements:
+#   enabled: true
 rollOutCiliumPods: true
-ipv4NativeRoutingCIDR: 10.10.8.0/22
+#ipv4NativeRoutingCIDR: 10.10.8.0/22
 
-ipam:
-  operator:
-    clusterPoolIPv4PodCIDRList: 10.42.0.0/16
+# ipam:
+#   operator:
+#     clusterPoolIPv4PodCIDRList: 10.42.0.0/16
     
 k8sServiceHost: 192.168.10.100
 k8sServicePort: 6443
