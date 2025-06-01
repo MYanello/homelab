@@ -6,7 +6,7 @@ resources:
   - manifests/cert.yaml
   - manifests/gateway.yaml
   - manifests/bgp.yaml
-
+  - manifests/httpRoute.yaml
 helmCharts:
   - name: cilium
     repo: https://helm.cilium.io
