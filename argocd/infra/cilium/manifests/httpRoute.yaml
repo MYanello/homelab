@@ -14,7 +14,7 @@ spec:
   parentRefs:
   - name: cilium-gateway
     namespace: cilium
-    sectionName: http
+    sectionName: https
   hostnames:
   - hubble.yanello.internal
   rules:
