@@ -4,7 +4,7 @@ metadata:
   name: gateway-api
 spec:
   addresses:
-    - value: 10.10.8.1 # the ip of the load balancer service
+    - value: 10.10.8.2 # the ip of the load balancer service
       type: IPAddress
   gatewayClassName: istio
   listeners:

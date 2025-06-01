@@ -1,21 +1,9 @@
-apiVersion: "cilium.io/v2alpha1"
-kind: CiliumLoadBalancerIPPool
-metadata:
-  name: "pool"
-spec:
-  disabled: false
-  blocks:
-  - cidr: "10.10.8.0/22"
----
+
 apiVersion: cilium.io/v2alpha1
 kind: CiliumBGPPeeringPolicy
 metadata:
   name: bgp-peering-policy-worker
 spec:
-  # serviceSelector: # this replaces address-pools, instead of defining the range of IPs that can be assigned to LoadBalancer services, now services have to match below selectors for their LB IPs to be announced
-  #   matchExpressions:
-  #     - {key: io.cilium/bgp, operator: NotIn, values: ["deny", "false"]}
-  #     - {key: io.cilium/internal, operator: NotIn, values: ["true"]}
   virtualRouters:
     - localASN: 64512 # Use your cluster's ASN here!
       serviceSelector: # Delete this line to allow all LoadBalancers
@@ -30,56 +18,14 @@ spec:
           keepAliveTimeSeconds: 30
           gracefulRestart:
             enabled: true
-            restartTimeSeconds: 120
-# ---
-# apiVersion: "cilium.io/v2alpha1"
-# kind: CiliumBGPClusterConfig
-# # Defines bgp config for 1+ nodes in the cluster 
-# metadata:
-#   name: config
-# spec:
-#   bgpInstances:
-#   - name: "cilium-instance"
-#     localASN: 64513
-#     peers:
-#     - name: opnsense
-#       peerASN: 65551
-#       peerAddress: 192.168.10.1
-#       peerConfigRef:
-#         name: opn-peer # matches CiliumBGPPeerConfig
-# ---
-# apiVersion: cilium.io/v2
-# kind: CiliumBGPPeerConfig
-# metadata:
-#   name: opn-peer
-# spec:
-#   timers:
-#     holdTimeSeconds: 9
-#     keepAliveTimeSeconds: 3
-#     connectRetryTimeSeconds: 5
-#  # authSecretRef: bgp-auth-secret # configs tcp md5 password
-#   # ebgpMultihop: 4 # specify ttl
-#   gracefulRestart:
-#     enabled: true
-#     restartTimeSeconds: 15
-#   families:
-#     - afi: ipv4
-#       safi: unicast
-#       advertisements:
-#         matchLabels:
-#           advertise: "bgp"
-# ---
-# apiVersion: "cilium.io/v2alpha1"
-# kind: CiliumBGPAdvertisement
-# metadata:
-#   name: services
-#   labels:
-#     advertise: generic
-# spec:
-#   advertisements:
-#     - advertisementType: "PodCIDR"
-#     - advertisementType: "Service"
-#       service:
-#         addresses:
-#           - LoadBalancerIP
-# ---
+            restartTimeSeconds: 12
+---
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "pool"
+spec:
+  disabled: false
+  blocks:
+  - cidr: "10.10.8.0/22"
+---
