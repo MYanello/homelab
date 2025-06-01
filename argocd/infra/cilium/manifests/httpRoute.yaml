@@ -20,6 +20,5 @@ spec:
   rules:
   - backendRefs:
     - name: hubble-ui
-      namespace: cilium
-      port: 80
+      port: 8081
       
