@@ -3,7 +3,8 @@ kind: CiliumLoadBalancerIPPool
 metadata:
   name: "pool"
 spec:
-  cidrs:
+  disabled: false
+  blocks:
   - cidr: "172.16.12.0/22"
 ---
 apiVersion: cilium.io/v2alpha1
