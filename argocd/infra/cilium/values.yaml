@@ -31,7 +31,7 @@ gatewayAPI:
 # loadBalancer:
 #   mode: dsr
 #   dsrDispatch: opt
-routingMode: native
+# routingMode: native
 # ipv4:
 #   enabled: true
 # ipMasqAgent:
