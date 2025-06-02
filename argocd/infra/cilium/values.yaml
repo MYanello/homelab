@@ -28,10 +28,10 @@ gatewayAPI:
   # enableProxyProtocol: ""
   # externalTrafficPolicy: Local
 
-# loadBalancer:
-#   mode: dsr
-#   dsrDispatch: opt
-# routingMode: native
+loadBalancer:
+  mode: dsr
+  dsrDispatch: opt
+routingMode: native
 # ipv4:
 #   enabled: true
 # ipMasqAgent:
