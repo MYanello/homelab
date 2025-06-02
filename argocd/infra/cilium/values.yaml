@@ -28,9 +28,9 @@ gatewayAPI:
   # enableProxyProtocol: ""
   # externalTrafficPolicy: Local
 
-loadBalancer:
-  mode: dsr
-  dsrDispatch: opt
+# loadBalancer:
+#   mode: dsr
+#   dsrDispatch: opt
 routingMode: native
 # ipv4:
 #   enabled: true
