@@ -24,7 +24,7 @@ k8sServicePort: 6443
 devices: eth0
 gatewayAPI:
   enabled: true
-  # xffNumTrustedHops: 2
+  xffNumTrustedHops: 2
   # enableProxyProtocol: ""
   # externalTrafficPolicy: Local
 
