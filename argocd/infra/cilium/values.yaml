@@ -32,6 +32,7 @@ loadBalancer:
   mode: dsr
   dsrDispatch: opt
 routingMode: native
+tunnel: disabled
 # ipv4:
 #   enabled: true
 # ipMasqAgent:
