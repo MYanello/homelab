@@ -37,7 +37,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: lscr.io/linuxserver/overseerr:latest@sha256:01d48e366fe6ae89a2d09e89b7bf171bb391b8bf279c15cd0fb2efd1523692b7
+          image: lscr.io/linuxserver/overseerr:latest@sha256:e958969abc43216ad371266c794e224a4f81cc25af0146ece314ded58520678b
           imagePullPolicy: IfNotPresent
           name: overseerr
           resources:
