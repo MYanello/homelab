@@ -1,14 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: netshoot
+  name: node
   labels:
-    app: netshoot
+    app: node
 spec:
+  imagePullSecrets:
+    - name: iron-bank-bot-secret
   containers:
-  - name: nettools
-    image: garethgeorge/backrest:1.8.0@sha256:b98a3cd1a9ab7cfe5dc322d5a66e64194cf8042a976e8906df2466e0bec9c744
+  - name: node
+    image: registry1.dso.mil/ironbank/opensource/nodejs/nodejs18:18.20@sha256:8a0216e3095dec0dc640c4ca469b6c6eca2044f530b038cfaf2aee7439248bd6 
     command: ["/bin/sh", "-c", "sleep infinity"]
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
     resources:
       requests:
         memory: "64Mi"
@@ -16,11 +21,20 @@ spec:
       limits:
         memory: "128Mi"
         cpu: "500m"
-    volumeMounts:
-      - name: data-vol
-        mountPath: /data
+    # volumeMounts:
+    #   - name: data-vol
+    #     mountPath: /data
   restartPolicy: Never
-  volumes:
-    - name: data-vol
-      persistentVolumeClaim:
-        claimName: pgdata-postgres-0
+  # volumes:
+  #   - name: data-vol
+  #     persistentVolumeClaim:
+  #       claimName: pgdata-postgres-0
+---
+apiVersion: devops.rescale.com/v1beta1
+kind: AllowedImage
+metadata:
+  name: node
+spec:
+  digest: sha256:8a0216e3095dec0dc640c4ca469b6c6eca2044f530b038cfaf2aee7439248bd6
+  image: registry1.dso.mil/ironbank/opensource/nodejs/nodejs18
+  tag: '18.20'

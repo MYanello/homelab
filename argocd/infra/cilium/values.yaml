@@ -7,12 +7,7 @@ ingressController:
   service:
     annotations:
       io.cilium/lb-ipam-ips: 10.10.8.0/22
-      
-# externalIPs:
-#   enabled: true
-  #strictARP: true
-# l2announcements:
-#   enabled: true
+
 rollOutCiliumPods: true
 
 ipam:
@@ -25,21 +20,14 @@ devices: eth0
 gatewayAPI:
   enabled: true
   xffNumTrustedHops: 2
-  # enableProxyProtocol: ""
-  # externalTrafficPolicy: Local
 
 loadBalancer:
   mode: dsr
   dsrDispatch: opt
 routingMode: native
-# ipv4:
-#   enabled: true
-# ipMasqAgent:
-#   enabled: false
 enableIPv4Masquerade: true
 ipv4NativeRoutingCIDR: 10.42.0.0/16
 autoDirectNodeRoutes: true
-
 
 envoy:
   securityContext:
