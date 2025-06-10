@@ -379,9 +379,9 @@ packaging==24.0 \
     # via
     #   gunicorn
     #   opentelemetry-instrumentation-flask
-prometheus-client==0.22.0 \
-    --hash=sha256:18da1d2241ac2d10c8d2110f13eedcd5c7c0c8af18c926e8731f04fc10cd575c \
-    --hash=sha256:c8951bbe64e62b96cd8e8f5d917279d1b9b91ab766793f33d4dce6c228558713
+prometheus-client==0.22.1 \
+    --hash=sha256:190f1331e783cf21eb60bca559354e0a4d4378facecf78f5428c39b675d20d28 \
+    --hash=sha256:cca895342e308174341b2cbf99a56bef291fbc0ef7b9e5412a0f26d653ba7094
     # via -r requirements.in
 requests==2.32.4 \
     --hash=sha256:27babd3cda2a6d50b30443204ee89830707d396671944c998b5975b031ac2b2c \
