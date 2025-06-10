@@ -12,12 +12,36 @@ metadata:
   name: maintainerr-http-route
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-gateway #gateway-api
+      namespace: cilium #istio-system
       sectionName: https
   hostnames:
-    - maintainerr.yanello.net
+    - maintainerr.yanello.internal
   rules:
     - backendRefs:
         - name: maintainerr
           port: 6246
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   # annotations:
+#   #   gethomepage.dev/enabled: "true"
+#   #   gethomepage.dev/name: Immich
+#   #   gethomepage.dev/icon: immich
+#   #   gethomepage.dev/description: "High performance self-hosted photo and video management solution."
+#   #   gethomepage.dev/pod-selector: app=immich-server
+#   labels:
+#     app.kubernetes.io/name: hubble-ui
+#   name: hubble-ui-httproute
+# spec:
+#   parentRefs:
+#   - name: cilium-gateway
+#     namespace: cilium
+#     sectionName: https
+#   hostnames:
+#   - hubble.yanello.internal
+#   rules:
+#   - backendRefs:
+#     - name: hubble-ui
+#       port: 80
+      
