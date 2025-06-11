@@ -10,7 +10,7 @@ spec:
   listeners:
     - name: http
       protocol: HTTP
-      hostname: "*.yanello.internal"
+      hostname: "*.yanello.net"
       port: 80
       allowedRoutes:
         namespaces:
@@ -19,7 +19,7 @@ spec:
           - kind: HTTPRoute
     - name: http-root
       protocol: HTTP
-      hostname: "yanello.internal"
+      hostname: "yanello.net"
       port: 80
       allowedRoutes:
         namespaces:
@@ -28,12 +28,12 @@ spec:
           - kind: HTTPRoute
     - name: https
       protocol: HTTPS
-      hostname: "*.yanello.internal"
+      hostname: "*.yanello.net"
       port: 443
       tls:
         mode: Terminate
         certificateRefs:
-          - name: cilium-ingress-cert
+          - name: cilium-public
       allowedRoutes:
         namespaces:
           from: All
@@ -41,12 +41,12 @@ spec:
           - kind: HTTPRoute
     - name: https-root
       protocol: HTTPS
-      hostname: "yanello.internal"
+      hostname: "yanello.net"
       port: 443
       tls:
         mode: Terminate
         certificateRefs:
-          - name: cilium-ingress-cert
+          - name: cilium-public
       allowedRoutes:
         namespaces:
           from: All
@@ -62,8 +62,8 @@ spec:
     - name: cilium-gateway
       sectionName: http
   hostnames:
-    - "*.yanello.internal"
-    - "yanello.internal"
+    - "*.yanello.net"
+    - "yanello.net"
   rules:
     - filters:
         - type: RequestRedirect
