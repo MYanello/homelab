@@ -12,7 +12,7 @@ metadata:
   name: maintainerr-http-route
 spec:
   parentRefs:
-    - name: cilium-gateway #gateway-api
+    - name: cilium-private-gateway #gateway-api
       namespace: cilium #istio-system
       sectionName: https
   hostnames:
