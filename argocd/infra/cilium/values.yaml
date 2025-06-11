@@ -21,6 +21,7 @@ gatewayAPI:
   enabled: true
   xffNumTrustedHops: 2
 
+# for preserving source ips
 loadBalancer:
   mode: dsr
   dsrDispatch: opt
@@ -33,7 +34,7 @@ envoy:
   securityContext:
     capabilities:
       keepCapNetBindService: true
-      
+
 hubble:
   enabled: true
   ui:
