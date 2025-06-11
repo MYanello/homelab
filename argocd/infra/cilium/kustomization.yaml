@@ -5,6 +5,7 @@ resources:
   #- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
   - manifests/cert.yaml
   - manifests/privateGateway.yaml
+  - manifests/publicGateway.yaml
   - manifests/bgp.yaml
   - manifests/httpRoute.yaml
 helmCharts:
