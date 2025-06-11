@@ -12,8 +12,8 @@ metadata:
     gethomepage.dev/pod-selector: app.kubernetes.io/name=stirling-pdf-chart
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - pdf.yanello.net

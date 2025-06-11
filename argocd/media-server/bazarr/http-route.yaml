@@ -13,14 +13,13 @@ metadata:
   namespace: bazarr
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
-  - bazarr.yanello.net
+    - bazarr.yanello.net
   rules:
-  - backendRefs:
-    - name: bazarr
-      namespace: bazarr
-      port: 6767
-      
+    - backendRefs:
+        - name: bazarr
+          namespace: bazarr
+          port: 6767

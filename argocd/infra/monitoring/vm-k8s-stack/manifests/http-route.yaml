@@ -12,8 +12,8 @@ metadata:
   name: vm-httproute
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - vm.yanello.net
@@ -37,8 +37,8 @@ metadata:
   name: vmagent-httproute
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - vmagent.yanello.net
@@ -60,8 +60,11 @@ metadata:
     gethomepage.dev/pod-selector: app.kubernetes.io/name=grafana
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - grafana.yanello.net

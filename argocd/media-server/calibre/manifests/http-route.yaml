@@ -12,9 +12,9 @@ metadata:
   name: calibre-httproute
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - calibre.yanello.net
   rules:

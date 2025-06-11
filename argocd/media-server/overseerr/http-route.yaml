@@ -13,9 +13,12 @@ metadata:
   namespace: overseerr
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - overseerr.yanello.net
   rules:

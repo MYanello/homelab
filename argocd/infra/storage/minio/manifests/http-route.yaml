@@ -12,9 +12,9 @@ metadata:
   name: minio-httproute
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - minio-console.yanello.net
   rules:
@@ -33,9 +33,9 @@ metadata:
   name: minio-api-httproute
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - minio.yanello.net
   rules:

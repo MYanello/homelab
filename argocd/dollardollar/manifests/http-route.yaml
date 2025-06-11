@@ -12,8 +12,8 @@ metadata:
   name: dollardollar-http-route
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - dollar.yanello.net

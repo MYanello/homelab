@@ -12,9 +12,12 @@ metadata:
   name: immich-httproute
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - immich.yanello.net
   rules:

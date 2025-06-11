@@ -12,8 +12,11 @@ metadata:
     gethomepage.dev/pod-selector: app.kubernetes.io/name=nextcloud
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - nextcloud.yanello.net

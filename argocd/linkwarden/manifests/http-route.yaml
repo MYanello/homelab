@@ -11,9 +11,12 @@ metadata:
     gethomepage.dev/pod-selector: app=linkwarden
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - linkwarden.yanello.net
   rules:

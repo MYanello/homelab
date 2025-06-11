@@ -6,17 +6,17 @@ metadata:
   name: nepenthes
 spec:
   parentRefs:
-  - name: gateway-api
+  - name: cilium-public-gateway
     namespace: istio-system
     sectionName: https-root
-  - name: gateway-api
+  - name: cilium-public-gateway
     namespace: istio-system
     sectionName: http-root
-  - name: gateway-api
+  - name: cilium-private-gateway
     namespace: istio-system
     sectionName: http
-  - name: gateway-api
-    namespace: istio-system
+  - name: cilium-private-gateway
+    namespace: cilium
     sectionName: https
   hostnames:
   - nepenthes.yanello.net

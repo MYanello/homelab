@@ -13,8 +13,8 @@ metadata:
   namespace: argocd
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - argocd.yanello.net

@@ -12,8 +12,11 @@ metadata:
   name: resume-httproute
 spec:
   parentRefs:
-    - name: gateway-api
-      namespace: istio-system
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - rxresume.yanello.net

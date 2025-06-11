@@ -13,9 +13,9 @@ metadata:
   namespace: myspeed
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
   - myspeed.yanello.net
   rules:

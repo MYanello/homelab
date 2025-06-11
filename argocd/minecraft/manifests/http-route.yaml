@@ -9,9 +9,9 @@ metadata:
   namespace: minecraft
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
-    sectionName: minecraft
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   rules:
   - backendRefs:
     - name: mc
