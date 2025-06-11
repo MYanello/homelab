@@ -16,7 +16,7 @@ spec:
       namespace: cilium #istio-system
       sectionName: https
   hostnames:
-    - maintainerr.yanello.internal
+    - maintainerr.yanello.net
   rules:
     - backendRefs:
         - name: maintainerr
