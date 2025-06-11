@@ -8,6 +8,7 @@ resources:
   - manifests/publicGateway.yaml
   - manifests/bgp.yaml
   - manifests/httpRoute.yaml
+  - ./external
 helmCharts:
   - name: cilium
     repo: https://helm.cilium.io
