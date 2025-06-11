@@ -10,7 +10,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: qbittorrent-app
   name: qbittorrent-httproute
-  namespace: qbittorrent
 spec:
   parentRefs:
     - name: cilium-private-gateway
@@ -21,6 +20,4 @@ spec:
   rules:
   - backendRefs:
     - name: qbittorrent
-      namespace: qbittorrent
       port: 8080
-      
