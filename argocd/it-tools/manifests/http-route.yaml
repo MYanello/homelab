@@ -12,11 +12,11 @@ metadata:
   name: it-tools-http-route
 spec:
   parentRefs:
-    - name: cilium-gateway
+    - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
   hostnames:
-    - tools.yanello.internal
+    - tools.yanello.net
   rules:
     - backendRefs:
         - name: it-tools

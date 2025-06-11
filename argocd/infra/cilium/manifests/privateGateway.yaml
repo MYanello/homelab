@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: cilium-gateway
+  name: cilium-private-gateway
 spec:
   gatewayClassName: cilium
   addresses:
