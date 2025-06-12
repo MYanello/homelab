@@ -4,6 +4,12 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, 3 n150
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to configure argocd and other core components.
 
 ## Worklog
+### 06.12.25
+- Got all httproutes migrated to cilium
+- Decided to not even use the source ip auth that initially was the point of moving to cilium
+- Went with a public and private gateway instead. Locally dns resolves to the private gateway which doesn't get port forwarded to from the edge
+- Set up pis in talos for multicluster testing
+
 ### 05.29.25
 - Got external secrets operator working with bitwarden
   - Seems cool, likely won't use due to pricing from provider and no issues with sops incluster
