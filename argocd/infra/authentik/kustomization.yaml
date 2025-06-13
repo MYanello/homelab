@@ -14,7 +14,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/replicas
-        value: 1
+        value: 0
   - target:
       kind: StatefulSet
     patch: |-
