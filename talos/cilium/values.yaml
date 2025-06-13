@@ -1,0 +1,46 @@
+kubeProxyReplacement: true
+
+ingressController:
+  enabled: false
+  loadBalancerMode: shared
+  default: true
+  service:
+    annotations:
+      io.cilium/lb-ipam-ips: 10.10.200.0/22
+
+rollOutCiliumPods: true
+
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList: 10.244.0.0/16
+    
+k8sServiceHost: 192.168.10.200
+k8sServicePort: 6443
+devices: end0
+gatewayAPI:
+  enabled: true
+  xffNumTrustedHops: 2
+
+# for preserving source ips
+loadBalancer:
+  mode: dsr
+  dsrDispatch: opt
+routingMode: native
+enableIPv4Masquerade: true
+ipv4NativeRoutingCIDR: 10.244.0.0/16
+autoDirectNodeRoutes: true
+
+envoy:
+  securityContext:
+    capabilities:
+      keepCapNetBindService: true
+
+hubble:
+  enabled: true
+  ui:
+    enabled: true
+  relay:
+    enabled: true
+
+bgpControlPlane:
+  enabled: true
