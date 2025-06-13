@@ -11,10 +11,10 @@ vmagent:
     resources:
       requests:
         cpu: 150m
-        memory: 2Gi
+        memory: 500Mi
       limits:
         cpu: 500m
-        memory: 500Mi
+        memory: 2Gi
 
 
 vmsingle: 
