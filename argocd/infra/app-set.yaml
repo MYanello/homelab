@@ -15,6 +15,12 @@ spec:
   template:
     metadata:
       name: "{{path.basename}}-app"
+    ignoreDifferences: 
+      - group: admissionregistration.k8s.io
+        kind: MutatingWebhookConfiguration
+        name: vault-agent-injector-cfg
+        jqPathExpressions:
+          - .webhooks[].clientConfig.caBundle
     spec:
       project: default
       syncPolicy:
