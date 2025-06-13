@@ -85,7 +85,7 @@ redis:
 postgresql:
   enabled: true
   diagnosticMode:
-    enabled: true
+    enabled: false
   primary:
     persistence:
       enabled: true
