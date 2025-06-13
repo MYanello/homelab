@@ -7,6 +7,10 @@ global:
       memory: 512Mi
       cpu: 500m
 server:
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
   ha:
     enabled: true
     replicas: 3
