@@ -8,6 +8,13 @@ vmagent:
   spec:
     extraArgs:
       promscrape.maxScrapeSize: "32MB"
+    resources:
+      requests:
+        cpu: 150m
+        memory: 2Gi
+      limits:
+        cpu: 500m
+        memory: 500Mi
 
 
 vmsingle: 
@@ -37,10 +44,10 @@ vmsingle:
     resources:
       requests:
         cpu: 150m
-        memory: 500Mi
+        memory: 2Gi
       limits:
         cpu: 2500m
-        memory: 4Gi
+        memory: 8Gi
         
 defaultDashboards:
   annotations:
