@@ -9,10 +9,10 @@ resources:
   # - manifests/publicGateway.yaml
   # - manifests/bgp.yaml
   #- manifests/httpRoute.yaml
-helmCharts:
-  - name: cilium
-    repo: https://helm.cilium.io
-    version: "1.17.4"
-    releaseName: cilium
-    namespace: cilium
-    valuesFile: ./values.yaml
+# helmCharts:
+#   - name: cilium
+#     repo: https://helm.cilium.io
+#     version: "1.17.4"
+#     releaseName: cilium
+#     namespace: cilium
+#     valuesFile: ./values.yaml
