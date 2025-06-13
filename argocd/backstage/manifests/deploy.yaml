@@ -38,7 +38,7 @@ spec:
           envFrom:
             - secretRef:
                 name: backstage-secrets
-          image: gitea.yanello.net/marcus/backstage:latest@sha256:5b1e4e4debaa3f330a186d0d76d1c4bb5f960dda8dc5cc03daa0ccdcc7dca4a0
+          image: gitea.yanello.net/marcus/backstage:latest@sha256:c649e2b705d828de3b69d293b6d6ac787328b6a2031f86b17c4bf831cfdab087
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
