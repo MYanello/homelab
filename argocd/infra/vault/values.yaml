@@ -54,8 +54,8 @@ server:
     enabled: true
     path: "/v1/sys/health?standbyok=true"
     initialDelaySeconds: 60
-  extraEnvironmentVars:
-    VAULT_CACERT: /vault/userconfig/tls-ca/ca.crt
+  # extraEnvironmentVars:
+  #   VAULT_CACERT: /vault/userconfig/tls-ca/ca.crt
   # extraVolumes:
   #   - type: secret
   #     name: tls-server
