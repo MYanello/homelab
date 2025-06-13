@@ -36,11 +36,11 @@ envoy:
       keepCapNetBindService: true
 
 hubble:
-  enabled: true
+  enabled: false
   ui:
-    enabled: true
+    enabled: false
   relay:
-    enabled: true
+    enabled: false
 
 bgpControlPlane:
   enabled: true
