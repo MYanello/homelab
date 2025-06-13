@@ -84,6 +84,8 @@ redis:
         memory: 100Mi
 postgresql:
   enabled: true
+  diagnosticMode:
+    enabled: true
   primary:
     persistence:
       enabled: true
