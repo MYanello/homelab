@@ -10,8 +10,8 @@ spec:
         revision: HEAD
         directories:
           - path: argocd/infra/*
-            exclude:
-              - argocd/infra/metallb
+          - path: argocd/infra/metallb
+            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
