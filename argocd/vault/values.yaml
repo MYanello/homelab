@@ -12,8 +12,8 @@ server:
       operator: "Exists"
       effect: "NoSchedule"
   ha:
-    enabled: true
-    replicas: 3
+    enabled: false
+    replicas: 1
     raft:
       enabled: true
       setNodeId: true
