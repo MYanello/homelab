@@ -43,6 +43,16 @@ resource "kubernetes_manifest" "argocd_appset" {
             "name"      = "in-cluster"
             "namespace" = "{{path.basename}}"
           }
+          "ignoreDifferences" = [
+            {
+              "group" = "admissionregistration.k8s.io"
+              "kind"  = "MutatingWebhookConfiguration"
+              "name"  = "vault-agent-injector-cfg"
+              "jqPathExpressions" = [
+                ".webhooks[].clientConfig.caBundle"
+              ]
+            }
+          ]
           "syncPolicy" = {
             "automated" = {
               "prune"    = true
