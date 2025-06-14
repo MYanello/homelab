@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - httpRoute.yaml
+  - pki.yaml
 
 helmCharts:
   - name: vault
