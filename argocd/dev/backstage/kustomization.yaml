@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/rbac.yaml
-  - ./manifests/sts.yaml
+  # - ./manifests/sts.yaml
   - ./manifests/svc.yaml
-  - ./manifests/deploy.yaml
+  # - ./manifests/deploy.yaml
 generators:
   - ./manifests/secret-generator.yaml
   #- ./manifests/cm.yaml
