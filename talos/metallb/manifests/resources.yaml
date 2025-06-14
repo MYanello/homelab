@@ -1,0 +1,35 @@
+# Metallb config, bgp guide for opnsense from https://tyzbit.blog/configuring-bgp-with-calico-on-k8s-and-opnsense
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: address-pool
+spec:
+  addresses:
+    - 10.10.200.0/22
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPPeer
+metadata:
+  name: opnsense
+spec:
+  myASN: 64513
+  peerASN: 65551
+  peerAddress: 192.168.10.1
+  bfdProfile: bfd-profile
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: bgp-advertisement
+spec:
+  ipAddressPools:
+    - address-pool
+---
+apiVersion: metallb.io/v1beta1
+kind: BFDProfile
+metadata:
+  name: bfd-profile
+spec:
+  receiveInterval: 380
+  transmitInterval: 270

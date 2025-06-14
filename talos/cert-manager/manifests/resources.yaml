@@ -1,0 +1,38 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: local-root-ca-issuer
+spec:
+  ca:
+    secretName: local-root-ca-secret
+---
+# Intermediate CA
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: local-intermediate-ca1
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: local-intermediate-ca1
+  secretName: local-intermediate-ca1-secret
+  duration: 43800h # 5y
+  renewBefore: 35040h # 4y
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: local-root-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: local-intermediate-ca1-issuer
+spec:
+  ca:
+    secretName: local-intermediate-ca1-secret
+    
+  

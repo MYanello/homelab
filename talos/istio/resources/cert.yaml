@@ -1,0 +1,31 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: default-ingress-internal-cert
+  namespace: istio-system
+spec:
+  commonName: yanello.net
+  dnsNames:
+  - "*.yanello.net"
+  - yanello.net
+  secretName: default-ingress-internal-cert
+  issuerRef:
+    name: local-intermediate-ca1-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: default-ingress-cert
+  namespace: istio-system
+spec:
+  commonName: yanello.net
+  dnsNames:
+  - "*.yanello.net"
+  - yanello.net
+  secretName: default-ingress-cert
+  issuerRef: # clusterissuer definition in infra/cert-manager/manifests/resources.yaml
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io

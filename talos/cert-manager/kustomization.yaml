@@ -1,0 +1,22 @@
+resources:
+  - ./manifests/resources.yaml
+
+helmCharts:
+  - name: cert-manager
+    repo: https://charts.jetstack.io
+    version: "v1.18.0"
+    releaseName: cert-manager
+    namespace: cert-manager
+    valuesInline: 
+      installCRDs: true
+      featureGates: NameConstraints=true
+      webhook:
+        featureGates: NameConstraints=true
+      extraArgs:
+        - --dns01-recursive-nameservers-only
+        - --dns01-recursive-nameservers=8.8.8.8:53
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+    
