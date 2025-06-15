@@ -11,6 +11,8 @@ server:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+  standalone:
+    enabled: true
   ha:
     enabled: false
     replicas: 1
