@@ -44,3 +44,10 @@ hubble:
 
 bgpControlPlane:
   enabled: true
+
+authentication:
+  mutual:
+    spire:
+      enabled: true
+      install:
+        enabled: true
