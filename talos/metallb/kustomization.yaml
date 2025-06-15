@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - manifests/resources.yaml
+  - manifests/ns.yaml
 
 helmCharts:
   - name: metallb
