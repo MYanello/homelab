@@ -122,7 +122,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
               "datasource": {
@@ -229,7 +229,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
               "datasource": {
@@ -305,7 +305,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
               "datasource": {
@@ -563,7 +563,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
               "datasource": {
@@ -837,7 +837,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
               "datasource": {
@@ -890,8 +890,8 @@ data:
         },
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "deh3zxjsl5la8a"
+            "type": "prometheus",
+            "uid": "P4169E866C3094E38"
           },
           "fieldConfig": {
             "defaults": {
@@ -1015,245 +1015,98 @@ data:
             "xTickLabelRotation": 0,
             "xTickLabelSpacing": 0
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
-              "alias": "Total",
               "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
+                "type": "prometheus",
+                "uid": "prometheus-uid"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "hide": true,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Mains_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
-              "rawQuery": true,
-              "refId": "Total",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Pool",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "increase(iota_Mains_Watts_value[1d]) * 0.126 / 1000",
               "hide": false,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Pool_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
-              "rawQuery": true,
-              "refId": "Pool",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "interval": "1d",
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "Total"
             },
             {
-              "alias": "Car",
               "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
+                "type": "prometheus",
+                "uid": "prometheus-uid"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "editorMode": "code",
+              "expr": "increase(iota_Pool_Watts_value[1d]) * 0.13 / 1000",
               "hide": false,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Car_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
-              "rawQuery": true,
-              "refId": "Car",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Upstairs Office",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "hide": true,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Upstair_Office_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
-              "rawQuery": true,
-              "refId": "Upstairs Office",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Downstairs Office",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "hide": true,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Office_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
-              "rawQuery": true,
-              "refId": "Downstairs Office",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Guest Rooms",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "deh3zxjsl5la8a"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1h"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "hide": true,
-              "measurement": "iota_Mains_Watts",
-              "orderByTime": "ASC",
-              "policy": "autogen",
-              "query": "SELECT integral(\"value\", 1h)*0.13/1000 FROM \"autogen\".\"iota_Guest_Rooms_Watts\" WHERE time > now() - 1d GROUP BY time(1h)",
-              "rawQuery": true,
-              "refId": "Guest Rooms",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "integral"
-                  }
-                ]
-              ],
-              "tags": []
+              "interval": "1d",
+              "legendFormat": "Pool",
+              "range": true,
+              "refId": "Pool"
             },
             {
               "datasource": {
-                "type": "__expr__",
-                "uid": "__expr__"
+                "type": "prometheus",
+                "uid": "prometheus-uid"
               },
-              "expression": "${Upstairs Office} + ${Downstairs Office} + ${Guest Rooms}",
+              "editorMode": "code",
+              "expr": "increase(iota_Car_Watts_value[1d]) * 0.13 / 1000",
               "hide": false,
-              "refId": "Offices",
-              "type": "math"
+              "interval": "1d",
+              "legendFormat": "Car",
+              "range": true,
+              "refId": "Car"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-uid"
+              },
+              "editorMode": "code",
+              "expr": "increase(iota_Upstair_Office_Watts_value[1d]) * 0.13 / 1000",
+              "hide": false,
+              "interval": "1d",
+              "legendFormat": "Upstairs Office",
+              "range": true,
+              "refId": "Upstairs_Office"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-uid"
+              },
+              "editorMode": "code",
+              "expr": "increase(iota_Office_Watts_value[1d]) * 0.13 / 1000",
+              "hide": false,
+              "interval": "1d",
+              "legendFormat": "Downstairs Office",
+              "range": true,
+              "refId": "Downstairs_Office"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-uid"
+              },
+              "editorMode": "code",
+              "expr": "increase(iota_Guest_Rooms_Watts_value[1h]) * 0.13 / 1000",
+              "hide": false,
+              "interval": "1d",
+              "legendFormat": "Guest Rooms",
+              "range": true,
+              "refId": "Guest_Rooms"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-uid"
+              },
+              "editorMode": "code",
+              "expr": "increase(iota_Upstair_Office_Watts_value[1d]) * 0.13 / 1000 + increase(iota_Office_Watts_value[1d]) * 0.13 / 1000 + increase(iota_Guest_Rooms_Watts_value[1d]) * 0.13 / 1000",
+              "hide": false,
+              "interval": "1d",
+              "legendFormat": "Offices",
+              "range": true,
+              "refId": "Offices"
             }
           ],
           "title": "Daily Cost",
@@ -1399,7 +1252,7 @@ data:
             "xTickLabelRotation": 0,
             "xTickLabelSpacing": 0
           },
-          "pluginVersion": "11.6.0",
+          "pluginVersion": "12.0.1",
           "targets": [
             {
               "alias": "Total",

@@ -5,12 +5,12 @@ metadata:
   labels:
     app: debug
 spec:
-  imagePullSecrets:
-    - name: gitea-pull-secrets
+  # imagePullSecrets:
+  #   - name: gitea-pull-secrets
   containers:
   - name: debug
-    image: gitea.yanello.net/marcus/lmutil-me:latest
-    command: ["/bin/sh", "-c", "sleep infinity"]
+    image: registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.6@sha256:363f765fdc6fc8f1dba710341b099af0b2e55335cad155041e4364dc7a99be0f 
+    command: ["/bin/bash", "-c", "sleep infinity"]
     securityContext:
       runAsUser: 0
       runAsGroup: 0
