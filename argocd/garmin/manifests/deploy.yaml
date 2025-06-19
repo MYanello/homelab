@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: garmin-fetch
+  labels:
+    app: garmin-fetch
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: garmin-fetch
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: garmin-fetch
+    spec:
+      containers:
+        - image: thisisarpanghosh/garmin-fetch-data:latest
+          imagePullPolicy: IfNotPresent
+          name: garmin-fetch
+          env: 
+            - name: INFLUXDB_DATABASE
+              value: GarminStats
+            - name: LOG_LEVEL
+              value: "DEBUG"
+          envFrom:
+            - secretRef:
+                name: garmin-secrets
+      #     volumeMounts:
+      #       - mountPath: /home/appuser/.garminconnect
+      #         name: garmin-data
+      # volumes:
+      #   - name: garmin-data
+      #     emptyDir: {}
