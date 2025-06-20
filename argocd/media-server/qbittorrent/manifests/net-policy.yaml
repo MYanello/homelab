@@ -22,7 +22,7 @@ spec:
               kubernetes.io/metadata.name: sonarr
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: istio-system
+              kubernetes.io/metadata.name: cilium
       ports:
         - protocol: TCP
           port: 8080
