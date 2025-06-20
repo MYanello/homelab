@@ -60,7 +60,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             }
             "syncOptions" = [
               "CreateNamespace=true",
-              "ServerSideApply=true"
+              "ServerSideApply=false"
             ]
             "managedNamespaceMetadata" = {
               "labels" : {
