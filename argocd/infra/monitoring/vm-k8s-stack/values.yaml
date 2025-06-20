@@ -72,6 +72,7 @@ grafana:
     GF_SERVER_ROOT_URL: 'https://grafana.yanello.net'
   plugins:
     - victoriametrics-logs-datasource
+    - marcusolsson-hourly-heatmap-panel
   datasources:
     datasources.yaml:
       apiVersion: 1
