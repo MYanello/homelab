@@ -28,6 +28,10 @@ spec:
           env: 
             - name: INFLUXDB_DATABASE
               value: GarminStats
+            - name: INFLUXDB_HOST
+              value: vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local
+            - name: INFLUXDB_PORT
+              value: "8428"
             - name: LOG_LEVEL
               value: "DEBUG"
           envFrom:
