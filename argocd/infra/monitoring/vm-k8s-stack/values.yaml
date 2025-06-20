@@ -61,8 +61,8 @@ grafana:
     userKey: grafana-admin-user
     passwordKey: grafana-admin-password
   envFromSecrets:
-    - grafana-env-secrets
-    - influx-secrets
+    - name: grafana-env-secrets
+    - name: influx-secrets
   env:
     GF_AUTH_GENERIC_OAUTH_ENABLED: 'true'
     GF_AUTH_GENERIC_OAUTH_NAME: 'authentik'
