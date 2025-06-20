@@ -27,7 +27,7 @@ spec:
         runAsGroup: 1000
       initContainers:
         - name: fix-permissions
-          image: busybox:1.35
+          image: busybox:1.35@sha256:98ad9d1a2be345201bb0709b0d38655eb1b370145c7d94ca1fe9c421f76e245a
           command: ['sh', '-c', 'chown -R 1000:1000 /home/appuser/.garminconnect && chmod -R 755 /home/appuser/.garminconnect']
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
@@ -35,7 +35,7 @@ spec:
           securityContext:
             runAsUser: 0
       containers:
-        - image: thisisarpanghosh/garmin-fetch-data:latest
+        - image: thisisarpanghosh/garmin-fetch-data:latest@sha256:6838eb914b8bd695a732a94af9c43cb37243ee40193db851af86cb95808222d0
           imagePullPolicy: IfNotPresent
           name: garmin-fetch
           env: 
