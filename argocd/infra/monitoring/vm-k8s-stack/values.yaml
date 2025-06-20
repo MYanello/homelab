@@ -84,7 +84,7 @@ grafana:
         type: influxdb
         access: proxy
         url: http://influxdb:8086
-        user: $influxdb-user
+        user: "${influxdb-user}"
         database: GarminStats
         secureJsonData:
           password: $influxdb-password
@@ -95,7 +95,7 @@ grafana:
         type: influxdb
         access: proxy
         url: http://influxdb:8086
-        user: $influxdb-user
+        user: "${influxdb-user}"
         database: home
         secureJsonData:
           password: $influxdb-password
