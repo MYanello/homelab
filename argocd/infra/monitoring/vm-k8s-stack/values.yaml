@@ -94,6 +94,7 @@ grafana:
         uid: iota_influxdb
         type: influxdb
         access: proxy
+        isDefault: true
         url: http://influxdb:8086
         user: "${influxdb-user}"
         database: home
