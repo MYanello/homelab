@@ -1,21 +1,21 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: garmin-fetch
   labels:
     app: garmin-fetch
 spec:
+  serviceName: garmin-fetch
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: garmin-fetch
-  strategy:
+  updateStrategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
-      maxSurge: 1
   template:
     metadata:
       labels:
@@ -37,9 +37,15 @@ spec:
           envFrom:
             - secretRef:
                 name: garmin-secrets
-      #     volumeMounts:
-      #       - mountPath: /home/appuser/.garminconnect
-      #         name: garmin-data
-      # volumes:
-      #   - name: garmin-data
-      #     emptyDir: {}
+          volumeMounts:
+            - mountPath: /home/appuser/.garminconnect
+              name: garmin-data
+  volumeClaimTemplates:
+    - metadata:
+        name: garmin-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 10Mi
