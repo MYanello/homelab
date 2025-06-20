@@ -25,4 +25,9 @@ helmCharts:
           init.iql: |+
             CREATE DATABASE "home"
             CREATE DATABASE "GarminStats"
-          
+      backup:
+        enabled: false
+        s3:
+          credentialsSecret: ""
+          destination: "s3://bucket/path"
+          endpointUrl: "Specify if you're using an alternate S3 endpoint."
