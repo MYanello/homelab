@@ -19,7 +19,7 @@ helmCharts:
       setDefaultUser:
         enabled: true
         user:
-          existingSecret: influxdb-secrets
+          existingSecret: influx-secrets
       initScripts:
         enabled: true
         scripts: 
