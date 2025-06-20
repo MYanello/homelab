@@ -40,7 +40,3 @@ helmCharts:
       releaseName: frigate
       namespace: frigate
       valuesFile: ./manifests/values.yaml
-
-images:
-  - name: frigate
-    newTag: 0.15.1
