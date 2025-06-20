@@ -60,7 +60,9 @@ grafana:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
     passwordKey: grafana-admin-password
-  envFromSecret: grafana-env-secrets
+  envFromSecrets:
+    - grafana-env-secrets
+    - influx-secrets
   env:
     GF_AUTH_GENERIC_OAUTH_ENABLED: 'true'
     GF_AUTH_GENERIC_OAUTH_NAME: 'authentik'
@@ -77,6 +79,32 @@ grafana:
       - name: VictoriaLogs
         type: victoriametrics-logs-datasource
         url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+      - name: Garmin-InfluxDB
+        uid: garmin_influxdb
+        type: influxdb
+        access: proxy
+        url: http://influxdb:8086
+        user: $influxdb-user
+        database: GarminStats
+        isDefault: true
+        editable: true
+        secureJsonData:
+          password: $influxdb-password
+        jsonData:
+          httpMode: GET
+      - name: Iota-InfluxDB
+        uid: iota_influxdb
+        type: influxdb
+        access: proxy
+        url: http://influxdb:8086
+        user: $influxdb-user
+        database: home
+        isDefault: true
+        editable: true
+        secureJsonData:
+          password: $influxdb-password
+        jsonData:
+          httpMode: GET
   # dashboards:
   #   default:
   #     victorialogs:
