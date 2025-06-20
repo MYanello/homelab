@@ -86,8 +86,6 @@ grafana:
         url: http://influxdb:8086
         user: $influxdb-user
         database: GarminStats
-        isDefault: true
-        editable: true
         secureJsonData:
           password: $influxdb-password
         jsonData:
@@ -99,8 +97,6 @@ grafana:
         url: http://influxdb:8086
         user: $influxdb-user
         database: home
-        isDefault: true
-        editable: true
         secureJsonData:
           password: $influxdb-password
         jsonData:
