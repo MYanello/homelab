@@ -265,6 +265,8 @@ spec:
                   key: DB_DATABASE_NAME
             - name: POSTGRES_INITDB_ARGS
               value: "--data-checksums"
+            - name: DB_STORAGE_TYPE
+              value: "HDD"
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
