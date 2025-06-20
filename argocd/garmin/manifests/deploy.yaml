@@ -54,7 +54,9 @@ spec:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: garmin-data
       spec:
         accessModes: [ "ReadWriteOnce" ]
