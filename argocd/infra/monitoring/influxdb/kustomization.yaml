@@ -19,3 +19,10 @@ helmCharts:
       setDefaultUser:
         enabled: true
         existingSecret: influxdb-secrets
+      initScripts:
+        enabled: true
+        scripts: 
+          init.iql: |+
+            CREATE DATABASE "home"
+            CREATE DATABASE "GarminStats"
+          
