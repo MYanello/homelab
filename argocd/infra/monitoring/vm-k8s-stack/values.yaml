@@ -91,10 +91,9 @@ grafana:
         jsonData:
           httpMode: GET
       - name: Iota-InfluxDB
-        uid: iota_influxdb
+        uid: DS_GARMIN_STATS
         type: influxdb
         access: proxy
-        isDefault: true
         url: http://influxdb:8086
         user: "${influxdb-user}"
         database: home
