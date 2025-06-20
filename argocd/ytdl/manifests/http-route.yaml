@@ -12,8 +12,11 @@ metadata:
     gethomepage.dev/pod-selector: io.kompose.service=ytdl
 spec:
   parentRefs:
-  - name: gateway-api
-    namespace: istio-system
+  - name: cilium-private-gateway
+    namespace: cilium
+    sectionName: https
+  - name: cilium-public-gateway
+    namespace: cilium
     sectionName: https
   hostnames:
   - ytdl.yanello.net
