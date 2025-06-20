@@ -21,6 +21,19 @@ spec:
       labels:
         app: garmin-fetch
     spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+      initContainers:
+        - name: fix-permissions
+          image: busybox:1.35
+          command: ['sh', '-c', 'chown -R 1000:1000 /home/appuser/.garminconnect && chmod -R 755 /home/appuser/.garminconnect']
+          volumeMounts:
+            - mountPath: /home/appuser/.garminconnect
+              name: garmin-data
+          securityContext:
+            runAsUser: 0
       containers:
         - image: thisisarpanghosh/garmin-fetch-data:latest
           imagePullPolicy: IfNotPresent
