@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: influxdb
+    repo: https://helm.influxdata.com/
+    version: "4.12.5"
+    releaseName: influxdb
+    namespace: monitoring
+    valuesInline: 
+      service: 
+        type: LoadBalancer
+        #loadBalancerIP: 192.168.1.100
+      persistence:
+        storageClassName: longhorn
