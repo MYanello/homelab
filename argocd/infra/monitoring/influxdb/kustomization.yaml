@@ -18,7 +18,8 @@ helmCharts:
         storageClassName: longhorn
       setDefaultUser:
         enabled: true
-        existingSecret: influxdb-secrets
+        user:
+          existingSecret: influxdb-secrets
       initScripts:
         enabled: true
         scripts: 
