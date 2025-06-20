@@ -59,7 +59,8 @@ resource "kubernetes_manifest" "argocd_appset" {
               "selfHeal" = true
             }
             "syncOptions" = [
-              "CreateNamespace=true"
+              "CreateNamespace=true",
+              "ServerSideApply=true"
             ]
             "managedNamespaceMetadata" = {
               "labels" : {
