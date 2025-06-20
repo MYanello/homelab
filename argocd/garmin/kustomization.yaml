@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - manifests/deploy.yaml
+- manifests/dashboard.yaml
 
 generators:
 - manifests/secret-generator.yaml

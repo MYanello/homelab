@@ -1,26 +1,39 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: garmin-fetch
   labels:
     app: garmin-fetch
 spec:
+  serviceName: garmin-fetch
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: garmin-fetch
-  strategy:
+  updateStrategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
-      maxSurge: 1
   template:
     metadata:
       labels:
         app: garmin-fetch
     spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+      initContainers:
+        - name: fix-permissions
+          image: busybox:1.35
+          command: ['sh', '-c', 'chown -R 1000:1000 /home/appuser/.garminconnect && chmod -R 755 /home/appuser/.garminconnect']
+          volumeMounts:
+            - mountPath: /home/appuser/.garminconnect
+              name: garmin-data
+          securityContext:
+            runAsUser: 0
       containers:
         - image: thisisarpanghosh/garmin-fetch-data:latest
           imagePullPolicy: IfNotPresent
@@ -28,14 +41,24 @@ spec:
           env: 
             - name: INFLUXDB_DATABASE
               value: GarminStats
+            - name: INFLUXDB_HOST
+              value: vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local
+            - name: INFLUXDB_PORT
+              value: "8429"
             - name: LOG_LEVEL
               value: "DEBUG"
           envFrom:
             - secretRef:
                 name: garmin-secrets
-      #     volumeMounts:
-      #       - mountPath: /home/appuser/.garminconnect
-      #         name: garmin-data
-      # volumes:
-      #   - name: garmin-data
-      #     emptyDir: {}
+          volumeMounts:
+            - mountPath: /home/appuser/.garminconnect
+              name: garmin-data
+  volumeClaimTemplates:
+    - metadata:
+        name: garmin-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 10Mi
