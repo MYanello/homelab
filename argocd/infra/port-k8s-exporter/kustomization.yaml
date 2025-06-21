@@ -9,5 +9,5 @@ helmCharts:
     releaseName: port-k8s-exporter
     namespace: port-k8s-exporter
     repo: https://port-labs.github.io/helm-charts
-    version: "0.3.2"
+    version: "0.3.3"
     valuesFile: ./values.yaml

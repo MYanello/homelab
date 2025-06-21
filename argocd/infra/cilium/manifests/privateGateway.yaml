@@ -1,11 +1,11 @@
-apiVersion: gateway.networking.k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1beta1
 kind: Gateway
 metadata:
   name: cilium-private-gateway
 spec:
   gatewayClassName: cilium
   addresses:
-    - value: 10.10.8.100 # the ip of the load balancer service
+    - value: 10.10.8.100
       type: IPAddress
   listeners:
     - name: vault-tls-passthrough
@@ -17,8 +17,8 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        kinds:
-          - kind: TLSRoute
+        # kinds:
+        #   - kind: TLSRoute
     - name: http
       protocol: HTTP
       hostname: "*.yanello.net"
@@ -26,8 +26,8 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        kinds:
-          - kind: HTTPRoute
+        # kinds:
+        #   - kind: HTTPRoute
     - name: http-root
       protocol: HTTP
       hostname: "yanello.net"
@@ -35,8 +35,8 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        kinds:
-          - kind: HTTPRoute
+        # kinds:
+        #   - kind: HTTPRoute
     - name: https
       protocol: HTTPS
       hostname: "*.yanello.net"
@@ -48,8 +48,8 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        kinds:
-          - kind: HTTPRoute
+        # kinds:
+        #   - kind: HTTPRoute
     - name: https-root
       protocol: HTTPS
       hostname: "yanello.net"
@@ -61,8 +61,8 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        kinds:
-          - kind: HTTPRoute
+        # kinds:
+        #   - kind: HTTPRoute
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
