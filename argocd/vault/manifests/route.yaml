@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: TLSRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Vault
+    gethomepage.dev/icon: sh-hashicorp-vault
+    gethomepage.dev/description: "Vault provides organizations with identity-based security to automatically authenticate and authorize access to secrets and other sensitive data."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=vault
+  labels:
+    app.kubernetes.io/instance: vault-app
+  name: vault-http-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: vault-tls-passthrough
+  hostnames:
+    - vault.yanello.net
+  rules:
+    - backendRefs:
+        - name: vault-ui
+          port: 8200

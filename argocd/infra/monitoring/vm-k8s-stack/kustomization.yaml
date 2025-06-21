@@ -9,8 +9,7 @@ resources:
   - ./manifests/vmscrape/haproxy.yaml
   - ./manifests/vmscrape/netdata.yaml
   - ./manifests/vmscrape/kuma.yaml
- # - ./manifests/vmscrape/istio.yaml
- # - ./manifests/vmsingle/influx.yaml
+
 generators:
   - ./manifests/secrets/secret-generator.yaml
 

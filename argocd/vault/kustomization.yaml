@@ -1,9 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+generators:
+  - ./manifests/secretGenerator.yaml
+
 resources:
-  - httpRoute.yaml
-  #- pki.yaml
+  - ./manifests/route.yaml
+  - ./manifests/pki.yaml
 
 helmCharts:
   - name: vault
