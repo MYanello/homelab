@@ -89,12 +89,15 @@ jobs:
             cm:
               kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
           repoServer:
-            # Use init containers to configure custom tooling
-            # https://argoproj.github.io/argo-cd/operator-manual/custom_tools/
+            env:
+              - name: SOPS_AGE_KEY_FILE
+                value: /.config/sops/age/key.txt
             volumes:
               - name: custom-tools
                 emptyDir: {}
-          
+              - name: sops-age
+                secret:
+                  secretName: sops-age
             initContainers:
               - name: install-ksops
                 image: viaductoss/ksops:v4.4.0
@@ -114,6 +117,9 @@ jobs:
               - mountPath: /usr/local/bin/ksops
                 name: custom-tools
                 subPath: ksops
+              - mountPath: /.config/sops/age/key.txt
+                name: sops-age
+                subPath: key.txt
           EOF
 
       - name: Generate Diff
@@ -128,7 +134,7 @@ jobs:
             -v $(pwd)/values.yaml:/argocd-config/values.yaml \
             -e TARGET_BRANCH=refs/pull/${{ github.event.number }}/merge \
             -e REPO=${{ github.repository }} \
-            dagandersen/argocd-diff-preview:v0.1.10
+            dagandersen/argocd-diff-preview:v0.1.10 --debug
 
       - name: Post diff as comment
         run: |
