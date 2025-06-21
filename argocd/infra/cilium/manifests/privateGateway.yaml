@@ -21,7 +21,7 @@ spec:
           - kind: TLSRoute
     - name: http
       protocol: HTTP
-      hostname: "*.yanello.net"
+      hostname: "test.yanello.net"
       port: 80
       allowedRoutes:
         namespaces:
@@ -39,7 +39,7 @@ spec:
           - kind: HTTPRoute
     - name: https
       protocol: HTTPS
-      hostname: "*.yanello.net"
+      hostname: "test.yanello.net"
       port: 443
       tls:
         mode: Terminate
@@ -73,7 +73,7 @@ spec:
     - name: cilium-private-gateway
       sectionName: http
   hostnames:
-    - "*.yanello.net"
+    - "test.yanello.net"
     - "yanello.net"
   rules:
     - filters:
