@@ -1,4 +1,4 @@
-apiVersion: gateway.networking.k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
   annotations:
@@ -9,7 +9,7 @@ metadata:
     gethomepage.dev/pod-selector: app.kubernetes.io/name=vault
   labels:
     app.kubernetes.io/instance: vault-app
-  name: vault-http-route
+  name: vault-route
 spec:
   parentRefs:
     - name: cilium-private-gateway

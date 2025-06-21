@@ -8,6 +8,17 @@ spec:
     - value: 10.10.8.100 # the ip of the load balancer service
       type: IPAddress
   listeners:
+    - name: vault-tls-passthrough
+      protocol: TLS
+      hostname: "vault.yanello.net"
+      port: 443
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TLSRoute
     - name: http
       protocol: HTTP
       hostname: "*.yanello.net"
@@ -52,17 +63,6 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
-    - name: vault-tls-passthrough
-      protocol: TLS
-      hostname: "vault.yanello.net"
-      port: 443
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: TLSRoute
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
