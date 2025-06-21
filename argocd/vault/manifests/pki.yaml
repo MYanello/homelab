@@ -1,0 +1,47 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vault-public
+spec:
+  commonName: vault.yanello.net
+  dnsNames:
+  - "vault.yanello.net"
+  secretName: vault-letsencrypt
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-selfsigned
+spec:
+  selfSigned: {}
+---
+# Bootstrap certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tls-server
+spec:
+  secretName: tls-server
+  duration: 168h 
+  renewBefore: 24h
+  issuerRef:
+    name: vault-selfsigned
+    kind: Issuer
+  commonName: vault.yanello.net
+  dnsNames:
+    - vault.yanello.net
+    - vault.vault.svc.cluster.local
+    - vault-0.vault-internal
+    - vault-1.vault-internal
+    - vault-2.vault-internal
+    - localhost
+  ipAddresses:
+    - 127.0.0.1
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth

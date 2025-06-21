@@ -52,6 +52,17 @@ spec:
           from: All
         kinds:
           - kind: HTTPRoute
+    - name: vault-tls-passthrough
+      protocol: TLS
+      hostname: "vault.yanello.net"
+      port: 443
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TLSRoute
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
