@@ -5,7 +5,7 @@ metadata:
 spec:
   gatewayClassName: cilium
   addresses:
-    - value: 10.10.8.100 # the ip of the load balancer service
+    - value: 10.10.8.100
       type: IPAddress
   listeners:
     - name: vault-tls-passthrough
@@ -21,7 +21,7 @@ spec:
           - kind: TLSRoute
     - name: http
       protocol: HTTP
-      hostname: "test.yanello.net"
+      hostname: "*.yanello.net"
       port: 80
       allowedRoutes:
         namespaces:
@@ -39,7 +39,7 @@ spec:
           - kind: HTTPRoute
     - name: https
       protocol: HTTPS
-      hostname: "test.yanello.net"
+      hostname: "*.yanello.net"
       port: 443
       tls:
         mode: Terminate
@@ -73,7 +73,7 @@ spec:
     - name: cilium-private-gateway
       sectionName: http
   hostnames:
-    - "test.yanello.net"
+    - "*.yanello.net"
     - "yanello.net"
   rules:
     - filters:
