@@ -44,8 +44,38 @@ data:
           "type": "row"
         },
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_GARMIN_STATS}"
+          },
           "fieldConfig": {
-            "defaults": {},
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "light-blue",
+                    "value": 1800000000000
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 3600000000000
+                  },
+                  {
+                    "color": "red",
+                    "value": 5400000000000
+                  }
+                ]
+              },
+              "unit": "dateTimeFromNow"
+            },
             "overrides": []
           },
           "gridPos": {
@@ -54,20 +84,59 @@ data:
             "x": 0,
             "y": 1
           },
-          "id": 25,
+          "hideTimeOverride": true,
+          "id": 26,
           "options": {
-            "code": {
-              "language": "plaintext",
-              "showLineNumbers": false,
-              "showMiniMap": false
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^Time$/",
+              "values": false
             },
-            "content": "<center><a href='https://ko-fi.com/A0A84F3DP' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></center>  ",
-            "mode": "html"
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
           },
           "pluginVersion": "12.0.1",
-          "title": "Support Me!",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_GARMIN_STATS}"
+              },
+              "groupBy": [],
+              "measurement": "HeartRateIntraday",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "HeartRate"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "last"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "timeFrom": "24h",
+          "title": "Last Sync ",
           "transparent": true,
-          "type": "text"
+          "type": "stat"
         },
         {
           "datasource": {
@@ -255,101 +324,6 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "light-blue",
-                    "value": 1800000000000
-                  },
-                  {
-                    "color": "#EAB839",
-                    "value": 3600000000000
-                  },
-                  {
-                    "color": "red",
-                    "value": 5400000000000
-                  }
-                ]
-              },
-              "unit": "dateTimeFromNow"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 0,
-            "y": 4
-          },
-          "hideTimeOverride": true,
-          "id": 26,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "/^Time$/",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "influxdb",
-                "uid": "${DS_GARMIN_STATS}"
-              },
-              "groupBy": [],
-              "measurement": "HeartRateIntraday",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "HeartRate"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "timeFrom": "24h",
-          "title": "Last Sync ",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_GARMIN_STATS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
                 "mode": "palette-classic"
               },
               "custom": {
@@ -413,7 +387,7 @@ data:
             "h": 4,
             "w": 3,
             "x": 0,
-            "y": 7
+            "y": 4
           },
           "hideTimeOverride": true,
           "id": 21,
@@ -569,6 +543,122 @@ data:
           "title": "Heart Rate Distribution",
           "transparent": true,
           "type": "histogram"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_GARMIN_STATS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "displayName": "Resting HR",
+              "mappings": [],
+              "max": 100,
+              "min": 40,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "light-blue"
+                  },
+                  {
+                    "color": "semi-dark-green",
+                    "value": 60
+                  },
+                  {
+                    "color": "semi-dark-yellow",
+                    "value": 70
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 3,
+            "x": 0,
+            "y": 8
+          },
+          "id": 28,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto",
+            "text": {}
+          },
+          "pluginVersion": "12.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_GARMIN_STATS}"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1d"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "DailyStats",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "restingHeartRate"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "last"
+                  }
+                ]
+              ],
+              "tags": [],
+              "tz": "$TimeZone"
+            }
+          ],
+          "title": "Today RHR",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            }
+          ],
+          "transparent": true,
+          "type": "gauge"
         },
         {
           "datasource": {
@@ -796,122 +886,6 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "displayName": "Resting HR",
-              "mappings": [],
-              "max": 100,
-              "min": 40,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "light-blue"
-                  },
-                  {
-                    "color": "semi-dark-green",
-                    "value": 60
-                  },
-                  {
-                    "color": "semi-dark-yellow",
-                    "value": 70
-                  },
-                  {
-                    "color": "semi-dark-red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 3,
-            "x": 0,
-            "y": 11
-          },
-          "id": 28,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto",
-            "text": {}
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "influxdb",
-                "uid": "${DS_GARMIN_STATS}"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "DailyStats",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "restingHeartRate"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "$TimeZone"
-            }
-          ],
-          "title": "Today RHR",
-          "transformations": [
-            {
-              "id": "merge",
-              "options": {}
-            }
-          ],
-          "transparent": true,
-          "type": "gauge"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_GARMIN_STATS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
               "displayName": "Steps 👟",
               "mappings": [],
               "max": 15000,
@@ -944,7 +918,7 @@ data:
             "h": 6,
             "w": 3,
             "x": 0,
-            "y": 16
+            "y": 13
           },
           "id": 30,
           "options": {
@@ -1251,7 +1225,7 @@ data:
             "h": 6,
             "w": 3,
             "x": 0,
-            "y": 22
+            "y": 19
           },
           "id": 31,
           "options": {
@@ -1321,6 +1295,122 @@ data:
               "options": {}
             }
           ],
+          "transparent": true,
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_GARMIN_STATS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "displayName": "of sleep",
+              "fieldMinMax": false,
+              "mappings": [],
+              "max": 36000,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue"
+                  },
+                  {
+                    "color": "semi-dark-red",
+                    "value": 7200
+                  },
+                  {
+                    "color": "semi-dark-orange",
+                    "value": 10800
+                  },
+                  {
+                    "color": "semi-dark-yellow",
+                    "value": 18000
+                  },
+                  {
+                    "color": "semi-dark-green",
+                    "value": 25200
+                  }
+                ]
+              },
+              "unit": "dthms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 3,
+            "x": 0,
+            "y": 25
+          },
+          "hideTimeOverride": true,
+          "id": 32,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "12.0.1",
+          "targets": [
+            {
+              "alias": "Total Asleep",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_GARMIN_STATS}"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "1d"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "SleepSummary",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "sleepTimeSeconds"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "last"
+                  }
+                ]
+              ],
+              "tags": [],
+              "tz": "$TimeZone"
+            }
+          ],
+          "timeFrom": "24h",
+          "title": "Last Sleep Hours",
           "transparent": true,
           "type": "gauge"
         },
@@ -1436,122 +1526,6 @@ data:
           "title": "Steps Hourly (24h)",
           "transparent": true,
           "type": "state-timeline"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "${DS_GARMIN_STATS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "displayName": "of sleep",
-              "fieldMinMax": false,
-              "mappings": [],
-              "max": 36000,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "blue"
-                  },
-                  {
-                    "color": "semi-dark-red",
-                    "value": 7200
-                  },
-                  {
-                    "color": "semi-dark-orange",
-                    "value": 10800
-                  },
-                  {
-                    "color": "semi-dark-yellow",
-                    "value": 18000
-                  },
-                  {
-                    "color": "semi-dark-green",
-                    "value": 25200
-                  }
-                ]
-              },
-              "unit": "dthms"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 3,
-            "x": 0,
-            "y": 28
-          },
-          "hideTimeOverride": true,
-          "id": 32,
-          "options": {
-            "minVizHeight": 75,
-            "minVizWidth": 75,
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "sizing": "auto"
-          },
-          "pluginVersion": "12.0.1",
-          "targets": [
-            {
-              "alias": "Total Asleep",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "${DS_GARMIN_STATS}"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "SleepSummary",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "sleepTimeSeconds"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "$TimeZone"
-            }
-          ],
-          "timeFrom": "24h",
-          "title": "Last Sleep Hours",
-          "transparent": true,
-          "type": "gauge"
         },
         {
           "datasource": {
@@ -1798,7 +1772,7 @@ data:
             "h": 7,
             "w": 3,
             "x": 0,
-            "y": 34
+            "y": 31
           },
           "id": 33,
           "options": {
@@ -2084,7 +2058,7 @@ data:
             "h": 9,
             "w": 3,
             "x": 0,
-            "y": 41
+            "y": 38
           },
           "hideTimeOverride": true,
           "id": 36,
@@ -2711,7 +2685,7 @@ data:
             "h": 9,
             "w": 3,
             "x": 0,
-            "y": 50
+            "y": 47
           },
           "hideTimeOverride": true,
           "id": 35,
