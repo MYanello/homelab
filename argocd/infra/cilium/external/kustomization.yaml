@@ -9,6 +9,3 @@ resources:
   - pikvm.yaml
   - router.yaml
   - ubiquiti.yaml
-
-commonAnnotations:
-  argocd.argoproj.io/group: "external-services"
