@@ -36,6 +36,12 @@ server:
           tls_cert_file = "/vault/userconfig/vault-letsencrypt/tls.crt"
           tls_key_file = "/vault/userconfig/vault-letsencrypt/tls.key"
         }
+        listener "tcp" {
+          address = "127.0.0.1:8202"
+          cluster_address = "[::]:8201"
+          tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
+          tls_key_file = "/vault/userconfig/tls-server/tls.key"
+        }
         storage "raft" {
           path = "/vault/data"
           retry_join {
