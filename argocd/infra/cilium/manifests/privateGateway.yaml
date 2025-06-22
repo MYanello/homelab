@@ -9,7 +9,7 @@ spec:
       type: IPAddress
   listeners:
     - name: vault-tls-passthrough
-      protocol: TLS
+      protocol: HTTPS
       hostname: "vault.yanello.net"
       port: 443
       tls:
