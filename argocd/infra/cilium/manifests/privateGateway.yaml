@@ -14,9 +14,9 @@ spec:
       port: 443
       tls:
         mode: Passthrough
-      # allowedRoutes:
-      #   namespaces:
-      #     from: All
+      allowedRoutes:
+        namespaces:
+          from: All
       #   kinds:
       #     - kind: TLSRoute
     - name: http
