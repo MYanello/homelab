@@ -37,32 +37,32 @@ spec:
     #       from: All
     #     kinds:
     #       - kind: HTTPRoute
-    - name: https
-      protocol: HTTPS
-      hostname: "*.yanello.net"
-      port: 443
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: cilium-public
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: HTTPRoute
-    - name: https-root
-      protocol: HTTPS
-      hostname: "yanello.net"
-      port: 443
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: cilium-public
-      allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: HTTPRoute
+    # - name: https
+    #   protocol: HTTPS
+    #   hostname: "*.yanello.net"
+    #   port: 443
+    #   tls:
+    #     mode: Terminate
+    #     certificateRefs:
+    #       - name: cilium-public
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: All
+    #     kinds:
+    #       - kind: HTTPRoute
+    # - name: https-root
+    #   protocol: HTTPS
+    #   hostname: "yanello.net"
+    #   port: 443
+    #   tls:
+    #     mode: Terminate
+    #     certificateRefs:
+    #       - name: cilium-public
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: All
+    #     kinds:
+    #       - kind: HTTPRoute
 # ---
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: HTTPRoute
