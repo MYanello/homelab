@@ -17,8 +17,9 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-      #   kinds:
-      #     - kind: TLSRoute
+        kinds:
+          - group: gateway.networking.k8s.io
+            kind: TLSRoute
     - name: http
       protocol: HTTP
       hostname: "*.yanello.net"
