@@ -62,7 +62,7 @@ server:
             leader_api_addr = "https://vault-2.vault-internal:8201"
             leader_ca_cert_file = "/vault/userconfig/tls-server/ca.crt"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
-            leader_client_key_file = "/vault/userconfig/vault-letsencrypt/tls.key"
+            leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
         } 
   # readinessProbe:
