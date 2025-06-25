@@ -15,8 +15,8 @@ server:
     enabled: false
   extraEnvironmentVars:
     VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
-    # VAULT_ADDR: https://localhost:8202
-    # VAULT_CLUSTER_ADDR: https://localhost:8203
+    VAULT_ADDR: https://localhost:8200
+    VAULT_CLUSTER_ADDR: https://localhost:8201
   extraVolumes:
     - type: secret
       name: tls-server
