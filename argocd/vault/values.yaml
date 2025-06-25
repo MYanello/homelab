@@ -14,12 +14,12 @@ server:
   standalone:
     enabled: false
   extraEnvironmentVars:
-    #VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
+    VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
     # - name: VAULT_API_ADDR
     #   value: https://localhost:8200
     # - name: VAULT_CLUSTER_ADDR
     #   value: https://localhost:8201
-    VAULT_ADDR: https://127.0.0.1:8202
+    # VAULT_ADDR: https://127.0.0.1:8202
   extraVolumes:
     - type: secret
       name: tls-server
@@ -37,15 +37,14 @@ server:
         ui = true
         cluster_name = "vault-integrated-storage"
         listener "tcp" {
-          address = "[::]:8201"
+          address = "[::]:8200"
           tls_cert_file = "/vault/userconfig/vault-letsencrypt/tls.crt"
           tls_key_file = "/vault/userconfig/vault-letsencrypt/tls.key"
         }
         
         # Cluster communication listener with internal cert
         listener "tcp" {
-          address = "[::]:8203"
-          cluster_address = "[::]:8202"
+          address = "[::]:8202"
           tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
           tls_key_file = "/vault/userconfig/tls-server/tls.key"
         }
