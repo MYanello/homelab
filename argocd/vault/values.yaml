@@ -19,7 +19,7 @@ server:
     #   value: https://localhost:8200
     # - name: VAULT_CLUSTER_ADDR
     #   value: https://localhost:8201
-    # VAULT_ADDR: https://127.0.0.1:8201
+    VAULT_ADDR: https://127.0.0.1:8202
   extraVolumes:
     - type: secret
       name: tls-server
@@ -45,7 +45,7 @@ server:
         # Cluster communication listener with internal cert
         listener "tcp" {
           address = "[::]:8203"
-          cluster_address = "[::]:8201"
+          cluster_address = "[::]:8202"
           tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
           tls_key_file = "/vault/userconfig/tls-server/tls.key"
         }
@@ -53,19 +53,19 @@ server:
         storage "raft" {
           path = "/vault/data"
           retry_join {
-            leader_api_addr = "https://vault-0.vault-internal:8201"
+            leader_api_addr = "https://vault-0.vault-internal:8202"
             leader_ca_cert_file = "/vault/userconfig/tls-server/ca.crt"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
           retry_join {
-            leader_api_addr = "https://vault-1.vault-internal:8201"
+            leader_api_addr = "https://vault-1.vault-internal:8202"
             leader_ca_cert_file = "/vault/userconfig/tls-server/ca.crt"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
           retry_join {
-            leader_api_addr = "https://vault-2.vault-internal:8201"
+            leader_api_addr = "https://vault-2.vault-internal:8202"
             leader_ca_cert_file = "/vault/userconfig/tls-server/ca.crt"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
