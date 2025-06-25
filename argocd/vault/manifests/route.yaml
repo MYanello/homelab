@@ -20,4 +20,4 @@ spec:
   rules:
     - backendRefs:
         - name: vault-active
-          port: 8200
+          port: 8201
