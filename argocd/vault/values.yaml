@@ -13,7 +13,7 @@ server:
       effect: "NoSchedule"
   standalone:
     enabled: false
-  extraEnvironmentVars:
+  # extraEnvironmentVars:
     # VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
     # VAULT_ADDR: https://localhost:8202
     # VAULT_CLUSTER_ADDR: https://localhost:8203
