@@ -19,5 +19,5 @@ spec:
     - vault.yanello.net
   rules:
     - backendRefs:
-        - name: vault-ui
+        - name: vault-active
           port: 8200
