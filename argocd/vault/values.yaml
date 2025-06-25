@@ -28,6 +28,8 @@ server:
   ha:
     enabled: true
     replicas: 3
+    #apiAddr: https://127.0.0.1:8200
+    #clusterAddr: 
     raft:
       enabled: true
       setNodeId: true
@@ -42,7 +44,8 @@ server:
         
         # Cluster communication listener with internal cert
         listener "tcp" {
-          address = "[::]:8201"
+          address = "[::]:8203"
+          cluster_address = "[::]:8201"
           tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
           tls_key_file = "/vault/userconfig/tls-server/tls.key"
         }
