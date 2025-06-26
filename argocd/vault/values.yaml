@@ -71,4 +71,5 @@ server:
 ui:
   enabled: true
   serviceType: "ClusterIP"
-  externalPort: 8200
+  externalPort: 8202
+  targetPort: 8202
