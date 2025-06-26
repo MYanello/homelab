@@ -1,0 +1,21 @@
+tenancy_ocid: ENC[AES256_GCM,data:7YEOi6ZDFxQOZpq1Mbybdcr7CekAsB4yqefj4Sm8gys+zvGYkOrcczoIoFjBrD+lSVdKJm2M7FeHLNF/rKoNRRKHFzywzUjCaP4fxdFseQ==,iv:ciJovhHzObZX6kB8j2NIpathi+g1LBqqoANCKERHEyM=,tag:nFa9T24+Ao+eSNRCApOJYQ==,type:str]
+user_ocid: ENC[AES256_GCM,data:k6ZZTR2b/2qRFhoSqSNC+vkldXDvV0Tp+6AlqOSsz5qQK1oNABpxQEwZNIsd3HbP/IC9CuXb5VE8HgU3OSMi+Ec9OJbf2hMQ+Bn02w==,iv:33izt3Qg0+xXwNxXbUBfKODgnaMIugh8iI9OCOo0N0k=,tag:ISiwrPUnSZ8l6rSYBzlA+Q==,type:str]
+fingerprint: ENC[AES256_GCM,data:9sbtAUShxecHD7DNNNFEIk3j9PfigPx/RCxBqjWcMIxVgzIvv6zfpPm2Fh1Mja4=,iv:j0eIDx167L6twJek4sI+ZBzTzAP18Bp1DxfEgFHj4jQ=,tag:a5ytlnm+K68bjxjMQQh/DA==,type:str]
+private_key_path: ENC[AES256_GCM,data:HgiN+j/2XC5I0STTSyCkL/fh,iv:L++52ofDlJFctqYu8IcIOQ04KMMJUN111wRX5yBZmBM=,tag:5S4mmNFsJrk9j0f8MF6/Fw==,type:str]
+region: ENC[AES256_GCM,data:cD9DoGzafRBJHb0q,iv:NxfSyeq1rRtuMIMwbBw+gIdXaj1E2v0fdLy1KHVxYgE=,tag:6K2rCaAAHUAvYSDFSIIgzA==,type:str]
+compartment_id: ENC[AES256_GCM,data:xJajBcbgzMCZZYQfVKj75VZDvdPuju4jZtar4z/in212c6pNUyxgxdfwfLcjHTtXd01Go8++m7d0p474VlrJs9BZ0k9hmx2ZqyaiogUsgA==,iv:W3KMz1AHvWk5WT+3X9PNumLADpYa+lOG8ZzC21wx4I8=,tag:bUTyyLgwl1E0XlyfLsQz+g==,type:str]
+sops:
+    age:
+        - recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyM1FpUXFhT1BDd2NSSEJu
+            UyszaGFaazgzUEswS3U0Q3hYUy9XbXdZaDFJCmovUjg2U2Q2OE92RHNJeUNDMC9s
+            WHd0R0NWS09iUEZhTUhMQndWdHFHVlEKLS0tIDRjQ0tRNWNhTnVtT3YvV2tjUG90
+            MG9mNjU1bjhXbXlCVThwVVBZK3N6VEEKOdPw2yEZ/9fdL8x1GidSAKc67mkBOb+c
+            rcNToKy4Jd2u6t56mPet99thPhb3D81lNYmTIxm9QMcdaGw5NnPQGQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-06-26T12:35:14Z"
+    mac: ENC[AES256_GCM,data:vrfbLJKhtVGJ7vjUmxUwWLDd38WJbwUNJ3tF0H9F5kB7/vjRkPevGwFjv8KCDyWrk4/qVZFRMR69LFfVJM5fvde2qYmWpRROMm9SAHym9o9asW50Drk8kQUrf5MZ4gE/61UokIgbTzptdEoptONr5f2hbZ8EUt9xeKqVgpBmri0=,iv:EnSpJlCRodCBJQSOHhBwunUk8awkVd3qakm96IR40M0=,tag:M0QiDnwZ3N8u7mpGhg4fVg==,type:str]
+    unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+    version: 3.10.2
