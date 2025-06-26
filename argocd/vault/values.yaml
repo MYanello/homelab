@@ -18,7 +18,7 @@ server:
     VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
     # VAULT_API_ADDR: https://vault-active:8200
     # VAULT_CLUSTER_ADDR: https://vault-active:8201
-    VAULT_ADDR: https://localhost:8200
+    # VAULT_ADDR: https://localhost:8200
   extraVolumes:
     - type: secret
       name: tls-server
