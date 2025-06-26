@@ -1,5 +1,5 @@
 data "sops_file" "oci" {
-  source_file     = "oci.enc.yaml"
+  source_file     = "sops/oci.enc.yaml"
   input_type = "yaml"
 }
 
