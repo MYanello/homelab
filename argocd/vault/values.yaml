@@ -6,6 +6,7 @@ global:
     limits:
       memory: 512Mi
       cpu: 500m
+  tlsDisable: false
 server:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
@@ -26,8 +27,8 @@ server:
   ha:
     enabled: true
     replicas: 3
-    apiAddr: https://vault-active:8200
-    clusterAddr: https://vault-active:8201
+    #apiAddr: https://vault-active:8200
+    #clusterAddr: https://vault-active:8201
     raft:
       enabled: true
       setNodeId: true
