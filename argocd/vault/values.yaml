@@ -19,7 +19,7 @@ server:
     #   value: https://localhost:8200
     # - name: VAULT_CLUSTER_ADDR
     #   value: https://localhost:8201
-    # VAULT_ADDR: https://127.0.0.1:8202
+    VAULT_ADDR: https://127.0.0.1:8200
   extraVolumes:
     - type: secret
       name: tls-server
@@ -38,6 +38,7 @@ server:
         cluster_name = "vault-integrated-storage"
         listener "tcp" {
           address = "[::]:8200"
+          cluster_address = "[::]:8201"
           tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
           tls_key_file = "/vault/userconfig/tls-server/tls.key"
         }
