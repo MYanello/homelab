@@ -33,6 +33,13 @@ server:
       name: vault-letsencrypt
     - type: secret
       name: oci-config
+  volumes:
+    - type: secret
+      name: oci-config
+  volumeMounts:
+    - mountpath: /home/vault/.oci
+      name: config
+
   ha:
     enabled: true
     replicas: 3
