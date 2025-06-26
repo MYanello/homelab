@@ -18,13 +18,13 @@ server:
     VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
   extraSecretEnvironmentVars:
     - envName: VAULT_OCIKMS_CRYPTO_ENDPOINT
-      secretName: oci-secrets
+      secretName: oci-env-vars
       secretKey: VAULT_OCIKMS_CRYPTO_ENDPOINT
     - envName: VAULT_OCIKMS_MANAGEMENT_ENDPOINT
-      secretName: oci-secrets
+      secretName: oci-env-vars
       secretKey: VAULT_OCIKMS_MANAGEMENT_ENDPOINT
     - envName: VAULT_OCIKMS_SEAL_KEY_ID
-      secretName: oci-secrets
+      secretName: oci-env-vars
       secretKey: VAULT_OCIKMS_SEAL_KEY_ID
   extraVolumes:
     - type: secret
@@ -32,7 +32,7 @@ server:
     - type: secret
       name: vault-letsencrypt
     - type: secret
-      name: ociConfig
+      name: oci-config
   ha:
     enabled: true
     replicas: 3
