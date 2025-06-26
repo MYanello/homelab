@@ -33,11 +33,12 @@ server:
     - type: secret
       name: vault-letsencrypt
   volumes:
-    - type: secret
+    - secret: 
+        secretName: oci-config
       name: oci-config
   volumeMounts:
     - mountPath: /home/vault/.oci
-      name: userconfig-oci-config
+      name: oci-config
 
   ha:
     enabled: true
