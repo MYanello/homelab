@@ -38,7 +38,7 @@ server:
       name: oci-config
   volumeMounts:
     - mountPath: /home/vault/.oci
-      name: config
+      name: userconfig-oci-config
 
   ha:
     enabled: true
