@@ -36,6 +36,13 @@ server:
         ui = true
         cluster_name = "vault-integrated-storage"
         listener "tcp" {
+          address = "[::]:8202"
+          cluster_address = "[::]:8203"
+          tls_cert_file = "/vault/userconfig/vault-letsencrypt/tls.crt"
+          tls_key_file = "/vault/userconfig/vault-letsencrypt/tls.key"
+        }
+        
+        listener "tcp" {
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
