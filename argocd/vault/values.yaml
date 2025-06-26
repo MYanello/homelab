@@ -16,14 +16,23 @@ server:
     enabled: false
   extraEnvironmentVars:
     VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
-    # VAULT_API_ADDR: https://vault-active:8200
-    # VAULT_CLUSTER_ADDR: https://vault-active:8201
-    # VAULT_ADDR: https://localhost:8200
+  extraSecretEnvironmentVars:
+    - envName: VAULT_OCIKMS_CRYPTO_ENDPOINT
+      secretName: oci-secrets
+      secretKey: VAULT_OCIKMS_CRYPTO_ENDPOINT
+    - envName: VAULT_OCIKMS_MANAGEMENT_ENDPOINT
+      secretName: oci-secrets
+      secretKey: VAULT_OCIKMS_MANAGEMENT_ENDPOINT
+    - envName: VAULT_OCIKMS_SEAL_KEY_ID
+      secretName: oci-secrets
+      secretKey: VAULT_OCIKMS_SEAL_KEY_ID
   extraVolumes:
     - type: secret
       name: tls-server
     - type: secret
       name: vault-letsencrypt
+    - type: secret
+      name: ociConfig
   ha:
     enabled: true
     replicas: 3

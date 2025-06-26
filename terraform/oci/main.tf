@@ -1,3 +1,7 @@
+locals {
+  admin_user_id = "ocid1.user.oc1..aaaaaaaakfe6mukfk43qlbvnwsajk2qpatdxihiipbb67556ur3ei2c2nv7a"
+}
+
 resource "oci_kms_vault" "hcl_vault" {
   compartment_id = oci_identity_compartment.vault_autounseal.id
   display_name   = "hc-vault"
@@ -38,6 +42,11 @@ resource "oci_identity_group" "vault_autounseal" {
 resource "oci_identity_user_group_membership" "vault_autounseal" {
   group_id = oci_identity_group.vault_autounseal.id
   user_id  = oci_identity_user.vault_autounseal.id
+}
+
+resource "oci_identity_user_group_membership" "vault_autounseal_admin_user" {
+  group_id = oci_identity_group.vault_autounseal.id
+  user_id  = local.admin_user_id
 }
 
 resource "oci_identity_policy" "vault_autounseal" {
