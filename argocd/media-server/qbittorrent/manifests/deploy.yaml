@@ -36,9 +36,9 @@ spec:
               value: "1000"
             - name: PUID
               value: "1000"
-            - name: DOCKER_MODS
-              value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
-          image: lscr.io/linuxserver/qbittorrent:5.1.1-r0-ls400@sha256:5ad96de40e199060acfae0fe3843f575e487098095ac9e61ddf6b97e32df5619
+            # - name: DOCKER_MODS
+            #   value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+          image: lscr.io/linuxserver/qbittorrent:5.1.1-r0-ls400@sha256:069bd76a79e95a3d42eed1bcdfcf295f47e76d47a3b216996ebe77f2d6b28b98
           imagePullPolicy: IfNotPresent
           resources:
             requests:
