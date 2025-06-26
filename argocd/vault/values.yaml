@@ -8,6 +8,7 @@ global:
       cpu: 500m
   tlsDisable: false
 server:
+  hostNetwork: false
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
@@ -31,14 +32,12 @@ server:
       name: tls-server
     - type: secret
       name: vault-letsencrypt
-    - type: secret
-      name: oci-config
   volumes:
     - type: secret
       name: oci-config
   volumeMounts:
     - mountPath: /home/vault/.oci
-      name: oci-config
+      name: userconfig-oci-config
 
   ha:
     enabled: true
