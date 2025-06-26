@@ -37,7 +37,7 @@ server:
     - type: secret
       name: oci-config
   volumeMounts:
-    - mountpath: /home/vault/.oci
+    - mountPath: /home/vault/.oci
       name: config
 
   ha:
