@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: ociEnvVars
+    name: oci-env-vars
 type: Opaque
 stringData:
     VAULT_OCIKMS_CRYPTO_ENDPOINT: ENC[AES256_GCM,data:2NdE4b04aW9o0KI6pLQoMsoo7e8mxEv/WqkswHBIAMTCntgYl2mJgEnPDcqktvLIUMtlwzv9ZAdvyx7J7A==,iv:SWa6HnVRgc9JcgMGvzODciBRJ6ua/5E2cvKlceEUY6s=,tag:IMy9wj/gA9YFBkxLtPkxMQ==,type:str]
@@ -18,7 +18,7 @@ sops:
             NE40enY1a3NZbVljYmpyNDRFSUZ5RTAKZZhEGkeVjJNT+kbv7xyxePum1RfP1OUw
             +RgCoroHJyrxhmPCmoG09BcR4GhWK6pvkXel+qronUrgHNq2BRydag==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-06-26T14:18:15Z"
-    mac: ENC[AES256_GCM,data:kEqlWsSnn8J+vFd3+tOmLvxOL4ZNnlBMAToY6dgLqCo6403acr3zktTnX+iqu5o2wNS8eWkqYZo7oZcCpvK5cw54HTBxljW5XCtzEMoZVLZdiBWi2JwAjZu0gREWMn3gfKp5Rn6mjmSHABF2CB0wk5XWKyUOqW5Bj3xEBdenkSA=,iv:h06AE5tqvgg17A4OCyfoabsir1BV08bF49llZ0dT+88=,tag:cOu3UdOkGIcRaFy+hBvUEQ==,type:str]
+    lastmodified: "2025-06-26T14:21:55Z"
+    mac: ENC[AES256_GCM,data:Si4BFZZWE6gNXg6KYfldDmD9LlkFS5+zKOBI1DV7sBmKu+tOR1JVKgvhYy/NI2DwccVQ4zB6tw957mN3ayBMnC2xaIo5WlZnev89lOoSP6iY4wPEXFZb8vFv8iSo8uQSis0ik6xkQ9PyvCdCDkBH+1DwwVf4vYRtCdzb5a2J0Bo=,iv:790C7SAK5EmBm4w+DYaEyFu/93cE7hN7rw2A3GY0DVk=,tag:uFfVZdIUUZVZUv56IOYzfQ==,type:str]
     unencrypted_regex: ^(apiVersion|metadata|kind|type)$
     version: 3.10.2

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: ociConfig
+    name: oci-config
 type: Opaque
 stringData:
     config: ENC[AES256_GCM,data:SjVYDSBBQXL4Z/XNdvqlLzMNGBK8wYS4k1+gyrPCVrMe2+ZqojDWdjBjNP7MhBcMNqwq0sTXsROIf4YwIh6ITKg9qzgDwhAkkOq/A0+Q2DFLHPqvvanwtvi6f04D7SlTvWYMXe/WN2JyAt3dVXmcau8R92Xs1LVyMozbTLfYs+StOxn+XW951ZlOmEEzyd2SlVMAlm87X1uORW5QIUKigOk8HQSvm5OGoO3HZRGqYPUxYI5hkDeQqX3KiF3nU4KgI5W5W4W7JRgPV7uLEW9XFXlMI6Ei2L58fjdp4T5MWv3efOm+WipbwE2PoLpVyhYccLjCxm1n7C5X7ekNwJ2AFh9Cqce3y9+bhf1d7A6XCzXhowlmhsGmnkNgl/zTDb9hOZzxVZoMf0QbcCaFiCcq4fOGeEwt,iv:HTxYZXlnLDTX2qEN2/1gEAUvE3nBzSOabo8WZP3jO/s=,tag:Uu7UEjx4sxcSFVccNrTNcQ==,type:str]
@@ -17,7 +17,7 @@ sops:
             NE40enY1a3NZbVljYmpyNDRFSUZ5RTAKZZhEGkeVjJNT+kbv7xyxePum1RfP1OUw
             +RgCoroHJyrxhmPCmoG09BcR4GhWK6pvkXel+qronUrgHNq2BRydag==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-06-26T14:21:25Z"
-    mac: ENC[AES256_GCM,data:TMwswgr/smMBnJcXM0nmUHMtynE9KlILh/QIhEj9WajZ5qUJ9EAa3pj7kr3XKadAX4OmFjrhRPhC6G/5Qw5dPNSTN2U3vlADzIMnVmwK2M8tosXC5O4lJBFD212lDBrQcsQtJgaEoluj8Ce/pczb7fpy5D47yRAiL0tdiS/JBws=,iv:hO6WxqspUP5fnIx+hywzUp4KDosHVWp+ThTdieQqhOQ=,tag:YT6HxDx3nkdqFMakLj+K9w==,type:str]
+    lastmodified: "2025-06-26T14:21:45Z"
+    mac: ENC[AES256_GCM,data:I4VibYKfUWAYiiHO4MG9dMt85r5/sALrGv4w0CG4SkcotN+sILQL3DzkOhPUC3WaNYcSDarJlX5pzElKBaOLFPdM/XF4sDfMyyvARWKoOWTSEx1Y5go8lXTj1lpzBQaSPNw5LjqT/Q2xsDBB6Sl5c29BgX+YPklex4MEAwmHQFA=,iv:DtKSPKLCemQGYuOsgBE7ZH051mN8L2d1HP4JoBF3Nu8=,tag:I5mMsNtQE2SozW6ffyHrww==,type:str]
     unencrypted_regex: ^(apiVersion|metadata|kind|type)$
     version: 3.10.2
