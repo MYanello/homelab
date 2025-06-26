@@ -58,14 +58,13 @@ server:
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
         } 
-
-  # readinessProbe:
-  #   enabled: true
-  #   path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
-  # livenessProbe:
-  #   enabled: true
-  #   path: "/v1/sys/health?standbyok=true"
-  #   initialDelaySeconds: 60
+  readinessProbe:
+    enabled: true
+    path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
+  livenessProbe:
+    enabled: true
+    path: "/v1/sys/health?standbyok=true"
+    initialDelaySeconds: 60
   auditStorage:
     enabled: true
 ui:
