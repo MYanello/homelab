@@ -40,7 +40,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-cmd-params-cm
 data:
-  server.insecure: "true"
+  server.insecure: "false"
 ---
 apiVersion: v1
 kind: ConfigMap
