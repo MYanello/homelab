@@ -1,7 +1,8 @@
 resources:
   - ./manifests/lb.yaml
   - ./manifests/cm.yaml
-  - ./manifests/httproute.yaml
+  #- ./manifests/httproute.yaml
+  - ./manifests/tlsRoute.yaml
   - ./manifests/deploy.yaml
   - ./manifests/cert.yaml
 generators:

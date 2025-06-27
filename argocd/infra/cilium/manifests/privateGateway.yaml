@@ -8,6 +8,15 @@ spec:
     - value: 10.10.8.100
       type: IPAddress
   listeners:
+    - name: argo-tls-passthrough
+      protocol: TLS
+      hostname: "argocd.yanello.net"
+      port: 443
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: vault-tls-passthrough
       protocol: TLS
       hostname: "vault.yanello.net"

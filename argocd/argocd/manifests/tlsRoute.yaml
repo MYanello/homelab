@@ -1,0 +1,27 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: ArgoCD
+    gethomepage.dev/icon: sh-argo-cd
+    gethomepage.dev/description: "Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=argocd-server
+  labels:
+    app.kubernetes.io/instance: argocd-app
+  name: argocd-tlsroute
+  namespace: argocd
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: argo-tls-passthrough
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: argo-tls-passthrough
+  hostnames:
+    - argocd.yanello.net
+  rules:
+    - backendRefs:
+        - name: argocd-server-lb
+          port: 80
