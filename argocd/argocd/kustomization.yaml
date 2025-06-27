@@ -3,5 +3,6 @@ resources:
   - ./manifests/cm.yaml
   - ./manifests/httproute.yaml
   - ./manifests/deploy.yaml
+  - ./manifests/cert.yaml
 generators:
   - ./manifests/secret-generator.yaml

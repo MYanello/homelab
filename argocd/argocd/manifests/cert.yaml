@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argo-public
+spec:
+  commonName: argocd.yanello.net
+  dnsNames:
+  - "argocd.yanello.net"
+  secretName: argocd-letsencrypt
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
