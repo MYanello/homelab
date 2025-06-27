@@ -74,4 +74,3 @@ resource "oci_identity_api_key" "vault_autounseal" {
   user_id   = oci_identity_user.vault_autounseal.id
   key_value = data.sops_file.vault-autounseal-public.raw
 }
-# 

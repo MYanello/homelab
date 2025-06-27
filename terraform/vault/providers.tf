@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/vault"
       version = " >= 5.0.0"
     }
+    sops = {
+      source  = "carlpett/sops"
+      version = "~> 1.2.0"
+    }
   }
 }
 
