@@ -10,6 +10,8 @@ spec:
         revision: HEAD
         directories:
           - path: argocd/infra/monitoring/*
+          - path: argocd/infra/monitoring/kiali
+            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
