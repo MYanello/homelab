@@ -62,3 +62,12 @@ resource "vault_identity_group_alias" "admin-group-alias" {
   mount_accessor = vault_jwt_auth_backend.authentik.accessor
   canonical_id   = vault_identity_group.admin.id
 }
+
+resource "vault_policy" "admin" {
+  name = "admin"
+  policy = <<EOT
+  path "*" {
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+  }
+  EOT
+}
