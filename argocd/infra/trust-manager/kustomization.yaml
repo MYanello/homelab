@@ -8,4 +8,4 @@ helmCharts:
       secretTargets:
         enabled: "true"
         authorizedSecrets:
-          - 
+          - vault-tls
