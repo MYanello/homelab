@@ -20,5 +20,5 @@
     provider: custom
     showSearchSuggestions: true
     suggestionUrl: https://kagi.com/api/autosuggest?q=
-    url: https://kagi.com/search?q=%s
+    url: https://kagi.com/search?q=
     target: _blank
