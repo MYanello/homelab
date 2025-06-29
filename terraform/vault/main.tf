@@ -123,22 +123,3 @@ resource "vault_kubernetes_auth_backend_role" "esops" {
   token_ttl                        = 3600
   token_policies                   = [vault_policy.esops.name]
 }
-
-
-# resource "vault_policy" "internal-db-reader" {
-#   name   = "internal-db-reader"
-#   policy = <<EOT
-#   path "/secret/database/config" {
-#   capabilities = ["read"]
-#   }
-#   EOT
-# }
-
-# resource "vault_kubernetes_auth_backend_role" "internal-db" {
-#   backend                          = vault_auth_backend.kubernetes.path
-#   role_name                        = "example-role"
-#   bound_service_account_names      = ["internal-app"]
-#   bound_service_account_namespaces = ["default"]
-#   token_ttl                        = "3600"
-#   token_policies                   = [vault_policy.internal-db-reader.name]
-# }
