@@ -68,7 +68,8 @@ spec:
   - secret:
       key: "ca.crt"
       selector:
-        cert-manager.io/certificate-name: vault-tls
+        matchLabels:
+          cert-manager.io/certificate-name: vault-tls
 
   # Another Secret source, but this time using a label selector instead of a named Secret
   # - secret:
