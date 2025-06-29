@@ -8,8 +8,7 @@ global:
       cpu: 500m
   tlsDisable: false
 injector:
-  certs:
-    secretName: vault-tls
+  enabled: false
 server:
   hostNetwork: false
   tolerations:
