@@ -26,6 +26,8 @@ metadata:
   name: vault-tls
   labels:
     cert-manager.io/certificate-name: vault-tls
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "trust-manager"
 spec:
   secretName: vault-tls
   duration: 168h 
@@ -67,10 +69,7 @@ spec:
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
   - secret:
       key: "ca.crt"
-      namespace: vault
-      selector:
-        matchLabels:
-          cert-manager.io/certificate-name: vault-tls
+      name: vault-tls
 
   # Another Secret source, but this time using a label selector instead of a named Secret
   # - secret:
