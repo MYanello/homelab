@@ -74,7 +74,7 @@ spec:
 
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
   - secret:
-      key: "tls.crt"
+      key: "ca.crt"
       name: vault-tls
       # selector:
       #   matchLabels:
