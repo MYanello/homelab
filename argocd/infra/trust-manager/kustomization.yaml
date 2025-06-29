@@ -4,3 +4,8 @@ helmCharts:
     version: "v0.18.0"  # Use a current version
     namespace: trust-manager
     releaseName: trust-manager
+    valuesInline:
+      secretTargets:
+        enabled: "true"
+        authorizedSecrets:
+          - 

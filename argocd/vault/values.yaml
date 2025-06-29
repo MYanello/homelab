@@ -16,7 +16,7 @@ server:
   standalone:
     enabled: false
   extraEnvironmentVars:
-    VAULT_CACERT: /vault/userconfig/tls-server/ca.crt
+    VAULT_CACERT: /vault/userconfig/vault-tls/ca.crt
   extraSecretEnvironmentVars:
     - envName: VAULT_OCIKMS_CRYPTO_ENDPOINT
       secretName: oci-env-vars
@@ -29,7 +29,7 @@ server:
       secretKey: VAULT_OCIKMS_SEAL_KEY_ID
   extraVolumes:
     - type: secret
-      name: tls-server
+      name: vault-tls
     - type: secret
       name: vault-letsencrypt
   volumes:
@@ -59,17 +59,17 @@ server:
         listener "tcp" {
           address = "[::]:8200"
           cluster_address = "[::]:8201"
-          tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
-          tls_key_file = "/vault/userconfig/tls-server/tls.key"
+          tls_cert_file = "/vault/userconfig/vault-tls/tls.crt"
+          tls_key_file = "/vault/userconfig/vault-tls/tls.key"
         }
         
         storage "raft" {
           path = "/vault/data"
           retry_join {
             leader_api_addr = "https://vault-active:8200"
-            leader_ca_cert_file = "/vault/userconfig/tls-server/ca.crt"
-            leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
-            leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
+            leader_ca_cert_file = "/vault/userconfig/vault-tls/ca.crt"
+            leader_client_cert_file = "/vault/userconfig/vault-tls/tls.crt"
+            leader_client_key_file = "/vault/userconfig/vault-tls/tls.key"
           }
         } 
         seal "ocikms" {

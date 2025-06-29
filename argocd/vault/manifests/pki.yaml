@@ -23,9 +23,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: tls-server
+  name: vault-tls
 spec:
-  secretName: tls-server
+  secretName: vault-tls
   duration: 168h 
   renewBefore: 24h
   issuerRef:
@@ -116,11 +116,11 @@ spec:
           argocd.argoproj.io/sync-wave: "1"
         labels:
           app.kubernetes.io/component: "trust-bundle"
-    additionalFormats:
-      jks:
-        key: "bundle.jks"
-      pkcs12:
-        key: "bundle.p12"
+    # additionalFormats:
+    #   jks:
+    #     key: "bundle.jks"
+    #   pkcs12:
+    #     key: "bundle.p12"
     namespaceSelector:
       matchLabels:
         vault.hashicorp.com/agent-inject: "true"
