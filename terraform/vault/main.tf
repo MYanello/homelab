@@ -94,20 +94,51 @@ resource "vault_kubernetes_auth_backend_config" "k8s" {
   kubernetes_host = "https://$KUBERNETES_PORT_443_TCP_ADDR:443"
 }
 
-resource "vault_policy" "internal-db-reader" {
-  name   = "internal-db-reader"
+
+### ESOps Setup
+resource "vault_mount" "k8s_kv" {
+  path        = "k8s"
+  type        = "kv"
+  description = "K8s Key-Value Secrets Engine"
+  options = {
+    version = "2"
+    type    = "kv-v2"
+  }
+}
+
+resource "vault_policy" "esops" {
+  name   = "esops"
   policy = <<EOT
-  path "/secret/database/config" {
-  capabilities = ["read"]
+  path "k8s/*" {
+    capabilities = ["read", "list", "update", "delete", "create"]
   }
   EOT
 }
 
-resource "vault_kubernetes_auth_backend_role" "internal-db" {
+resource "vault_kubernetes_auth_backend_role" "esops" {
   backend                          = vault_auth_backend.kubernetes.path
-  role_name                        = "example-role"
-  bound_service_account_names      = ["internal-app"]
-  bound_service_account_namespaces = ["default"]
-  token_ttl                        = "3600"
-  token_policies                   = [vault_policy.internal-db-reader.name]
+  role_name                        = "esops"
+  bound_service_account_names      = ["external-secrets"]
+  bound_service_account_namespaces = ["esops"]
+  token_ttl                        = 3600
+  token_policies                   = [vault_policy.esops.name]
 }
+
+
+# resource "vault_policy" "internal-db-reader" {
+#   name   = "internal-db-reader"
+#   policy = <<EOT
+#   path "/secret/database/config" {
+#   capabilities = ["read"]
+#   }
+#   EOT
+# }
+
+# resource "vault_kubernetes_auth_backend_role" "internal-db" {
+#   backend                          = vault_auth_backend.kubernetes.path
+#   role_name                        = "example-role"
+#   bound_service_account_names      = ["internal-app"]
+#   bound_service_account_namespaces = ["default"]
+#   token_ttl                        = "3600"
+#   token_policies                   = [vault_policy.internal-db-reader.name]
+# }
