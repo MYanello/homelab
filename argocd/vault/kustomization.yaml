@@ -7,6 +7,7 @@ generators:
 resources:
   - ./manifests/route.yaml
   - ./manifests/pki.yaml
+  - ./manifests/clusterSecretStore.yaml
 
 helmCharts:
   - name: vault
