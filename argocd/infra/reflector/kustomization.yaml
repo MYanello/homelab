@@ -1,6 +1,6 @@
 helmCharts:
   - name: reflector
     repo: https://emberstack.github.io/helm-charts
-    version: "v0.18.0"
+    version: "9.1.15"
     namespace: reflector
     releaseName: reflector
