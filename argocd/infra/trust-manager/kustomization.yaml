@@ -6,6 +6,6 @@ helmCharts:
     releaseName: trust-manager
     valuesInline:
       secretTargets:
-        enabled: "true"
+        enabled: true
         authorizedSecrets:
           - vault-tls
