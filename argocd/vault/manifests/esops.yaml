@@ -1,0 +1,25 @@
+apiVersion: external-secrets.io/v1
+kind: ClusterSecretStore
+metadata:
+  name: vault-secrets
+spec:
+  provider:
+    vault:
+      server: "https://vault-active.vault.svc.cluster.local:8201"
+      path: "k8s"
+      version: "v2"
+      auth:
+        kubernetes:
+          # Path where the Kubernetes authentication backend is mounted in Vault
+          mountPath: "kubernetes"
+          # A required field containing the Vault Role to assume.
+          role: "esops"
+          # Optional service account field containing the name
+          # of a kubernetes ServiceAccount
+          # serviceAccountRef:
+          #   name: "my-sa"
+          # # Optional secret field containing a Kubernetes ServiceAccount JWT
+          # #  used for authenticating with Vault
+          # secretRef:
+          #   name: "my-secret"
+          #   key: "vault"
