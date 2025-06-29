@@ -55,7 +55,7 @@ spec:
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
-  name: vault-certs  # The bundle name will also be used for the target
+  name: vault-trust-bundle  # The bundle name will also be used for the target
 spec:
   sources:
   # Include a bundle of publicly trusted certificates which can be
@@ -67,6 +67,7 @@ spec:
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
   - secret:
       key: "ca.crt"
+      namespace: vault
       selector:
         matchLabels:
           cert-manager.io/certificate-name: vault-tls
