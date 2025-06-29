@@ -16,8 +16,8 @@ spec:
           vault.hashicorp.com/agent-inject: 'true'
           vault.hashicorp.com/role: 'internal-app'
           vault.hashicorp.com/agent-inject-secret-database-config.txt: 'secret/database/config'
-          vault.hashicorp.com/tls-secret: vault-tls-secret 
-          vault.hashicorp.com/ca-cert: /vault/tls/ca.crt
+          vault.hashicorp.com/tls-secret: vault-trust-bundle
+          vault.hashicorp.com/ca-cert: /vault/tls/vault-certs.pem
         labels:
           app: orgchart
       spec:
