@@ -24,4 +24,4 @@ spec:
         serviceAccountName: internal-app
         containers:
           - name: orgchart
-            image: jweissig/app:0.0.1
+            image: jweissig/app:0.0.1@sha256:54e7159831602dd8ffd8b81e1d4534c664a73e88f3f340df9c637fc16a5cf0b7
