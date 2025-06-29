@@ -7,6 +7,9 @@ global:
       memory: 512Mi
       cpu: 500m
   tlsDisable: false
+injector:
+  certs:
+    secretName: vault-tls
 server:
   hostNetwork: false
   tolerations:
