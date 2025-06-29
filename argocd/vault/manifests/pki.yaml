@@ -64,8 +64,9 @@ spec:
 
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
   - secret:
-      name: tls-server
       key: "ca.crt"
+      selector:
+        - cert-manager.io/certificate-name: vault-tls
 
   # Another Secret source, but this time using a label selector instead of a named Secret
   # - secret:
@@ -109,7 +110,7 @@ spec:
     # All ConfigMaps will include a PEM-formatted bundle, here named "root-certs.pem"
     # and in this case we also request binary formatted bundles in JKS and PKCS#12 formats,
     # here named "bundle.jks" and "bundle.p12".
-    configMap:
+    secret:
       key: "vault-certs.pem"
       metadata:
         annotations:
