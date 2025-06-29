@@ -7,9 +7,10 @@ metadata:
 spec:
   # imagePullSecrets:
   #   - name: gitea-pull-secrets
+  serviceAccountName: vault
   containers:
   - name: debug
-    image: ghcr.io/runatlantis/atlantis:v0.33.0
+    image: docker.io/ubuntu:latest
   # 301733247343.dkr.ecr-fips.us-gov-east-1.amazonaws.com/buildah:v1.40.0@sha256:5e4509edcd6021bee58c3de47eda93701c12957e700d7de3a3b57203706afcb1 
   # 301733247343.dkr.ecr-fips.us-gov-east-1.amazonaws.com/kaniko-executor:debug@sha256:fb6d29da5792b6b9886bb132d1bb600bec79a47a31e4c152df3e52de9c561a44
   # registry1.dso.mil/ironbank/redhat/ubi/ubi9:9.6@sha256:363f765fdc6fc8f1dba710341b099af0b2e55335cad155041e4364dc7a99be0f 
