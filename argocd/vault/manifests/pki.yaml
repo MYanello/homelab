@@ -24,7 +24,17 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: vault-tls
+  labels:
+    cert-manager.io/certificate-name: vault-tls
 spec:
+  secretTemplate:
+    labels:
+      cert-manager.io/certificate-name: vault-tls
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "cert-manager"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "cert-manager"
   secretName: vault-tls
   duration: 168h 
   renewBefore: 24h
@@ -53,7 +63,7 @@ spec:
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
-  name: vault-certs  # The bundle name will also be used for the target
+  name: vault-trust-bundle  # The bundle name will also be used for the target
 spec:
   sources:
   # Include a bundle of publicly trusted certificates which can be
@@ -65,8 +75,10 @@ spec:
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
   - secret:
       key: "ca.crt"
-      selector:
-        - cert-manager.io/certificate-name: vault-tls
+      name: vault-tls
+      # selector:
+      #   matchLabels:
+      #     cert-manager.io/certificate-name: vault-tls
 
   # Another Secret source, but this time using a label selector instead of a named Secret
   # - secret:
@@ -124,4 +136,4 @@ spec:
     #     key: "bundle.p12"
     namespaceSelector:
       matchLabels:
-        vault.hashicorp.com/agent-inject: "true"
+        kubernetes.io/metadata.name: default

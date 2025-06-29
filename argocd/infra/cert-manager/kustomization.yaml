@@ -22,4 +22,14 @@ helmCharts:
       - key: "node-role.kubernetes.io/control-plane"
         operator: "Exists"
         effect: "NoSchedule"
-    
+  - name: trust-manager
+    repo: https://charts.jetstack.io
+    version: "v0.18.0"
+    namespace: cert-manager
+    releaseName: trust-manager
+    valuesInline:
+      secretTargets:
+        enabled: true
+        authorizedSecrets:
+          - vault-tls
+          - vault-trust-bundle
