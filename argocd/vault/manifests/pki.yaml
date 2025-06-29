@@ -24,6 +24,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: vault-tls
+  labels:
+    cert-manager.io/certificate-name: vault-tls
 spec:
   secretName: vault-tls
   duration: 168h 
@@ -66,7 +68,7 @@ spec:
   - secret:
       key: "ca.crt"
       selector:
-        - cert-manager.io/certificate-name: vault-tls
+        cert-manager.io/certificate-name: vault-tls
 
   # Another Secret source, but this time using a label selector instead of a named Secret
   # - secret:
