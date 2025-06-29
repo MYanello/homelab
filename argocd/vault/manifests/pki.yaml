@@ -136,4 +136,4 @@ spec:
     #     key: "bundle.p12"
     namespaceSelector:
       matchLabels:
-        vault.hashicorp.com/agent-inject: "true"
+        kubernetes.io/metadata.name: default
