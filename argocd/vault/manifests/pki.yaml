@@ -33,6 +33,8 @@ spec:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "trust-manager"
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "trust-manager"
   secretName: vault-tls
   duration: 168h 
   renewBefore: 24h
