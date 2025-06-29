@@ -4,7 +4,7 @@ data "sops_file" "authentik" {
 }
 
 resource "vault_jwt_auth_backend" "authentik" {
-  description = "Vault Authentik Terraform JWT auth backend"
+  description        = "Vault Authentik Terraform JWT auth backend"
   path               = "oidc"
   type               = "oidc"
   default_role       = "admin"
@@ -52,6 +52,7 @@ resource "vault_jwt_auth_backend_role" "admin" {
     "http://localhost:8250/oidc/callback"
   ]
 }
+
 resource "vault_identity_group" "admin" {
   name     = "admin"
   type     = "external"
@@ -64,10 +65,49 @@ resource "vault_identity_group_alias" "admin-group-alias" {
 }
 
 resource "vault_policy" "admin" {
-  name = "admin"
+  name   = "admin"
   policy = <<EOT
   path "*" {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
   }
   EOT
+}
+
+resource "vault_mount" "kv" {
+  path        = "secret"
+  type        = "kv"
+  description = "Key-Value Secrets Engine"
+  options = {
+    version = "2"
+    type    = "kv-v2"
+  }
+}
+
+resource "vault_auth_backend" "kubernetes" {
+  type        = "kubernetes"
+  path        = "kubernetes"
+  description = "Kubernetes Auth Backend"
+}
+
+resource "vault_kubernetes_auth_backend_config" "k8s" {
+  backend         = vault_auth_backend.kubernetes.path
+  kubernetes_host = "https://$KUBERNETES_PORT_443_TCP_ADDR:443"
+}
+
+resource "vault_policy" "internal-db-reader" {
+  name   = "internal-db-reader"
+  policy = <<EOT
+  path "/secret/database/config" {
+  capabilities = ["read"]
+  }
+  EOT
+}
+
+resource "vault_kubernetes_auth_backend_role" "internal-db" {
+  backend                          = vault_auth_backend.kubernetes.path
+  role_name                        = "example-role"
+  bound_service_account_names      = ["internal-app"]
+  bound_service_account_namespaces = ["default"]
+  token_ttl                        = "3600"
+  token_policies                   = [vault_policy.internal-db-reader.name]
 }

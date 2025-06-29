@@ -49,3 +49,78 @@ spec:
     - digital signature
     - key encipherment
     - server auth
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: vault-certs  # The bundle name will also be used for the target
+spec:
+  sources:
+  # Include a bundle of publicly trusted certificates which can be
+  # used to validate most TLS certificates on the internet, such as
+  # those issued by Let's Encrypt, Google, Amazon and others.
+  # NB: Unless you pin the package providing these CAs, the default can change!
+  - useDefaultCAs: false
+
+  # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
+  - secret:
+      name: tls-server
+      key: "ca.crt"
+
+  # Another Secret source, but this time using a label selector instead of a named Secret
+  # - secret:
+  #     selector:
+  #       matchLabels:
+  #         fruit: apple
+  #     key: "ca.crt"
+
+  # One more Secret source, this time including all certificates from every key
+  # - secret:
+  #     name: "my-regional-cas"
+  #     includeAllKeys: true
+
+  # A ConfigMap in the "trust" namespace; see "Trust Namespace" below for further details
+  # - configMap:
+  #     name: "my-org.net"
+  #     key: "root-certs.pem"
+
+  # Another ConfigMap source, but this time using a label selector instead of a named ConfigMap
+  # - configMap:
+  #     selector:
+  #       matchLabels:
+  #         fruit: apple
+  #     key: "ca.crt"
+
+  # One more ConfigMap source, this time including all certificates from every key
+  # - configMap:
+  #     name: "my-org-cas"
+  #     includeAllKeys: true
+
+  # A manually specified PEM-encoded cert, included directly into the Bundle
+  # - inLine: |
+  #     -----BEGIN CERTIFICATE-----
+  #     MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+  #     ....
+  #     0V3NCaQrXoh+3xrXgX/vMdijYLUSo/YPEWmo
+  #     -----END CERTIFICATE-----
+  target:
+    # Sync the bundle to a ConfigMap called `my-org.com` in every namespace which
+    # has the label "linkerd.io/inject=enabled"
+    # All ConfigMaps will include a PEM-formatted bundle, here named "root-certs.pem"
+    # and in this case we also request binary formatted bundles in JKS and PKCS#12 formats,
+    # here named "bundle.jks" and "bundle.p12".
+    configMap:
+      key: "vault-certs.pem"
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        labels:
+          app.kubernetes.io/component: "trust-bundle"
+    additionalFormats:
+      jks:
+        key: "bundle.jks"
+      pkcs12:
+        key: "bundle.p12"
+    namespaceSelector:
+      matchLabels:
+        vault.hashicorp.com/agent-inject: "true"
