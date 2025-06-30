@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./manifests/certificate.yaml
   - ./manifests/secretstore.yaml
+  - ./manifests/rbac.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
