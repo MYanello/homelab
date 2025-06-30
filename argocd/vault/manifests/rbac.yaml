@@ -3,19 +3,32 @@ kind: ClusterRole
 metadata:
   name: read-serviceaccounts
 rules:
-- apiGroups: [""]
-  resources: ["serviceaccounts"]
-  verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts"]
+    verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: read-serviceaccounts
 subjects:
-- kind: ServiceAccount
-  name: vault
-  namespace: vault
+  - kind: ServiceAccount
+    name: vault
+    namespace: vault
 roleRef:
   kind: ClusterRole
   name: read-serviceaccounts
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vault-auth-delegator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+  - kind: ServiceAccount
+    name: vault
+    namespace: vault
