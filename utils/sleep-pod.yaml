@@ -7,7 +7,7 @@ metadata:
 spec:
   # imagePullSecrets:
   #   - name: gitea-pull-secrets
-  serviceAccountName: vault
+  serviceAccountName: external-secrets
   containers:
   - name: debug
     image: docker.io/hashicorp/vault:latest

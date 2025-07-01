@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chartdb
+  name: chartdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chartdb
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: chartdb
+    spec:
+      containers:
+        - image: ghcr.io/chartdb/chartdb:1.13.0
+          imagePullPolicy: IfNotPresent
+          name: chartdb
+          # resources:
+          #   limits:
+          #     cpu: 500m
+          #     memory: 500Mi
+          #   requests:
+          #     cpu: 25m
+          #     memory: 50Mi
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
