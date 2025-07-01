@@ -8,7 +8,7 @@ resources:
   - ./manifests/route.yaml
   - ./manifests/pki.yaml
   - ./manifests/clusterSecretStore.yaml
-  #- ./manifests/rbac.yaml
+  - ./manifests/rbac.yaml
 
 helmCharts:
   - name: vault

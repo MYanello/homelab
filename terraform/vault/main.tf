@@ -1,3 +1,10 @@
+resource "vault_audit" "stdout" {
+  type = "file"
+  options = {
+    file_path = "stdout"
+  }
+}
+
 data "sops_file" "authentik" {
   source_file = "sops/authentik.yaml"
   input_type  = "yaml"
@@ -89,11 +96,15 @@ resource "vault_auth_backend" "kubernetes" {
   description = "Kubernetes Auth Backend"
 }
 
-resource "vault_kubernetes_auth_backend_config" "k8s" {
-  backend         = vault_auth_backend.kubernetes.path
-  kubernetes_host = "https://$KUBERNETES_PORT_443_TCP_ADDR:443"
+data "sops_file" "k8s" {
+  source_file = "sops/k8s.yaml"
+  input_type  = "yaml"
 }
 
+resource "vault_kubernetes_auth_backend_config" "k8s" {
+  backend            = vault_auth_backend.kubernetes.path
+  kubernetes_host    = "https://kubernetes.default.svc.cluster.local"
+}
 
 ### ESOps Setup
 resource "vault_mount" "k8s_kv" {
@@ -109,7 +120,7 @@ resource "vault_mount" "k8s_kv" {
 resource "vault_policy" "esops" {
   name   = "esops"
   policy = <<EOT
-  path "secrets/k8s/*" {
+  path "k8s/esops/*" {
     capabilities = ["read", "list", "update", "delete", "create"]
   }
   EOT
