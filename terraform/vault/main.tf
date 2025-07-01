@@ -96,11 +96,6 @@ resource "vault_auth_backend" "kubernetes" {
   description = "Kubernetes Auth Backend"
 }
 
-data "sops_file" "k8s" {
-  source_file = "sops/k8s.yaml"
-  input_type  = "yaml"
-}
-
 resource "vault_kubernetes_auth_backend_config" "k8s" {
   backend            = vault_auth_backend.kubernetes.path
   kubernetes_host    = "https://kubernetes.default.svc.cluster.local"
