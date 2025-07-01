@@ -33,6 +33,7 @@
 #     name: vault
 #     namespace: vault
 ---
+apiVersion: v1
 kind: Secret
 metadata:
   name: vault-sa-secret
