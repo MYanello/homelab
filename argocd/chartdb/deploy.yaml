@@ -16,6 +16,7 @@ spec:
       maxSurge: 1
   template:
     metadata:
+      name: chartdb
       labels:
         app: chartdb
     spec:
