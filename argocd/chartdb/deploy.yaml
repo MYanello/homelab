@@ -20,7 +20,7 @@ spec:
         app: chartdb
     spec:
       containers:
-          image: ghcr.io/chartdb/chartdb:1.13.0
+        - image: ghcr.io/chartdb/chartdb:1.13.0
           imagePullPolicy: IfNotPresent
           name: chartdb
           # resources:
