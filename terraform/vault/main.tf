@@ -1,3 +1,10 @@
+resource "vault_audit" "stdout" {
+  type = "file"
+  options = {
+    file_path = "stdout"
+  }
+}
+
 data "sops_file" "authentik" {
   source_file = "sops/authentik.yaml"
   input_type  = "yaml"
@@ -94,7 +101,6 @@ resource "vault_kubernetes_auth_backend_config" "k8s" {
   kubernetes_host = "https://$KUBERNETES_PORT_443_TCP_ADDR:443"
 }
 
-
 ### ESOps Setup
 resource "vault_mount" "k8s_kv" {
   path        = "k8s"
@@ -109,7 +115,7 @@ resource "vault_mount" "k8s_kv" {
 resource "vault_policy" "esops" {
   name   = "esops"
   policy = <<EOT
-  path "secrets/k8s/*" {
+  path "k8s/esops/*" {
     capabilities = ["read", "list", "update", "delete", "create"]
   }
   EOT
