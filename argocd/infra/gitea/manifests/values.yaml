@@ -24,16 +24,16 @@ gitea:
 service:
   ssh:
     type: LoadBalancer
-    loadBalancerIP: 10.10.8.11
-    clusterIP: 
-    annotations:
-      metallb.universe.tf/allow-shared-ip: "gitea"
+    # loadBalancerIP: 10.10.8.11
+    # clusterIP: 
+    # annotations:
+    #   metallb.universe.tf/allow-shared-ip: "gitea"
   http:
     type: LoadBalancer
-    loadBalancerIP: 10.10.8.11
-    clusterIP: 
-    annotations:
-      metallb.universe.tf/allow-shared-ip: "gitea"
+    # loadBalancerIP: 10.10.8.11
+    # clusterIP: 
+    # annotations:
+    #   metallb.universe.tf/allow-shared-ip: "gitea"
 
 
 persistence:
