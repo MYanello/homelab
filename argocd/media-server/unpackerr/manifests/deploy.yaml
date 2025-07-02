@@ -42,8 +42,6 @@ spec:
               value: /data/logs/log.txt
             - name: UN_FOLDER_0_MOVE_BACK
               value: "true"
-            - name: UN_FOLDER_0_PATH
-              value: /data/media/torrents/completed/tv/Key.And.Peele.S01-S05.DVDRip.XviD.x264-Scene
           envFrom:
             - secretRef:
                 name: unpackerr-secrets
