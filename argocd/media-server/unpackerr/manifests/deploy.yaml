@@ -45,7 +45,7 @@ spec:
           envFrom:
             - secretRef:
                 name: unpackerr-secrets
-          image: golift/unpackerr:latest@sha256:a9e7eb0d7b0ca16d2bdcb5af52eb4b544053ad6d915dd9b0f8383bc83f1df5cc
+          image: golift/unpackerr:0.14.5@sha256:8493ffc2dd17e0b8a034552bb52d44e003fa457ee407da97ccc69328bce4a815
           imagePullPolicy: Always
           resources:
             limits:
@@ -56,12 +56,10 @@ spec:
               memory: 50Mi
           name: unpackerr
           volumeMounts:
-          #   - mountPath: /config/unpackerr.conf
-          #     name: config
             - mountPath: /data/media
               name: media
-          #   - name: logs
-          #     mountPath: /data/logs
+          #   - mountPath: /config/unpackerr.conf
+          #     name: config
       volumes:
         - name: config
           configMap:
@@ -69,14 +67,9 @@ spec:
         - name: logs
           emptyDir: {}
         - name: media
-          # persistentVolumeClaim:
-          #   claimName: media
           nfs:
             server: marcus-server.lan
             path: /data/media
         # - name: config
         #   persistentVolumeClaim:
         #     claimName: config
-        # - name: logs
-        #   persistentVolumeClaim:
-        #     claimName: logs
