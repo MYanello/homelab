@@ -58,8 +58,6 @@ spec:
           volumeMounts:
             - mountPath: /data/media
               name: media
-          #   - name: logs
-          #     mountPath: /data/logs
           #   - mountPath: /config/unpackerr.conf
           #     name: config
       volumes:
@@ -75,6 +73,3 @@ spec:
         # - name: config
         #   persistentVolumeClaim:
         #     claimName: config
-        # - name: logs
-        #   persistentVolumeClaim:
-        #     claimName: logs
