@@ -29,7 +29,7 @@ spec:
               value: "100"
             - name: HBOX_ALLOW_REGISTRATION
               value: "false"
-          image: ghcr.io/sysadminsmedia/homebox:0.20.0@sha256:2e26a74cd2969ccce0c2502759bd9e1fdd66004a67430d9e32ef3e6256b24554
+          image: ghcr.io/sysadminsmedia/homebox:0.20.2@sha256:c5e13bf9d8f925c0c68a59518bf0bc7f1f26673e479ebf30fe64d0469770e48d
           imagePullPolicy: IfNotPresent
           name: homebox
           resources:
