@@ -56,8 +56,8 @@ spec:
               memory: 50Mi
           name: unpackerr
           volumeMounts:
-          #   - mountPath: /config/unpackerr.conf
-          #     name: config
+            # - mountPath: /config/unpackerr.conf
+            #   name: config
             - mountPath: /data/media
               name: media
           #   - name: logs
