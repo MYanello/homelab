@@ -24,7 +24,7 @@ vmsingle:
     storage:
       resources:
         requests:
-          storage: 50Gi
+          storage: 250Gi
     insertPorts:
       influxPort: "8086"
     extraEnvs:
