@@ -25,14 +25,12 @@ spec:
               name: http
           image: ghcr.io/claabs/epicgames-freegames-node:latest
           volumeMounts:
-            - mountPath: /usr/app/config/config.json
-              subPath: config.json
-              name: config.enc.json5
+            - mountPath: /usr/app/config/config.json5
+              name: config
           command:
             - sleep
             - inf
       volumes:
         - name: config
-          mountPath:
           secret:
-            name: config
+            secretName: config
