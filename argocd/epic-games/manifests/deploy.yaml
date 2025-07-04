@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: epic-games
+  labels:
+    app: epic-games
+spec:
+  replicas: 1
+  serviceName: epic-games
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: epic-games
+  template:
+    metadata:
+      labels:
+        app: epic-games
+    spec:
+      containers:
+        - name: epic-games
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          image: ghcr.io/claabs/epicgames-freegames-node:latest
+          volumeMounts: 
+            - mountPath: /usr/app/config.json
+              name: config
+      volumes:
+        - name: config
+          mountPath: 
+          configMap:
+            name: config
