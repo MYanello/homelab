@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: habit-trove
+  labels:
+    app: habit-trove
+spec:
+  replicas: 1
+  serviceName: habit-trove
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: habit-trove
+  template:
+    metadata:
+      labels:
+        app: habit-trove
+    spec:
+      containers:
+        - name: habit-trove
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: habit-trove-secrets
+                  key: auth-secret
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          image: docker.io/dohsimpson/habittrove:v0.2.23
+          volumeMounts:
+            - mountPath: /app/data
+              name: data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 100Mi
