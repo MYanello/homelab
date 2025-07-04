@@ -3,7 +3,7 @@
   "cronSchedule": "0 0,6,12,18 * * *",
   "logLevel": "info",
   "webPortalConfig": {
-    "baseUrl": "https://epic.example.com",
+    "baseUrl": "https://epic.yanello.net",
   },
   "accounts": [
     {
@@ -11,8 +11,6 @@
     },
   ],
   "notifiers": [
-    // You may configure as many of any notifier as needed
-    // Here are some examples of each type
     {
       "type": "email",
       "smtpHost": "smtp.gmail.com",

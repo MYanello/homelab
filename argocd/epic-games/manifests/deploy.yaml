@@ -27,6 +27,9 @@ spec:
           volumeMounts: 
             - mountPath: /usr/app/config.json
               name: config
+          command:
+            - sleep
+            - inf
       volumes:
         - name: config
           mountPath: 
