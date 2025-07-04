@@ -5,7 +5,6 @@ metadata:
   labels:
     app: habit-trove
 spec:
-  # type: LoadBalancer
   ports:
     - name: habit-trove
       port: 3000
