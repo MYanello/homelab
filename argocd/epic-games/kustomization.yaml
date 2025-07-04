@@ -9,4 +9,4 @@ resources:
 secretGenerator:
   - name: config
     files:
-      - ./manifests/config.json
+      - ./manifests/config.enc.json5
