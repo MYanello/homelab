@@ -1,5 +1,5 @@
 creation_rules:
-  - path_regex: .*\.(yaml|json)$
+  - path_regex: .*\.(yaml|json|json5)$
     unencrypted_regex: "^(apiVersion|metadata|kind|type)$"
     age: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5 # public key / recipient
   - path_regex: .*\.(pem|key|crt)$

@@ -6,7 +6,6 @@ metadata:
     app: epic-games
 spec:
   replicas: 1
-  serviceName: epic-games
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -24,11 +23,18 @@ spec:
               protocol: TCP
               name: http
           image: ghcr.io/claabs/epicgames-freegames-node:latest
-          volumeMounts: 
-            - mountPath: /usr/app/config.json
+          volumeMounts:
+            - mountPath: /usr/app/config/config.json5
               name: config
+              subPath: config
+          resources:
+            limits:
+              cpu: 50m
+              memory: 500Mi
+            requests:
+              cpu: 1m
+              memory: 300Mi
       volumes:
         - name: config
-          mountPath: 
-          configMap:
-            name: config
+          secret:
+            secretName: epic-games-config

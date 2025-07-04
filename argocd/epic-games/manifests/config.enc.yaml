@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: epic-games-config
+type: Opaque
+stringData:
+    config: ENC[AES256_GCM,data:nlEiAV+oTymN9i0t6VzTCckBimIJw1rT5MGFxvEFBizYAgZWepQ+DxrlUGRD719t5kqWH6rRNxHLdjQmiSZjdHYSB4OnDXhU1DXjMlwI8ckVzzcLa6kXPbAEDb3CO0TMdwBl7RgJJkQoiUrjiKcofbQ4XhJDtNMjbgV+6c5kUksUhnmFNzW06w7ROSWQva+9cTPeR3Srlp5V2rL5N96gZNif+VePq4S2L8BdUetRPzJRT7CnpJpKoZMcgfc+guVV4PYIJkohYSaP6eBKFjFKMA//lRIw5/So2yXKBpbE6FAtCumzdbExuHMHUy4Y3GMiWXdaca+IqeoNbRF+w8w4lin96GGBjVKJISQSNeXip64Ton1FLwqMAMpL+QluhI+7bEU7gKMxkvIbfADQLpQ5Vpy3nWnHUrgul43IUZqPA9oC+ftU8I/r4QY14HRfInjuazEWrRi82Ep0sqrSrgFaaqFA7O6tQbEVe/33RA21Bzdz20j6d8PPXjbkcGCz0wMLfoXS2uN4yCnXR/UCa1WxopWN7ywRCI92HdD5RJkgU1r6Lf3vx/LZTzAj5h2ngB8afdxorJmybXLCagXMcf+z8d1+4XmLGye+MsAj7uztrqc7AWXlucKWNWqrpsAWA/ePGtKfahEui1lNgyLRL7XeNU8Vu4GayphdSoRqePQHUyN+oDCF7C1iQyF1pVso/u6jbU2XZH4LIaZw7WWaSAZlLoGo7OxuPFstHUKXg7rvTKqZ+Q0NZbUkWV9kXdPNRmy2swO0jEoBus7fxAZviml0x08OjUbi8BFLcVU3Ck7JJwTXO4gRR65/Fp+ivfFhU9Bjf3SMUEflWD27amSEJg==,iv:uANJgCpjJiLnh6QuOtGFid8BOq/3VNtV+zouDMBlxq4=,tag:lXdAFf9wpj7CNiYupQw7Hw==,type:str]
+sops:
+    age:
+        - recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNK0NWbkpIakZOSTlTWUts
+            TnVIWmRJaTRwcUozdjZMM0FnclpUVDAyRFZVCjQ2eHd5aGdaSFRpSEtrc1RHaThV
+            cnprNk53bXRJUFVHM2dLUUtxNEdNd2cKLS0tIEo1dm4weGdtNHNOdDl2aDcveHBL
+            SnFSUHVQUlZIQjYyWmd4dis5ZFIwbmcK0Z6G7noV+pf0ZauT31yH95EpO4c/E/yk
+            vbeJDjJCgZmJbtxZFReWkNGIw0kB/Z1b3xJBaRDl5uaxQ1u1UjToiw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-07-04T13:30:23Z"
+    mac: ENC[AES256_GCM,data:Am4vnQcWdU9vN8gBAxaWnR6VKCw4o4yxtHAkoVc79yGOUqNQTNfJEUENLRU5KFp4giCHC68qowARt2Nw/GFHZMaZ4AgKKZFWNjnOAVWNxKjpDZlACxfVbg1KGMEvg9xkvj/TJURu+cELIe5HlB23Oo4/6zGJuU9h/q/juYojUpA=,iv:trVJlBsjTSLwZxQvJfAcRKJ0cezSJVXTpVdC6s/pJVY=,tag:zsS+33cH7+DJrU6QEHs5Hg==,type:str]
+    unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+    version: 3.10.2
