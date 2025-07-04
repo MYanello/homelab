@@ -8,5 +8,3 @@ resources:
 
 generators:
   - manifests/secret-generator.yaml
-
-
