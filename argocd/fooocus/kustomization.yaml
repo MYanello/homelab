@@ -8,5 +8,5 @@ resources:
 
 replicas:
   - name: fooocus
-    count: 1
+    count: 0
   
