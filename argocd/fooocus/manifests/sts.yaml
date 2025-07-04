@@ -19,7 +19,7 @@ spec:
       runtimeClassName: nvidia
       containers:
         - name: fooocus
-          image: "ghcr.io/lllyasviel/fooocus:latest"
+          image: "ghcr.io/lllyasviel/fooocus:2.5.5"
           imagePullPolicy: IfNotPresent
           env:
             - name: CMDARGS
