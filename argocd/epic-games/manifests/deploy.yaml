@@ -25,7 +25,7 @@ spec:
               name: http
           image: ghcr.io/claabs/epicgames-freegames-node:latest
           volumeMounts: 
-            - mountPath: /usr/app/config.json
+            - mountPath: /usr/app/
               name: config
           command:
             - sleep
