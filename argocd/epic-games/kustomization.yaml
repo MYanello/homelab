@@ -9,7 +9,4 @@ resources:
 generators:
   - manifests/secret-generator.yaml
 
-secretGenerator:
-  - name: config
-    files:
-      - ./manifests/config.enc.json5
+
