@@ -1,0 +1,16 @@
+provider:
+  name: cloudflare
+env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare-secrets
+        key: apikey
+rbac:
+  additionalPermissions:
+    - apiGroups: [""]
+      resources: ["namespaces"]
+      verbs: ["get","watch","list"]
+    - apiGroups: ["gateway.networking.k8s.io"]
+      resources: ["gateways","httproutes","grpcroutes","tlsroutes","tcproutes","udproutes"]
+      verbs: ["get","watch","list"]
