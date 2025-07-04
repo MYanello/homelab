@@ -6,7 +6,7 @@ resources:
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml
 
-configMapGenerator:
+secretGenerator:
   - name: config
     files:
       - ./manifests/config.json

@@ -24,7 +24,7 @@ spec:
               protocol: TCP
               name: http
           image: ghcr.io/claabs/epicgames-freegames-node:latest
-          volumeMounts: 
+          volumeMounts:
             - mountPath: /usr/app/config/config.json
               subPath: config.json
               name: config
@@ -33,6 +33,6 @@ spec:
             - inf
       volumes:
         - name: config
-          mountPath: 
-          configMap:
+          mountPath:
+          secret:
             name: config
