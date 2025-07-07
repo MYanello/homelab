@@ -20,7 +20,7 @@ spec:
         app: chartdb
     spec:
       containers:
-        - image: ghcr.io/chartdb/chartdb:1.13.0@sha256:88ab32282f09283f09e842c0be04c2ab0be1344867505766698ed2b4d8cc2c73
+        - image: ghcr.io/chartdb/chartdb:1.13.2@sha256:49ef4085643edc16fe7d85f6d5cd1931df4f268edd7a4da971650968bf98a9be
           imagePullPolicy: IfNotPresent
           name: chartdb
           # resources:
