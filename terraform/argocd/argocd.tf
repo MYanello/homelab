@@ -171,7 +171,7 @@ resource "kubernetes_manifest" "argocd_dev_appset" {
             ]
             "managedNamespaceMetadata" = {
               "labels" : {
-                "istio-injection" = "enabled"
+                "istio-injection" = "disabled"
               }
             }
           }
