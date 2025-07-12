@@ -57,7 +57,7 @@ spec:
             # - MAIL_USERNAME=${MAIL_USERNAME}
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
-          image: gitea.yanello.net/marcus/dollardollar:latest@sha256:8224701399a03de1323e1be17a79f2c91365863513e8bf80956671c7ab5d3e89
+          image: gitea.yanello.net/marcus/dollardollar:latest
           imagePullPolicy: Always
           name: dollardollar-dev
           ports:
