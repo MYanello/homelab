@@ -11,7 +11,7 @@ generators:
 helmCharts:
   - name: gitea
     repo: https://dl.gitea.com/charts/
-    version: "12.1.1"
+    version: "12.1.2"
     releaseName: gitea
     namespace: gitea
     valuesFile: ./manifests/values.yaml
