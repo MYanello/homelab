@@ -56,8 +56,8 @@ spec:
               cpu: "1"
               memory: 1Gi
           ports:
-            - containerPort: 32400 # < required network portnumber. See https://hub.docker.com/r/linuxserver/plex
-              name: pms-web # < reference name from the port in the service yaml
+            - containerPort: 32400
+              name: pms-web
               protocol: TCP
             - containerPort: 32469
               name: dlna-tcp
