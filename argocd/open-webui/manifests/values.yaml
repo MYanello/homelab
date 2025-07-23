@@ -6,8 +6,7 @@ ollama:
   runtimeClassName: nvidia
   persistentVolume:
     enabled: true
-    storageClass: nfs-storage
-
+    storageClass: longhorn
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -23,14 +22,14 @@ tika:
 
 persistence:
   enabled: true
-  storageClass: nfs-storage
+  storageClass: longhorn
   accessMode: ReadWriteOnce
   size: 10Gi
 
 pipelines:
   persistence:
     enabled: true
-    storageClass: nfs-storage
+    storageClass: longhorn
     accessMode: ReadWriteOnce
     size: 10Gi
 
