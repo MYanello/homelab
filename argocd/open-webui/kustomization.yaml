@@ -12,7 +12,7 @@ resources:
 helmCharts:
   - name: open-webui
     repo: https://helm.openwebui.com/
-    version: "6.27.0"
+    version: "6.28.0"
     releaseName: open-webui
     namespace: open-webui
     valuesFile: manifests/values.yaml
