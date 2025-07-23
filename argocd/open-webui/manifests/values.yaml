@@ -7,6 +7,7 @@ ollama:
   persistentVolume:
     enabled: true
     storageClass: longhorn
+    
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -24,7 +25,7 @@ persistence:
   enabled: true
   storageClass: longhorn
   accessMode: ReadWriteOnce
-  size: 10Gi
+  size: 100Gi
 
 pipelines:
   persistence:
