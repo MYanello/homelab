@@ -27,7 +27,7 @@ persistence:
   enabled: true
   storageClass: longhorn
   accessMode: ReadWriteOnce
-  size: 100Gi
+  size: 10Gi
 
 pipelines:
   persistence:
