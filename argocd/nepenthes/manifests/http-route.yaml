@@ -7,13 +7,13 @@ metadata:
 spec:
   parentRefs:
   - name: cilium-public-gateway
-    namespace: istio-system
+    namespace: cilium
     sectionName: https-root
   - name: cilium-public-gateway
-    namespace: istio-system
+    namespace: cilium
     sectionName: http-root
   - name: cilium-private-gateway
-    namespace: istio-system
+    namespace: cilium
     sectionName: http
   - name: cilium-private-gateway
     namespace: cilium
