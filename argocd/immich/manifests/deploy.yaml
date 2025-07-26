@@ -131,7 +131,7 @@ spec:
       volumes:
         - name: photos
           hostPath:
-            path: /fast-k8s/immich/Photos
+            path: /fast-k8s/Photos
         - name: model-cache
           hostPath:
             path: /fast-k8s/immich/model-cache
