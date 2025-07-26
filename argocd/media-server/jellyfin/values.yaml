@@ -24,13 +24,13 @@ livenessProbe:
 #   failureThreshold: 5
 #   timeoutSeconds: 1
 #   periodSeconds: 15
-# volumes:
-#   - name: host-media
-#     hostPath:
-#       path: /data/media
-# volumeMounts:
-#   - name: host-media
-#     mountPath: /data/media
+volumes:
+  - name: host-media
+    hostPath:
+      path: /data/media
+volumeMounts:
+  - name: host-media
+    mountPath: /data/media
       
 # persistence: 
 #   config:
@@ -46,8 +46,8 @@ persistence:
     accessMode: ReadWriteOnce
     size: 5Gi
     storageClass: longhorn
-  media:
-    enabled: true
-    type: hostPath
-    hostPath: /data/media
-    size: 5Gi
+  # media:
+  #   enabled: true
+  #   type: hostPath
+  #   hostPath: /data/media
+  #   size: 5Gi
