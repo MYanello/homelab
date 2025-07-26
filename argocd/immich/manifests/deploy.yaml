@@ -131,10 +131,10 @@ spec:
       volumes:
         - name: photos
           hostPath:
-            path: /zpool/Photos/immich
+            path: /fast-k8s/Photos/immich
         - name: model-cache
           hostPath:
-            path: /zpool/k8s/immich/model-cache
+            path: /fast-k8s/immich/model-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -218,7 +218,7 @@ spec:
             - name: POSTGRES_INITDB_ARGS
               value: "--data-checksums"
             - name: DB_STORAGE_TYPE
-              value: "HDD"
+              value: "SSD"
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
@@ -271,6 +271,6 @@ spec:
       volumes:
         - name: db
           hostPath:
-            path: /zpool/k8s/immich/db
+            path: /fast-k8s/immich/db
 ---
 
