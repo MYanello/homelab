@@ -44,6 +44,7 @@ spec:
                       - marcus-server
       containers:
         - name: immich-server
+          command: ["sleep inf"]
           envFrom:
             - configMapRef:
                 name: immich-config
