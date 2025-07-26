@@ -71,7 +71,7 @@ spec:
       volumes:
         - name: photos
           hostPath:
-            path: /zpool/Photos/immich
+            path: /fast-k8s/Photos/immich
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -131,7 +131,7 @@ spec:
       volumes:
         - name: photos
           hostPath:
-            path: /fast-k8s/Photos/immich
+            path: /fast-k8s/immich/Photos
         - name: model-cache
           hostPath:
             path: /fast-k8s/immich/model-cache
