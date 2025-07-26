@@ -53,6 +53,8 @@ spec:
               mountPath: /cache
             - name: zpool
               mountPath: /userdata/zpool/
+            - name: fast-k8s
+              mountPath: /userdata/fast-k8s/
             - name: hostdata
               mountPath: /userdata/data
             - name: etc
@@ -83,6 +85,9 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/backrest/config
+        - name: fast-k8s
+          hostPath:
+            path: /fast-k8s
         - name: cache
           hostPath:
             path: /zpool/k8s/backrest/cache
