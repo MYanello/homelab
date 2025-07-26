@@ -49,7 +49,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: ghcr.io/immich-app/immich-server:v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
+          image: ghcr.io/immich-app/immich-server:v1.136.0
           ports:
             - containerPort: 2283
               protocol: TCP
@@ -112,7 +112,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: ghcr.io/immich-app/immich-machine-learning:v1.135.3-cuda@sha256:3f83ca84681f5e8e922a97ee7320279f78b30c4722630aae550f911c8d0effc4
+          image: ghcr.io/immich-app/immich-machine-learning:v1.136.0-cuda
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: photos
@@ -272,8 +272,6 @@ spec:
                 configMapKeyRef:
                   name: immich-config
                   key: DB_USERNAME
-            # - name: DB_DATA_LOCATION
-            #   value: /var/lib/postgresql/data
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
