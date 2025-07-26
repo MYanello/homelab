@@ -139,54 +139,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: typesense
-  labels:
-    app: typesense
-spec:
-  replicas: 1
-  revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      app: typesense
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
-  template:
-    metadata:
-      labels:
-        app: typesense
-    spec:
-      containers:
-        - env:
-            - name: TYPESENSE_DATA_DIR
-              value: /data
-          envFrom:
-            - secretRef:
-                name: immich-secrets
-          image: typesense/typesense:0.25.2@sha256:1ddbb28a52b0b8be31237ec718df1c9bc895c5626b26c10fa3f340f684e81488
-          imagePullPolicy: IfNotPresent
-          name: typesense
-          volumeMounts:
-            - name: tsdata
-              mountPath: /data
-          resources:
-            requests:
-              memory: 100Mi
-              cpu: 100m
-            limits:
-              memory: 500Mi
-              cpu: 200m
-      volumes:
-        - name: tsdata
-          hostPath:
-            path: /zpool/k8s/immich/tsdata
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: redis
   labels:
     app: redis
