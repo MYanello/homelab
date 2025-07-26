@@ -13,6 +13,6 @@ patches:
 - patch: |-
     - op: replace
       path: /spec/replicas
-      value: 0g
+      value: 0
   target:
     kind: Deployment
