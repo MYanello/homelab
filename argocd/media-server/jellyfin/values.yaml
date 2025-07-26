@@ -16,27 +16,38 @@ livenessProbe:
   # timeoutSeconds: 1
   periodSeconds: 15
 
-# -- Configure readiness probe for Jellyfin.
-readinessProbe:
-  initialDelaySeconds: 15
-  tcpSocket:
-    port: http
-  # successThreshold: 1
-  failureThreshold: 5
-  # timeoutSeconds: 1
-  periodSeconds: 15
-volumes:
-  - name: host-media
-    hostPath:
-      path: /data/media
-volumeMounts:
-  - name: host-media
-    mountPath: /data/media
+# readinessProbe:
+#   initialDelaySeconds: 15
+#   tcpSocket:
+#     port: http
+#   successThreshold: 1
+#   failureThreshold: 5
+#   timeoutSeconds: 1
+#   periodSeconds: 15
+# volumes:
+#   - name: host-media
+#     hostPath:
+#       path: /data/media
+# volumeMounts:
+#   - name: host-media
+#     mountPath: /data/media
       
-persistence: 
-  config:
-    storageClass: local-path
-  media:
-    storageClass: local-path
+# persistence: 
+#   config:
+#     storageClass: local-path
+#   media:
+#     storageClass: local-path
 
 runtimeClassName: nvidia
+
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 5Gi
+    storageClass: longhorn
+  media:
+    enabled: true
+    type: hostPath
+    hostPath: /data/media
+    size: 5Gi
