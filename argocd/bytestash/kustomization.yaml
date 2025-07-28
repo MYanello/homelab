@@ -20,7 +20,7 @@ helmCharts:
       bytestash:
         existingJwtSecret:
           secretName: bytestash-secrets
-          jwtKey: ""
+          jwtKey: jwt-secret
       oidc:
         enabled: false
         name: "Single Sign-on"
