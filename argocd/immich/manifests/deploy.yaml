@@ -71,7 +71,8 @@ spec:
       volumes:
         - name: photos
           hostPath:
-            path: /fast-k8s/Photos/immich
+            path: /zpool/Photos/immich
+            #path: /fast-k8s/Photos/immich
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -131,10 +132,12 @@ spec:
       volumes:
         - name: photos
           hostPath:
-            path: /fast-k8s/Photos/immich
+            #path: /fast-k8s/Photos/immich
+            path: /zpool/k8s/Photos/immich
         - name: model-cache
           hostPath:
-            path: /fast-k8s/immich/model-cache
+            #path: /fast-k8s/immich/model-cache
+            path: /zpool/k8s/immich/model-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -271,6 +274,7 @@ spec:
       volumes:
         - name: db
           hostPath:
-            path: /fast-k8s/immich/db
+            #path: /fast-k8s/immich/db
+            path: /zpool/k8s/immich/db
 ---
 
