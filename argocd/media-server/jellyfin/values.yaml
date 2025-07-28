@@ -31,12 +31,6 @@ volumes:
 volumeMounts:
   - name: host-media
     mountPath: /data/media
-      
-# persistence: 
-#   config:
-#     storageClass: local-path
-#   media:
-#     storageClass: local-path
 
 runtimeClassName: nvidia
 
@@ -44,7 +38,7 @@ persistence:
   config:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 5Gi
+    size: 15Gi
     storageClass: longhorn
   # media:
   #   enabled: true
