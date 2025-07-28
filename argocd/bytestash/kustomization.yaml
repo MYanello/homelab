@@ -21,6 +21,7 @@ helmCharts:
         existingJwtSecret:
           secretName: bytestash-secrets
           jwtKey: jwt-secret
+          expirityKey: expirity-key
       oidc:
         enabled: false
         name: "Single Sign-on"
