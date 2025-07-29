@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bytestash
+  labels:
+    app: bytestash
+spec:
+  replicas: 1
+  serviceName: bytestash
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: bytestash
+  template:
+    metadata:
+      labels:
+        app: bytestash
+    spec:
+      containers:
+        - name: bytestash
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: bytestash-secrets
+          image: ghcr.io/jordan-dalby/bytestash:1.5.8
+          volumeMounts:
+            - mountPath: /data/snippets
+              name: snippets
+          resources:
+            requests:
+              cpu: 10m
+              memory: 500Mi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: snippets
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn-xfs
+        resources:
+          requests:
+            storage: 5Gi
