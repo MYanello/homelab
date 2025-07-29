@@ -28,9 +28,13 @@ spec:
             - name: DEBUG
               value: "false"
             - name: DISABLE_ACCOUNTS
-              value: "true"
+              value: "false"
             - name: DISABLE_INTERNAL_ACCOUNTS
               value: "false"
+            - name: ALLOW_PASSWORD_CHANGES
+              value: "true"
+            - name: BASE_PATH
+              value: ""
           envFrom:
             - secretRef:
                 name: bytestash-secrets
