@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./http-route.yaml
   - ./sts.yaml
+  - ./svc.yaml
 
 generators:
   - secret-generator.yaml
