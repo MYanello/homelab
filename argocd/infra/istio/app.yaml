@@ -26,7 +26,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: "1.26.2"
+    targetRevision: "1.26.3"
     chart: base
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -55,7 +55,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: "1.26.2"
+    targetRevision: "1.26.3"
     chart: istiod
     helm:
       valuesObject:
