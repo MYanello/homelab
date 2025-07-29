@@ -4,6 +4,6 @@ kind: Kustomization
 helmCharts:
   - name: eck-operator
     repo: https://helm.elastic.co
-    version: "3.0.0"
+    version: "3.1.0"
     releaseName: eck-operator
     namespace: monitoring
