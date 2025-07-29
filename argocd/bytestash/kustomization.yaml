@@ -8,26 +8,3 @@ resources:
 
 generators:
   - secret-generator.yaml
-
-# helmCharts:
-#   - name: bytestash
-#     namespace: bytestash
-#     releaseName: bytestash
-#     repo: https://jordan-dalby.github.io/ByteStash/
-#     version: "0.1.1"
-#     valuesInline:
-#       persistence:
-#         enabled: true
-#         storageClassName: longhorn
-#       bytestash:
-#         existingJwtSecret:
-#           secretName: bytestash-secrets
-#           jwtKey: jwt-secret
-#           expirityKey: expirity-key
-#       oidc:
-#         enabled: false
-#         name: "Single Sign-on"
-#         issuerUrl: "" # Authentik, Authelia, or Keycloak
-#         clientId: ""
-#         clientSecret: ""
-#         scopes: ""
