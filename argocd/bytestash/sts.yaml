@@ -35,6 +35,8 @@ spec:
               value: "true"
             - name: BASE_PATH
               value: ""
+            - name: TOKEN_EXPIRY
+              value: 24h
           envFrom:
             - secretRef:
                 name: bytestash-secrets
