@@ -22,6 +22,15 @@ spec:
           ports:
             - containerPort: 5000
               protocol: TCP
+          env:
+            - name: ALLOW_NEW_ACCOUNTS
+              value: "true"
+            - name: DEBUG
+              value: "false"
+            - name: DISABLE_ACCOUNTS
+              value: "true"
+            - name: DISABLE_INTERNAL_ACCOUNTS
+              value: "false"
           envFrom:
             - secretRef:
                 name: bytestash-secrets
