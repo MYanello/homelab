@@ -103,7 +103,7 @@ spec:
               value: "America/Chicago"
             - name: DOCKER_MODS
               value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
-          image: crocodilestick/calibre-web-automated:latest@sha256:e602e73b6fd50c3ba389b38acb701205976a05b650898f615f93bd7e3537a827
+          image: crocodilestick/calibre-web-automated:latest@sha256:a4f91a780685274bde623d38b540932be5638e5379075a002d9c55517869e25a
           imagePullPolicy: IfNotPresent
           name: calibre
           resources:
