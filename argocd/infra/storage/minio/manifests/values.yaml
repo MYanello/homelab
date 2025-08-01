@@ -1,0 +1,32 @@
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - marcus-server
+                
+persistence:
+  storageClass: local-path
+
+tenant:
+  existingSecret: true
+  configuration:
+    name: myminio-env-configuration
+  pools:
+    - name: pool-0
+      storageClassName: local-path
+      servers: 1
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
+  certificate:
+    requestAutoCert: false

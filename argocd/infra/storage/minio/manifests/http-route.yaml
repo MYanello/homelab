@@ -1,0 +1,45 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: MinIO
+    gethomepage.dev/icon: minio
+    gethomepage.dev/description: "MinIO Is The Most Reliable Object Storage Solution For On-Premise Deployments."
+    gethomepage.dev/pod-selector: v1.min.io/console=myminio-console
+  labels:
+    app.kubernetes.io/instance: minio-app
+  name: minio-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+  - minio-console.yanello.net
+  rules:
+  - backendRefs:
+    - name: myminio-console
+      port: 9090
+      
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gateway.networking.k8s.io/generator: ingress2gateway-0.4.0
+  labels:
+    app.kubernetes.io/instance: minio-app
+  name: minio-api-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+  - minio.yanello.net
+  rules:
+  - backendRefs:
+    - name: minio
+      port: 80
+      

@@ -1,0 +1,59 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: local-path-config
+data:
+  config.json: |-
+    {
+      "nodePathMap":[
+        {
+          "node":"DEFAULT_PATH_FOR_NON_LISTED_NODES",
+          "paths":["/var/lib/rancher/k3s/storage"]
+        },
+        {
+          "node":"marcus-server",
+          "paths":["/zpool/k8s/"]
+        },
+        {
+          "node":"picluster0",
+          "paths":[]
+        },
+        {
+          "node":"picluster1",
+          "paths":[]
+        },
+        {
+          "node":"picluster2",
+          "paths":[]
+        },
+        {
+          "node":"hp-worker",
+          "paths":[]
+        }
+      ]
+    }
+  setup: |-
+    #!/bin/sh
+    set -eu
+    NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+    mkdir -m 0777 -p "$VOL_DIR"
+  teardown: |-
+    #!/bin/sh
+    set -eu
+    NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+    rm -rf "$VOL_DIR"
+  helperPod.yaml: |-
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: helper-pod
+    spec:
+      priorityClassName: system-node-critical
+      tolerations:
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
+      containers:
+      - name: helper-pod
+        image: busybox:1.31.1
+        command: ["/bin/sh", "-c", "sleep 3600"]
