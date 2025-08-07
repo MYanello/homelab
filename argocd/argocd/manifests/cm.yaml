@@ -13,7 +13,7 @@ data:
   resource.links: |
     - url: https://{{index .resource.spec.hostnames 0}}
       title: Resource
-      if: resource.kind == "HTTPRoute"
+      if: resource.kind == "HTTPRoute" || resource.kind == "TLSRoute"
   dex.config: |
     connectors:
     - config:
