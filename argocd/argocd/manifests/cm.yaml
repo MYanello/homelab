@@ -10,6 +10,10 @@ data:
   accounts.port-ocean-user: apiKey, login
   accounts.port-ocean-user.enabled: "true"
   url: https://argocd.yanello.net
+  resource.links: |
+    - url: https://{{index .resource.spec.hostnames 0}}
+      title: Resource
+      if: resource.kind == "HTTPRoute"
   dex.config: |
     connectors:
     - config:
@@ -58,4 +62,3 @@ data:
     p, role:read-only-role, projects, get, *, allow
     p, role:read-only-role, logs, get, *, allow
     g, port-ocean-user, role:read-only-role
-    
