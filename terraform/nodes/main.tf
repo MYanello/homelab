@@ -3,6 +3,22 @@ provider "kubernetes" {
   config_context = "homecontext"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "terraform"
+    endpoints = {
+      s3 = "https://minio.yanello.net"
+    }
+    key                         = "nodes"
+    region                      = "homelab"
+    skip_credentials_validation = true # Skip AWS related checks and validations
+    skip_requesting_account_id  = true
+    skip_metadata_api_check     = true
+    skip_region_validation      = true
+    use_path_style              = true # Enable path-style S3 URLs, required for minio (https://<HOST>/<BUCKET> https://developer.hashicorp.com/terraform/language/settings/backends/s3#use_path_style
+  }
+}
+
 # resource "kubernetes_node_taint" "no_schedule" {
 #   metadata {
 #     name = "marcus-server"
@@ -21,13 +37,13 @@ resource "kubernetes_labels" "server" {
     name = "marcus-server"
   }
   labels = {
-    "accelerator" = "coral-tpu"
+    "accelerator"      = "coral-tpu"
     "storage.type/ssd" = "true"
     "storage.type/hdd" = "true"
-    "storage.kubernetes.io/performance": "fast"
-    "cpu.performance": "high"
-    "gpu.type": "nvidia"
- }
+    "storage.kubernetes.io/performance" : "fast"
+    "cpu.performance" : "high"
+    "gpu.type" : "nvidia"
+  }
 }
 
 resource "kubernetes_labels" "hp-worker" {
@@ -44,20 +60,20 @@ resource "kubernetes_labels" "hp-worker" {
   }
 }
 
-resource "kubernetes_labels" "office-desktop" {
-  api_version = "v1"
-  kind        = "Node"
-  metadata {
-    name = "office-desktop"
-  }
-  labels = {
-    "storage.type/ssd" = "true"
-    "storage.type/hdd" = "true"
-    "storage.kubernetes.io/performance" : "fast"
-    "cpu.performance" : "medium"
-    "gpu.type" : "amd"
-  }
-}
+# resource "kubernetes_labels" "office-desktop" {
+#   api_version = "v1"
+#   kind        = "Node"
+#   metadata {
+#     name = "office-desktop"
+#   }
+#   labels = {
+#     "storage.type/ssd" = "true"
+#     "storage.type/hdd" = "true"
+#     "storage.kubernetes.io/performance" : "fast"
+#     "cpu.performance" : "medium"
+#     "gpu.type" : "amd"
+#   }
+# }
 # resource "kubernetes_labels" "picluster0" {
 #   api_version = "v1"
 #   kind        = "Node"
@@ -137,8 +153,8 @@ resource "kubernetes_node_taint" "pc3" {
   }
   taint {
     key    = "node-role.kubernetes.io/control-plane" # Your taint key
-    value  = "true"                           # Your taint value
-    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+    value  = "true"                                  # Your taint value
+    effect = "NoSchedule"                            # NoSchedule, PreferNoSchedule, or NoExecute
   }
 }
 
@@ -162,8 +178,8 @@ resource "kubernetes_node_taint" "pc4" {
   }
   taint {
     key    = "node-role.kubernetes.io/control-plane" # Your taint key
-    value  = "true"                           # Your taint value
-    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+    value  = "true"                                  # Your taint value
+    effect = "NoSchedule"                            # NoSchedule, PreferNoSchedule, or NoExecute
   }
 }
 
@@ -186,8 +202,8 @@ resource "kubernetes_node_taint" "pc5" {
   }
   taint {
     key    = "node-role.kubernetes.io/control-plane" # Your taint key
-    value  = "true"                           # Your taint value
-    effect = "NoSchedule"                     # NoSchedule, PreferNoSchedule, or NoExecute
+    value  = "true"                                  # Your taint value
+    effect = "NoSchedule"                            # NoSchedule, PreferNoSchedule, or NoExecute
   }
 }
 
