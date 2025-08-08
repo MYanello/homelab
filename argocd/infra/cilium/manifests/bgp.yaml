@@ -28,4 +28,68 @@ spec:
   disabled: false
   blocks:
   - cidr: "10.10.8.0/22"
----
+# ---
+# # BGP Cluster Configuration - defines the BGP instance
+# apiVersion: cilium.io/v2
+# kind: CiliumBGPClusterConfig
+# metadata:
+#   name: bgp-cluster-config
+# spec:
+#   nodeSelector:
+#     matchLabels: {}  # Apply to all nodes, or add specific labels
+#   bgpInstances:
+#     - name: main-bgp-instance
+#       localASN: 64512
+#       peers:
+#         - name: opnsense-router
+# ---
+# # BGP Peer Configuration - defines the peer connection
+# apiVersion: cilium.io/v2
+# kind: CiliumBGPPeerConfig
+# metadata:
+#   name: opnsense-router
+# spec:
+#   peerAddress: "192.168.10.1"
+#   peerASN: 65551
+#   eBGPMultihopTTL: 10
+#   connectRetryTimeSeconds: 120
+#   holdTimeSeconds: 90
+#   keepAliveTimeSeconds: 30
+#   gracefulRestart:
+#     enabled: true
+#     restartTimeSeconds: 12
+#   families:
+#     - afi: ipv4
+#       safi: unicast
+#       advertisements:
+#         matchLabels:
+#           advertise: "loadbalancer"
+# ---
+# # BGP Advertisement - defines what to advertise
+# apiVersion: cilium.io/v2
+# kind: CiliumBGPAdvertisement
+# metadata:
+#   name: loadbalancer-advertisement
+#   labels:
+#     advertise: "loadbalancer"
+# spec:
+#   advertisements:
+#     - advertisementType: "Service"
+#       service:
+#         addresses:
+#           - LoadBalancerIP
+#       selector:
+#         matchExpressions:
+#           - key: "io.cilium/bgp-announce"
+#             operator: NotIn
+#             values: ['fakevalue']
+# ---
+# # Load Balancer IP Pool (this stays the same)
+# apiVersion: "cilium.io/v2alpha1"
+# kind: CiliumLoadBalancerIPPool
+# metadata:
+#   name: "pool"
+# spec:
+#   disabled: false
+#   blocks:
+#   - cidr: "10.10.8.0/22"
