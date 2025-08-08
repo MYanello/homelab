@@ -1,6 +1,6 @@
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "picontext"
+  config_context = "homecontext"
 }
 
 # resource "kubernetes_node_taint" "no_schedule" {
@@ -21,12 +21,12 @@ resource "kubernetes_labels" "server" {
     name = "marcus-server"
   }
   labels = {
-    "accelerator" = "coral-tpu",
-    "storage.type/ssd" = "true",
-    "storage.type/hdd" = "true",
+    "accelerator" = "coral-tpu"
+    "storage.type/ssd" = "true"
+    "storage.type/hdd" = "true"
     "storage.kubernetes.io/performance": "fast"
     "cpu.performance": "high"
-
+    "gpu.type": "nvidia"
  }
 }
 
@@ -37,13 +37,27 @@ resource "kubernetes_labels" "hp-worker" {
     name = "hp-worker"
   }
   labels = {
-    "storage.type/ssd" = "true",
-    "storage.type/hdd" = "false",
-    "storage.kubernetes.io/performance" : "fast",
+    "storage.type/ssd" = "true"
+    "storage.type/hdd" = "false"
+    "storage.kubernetes.io/performance" : "fast"
     "cpu.performance" : "low"
   }
 }
 
+resource "kubernetes_labels" "office-desktop" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "office-desktop"
+  }
+  labels = {
+    "storage.type/ssd" = "true"
+    "storage.type/hdd" = "true"
+    "storage.kubernetes.io/performance" : "fast"
+    "cpu.performance" : "medium"
+    "gpu.type" : "amd"
+  }
+}
 # resource "kubernetes_labels" "picluster0" {
 #   api_version = "v1"
 #   kind        = "Node"
