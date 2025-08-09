@@ -10,5 +10,5 @@ helmCharts:
     releaseName: uptime-kuma
     namespace: monitoring
     repo: https://helm.irsigler.cloud
-    version: "2.21.3"
+    version: "2.22.0"
     valuesFile: values.yaml
