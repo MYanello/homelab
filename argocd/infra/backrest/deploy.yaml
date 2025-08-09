@@ -41,6 +41,8 @@ spec:
               value: /cache
             - name: TZ
               value: America/Chicago
+            - name: BACKREST_PORT
+              value: "9898"
           ports:
             - containerPort: 9898
               protocol: TCP
