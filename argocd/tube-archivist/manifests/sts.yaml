@@ -91,7 +91,7 @@ spec:
           envFrom:
             - secretRef:
                 name: ta-secrets
-          image: docker.io/bbill1/tubearchivist-es
+          image: docker.io/bbilly1/tubearchivist-es
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
               name: es
