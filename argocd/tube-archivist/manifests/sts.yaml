@@ -27,7 +27,7 @@ spec:
                 name: ta-secrets
             - configMapRef:
                 name: ta-cm
-          image: docker.io/bbilly1/tubearchivist
+          image: docker.io/bbilly1/tubearchivist:v0.5.5
           volumeMounts:
             - mountPath: /youtube
               name: youtube
