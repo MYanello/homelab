@@ -8,6 +8,6 @@ data:
   TA_USERNAME: admin
   TZ: America/Chicago
   TA_AUTO_UPDATE_YTDLP: "release"
-  REDIS_CON: redis://ta-redis:6379
-  ES_URL: https://ta-es:9200
+  REDIS_CON: redis://redis:6379
+  ES_URL: https://elasticsearch:9200
   

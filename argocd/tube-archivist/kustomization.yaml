@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./manifests/cm.yaml
   - ./manifests/sts.yaml
+  - ./manifests/svc.yaml
 
 generators:
   - manifests/secret-generator.yaml
