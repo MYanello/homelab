@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ta-cm
+data:
+  TA_HOST: https://ta.yanello.net
+  TA_USERNAME: admin
+  TZ: America/Chicago
+  TA_AUTO_UPDATE_YTDLP: "release"
+  REDIS_CON: redis://ta-redis:6379
+  ES_URL: https://ta-es:9200
+  
