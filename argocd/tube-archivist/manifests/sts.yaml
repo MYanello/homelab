@@ -1,0 +1,148 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tube-archivist
+  labels:
+    app: tube-archivist
+spec:
+  replicas: 1
+  serviceName: tube-archivist
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: tube-archivist
+  template:
+    metadata:
+      labels:
+        app: tube-archivist
+    spec:
+      containers:
+        - name: tube-archivist
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              protocol: TCP            
+          envFrom:
+            - secretRef:
+                name: ta-secrets
+            - configMapRef:
+                name: ta-cm
+          image: docker.io/bbilly1/tubearchivist:v0.5.5
+          volumeMounts:
+            - mountPath: /youtube
+              name: youtube
+            - mountPath: /cache
+              name: cache
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: youtube
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs-storage
+        resources:
+          requests:
+            storage: 100Gi
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: cache
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs-storage
+        resources:
+          requests:
+            storage: 1Gi      
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  serviceName: elasticsearch
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - name: elasticsearch
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9200
+              protocol: TCP       
+          env:
+            - name: ES_JAVA_OPTS
+              value: -Xms1g -Xmx1g
+            - name: xpack.security.enabled
+              value: "true"
+            - name: discovery.type
+              value: single-node
+            - name: path.repo
+              value: /usr/share/elasticsearch/data/snapshot
+          envFrom:
+            - secretRef:
+                name: ta-secrets
+          image: docker.io/bbilly1/tubearchivist-es
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: es
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: es
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs-storage
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ta-redis
+  labels:
+    app: ta-redis
+spec:
+  replicas: 1
+  serviceName: ta-redis
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: ta-redis
+  template:
+    metadata:
+      labels:
+        app: ta-redis
+    spec:
+      containers:
+        - name: ta-redis
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+              protocol: TCP       
+          image: docker.io/redis:8.2-alpine3.22
+          volumeMounts:
+            - mountPath: /data
+              name: data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs-storage
+        resources:
+          requests:
+            storage: 1Gi

@@ -8,17 +8,17 @@ metadata:
   #   gethomepage.dev/description: 'chartdb is the inventory and organization system built for the Home User!'
   #   gethomepage.dev/pod-selector: app=chartdb
   labels:
-    app.kubernetes.io/instance: chartdb-app
-  name: chartdb-http-route
+    app: tubearchivist
+  name: tubearchivist
 spec:
   parentRefs:
   - name: cilium-private-gateway
     namespace: cilium
     sectionName: https
   hostnames:
-  - chartdb.yanello.net
+  - ta.yanello.net
   rules:
   - backendRefs:
-    - name: chartdb
-      port: 80
+    - name: tube-archivist
+      port: 8000
 
