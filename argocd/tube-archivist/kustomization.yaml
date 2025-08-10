@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./manifests/cm.yaml
+  - ./manifests/sts.yaml
+
+generators:
+  - manifests/secret-generator.yaml
