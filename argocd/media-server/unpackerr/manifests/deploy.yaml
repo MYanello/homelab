@@ -29,7 +29,7 @@ spec:
             - name: TZ
               value: America/Chicago
             - name: UN_DEBUG
-              value: "false"
+              value: "true"
             - name: UN_SONARR_O_URL
               value: http://sonarr.sonarr.svc:8989
             - name: UN_SONARR_PATHS_0
