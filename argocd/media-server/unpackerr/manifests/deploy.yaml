@@ -29,13 +29,13 @@ spec:
             - name: TZ
               value: America/Chicago
             - name: UN_DEBUG
-              value: "true"
-            - name: UN_SONARR_O_URL
-              value: http://sonarr.sonarr.svc:8989
+              value: "false"
+            - name: UN_SONARR_0_URL
+              value: http://sonarr.sonarr.svc.cluster.local:8989
             - name: UN_SONARR_PATHS_0
               value: /data/torrents/completed/tv
             - name: UN_RADARR_0_URL
-              value: http://radarr.radarr.svc:7878
+              value: http://radarr.radarr.svc.cluster.local:7878
             - name: UN_RADARR_PATHS_0
               value: /data/torrents/completed/movies
             - name: UN_LOG_FILE
