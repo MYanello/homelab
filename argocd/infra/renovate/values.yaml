@@ -60,7 +60,7 @@ renovate:
         "fileMatch": ["/argocd/.+\\.yaml$"],
       },
       "kubernetes": {
-        "fileMatch": ["/argocd/.+\\.yaml$/"]
+        "fileMatch": ["/argocd/.+\\.yaml$"]
       },
       "gradle": {
         "fileMatch": ["^build.gradle$"],
