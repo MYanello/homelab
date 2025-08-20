@@ -15,8 +15,6 @@ spec:
   template:
     metadata:
       name: "{{path.basename}}-app"
-      annotations:
-        argocd-diff-preview/ignore: "true"
     spec:
       project: default
       syncPolicy:
