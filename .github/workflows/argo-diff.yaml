@@ -135,7 +135,7 @@ jobs:
             -e TARGET_BRANCH=refs/pull/${{ github.event.number }}/merge \
             -e REPO=${{ github.repository }} \
             dagandersen/argocd-diff-preview:v0.1.10 \
-            --diff-ignore="install_id|install_time|checksum|caBundle"
+            --diff-ignore="checksum|caBundle"
 
       - name: Post diff as comment
         run: |
