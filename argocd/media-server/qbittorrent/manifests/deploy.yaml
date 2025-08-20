@@ -104,8 +104,8 @@ spec:
               value: "on"
             - name: VPN_PORT_FORWARDING_PROVIDER
               value: protonvpn
-            - name: PORT_FORWARD_ONLY
-              value: "on"
+            # - name: PORT_FORWARD_ONLY
+            #   value: "on"
             - name: FIREWALL_DEBUG
               value: "on"
             - name: VPN_PORT_FORWARDING_UP_COMMAND
