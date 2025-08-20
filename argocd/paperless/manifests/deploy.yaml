@@ -147,7 +147,7 @@ spec:
         app: paperless-redis
     spec:
       containers:
-        - image: docker.io/library/redis:8@sha256:bf1a994cdee057bc4b0a474d25bcdc2fa71db578c38f8e240627246effe295d2
+        - image: docker.io/library/redis:8@sha256:cc2dfb8f5151da2684b4a09bd04b567f92d07591d91980eb3eca21df07e12760
           imagePullPolicy: IfNotPresent
           name: paperless-redis
           ports:
