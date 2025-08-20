@@ -6,6 +6,7 @@ metadata:
   name: argocd-cm
 data:
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
+  controller.diff.server.side: "true"
   webhook.github.secret: $argocd-custom-secrets:webhook.github.secret
   accounts.port-ocean-user: apiKey, login
   accounts.port-ocean-user.enabled: "true"
