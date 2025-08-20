@@ -26,7 +26,7 @@ renovate:
   mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: "0 0 * * *"
-  logLevel: debug
+  logLevel: DEBUG
   config: |
     module.exports = {
       "extends": [
