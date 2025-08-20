@@ -57,10 +57,16 @@ renovate:
         "vulnerabilityFixStrategy": "lowest",
       },
       "argocd": {
-        "fileMatch": ["/argocd/.+\\.yaml$"],
+        "fileMatch": [
+          "/argocd/.+\\.yaml$",
+          "/talos/.+\\.yaml$"
+        ],
       },
       "kubernetes": {
-        "fileMatch": ["/argocd/.+\\.yaml$"]
+        "fileMatch": [
+          "/argocd/.+\\.yaml$",
+          "/talos/.+\\.yaml$"
+        ]
       },
       "gradle": {
         "fileMatch": ["^build.gradle$"],
