@@ -60,30 +60,12 @@ renovate:
         "fileMatch": ["argocd/.+\\.yaml$"],
       },
       "kubernetes": {
-        "fileMatch": ["deploy\.yaml$"],
+        "fileMatch": ["/\\.yaml$/"]
       },
       "gradle": {
         "fileMatch": ["^build.gradle$"],
       },
       "ignorePaths": [
-        "**/dev/**"
-      ],
-      "packageRules": [
-        {
-          "matchDatasources": ["docker", "kustomize", "kubernetes"],
-          "matchPackageNames": ["/.*pipeline.*resolvers.*/"],
-          "groupName": "Tekton",
-          "registryUrls": ["ghcr.io"]
-        },
-        {
-          "matchPackageNames": ["/.*istio.*/"],
-          "groupName": "Istio"
-        },
-        {
-          "matchUpdateTypes": ["minor", "patch"],
-          "automerge": true
-        },
+        "/argocd/dev/**"
       ]
     }
-
-
