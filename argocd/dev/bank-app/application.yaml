@@ -10,7 +10,7 @@ spec:
     targetRevision: main   
     path: deployment
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: bank-app
   syncPolicy:
     automated:
