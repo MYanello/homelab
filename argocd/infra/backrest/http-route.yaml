@@ -22,6 +22,8 @@ spec:
     - backrest.yanello.net
   rules:
     - backendRefs:
-        - name: backrest
+        - group: ""
+          kind: Service
+          name: backrest
           namespace: backrest
           port: 9898
