@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://codeberg.org/marcusjy/bank-app.git
+    repoURL: https://github.com/MYanello/bank-app.git
     targetRevision: main   
     path: deployment
   destination:
