@@ -13,9 +13,11 @@ metadata:
   namespace: backrest
 spec:
   parentRefs:
-    - name: cilium-private-gateway
-      namespace: cilium
-      sectionName: https
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: cilium-private-gateway
+    namespace: cilium
+    sectionName: https
   hostnames:
     - backrest.yanello.net
   rules:

@@ -19,10 +19,9 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - immich.yanello.net
+    - immich.yanello.net
   rules:
-  - backendRefs:
-    - name: immich-server
-      namespace: immich
-      port: 2283
-      
+    - backendRefs:
+        - name: immich-server
+          namespace: immich
+          port: 2283
