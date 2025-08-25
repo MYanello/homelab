@@ -70,7 +70,7 @@ spec:
         certificateRefs:
           - name: cilium-public
             group: ""
-            kind: Secret            
+            kind: Secret
       allowedRoutes:
         namespaces:
           from: All
@@ -84,6 +84,8 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       sectionName: http
   hostnames:
     - "*.yanello.net"
@@ -94,3 +96,8 @@ spec:
           requestRedirect:
             scheme: https
             statusCode: 301
+            weight: 1
+          matches:
+            - path:
+                type: PathPrefix
+                value: /

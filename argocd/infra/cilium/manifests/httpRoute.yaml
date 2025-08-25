@@ -13,6 +13,8 @@ metadata:
 spec:
   parentRefs:
   - name: cilium-private-gateway
+    group: gateway.networking.k8s.io
+    kind: Gateway
     namespace: cilium
     sectionName: https
   hostnames:
@@ -20,5 +22,12 @@ spec:
   rules:
   - backendRefs:
     - name: hubble-ui
+      kind: Service
+      group: ""
       port: 80
+      weight: 1
+  matches:
+    - path:
+        type: PathPrefix
+        value: /
       
