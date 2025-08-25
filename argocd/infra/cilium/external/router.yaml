@@ -17,6 +17,7 @@ spec:
   rules:
     - backendRefs:
         - name: opnsense-service
+          group: ""
           kind: Service
           port: 1000
 ---

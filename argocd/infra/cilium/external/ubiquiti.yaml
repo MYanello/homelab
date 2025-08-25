@@ -16,6 +16,7 @@ spec:
   rules:
     - backendRefs:
         - name: ubiquiti-service
+          group: ""
           kind: Service
           port: 8880
 ---

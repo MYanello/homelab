@@ -16,6 +16,7 @@ spec:
   rules:
     - backendRefs:
         - name: ntopng-service
+          group: ""
           kind: Service
           port: 30341
 ---

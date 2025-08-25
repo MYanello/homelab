@@ -16,6 +16,7 @@ spec:
   rules:
     - backendRefs:
         - name: coffee-service
+          group: ""
           kind: Service
           port: 80
 ---

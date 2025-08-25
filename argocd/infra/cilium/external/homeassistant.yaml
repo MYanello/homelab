@@ -21,6 +21,7 @@ spec:
   rules:
     - backendRefs:
         - name: homeassistant-service
+          group: ""
           kind: Service
           port: 8123
 ---

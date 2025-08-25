@@ -16,6 +16,7 @@ spec:
   rules:
     - backendRefs:
         - name: agh-service
+          group: ""
           kind: Service
           port: 3000
 ---

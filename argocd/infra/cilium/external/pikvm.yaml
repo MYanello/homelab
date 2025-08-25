@@ -16,6 +16,7 @@ spec:
   rules:
     - backendRefs:
         - name: pikvm-service
+          group: ""
           kind: Service
           port: 80
 ---
