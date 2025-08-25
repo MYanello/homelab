@@ -28,6 +28,8 @@ spec:
   rules:
     - backendRefs:
         - name: authentik-server
+          group: ""
+          kind: Service
           namespace: authentik
           port: 80
           weight: 1
