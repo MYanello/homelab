@@ -9,6 +9,8 @@ spec:
     - agh.yanello.net
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
   rules:
