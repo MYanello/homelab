@@ -5,7 +5,7 @@ metadata:
 spec:
   gatewayClassName: cilium
   addresses:
-    - value: 10.10.8.101 
+    - value: 10.10.8.101
       type: IPAddress
   listeners:
     - name: argo-tls-passthrough
@@ -81,4 +81,3 @@ spec:
           requestRedirect:
             scheme: https
             statusCode: 301
-          weight: 1
