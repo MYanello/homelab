@@ -14,17 +14,24 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
     - name: cilium-public-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
   hostnames:
-  - authentik.yanello.net
+    - authentik.yanello.net
   rules:
-  - backendRefs:
-    - name: authentik-server
-      namespace: authentik
-      port: 80
-      
-
+    - backendRefs:
+        - name: authentik-server
+          namespace: authentik
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
