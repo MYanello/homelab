@@ -8,9 +8,13 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
     - name: cilium-public-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
   hostnames:
@@ -18,5 +22,12 @@ spec:
   rules:
   - backendRefs:
     - name: mend-renovate-ce
+      group: ""
+      kind: Service
       namespace: renovate
       port: 80
+      weight: 1
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
