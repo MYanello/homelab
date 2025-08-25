@@ -54,6 +54,8 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: cilium-public
+            group: ""
+            kind: Secret
       allowedRoutes:
         namespaces:
           from: All
@@ -67,6 +69,8 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: cilium-public
+            group: ""
+            kind: Secret            
       allowedRoutes:
         namespaces:
           from: All
