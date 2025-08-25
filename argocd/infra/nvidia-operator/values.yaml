@@ -18,7 +18,7 @@ operator:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-          matchExpressions:
-            - key: "gpu.type"
-              operator: In
-              values: ["nvidia"]
+          - matchExpressions:
+              - key: "gpu.type"
+                operator: In
+                values: ["nvidia"]
