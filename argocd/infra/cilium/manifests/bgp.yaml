@@ -21,6 +21,8 @@ spec:
           gracefulRestart:
             enabled: true
             restartTimeSeconds: 12
+      serviceAdvertisements:
+        - LoadBalancerIP
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumLoadBalancerIPPool
