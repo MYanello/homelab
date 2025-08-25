@@ -26,8 +26,8 @@ spec:
       group: ""
       port: 80
       weight: 1
-  matches:
-    - path:
-        type: PathPrefix
-        value: /
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
       
