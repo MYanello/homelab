@@ -82,7 +82,3 @@ spec:
             scheme: https
             statusCode: 301
           weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
