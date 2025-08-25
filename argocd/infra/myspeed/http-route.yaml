@@ -14,6 +14,8 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
   hostnames:
@@ -21,6 +23,13 @@ spec:
   rules:
   - backendRefs:
     - name: myspeed
+      group: ""
+      kind: Service
       namespace: myspeed
       port: 5216
-      
+      weight: 1
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
+    
