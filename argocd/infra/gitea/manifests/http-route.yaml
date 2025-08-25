@@ -14,6 +14,8 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
   hostnames:
@@ -21,7 +23,14 @@ spec:
   rules:
   - backendRefs:
     - name: gitea-http
+      group: ""
+      kind: Service
       port: 3000
+      weight: 1
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
 # ---
 # apiVersion: gateway.networking.k8s.io/v1alpha2
 # kind: TCPRoute
