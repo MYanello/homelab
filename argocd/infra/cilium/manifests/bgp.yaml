@@ -5,12 +5,14 @@ metadata:
   name: bgp-peering-policy-worker
 spec:
   virtualRouters:
-    - localASN: 64512 # Use your cluster's ASN here!
+    - exportPodCIDR: false
+      localASN: 64512 # Use your cluster's ASN here!
       serviceSelector: # Delete this line to allow all LoadBalancers
         matchExpressions: # Delete this line to allow all LoadBalancers
           - {key: "io.cilium/bgp-announce", operator: NotIn, values: ['fakevalue']} # This will allow all `LoadBalancers`
       neighbors:
         - peerAddress: '192.168.10.1/32' # This should be the IP of your Opnsense Router, the /32 should be included as CIDR notation is required.
+          peerPort: 179
           peerASN: 65551 # Set this to the ASN delegated to your Opnsense Router
           eBGPMultihopTTL: 10
           connectRetryTimeSeconds: 120
