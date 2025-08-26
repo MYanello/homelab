@@ -87,7 +87,7 @@ spec:
             - name: discovery.type
               value: single-node
             - name: path.repo
-              value: /usr/share/elasticsearch/data/snapshot
+              value: /usr/share/elasticsearch/data
           envFrom:
             - secretRef:
                 name: ta-secrets
@@ -102,7 +102,7 @@ spec:
         name: es
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn
+        storageClassName: nfs
         resources:
           requests:
             storage: 1Gi
