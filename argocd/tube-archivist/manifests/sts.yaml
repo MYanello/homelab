@@ -87,7 +87,7 @@ spec:
             - name: discovery.type
               value: single-node
             - name: path.repo
-              value: /usr/share/elasticsearch/data
+              value: /usr/share/elasticsearch/data/snapshot
           envFrom:
             - secretRef:
                 name: ta-secrets
