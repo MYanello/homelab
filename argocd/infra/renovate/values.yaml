@@ -58,13 +58,13 @@ renovate:
       },
       "argocd": {
         "fileMatch": [
-          ""**/argocd/.+\\.yaml$",
-          ""**/talos/.+\\.yaml$"
+          "**/argocd/.+\\.yaml$",
+          "**/talos/.+\\.yaml$"
         ],
       },
       "kubernetes": {
         "fileMatch": [
-          ""**/argocd/.+\\.yaml$",
+          "**/argocd/.+\\.yaml$",
           "**/talos/.+\\.yaml$"
         ]
       },
