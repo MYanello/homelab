@@ -72,6 +72,6 @@ renovate:
         "fileMatch": ["^build.gradle$"],
       },
       "ignorePaths": [
-        ""**/argocd/dev/**"
+        "**/argocd/dev/**"
       ]
     }
