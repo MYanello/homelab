@@ -102,7 +102,7 @@ spec:
         name: es
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: nfs
+        storageClassName: nfs-storage
         resources:
           requests:
             storage: 1Gi
