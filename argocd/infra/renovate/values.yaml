@@ -64,8 +64,8 @@ renovate:
       },
       "kubernetes": {
         "fileMatch": [
-          "**/*.yaml",
-          "**/*.yaml"
+          "*.yaml",
+          "*.yaml"
         ]
       },
       "gradle": {
