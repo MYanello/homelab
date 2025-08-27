@@ -25,7 +25,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: postgres:15@sha256:e897e4ad35012fb8baed1e5e8462f17b34d534d7fb52fd6b658e41f3fbaea32b
+        - image: postgres:15@sha256:bc51cf4f1fe02cce7ed2370b20128a9b00b4eb804573a77d2a0d877aaa9c82b1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
