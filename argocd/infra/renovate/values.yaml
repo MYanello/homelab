@@ -63,10 +63,7 @@ renovate:
         ],
       },
       "kubernetes": {
-        "fileMatch": [
-          "/homelab/argocd/.+\\.yaml$",
-          "/homelab/talos/.+\\.yaml$"
-        ]
+        "managerFilePatters": ["/^config/.*\\.yaml$/"]
       },
       "gradle": {
         "fileMatch": ["^build.gradle$"],
