@@ -21,7 +21,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: krr
-            image: robustadev/krr:v1.17.0
+            image: robustadev/krr:v1.17.0@sha256:b2f4203e04dcc6324afe4504c18738a427386ffcf2bae2580c670fcf315ca07f
             imagePullPolicy: Always
             command:
               - /bin/sh

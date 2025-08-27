@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: docker.io/istio/examples-bookinfo-reviews-v2:1.20.2
+        image: docker.io/istio/examples-bookinfo-reviews-v2:1.20.2@sha256:5d2404147d9aa4015b1e398e03dba8472ef80c92a5039ae568adc09f47b4da12
         imagePullPolicy: IfNotPresent
         env:
         - name: LOG_DIR
