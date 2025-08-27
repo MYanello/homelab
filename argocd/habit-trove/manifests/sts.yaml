@@ -29,7 +29,7 @@ spec:
             - containerPort: 3000
               protocol: TCP
               name: http
-          image: docker.io/dohsimpson/habittrove:v0.2.23@sha256:8f1a3788bc8fd1b5e436a2e13105089e7e2333893270ed28ae080b8cdf79f14a
+          image: docker.io/dohsimpson/habittrove:v0.2.29@sha256:b8af5fe4e3649058967fb42cf0522c07a61e2b9ba64d897792b08fe3e15856a9
           volumeMounts:
             - mountPath: /app/data
               name: data
