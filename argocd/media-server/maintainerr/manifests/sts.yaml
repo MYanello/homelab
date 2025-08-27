@@ -22,7 +22,7 @@ spec:
         runAsGroup: 1000     # Group ID for the process
       restartPolicy: Always
       containers:
-        - image: ghcr.io/jorenn92/maintainerr:2.18.1@sha256:da4b3b5b5e0a4aae6b4e294abdad2510a3be9bd138af8f4ca5a6e7cd6d94b1a2
+        - image: ghcr.io/jorenn92/maintainerr:2.19.0@sha256:bee84707edaf589cda3d18b6813cbfe3a137b52786210c3a28190e10910c1240
           imagePullPolicy: IfNotPresent
           name: maintainerr
           ports:
