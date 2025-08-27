@@ -57,7 +57,7 @@ spec:
             # - MAIL_USERNAME=${MAIL_USERNAME}
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
-          image: ghcr.io/myanello/dollardollar:latest
+          image: ghcr.io/myanello/dollardollar:latest@sha256:ddd8011c2cf1fa1a448e7dda5981455e485a1ca76eb1a36e9e8a2f430f67a651
           imagePullPolicy: Always
           name: dollardollar-dev
           ports:

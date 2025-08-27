@@ -27,7 +27,7 @@ spec:
             - containerPort: 3000
               protocol: TCP
           env:
-          image: clusterzx/paperless-ai
+          image: clusterzx/paperless-ai@sha256:25e1c501891e2d409f1df92e64e4e20b379a0197b7cd35cf98b49184d9da6814
           volumeMounts:
             - mountPath: /app/data
               name: paperless-ai-data

@@ -27,7 +27,7 @@ spec:
                 name: ta-secrets
             - configMapRef:
                 name: ta-cm
-          image: docker.io/bbilly1/tubearchivist:v0.5.7
+          image: docker.io/bbilly1/tubearchivist:v0.5.7@sha256:20ce26849d0bf00db9d85300f8205af24d4cd507dd7ab53b55d48a33544ce5b6
           volumeMounts:
             - mountPath: /youtube
               name: youtube
@@ -91,7 +91,7 @@ spec:
           envFrom:
             - secretRef:
                 name: ta-secrets
-          image: docker.io/bbilly1/tubearchivist-es
+          image: docker.io/bbilly1/tubearchivist-es@sha256:58007d1cf7a3b9f3ae4a8e0d2798b05d9c7dd768877b1fe908fd4142da4c68b6
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
               name: es
@@ -131,7 +131,7 @@ spec:
           ports:
             - containerPort: 6379
               protocol: TCP       
-          image: docker.io/redis:8.2-alpine3.22
+          image: docker.io/redis:8.2-alpine3.22@sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
           volumeMounts:
             - mountPath: /data
               name: data

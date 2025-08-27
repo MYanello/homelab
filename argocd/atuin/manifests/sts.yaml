@@ -25,7 +25,7 @@ spec:
           envFrom:
             - secretRef:
                 name: atuin-secrets
-          image: postgres:14
+          image: postgres:14@sha256:445df84770a5a99d141a79700f2806313bf9569ffa08a71f055b28702859a981
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pgdata
@@ -105,7 +105,7 @@ spec:
               value: "8888"
             - name: ATUIN_OPEN_REGISTRATION
               value: "true"
-          image: ghcr.io/atuinsh/atuin:latest
+          image: ghcr.io/atuinsh/atuin:latest@sha256:8a8a8ef4eb5865656072bace5cc49390b56caa81360f9f0869054777155b6ef1
           imagePullPolicy: IfNotPresent
           name: atuin
           resources:

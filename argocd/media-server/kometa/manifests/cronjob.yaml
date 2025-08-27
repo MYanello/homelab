@@ -30,7 +30,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: kometa
-              image: kometateam/kometa:latest
+              image: kometateam/kometa:latest@sha256:4d7664af7a94d76b2f07ce0a9dc0ee88e52a952bbe6b27cef6cfd4c893f9f110
               imagePullPolicy: Always
               command: ["python", "kometa.py", "-r"]
               env:

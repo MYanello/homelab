@@ -10,7 +10,7 @@ spec:
 #  serviceAccountName: external-secrets
   containers:
   - name: debug
-    image: docker.io/nicolaka/netshoot:latest
+    image: docker.io/nicolaka/netshoot:latest@sha256:7f08c4aff13ff61a35d30e30c5c1ea8396eac6ab4ce19fd02d5a4b3b5d0d09a2
       #docker.io/hashicorp/vault:latest
       # docker.io/ubuntu:latest
   # 301733247343.dkr.ecr-fips.us-gov-east-1.amazonaws.com/buildah:v1.40.0@sha256:5e4509edcd6021bee58c3de47eda93701c12957e700d7de3a3b57203706afcb1 
