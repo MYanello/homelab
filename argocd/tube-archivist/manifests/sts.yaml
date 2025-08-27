@@ -124,10 +124,10 @@ spec:
     metadata:
       labels:
         app: ta-redis
-    securityContext:
-      fsGroup: 999
-      fsGroupChangePolicy: OnRootMismatch
     spec:
+      securityContext:
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: ta-redis
           imagePullPolicy: IfNotPresent
