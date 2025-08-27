@@ -26,5 +26,5 @@ module.exports = {
   kubernetes: {
     managerFilePatterns: ["argocd/**/*.yaml", "talos/**/*.yaml"],
   },
-  ignorePaths: ["argocd/dev/"],
+  ignorePaths: ["argocd/dev/**/*.yaml"],
 };
