@@ -14,6 +14,14 @@ module.exports = {
   major: {
     dependencyDashboardApproval: true,
   },
+  minor: {
+    automerge: true,
+    dependencyDashboardApproval: false,
+  },
+  patch: {
+    automerge: true,
+    dependencyDashboardApproval: false,
+  },
   dependencyDashboardOSVVulnerabilitySummary: "all",
   osvVulnerabilityAlerts: true,
   vulnerabilityAlerts: {
