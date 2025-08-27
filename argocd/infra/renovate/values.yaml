@@ -64,8 +64,8 @@ renovate:
       },
       "kubernetes": {
         "fileMatch": [
-          "**/argocd/.+\\.yaml$",
-          "**/talos/.+\\.yaml$"
+          "**/*.yaml",
+          "**/*.yaml"
         ]
       },
       "gradle": {
