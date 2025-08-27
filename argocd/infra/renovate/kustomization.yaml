@@ -4,16 +4,17 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
 
-generatorOptions:
-  disableNameSuffixHash: true
+# generatorOptions:
+#   disableNameSuffixHash: true
+  
+# configMapGenerator:
+#   - name: mend-renovate-ce-config-js
+#     files:
+#       - ./manifests/config.js
 
 generators:
   - ./manifests/secret-generator.yaml
 
-configMapGenerator:
-  - name: mend-renovate-ce-config-js
-    files:
-      - ./manifests/config.js
 
 helmCharts:
   - name: mend-renovate-ce
