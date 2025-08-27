@@ -4,6 +4,11 @@ resources:
 generators:
   - ./manifests/secret-generator.yaml
 
+configMapGenerator:
+  - name: mend-renovate-ce-config-js
+    files:
+      - ./manifests/config.js
+
 helmCharts:
   - name: mend-renovate-ce
     repo: https://mend.github.io/renovate-ce-ee
