@@ -36,7 +36,7 @@ spec:
             value: https://authentik.yanello.net/application/o/linkwarden
           - name: AUTHENTIK_CLIENT_ID
             value: 67Bx3KAAXldSRDpVihw7fpuZQ1Y3I3vEvrFK1fvR
-          image: ghcr.io/linkwarden/linkwarden:v2.11.8@sha256:c51e2d947cfe5323775057e399da9d0dac41108fb4926391663c5b64c3df891c
+          image: ghcr.io/linkwarden/linkwarden:v2.12.0@sha256:f2f1d20e94e7ada9322023385a073aaa4c53f7c25a359d35981d9c39cc9da6ec
           volumeMounts:
             - mountPath: /data/data
               name: data
