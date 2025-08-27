@@ -58,20 +58,20 @@ renovate:
       },
       "argocd": {
         "fileMatch": [
-          "**/argocd/.+\\.yaml$",
-          "**/talos/.+\\.yaml$"
+          "/homelab/argocd/.+\\.yaml$",
+          "/homelab/talos/.+\\.yaml$"
         ],
       },
       "kubernetes": {
         "fileMatch": [
-          "*.yaml",
-          "*.yaml"
+          "/homelab/argocd/.+\\.yaml$",
+          "/homelab/talos/.+\\.yaml$"
         ]
       },
       "gradle": {
         "fileMatch": ["^build.gradle$"],
       },
       "ignorePaths": [
-        "**/argocd/dev/**"
+        "/argocd/dev/**"
       ]
     }
