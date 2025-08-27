@@ -63,7 +63,7 @@ renovate:
         ],
       },
       "kubernetes": {
-        "managerFilePatters": ["/^config/.*\\.yaml$/"]
+        "managerFilePatterns": ["/\\.yaml$/"]
       },
       "gradle": {
         "fileMatch": ["^build.gradle$"],
