@@ -3,7 +3,6 @@ module.exports = {
     "config:best-practices",
     "mergeConfidence:all-badges",
     "default:automergeDigest",
-    "default:pinDigestsDisabled",
   ],
   digest: {
     automerge: true,
@@ -25,7 +24,7 @@ module.exports = {
     managerFilePatterns: ["argocd/**/*.yaml$", "talos/**/*.yaml$"],
   },
   kubernetes: {
-    managerFilePatterns: ["/\\.yaml$/"],
+    managerFilePatterns: ["argocd/**/*.yaml", "talos/**/*.yaml"],
   },
   ignorePaths: ["argocd/dev/**"],
 };
