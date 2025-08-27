@@ -4,33 +4,33 @@ kind: Kustomization
 generators:
   - secret-generator.yaml
 
-# helmCharts:
-#   - name: influxdb
-#     repo: https://helm.influxdata.com/
-#     version: "4.12.5"
-#     releaseName: influxdb
-#     namespace: monitoring
-#     valuesInline: 
-#       service: 
-#         type: LoadBalancer
-#         loadBalancerIP: 10.10.8.0
-#       persistence:
-#         storageClassName: longhorn
-#       setDefaultUser:
-#         enabled: true
-#         user:
-#           existingSecret: influx-secrets
-#       initScripts:
-#         enabled: true
-#         scripts: 
-#           init.iql: |+
-#             CREATE DATABASE "home"
-#             CREATE RETENTION POLICY "2_years" ON "home" DURATION 730d REPLICATION 1 DEFAULT
-#             CREATE DATABASE "GarminStats"
-#             CREATE RETENTION POLICY "2_years" ON "GarminStats" DURATION 730d REPLICATION 1 DEFAULT
-#       backup:
-#         enabled: false
-#         s3:
-#           credentialsSecret: ""
-#           destination: "s3://bucket/path"
-#           endpointUrl: "Specify if you're using an alternate S3 endpoint."
+helmCharts:
+  - name: influxdb
+    repo: https://helm.influxdata.com/
+    version: "4.12.5"
+    releaseName: influxdb
+    namespace: monitoring
+    valuesInline: 
+      service: 
+        type: LoadBalancer
+        loadBalancerIP: 10.10.8.0
+      persistence:
+        storageClassName: longhorn
+      setDefaultUser:
+        enabled: true
+        user:
+          existingSecret: influx-secrets
+      initScripts:
+        enabled: true
+        scripts: 
+          init.iql: |+
+            CREATE DATABASE "home"
+            CREATE RETENTION POLICY "2_years" ON "home" DURATION 730d REPLICATION 1 DEFAULT
+            CREATE DATABASE "GarminStats"
+            CREATE RETENTION POLICY "2_years" ON "GarminStats" DURATION 730d REPLICATION 1 DEFAULT
+      backup:
+        enabled: false
+        s3:
+          credentialsSecret: ""
+          destination: "s3://bucket/path"
+          endpointUrl: "Specify if you're using an alternate S3 endpoint."
