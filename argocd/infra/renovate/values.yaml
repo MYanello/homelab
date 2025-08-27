@@ -58,17 +58,14 @@ renovate:
       },
       "argocd": {
         "managerFilePatterns": [
-          "/homelab/argocd/.+\\.yaml$",
-          "/homelab/talos/.+\\.yaml$"
+          "argocd/**/*.yaml$",
+          "talos/**/*.yaml$"
         ],
       },
       "kubernetes": {
         "managerFilePatterns": ["/\\.yaml$/"]
-      },
-      "gradle": {
-        "managerFilePatterns": ["^build.gradle$"],
-      },
+      }
       "ignorePaths": [
-        "/argocd/dev/**"
+        "argocd/dev/**"
       ]
     }
