@@ -21,7 +21,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: homepage
-          image: ghcr.io/gethomepage/homepage:v1.4.6
+          image: ghcr.io/gethomepage/homepage:v1.4.6@sha256:a1a578fdcfc72754985c3b3b26e4f398a6a782e354d10cf2b156ecbf06d252e9
           imagePullPolicy: Always
           envFrom:
             - secretRef:
