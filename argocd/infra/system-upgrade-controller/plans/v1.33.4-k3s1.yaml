@@ -16,7 +16,7 @@ spec:
   tolerations:
     - key: node-role.kubernetes.io/control-plane
       operator: Equal
-      value: true
+      value: "true"
         
   serviceAccountName: system-upgrade
   upgrade:
