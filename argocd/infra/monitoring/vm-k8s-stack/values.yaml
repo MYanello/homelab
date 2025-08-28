@@ -20,7 +20,7 @@ vmagent:
 vmsingle: 
   enabled: true
   spec:
-    retentionPeriod: 30d
+    retentionPeriod: 90d
     storage:
       resources:
         requests:
@@ -36,6 +36,7 @@ vmsingle:
         value: "home"
     extraArgs:
       maxLabelsPerTimeseries: "500"
+      storage.minFreeDiskSpaceBytes: "10GB"
       # influxListenAddr: ":8428"
     serviceSpec:
       spec:
