@@ -23,7 +23,7 @@ spec:
         runAsGroup: 1000
       initContainers:
         - name: fix-permissions
-          image: busybox:1.35@sha256:98ad9d1a2be345201bb0709b0d38655eb1b370145c7d94ca1fe9c421f76e245a
+          image: busybox:1.37@sha256:ab33eacc8251e3807b85bb6dba570e4698c3998eca6f0fc2ccb60575a563ea74
           command: ['sh', '-c', 'chown -R 1000:1000 /home/appuser/.garminconnect && chmod -R 755 /home/appuser/.garminconnect']
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
