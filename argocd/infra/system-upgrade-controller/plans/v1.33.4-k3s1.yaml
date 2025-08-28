@@ -27,6 +27,7 @@ apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
   name: agent-plan
+  namespace: system-upgrade
 spec:
   concurrency: 1
   cordon: true
@@ -35,9 +36,9 @@ spec:
     - key: node-role.kubernetes.io/control-plane
       operator: DoesNotExist
   prepare:
-    # args:
-    # - prepare
-    # - server-plan
+    args:
+    - prepare
+    - server-plan
     image: rancher/k3s-upgrade
   serviceAccountName: system-upgrade
   upgrade:
