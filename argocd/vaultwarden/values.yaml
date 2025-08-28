@@ -14,7 +14,7 @@ tolerations:
 #                 - marcus-server
 domain: "https://bitwarden.yanello.net"
 signupsAllowed: false
-replicas: 3
+replicas: 1
 storage:
   data:
     name: vaultwarden-data
