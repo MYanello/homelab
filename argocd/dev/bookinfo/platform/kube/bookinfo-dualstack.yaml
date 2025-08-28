@@ -330,7 +330,7 @@ spec:
       serviceAccountName: bookinfo-productpage
       containers:
       - name: productpage
-        image: docker.io/istio/examples-bookinfo-productpage-v1:1.20.2@sha256:f3754ad97d9abfef9b92913dd57f3a6b5b1ede74a77b0fd699fa41984fa1d3a4
+        image: docker.io/istio/examples-bookinfo-productpage-v1:1.20.3@sha256:1e339866b782d22b063539d19c87b4682291c889e67c3d4abdea947bef917958
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
