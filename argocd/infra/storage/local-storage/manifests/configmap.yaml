@@ -55,5 +55,5 @@ data:
           effect: NoSchedule
       containers:
       - name: helper-pod
-        image: busybox:1.31.1@sha256:95cf004f559831017cdf4628aaf1bb30133677be8702a8c5f2994629f637a209
+        image: busybox:1.37.0@sha256:ab33eacc8251e3807b85bb6dba570e4698c3998eca6f0fc2ccb60575a563ea74
         command: ["/bin/sh", "-c", "sleep 3600"]
