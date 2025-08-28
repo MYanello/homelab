@@ -1,13 +1,17 @@
-affinity:
-  nodeAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 1
-        preference:
-          matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - marcus-server
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+# affinity:
+#   nodeAffinity:
+#     preferredDuringSchedulingIgnoredDuringExecution:
+#       - weight: 1
+#         preference:
+#           matchExpressions:
+#             - key: kubernetes.io/hostname
+#               operator: In
+#               values:
+#                 - marcus-server
 domain: "https://bitwarden.yanello.net"
 signupsAllowed: false
 replicas: 3
