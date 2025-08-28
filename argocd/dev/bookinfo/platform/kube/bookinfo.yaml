@@ -174,7 +174,7 @@ spec:
       serviceAccountName: bookinfo-reviews
       containers:
       - name: reviews
-        image: docker.io/istio/examples-bookinfo-reviews-v1:1.20.2@sha256:06a25fc77e9ff75b2be5624074f229def33a52618e7f6f11c413d9925757a3e8
+        image: docker.io/istio/examples-bookinfo-reviews-v1:1.20.3@sha256:e2efe32bf087dcd35c397fc6766c0bdcbae77855df7919377bcf047e1a6ded12
         imagePullPolicy: IfNotPresent
         env:
         - name: LOG_DIR
