@@ -7,23 +7,23 @@ resource "aws_s3_bucket" "backrest" {
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "deep_archive_lifecycle" {
-  bucket = aws_s3_bucket.backrest.id
+# resource "aws_s3_bucket_lifecycle_configuration" "deep_archive_lifecycle" {
+#   bucket = aws_s3_bucket.backrest.id
 
-  rule {
-    id     = "transition-to-deep-archive"
-    status = "Enabled"
+#   rule {
+#     id     = "transition-to-deep-archive"
+#     status = "Enabled"
 
-    filter {
-      prefix = "" # Applies to all objects
-    }
+#     filter {
+#       prefix = "" # Applies to all objects
+#     }
 
-    transition {
-      days          = 3
-      storage_class = "DEEP_ARCHIVE"
-    }
-  }
-}
+#     transition {
+#       days          = 3
+#       storage_class = "DEEP_ARCHIVE"
+#     }
+#   }
+# }
 
 resource "aws_iam_user" "backrest" {
   name = "backrest"
