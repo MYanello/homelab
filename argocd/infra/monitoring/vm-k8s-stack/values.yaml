@@ -20,7 +20,7 @@ vmagent:
 vmsingle: 
   enabled: true
   spec:
-    retentionPeriod: 10y
+    retentionPeriod: 30d
     storage:
       resources:
         requests:
