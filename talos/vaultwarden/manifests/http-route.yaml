@@ -1,0 +1,28 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Vaultwarden
+    gethomepage.dev/icon: vaultwarden
+    gethomepage.dev/description: "An alternative server implementation of the Bitwarden Client API, written in Rust and compatible with official Bitwarden clients."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=vaultwarden
+  labels:
+    app.kubernetes.io/instance: vaultwarden
+  name: vaultwarden-httproute
+  namespace: vaultwarden
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+  - bitwarden-talos.yanello.net
+  rules:
+  - backendRefs:
+    - name: vaultwarden
+      namespace: vaultwarden
+      port: 80

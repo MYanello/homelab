@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# resources:
+#   - manifests/http-route.yaml
+
+generators:
+  - manifests/secret-generator.yaml
+
+helmCharts:
+    - name: vaultwarden
+      repo: https://guerzon.github.io/vaultwarden
+      version: "0.34.3"
+      releaseName: vaultwarden
+      namespace: vaultwarden
+      valuesFile: ./values.yaml
