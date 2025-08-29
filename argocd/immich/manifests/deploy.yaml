@@ -17,7 +17,7 @@ metadata:
   labels:
     app: immich-server
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -81,7 +81,7 @@ metadata:
   labels:
     app: immich-machine-learning
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -144,7 +144,7 @@ metadata:
   labels:
     app: redis
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 3
   selector:
     matchLabels:
