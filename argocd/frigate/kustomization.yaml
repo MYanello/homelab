@@ -2,41 +2,41 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 generators:
-- ./manifests/secret-generator.yaml
+  - ./manifests/secret-generator.yaml
 
 resources:
-- ./manifests/health-check.yaml
-- ./manifests/http-route.yaml
+  - ./manifests/health-check.yaml
+  - ./manifests/http-route.yaml
 patches:
-- path: ./manifests/health-check-patch.yaml
-- target:
-    kind: Deployment
-    name: frigate
-  patch: |-
-    - op: add
-      path: /spec/template/spec/hostNetwork
-      value: true
-# - patch: |
-#     apiVersion: apps/v1
-#     kind: Deployment
-#     metadata:
-#       name: frigate
-#     spec:
-#       template:
-#         spec:
-#           volumes:
-#           - name: media
-#             persistentVolumeClaim: null
-#             hostPath:
-#               path: /zpool/k8s/frigate/media
-  # target:
-  #   kind: Deployment
-  #   name: frigate
-    
+  - path: ./manifests/health-check-patch.yaml
+  - target:
+      kind: Deployment
+      name: frigate
+    patch: |-
+      - op: add
+        path: /spec/template/spec/hostNetwork
+        value: true
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: frigate
+      spec:
+        template:
+          spec:
+            volumes:
+            - name: media
+              persistentVolumeClaim: null
+              hostPath:
+                path: /data/k8s/frigate/
+    target:
+      kind: Deployment
+      name: frigate
+
 helmCharts:
-    - name: frigate
-      repo: https://blakeblackshear.github.io/blakeshome-charts/
-      version: "7.8.0"
-      releaseName: frigate
-      namespace: frigate
-      valuesFile: ./manifests/values.yaml
+  - name: frigate
+    repo: https://blakeblackshear.github.io/blakeshome-charts/
+    version: "7.8.0"
+    releaseName: frigate
+    namespace: frigate
+    valuesFile: ./manifests/values.yaml
