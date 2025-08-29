@@ -90,17 +90,17 @@ spec:
             limits:
               memory: 1Gi
               cpu: 300m
-      volumeClaimTemplates:
-        - apiVersion: v1
-          kind: PersistentVolumeClaim
-          metadata:
-            name: postgres-data
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: longhorn-xfs
-            resources:
-              requests:
-                storage: 10Gi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: postgres-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn-xfs
+        resources:
+          requests:
+            storage: 10Gi
       # volumes:
       #   - name: db
       #     hostPath:
