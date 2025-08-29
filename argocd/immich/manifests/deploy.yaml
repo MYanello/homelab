@@ -210,7 +210,8 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       containers:
-        - env:
+        - command: ["sleep", "inf"]
+          env:
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
