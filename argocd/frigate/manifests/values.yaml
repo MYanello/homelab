@@ -5,12 +5,12 @@ nodeSelector:
 image:
   tag: stable
   pullPolicy: Always
-# persistence:
-#   media:
-#     enabled: true
-#     storageClass: snapraid-storage
-#     accessMode: ReadWriteOnce
-#     size: 1Ti
+persistence:
+  media:
+    enabled: true
+    storageClass: snapraid-storage
+    accessMode: ReadWriteOnce
+    size: 1Ti
 envFromSecrets:
   - frigate-secrets
 coral:
