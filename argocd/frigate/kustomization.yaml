@@ -28,7 +28,7 @@ patches:
             - name: media
               persistentVolumeClaim: null
               hostPath:
-                path: /data/k8s/frigate/
+                path: /data/k8s/
     target:
       kind: Deployment
       name: frigate
