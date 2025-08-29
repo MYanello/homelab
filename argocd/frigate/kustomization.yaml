@@ -9,29 +9,29 @@ resources:
   - ./manifests/http-route.yaml
 patches:
   - path: ./manifests/health-check-patch.yaml
-  - target:
-      kind: Deployment
-      name: frigate
-    patch: |-
-      - op: add
-        path: /spec/template/spec/hostNetwork
-        value: true
-  - patch: |
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: frigate
-      spec:
-        template:
-          spec:
-            volumes:
-            - name: media
-              persistentVolumeClaim: null
-              hostPath:
-                path: /data/k8s/
-    target:
-      kind: Deployment
-      name: frigate
+  # - target:
+  #     kind: Deployment
+  #     name: frigate
+  #   patch: |-
+  #     - op: add
+  #       path: /spec/template/spec/hostNetwork
+  #       value: true
+  # - patch: |
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: frigate
+  #     spec:
+  #       template:
+  #         spec:
+  #           volumes:
+  #           - name: media
+  #             persistentVolumeClaim: null
+  #             hostPath:
+  #               path: /data/k8s/
+    # target:
+    #   kind: Deployment
+    #   name: frigate
 
 helmCharts:
   - name: frigate
