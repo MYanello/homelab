@@ -5,7 +5,7 @@ metadata:
   name: bgp-peering-policy-worker
 spec:
   virtualRouters:
-    - localASN: 64512 # Use your cluster's ASN here!
+    - localASN: 64513 # Use your cluster's ASN here!
       serviceSelector: # Delete this line to allow all LoadBalancers
         matchExpressions: # Delete this line to allow all LoadBalancers
           - {key: "io.cilium/bgp-announce", operator: NotIn, values: ['fakevalue']} # This will allow all `LoadBalancers`
@@ -27,5 +27,5 @@ metadata:
 spec:
   disabled: false
   blocks:
-  - cidr: "10.10.8.0/22"
+  - cidr: "10.20.8.0/22"
 ---

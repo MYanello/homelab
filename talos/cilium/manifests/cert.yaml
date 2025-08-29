@@ -5,8 +5,8 @@ metadata:
 spec:
   commonName: yanello.net
   dnsNames:
-  - "*.yanello.net"
-  - yanello.net
+  - "*.t.yanello.net"
+  - t.yanello.net
   secretName: cilium-public
   issuerRef:
     name: letsencrypt-prod
@@ -20,8 +20,8 @@ metadata:
 spec:
   commonName: yanello.internal
   dnsNames:
-  - "*.yanello.internal"
-  - yanello.internal
+  - "*.t.yanello.internal"
+  - t.yanello.internal
   secretName: cilium-ingress-cert
   issuerRef:
     name: cilium-issuer

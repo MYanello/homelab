@@ -16,7 +16,7 @@ spec:
     namespace: cilium
     sectionName: https
   hostnames:
-  - hubble.yanello.net
+  - hubble.t.yanello.net
   rules:
   - backendRefs:
     - name: hubble-ui

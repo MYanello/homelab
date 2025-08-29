@@ -5,12 +5,12 @@ metadata:
 spec:
   gatewayClassName: cilium
   addresses:
-    - value: 10.10.8.101 
+    - value: 10.20.8.101 
       type: IPAddress
   listeners:
     - name: http
       protocol: HTTP
-      hostname: "*.yanello.net"
+      hostname: "*.t.yanello.net"
       port: 80
       allowedRoutes:
         namespaces:
@@ -19,7 +19,7 @@ spec:
           - kind: HTTPRoute
     - name: http-root
       protocol: HTTP
-      hostname: "yanello.net"
+      hostname: "t.yanello.net"
       port: 80
       allowedRoutes:
         namespaces:
@@ -28,7 +28,7 @@ spec:
           - kind: HTTPRoute
     - name: https
       protocol: HTTPS
-      hostname: "*.yanello.net"
+      hostname: "*.t.yanello.net"
       port: 443
       tls:
         mode: Terminate
@@ -41,7 +41,7 @@ spec:
           - kind: HTTPRoute
     - name: https-root
       protocol: HTTPS
-      hostname: "yanello.net"
+      hostname: "t.yanello.net"
       port: 443
       tls:
         mode: Terminate
@@ -62,8 +62,8 @@ spec:
     - name: cilium-public-gateway
       sectionName: http
   hostnames:
-    - "*.yanello.net"
-    - "yanello.net"
+    - "*.t.yanello.net"
+    - "t.yanello.net"
   rules:
     - filters:
         - type: RequestRedirect
