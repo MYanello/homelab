@@ -7,12 +7,12 @@ resources:
   # - manifests/cert.yaml
   # - manifests/privateGateway.yaml
   # - manifests/publicGateway.yaml
-  # - manifests/bgp.yaml
+  - manifests/bgp.yaml
   #- manifests/httpRoute.yaml
-# helmCharts:
-#   - name: cilium
-#     repo: https://helm.cilium.io
-#     version: "1.18.1"
-#     releaseName: cilium
-#     namespace: cilium
-#     valuesFile: ./values.yaml
+helmCharts:
+  - name: cilium
+    repo: https://helm.cilium.io
+    version: "1.18.1"
+    releaseName: cilium
+    namespace: cilium
+    valuesFile: ./values.yaml
