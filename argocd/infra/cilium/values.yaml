@@ -57,14 +57,19 @@ cluster:
   id: 1
 clustermesh:
   useAPIServer: true
+  apiserver:
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
   config:
     enabled: true
     clusters:
       - name: home
-        port: 6443
+        port: 2379
         ips:
           - 192.168.10.100
       - name: talos
-        port: 6443
+        port: 2379
         ips:
           - 192.168.10.200
