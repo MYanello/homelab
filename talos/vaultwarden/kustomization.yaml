@@ -7,10 +7,10 @@ kind: Kustomization
 generators:
   - manifests/secret-generator.yaml
 
-helmCharts:
-    - name: vaultwarden
-      repo: https://guerzon.github.io/vaultwarden
-      version: "0.34.3"
-      releaseName: vaultwarden
-      namespace: vaultwarden
-      valuesFile: ./values.yaml
+# helmCharts:
+#     - name: vaultwarden
+#       repo: https://guerzon.github.io/vaultwarden
+#       version: "0.34.3"
+#       releaseName: vaultwarden
+#       namespace: vaultwarden
+#       valuesFile: ./values.yaml
