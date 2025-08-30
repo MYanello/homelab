@@ -74,26 +74,26 @@ cgroup:
 cluster:
   name: talos
   id: 2
-clustermesh:
-  useAPIServer: true
-  apiserver:
-    tolerations:
-      - key: "node-role.kubernetes.io/control-plane"
-        operator: "Exists"
-        effect: "NoSchedule"
-    service:
-      type: LoadBalancer
-      loadBalancerIP: 10.20.8.102
-  config:
-    enabled: true
-    clusters:
-      home:
-        enabled: true
-        port: 2379
-        ips:
-          - 10.10.8.102
-      talos:
-        enabled: true
-        port: 2379
-        ips:
-          - 10.20.8.102
+# clustermesh:
+#   useAPIServer: true
+#   apiserver:
+#     tolerations:
+#       - key: "node-role.kubernetes.io/control-plane"
+#         operator: "Exists"
+#         effect: "NoSchedule"
+#     service:
+#       type: LoadBalancer
+#       loadBalancerIP: 10.20.8.102
+#   config:
+#     enabled: true
+#     clusters:
+#       home:
+#         enabled: true
+#         port: 2379
+#         ips:
+#           - 10.10.8.102
+#       talos:
+#         enabled: true
+#         port: 2379
+#         ips:
+#           - 10.20.8.102
