@@ -72,7 +72,7 @@ clustermesh:
         port: 2379
         ips:
           - 10.10.8.102
-      # - name: talos
-      #   port: 2379
-      #   ips:
-      #     - 10.20.8.102
+      - name: talos
+        port: 2379
+        ips:
+          - 10.20.8.102
