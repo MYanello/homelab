@@ -71,8 +71,8 @@ clustermesh:
       - name: home
         port: 2379
         ips:
-          - 192.168.10.100
+          - 10.10.8.102
       - name: talos
         port: 2379
         ips:
-          - 192.168.10.200
+          - 10.20.8.102
