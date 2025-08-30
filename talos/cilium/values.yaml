@@ -87,11 +87,13 @@ clustermesh:
   config:
     enabled: true
     clusters:
-      - name: home
+      home:
+        enabled: true
         port: 2379
         ips:
           - 10.10.8.102
-      - name: talos
+      talos:
+        enabled: true
         port: 2379
         ips:
           - 10.20.8.102
