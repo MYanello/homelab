@@ -13,7 +13,7 @@ rollOutCiliumPods: true
 ipam:
   operator:
     clusterPoolIPv4PodCIDRList: 10.42.0.0/16
-    
+
 k8sServiceHost: 192.168.10.100
 k8sServicePort: 6443
 devices: eth0
@@ -51,7 +51,20 @@ authentication:
       enabled: false
       install:
         enabled: false
-        
+
 cluster:
   name: home
   id: 1
+clustermesh:
+  useAPIServer: true
+  config:
+    enabled: true
+    clusters:
+      - name: home
+        port: 6443
+        ips:
+          - 192.168.10.100
+      - name: talos
+        port: 6443
+        ips:
+          - 192.168.10.200
