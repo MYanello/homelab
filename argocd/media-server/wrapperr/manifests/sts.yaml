@@ -18,7 +18,7 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-        - image: ghcr.io/aunefyren/wrapperr:latest@sha256:8e8474f68abb6bf3409f129514d4c13463cca9ada4e73962917c996ef9776207
+        - image: ghcr.io/aunefyren/wrapperr:v3.2.9@sha256:8e8474f68abb6bf3409f129514d4c13463cca9ada4e73962917c996ef9776207
           imagePullPolicy: IfNotPresent
           name: wrapperr
           ports:
