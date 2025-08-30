@@ -81,6 +81,9 @@ clustermesh:
       - key: "node-role.kubernetes.io/control-plane"
         operator: "Exists"
         effect: "NoSchedule"
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 10.20.8.102
   config:
     enabled: true
     clusters:
