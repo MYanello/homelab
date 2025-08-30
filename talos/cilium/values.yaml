@@ -29,7 +29,7 @@ loadBalancer:
   dsrDispatch: opt
 routingMode: native
 enableIPv4Masquerade: true
-ipv4NativeRoutingCIDR: 10.244.0.0/16
+ipv4NativeRoutingCIDR: 10.0.0.0/8
 autoDirectNodeRoutes: true
 
 envoy:
@@ -70,3 +70,7 @@ cgroup:
   autoMount:
     enabled: false
     hostRoot: /sys/fs/cgroup
+
+cluster:
+  name: talos
+  id: 2

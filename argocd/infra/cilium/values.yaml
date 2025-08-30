@@ -27,7 +27,7 @@ loadBalancer:
   dsrDispatch: opt
 routingMode: native
 enableIPv4Masquerade: true
-ipv4NativeRoutingCIDR: 10.42.0.0/16
+ipv4NativeRoutingCIDR: 10.0.0.0/8
 autoDirectNodeRoutes: true
 
 envoy:
@@ -51,3 +51,7 @@ authentication:
       enabled: false
       install:
         enabled: false
+        
+cluster:
+  name: home
+  id: 1
