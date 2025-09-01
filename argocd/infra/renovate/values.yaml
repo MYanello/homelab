@@ -65,4 +65,7 @@ renovate:
         managerFilePatterns: ["argocd/**/*.yaml", "talos/**/*.yaml"],
       },
       ignorePaths: ["argocd/dev/**"],
+      "branchConcurrentLimit": 50,
+      "prConcurrentLimit": 50,
+      "prHourlyLimit": 0,
     };
