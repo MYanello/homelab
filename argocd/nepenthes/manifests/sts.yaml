@@ -20,7 +20,7 @@ spec:
         - name: gitea-pull-secrets
       initContainers:
         - name: init-db
-          image: docker.io/alpine:3.9.6@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
+          image: docker.io/alpine:3.9.6@sha256:414e0518bb9228d35e4cd5165567fb91d26c6a214e9c95899e1e056fcd349011
           command:
             - "/bin/sh"
             - "-c"
