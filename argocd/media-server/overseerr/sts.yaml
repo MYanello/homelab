@@ -1,34 +1,25 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: overseerr
   labels:
     app: overseerr
 spec:
+  serviceName: overseerr
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: overseerr
-  strategy:
+  updateStrategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
-      maxSurge: 1
   template:
     metadata:
       labels:
         app: overseerr
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
       containers:
         - env:
             - name: PGID
@@ -69,9 +60,13 @@ spec:
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
-      volumes:
-        - name: config
-          hostPath:
-            path: /zpool/k8s/overseerr/config
-          # persistentVolumeClaim:
-          #   claimName: config
+  volumeClaimTemplates:
+    - metadata:
+        name: config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 1Gi
