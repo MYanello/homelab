@@ -4,8 +4,8 @@ defaultSettings:
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
 defaultBackupStore:
-  backupTarget: "s3://longhorn@homelab/backups"
-  backupTargetCredentialSecret: "minio-access"
+  backupTarget: "s3://myanello-longhorn@s3.us-west-004/"
+  backupTargetCredentialSecret: "s3-secrets"
 
 preUpgradeChecker:
   jobEnabled: false
