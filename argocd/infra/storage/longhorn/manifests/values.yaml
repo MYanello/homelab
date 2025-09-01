@@ -4,7 +4,7 @@ defaultSettings:
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
 defaultBackupStore:
-  backupTarget: "s3://myanello-longhorn@s3.us-west-004.backblazeb2.com"
+  backupTarget: "s3://longhorn-myanello@s3.us-west-004/"
   backupTargetCredentialSecret: "s3-secrets"
 
 preUpgradeChecker:
