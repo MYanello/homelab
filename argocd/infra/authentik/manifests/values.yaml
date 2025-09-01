@@ -3,14 +3,14 @@ global:
     - secretRef:
         name: authentik-secrets
   affinity:
-          nodeAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: kubernetes.io/arch
-                      operator: In
-                      values:
-                        - amd64
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
@@ -52,6 +52,10 @@ worker:
     timeoutSeconds: 5
 redis:
   enabled: true
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
   master:
     persistence:
       enabled: false
