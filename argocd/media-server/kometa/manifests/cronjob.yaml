@@ -54,6 +54,8 @@ spec:
                 - secretRef:
                     name: kometa-secrets
               volumeMounts:
+                - name: config
+                  mountPath: /config
               #   - name: config-kometa
               #     mountPath: /tmp/config.yml
               #     subPath: config.yml
