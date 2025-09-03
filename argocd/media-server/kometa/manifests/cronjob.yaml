@@ -28,6 +28,20 @@ spec:
                         values:
                           - marcus-server
           restartPolicy: OnFailure
+          initContainers:
+            - name: copy-config
+              image: busybox
+              command: ["sh", "-c", "cp /tmp/* /config/"]
+              volumeMounts:
+                - name: config-kometa
+                  mountPath: /tmp/config.yml
+                  subPath: config.yml
+                - name: config-movies
+                  mountPath: /tmp/Movies
+                - name: config-tv
+                  mountPath: /tmp/TV
+                - name: media
+                  mountPath: /data/media
           containers:
             - name: kometa
               image: docker.io/kometateam/kometa:v2.2.1@sha256:83b071e96526fc8d29a4101304a1bc0e5363cedbeec8d6b79293c9316f967d4d
@@ -39,17 +53,16 @@ spec:
               envFrom:
                 - secretRef:
                     name: kometa-secrets
-              volumeMounts:
-                - name: config-kometa
-                  mountPath: /config/config.yml
-                  subPath: config.yml
-                - name: config-movies
-                  mountPath: /config/Movies
-                - name: config-tv
-                  mountPath: /config/TV
-                - name: media
-                  mountPath: /data/media
-
+              # volumeMounts:
+              #   - name: config-kometa
+              #     mountPath: /tmp/config.yml
+              #     subPath: config.yml
+              #   - name: config-movies
+              #     mountPath: /tmp/Movies
+              #   - name: config-tv
+              #     mountPath: /tmp/TV
+              #   - name: media
+              #     mountPath: /data/media
               resources:
                 requests:
                   memory: "500Mi"
