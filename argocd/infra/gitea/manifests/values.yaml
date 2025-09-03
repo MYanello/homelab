@@ -42,10 +42,12 @@ persistence:
 metrics:
   enabled: true
 
-redis-cluster:
+valkey-cluster:
   enabled: false
-redis:
+valkey:
   enabled: true
+  master:
+    count: 1
 
 postgresql-ha:
   enabled: false
