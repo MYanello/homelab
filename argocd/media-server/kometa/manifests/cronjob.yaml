@@ -31,7 +31,7 @@ spec:
           initContainers:
             - name: copy-config
               image: busybox
-              command: ["sh", "-c", "cp /tmp/* /config/"]
+              command: ["sh", "-c", "cp -r /tmp/* /config/"]
               volumeMounts:
                 - name: config-kometa
                   mountPath: /tmp/config.yml
