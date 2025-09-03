@@ -71,7 +71,7 @@ spec:
                   memory: "1500Mi"
                   cpu: "500m"
           volumes:
-            - name: confg
+            - name: config
               emptyDir: {}
             - name: config-kometa
               configMap:
