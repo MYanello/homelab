@@ -1,5 +1,5 @@
 resources:
-  - ./manifests/lb.yaml
+  - ./manifests/svc.yaml
   - ./manifests/cm.yaml
   #- ./manifests/httproute.yaml
   - ./manifests/tlsRoute.yaml
