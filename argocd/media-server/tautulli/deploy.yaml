@@ -37,7 +37,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: docker.io/linuxserver/tautulli:2.16.0
+          image: docker.io/linuxserver/tautulli:2.16.0@sha256:e59ad4e5ad8ba315696b47944869b84989984e6c335e8df38e5f8bccce31fd18
           imagePullPolicy: IfNotPresent
           name: tautulli
           resources:
