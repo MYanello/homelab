@@ -2,21 +2,21 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ./manifests/http-route.yaml
-  - ./manifests/dashboards/power-dash.yaml
-  - ./manifests/dashboards/istio-dash.yaml
-  - ./manifests/vmscrape/homeassistant.yaml
-  - ./manifests/vmscrape/haproxy.yaml
-  - ./manifests/vmscrape/netdata.yaml
-  - ./manifests/vmscrape/kuma.yaml
+#  - ./manifests/http-route.yaml
+#  - ./manifests/dashboards/power-dash.yaml
+#  - ./manifests/dashboards/istio-dash.yaml
+#  - ./manifests/vmscrape/homeassistant.yaml
+#  - ./manifests/vmscrape/haproxy.yaml
+#  - ./manifests/vmscrape/netdata.yaml
+#  - ./manifests/vmscrape/kuma.yaml
 
 generators:
   - ./manifests/secrets/secret-generator.yaml
 
-helmCharts:
-  - name: victoria-metrics-k8s-stack
-    releaseName: victoria-metrics-k8s-stack
-    namespace: monitoring
-    repo: https://victoriametrics.github.io/helm-charts/
-    version: "0.59.5"
-    valuesFile: values.yaml
+#helmCharts:
+#  - name: victoria-metrics-k8s-stack
+#    releaseName: victoria-metrics-k8s-stack
+#    namespace: monitoring
+#    repo: https://victoriametrics.github.io/helm-charts/
+#    version: "0.59.5"
+#    valuesFile: values.yaml
