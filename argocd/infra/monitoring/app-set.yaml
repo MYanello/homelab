@@ -7,15 +7,9 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/myanello/homelab.git
-        revision: HEAD
+        revision: main
         directories:
           - path: argocd/infra/monitoring/*
-          - path: argocd/infra/monitoring/kiali
-            exclude: true
-          - path: argocd/infra/monitoring/elastic-cloud
-            exclude: true
-          - path: argocd/infra/monitoring/open-telemetry
-            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
