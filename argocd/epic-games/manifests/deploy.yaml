@@ -5,7 +5,7 @@ metadata:
   labels:
     app: epic-games
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
