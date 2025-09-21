@@ -36,7 +36,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: mc-config
-          image: itzg/minecraft-server:2025.8.1-java21@sha256:92681e6745391ed80c7e59ebe9ba9956e787178b9e52c34e734e998bc80a8649
+          image: itzg/minecraft-server:2025.9.2-java21@sha256:1de76802ab088730e40c9d1866b8b7d2b4d341b946342892a1dbb6f7f4feeb18
           stdin: true
           tty: true
           volumeMounts:
