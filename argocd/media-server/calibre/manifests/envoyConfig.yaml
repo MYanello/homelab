@@ -1,0 +1,29 @@
+apiVersion: cilium.io/v2
+kind: CiliumEnvoyConfig
+metadata:
+  name: calibre-buffering
+  namespace: calibre
+spec:
+  services:
+    - name: calibre
+      namespace: calibre
+  resources:
+    - "@type": type.googleapis.com/envoy.extensions.filters.http.buffer.v3.Buffer
+      name: envoy.filters.http.buffer
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.filters.http.buffer.v3.Buffer
+        max_request_bytes: 262144  # 256KB (equivalent to proxy_buffer_size)
+        max_request_time: 30s
+    - "@type": type.googleapis.com/envoy.config.route.v3.RouteConfiguration
+      name: calibre_route
+      virtual_hosts:
+        - name: calibre_host
+          domains: ["calibre.yanello.net"]
+          routes:
+            - match:
+                prefix: "/"
+              route:
+                cluster: calibre
+                timeout: 60s
+                buffer_options:
+                  max_request_bytes: 262144  # 256KB

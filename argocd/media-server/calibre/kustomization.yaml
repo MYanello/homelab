@@ -9,3 +9,4 @@ resources:
 - ./manifests/deploy.yaml
 - ./manifests/service.yaml
 - ./manifests/http-route.yaml
+- ./manifests/envoyConfig.yaml
