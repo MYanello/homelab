@@ -21,7 +21,7 @@ spec:
     - backendRefs:
         - name: calibre
           namespace: calibre
-          port: 8083
+          port: 80
       filters:
         - type: RequestHeaderModifier
           requestHeaderModifier:
