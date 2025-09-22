@@ -5,6 +5,7 @@ resources:
   - ./manifests/vs.yaml
   - ./manifests/http-route.yaml
   - ./manifests/longhorn-xfs-sc.yaml
+  - ./manifests/recurringJob.yaml
   
 generators:
   - ./manifests/secret-generator.yaml
