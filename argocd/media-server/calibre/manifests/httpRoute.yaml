@@ -22,12 +22,12 @@ spec:
         - name: calibre
           namespace: calibre
           port: 80
-      # filters:
-      #   - type: RequestHeaderModifier
-      #     requestHeaderModifier:
-      #       add:
-      #         - name: X-Scheme
-      #           value: https
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            add:
+              - name: X-Scheme
+                value: https
       #       set:
       #         - name: Host
       #           value: calibre.yanello.net
