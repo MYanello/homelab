@@ -28,6 +28,11 @@ spec:
             add:
               - name: X-Scheme
                 value: https
+              - name: X-Forwarded-For
+                value: "%DOWNSTREAM_REMOTE_ADDRESS%"
+            set:
+              - name: Host
+                value: calibre.yanello.net
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
