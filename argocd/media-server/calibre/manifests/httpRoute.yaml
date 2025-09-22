@@ -22,15 +22,15 @@ spec:
         - name: calibre
           namespace: calibre
           port: 80
-      filters:
-        - type: RequestHeaderModifier
-          requestHeaderModifier:
-            add:
-              - name: X-Scheme
-                value: https
-            set:
-              - name: Host
-                value: calibre.yanello.net
+      # filters:
+      #   - type: RequestHeaderModifier
+      #     requestHeaderModifier:
+      #       add:
+      #         - name: X-Scheme
+      #           value: https
+      #       set:
+      #         - name: Host
+      #           value: calibre.yanello.net
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
