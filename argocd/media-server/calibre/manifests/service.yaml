@@ -10,8 +10,8 @@ spec:
   type: LoadBalancer
   ports:
     - name: "http"
-      port: 443
-      targetPort: 443
+      port: 80
+      targetPort: 80
   selector:
     app: calibre
 ---
