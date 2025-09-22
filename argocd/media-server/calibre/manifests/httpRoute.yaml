@@ -14,6 +14,9 @@ spec:
   parentRefs:
     - name: cilium-private-gateway
       namespace: cilium
+      sectionName: http
+    - name: cilium-private-gateway
+      namespace: cilium
       sectionName: https
   hostnames:
     - calibre.yanello.net
