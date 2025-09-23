@@ -20,6 +20,6 @@ spec:
   rules:
   - backendRefs:
     - name: longhorn-frontend
-      namespace: longhorn
+      namespace: longhorn-system
       port: 80
       
