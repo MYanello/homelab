@@ -1,3 +1,5 @@
+namespaceOverride: longhorn
+
 defaultSettings:
   defaultDataPath: "/app/longhorn/"
   defaultReplicaCount: 2
