@@ -10,7 +10,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: longhorn-app
   name: longhorn-httproute
-  namespace: longhorn
 spec:
   parentRefs:
     - name: cilium-private-gateway
