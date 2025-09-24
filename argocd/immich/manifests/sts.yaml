@@ -85,8 +85,11 @@ spec:
               memory: 500Mi
               cpu: 100m
             limits:
-              memory: 2Gi
-              cpu: "1"
+              memory: 4Gi
+    # volumes:
+    #   - name: postgres-data
+    #     hostPath:
+    #       path: /k8s-fast/immich/db
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
