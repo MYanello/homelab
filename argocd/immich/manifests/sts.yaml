@@ -5,7 +5,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  replicas: 0
+  replicas: 1
   serviceName: postgres
   revisionHistoryLimit: 3
   selector:
