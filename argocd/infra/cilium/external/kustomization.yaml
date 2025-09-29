@@ -11,3 +11,4 @@ resources:
   - ubiquiti.yaml
   - coffee.yaml
   - proxmox.yaml
+  - truenas.yaml
