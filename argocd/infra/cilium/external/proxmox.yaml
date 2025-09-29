@@ -51,3 +51,17 @@ endpoints:
       - 192.168.10.77
     conditions:
       ready: true
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: proxmox-public
+spec:
+  commonName: proxmox.yanello.net
+  dnsNames:
+  - "proxmox.yanello.net"
+  secretName: proxmox-server-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
