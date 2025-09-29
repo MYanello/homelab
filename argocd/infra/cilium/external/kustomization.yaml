@@ -10,3 +10,4 @@ resources:
   - router.yaml
   - ubiquiti.yaml
   - coffee.yaml
+  - proxmox.yaml
