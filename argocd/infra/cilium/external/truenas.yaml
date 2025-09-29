@@ -16,7 +16,7 @@ spec:
         - name: truenas-service
           group: ""
           kind: Service
-          port: 8006
+          port: 443
           weight: 1
 ---
 apiVersion: v1
@@ -25,7 +25,7 @@ metadata:
   name: truenas-service
 spec:
   ports:
-    - name: https
+    - name: http
       protocol: TCP
       port: 443
       targetPort: 443
