@@ -6,7 +6,7 @@ metadata:
   name: coffee-httproute
 spec:
   hostnames:
-    - iota.yanello.net
+    - coffee.yanello.net
   parentRefs:
     - name: cilium-private-gateway
       group: gateway.networking.k8s.io
