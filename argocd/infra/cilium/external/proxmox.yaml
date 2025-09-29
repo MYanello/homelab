@@ -10,7 +10,7 @@ spec:
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: http
+      sectionName: proxmox-tls-passthrough
   rules:
     - backendRefs:
         - name: proxmox-service
