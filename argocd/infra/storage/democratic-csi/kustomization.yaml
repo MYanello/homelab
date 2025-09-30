@@ -4,6 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: democratic-csi
     releaseName: democratic-csi
+    namespace: democratic-csi
     repo: https://democratic-csi.github.io/charts/
     version: "0.15.0"
     valuesFile: values.yaml
