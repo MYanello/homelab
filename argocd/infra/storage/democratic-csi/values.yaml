@@ -2,6 +2,12 @@ csiDriver:
   # should be globally unique for a given cluster
   name: "org.democratic-csi.iscsi"
 
+node:
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+    
 # add note here about volume expansion requirements
 storageClasses:
   - name: freenas-iscsi-csi
