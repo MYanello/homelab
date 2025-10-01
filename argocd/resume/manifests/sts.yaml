@@ -72,8 +72,7 @@ spec:
         resources:
           requests:
             storage: 100Mi
-            
----
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -82,7 +81,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: iscsi
+  storageClassName: truenas-api-iscsi
   resources:
     requests:
       storage: 10Gi
