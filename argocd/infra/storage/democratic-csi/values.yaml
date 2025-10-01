@@ -15,7 +15,7 @@ controller:
   
 # add note here about volume expansion requirements
 storageClasses:
-  - name: truenas-api-iscsi
+  - name: truenas-hdd
     defaultClass: false
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
