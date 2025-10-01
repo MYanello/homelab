@@ -15,7 +15,7 @@ controller:
   
 # add note here about volume expansion requirements
 storageClasses:
-  - name: truenas-iscsi
+  - name: truenas-api-iscsi
     defaultClass: false
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
@@ -62,4 +62,4 @@ volumeSnapshotClasses: []
 driver:
   existingConfigSecret: democratic-secret
   config:
-    driver: freenas-iscsi
+    driver: freenas-api-iscsi
