@@ -10,7 +10,7 @@ node:
     
 # add note here about volume expansion requirements
 storageClasses:
-  - name: freenas-iscsi-csi
+  - name: truenas-iscsi
     defaultClass: false
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
@@ -60,4 +60,45 @@ driver:
     # https://github.com/democratic-csi/democratic-csi/tree/master/examples
     # YOU MUST COPY THE DATA HERE INLINE!
     driver: freenas-iscsi
-    #...
+    httpConnection:
+      protocol: https
+      host: truenas.yanello.net
+      port: 443
+      apiKey: ""
+      username: democratic
+      apiVersion: 2
+    sshConnection:
+      host: truenas.yanello.net
+      port: 22
+      username: democratic
+      privateKey: ""
+    zfs:
+      cli:
+        sudoEnabled: true
+        paths:
+          zfs: /usr/sbin/zfs
+          zpool: /usr/sbin/zpool
+          sudo: /usr/bin/sudo
+          chroot: /usr/sbin/chroot
+      datasetParentName: pool0/csi/vols
+      detachedSnapshotsDatasetParentName: pool0/csi/snaps
+      zvolCompression: 
+      zvolDedup:
+      zvolEnableReservation: false
+      zvolBlocksize:
+    iscsi:
+      targetPortal: [192.168.10.78:3260]
+      targetPortals: []
+      interface:
+      namePrefix: prod-
+      nameSuffix: ""
+      targetGroups:
+        - targetGroupPortalGroup: 1
+          targetGroupInitiatorGroup: 1
+          targetGroupAuthType: None
+      extentInsecureTpc: true
+      extentXenCompat: false
+      extentDisablePhysicalBlocksize: true
+      extentBlocksize: 4096
+      extentRpm: "HDD"
+      extentAvailThreshold: 0
