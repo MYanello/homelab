@@ -68,9 +68,9 @@ spec:
         name: pgdata
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn-xfs
+        storageClassName: longhorn
         resources:
           requests:
-            storage: 1Gi
+            storage: 100Mi
             
 #  pvc-f9f2e33f-4060-4265-8f3b-9e8a0567e3f0       
