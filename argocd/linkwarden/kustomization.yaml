@@ -8,3 +8,19 @@ resources:
   
 generators:
   - ./manifests/secret-generator.yaml
+  
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
+    target:
+      kind: StatefulSet
+      
+## pg
+# old  pvc-ef007f6c-68f7-4d23-b538-a007d4363eff
+# new pvc-46e8c4b6-5b33-4bc0-818d-cb9e4e0be9f8
+# 
+# data
+# old  pvc-e0eddc24-6e45-4aed-b274-27f63868d674      
+# new pvc-bc267788-a2c0-4def-a2e4-2dd965074325 
