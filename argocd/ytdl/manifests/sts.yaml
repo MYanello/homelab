@@ -82,16 +82,16 @@ spec:
     - metadata:
         name: appdata
       spec:
-        storageClassName: nfs-storage
+        storageClassName: truenas-ssd
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 1Gi
     - metadata:
         name: audio
       spec:
-        storageClassName: nfs-storage
+        storageClassName: truenas-hdd
         accessModes:
           - ReadWriteOnce
         resources:
@@ -100,16 +100,16 @@ spec:
     - metadata:
         name: video
       spec:
-        storageClassName: nfs-storage
+        storageClassName: truenas-hdd
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 20Gi
+            storage: 100Gi
     - metadata:
         name: subscriptions
       spec:
-        storageClassName: nfs-storage
+        storageClassName: truenas-hdd
         accessModes:
           - ReadWriteOnce
         resources:
@@ -118,12 +118,12 @@ spec:
     - metadata:
         name: users
       spec:
-        storageClassName: nfs-storage
+        storageClassName: truenas-hdd
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 500Mi
+            storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: StatefulSet
