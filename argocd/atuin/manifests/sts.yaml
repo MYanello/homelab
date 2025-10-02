@@ -25,7 +25,7 @@ spec:
           envFrom:
             - secretRef:
                 name: atuin-secrets
-          image: postgres:14@sha256:515cda353bc6ec67e1592db0973c7a5f829375bab7ad879f4e7ecf0c7e777c7f
+          image: postgres:14@sha256:fbd63b8e1eb2b318d342e8ad279891f622aa5ff69bd95e5683cc915301218bcf
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pgdata
