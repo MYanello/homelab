@@ -8,11 +8,6 @@ node:
       operator: "Exists"
       effect: "NoSchedule"
 
-controller:
-  driver:
-    image:
-      tag: next
-  
 # add note here about volume expansion requirements
 storageClasses:
   - name: truenas-hdd
