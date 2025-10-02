@@ -6,8 +6,8 @@ generators:
 
 helmCharts:
   - name: democratic-csi
-    releaseName: democratic-csi
-    namespace: democratic-csi
+    releaseName: democratic-hdd
+    namespace: democratic-hdd
     repo: https://democratic-csi.github.io/charts/
     version: "0.15.0"
     valuesFile: values.yaml
