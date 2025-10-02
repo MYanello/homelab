@@ -1,6 +1,6 @@
 csiDriver:
   # should be globally unique for a given cluster
-  name: "org.democratic-csi.iscsi"
+  name: "org.democratic-csi.iscsi.ssd"
 
 node:
   tolerations:
@@ -15,7 +15,7 @@ controller:
   
 # add note here about volume expansion requirements
 storageClasses:
-  - name: truenas-hdd
+  - name: truenas-ssd
     defaultClass: false
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
