@@ -29,7 +29,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: ghcr.io/mealie-recipes/mealie:v3.2.1@sha256:322369a5b748eddb091417e708f0667d21994e6119278d1b8c509900ba41e54b
+        - image: ghcr.io/mealie-recipes/mealie:v3.3.0
           imagePullPolicy: IfNotPresent
           resources:
             limits:
