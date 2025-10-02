@@ -186,9 +186,9 @@ spec:
     - metadata:
         name: db
       spec:
-        storageClassName: nfs-storage
+        storageClassName: truenas-ssd
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 1Gi
