@@ -4,6 +4,9 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, 3 n150
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to configure argocd and other core components.
 
 ## Worklog
+### 01.10.25
+- Set up democratic-csi to connect to a truenas instance for iscsi to my ssd/hdd storage
+
 ### 06.12.25
 - Got all httproutes migrated to cilium
 - Decided to not even use the source ip auth that initially was the point of moving to cilium
