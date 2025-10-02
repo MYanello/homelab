@@ -80,7 +80,7 @@ spec:
             httpGet:
               path: /
               port: 17442
-            initialDelaySeconds: 300
+            initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 10
@@ -150,7 +150,7 @@ spec:
           startupProbe:
             tcpSocket:
               port: 27017
-            failureThreshold: 30
+            failureThreshold: 3
             periodSeconds: 10
           readinessProbe:
             tcpSocket:
