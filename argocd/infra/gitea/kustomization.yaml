@@ -15,3 +15,17 @@ helmCharts:
     releaseName: gitea
     namespace: gitea
     valuesFile: ./manifests/values.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: StatefulSet
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
