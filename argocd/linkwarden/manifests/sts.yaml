@@ -96,7 +96,7 @@ spec:
         name: pgdata
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: truenas-hdd
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 1Gi
