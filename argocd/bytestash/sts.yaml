@@ -5,7 +5,7 @@ metadata:
   labels:
     app: bytestash
 spec:
-  replicas: 1
+  replicas: 0
   serviceName: bytestash
   revisionHistoryLimit: 3
   selector:
