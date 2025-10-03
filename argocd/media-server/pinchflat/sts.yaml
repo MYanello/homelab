@@ -17,12 +17,12 @@ spec:
         app: pinchflat
     spec:
       containers:
+        - name: pinchflat
           env:
             - name: TZ
-              value: America/Chicago              
+              value: America/Chicago
           image: ghcr.io/kieraneglin/pinchflat:latest
           imagePullPolicy: IfNotPresent
-          name: pinchflat
           resources:
             limits:
               cpu: 250m
@@ -50,10 +50,10 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
           volumeMounts:
-          - mountPath: /config
-            name: config
-          - mountPath: /downloads
-            name: downloads
+            - mountPath: /config
+              name: config
+            - mountPath: /downloads
+              name: downloads
       restartPolicy: Always
   volumeClaimTemplates:
     - apiVersion: v1

@@ -5,4 +5,3 @@ resources:
   - ./sts.yaml
   - ./svc.yaml
   - ./httpRoute.yaml
-
