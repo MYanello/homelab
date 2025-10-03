@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
         - name: metube
-          env:
-            - name: YTDL_OPTIONS
-              value: "{'cookiefile':'/downloads/cookies.txt'}"
+        #   env:
+        #     - name: YTDL_OPTIONS
+        #       value: "{'cookiefile':'/downloads/cookies.txt'}"
           image: ghcr.io/alexta69/metube:latest
           imagePullPolicy: IfNotPresent
           resources:
