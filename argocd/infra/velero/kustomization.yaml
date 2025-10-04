@@ -11,6 +11,13 @@ helmCharts:
     repo: https://vmware-tanzu.github.io/helm-charts
     version: 11.0.0
     valuesInline:
+      initContainers:
+        - name: velero-plugin-for-aws
+          image: velero/velero-plugin-for-aws:v1.13.0
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /target
+              name: plugins
       configuration:
         backupStorageLocation:
           - name: backblaze
