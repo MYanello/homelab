@@ -11,7 +11,6 @@ helmCharts:
     repo: https://vmware-tanzu.github.io/helm-charts
     version: 11.0.0
     valuesInline:
-      installCRDs: true
       configuration:
         backupStorageLocation:
           - name: backblaze
