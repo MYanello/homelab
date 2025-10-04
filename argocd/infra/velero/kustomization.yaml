@@ -23,16 +23,16 @@ helmCharts:
     namespace: velero
     repo: https://vmware-tanzu.github.io/helm-charts
     version: 11.0.0
-    # valuesInline:
-    #   configuration:
-    #     backupStorageLocation:
-    #       - name: backblaze
-    #         provider: aws
-    #         bucket: myanello-velero
-    #         default: true
-    #         credential:
-    #           name: backblaze-secrets
-    #           key: applicationKey
-    #         config:
-    #           region: us-west-004
-    #           s3Url: s3.us-west-004.backblazeb2.com
+    valuesInline:
+      configuration:
+        backupStorageLocation:
+          - name: backblaze
+            provider: aws
+            bucket: myanello-velero
+            default: true
+            credential:
+              name: backblaze-secrets
+              key: applicationKey
+            config:
+              region: us-west-004
+              s3Url: s3.us-west-004.backblazeb2.com
