@@ -5,7 +5,8 @@ metadata:
 spec:
   cron: "0 2 * * *"  # Daily at 2 AM
   task: backup
-  groups: []
+  groups: 
+    - default
   retain: 1
   concurrency: 3
 ---
@@ -16,6 +17,7 @@ metadata:
 spec:
   cron: "0 3 * * 0"  # Weekly on Sunday at 3 AM
   task: backup
-  groups: []
+  groups: 
+    - default
   retain: 1
   concurrency: 3
