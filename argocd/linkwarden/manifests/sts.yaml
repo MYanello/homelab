@@ -43,8 +43,8 @@ spec:
               cpu: 200m
               memory: 1Gi
             limits:
-              cpu: 500m
-              memory: 2Gi
+              cpu: "1"
+              memory: 4Gi
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
@@ -92,6 +92,9 @@ spec:
             requests:
               cpu: 150m
               memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
