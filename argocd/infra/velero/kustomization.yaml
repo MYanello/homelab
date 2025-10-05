@@ -20,7 +20,7 @@ helmCharts:
               name: plugins
       credentials:
         useSecret: true
-        existingSecret: backblaze-secrets
+        existingSecret: cloud-credentials
       configuration:
         backupStorageLocation:
           - name: backblaze
