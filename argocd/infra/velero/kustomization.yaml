@@ -27,9 +27,9 @@ helmCharts:
             provider: aws
             bucket: myanello-velero
             default: true
-            # credential:
-            #   name: backblaze-secrets
-            #   key: aws_secret_access_key
+            credential:
+              name: backblaze-secrets
+              key: aws_secret_access_key
             config:
               region: us-west-004
               s3Url: s3.us-west-004.backblazeb2.com
