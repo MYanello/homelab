@@ -40,7 +40,7 @@ helmCharts:
             default: true
             credential:
               name: backblaze-secrets
-              key: applicationKey
+              key: aws_secret_access_key
             config:
               region: us-west-004
               s3Url: s3.us-west-004.backblazeb2.com
