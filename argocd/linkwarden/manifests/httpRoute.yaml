@@ -1,0 +1,27 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: linkwarden-http-route
+  namespace: linkwarden
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Linkwarden
+    gethomepage.dev/icon: linkwarden
+    gethomepage.dev/description: "Linkwarden is a self-hosted, open-source collaborative bookmark manager to collect, organize and archive webpages."
+    gethomepage.dev/pod-selector: app=linkwarden
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+  - linkwarden.yanello.net
+  rules:
+  - backendRefs:
+    - name: linkwarden
+      namespace: linkwarden
+      port: 3000
+
