@@ -4,10 +4,10 @@ kind: Kustomization
 resources:
   # - ./manifests/sts.yaml
   - ./manifests/svc.yaml
-  - ./manifests/http-route.yaml
+  - ./manifests/httpRoute.yaml
   
 generators:
-  - ./manifests/secret-generator.yaml
+  - ./manifests/secretGenerator.yaml
   
 patches:
   - patch: |-
