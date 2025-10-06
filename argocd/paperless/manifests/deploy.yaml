@@ -92,7 +92,7 @@ spec:
         app: paperless-db
     spec:
       containers:
-        - image: docker.io/library/mariadb:11@sha256:4b1e7958f820681b1b93b9cf9ea05a76e0785da12699a1fb1d05e0eb2137e56b
+        - image: docker.io/library/mariadb:12@sha256:03a03a6817bb9eaa21e5aed1b734d432ec3f80021f5a2de1795475f158217545
           imagePullPolicy: IfNotPresent
           name: paperless-db
           ports:
