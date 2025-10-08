@@ -19,6 +19,6 @@ operator:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
           - matchExpressions:
-              - key: "gpu.type"
+              - key: "nvidia.com/gpu.present"
                 operator: In
-                values: ["nvidia"]
+                values: ["true"]
