@@ -2,6 +2,9 @@ driver:
   enabled: false
 toolkit:
   enabled: true
+  env:
+    - name: CONTAINERD_SOCKET
+      value: /run/k3s/containerd/containerd.sock
 
 devicePlugin:
   config:
