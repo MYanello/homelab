@@ -29,7 +29,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: docker.io/garethgeorge/backrest:v1.9.2-scratch
+        - image: docker.io/garethgeorge/backrest:v1.9.2-scratch@sha256:481b7f91c7a3b85d76c63afdf690607a66cf383d42e734b5f57555005922a9db
           imagePullPolicy: IfNotPresent
           name: backrest
           resources:
