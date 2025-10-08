@@ -42,7 +42,6 @@ resource "kubernetes_labels" "server" {
     "storage.type/hdd" = "true"
     "storage.kubernetes.io/performance" : "fast"
     "cpu.performance" : "high"
-    "gpu.type" : "nvidia"
   }
 }
 
