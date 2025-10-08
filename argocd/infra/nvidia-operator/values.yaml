@@ -1,7 +1,7 @@
 driver:
   enabled: false
 toolkit:
-  enabled: false
+  enabled: true
 
 devicePlugin:
   config:
