@@ -33,14 +33,14 @@ helmCharts:
             config:
               region: us-west-004
               s3Url: https://s3.us-west-004.backblazeb2.com
-        volumeSnapshotLocation:
-          - name: backblaze
-            provider: aws
-            bucket: myanello-velero
-            default: true
-            credential:
-              name: cloud-credentials
-              key: cloud
-            config:
-              region: us-west-004
-              s3Url: https://s3.us-west-004.backblazeb2.com
+        # volumeSnapshotLocation:
+        #   - name: backblaze
+        #     provider: aws
+        #     bucket: myanello-velero
+        #     default: true
+        #     credential:
+        #       name: cloud-credentials
+        #       key: cloud
+        #     config:
+        #       region: us-west-004
+        #       s3Url: https://s3.us-west-004.backblazeb2.com
