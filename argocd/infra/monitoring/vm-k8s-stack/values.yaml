@@ -22,6 +22,7 @@ vmsingle:
   spec:
     retentionPeriod: 90d
     storage:
+      storageClassName: "truenas-hdd"
       resources:
         requests:
           storage: 250Gi
