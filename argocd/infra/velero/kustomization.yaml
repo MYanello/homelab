@@ -53,12 +53,12 @@ helmCharts:
             operator: Exists
           - effect: NoExecute
             operator: Exists
-        schedules:
-          weekly:
-            disabled: false
-            schedule: "0 0 * * 1" # mondays
-            paused: false
-            skipImmediately: false
-            template:
-              ttl: "672h" # 1 month 
-              storageLocation: default
+      schedules:
+        weekly:
+          disabled: false
+          schedule: "0 0 * * 1" # mondays
+          paused: false
+          skipImmediately: false
+          template:
+            ttl: "672h" # 1 month 
+            storageLocation: default
