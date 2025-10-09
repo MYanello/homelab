@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kometa
 spec:
-  schedule: "0 */6 * * *"
+  schedule: "0 */6 * * *" # every 6h
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -56,13 +56,6 @@ spec:
               volumeMounts:
                 - name: config
                   mountPath: /config
-              #   - name: config-kometa
-              #     mountPath: /tmp/config.yml
-              #     subPath: config.yml
-              #   - name: config-movies
-              #     mountPath: /tmp/Movies
-              #   - name: config-tv
-              #     mountPath: /tmp/TV
                 - name: media
                   mountPath: /data/media
               resources:
