@@ -33,15 +33,6 @@ helmCharts:
             config:
               region: us-west-004
               s3Url: https://s3.us-west-004.backblazeb2.com
-      deployNodeAgent: true
-      nodeAgent:
-        podVolumePath: /var/lib/kubelet/pods
-        privileged: false
-        tolerations:
-          - effect: NoSchedule
-            operator: Exists
-          - effect: NoExecute
-            operator: Exists
         volumeSnapshotLocation:
           - name: backblaze
             provider: aws
@@ -53,6 +44,15 @@ helmCharts:
             config:
               region: us-west-004
               s3Url: https://s3.us-west-004.backblazeb2.com
+      deployNodeAgent: true
+      nodeAgent:
+        podVolumePath: /var/lib/kubelet/pods
+        privileged: false
+        tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          - effect: NoExecute
+            operator: Exists
         # schedules:
         #   mybackup:
         #     disabled: false
