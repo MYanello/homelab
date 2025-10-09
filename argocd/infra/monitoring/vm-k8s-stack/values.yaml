@@ -1,4 +1,7 @@
-victoria-metrics-operator: {}
+victoria-metrics-operator:
+  operator:
+    crdCreator:
+      disable: ['VLAgent', 'VLCluster', 'VLSingle', 'VMAnomaly']
 
 vmalert:
   enabled: true
