@@ -82,7 +82,7 @@ spec:
           envFrom:
             - secretRef:
                 name: linkwarden-secrets
-          image: postgres:16-alpine@sha256:105f749903482290d5d5d96401f9d052bb92c8d00bf8be3777c5436d8136af3f
+          image: postgres:16-alpine@sha256:9d4951e6dc70422022512ff05ac86e0ae360da051c563accbed85d6f654c3357
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pgdata
