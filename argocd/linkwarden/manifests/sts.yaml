@@ -12,6 +12,8 @@ spec:
       app: linkwarden
   template:
     metadata:
+      annotations: 
+        backup.velero.io/backup-volumes: data
       labels:
         app: linkwarden
     spec:
@@ -60,6 +62,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
+  annotations: 
+    backup.velero.io/backup-volumes: pgdata
   labels:
     app: postgres
 spec:
