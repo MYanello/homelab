@@ -20,5 +20,4 @@ spec:
   rules:
     - backendRefs:
         - name: victoria-logs-single-server
-          namespace: monitoring
           port: 9428
