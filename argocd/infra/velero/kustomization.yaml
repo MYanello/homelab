@@ -42,14 +42,35 @@ helmCharts:
             operator: Exists
           - effect: NoExecute
             operator: Exists
-        # volumeSnapshotLocation:
-        #   - name: backblaze
-        #     provider: aws
-        #     bucket: myanello-velero
-        #     default: true
-        #     credential:
-        #       name: cloud-credentials
-        #       key: cloud
-        #     config:
-        #       region: us-west-004
-        #       s3Url: https://s3.us-west-004.backblazeb2.com
+        volumeSnapshotLocation:
+          - name: backblaze
+            provider: aws
+            bucket: myanello-velero
+            default: true
+            credential:
+              name: cloud-credentials
+              key: cloud
+            config:
+              region: us-west-004
+              s3Url: https://s3.us-west-004.backblazeb2.com
+        # schedules:
+        #   mybackup:
+        #     disabled: false
+        #     labels:
+        #       myenv: foo
+        #     annotations:
+        #       myenv: foo
+        #     schedule: "0 0 * * *"
+        #     useOwnerReferencesInBackup: false
+        #     paused: false
+        #     skipImmediately: false
+        #     template:
+        #       ttl: "240h"
+        #       storageLocation: default
+        #       includedNamespaces:
+        #       - foo
+        #       # See: https://velero.io/docs/v1.14/resource-filtering/#excludes
+        #       excludedNamespaceScopedResources:
+        #       - persistentVolumeClaims
+        #       excludedClusterScopedResources:
+        #       - persistentVolumes
