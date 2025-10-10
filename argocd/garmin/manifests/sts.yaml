@@ -27,6 +27,16 @@ spec:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
+        - name: wait-for-influxdb
+          image: curlimages/curl:latest
+          command: ['sh', '-c']
+          args:
+            - |
+              until curl -f http://($INFLUXDB_HOST):$(INFLUXDB_PORT)/ping; do
+                echo "Waiting for InfluxDB..."
+                sleep 5
+              done
+              echo "InfluxDB is ready!"
       containers:
         - image: docker.io/thisisarpanghosh/garmin-fetch-data:v0.3.0@sha256:4aaebdee5fd15d602371c089fe28c76ae7ef0c1924335331a11424948e5711f5
           imagePullPolicy: IfNotPresent
