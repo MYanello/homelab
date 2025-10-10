@@ -34,6 +34,9 @@ spec:
             runAsGroup: 0
         - name: wait-for-influxdb
           image: curlimages/curl:latest
+          envFrom:
+            - configMapRef:
+                name: garmin-config
           command: ["sh", "-c"]
           args:
             - |
@@ -63,6 +66,8 @@ spec:
           envFrom:
             - secretRef:
                 name: garmin-secrets
+            - configMapRef:
+                name: garmin-config
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
