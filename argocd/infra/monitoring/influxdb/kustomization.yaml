@@ -13,6 +13,10 @@ helmCharts:
     valuesInline: 
       image:
         tag: 1.12.2-alpine
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       service: 
         type: LoadBalancer
         loadBalancerIP: 10.10.8.0
