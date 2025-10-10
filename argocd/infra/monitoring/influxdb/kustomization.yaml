@@ -15,7 +15,7 @@ helmCharts:
         type: LoadBalancer
         loadBalancerIP: 10.10.8.0
       persistence:
-        storageClassName: longhorn
+        storageClassName: truenas-hdd
       setDefaultUser:
         enabled: true
         user:
@@ -39,12 +39,12 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/replicas
-        value: 0
+        value: 1
     target:
       kind: Deployment
   - patch: |-
       - op: replace
         path: /spec/replicas
-        value: 0
+        value: 1
     target:
       kind: StatefulSet
