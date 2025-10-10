@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+ - name: victoria-metrics-operator-crds
+   releaseName: victoria-metrics-operator-crds
+   namespace: monitoring
+   repo: https://victoriametrics.github.io/helm-charts/
+   version: "0.5.1"
+   valuesFile: values.yaml
