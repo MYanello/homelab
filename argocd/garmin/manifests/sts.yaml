@@ -20,7 +20,12 @@ spec:
       initContainers:
         - name: fix-permissions
           image: busybox:1.37@sha256:d82f458899c9696cb26a7c02d5568f81c8c8223f8661bb2a7988b269c8b9051e
-          command: ['sh', '-c', 'chown -R 1000:1000 /home/appuser/.garminconnect && chmod -R 755 /home/appuser/.garminconnect']
+          command: ["sh", "-c"]
+          args:
+            - |
+              chown -R 1000:1000 /home/appuser/.garminconnect
+              chmod -R 755 /home/appuser/.garminconnect
+              echo "Applied permissions"
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
@@ -29,10 +34,10 @@ spec:
             runAsGroup: 0
         - name: wait-for-influxdb
           image: curlimages/curl:latest
-          command: ['sh', '-c']
+          command: ["sh", "-c"]
           args:
             - |
-              until curl -f http://($INFLUXDB_HOST):$(INFLUXDB_PORT)/ping; do
+              until curl -f http://$(INFLUXDB_HOST):$(INFLUXDB_PORT)/ping; do
                 echo "Waiting for InfluxDB..."
                 sleep 5
               done
@@ -45,7 +50,7 @@ spec:
             runAsUser: 0
             runAsGroup: 0
           # command: ["/bin/bash", "-c", "sleep inf"]
-          env: 
+          env:
             - name: INFLUXDB_DATABASE
               value: GarminStats
             - name: INFLUXDB_HOST
@@ -66,7 +71,7 @@ spec:
       metadata:
         name: garmin-data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         storageClassName: longhorn
         resources:
           requests:
