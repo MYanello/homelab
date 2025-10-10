@@ -39,7 +39,7 @@ spec:
             - name: INFLUXDB_DATABASE
               value: GarminStats
             - name: INFLUXDB_HOST
-              value: 10.10.8.0 #influxdb.monitoring.svc.cluster.local
+              value: influxdb.monitoring.svc.cluster.local
             - name: INFLUXDB_PORT
               value: "8086"
             - name: LOG_LEVEL
