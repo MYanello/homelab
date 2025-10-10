@@ -34,7 +34,7 @@ spec:
           securityContext:
             runAsUser: 0
             runAsGroup: 0
-          # command: ["/bin/bash", "-c", "sleep inf"]
+          command: ["/bin/bash", "-c", "sleep inf"]
           env: 
             - name: INFLUXDB_DATABASE
               value: GarminStats
