@@ -86,7 +86,7 @@ grafana:
         uid: garmin_influxdb
         type: influxdb
         access: proxy
-        url: http://influxdb:8086
+        url: http://influxdb.monitoring.svc.cluster.local:8086
         user: "${influxdb-user}"
         database: GarminStats
         secureJsonData:
@@ -97,7 +97,7 @@ grafana:
         uid: DS_GARMIN_STATS
         type: influxdb
         access: proxy
-        url: http://influxdb:8086
+        url: http://influxdb.monitoring.svc.cluster.local:8086
         user: "${influxdb-user}"
         database: home
         secureJsonData:
