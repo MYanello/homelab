@@ -11,6 +11,8 @@ helmCharts:
     releaseName: influxdb
     namespace: monitoring
     valuesInline: 
+      image:
+        tag: 1.12.2-alpine
       service: 
         type: LoadBalancer
         loadBalancerIP: 10.10.8.0
