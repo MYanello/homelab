@@ -34,6 +34,10 @@ spec:
         - image: docker.io/thisisarpanghosh/garmin-fetch-data:v0.3.0@sha256:4aaebdee5fd15d602371c089fe28c76ae7ef0c1924335331a11424948e5711f5
           imagePullPolicy: IfNotPresent
           name: garmin-fetch
+          securityContext:
+            fsGroup: 0
+            runAsUser: 0
+            runAsGroup: 0
           command: ["/bin/bash", "-c", "sleep inf"]
           env: 
             - name: INFLUXDB_DATABASE
