@@ -37,6 +37,7 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
+              echo http://${INFLUXDB_HOST}:${INFLUXDB_PORT}
               until curl -f http://$(INFLUXDB_HOST):$(INFLUXDB_PORT)/ping; do
                 echo "Waiting for InfluxDB..."
                 sleep 5
