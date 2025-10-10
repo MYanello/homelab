@@ -25,7 +25,6 @@ spec:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
           securityContext:
-            fsGroup: 0
             runAsUser: 0
             runAsGroup: 0
       containers:
@@ -33,7 +32,6 @@ spec:
           imagePullPolicy: IfNotPresent
           name: garmin-fetch
           securityContext:
-            fsGroup: 0
             runAsUser: 0
             runAsGroup: 0
           # command: ["/bin/bash", "-c", "sleep inf"]
