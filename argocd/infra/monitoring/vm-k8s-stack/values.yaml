@@ -38,7 +38,7 @@ vmsingle:
     extraArgs:
       maxLabelsPerTimeseries: "500"
       storage.minFreeDiskSpaceBytes: "10GB"
-      influxListenAddr: ":8428"
+      influxListenAddr: ":8086"
     serviceSpec:
       spec:
         type: LoadBalancer
