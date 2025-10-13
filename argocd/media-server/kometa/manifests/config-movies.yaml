@@ -35,7 +35,6 @@ data:
       Universe Collections:
         type: custom
         data:
-          star: Star Wars Universe
           dcu: DC Extended Universe
           mcu: Marvel Cinematic Universe
           a24: A24
@@ -46,14 +45,12 @@ data:
           - custom
         template_variables:
           trakt_list:
-            star: https://trakt.tv/users/darkman1498/lists/star-wars
             dcu: https://trakt.tv/users/donxy/lists/dc-extended-universe
             mcu: https://trakt.tv/users/donxy/lists/marvel-cinematic-universe
             a24: https://trakt.tv/users/fidel-cb/lists/a24
           image:
             default: universe/<<key>>
           collection_order:
-            star: release.asc
             dcu: release.desc
             mcu: release.desc
             a24: release.desc
@@ -187,6 +184,7 @@ data:
           pirates: Pirates of the Caribbean
           indiana: Indiana Jones
           jurassic: Jurassic Park
+          star_wars: Star Wars
         template:
           - lbxd
           - shared
@@ -195,6 +193,7 @@ data:
         template_variables:
           letterboxd_list:
             criterion: https://letterboxd.com/jbutts15/list/the-complete-criterion-collection/
+            star_wars: https://letterboxd.com/drchuck/list/star-wars/
             lotr: https://letterboxd.com/rachles/list/lord-of-the-rings/
             john_wick: https://letterboxd.com/fantic/list/john-wick/
             hunger_games: https://letterboxd.com/hogwarthur/list/hunger-games/
