@@ -3,8 +3,6 @@ apiVersion: cilium.io/v2
 kind: CiliumBGPPeeringPolicy
 metadata:
   name: bgp-peering-policy-worker
-  annotations:
-    argocd.argoproj.io/sync-options: Replace=true
 spec:
   virtualRouters:
     - exportPodCIDR: false
@@ -30,8 +28,6 @@ apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
   name: "pool"
-  annotations:
-    argocd.argoproj.io/sync-options: Replace=true
 spec:
   disabled: false
   blocks:
