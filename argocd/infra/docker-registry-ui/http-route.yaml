@@ -1,8 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  annotations:
-    gethomepage.dev/enabled: "false"
+  # annotations:
+    # gethomepage.dev/enabled: "false"
     # gethomepage.dev/name: Backrest
     # gethomepage.dev/icon: backrest
     # gethomepage.dev/description: "Backrest provides a WebUI which wraps the restic CLI and makes it easy to create repos, browse snapshots, and restore files."
