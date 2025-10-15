@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/myanello/homelab.git
-        revision: HEAD
+        revision: main
         directories:
           - path: argocd/media-server/*
   template:
@@ -30,4 +30,4 @@ spec:
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
-        targetRevision: HEAD
+        targetRevision: main
