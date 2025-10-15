@@ -1,5 +1,5 @@
 
-apiVersion: cilium.io/v2
+apiVersion: cilium.io/v2alpha1
 kind: CiliumBGPPeeringPolicy
 metadata:
   name: bgp-peering-policy-worker
@@ -24,7 +24,7 @@ spec:
       serviceAdvertisements:
         - LoadBalancerIP
 ---
-apiVersion: cilium.io/v2
+apiVersion: cilium.io/v2alpha1
 kind: CiliumLoadBalancerIPPool
 metadata:
   name: "pool"
