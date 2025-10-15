@@ -15,7 +15,7 @@ patches:
       - op: add
         path: /spec/template/metadata/annotations
         value: 
-          backup.velero.io/backup-volumes: data
+          backup.velero.io/backup-volumes: vaultwarden-data-vaultwarden-0
 
 helmCharts:
     - name: vaultwarden
