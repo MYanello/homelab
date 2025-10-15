@@ -55,6 +55,7 @@ metadata:
 spec:
   timers:
     holdTimeSeconds: 9
+    connectRetryTimeSeconds: 5
     keepAliveTimeSeconds: 3
   address: "192.168.10.1"
   asn: 65551
