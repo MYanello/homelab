@@ -30,8 +30,8 @@ spec:
               cpu: 150m
               memory: 500Mi
             requests:
-              cpu: 10m
-              memory: 10Mi
+              cpu: 100m
+              memory: 100Mi
           ports:
             - containerPort: 80
               protocol: TCP
@@ -78,7 +78,7 @@ spec:
         storageClassName: truenas-hdd
         resources:
           requests:
-            storage: 10Gi
+            storage: 100Gi
     - metadata:
         name: podcasts
       spec:
