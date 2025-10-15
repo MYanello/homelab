@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: audiobookshelf
+  labels:
+    app: audiobookshelf
+spec:
+  serviceName: audiobookshelf
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: audiobookshelf
+  template:
+    metadata:
+      labels:
+        app: audiobookshelf
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+          image: ghcr.io/advplyr/audiobookshelf:2.30.0
+          imagePullPolicy: IfNotPresent
+          name: overseerr
+          resources:
+            limits:
+              cpu: 150m
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /audiobooks
+              name: audiobooks
+            - mountPath: /podcasts
+              name: podcasts
+            - mountPath: /metadata
+              name: metadata      
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+  volumeClaimTemplates:
+    - metadata:
+        name: config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: truenas-ssd
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: audiobooks
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: truenas-hdd
+        resources:
+          requests:
+            storage: 10Gi
+    - metadata:
+        name: podcasts
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: truenas-hdd
+        resources:
+          requests:
+            storage: 10Gi
+    - metadata:
+        name: metadata
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: truenas-hdd
+        resources:
+          requests:
+            storage: 10Gi
