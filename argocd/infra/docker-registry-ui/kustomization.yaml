@@ -9,4 +9,4 @@ helmCharts:
     namespace: docker-registry-ui
     valuesInline:
       image:
-        tag: v0.5.3
+        tag: 0.5.3
