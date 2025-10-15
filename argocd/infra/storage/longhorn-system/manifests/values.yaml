@@ -1,6 +1,6 @@
 defaultSettings:
   defaultDataPath: "/app/longhorn/"
-  defaultReplicaCount: 2
+  defaultReplicaCount: "2"
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
 defaultBackupStore:
@@ -11,7 +11,7 @@ preUpgradeChecker:
   jobEnabled: false
 
 persistence:
-  defaultClassReplicaCount: 2
+  defaultClassReplicaCount: "2"
   
 global:
   tolerations:
