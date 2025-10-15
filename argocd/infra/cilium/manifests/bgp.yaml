@@ -58,7 +58,7 @@ spec:
     keepAliveTimeSeconds: 3
   address: "192.168.10.1"
   asn: 65551
-  eBGPMultihopTTL: 10
+  ebgpMultihop: 10
   connectRetryTimeSeconds: 120
   holdTimeSeconds: 90
   keepAliveTimeSeconds: 30
