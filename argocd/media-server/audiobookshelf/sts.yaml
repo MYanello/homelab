@@ -13,6 +13,8 @@ spec:
       app: audiobookshelf
   template:
     metadata:
+      annotations:
+        backup.velero.io/backup-volumes: config,metadata
       labels:
         app: audiobookshelf
     spec:
