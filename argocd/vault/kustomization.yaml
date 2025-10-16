@@ -4,16 +4,16 @@ kind: Kustomization
 generators:
   - ./manifests/secretGenerator.yaml
 
-# resources:
-#   - ./manifests/route.yaml
-#   - ./manifests/pki.yaml
-#   - ./manifests/clusterSecretStore.yaml
-#   - ./manifests/rbac.yaml
+resources:
+  - ./manifests/route.yaml
+  - ./manifests/pki.yaml
+  - ./manifests/clusterSecretStore.yaml
+  - ./manifests/rbac.yaml
 
-# helmCharts:
-#   - name: vault
-#     repo: https://helm.releases.hashicorp.com
-#     version: "0.30.1"
-#     releaseName: vault
-#     namespace: vault
-#     valuesFile: ./values.yaml
+helmCharts:
+  - name: vault
+    repo: https://helm.releases.hashicorp.com
+    version: "0.30.1"
+    releaseName: vault
+    namespace: vault
+    valuesFile: ./values.yaml
