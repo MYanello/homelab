@@ -134,16 +134,3 @@ mariadb:
                   operator: In
                   values:
                     - marcus-server
-  secondary:
-    extraEnvVars:
-      - name: MARIADB_ENABLE_SSL
-        value: "no"
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - marcus-server
