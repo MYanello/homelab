@@ -43,7 +43,8 @@ helmCharts:
               key: cloud
             config:
               region: us-west-004
-              s3Url: https://s3.us-west-004.backblazeb2.com
+              profile: default
+              enableSharedConfig: "true"
       deployNodeAgent: true
       nodeAgent:
         podVolumePath: /var/lib/kubelet/pods
@@ -56,7 +57,7 @@ helmCharts:
       schedules:
         weekly:
           disabled: false
-          schedule: "0 * * * 4" # hourly thursday
+          schedule: "0 1 * * 1" # hourly thursday
           paused: false
           skipImmediately: false
           template:
