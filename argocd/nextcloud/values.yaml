@@ -110,16 +110,18 @@ externalDatabase:
     passwordKey: mariadb-password
 
 mariadb:
+  tls:
+    enabled: true
   enabled: true
   auth:
     existingSecret: nextcloud-secrets
   global:
     defaultStorageClass: longhorn-xfs
   primary:
-    extraFlags: "--ssl=0 --require_secure_transport=OFF"
-    extraEnvVars:
-      - name: MARIADB_ENABLE_SSL
-        value: "no"
+    # extraFlags: "--ssl=0 --require_secure_transport=OFF"
+    # extraEnvVars:
+      # - name: MARIADB_ENABLE_SSL
+        # value: "no"
     persistence:
       enabled: true
       storageClass: longhorn-xfs
