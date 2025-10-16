@@ -3,8 +3,8 @@ replicaCount: 1
 persistence:
   enabled: true
   storageClass: longhorn
-  size: '8589934592' # 8Gi
-  
+  size: "8589934592" # 8Gi
+
 livenessProbe:
   enabled: true
 startupProbe:
@@ -111,10 +111,15 @@ externalDatabase:
 
 mariadb:
   enabled: true
+  auth:
+    existingSecret: nextcloud-secrets
   global:
     defaultStorageClass: longhorn-xfs
   primary:
     extraFlags: "--ssl=0 --require_secure_transport=OFF"
+    extraEnvVars:
+      - name: MARIADB_ENABLE_SSL
+        value: "no"
     persistence:
       enabled: true
       storageClass: longhorn-xfs
@@ -128,6 +133,9 @@ mariadb:
                   values:
                     - marcus-server
   secondary:
+    extraEnvVars:
+      - name: MARIADB_ENABLE_SSL
+        value: "no"
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -137,5 +145,3 @@ mariadb:
                   operator: In
                   values:
                     - marcus-server
-  auth:
-    existingSecret: nextcloud-secrets
