@@ -114,6 +114,7 @@ mariadb:
   global:
     defaultStorageClass: longhorn-xfs
   primary:
+    extraFlags: "--ssl=0 --require_secure_transport=OFF"
     persistence:
       enabled: true
       storageClass: longhorn-xfs
