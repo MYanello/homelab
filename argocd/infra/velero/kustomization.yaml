@@ -61,4 +61,4 @@ helmCharts:
           skipImmediately: false
           template:
             ttl: "672h" # 1 month 
-            storageLocation: default
+            storageLocation: backblaze
