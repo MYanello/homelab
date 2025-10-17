@@ -44,7 +44,7 @@ spec:
             - containerPort: 5432
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/postgresql/
               name: pg-data
           readinessProbe:
             exec:
