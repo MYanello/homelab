@@ -33,6 +33,10 @@ spec:
             requests:
               cpu: 150m
               memory: 1Gi
+          command:
+            - /bin/bash
+            - -c
+            - sleep inf
           livenessProbe:
             exec:
               command:
