@@ -27,7 +27,7 @@ spec:
                 name: atuin-secrets
           image: pgautoupgrade/pgautoupgrade:18-debian #postgres:18@sha256:073e7c8b84e2197f94c8083634640ab37105effe1bc853ca4d5fbece3219b0e8
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/postgresql/
               name: pgdata
           resources:
             requests:
