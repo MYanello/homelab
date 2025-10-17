@@ -33,10 +33,10 @@ spec:
             requests:
               cpu: 150m
               memory: 1Gi
-          command:
-            - /bin/bash
-            - -c
-            - sleep inf
+          # command:
+          #   - /bin/bash
+          #   - -c
+          #   - sleep inf
           # livenessProbe:
           #   exec:
           #     command:
@@ -152,4 +152,4 @@ spec:
         storageClassName: longhorn
         resources:
           requests:
-            storage: 25Mi
+            storage: 250Mi
