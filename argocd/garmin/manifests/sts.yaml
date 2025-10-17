@@ -63,6 +63,8 @@ spec:
               value: "8086"
             - name: LOG_LEVEL
               value: "DEBUG"
+            - name: MANUAL_START_DATE
+              value: "2025-01-01"
           envFrom:
             # - secretRef:
                 # name: garmin-secrets
