@@ -25,7 +25,7 @@ spec:
           envFrom:
             - secretRef:
                 name: atuin-secrets
-          image: postgres:14@sha256:fbd63b8e1eb2b318d342e8ad279891f622aa5ff69bd95e5683cc915301218bcf
+          image: pgautoupgrade/pgautoupgrade:18-debian #postgres:18@sha256:073e7c8b84e2197f94c8083634640ab37105effe1bc853ca4d5fbece3219b0e8
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pgdata
