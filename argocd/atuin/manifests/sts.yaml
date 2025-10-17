@@ -25,7 +25,7 @@ spec:
           envFrom:
             - secretRef:
                 name: atuin-secrets
-          image: pgautoupgrade/pgautoupgrade:18-debian #postgres:18@sha256:073e7c8b84e2197f94c8083634640ab37105effe1bc853ca4d5fbece3219b0e8
+          image: postgres:18@sha256:073e7c8b84e2197f94c8083634640ab37105effe1bc853ca4d5fbece3219b0e8
           volumeMounts:
             - mountPath: /var/lib/postgresql/
               name: pgdata
@@ -33,29 +33,25 @@ spec:
             requests:
               cpu: 150m
               memory: 1Gi
-          # command:
-          #   - /bin/bash
-          #   - -c
-          #   - sleep inf
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #       - sh
-          #       - -c
-          #       - |
-          #         pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" || exit 1;
-          #         Chksum="$(psql --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
-          #         echo "checksum failure count is $$Chksum";
-          #         [ "$Chksum" = '0' ] || exit 1
-          #   initialDelaySeconds: 30
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #       - sh
-          #       - -c
-          #       - pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}"
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" || exit 1;
+                  Chksum="$(psql --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
+                  echo "checksum failure count is $$Chksum";
+                  [ "$Chksum" = '0' ] || exit 1
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}"
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
@@ -90,7 +86,6 @@ spec:
         runAsUser: 1000      # User ID to run the container
         runAsGroup: 1000     # Group ID for the process
       containers:
-        #- command: ["sleep", "inf"]
         - args:
             - server
             - start
