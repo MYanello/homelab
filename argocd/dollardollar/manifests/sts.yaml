@@ -25,7 +25,7 @@ spec:
           envFrom:
             - secretRef:
                 name: dollardollar-secrets
-          image: postgres:13@sha256:f8e950624f314c103c9f40d1ba24ee67f1b16b529b342420d851d9b9d52449c3
+          image: postgres:18@sha256:073e7c8b84e2197f94c8083634640ab37105effe1bc853ca4d5fbece3219b0e8
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pgdata
