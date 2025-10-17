@@ -13,6 +13,9 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/replicas
-        value: 0
+        value: 1
     target:
       kind: StatefulSet
+
+      # pvc-95f9e504-fd0c-4163-9d75-5ad68b944387 new 
+      # pvc-118647d4-5bd6-44e2-bd95-b475b95990a1 old
