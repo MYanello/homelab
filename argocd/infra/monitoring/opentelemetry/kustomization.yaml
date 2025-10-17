@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
  - manifests/collector.yaml
+ - manifests/rbac.yaml
 
 helmCharts:
   - name: opentelemetry-operator
