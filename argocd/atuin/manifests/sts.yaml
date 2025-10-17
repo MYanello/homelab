@@ -62,7 +62,7 @@ spec:
         storageClassName: longhorn-xfs
         resources:
           requests:
-            storage: 300Mi
+            storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: StatefulSet
