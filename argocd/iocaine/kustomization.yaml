@@ -5,12 +5,6 @@ configMapGenerator:
   - name: config
     files:
       - ./manifests/config.toml
-  - name: data
-    files:
-      - ./data/1984.txt
-      - ./data/ai.robots.txt-robots.json
-      - ./data/brave-new-world.txt
-      - ./data/words.txt
 
 resources:
   - manifests/sts.yaml

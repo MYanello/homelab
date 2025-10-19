@@ -8,3 +8,5 @@ terraform.tfvars
 .yarn
 node_modules
 
+# iocaine data
+argocd/iocaine/data/
