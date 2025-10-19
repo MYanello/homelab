@@ -10,7 +10,7 @@ configMapGenerator:
       - ./data/1984.txt
       - ./data/ai.robots.txt-robots.json
       - ./data/brave-new-world.txt
-      - ./words.txt
+      - ./data/words.txt
 
 resources:
   - manifests/sts.yaml
