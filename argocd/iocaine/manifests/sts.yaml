@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: iocaine
+  labels:
+    app: iocaine
+spec:
+  serviceName: "iocaine"
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: iocaine
+  template:
+    metadata:
+      labels:
+        app: iocaine
+    spec:
+      containers:
+        - name: iocaine
+          image: git.madhouse-project.org/iocaine/iocaine:2
+          command: ["--config-file", "/etc/iocaine/config.toml"]
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 50Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: "1"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/iocaine/config.toml
+              subPath: config.toml
+            - name: iocaine-data
+              mountPath: /data
+      volumes:
+        - name: config
+          configMap:
+            name: config
+  volumeClaimTemplates:
+    - metadata:
+        name: iocaine-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "longhorn-xfs"
+        resources:
+          requests:
+            storage: 1Gi

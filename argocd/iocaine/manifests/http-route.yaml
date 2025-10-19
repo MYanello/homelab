@@ -1,0 +1,28 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: iocaine
+  name: iocaine
+spec:
+  parentRefs:
+  - name: cilium-public-gateway
+    namespace: cilium
+    sectionName: https-root
+  - name: cilium-public-gateway
+    namespace: cilium
+    sectionName: http-root
+  - name: cilium-private-gateway
+    namespace: cilium
+    sectionName: http
+  - name: cilium-private-gateway
+    namespace: cilium
+    sectionName: https
+  hostnames:
+  - iocaine.yanello.net
+  - yanello.net
+  rules:
+  - backendRefs:
+    - name: iocaine
+      port: 8080
+      
