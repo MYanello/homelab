@@ -1,0 +1,11 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: iocaine
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+  - targets:
+    - metrics.iocaine.svc.cluster.local
+  path: /metrics
+  scheme: http
