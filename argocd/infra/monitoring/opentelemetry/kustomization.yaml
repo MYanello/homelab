@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
- - manifests/collector.yaml
+# resources:
+ # - manifests/collector.yaml
  # - manifests/rbac.yaml
 
 helmCharts:
@@ -11,4 +11,4 @@ helmCharts:
     namespace: monitoring
     repo: https://open-telemetry.github.io/opentelemetry-helm-charts
     version: "0.97.1"
-    # valuesFile: values.yaml
+    valuesFile: values.yaml
