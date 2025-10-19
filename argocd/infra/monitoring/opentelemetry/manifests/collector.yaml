@@ -5,18 +5,19 @@ metadata:
 spec:
   mode: daemonset
   presets:
-    kubeletMetrics:
+    logsCollection:
       enabled: true
     kubernetesAttributes:
       enabled: true
-  volumes:
-    - name: varlogpods
-      hostPath:
-        path: /var/log/pods
-  volumeMounts:
-    - name: varlogpods
-      mountPath: /var/log/pods
-      readOnly: true
+      
+  # volumes:
+  #   - name: varlogpods
+  #     hostPath:
+  #       path: /var/log/pods
+  # volumeMounts:
+  #   - name: varlogpods
+  #     mountPath: /var/log/pods
+  #     readOnly: true
   tolerations:
     - key: node-role.kubernetes.io/control-plane
       operator: Exists
@@ -36,9 +37,9 @@ spec:
             endpoint: "0.0.0.0:4317"
           http:
             endpoint: "0.0.0.0:4318"
-      filelog:
-        include: ["/var/log/pods/**/*.log"]
-        start_at: beginning
+      # filelog:
+      #   include: ["/var/log/pods/**/*.log"]
+      #   start_at: beginning
     exporters:
       otlphttp/victoriametrics:
         encoding: proto
@@ -47,13 +48,13 @@ spec:
         logs_endpoint: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428/insert/opentelemetry/v1/logs
       debug:
         verbosity: detailed
-    service:
-      pipelines:
-        logs:
-          receivers: [otlp, filelog]
-          processors: [batch]
-          exporters: [otlphttp/victoriametrics]
-        metrics:
-          receivers: [otlp]
-          processors: [deltatocumulative]
-          exporters: [otlphttp/victoriametrics]
+    # service:
+    #   pipelines:
+    #     logs:
+    #       receivers: [otlp, filelog]
+    #       processors: [batch]
+    #       exporters: [otlphttp/victoriametrics]
+    #     metrics:
+    #       receivers: [otlp]
+    #       processors: [deltatocumulative]
+    #       exporters: [otlphttp/victoriametrics]
