@@ -3,6 +3,7 @@ bind = "0.0.0.0:8080"
 [metrics]
 enable = true
 bind = "0.0.0.0:8181"
+persist-path = "/opt/iocaine/share/data/metrics.json"
 [sources]
 markov = [
   "/opt/iocaine/share/data/1984.txt",
