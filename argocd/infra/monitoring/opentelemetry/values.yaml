@@ -9,6 +9,12 @@ presets:
     enabled: true
 
 config:
+  processors:
+    batch:
+      send_batch_size: 1000
+      timeout: 10s
+    deltatocumulative:
+      max_stale: 5m
   exporters:
     otlphttp/victoriametrics:
       encoding: proto
