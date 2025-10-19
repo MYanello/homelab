@@ -21,7 +21,7 @@ metadata:
 spec:
   ports:
     - name: metrics
-      port: 8081
-      targetPort: 8081
+      port: 8181
+      targetPort: 8181
   selector:
     app: iocaine

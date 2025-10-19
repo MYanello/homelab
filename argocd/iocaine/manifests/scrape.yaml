@@ -6,6 +6,6 @@ spec:
   scrape_interval: 60s
   staticConfigs:
   - targets:
-    - metrics.iocaine.svc.cluster.local:8081
+    - metrics.iocaine.svc.cluster.local:8181
   path: /metrics
   scheme: http
