@@ -19,15 +19,18 @@ spec:
       initContainers:
         - name: pull-data
           image: docker.io/curlimages/curl:8.16.0
+          securityContext:
+            runAsUser: 0
           command:
             - "/bin/sh"
             - "-c"
             - |
               cd /opt/iocaine/share/data
-              curl -L https://archive.org/download/GeorgeOrwells1984/1984_djvu.txt -o 1984.txt
-              curl -L https://archive.org/download/ost-english-brave_new_world_aldous_huxley/Brave_New_World_Aldous_Huxley_djvu.txt -o brave-new-world.txt
-              curl -L https://git.savannah.gnu.org/cgit/miscfiles.git/plain/web2 -o words.txt
-              curl -L https://github.com/ai-robots-txt/ai.robots.txt/raw/refs/heads/main/robots.json -o ai.robots.txt-robots.json
+              echo "Pulling data"
+              curl -s -L https://archive.org/download/GeorgeOrwells1984/1984_djvu.txt -o 1984.txt
+              curl -s -L https://archive.org/download/ost-english-brave_new_world_aldous_huxley/Brave_New_World_Aldous_Huxley_djvu.txt -o brave-new-world.txt
+              curl -s -L https://git.savannah.gnu.org/cgit/miscfiles.git/plain/web2 -o words.txt
+              curl -s -L https://github.com/ai-robots-txt/ai.robots.txt/raw/refs/heads/main/robots.json -o ai.robots.txt-robots.json
           volumeMounts:
             - name: iocaine-persistent
               mountPath: /opt/iocaine/share/data/
