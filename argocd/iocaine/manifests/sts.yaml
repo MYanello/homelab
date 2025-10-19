@@ -18,7 +18,7 @@ spec:
     spec:
       initContainers:
         - name: pull-data
-          image: docker.io/curlimages/curl:8.16.0
+          image: docker.io/curlimages/curl:8.16.0@sha256:463eaf6072688fe96ac64fa623fe73e1dbe25d8ad6c34404a669ad3ce1f104b6
           securityContext:
             runAsUser: 0
           command:
@@ -37,7 +37,7 @@ spec:
               mountPath: /opt/iocaine/share/data/
       containers:
         - name: iocaine
-          image: git.madhouse-project.org/iocaine/iocaine:2.5.1
+          image: git.madhouse-project.org/iocaine/iocaine:2.5.1@sha256:9ba6f3ba5520964f6905ceb10cb1d358144ebfa84f7f101a33e25fbcddb8f867
           command: ["iocaine"]
           args: ["--config-file", "/etc/iocaine/config.toml"]
           ports:
