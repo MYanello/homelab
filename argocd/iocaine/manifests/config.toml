@@ -1,9 +1,24 @@
 [server]
 bind = "0.0.0.0:8080"
+
 [metrics]
 enable = true
 bind = "0.0.0.0:8181"
+labels = [ "Host", "UserAgentGroup", "Verdict" ]
+[[metrics.agent_group]]
+agent = "(?i:ClaudeBot)"
+group = "ClaudeBot"
+[[metrics.agent_group]]
+agent = "(?i:AmazonBot)"
+group = "Amazon"
+[[metrics.agent_group]]
+agent = "(?i:GPTBot|ChatGPT)"
+group = "GPTBot"
+[[metrics.agent_group]]
+agent = "."
+group = "Other"
 persist-path = "/opt/iocaine/share/data/metrics.json"
+
 [sources]
 markov = [
   "/opt/iocaine/share/data/1984.txt",
