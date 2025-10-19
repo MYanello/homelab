@@ -1,7 +1,7 @@
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
-  name: collector
+  name: pod-log
 spec:
   mode: daemonset
   env:
