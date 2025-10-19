@@ -1,3 +1,11 @@
+[server]
+bind = "127.0.0.1:8080"
 [metrics]
 enable = true
 bind = "127.0.0.1:8181"
+[sources]
+markov = [
+  "/opt/iocaine/share/data/1984.txt",
+  "/opt/iocaine/share/data/brave-new-world.txt"
+]
+words = "/opt/iocaine/share/data/words.txt"

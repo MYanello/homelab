@@ -36,15 +36,25 @@ spec:
             - name: config
               mountPath: /etc/iocaine/config.toml
               subPath: config.toml
-            - name: iocaine-data
-              mountPath: /data
+            - name: "data"
+              mountPath: /opt/iocaine/share/data/1984.txt
+              subPath: "1984.txt"
+            - name: "data"
+              mountPath: /opt/iocaine/share/data/brave-new-world.txt
+              subPath: "brave-new-world.txt"
+            - name: "data"
+              mountPath: "/opt/iocaine/share/data/words.txt"
+              subPath: "words.txt"
       volumes:
         - name: config
           configMap:
             name: config
+        - name: data
+          configMap:
+            name: data
   volumeClaimTemplates:
     - metadata:
-        name: iocaine-data
+        name: iocaine-persistent
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: "longhorn-xfs"
