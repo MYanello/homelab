@@ -11,3 +11,17 @@ spec:
       targetPort: 8080
   selector:
     app: iocaine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: iocaine
+  name: iocaine-metrics
+spec:
+  ports:
+    - name: metrics
+      port: 8081
+      targetPort: 8081
+  selector:
+    app: iocaine
