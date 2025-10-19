@@ -5,6 +5,8 @@ metadata:
 spec:
   mode: daemonset
   presets:
+    kubeletMetrics:
+      enabled: true
     kubernetesAttributes:
       enabled: true
   volumes:
