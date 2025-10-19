@@ -19,6 +19,7 @@ spec:
       containers:
         - name: iocaine
           image: git.madhouse-project.org/iocaine/iocaine:2
+          command: ["iocaine"]
           args: ["--config-file", "/etc/iocaine/config.toml"]
           ports:
             - containerPort: 8080
