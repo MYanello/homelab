@@ -44,9 +44,9 @@ nodeAgent:
 schedules:
   weekly:
     disabled: false
-    schedule: "0 * * * 4" # hourly thursday
+    schedule: "0 * * * 4" # 4am sunday
     paused: false
     skipImmediately: false
     template:
-      ttl: "1" # 1 month 
+      ttl: "720" # 1 month 
       storageLocation: backblaze
