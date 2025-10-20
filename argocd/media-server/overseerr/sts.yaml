@@ -44,10 +44,10 @@ spec:
             httpGet:
               path: /
               port: 5055
-            initialDelaySeconds: 60
-            periodSeconds: 30
+            initialDelaySeconds: 15
+            periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 10
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /

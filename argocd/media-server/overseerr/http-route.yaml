@@ -9,7 +9,7 @@ metadata:
     gethomepage.dev/pod-selector: app=overseerr
   labels:
     app.kubernetes.io/instance: overseerr-app
-  name: overseerr-vs-idx-0
+  name: overseerr-httproute
   namespace: overseerr
 spec:
   parentRefs:
