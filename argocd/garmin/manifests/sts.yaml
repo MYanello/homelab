@@ -54,11 +54,11 @@ spec:
             runAsUser: 1000
             runAsGroup: 1000
           # command: ["/bin/bash", "-c", "sleep inf"]
-          env:
-            - name: MANUAL_START_DATE
-              value: "2025-01-01"
-            - name: MANUAL_END_DATE
-              value: "2025-10-01"
+          # env:
+          #   - name: MANUAL_START_DATE
+          #     value: "2025-01-01"
+          #   - name: MANUAL_END_DATE
+          #     value: "2025-10-01"
           envFrom:
             - secretRef:
                 name: garmin-secrets
