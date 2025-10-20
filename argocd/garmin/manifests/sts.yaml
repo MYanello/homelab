@@ -55,21 +55,13 @@ spec:
             runAsGroup: 1000
           # command: ["/bin/bash", "-c", "sleep inf"]
           env:
-            - name: INFLUXDB_DATABASE
-              value: GarminStats
-            - name: INFLUXDB_HOST
-              value: influxdb.monitoring.svc.cluster.local
-            - name: INFLUXDB_PORT
-              value: "8086"
-            - name: LOG_LEVEL
-              value: "DEBUG"
             - name: MANUAL_START_DATE
               value: "2025-01-01"
-          # envFrom:
-            # - secretRef:
-                # name: garmin-secrets
-            # - configMapRef:
-                # name: garmin-config
+          envFrom:
+            - secretRef:
+                name: garmin-secrets
+            - configMapRef:
+                name: garmin-config
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
