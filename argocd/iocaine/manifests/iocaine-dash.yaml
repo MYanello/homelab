@@ -4,6 +4,7 @@ metadata:
   labels:
     grafana_dashboard: "5"
   name: iocaine-dashboard
+  namespace: monitoring
 data:
   iocaine-dashboard.json: |-
     {
