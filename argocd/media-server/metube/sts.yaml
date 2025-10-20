@@ -15,8 +15,6 @@ spec:
     metadata:
       labels:
         app: metube
-      # annotations: 
-        # backup.velero.io/backup-volumes: downloads
     spec:
       containers:
         - name: metube
