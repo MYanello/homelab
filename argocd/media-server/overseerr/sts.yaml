@@ -62,7 +62,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: longhorn
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 1Gi
