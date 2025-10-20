@@ -33,5 +33,7 @@ helmCharts:
             storageClass: truenas-ssd
           redis:
             storageClass: truenas-ssd
+          trivy:
+            storageClass: truenas-hdd
       cache:
         enabled: true
