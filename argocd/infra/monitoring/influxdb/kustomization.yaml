@@ -33,7 +33,6 @@ helmCharts:
             CREATE DATABASE "home"
             CREATE RETENTION POLICY "2_years" ON "home" DURATION 730d REPLICATION 1 DEFAULT
             CREATE DATABASE "GarminStats"
-            CREATE RETENTION POLICY "2_years" ON "GarminStats" DURATION 730d REPLICATION 1 DEFAULT
       backup:
         enabled: false
         s3:
