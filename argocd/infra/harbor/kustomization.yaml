@@ -25,7 +25,7 @@ helmCharts:
               sectionName: https
           hosts:
             - harbor.yanello.net
-      externalURL: harbor.yanello.net
+      externalURL: https://harbor.yanello.net
       persistence:
         persistentVolumeClaim:
           registry:
