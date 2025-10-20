@@ -48,5 +48,5 @@ schedules:
     paused: false
     skipImmediately: false
     template:
-      ttl: "720" # 1 month 
+      ttl: "720h" # 1 month 
       storageLocation: backblaze
