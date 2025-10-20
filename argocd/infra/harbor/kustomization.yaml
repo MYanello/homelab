@@ -13,7 +13,7 @@ helmCharts:
         tls:
           enabled: false
         route:
-          parentsRefs:
+          parentRefs:
             - name: cilium-private-gateway
               namespace: cilium
               sectionName: https
