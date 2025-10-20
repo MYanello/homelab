@@ -65,11 +65,11 @@ spec:
               value: "DEBUG"
             - name: MANUAL_START_DATE
               value: "2025-01-01"
-          envFrom:
+          # envFrom:
             # - secretRef:
                 # name: garmin-secrets
-            - configMapRef:
-                name: garmin-config
+            # - configMapRef:
+                # name: garmin-config
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
