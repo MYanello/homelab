@@ -47,7 +47,7 @@ spec:
               done
               echo "InfluxDB is ready!"
       containers:
-        - image: docker.io/thisisarpanghosh/garmin-fetch-data:v0.3.0@sha256:4aaebdee5fd15d602371c089fe28c76ae7ef0c1924335331a11424948e5711f5
+        - image: harbor.yanello.net/library/garmin-grafana:v0.3.1 # docker.io/thisisarpanghosh/garmin-fetch-data:v0.3.0@sha256:4aaebdee5fd15d602371c089fe28c76ae7ef0c1924335331a11424948e5711f5
           imagePullPolicy: IfNotPresent
           name: garmin-fetch
           securityContext:
