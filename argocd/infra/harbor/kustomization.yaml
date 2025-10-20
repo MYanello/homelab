@@ -8,14 +8,28 @@ helmCharts:
     repo: https://helm.goharbor.io
     version: "1.18.0"
     valuesInline:
+      expose:
+        type: route
+        tls:
+          enabled: false
+        route:
+          parentsRefs:
+            - name: cilium-private-gateway
+              namespace: cilium
+              sectionName: https
+          hosts:
+            - harbor.yanello.net
+      externalURL: harbor.yanello.net
       persistence:
         persistentVolumeClaim:
           registry:
             storageClass: truenas-hdd
-            accessMode: ReadWriteMany
           chartmuseum:
             storageClass: truenas-hdd
-            accessMode: ReadWriteMany
           jobservice:
-            storageClass: truenas-hdd
-            accessMode: ReadWriteMany
+            jobLog:
+              storageClass: truenas-hdd
+          database:
+            storageClass: truenas-ssd
+          redis:
+            storageClass: truenas-ssd
