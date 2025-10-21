@@ -8,4 +8,3 @@ data:
   INFLUXDB_HOST: "vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local"
   INFLUXDB_PORT: "8428"
   LOG_LEVEL: "DEBUG"
-  USER_TIMEZONE: America/Chicago
