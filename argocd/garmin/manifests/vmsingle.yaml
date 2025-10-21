@@ -16,9 +16,9 @@ spec:
       - name: influx_databaseNames
         value: "GarminStats"
       - name: search_cacheTimestampOffset
-        value: "10000h"
+        value: "17520h"
       - name: search_cacheMaxAge
-        value: "360d"
+        value: "720d"
   resources:
     requests:
       cpu: 100m
