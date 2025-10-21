@@ -12,13 +12,9 @@ spec:
   extraArgs:
     maxLabelsPerTimeseries: "300"
     storage.minFreeDiskSpaceBytes: "20GB"
-  serviceSpec:
-    spec:
-      type: ClusterIP
-      ports:
-        - name: http
-          port: 8428
-          targetPort: 8428
+  extraEnvs:
+      - name: influx_databaseNames
+        value: "GarminStats"
   resources:
     requests:
       cpu: 100m
