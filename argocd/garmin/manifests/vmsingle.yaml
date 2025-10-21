@@ -12,9 +12,6 @@ spec:
   extraArgs:
     maxLabelsPerTimeseries: "300"
     storage.minFreeDiskSpaceBytes: "20GB"
-    # Optimize for long-term storage
-    storage.bigMergeConcurrency: "2"
-    storage.smallMergeConcurrency: "4"
   serviceSpec:
     spec:
       type: ClusterIP
