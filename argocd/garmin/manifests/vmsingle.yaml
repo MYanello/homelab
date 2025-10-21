@@ -1,0 +1,31 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMSingle
+metadata:
+  name: vmsingle-garmin
+spec:
+  retentionPeriod: 2y
+  storage:
+    storageClassName: "truenas-hdd"
+    resources:
+      requests:
+        storage: 100Gi
+  extraArgs:
+    maxLabelsPerTimeseries: "300"
+    storage.minFreeDiskSpaceBytes: "20GB"
+    # Optimize for long-term storage
+    storage.bigMergeConcurrency: "2"
+    storage.smallMergeConcurrency: "4"
+  serviceSpec:
+    spec:
+      type: ClusterIP
+      ports:
+        - name: http
+          port: 8428
+          targetPort: 8428
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi

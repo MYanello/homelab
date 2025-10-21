@@ -5,6 +5,7 @@ resources:
   - sts.yaml
   - dashboard.yaml
   - cm.yaml
+  - vmsingle.yaml
 
 generators:
   - secret-generator.yaml
