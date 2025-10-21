@@ -20,7 +20,7 @@ vmagent:
 vmsingle: 
   enabled: true
   spec:
-    retentionPeriod: 730d
+    retentionPeriod: 90d
     storage:
       storageClassName: "truenas-hdd"
       resources:
