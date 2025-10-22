@@ -5,6 +5,6 @@ metadata:
   namespace: garmin
 data:
   INFLUXDB_DATABASE: "GarminStats"
-  INFLUXDB_HOST: "vmsingle-vmsingle-garmin.garmin.svc.cluster.local"
-  INFLUXDB_PORT: "8428"
+  INFLUXDB_HOST: influxdb.monitoring #"vmsingle-vmsingle-garmin.garmin.svc.cluster.local"
+  INFLUXDB_PORT: "8086" #"8428"
   LOG_LEVEL: "DEBUG"
