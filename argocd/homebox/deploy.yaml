@@ -18,6 +18,8 @@ spec:
     metadata:
       labels:
         app: homebox
+      annotations: 
+        backup.velero.io/backup-volumes: data
     spec:
       containers:
         - env:
