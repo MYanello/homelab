@@ -73,6 +73,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations: 
+    backup.velero.io/backup-volumes: "config,ingest,library"
   labels:
     app: calibre
   name: calibre
@@ -103,8 +105,6 @@ spec:
               value: "America/Chicago"
             - name: CWA_PORT_OVERRIDE
               value: "80"
-            # - name: DOCKER_MODS
-            #   value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
           image: docker.io/crocodilestick/calibre-web-automated:latest@sha256:577e846f104fd21453ef306eefb4a95dd95b3b9ddd2463a150944494284da0fd
           imagePullPolicy: IfNotPresent
           name: calibre
@@ -125,22 +125,22 @@ spec:
               mountPath: /cwa-book-ingest
             - name: library
               mountPath: /calibre-library
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8083
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 30
-          #   timeoutSeconds: 5
-          #   failureThreshold: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8083
-          #   initialDelaySeconds: 300
-          #   periodSeconds: 15
-          #   timeoutSeconds: 5
-          #   failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 300
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 5
       restartPolicy: Always
       volumes:
         - name: config
@@ -152,56 +152,3 @@ spec:
         - name: library
           persistentVolumeClaim:
             claimName: library
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   labels:
-#     app: cloudflareproxy
-#   name: cloudflareproxy
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: cloudflareproxy
-#   strategy:
-#     type: RollingUpdate
-#     rollingUpdate:
-#       maxUnavailable: 1
-#       maxSurge: 1
-#   template:
-#     metadata:
-#       labels:
-#         app: cloudflareproxy
-#     spec:
-#       nodeSelector:
-#         beta.kubernetes.io/arch: amd64
-#       containers:
-#         - image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest@sha256:d1028839c2d6317a48e6e2139acaea5129bb3b089f0c5583f61fc162f1975de0
-#           imagePullPolicy: IfNotPresent
-#           resources:
-#             limits:
-#               cpu: 1000m
-#               memory: 500Mi
-#             requests:
-#               cpu: 200m
-#               memory: 500Mi
-#           name: cloudflareproxy
-#           ports:
-#             - containerPort: 8000
-#               protocol: TCP
-#           readinessProbe:
-#             tcpSocket:
-#               port: 8000
-#             initialDelaySeconds: 30
-#             periodSeconds: 10
-#             timeoutSeconds: 5
-#             failureThreshold: 3
-#           livenessProbe:
-#             tcpSocket:
-#               port: 8000
-#             initialDelaySeconds: 60
-#             periodSeconds: 15
-#             timeoutSeconds: 5
-#             failureThreshold: 3
-#       restartPolicy: Always
