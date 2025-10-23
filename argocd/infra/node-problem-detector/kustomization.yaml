@@ -5,5 +5,5 @@ helmCharts:
   - name: node-problem-detector
     namespace: node-problem-detector
     releaseName: node-problem-detector
-    repo: https://charts.deliveryhero.io/
+    repo: https://deliveryhero.github.io/helm-charts/
     version: "2.3.22"
