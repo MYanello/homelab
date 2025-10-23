@@ -16,6 +16,8 @@ spec:
       maxSurge: 1
   template:
     metadata:
+      annotations: 
+        backup.velero.io/backup-volumes: data
       labels:
         app: mealie
     spec:
