@@ -1,0 +1,55 @@
+csiDriver:
+  # should be globally unique for a given cluster
+  name: "org.democratic-csi.nfs.ssd"
+
+node:
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+
+controller:
+  driver:
+    image:
+      tag: next
+
+# add note here about volume expansion requirements
+storageClasses:
+  - name: truenas-ssd-nfs
+    defaultClass: false
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      # for block-based storage can be ext3, ext4, xfs
+      # for nfs should be nfs
+      fsType: nfs
+
+      # if true, volumes created from other snapshots will be
+      # zfs send/received instead of zfs cloned
+      # detachedVolumesFromSnapshots: "false"
+
+      # if true, volumes created from other volumes will be
+      # zfs send/received instead of zfs cloned
+      # detachedVolumesFromVolumes: "false"
+
+    mountOptions:
+      - nfsvers=4.2
+      - nconnect=8
+      - hard
+      - intr
+      - rsize=131072
+      - wsize=131072
+      - timeo=600
+      - retrans=2
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+driver:
+  existingConfigSecret: democratic-secret
+  config:
+    driver: freenas-api-nfs
