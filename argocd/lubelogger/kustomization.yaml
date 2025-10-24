@@ -14,6 +14,9 @@ helmCharts:
     repo: https://anza-labs.github.io/charts
     version: "1.4.0"
     valuesInline:
+      config:
+        userConfig:
+          UseDarkMode: true
       updateStrategy:
         type: RollingUpdate
         rollingUpdate:
@@ -30,3 +33,4 @@ helmCharts:
       oidc:
         enabled: true
         name: lube-secrets
+      
