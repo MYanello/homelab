@@ -26,3 +26,6 @@ helmCharts:
           accessMode: ReadWriteMany
       secret:
         create: false
+      oidc:
+        enabled: false
+        name: oidc-secrets
