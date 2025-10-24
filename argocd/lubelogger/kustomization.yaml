@@ -11,6 +11,11 @@ helmCharts:
     repo: https://anza-labs.github.io/charts
     version: "1.4.0"
     valuesInline:
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 75%
+          partition: 0
       persistence:
         data:
           storageClass: truenas-hdd-nfs
