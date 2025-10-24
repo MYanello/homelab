@@ -34,7 +34,7 @@ storageClasses:
       # detachedVolumesFromVolumes: "false"
 
     mountOptions:
-      - nfsvers=4.1
+      - nfsvers=4.2
       - nconnect=8
       - hard
       - intr
