@@ -26,6 +26,7 @@ helmCharts:
           accessMode: ReadWriteMany
       secret:
         create: false
+        name: lube-secrets
       oidc:
-        enabled: false
-        name: oidc-secrets
+        enabled: true
+        name: lube-secrets
