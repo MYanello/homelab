@@ -21,6 +21,7 @@ helmCharts:
           partition: 0
       persistence:
         data:
+          enabled: true
           storageClass: truenas-hdd-nfs
           accessMode: ReadWriteMany
       secret:
