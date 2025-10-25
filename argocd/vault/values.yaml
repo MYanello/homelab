@@ -17,8 +17,6 @@ server:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
-  standalone:
-    enabled: false
   extraEnvironmentVars:
     VAULT_CACERT: /vault/userconfig/vault-tls/ca.crt
   extraSecretEnvironmentVars:
@@ -45,8 +43,9 @@ server:
       name: oci-config
 
   ha:
-    enabled: true
     replicas: 3
+  # standalone:
+    enabled: true
     raft:
       enabled: true
       setNodeId: true
@@ -69,12 +68,6 @@ server:
         
         storage "raft" {
           path = "/vault/data"
-          retry_join {
-            leader_api_addr = "https://vault-active:8200"
-            leader_ca_cert_file = "/vault/userconfig/vault-tls/ca.crt"
-            leader_client_cert_file = "/vault/userconfig/vault-tls/tls.crt"
-            leader_client_key_file = "/vault/userconfig/vault-tls/tls.key"
-          }
         } 
         seal "ocikms" {
           auth_type_api_key = "true"
