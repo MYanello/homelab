@@ -44,7 +44,8 @@ server:
 
   ha:
     replicas: 3
-  # standalone:
+    enabled: false
+  standalone:
     enabled: true
     raft:
       enabled: true
@@ -68,7 +69,7 @@ server:
         
         storage "raft" {
           path = "/vault/data"
-        } 
+        }
         seal "ocikms" {
           auth_type_api_key = "true"
         }
