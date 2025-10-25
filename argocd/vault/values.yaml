@@ -44,8 +44,6 @@ server:
 
   ha:
     replicas: 3
-    enabled: false
-  standalone:
     enabled: true
     raft:
       enabled: true
@@ -69,7 +67,13 @@ server:
         
         storage "raft" {
           path = "/vault/data"
-        }
+          retry_join {
+            leader_api_addr = "https://vault-active:8200"
+            leader_ca_cert_file = "/vault/userconfig/vault-tls/ca.crt"
+            leader_client_cert_file = "/vault/userconfig/vault-tls/tls.crt"
+            leader_client_key_file = "/vault/userconfig/vault-tls/tls.key"
+          }
+        } 
         seal "ocikms" {
           auth_type_api_key = "true"
         }

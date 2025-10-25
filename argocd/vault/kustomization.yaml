@@ -5,7 +5,7 @@ generators:
   - ./manifests/secretGenerator.yaml
 
 resources:
-  - ./manifests/route.yaml
+  - ./manifests/tlsRoute.yaml
   - ./manifests/pki.yaml
   - ./manifests/clusterSecretStore.yaml
   - ./manifests/rbac.yaml
