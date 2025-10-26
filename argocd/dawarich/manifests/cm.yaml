@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shared-config
+data:
+  RAILS_ENV: "development"
+  REDIS_URL: "redis://dawarich-redis:6379"
+  DATABASE_HOST: "dawarich-db"
+  DATABASE_USERNAME: "postgres"
+  DATABASE_NAME: "dawarich_development"
+  APPLICATION_HOSTS: "localhost,dawarich.yanello.net"
+  APPLICATION_PROTOCOL: "http"
+  SELF_HOSTED: "true"
+  STORE_GEODATA: "true"
+  PROMETHEUS_EXPORTER_PORT: "9394"
+  BACKGROUND_PROCESSING_CONCURRENCY: "10"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  MIN_MINUTES_SPENT_IN_CITY: "60"
+  DISTANCE_UNIT: mi
+  TIME_ZONE: "America/Chicago"
+  PROMETHEUS_EXPORTER_ENABLED: "true"
+  PROMETHEUS_EXPORTER_HOST: "0.0.0.0"
+  BACKGROUND_PROCESSING_CONCURRENCY: "10"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sidekiq-config
+data:
+  env:
+    PROMETHEUS_EXPORTER_ENABLED: "false"
+    PROMETHEUS_EXPORTER_HOST: "dawarich-app"
