@@ -31,6 +31,5 @@ kind: ConfigMap
 metadata:
   name: sidekiq-config
 data:
-  env:
-    PROMETHEUS_EXPORTER_ENABLED: "false"
-    PROMETHEUS_EXPORTER_HOST: "dawarich-app"
+  PROMETHEUS_EXPORTER_ENABLED: "false"
+  PROMETHEUS_EXPORTER_HOST: "dawarich-app"
