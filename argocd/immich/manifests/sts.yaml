@@ -21,7 +21,8 @@ spec:
       #   runAsGroup: 1000
       #   fsGroup: 1000
       containers:
-        - command: ["sleep", "inf"]
+        - name: postgres
+          # command: ["sleep", "inf"]
           env:
             - name: POSTGRES_DB
               valueFrom:
@@ -64,7 +65,6 @@ spec:
           #       - pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}"
           #   initialDelaySeconds: 5
           #   periodSeconds: 10
-          name: postgres
           ports:
             - containerPort: 5432
               protocol: TCP
