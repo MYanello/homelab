@@ -16,22 +16,13 @@ spec:
       labels:
         app: postgres
     spec:
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #         - matchExpressions:
-      #             - key: kubernetes.io/hostname
-      #               operator: In
-      #               values:
-      #                 - marcus-server
       # securityContext:
       #   runAsUser: 1000
       #   runAsGroup: 1000
       #   fsGroup: 1000
       containers:
-        # - command: ["sleep", "inf"]
-        - env:
+        - command: ["sleep", "inf"]
+          env:
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
@@ -78,7 +69,9 @@ spec:
             - containerPort: 5432
               protocol: TCP
           volumeMounts:
-            - name: postgres-data
+            # - name: postgres-data
+            #   mountPath: /var/lib/postgresql/data
+            - name: pg-data
               mountPath: /var/lib/postgresql/data
           resources:
             requests:
@@ -86,10 +79,6 @@ spec:
               cpu: 100m
             limits:
               memory: 4Gi
-    # volumes:
-    #   - name: postgres-data
-    #     hostPath:
-    #       path: /k8s-fast/immich/db
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
@@ -101,67 +90,15 @@ spec:
         resources:
           requests:
             storage: 10Gi
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: pg-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd
+        resources:
+          requests:
+            storage: 10Gi
 ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: postgres14-migration
-#   labels:
-#     app: postgres14-migration
-# spec:
-#   restartPolicy: Never
-#   affinity:
-#     nodeAffinity:
-#       requiredDuringSchedulingIgnoredDuringExecution:
-#         nodeSelectorTerms:
-#           - matchExpressions:
-#               - key: kubernetes.io/hostname
-#                 operator: In
-#                 values:
-#                   - marcus-server
-#   containers:
-#     - name: postgres14
-#       image: harbor.yanello.net/ghcr-cache/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:8d292bdb796aa58bbbaa47fe971c8516f6f57d6a47e7172e62754feb6ed4e7b0
-#       imagePullPolicy: IfNotPresent
-#       env:
-#         - name: POSTGRES_DB
-#           value: "immich"
-#         - name: POSTGRES_USER
-#           value: "marcus"
-#         - name: POSTGRES_PASSWORD
-#           valueFrom:
-#             secretKeyRef:
-#               name: immich-secrets
-#               key: DB_PASSWORD
-#         - name: POSTGRES_INITDB_ARGS
-#           value: "--data-checksums"
-#         - name: DB_STORAGE_TYPE
-#           value: "HDD"
-#       ports:
-#         - containerPort: 5432
-#           protocol: TCP
-#       volumeMounts:
-#         - name: pg14-data
-#           mountPath: /var/lib/postgresql/data
-#         - name: backup-volume
-#           mountPath: /backup
-#       securityContext:
-#         runAsUser: 1000
-#         runAsGroup: 1000
-#       resources:
-#         requests:
-#           memory: 500Mi
-#           cpu: 100m
-#         limits:
-#           memory: 1Gi
-#           cpu: 300m
-#   volumes:
-#     - name: pg14-data
-#       hostPath:
-#         path: /zpool/k8s/immich/db
-#         type: Directory
-#     - name: backup-volume
-#       hostPath:
-#         path: /zpool/k8s/immich/backup
-#         type: DirectoryOrCreate
-# ---
+
