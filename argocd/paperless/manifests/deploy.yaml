@@ -75,14 +75,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: paperless-db
-  name: paperless-db
+    app: db
+  name: db
 spec:
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: paperless-db
+      app: db
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -91,14 +91,14 @@ spec:
   template:
     metadata:
       labels:
-        app: paperless-db
+        app: db
       annotations:
         backup.velero.io/backup-volumes: "db"
     spec:
       containers:
         - image: harbor.yanello.net/docker-hub-cache/library/mariadb:12@sha256:5b6a1eac15b85b981a61afb89aea2a22bf76b5f58809d05f0bcc13ab6ec44cb8
           imagePullPolicy: IfNotPresent
-          name: paperless-db
+          name: db
           ports:
             - containerPort: 3306
               protocol: TCP
@@ -132,14 +132,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: paperless-redis
-  name: paperless-redis
+    app: redis
+  name: redis
 spec:
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: paperless-redis
+      app: redis
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -148,12 +148,12 @@ spec:
   template:
     metadata:
       labels:
-        app: paperless-redis
+        app: redis
     spec:
       containers:
         - image: harbor.yanello.net/docker-hub-cache/library/redis:8@sha256:4521b581dbddea6e7d81f8fe95ede93f5648aaa66a9dacd581611bf6fe7527bd
           imagePullPolicy: IfNotPresent
-          name: paperless-redis
+          name: redis
           ports:
             - containerPort: 6379
               protocol: TCP
