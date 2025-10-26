@@ -23,7 +23,7 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  PROMETHEUS_EXPORTER_ENABLED: "true"
+  PROMETHEUS_EXPORTER_ENABLED: "false"
   PROMETHEUS_EXPORTER_HOST: "0.0.0.0"
 ---
 apiVersion: v1
