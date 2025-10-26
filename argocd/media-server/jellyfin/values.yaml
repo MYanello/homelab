@@ -40,8 +40,4 @@ persistence:
     accessMode: ReadWriteOnce
     size: 15Gi
     storageClass: longhorn
-  # media:
-  #   enabled: true
-  #   type: hostPath
-  #   hostPath: /data/media
-  #   size: 5Gi
+
