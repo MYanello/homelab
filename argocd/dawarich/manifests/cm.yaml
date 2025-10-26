@@ -14,18 +14,17 @@ data:
   STORE_GEODATA: "true"
   PROMETHEUS_EXPORTER_PORT: "9394"
   BACKGROUND_PROCESSING_CONCURRENCY: "10"
+  TIME_ZONE: "America/Chicago"
+  MIN_MINUTES_SPENT_IN_CITY: "60"
+  DISTANCE_UNIT: mi
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-config
 data:
-  MIN_MINUTES_SPENT_IN_CITY: "60"
-  DISTANCE_UNIT: mi
-  TIME_ZONE: "America/Chicago"
   PROMETHEUS_EXPORTER_ENABLED: "true"
   PROMETHEUS_EXPORTER_HOST: "0.0.0.0"
-  BACKGROUND_PROCESSING_CONCURRENCY: "10"
 ---
 apiVersion: v1
 kind: ConfigMap
