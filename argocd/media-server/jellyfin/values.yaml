@@ -39,7 +39,7 @@ persistence:
     enabled: true
     accessMode: ReadWriteOnce
     size: 15Gi
-    storageClass: longhorn
+    storageClass: truenas-ssd-nfs
 
 affinity:
   nodeAffinity:
