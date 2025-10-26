@@ -9,3 +9,4 @@ resources:
   - manifests/postgres.yaml
   - manifests/app.yaml
   - manifests/sidekiq.yaml
+  - manifests/http-route.yaml
