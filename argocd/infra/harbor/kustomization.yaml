@@ -34,7 +34,8 @@ helmCharts:
             storageClass: truenas-hdd
           jobservice:
             jobLog:
-              storageClass: truenas-hdd
+              storageClass: truenas-hdd-nfs
+              accessMode: ReadWriteMany
           database:
             storageClass: truenas-ssd
           redis:
