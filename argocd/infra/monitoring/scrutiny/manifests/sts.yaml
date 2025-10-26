@@ -101,7 +101,7 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
-          image: ghcr.io/analogj/scrutiny:master-omnibus@sha256:e5638d8580adba40f7c03464cde8420866188b9e48cddb9fc3866ec3243163d5
+          image: harbor.yanello.net/ghcr-cache/analogj/scrutiny:master-omnibus@sha256:e5638d8580adba40f7c03464cde8420866188b9e48cddb9fc3866ec3243163d5
           volumeMounts:
             - mountPath: /opt/scrutiny/config
               name: config

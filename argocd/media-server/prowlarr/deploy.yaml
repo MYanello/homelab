@@ -37,7 +37,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: ghcr.io/hotio/prowlarr:release-2.0.5.5160@sha256:abb923b9533d19636f055775f6500fc4fb5d50563adfa3b4e72685ae5adf4cdc
+          image: harbor.yanello.net/ghcr-cache/hotio/prowlarr:release-2.0.5.5160@sha256:abb923b9533d19636f055775f6500fc4fb5d50563adfa3b4e72685ae5adf4cdc
           imagePullPolicy: IfNotPresent
           name: prowlarr
           ports:
@@ -97,7 +97,7 @@ spec:
         app: flaresolverr
     spec:
       containers:
-      - image: ghcr.io/flaresolverr/flaresolverr:v3.4.2@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
+      - image: harbor.yanello.net/ghcr-cache/flaresolverr/flaresolverr:v3.4.2@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
         imagePullPolicy: IfNotPresent
         name: flaresolverr
         ports:

@@ -40,7 +40,7 @@ spec:
           envFrom:
             - secretRef:
                 name: bytestash-secrets
-          image: ghcr.io/jordan-dalby/bytestash:1.5.9@sha256:9c17b5510ca45c976fe23b0d4705ad416aa58d4bf756a70e03ef1f08cf7801fd
+          image: harbor.yanello.net/ghcr-cache/jordan-dalby/bytestash:1.5.9@sha256:9c17b5510ca45c976fe23b0d4705ad416aa58d4bf756a70e03ef1f08cf7801fd
           volumeMounts:
             - mountPath: /data/snippets
               name: snippets

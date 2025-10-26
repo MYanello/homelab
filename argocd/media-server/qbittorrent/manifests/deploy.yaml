@@ -37,7 +37,7 @@ spec:
             - name: PUID
               value: "1000"
             - name: DOCKER_MODS
-              value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+              value: "harbor.yanello.net/ghcr-cache/vuetorrent/vuetorrent-lsio-mod:latest"
           image: lscr.io/linuxserver/qbittorrent:5.1.1-r0-ls400@sha256:5ad96de40e199060acfae0fe3843f575e487098095ac9e61ddf6b97e32df5619
           imagePullPolicy: IfNotPresent
           resources:
@@ -76,7 +76,7 @@ spec:
           #   failureThreshold: 10
       initContainers:
         - name: gluetun
-          image: "ghcr.io/qdm12/gluetun:v3.40.0@sha256:2b42bfa046757145a5155acece417b65b4443c8033fb88661a8e9dcf7fda5a00"
+          image: "harbor.yanello.net/ghcr-cache/qdm12/gluetun:v3.40.0@sha256:2b42bfa046757145a5155acece417b65b4443c8033fb88661a8e9dcf7fda5a00"
           restartPolicy: Always
           imagePullPolicy: IfNotPresent
           ports:
