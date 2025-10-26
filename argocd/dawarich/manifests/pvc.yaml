@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany # Shared between postgres and redis
-  storageClassName: truenas-ssd
+  storageClassName: truenas-ssd-nfs
   resources:
     requests:
       storage: 2Gi
@@ -17,7 +17,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany  # Shared between app and sidekiq
-  storageClassName: truenas-ssd
+  storageClassName: truenas-ssd-nfs
   resources:
     requests:
       storage: 1Gi
@@ -29,7 +29,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany  # Shared between app and sidekiq
-  storageClassName: truenas-ssd
+  storageClassName: truenas-ssd-nfs
   resources:
     requests:
       storage: 2Gi
@@ -41,7 +41,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany  # Shared between app and sidekiq
-  storageClassName: truenas-ssd
+  storageClassName: truenas-ssd-nfs
   resources:
     requests:
       storage: 5Gi
