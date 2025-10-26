@@ -41,3 +41,12 @@ persistence:
     size: 15Gi
     storageClass: longhorn
 
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - marcus-server
