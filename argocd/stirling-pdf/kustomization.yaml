@@ -4,30 +4,13 @@ kind: Kustomization
 resources:
   - manifests/http-route.yaml
 
-# patches:
-#   - target:
-#       kind: Deployment
-#       name: stirling-pdf-chart
-#     patch: |-
-#       - op: add
-#         path: /spec/template/spec/containers/[0]/livenessProbe
-#         value: 
-#           - name: enabled
-#             value: true
-#   - target:
-#       kind: Deployment
-#       name: stirling-pdf-chart
-#     patch: |-
-#       - op: add
-#         path: /spec/template/spec/containers/[0]/readinessProbe
-#         value: 
-#           - name: enabled
-#             value: true
-       
 helmCharts:
   - name: stirling-pdf-chart
     repo: https://stirling-tools.github.io/Stirling-PDF-chart
     version: "2.2.0"
     releaseName: stirling-pdf-chart
     namespace: stirling-pdf
-    valuesFile: ./values.yaml
+    valuesInline:
+      persistence:
+        enabled: true
+        storageClass: truenas-ssd-nfs

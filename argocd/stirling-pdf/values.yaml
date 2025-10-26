@@ -1,9 +1,0 @@
-persistence:
-  enabled: true
-  storageClass: snapraid-storage
-
-# probes:
-#   liveness:
-#     enabled: false
-#   readiness:
-#     enabled: false
