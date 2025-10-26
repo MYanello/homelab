@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dawarich-app
+spec:
+  serviceName: dawarich-app
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dawarich-app
+  template:
+    metadata:
+      labels:
+        app: dawarich-app
+    spec:
+      containers:
+        - name: app
+          image: freikin/dawarich:latest
+          command: ["web-entrypoint.sh"]
+          args: ["bin/rails", "server", "-p", "3000", "-b", "::"]
+          env:
+            - name: RAILS_ENV
+              value: development
+            - name: REDIS_URL
+              value: redis://dawarich-redis:6379
+            - name: DATABASE_HOST
+              value: dawarich-db
+            - name: DATABASE_USERNAME
+              value: postgres
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dawarich-secrets
+                  key: POSTGRES_PASSWORD
+            - name: DATABASE_NAME
+              value: dawarich
+            - name: MIN_MINUTES_SPENT_IN_CITY
+              value: "60"
+            - name: APPLICATION_HOSTS
+              value: localhost
+            - name: TIME_ZONE
+              value: America/Chicago
+            - name: APPLICATION_PROTOCOL
+              value: http
+            - name: PROMETHEUS_EXPORTER_ENABLED
+              value: "false"
+            - name: PROMETHEUS_EXPORTER_HOST
+              value: 0.0.0.0
+            - name: PROMETHEUS_EXPORTER_PORT
+              value: "9394"
+            - name: SELF_HOSTED
+              value: "true"
+            - name: STORE_GEODATA
+              value: "true"
+          ports:
+            - containerPort: 3000
+              name: http
+          volumeMounts:
+            - name: public
+              mountPath: /var/app/public
+            - name: watched
+              mountPath: /var/app/tmp/imports/watched
+            - name: storage
+              mountPath: /var/app/storage
+            - name: db-data
+              mountPath: /dawarich_db_data
+          livenessProbe:
+            exec:
+              command:
+                ["wget", "-qO", "-", "http://127.0.0.1:3000/api/v1/health"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 30
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "250m"
+            limits:
+              memory: "4Gi"
+              cpu: "500m"
+          stdin: true
+          tty: true
+      volumes:
+        - name: public
+          persistentVolumeClaim:
+            claimName: dawarich-public
+        - name: watched
+          persistentVolumeClaim:
+            claimName: dawarich-watched
+        - name: storage
+          persistentVolumeClaim:
+            claimName: dawarich-storage
+  volumeClaimTemplates:
+    - metadata:
+        name: db-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dawarich-app
+spec:
+  selector:
+    app: dawarich-app
+  ports:
+    - port: 3000
+      targetPort: 3000
+      name: http
+  type: ClusterIP

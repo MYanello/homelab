@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dawarich-shared
+spec:
+  accessModes:
+    - ReadWriteMany # Shared between postgres and redis
+  storageClassName: truenas-ssd
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dawarich-public
+spec:
+  accessModes:
+    - ReadWriteMany  # Shared between app and sidekiq
+  storageClassName: truenas-ssd
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dawarich-watched
+spec:
+  accessModes:
+    - ReadWriteMany  # Shared between app and sidekiq
+  storageClassName: truenas-ssd
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dawarich-storage
+spec:
+  accessModes:
+    - ReadWriteMany  # Shared between app and sidekiq
+  storageClassName: truenas-ssd
+  resources:
+    requests:
+      storage: 5Gi
