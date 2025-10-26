@@ -36,11 +36,10 @@ runtimeClassName: nvidia
 
 persistence:
   config:
-    enabled: true
-    accessMode: ReadWriteOnce
-    size: 15Gi
     storageClass: truenas-ssd-nfs
-
+  media:
+    storageClass: truenas-hdd-nfs
+    
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
