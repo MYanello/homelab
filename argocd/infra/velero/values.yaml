@@ -44,7 +44,7 @@ nodeAgent:
 schedules:
   weekly:
     disabled: false
-    schedule: "0 * * * 4" # 4am sunday
+    schedule: "0 4 * * 1" # 4am monday
     paused: false
     skipImmediately: false
     template:
