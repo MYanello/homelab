@@ -96,7 +96,7 @@ spec:
         backup.velero.io/backup-volumes: "db"
     spec:
       containers:
-        - image: docker.io/library/mariadb:12@sha256:5b6a1eac15b85b981a61afb89aea2a22bf76b5f58809d05f0bcc13ab6ec44cb8
+        - image: harbor.yanello.net/docker-hub-cache/library/mariadb:12@sha256:5b6a1eac15b85b981a61afb89aea2a22bf76b5f58809d05f0bcc13ab6ec44cb8
           imagePullPolicy: IfNotPresent
           name: paperless-db
           ports:
@@ -151,7 +151,7 @@ spec:
         app: paperless-redis
     spec:
       containers:
-        - image: docker.io/library/redis:8@sha256:4521b581dbddea6e7d81f8fe95ede93f5648aaa66a9dacd581611bf6fe7527bd
+        - image: harbor.yanello.net/docker-hub-cache/library/redis:8@sha256:4521b581dbddea6e7d81f8fe95ede93f5648aaa66a9dacd581611bf6fe7527bd
           imagePullPolicy: IfNotPresent
           name: paperless-redis
           ports:
