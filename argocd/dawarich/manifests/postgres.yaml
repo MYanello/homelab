@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dawarich-db
+spec:
+  serviceName: dawarich-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dawarich-db
+  template:
+    metadata:
+      labels:
+        app: dawarich-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgis/postgis:17-3.5-alpine
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dawarich-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              value: dawarich_development
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+            - name: shared
+              mountPath: /var/shared
+          livenessProbe:
+            exec:
+              command:
+                ["pg_isready", "-U", "postgres", "-d", "dawarich_development"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            exec:
+              command:
+                ["pg_isready", "-U", "postgres", "-d", "dawarich_development"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            fsGroup: 999
+      volumes:
+        - name: shared
+          persistentVolumeClaim:
+            claimName: dawarich-shared
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dawarich-db
+spec:
+  selector:
+    app: dawarich-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: postgres
+  clusterIP: None
