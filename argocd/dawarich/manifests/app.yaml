@@ -33,7 +33,7 @@ spec:
                   name: dawarich-secrets
                   key: POSTGRES_PASSWORD
             - name: DATABASE_NAME
-              value: dawarich
+              value: dawarich_development
             - name: MIN_MINUTES_SPENT_IN_CITY
               value: "60"
             - name: APPLICATION_HOSTS
