@@ -16,13 +16,8 @@ spec:
       labels:
         app: postgres
     spec:
-      # securityContext:
-      #   runAsUser: 1000
-      #   runAsGroup: 1000
-      #   fsGroup: 1000
       containers:
         - name: postgres
-          # command: ["sleep", "inf"]
           env:
             - name: POSTGRES_DB
               valueFrom:
@@ -69,8 +64,6 @@ spec:
             - containerPort: 5432
               protocol: TCP
           volumeMounts:
-            # - name: postgres-data
-            #   mountPath: /var/lib/postgresql/data
             - name: pg-data
               mountPath: /var/lib/postgresql/data
           resources:
