@@ -37,7 +37,7 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Chicago
-          image: docker.io/linuxserver/radarr:amd64-5.19.3@sha256:57e7e481ef3b33d3c280e4691cbc516542c3a0831d96b68af9d8dcbd3c58667b
+          image: harbor.yanello.net/docker-hub-cache/linuxserver/radarr:5.28.0
           imagePullPolicy: IfNotPresent
           name: radarr
           resources:
