@@ -38,8 +38,7 @@ spec:
           image: lscr.io/linuxserver/qbittorrent:5.1.2-r3-ls422
           imagePullPolicy: IfNotPresent
           args:
-            - --dns 1.1.1.1
-
+            - --confirm-legal-notice
           resources:
             requests:
               memory: "1Gi"
