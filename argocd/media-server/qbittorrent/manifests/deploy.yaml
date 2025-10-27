@@ -111,6 +111,8 @@ spec:
               value: "on"
             - name: VPN_PORT_FORWARDING_UP_COMMAND
               value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://localhost:8080/api/v2/app/setPreferences'
+            - name: DOT
+              value: "off"
           securityContext:
             privileged: true
             capabilities:
