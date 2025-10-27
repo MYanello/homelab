@@ -35,8 +35,6 @@ spec:
               value: "1000"
           image: lscr.io/linuxserver/qbittorrent:5.1.2-r3-ls422
           imagePullPolicy: IfNotPresent
-          args:
-            - --confirm-legal-notice
           resources:
             requests:
               memory: "1Gi"
