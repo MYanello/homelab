@@ -37,6 +37,9 @@ spec:
               value: "harbor.yanello.net/ghcr-cache/vuetorrent/vuetorrent-lsio-mod:latest"
           image: lscr.io/linuxserver/qbittorrent:5.1.2-r3-ls422
           imagePullPolicy: IfNotPresent
+          args:
+            - --dns 1.1.1.1
+
           resources:
             requests:
               memory: "1Gi"
