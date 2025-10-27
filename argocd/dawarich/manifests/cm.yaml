@@ -17,6 +17,8 @@ data:
   TIME_ZONE: "America/Chicago"
   MIN_MINUTES_SPENT_IN_CITY: "60"
   DISTANCE_UNIT: mi
+  PHOTON_API_HOST: photon.komoot.io
+  PHOTON_API_USE_HTTPS: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
