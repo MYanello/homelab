@@ -30,6 +30,7 @@ helmCharts:
         persistentVolumeClaim:
           registry:
             storageClass: truenas-hdd
+            size: 100Gi
           chartmuseum:
             storageClass: truenas-hdd
           jobservice:
