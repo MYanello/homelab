@@ -11,3 +11,4 @@ resources:
   - manifests/sidekiq.yaml
   - manifests/http-route.yaml
   - manifests/cm.yaml
+  - manifests/photon.yaml
