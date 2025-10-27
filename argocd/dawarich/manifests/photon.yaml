@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: photon
+spec:
+  serviceName: photon
+  replicas: 1
+  selector:
+    matchLabels:
+      app: photon
+  template:
+    metadata:
+      labels:
+        app: photon
+    spec:
+      containers:
+        - name: photon
+          image: harbor.yanello.net/library/photon:v0.1.0
+          ports:
+            - containerPort: 3000
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /photon/photon_data
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-hdd
+        resources:
+          requests:
+            storage: 50Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: photon
+spec:
+  selector:
+    app: photon
+  ports:
+    - port: 2322
+      targetPort: 2322
+      name: http
+  type: ClusterIP
