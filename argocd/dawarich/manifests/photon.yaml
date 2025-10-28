@@ -4,7 +4,7 @@ metadata:
   name: photon
 spec:
   serviceName: photon
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: photon
@@ -24,7 +24,6 @@ spec:
               value: 720h # 30 days
             - name: REGION
               value: north-america
-
           ports:
             - containerPort: 3000
               name: http
