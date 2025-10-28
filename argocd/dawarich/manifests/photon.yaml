@@ -16,7 +16,8 @@ spec:
       containers:
         - name: photon
           image: ubuntu:latest
-          command: ["sleep inf"]
+          command: ["/bin/bash", "-c"]
+          args: ["sleep inf"]
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
