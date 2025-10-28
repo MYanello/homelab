@@ -4,7 +4,7 @@ metadata:
   name: photon
 spec:
   serviceName: photon
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: photon
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: photon
-          image: harbor.yanello.net/library/photon:v0.1.0
+          image: harbor.yanello.net/library/photon:v0.1.1
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
