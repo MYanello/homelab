@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: photon
-          image: harbor.yanello.net/library/photon:v0.1.1
-          command: ["tail -f /dev/null "]
+          image: ubuntu:latest
+          command: ["sleep inf"]
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
