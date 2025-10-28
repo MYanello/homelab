@@ -33,7 +33,7 @@ spec:
               value: "1000"
             - name: PUID
               value: "1000"
-          image: lscr.io/linuxserver/qbittorrent:5.1.2-r3-ls422
+          image: lscr.io/linuxserver/qbittorrent:5.1.2-r3-ls422@sha256:098d4340c0709a9ddbc7010ca21900238388454e20182d52b9723b40a2a44293
           imagePullPolicy: IfNotPresent
           resources:
             requests:
