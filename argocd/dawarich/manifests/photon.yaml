@@ -15,14 +15,22 @@ spec:
     spec:
       containers:
         - name: photon
-          image: harbor.yanello.net/library/photon:v0.1.2
+          image: harbor.yanello.net/docker-hub-cache/rtuszik/photon-docker:latest
           imagePullPolicy: Always
+          env:
+            - name: UPDATE_STRATEGY
+              value: parallel
+            - name: UPDATE_INTERVAL
+              value: 720h # 30 days
+            - name: REGION
+              value: north-america
+
           ports:
             - containerPort: 3000
               name: http
           volumeMounts:
             - name: data
-              mountPath: /photon/photon_data
+              mountPath: /photon/data
           resources:
             requests:
               memory: "100Mi"
