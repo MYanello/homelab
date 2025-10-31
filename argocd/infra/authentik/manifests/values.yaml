@@ -53,8 +53,7 @@ worker:
 redis:
   enabled: true
   image:
-    registry: harbor.yanello.net
-    repository: docker-hub-cache/library/redis
+    repository: library/redis
     tag: 7.2.3
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
