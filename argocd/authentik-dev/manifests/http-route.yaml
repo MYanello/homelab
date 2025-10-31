@@ -20,7 +20,7 @@ spec:
     - authentik-dev.yanello.net
   rules:
     - backendRefs:
-        - name: authentik-server
+        - name: authentik-dev-server
           group: ""
           kind: Service
           namespace: authentik-dev
