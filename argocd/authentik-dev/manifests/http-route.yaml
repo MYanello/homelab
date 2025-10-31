@@ -23,7 +23,7 @@ spec:
         - name: authentik-server
           group: ""
           kind: Service
-          namespace: authentik
+          namespace: authentik-dev
           port: 80
           weight: 1
       matches:
