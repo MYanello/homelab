@@ -52,6 +52,9 @@ worker:
     timeoutSeconds: 5
 redis:
   enabled: true
+  image:
+    registry: harbor.yanello.net
+    repository: docker-hub-cache/library/redis
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
