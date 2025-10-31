@@ -13,7 +13,7 @@ spec:
       labels:
         app: dawarich-db
       annotations:
-        backup.velero.io/backup-volumes: postgres-data
+        backup.velero.io/backup-volumes: postgres-data-dawarich-db-0
     spec:
       containers:
         - name: postgres
