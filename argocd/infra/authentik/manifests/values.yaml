@@ -52,9 +52,6 @@ worker:
     timeoutSeconds: 5
 redis:
   enabled: true
-  image:
-    repository: library/redis
-    tag: 7.2.3
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
