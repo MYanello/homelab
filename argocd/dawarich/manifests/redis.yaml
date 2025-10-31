@@ -13,7 +13,7 @@ spec:
       labels:
         app: dawarich-redis
       annotations:
-        backup.velero.io/backup-volumes: data
+        backup.velero.io/backup-volumes: data-dawarich-redis-0
     spec:
       containers:
       - name: redis
