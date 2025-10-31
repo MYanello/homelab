@@ -39,7 +39,7 @@ persistence:
     storageClass: truenas-ssd-nfs
   media:
     storageClass: truenas-hdd-nfs
-    
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:

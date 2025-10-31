@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: dawarich-redis
+  annotations:
+    backup.velero.io/backup-volumes: data
 spec:
   serviceName: dawarich-redis
   replicas: 1

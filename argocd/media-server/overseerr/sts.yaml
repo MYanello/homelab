@@ -4,6 +4,8 @@ metadata:
   name: overseerr
   labels:
     app: overseerr
+  annotations:
+    backup.velero.io/backup-volumes: config
 spec:
   serviceName: overseerr
   replicas: 1

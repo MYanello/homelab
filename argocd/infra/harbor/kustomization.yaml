@@ -11,6 +11,12 @@ helmCharts:
     repo: https://helm.goharbor.io
     version: "1.18.0"
     valuesInline:
+      database:
+        podAnnoations:
+          backup.velero.io/backup-volumes: database-data
+      redis:
+        podAnnotations:
+          backup.velero.io/backup-volumes: data
       existingSecretAdminPassword: harbor-secrets
       expose:
         type: route
