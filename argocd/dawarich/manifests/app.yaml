@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: dawarich-app
-  annotations:
-    backup.velero.io/backup-volumes: db-data,public,watched,storage
 spec:
   serviceName: dawarich-app
   replicas: 1
@@ -14,6 +12,8 @@ spec:
     metadata:
       labels:
         app: dawarich-app
+      annotations:
+        backup.velero.io/backup-volumes: db-data,public,watched,storage
     spec:
       containers:
         - name: app
