@@ -52,6 +52,10 @@ worker:
     timeoutSeconds: 5
 redis:
   enabled: true
+  image:
+    registry: harbor.yanello.net
+    repository: docker-hub-cache/library/redis
+    tag: 7.2.3-bookworm
   master:
     persistence:
       enabled: false
@@ -84,6 +88,10 @@ redis:
         memory: 100Mi
 postgresql:
   enabled: true
+  image:
+    registry: harbor.yanello.net
+    repository: docker-hub-cache/library/postgres
+    tag: 15.4-bullseye
   diagnosticMode:
     enabled: false
   primary:
