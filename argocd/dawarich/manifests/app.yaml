@@ -13,7 +13,7 @@ spec:
       labels:
         app: dawarich-app
       annotations:
-        backup.velero.io/backup-volumes: db-data,public,watched,storage
+        backup.velero.io/backup-volumes: db-data
     spec:
       containers:
         - name: app
