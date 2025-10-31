@@ -1,0 +1,108 @@
+global:
+  envFrom:
+    - secretRef:
+        name: authentik-secrets
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+
+authentik:
+  email:
+    host: smtp.gmail.com
+    port: 587
+    username: "marcus.yanello@gmail.com"
+    from: "authentik <marcus.yanello@gmail.com>"
+    use_tls: true
+    timeout: 30
+  error_reporting:
+    enabled: true
+server:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 750m
+      memory: 1Gi
+    requests:
+      cpu: 150m
+      memory: 750Mi
+worker:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 300m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 500Mi
+  livenessProbe:
+    timeoutSeconds: 5
+  startupProbe:
+    timeoutSeconds: 5
+  readinessProbe:
+    timeoutSeconds: 5
+redis:
+  enabled: true
+  master:
+    persistence:
+      enabled: false
+    resources:
+      requests:
+        cpu: 300m
+        memory: 50Mi
+      limits:
+        cpu: 500m
+        memory: 100Mi
+  replica:
+    persistence:
+      enabled: false
+    resources:
+      requests:
+        cpu: 300m
+        memory: 50Mi
+      limits:
+        cpu: 500m
+        memory: 100Mi
+  sentinel:
+    persistence:
+      enabled: false
+    resources:
+      requests:
+        cpu: 300m
+        memory: 50Mi
+      limits:
+        cpu: 500m
+        memory: 100Mi
+postgresql:
+  enabled: true
+  diagnosticMode:
+    enabled: false
+  primary:
+    persistence:
+      enabled: true
+      storageClass: truenas-ssd
+      accessMode: ReadWriteOnce
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 250Mi
+  auth:
+    username: authentik
+    database: authentik
+    existingSecret: authentik-secrets
+    secretKeys:
+      adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+      userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+      replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
