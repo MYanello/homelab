@@ -35,12 +35,8 @@ server:
     requests:
       cpu: 150m
       memory: 750Mi
-  image:
-    tag: 2024.6.3
 worker:
   replicas: 1
-  image:
-    tag: 2024.6.3
   resources:
     limits:
       cpu: 300m
@@ -56,10 +52,6 @@ worker:
     timeoutSeconds: 5
 redis:
   enabled: true
-  tolerations:
-    - key: "node-role.kubernetes.io/control-plane"
-      operator: "Exists"
-      effect: "NoSchedule"
   master:
     persistence:
       enabled: false
