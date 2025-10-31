@@ -21,10 +21,10 @@ patches:
         path: /spec/replicas
         value: 1
         
-helmCharts:
-  - name: authentik
-    namespace: authentik-dev
-    releaseName: authentik-dev
-    repo: https://charts.goauthentik.io/
-    version: "2024.8.4"
-    valuesFile: ./manifests/values.yaml
+# helmCharts:
+#   - name: authentik
+#     namespace: authentik-dev
+#     releaseName: authentik-dev
+#     repo: https://charts.goauthentik.io/
+#     version: "2024.8.4"
+#     valuesFile: ./manifests/values.yaml
