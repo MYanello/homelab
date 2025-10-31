@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgis/postgis:17-3.5-alpine@sha256:e3bcf545d181218c2feb97b00f9eba645558fd11406f66ab98bad3883daa608e
+          image: harbor.yanello.net/docker-hub-cache/postgis/postgis:17-3.5-alpine@sha256:e3bcf545d181218c2feb97b00f9eba645558fd11406f66ab98bad3883daa608e
           env:
             - name: POSTGRES_USER
               value: postgres
