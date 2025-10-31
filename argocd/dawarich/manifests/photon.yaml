@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: photon
-          image: harbor.yanello.net/docker-hub-cache/rtuszik/photon-docker:latest
+          image: harbor.yanello.net/docker-hub-cache/rtuszik/photon-docker:latest@sha256:c9475eebce4400852465aa8e3a2ca7667d699eb3e4b3a2777167ebced91f907b
           imagePullPolicy: Always
           env:
             - name: UPDATE_STRATEGY
