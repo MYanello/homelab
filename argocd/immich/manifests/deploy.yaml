@@ -119,6 +119,8 @@ spec:
               mountPath: /usr/src/app/upload
             - name: model-cache
               mountPath: /cache
+            - name: photo-frame
+              mountPath: /usr/src/app/photo-frame
           resources:
             requests:
               nvidia.com/gpu: "1"
@@ -135,6 +137,9 @@ spec:
         - name: model-cache
           hostPath:
             path: /zpool/k8s/immich/model-cache
+        - name: photo-frame
+          persistentVolumeClaim:
+            claimName: photo-frame
 ---
 apiVersion: apps/v1
 kind: Deployment
