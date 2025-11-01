@@ -36,22 +36,21 @@ spec:
             - name: ENABLE_PRUNING
               value: "true"
             - name: RETENTION_DAYS
-              value: "7"
+              value: "0"
             - name: MIN_FILES
-              value: "4"
+              value: "0"
           envFrom:
             - secretRef:
                 name: bw-sync
           resources:
             requests:
-              cpu: 10m
-              memory: 50Mi
-            limits:
               cpu: 50m
-              memory: 200Mi
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
           securityContext:
             runAsUser: 0
             runAsGroup: 0
             fsGroup: 0
       restartPolicy: Always
-
