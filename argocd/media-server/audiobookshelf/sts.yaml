@@ -6,7 +6,7 @@ metadata:
     app: audiobookshelf
 spec:
   serviceName: audiobookshelf
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 3
   selector:
     matchLabels:
