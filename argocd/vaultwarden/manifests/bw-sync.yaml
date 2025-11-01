@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: bitwarden-portal
-  name: bitwarden-portal
+    app: bitwarden-sync
+  name: bitwarden-sync
 spec:
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: bitwarden-portal
+      app: bitwarden-sync
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,12 +18,12 @@ spec:
   template:
     metadata:
       labels:
-        app: bitwarden-portal
+        app: bitwarden-sync
     spec:
       containers:
         - image: harbor.yanello.net/docker-hub-cache/reaper0x1/bitwarden-portal:latest
           imagePullPolicy: Always
-          name: bitwarden-portal
+          name: bitwarden-sync
           env:
             - name: CRON_SCHEDULE
               value: "0 0 * * *" # daily at noon
@@ -45,13 +45,13 @@ spec:
           resources:
             requests:
               cpu: 10m
-              memory: 100Mi
+              memory: 50Mi
             limits:
-              cpu: 500m
-              memory: 500Mi
+              cpu: 50m
+              memory: 200Mi
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
       restartPolicy: Always
 
