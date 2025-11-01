@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bitwarden-portal
+  name: bitwarden-portal
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: bitwarden-portal
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: bitwarden-portal
+    spec:
+      containers:
+        - image: harbor.yanello.net/docker-hub-cache/reaper0x1/bitwarden-portal:latest
+          imagePullPolicy: Always
+          name: bitwarden-portal
+          env:
+            - name: CRON_SCHEDULE
+              value: "0 0 * * *" # daily at noon
+            - name: TZ
+              value: "America/Chicago"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: ENABLE_PRUNING
+              value: "true"
+            - name: RETENTION_DAYS
+              value: "7"
+            - name: MIN_FILES
+              value: "4"
+          envFrom:
+            - secretRef:
+                name: bw-sync
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+      restartPolicy: Always
+
