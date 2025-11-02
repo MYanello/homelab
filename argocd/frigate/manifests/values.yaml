@@ -1,14 +1,13 @@
 nodeSelector:
   accelerator: coral-tpu
   nvidia.com/gpu.present: "true"
-  # cpu.performance: high
 image:
   tag: stable
   pullPolicy: Always
 persistence:
   media:
     enabled: true
-    storageClass: snapraid-storage
+    storageClass: truenas-hdd-nfs
     accessMode: ReadWriteOnce
     size: 1Ti
 envFromSecrets:
