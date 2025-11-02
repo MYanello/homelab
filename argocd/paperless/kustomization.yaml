@@ -18,4 +18,3 @@ resources:
 - manifests/pvc.yaml
 - manifests/service.yaml
 - manifests/http-route.yaml
-- manifests/esecret.yaml
