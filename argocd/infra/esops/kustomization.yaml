@@ -3,24 +3,24 @@ kind: Kustomization
 
 resources:
   - ./manifests/certificate.yaml
-  - ./manifests/secretstore.yaml
+  # - ./manifests/secretstore.yaml
   - ./manifests/rbac.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
 
-helmCharts:
-  - name: external-secrets
-    releaseName: external-secrets
-    namespace: esops
-    repo: https://charts.external-secrets.io
-    version: 0.20.4
-    valuesInline:
-      bitwarden-sdk-server:
-        enabled: true
-      global:
-        tolerations:
-          - key: "node-role.kubernetes.io/control-plane"
-            operator: "Exists"
-            effect: "NoSchedule"
+# helmCharts:
+#   - name: external-secrets
+#     releaseName: external-secrets
+#     namespace: esops
+#     repo: https://charts.external-secrets.io
+#     version: 0.20.4
+#     valuesInline:
+#       bitwarden-sdk-server:
+#         enabled: true
+#       global:
+#         tolerations:
+#           - key: "node-role.kubernetes.io/control-plane"
+#             operator: "Exists"
+#             effect: "NoSchedule"
       
