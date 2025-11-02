@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/certificate.yaml
-  # - ./manifests/secretstore.yaml
+  - ./manifests/secretstore.yaml
   - ./manifests/rbac.yaml
 
 generators:
@@ -24,3 +24,22 @@ helmCharts:
             operator: "Exists"
             effect: "NoSchedule"
       
+patches:
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
+  - target:
+      kind: StatefulSet
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
+  - target:
+      kind: DaemonSet
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0

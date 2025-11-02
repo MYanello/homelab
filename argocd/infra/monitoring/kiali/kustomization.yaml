@@ -1,16 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-generators:
-  - manifests/secret-generator.yaml
+# resources:
+#  - http-route.yaml
 
 helmCharts:
-  - name: external-dns
-    repo: https://kubernetes-sigs.github.io/external-dns/
-    version: "1.19.0"
-    releaseName: external-dns
-    namespace: external-dns
-    valuesFile: values.yaml
+  - name: kiali-operator
+    repo: https://kiali.org/helm-charts
+    version: "2.15.0"
+    releaseName: kiali-operator
+    namespace: monitoring
+    valuesFile: ./values.yaml
 
 patches:
   - target:
