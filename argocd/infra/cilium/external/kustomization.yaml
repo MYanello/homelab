@@ -12,3 +12,4 @@ resources:
   - coffee.yaml
   - proxmox.yaml
   - truenas.yaml
+  - foundry.yaml
