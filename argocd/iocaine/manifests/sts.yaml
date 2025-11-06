@@ -18,7 +18,7 @@ spec:
     spec:
       initContainers:
         - name: pull-data
-          image: harbor.yanello.net/docker-hub-cache/curlimages/curl:8.16.0@sha256:463eaf6072688fe96ac64fa623fe73e1dbe25d8ad6c34404a669ad3ce1f104b6
+          image: docker.io/curlimages/curl:8.16.0@sha256:463eaf6072688fe96ac64fa623fe73e1dbe25d8ad6c34404a669ad3ce1f104b6
           securityContext:
             runAsUser: 0
           command:

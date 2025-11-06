@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: harbor.yanello.net/docker-hub-cache/freikin/dawarich:latest@sha256:b132a407d920e5996c18b161740dbe918ab797d522be639fa5c5ea207b11ee0b
+          image: docker.io/freikin/dawarich:latest@sha256:b132a407d920e5996c18b161740dbe918ab797d522be639fa5c5ea207b11ee0b
           command: ["web-entrypoint.sh"]
           args: ["bin/rails", "server", "-p", "3000", "-b", "::"]
           envFrom:

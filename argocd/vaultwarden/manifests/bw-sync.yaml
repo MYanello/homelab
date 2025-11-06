@@ -21,7 +21,7 @@ spec:
         app: bitwarden-sync
     spec:
       containers:
-        - image: harbor.yanello.net/docker-hub-cache/reaper0x1/bitwarden-portal:latest
+        - image: docker.io/reaper0x1/bitwarden-portal:latest
           imagePullPolicy: Always
           name: bitwarden-sync
           env:
