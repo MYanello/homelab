@@ -20,7 +20,7 @@ spec:
         app: chartdb
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr-cache/chartdb/chartdb:1.16.0@sha256:7077687c230ace08e6b7078d69628a3049c690615e66561ea8727440abc27dfc
+        - image: ghcr.io/chartdb/chartdb:1.16.0@sha256:7077687c230ace08e6b7078d69628a3049c690615e66561ea8727440abc27dfc
           imagePullPolicy: IfNotPresent
           name: chartdb
           resources:

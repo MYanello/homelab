@@ -21,7 +21,7 @@ spec:
         app: it-tools
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr-cache/corentinth/it-tools:2024.10.22-7ca5933@sha256:8b8128748339583ca951af03dfe02a9a4d7363f61a216226fc28030731a5a61f
+        - image: ghcr.io/corentinth/it-tools:2024.10.22-7ca5933@sha256:8b8128748339583ca951af03dfe02a9a4d7363f61a216226fc28030731a5a61f
           imagePullPolicy: IfNotPresent
           name: it-tools
           ports:

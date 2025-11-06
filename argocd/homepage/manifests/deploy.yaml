@@ -21,7 +21,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: homepage
-          image: harbor.yanello.net/ghcr-cache/gethomepage/homepage:v1.5.0@sha256:e7fc26f914cf5e7dcd6c566e24ca218addb879aa76478ad4a553b1f9ae48b1d7
+          image: ghcr.io/gethomepage/homepage:v1.5.0@sha256:e7fc26f914cf5e7dcd6c566e24ca218addb879aa76478ad4a553b1f9ae48b1d7
           imagePullPolicy: Always
           envFrom:
             - secretRef:
