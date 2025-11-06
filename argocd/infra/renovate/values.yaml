@@ -1,6 +1,8 @@
-cacheInMemory:
+cachePersistence:
   enabled: true
-
+  storageClass: truenas-ssd-nfs
+  size: 5Gi
+  
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
