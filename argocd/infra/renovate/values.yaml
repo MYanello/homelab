@@ -1,5 +1,5 @@
 cachePersistence:
-  enabled: true
+  enabled: false
   storageClass: truenas-ssd-nfs
   size: 5Gi
   
@@ -15,7 +15,6 @@ affinity:
 
 resources:
   limits:
-    cpu: "2"
     memory: 8Gi
   requests:
     cpu: 100m
