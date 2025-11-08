@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rclone
+  labels:
+    app: rclone
+spec:
+  replicas: 1
+  serviceName: rclone
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: rclone
+  template:
+    metadata:
+      labels:
+        app: rclone
+    spec:
+      initContainers:
+        - name: generate-htpasswd
+          image: docker.io/httpd:alpine
+          command: ["sh", "-c"]
+          args:
+            - |
+              htpasswd -cbB /config/rclone/htpasswd "$USER" "$PASS"
+          envFrom:
+            - secretRef:
+                name: htpasswd
+          volumeMounts:
+            - name: config
+              mountPath: /config/rclone
+      containers:
+        - name: rclone
+          imagePullPolicy: IfNotPresent
+          image: docker.io/rclone/rclone:1.71.2
+          args:
+            - rcd
+            - --rc-web-gui
+            - --rc-web-gui-no-open-browser
+            - --rc-addr=:5572
+            - --rc-htpasswd=/config/rclone/htpasswd
+          ports:
+            - containerPort: 5572
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config/rclone
+              name: config
+          resources:
+            requests:
+              cpu: 150m
+              memory: 1Gi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd-nfs
+        resources:
+          requests:
+            storage: 1Gi
