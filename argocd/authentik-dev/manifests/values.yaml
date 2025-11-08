@@ -55,7 +55,7 @@ redis:
   image:
     registry: harbor.yanello.net
     repository: docker-hub-cache/library/redis
-    tag: 7.2.3-bookworm
+    tag: 7.2.3-bookworm@sha256:a7cee7c8178ff9b5297cb109e6240f5072cdaaafd775ce6b586c3c704b06458e
   master:
     persistence:
       enabled: false
@@ -91,7 +91,7 @@ postgresql:
   image:
     registry: harbor.yanello.net
     repository: docker-hub-cache/library/postgres
-    tag: 15.4-bullseye
+    tag: 15.4-bullseye@sha256:24ba76fdb195da7dc90fd6aff7fe744cf8c97f50a405d1a76cdda8b813aea7de
   diagnosticMode:
     enabled: false
   primary:
