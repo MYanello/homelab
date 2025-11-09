@@ -64,12 +64,13 @@ spec:
             limits:
               nvidia.com/gpu: "1"
               memory: 4Gi
-              cpu: "4"
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
             - name: photo-frame
               mountPath: /usr/src/app/photo-frame
+            - name: photos-truenas
+              mountPath: /usr/src/app/truenas
       volumes:
         - name: photos
           hostPath:
@@ -77,6 +78,9 @@ spec:
         - name: photo-frame
           persistentVolumeClaim:
             claimName: photo-frame
+        - name: photos-truenas
+          persistentVolumeClaim:
+            claimName: photos
 ---
 apiVersion: apps/v1
 kind: Deployment
