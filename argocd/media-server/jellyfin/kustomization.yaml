@@ -7,7 +7,7 @@ resources:
 helmCharts:
     - name: jellyfin
       repo: https://jellyfin.github.io/jellyfin-helm
-      version: "2.4.0"
+      version: "2.5.0"
       releaseName: jellyfin
       namespace: jellyfin
       valuesFile: values.yaml
