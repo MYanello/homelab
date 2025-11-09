@@ -34,14 +34,15 @@ service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
 config: |
-  logger:
-    logs:
-      frigate.genai: debug
   genai:
     enabled: True
     provider: openai
     api_key: "{FRIGATE_OPENAI_KEY}"
     model: mistralai/mistral-small-3.2-24b-instruct:free
+    
+  classification:
+    bird: 
+      enabled: true
 
   tls:
     enabled: false
