@@ -60,7 +60,7 @@ config: |
       enabled: true
 
   tls:
-    enabled: true
+    enabled: True
   mqtt:
     host: 192.168.1.4
     port: 1883
