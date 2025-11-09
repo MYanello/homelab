@@ -49,6 +49,8 @@ extraVolumes:
           path: privkey.pem
 
 config: |
+  logger:
+    default: debug
   genai:
     enabled: True
     provider: openai
