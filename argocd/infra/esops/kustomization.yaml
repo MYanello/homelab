@@ -14,7 +14,7 @@ helmCharts:
     releaseName: external-secrets
     namespace: esops
     repo: https://charts.external-secrets.io
-    version: 0.20.4
+    version: 1.0.0
     valuesInline:
       bitwarden-sdk-server:
         enabled: true
