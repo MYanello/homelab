@@ -14,7 +14,7 @@ spec:
   parentRefs:
     - name: cilium-private-gateway
       namespace: cilium
-      sectionName: argo-tls-passthrough
+      sectionName: frigate-tls-passthrough
   hostnames:
     - frigate.yanello.net
   rules:
