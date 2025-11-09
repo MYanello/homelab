@@ -32,7 +32,7 @@ spec:
                 secretKeyRef:
                   name: calibre-secrets
                   key: AA_KEY
-          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:v0.2.3@sha256:c2850991e99e278269003d92efa86e865f7df039093fbd03e85141b035cf7a80
+          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:v0.2.4@sha256:b1296c5edc89eee8742d86392ce40707233671044a454e002821e5c76cd58deb
           imagePullPolicy: IfNotPresent
           name: calibre-dl
           resources:
