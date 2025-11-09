@@ -26,12 +26,19 @@ resources:
     cpu: '200m'
   limits:
     nvidia.com/gpu: '1'
-    memory: '4Gi'
+    memory: '16Gi'
     cpu: '4000m'
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
 config: |
+  genai:
+    enabled: True
+    provider: ollama
+    base_url: https://openrouter.ai/api/v1
+    api_key: "{FRIGATE_OPENAI_KEY}"
+    model: gemini-2.5-flash
+  
   tls:
     enabled: false
   mqtt:
