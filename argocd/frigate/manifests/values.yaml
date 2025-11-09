@@ -3,7 +3,7 @@ nodeSelector:
   nvidia.com/gpu.present: "true"
 image:
   repository: harbor.yanello.net/ghcr-cache/blakeblackshear/frigate
-  tag: stable
+  tag: stable@sha256:4041ad318224500cf9513c513b1bb927d9dd252f63bbd3d11c92006c1172c86c
   pullPolicy: Always
 persistence:
   media:
