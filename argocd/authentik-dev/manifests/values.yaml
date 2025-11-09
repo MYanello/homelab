@@ -55,7 +55,7 @@ redis:
   image:
     registry: harbor.yanello.net
     repository: docker-hub-cache/library/redis
-    tag: 7.2.3-bookworm@sha256:a7cee7c8178ff9b5297cb109e6240f5072cdaaafd775ce6b586c3c704b06458e
+    tag: 7.4.7-bookworm@sha256:f3cd89d901f3ee81c80c6544f8ae175213fb97bf077cb555ef5673e1be0f8c68
   master:
     persistence:
       enabled: false
