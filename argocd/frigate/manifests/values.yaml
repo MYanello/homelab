@@ -6,6 +6,11 @@ image:
   tag: 0.16.2-tensorrt
   pullPolicy: IfNotPresent
 persistence:
+  data:
+    enabled: true
+    storageClass: truenas-hdd-nfs
+    accessMode: ReadWriteOnce
+    size: 1Gi
   media:
     enabled: true
     storageClass: truenas-hdd-nfs
