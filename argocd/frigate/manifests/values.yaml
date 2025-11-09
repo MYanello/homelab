@@ -12,6 +12,8 @@ persistence:
     size: 1Ti
 envFromSecrets:
   - frigate-secrets
+env:
+  OPENAI_BASE_URL: https://openrouter.ai/api/v1
 coral:
   enabled: true
   hostPath: /dev/apex_0
@@ -37,8 +39,7 @@ config: |
       frigate.genai: debug
   genai:
     enabled: True
-    provider: ollama
-    base_url: https://openrouter.ai/api/v1
+    provider: openai
     api_key: "{FRIGATE_OPENAI_KEY}"
     model: mistralai/mistral-small-3.2-24b-instruct:free
 
