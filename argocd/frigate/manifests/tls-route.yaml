@@ -9,8 +9,7 @@ metadata:
     gethomepage.dev/pod-selector: app.kubernetes.io/name=frigate
   labels:
     app.kubernetes.io/instance: frigate-app
-  name: frigate-httproute
-  namespace: frigate
+  name: tlsroute
 spec:
   parentRefs:
     - name: cilium-private-gateway
