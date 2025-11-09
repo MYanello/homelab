@@ -142,8 +142,8 @@ spec:
           hostPath:
             path: /zpool/Photos/immich
         - name: model-cache
-          hostPath:
-            path: /zpool/k8s/immich/model-cache
+          persistentVolumeClaim:
+            claimName: model-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -168,7 +168,7 @@ spec:
         app: redis
     spec:
       containers:
-        - image: docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
+        - image: harbor.yanello.net/docker-hub-cache/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
           imagePullPolicy: IfNotPresent
           name: redis
           ports:

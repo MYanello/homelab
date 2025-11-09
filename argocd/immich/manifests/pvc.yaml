@@ -21,3 +21,15 @@ spec:
   resources:
     requests:
       storage: 256Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-cache
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: truenas-hdd-nfs
+  resources:
+    requests:
+      storage: 20Gi
