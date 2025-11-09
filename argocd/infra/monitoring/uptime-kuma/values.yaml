@@ -1,2 +1,2 @@
 volume:
-  storageClassName: longhorn
+  storageClassName: truenas-hdd-nfs
