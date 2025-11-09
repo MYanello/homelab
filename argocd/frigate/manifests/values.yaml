@@ -33,15 +33,29 @@ resources:
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
+extraVolumeMounts:
+  - name: frigate-tls
+    mountPath: /etc/letsencrypt/live/frigate
+extraVolumes:
+  - name: frigate-tls
+    secret:
+      secretName: frigate-tls
+      defaultMode: 420
+      items:
+        - key: tls.crt
+          path: fullchain.pem
+        - key: tls.key
+          path: privkey.pem
+
 config: |
   genai:
     enabled: True
     provider: openai
     api_key: "{FRIGATE_OPENAI_KEY}"
     model: mistralai/mistral-small-3.2-24b-instruct:free
-    
+
   classification:
-    bird: 
+    bird:
       enabled: true
 
   tls:

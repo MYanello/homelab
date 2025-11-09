@@ -1,4 +1,4 @@
-apiVersion: gateway.networking.k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
   annotations:
@@ -14,9 +14,6 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
-      namespace: cilium
-      sectionName: argo-tls-passthrough
-    - name: cilium-public-gateway
       namespace: cilium
       sectionName: argo-tls-passthrough
   hostnames:
