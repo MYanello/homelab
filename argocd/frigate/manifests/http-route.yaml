@@ -1,5 +1,5 @@
 apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+kind: TLSRoute
 metadata:
   annotations:
     gethomepage.dev/enabled: "true"
@@ -15,11 +15,13 @@ spec:
   parentRefs:
     - name: cilium-private-gateway
       namespace: cilium
-      sectionName: https
+      sectionName: argo-tls-passthrough
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: argo-tls-passthrough
   hostnames:
     - frigate.yanello.net
   rules:
     - backendRefs:
         - name: frigate
-          namespace: frigate
           port: 5000
