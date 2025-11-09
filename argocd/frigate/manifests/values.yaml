@@ -32,6 +32,8 @@ service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
 config: |
+  logger:
+    default: debug
   genai:
     enabled: True
     provider: ollama
