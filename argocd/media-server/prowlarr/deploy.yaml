@@ -97,7 +97,7 @@ spec:
         app: flaresolverr
     spec:
       containers:
-      - image: ghcr.io/flaresolverr/flaresolverr:v3.4.2@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
+      - image: ghcr.io/flaresolverr/flaresolverr:v3.4.4@sha256:06c76759d062c185d8ac0b48f302258645b8d99db86109a3d6dce3209d93de51
         imagePullPolicy: IfNotPresent
         name: flaresolverr
         ports:
