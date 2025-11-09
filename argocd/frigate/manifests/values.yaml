@@ -33,7 +33,8 @@ service:
   loadBalancerIP: 10.10.8.3
 config: |
   logger:
-    default: debug
+    logs:
+      frigate.genai: debug
   genai:
     enabled: True
     provider: ollama
