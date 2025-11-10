@@ -55,6 +55,8 @@ spec:
               name: config
             - mountPath: /logs
               name: plex-logs
+            - name: config-truenas
+              mountPath: /tmp/config
           startupProbe:
             httpGet:
               path: /
@@ -78,3 +80,6 @@ spec:
         - name: plex-logs
           hostPath:
             path: /zpool/k8s/plex/config/Library/Application Support/Plex Media Server/Logs
+        - name: config-truenas
+          persistentVolumeClaim:
+            claimName: config
