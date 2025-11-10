@@ -55,6 +55,8 @@ spec:
               name: config
             - mountPath: /data/media
               name: media
+            - mountPath: /tmp/config
+              name: config-truenas
           readinessProbe:
             httpGet:
               path: /
@@ -79,3 +81,6 @@ spec:
         - name: media
           hostPath:
             path: /data/media
+        - name: config-truenas
+          persistentVolumeClaim:
+            claimName: config
