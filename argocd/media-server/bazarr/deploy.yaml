@@ -20,20 +20,26 @@ spec:
       labels:
         app: bazarr
     spec:
-      nodeSelector:
-        kubernetes.io/arch: amd64
-        cpu.performance: high
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: PGID
-              value: "1000"
+              value: "3000"
             - name: PUID
-              value: "1000"
+              value: "3000"
             - name: TZ
               value: America/Chicago
             - name: DOCKER_MODS
               value: wayller/bazarr-mod-subsync:latest
-          image: lscr.io/linuxserver/bazarr:1.5.3@sha256:a42fef2a5ffa1dca8714e12892ba0b8de5c6c513f1bcdb1ffe4143e715cffb45
+          image: harbor.yanello.net/lscr/linuxserver/bazarr:1.5.3@sha256:a42fef2a5ffa1dca8714e12892ba0b8de5c6c513f1bcdb1ffe4143e715cffb45
           imagePullPolicy: IfNotPresent
           name: bazarr
           resources:
@@ -47,13 +53,13 @@ spec:
             - containerPort: 6767
               protocol: TCP
           volumeMounts:
-            - mountPath: /config
-              name: config
+            # - mountPath: /config
+            #   name: config
             - mountPath: /data/media/Movies
               name: movies
             - mountPath: /data/media/TV
               name: tv
-            - mountPath: /tmp/config
+            - mountPath: /config
               name: data
           startupProbe:
             httpGet:
@@ -72,9 +78,9 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       volumes:
-        - name: config
-          hostPath:
-            path: /zpool/k8s/bazarr/config
+        # - name: config
+        #   hostPath:
+        #     path: /zpool/k8s/bazarr/config
         - name: movies
           hostPath:
             path: /data/media/Movies
