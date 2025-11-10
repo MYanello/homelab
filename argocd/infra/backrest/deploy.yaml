@@ -70,6 +70,10 @@ spec:
               mountPath: /userdata/etc
             - name: mnt
               mountPath: /userdata/mnt
+            - name: truenas-data
+              mountPath: /tmp/data
+            - name: truenas-config
+              mountPath: truenas-config
           readinessProbe:
             httpGet:
               path: /
@@ -112,3 +116,9 @@ spec:
         - name: mnt
           hostPath:
             path: /mnt
+        - name: truenas-data
+          persistentVolumeClaim:
+            claimName: data
+        - name: truenas-config
+          persistentVolumeClaim:
+            claimName: config
