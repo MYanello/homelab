@@ -55,8 +55,6 @@ spec:
               name: config
             - mountPath: /logs
               name: plex-logs
-            - name: config-truenas
-              mountPath: /tmp/config
           startupProbe:
             httpGet:
               path: /
@@ -74,12 +72,12 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       volumes:
-        - name: config
-          hostPath:
-            path: /zpool/k8s/tautulli/config
+        # - name: config
+        #   hostPath:
+        #     path: /zpool/k8s/tautulli/config
         - name: plex-logs
           hostPath:
             path: /zpool/k8s/plex/config/Library/Application Support/Plex Media Server/Logs
-        - name: config-truenas
+        - name: config
           persistentVolumeClaim:
             claimName: config
