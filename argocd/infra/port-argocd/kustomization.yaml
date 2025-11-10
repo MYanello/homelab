@@ -9,7 +9,7 @@ helmCharts:
     releaseName: argocd
     namespace: port-argocd
     repo: https://port-labs.github.io/helm-charts
-    version: "0.10.1"
+    version: "0.10.2"
     valuesFile: ./values.yaml
     
 patches:
