@@ -65,20 +65,15 @@ spec:
               nvidia.com/gpu: "1"
               memory: 4Gi
           volumeMounts:
-            - name: photos-truenas
+            - name: photos
               mountPath: /usr/src/app/upload
             - name: photo-frame
               mountPath: /usr/src/app/photo-frame
-            - name: photos
-              mountPath: /usr/src/app/photos-old
       volumes:
-        - name: photos
-          hostPath:
-            path: /zpool/Photos/immich
         - name: photo-frame
           persistentVolumeClaim:
             claimName: photo-frame
-        - name: photos-truenas
+        - name: photos
           persistentVolumeClaim:
             claimName: photos
 ---
@@ -140,7 +135,7 @@ spec:
       volumes:
         - name: photos
           persistentVolumeClaim:
-            claimName: photos-truenas
+            claimName: photos
         - name: model-cache
           persistentVolumeClaim:
             claimName: model-cache
