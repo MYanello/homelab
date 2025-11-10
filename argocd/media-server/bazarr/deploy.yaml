@@ -38,7 +38,7 @@ spec:
             - name: TZ
               value: America/Chicago
             - name: DOCKER_MODS
-              value: wayller/bazarr-mod-subsync:latest
+              value: harbor.yanello.net/docker/wayller/bazarr-mod-subsync:latest
           image: harbor.yanello.net/lscr/linuxserver/bazarr:1.5.3@sha256:a42fef2a5ffa1dca8714e12892ba0b8de5c6c513f1bcdb1ffe4143e715cffb45
           imagePullPolicy: IfNotPresent
           name: bazarr
@@ -53,8 +53,6 @@ spec:
             - containerPort: 6767
               protocol: TCP
           volumeMounts:
-            # - mountPath: /config
-            #   name: config
             - mountPath: /data/media/Movies
               name: movies
             - mountPath: /data/media/TV
@@ -78,9 +76,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       volumes:
-        # - name: config
-        #   hostPath:
-        #     path: /zpool/k8s/bazarr/config
         - name: movies
           hostPath:
             path: /data/media/Movies
