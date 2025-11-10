@@ -75,7 +75,7 @@ spec:
             - name: truenas-data
               mountPath: /tmp/data
             - name: truenas-config
-              mountPath: truenas-config
+              mountPath: /tmp/config
           # readinessProbe:
           #   httpGet:
           #     path: /
