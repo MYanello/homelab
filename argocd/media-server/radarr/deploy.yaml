@@ -32,9 +32,9 @@ spec:
       containers:
         - env:
             - name: PGID
-              value: "1000"
+              value: "3000"
             - name: PUID
-              value: "1000"
+              value: "3000"
             - name: TZ
               value: America/Chicago
           image: docker.io/linuxserver/radarr:5.28.0@sha256:c984533510abe0219a70e80d15bd0d212b7df21baa0913759c4ce6cc9092240b

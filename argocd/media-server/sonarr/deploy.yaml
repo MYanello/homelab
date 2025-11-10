@@ -32,9 +32,9 @@ spec:
       containers:
         - env:
             - name: PGID
-              value: "1000"
+              value: "3000"
             - name: PUID
-              value: "1000"
+              value: "3000"
             - name: TZ
               value: America/Chicago
           image: docker.io/linuxserver/sonarr:4.0.16@sha256:4b8a853b76337cd5de5f69961e23b7d0792ce7bf0a8be083dd7202ef670bfc34
