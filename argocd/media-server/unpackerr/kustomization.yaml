@@ -3,8 +3,6 @@ kind: Kustomization
 
 resources:
 - manifests/deploy.yaml
-#- manifests/pvc.yaml
-#- manifests/cm.yaml
 
 generators:
   -  manifests/secret-generator.yaml
