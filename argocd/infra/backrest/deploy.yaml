@@ -33,7 +33,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: backrest
           command: ["sh", "-c"]
-          args: ["sleep", "inf"]
+          args: ["sleep", "3600"]
           resources:
             limits:
               cpu: 1000m
