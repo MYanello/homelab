@@ -75,12 +75,12 @@ spec:
               memory: 200Mi
       restartPolicy: Always
       volumes:
-        - name: config
-          hostPath:
-            path: /zpool/k8s/sonarr/config
+        # - name: config
+        #   hostPath:
+        #     path: /zpool/k8s/sonarr/config
         - name: media
           hostPath:
             path: /data/media
-        - name: config-truenas
+        - name: config
           persistentVolumeClaim:
             claimName: config
