@@ -20,24 +20,15 @@ spec:
       labels:
         app: prowlarr
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
       containers:
         - env:
             - name: PGID
-              value: "1000"
+              value: "3000"
             - name: PUID
-              value: "1000"
+              value: "3000"
             - name: TZ
               value: America/Chicago
-          image: ghcr.io/hotio/prowlarr:release-2.0.5.5160@sha256:abb923b9533d19636f055775f6500fc4fb5d50563adfa3b4e72685ae5adf4cdc
+          image: harbor.yanello.net/ghcr/hotio/prowlarr:release-2.1.5.5216@sha256:abb923b9533d19636f055775f6500fc4fb5d50563adfa3b4e72685ae5adf4cdc
           imagePullPolicy: IfNotPresent
           name: prowlarr
           ports:
@@ -46,8 +37,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            - mountPath: /tmp/config
-              name: truenas
           startupProbe:
             httpGet:
               path: /
@@ -73,9 +62,6 @@ spec:
               memory: 150Mi
       volumes:
         - name: config
-          hostPath:
-            path: /zpool/k8s/prowlarr/config
-        - name: truenas
           persistentVolumeClaim:
             claimName: config
 ---
@@ -102,7 +88,7 @@ spec:
         app: flaresolverr
     spec:
       containers:
-      - image: ghcr.io/flaresolverr/flaresolverr:v3.4.4@sha256:06c76759d062c185d8ac0b48f302258645b8d99db86109a3d6dce3209d93de51
+      - image: harbor.yanello.net/ghcr/flaresolverr/flaresolverr:v3.4.4@sha256:06c76759d062c185d8ac0b48f302258645b8d99db86109a3d6dce3209d93de51
         imagePullPolicy: IfNotPresent
         name: flaresolverr
         ports:
