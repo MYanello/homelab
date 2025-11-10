@@ -6,7 +6,7 @@ image:
   tag: 0.16.2-tensorrt@sha256:7351ca2ddbce6d712c8a13842eeb4248844e5334565e71b4f6ae438ddaf9d04d
   pullPolicy: IfNotPresent
 persistence:
-  data:
+  config:
     enabled: true
     storageClass: truenas-hdd-nfs
     accessMode: ReadWriteOnce
