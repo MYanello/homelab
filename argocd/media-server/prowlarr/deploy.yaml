@@ -20,6 +20,18 @@ spec:
       labels:
         app: prowlarr
     spec:
+      initContainers:
+        - name: wait-for-flaresolverr
+          image: harbor.yanello.net/docker/busybox:1.37.0
+          command: ["sh", "-c"]
+          args: 
+            - |
+              echo "Waiting for flaresolverr..."
+              until wget --spider --quiet http://flaresolverr:8191/ || [ $? -eq 8 ]; do
+                echo "Flaresolverr not ready yet. Waiting..."
+                sleep 10
+              done
+              echo "Flaresolverr is ready!"
       containers:
         - env:
             - name: PGID
