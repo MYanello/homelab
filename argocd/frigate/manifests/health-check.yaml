@@ -13,7 +13,7 @@ data:
     def check_camera_fps():
         try:
             # Make request to Frigate API
-            response = requests.get('https://frigate.yanello.net/api/stats')
+            response = requests.get('http://frigate.frigate.svc.cluster.local:5000/api/stats')
             response.raise_for_status()  # Raise exception for non-200 status codes
             
             data = response.json()
