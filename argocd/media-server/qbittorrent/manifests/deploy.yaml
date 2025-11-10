@@ -51,6 +51,8 @@ spec:
               name: config
             - mountPath: /data/media/torrents
               name: torrents
+            - mountPath: /tmp/config
+              name: truenas
           # startupProbe:
           #   httpGet:
           #     scheme: HTTP
@@ -139,3 +141,6 @@ spec:
         - name: torrents
           hostPath:
             path: /data/media/torrents
+        - name: truenas
+          persistentVolumeClaim:
+            claimName: data
