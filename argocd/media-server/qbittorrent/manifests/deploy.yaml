@@ -48,11 +48,11 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /config
-              name: config
+              name: data
             - mountPath: /data/media/torrents
               name: torrents
-            - mountPath: /tmp/config
-              name: truenas
+            # - mountPath: /tmp/config
+            #   name: truenas
           # startupProbe:
           #   httpGet:
           #     scheme: HTTP
@@ -135,12 +135,12 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 5
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: config
+        # - name: config
+        #   persistentVolumeClaim:
+        #     claimName: config
         - name: torrents
           hostPath:
             path: /data/media/torrents
-        - name: truenas
+        - name: data
           persistentVolumeClaim:
             claimName: data
