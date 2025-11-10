@@ -46,6 +46,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountPath: /tmp/config
+              name: truenas
           startupProbe:
             httpGet:
               path: /
@@ -73,6 +75,9 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/prowlarr/config
+        - name: truenas
+          persistentVolumeClaim:
+            claimName: config
 ---
 apiVersion: apps/v1
 kind: Deployment
