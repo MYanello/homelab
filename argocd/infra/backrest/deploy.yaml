@@ -29,11 +29,9 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: busybox:latest #docker.io/garethgeorge/backrest:v1.10.1@sha256:c9933d81bbc19e058d831617194d8f9408ffd657f14ca6adc7bca7f9d97ce195
+        - image: docker.io/garethgeorge/backrest:v1.10.1@sha256:c9933d81bbc19e058d831617194d8f9408ffd657f14ca6adc7bca7f9d97ce195
           imagePullPolicy: IfNotPresent
           name: backrest
-          command: ["sh", "-c"]
-          args: ["sleep 1d"]
           resources:
             limits:
               cpu: 1000m
@@ -72,34 +70,34 @@ spec:
               mountPath: /userdata/etc
             - name: mnt
               mountPath: /userdata/mnt
-            - name: truenas-data
-              mountPath: /tmp/data
-            - name: truenas-config
-              mountPath: /tmp/config
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 9898
-          #   initialDelaySeconds: 30
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 9898
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 15
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
+            # - name: truenas-data
+            #   mountPath: /tmp/data
+            # - name: truenas-config
+            #   mountPath: /tmp/config
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9898
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9898
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
       restartPolicy: Always
       volumes:
-        - name: data
-          hostPath:
-            path: /zpool/k8s/backrest/data
-        - name: config
-          hostPath:
-            path: /zpool/k8s/backrest/config
+        # - name: data
+        #   hostPath:
+        #     path: /zpool/k8s/backrest/data
+        # - name: config
+        #   hostPath:
+        #     path: /zpool/k8s/backrest/config
         - name: fast-k8s
           hostPath:
             path: /fast-k8s
@@ -118,9 +116,9 @@ spec:
         - name: mnt
           hostPath:
             path: /mnt
-        - name: truenas-data
+        - name: data
           persistentVolumeClaim:
             claimName: data
-        - name: truenas-config
+        - name: config
           persistentVolumeClaim:
             claimName: config
