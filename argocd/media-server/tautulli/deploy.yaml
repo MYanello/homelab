@@ -32,9 +32,9 @@ spec:
       containers:
         - env:
             - name: PGID
-              value: "1000"
+              value: "3000"
             - name: PUID
-              value: "1000"
+              value: "3000"
             - name: TZ
               value: America/Chicago
           image: docker.io/linuxserver/tautulli:2.16.0@sha256:f8b84be159b6e413db2b60426154522ceaf33d7190489c160de415501d5e722e
@@ -72,9 +72,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       volumes:
-        # - name: config
-        #   hostPath:
-        #     path: /zpool/k8s/tautulli/config
         - name: plex-logs
           hostPath:
             path: /zpool/k8s/plex/config/Library/Application Support/Plex Media Server/Logs

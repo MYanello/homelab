@@ -75,9 +75,6 @@ spec:
             failureThreshold: 3
       restartPolicy: Always
       volumes:
-        # - name: config
-        #   hostPath:
-        #     path: /zpool/k8s/radarr/config
         - name: media
           hostPath:
             path: /data/media

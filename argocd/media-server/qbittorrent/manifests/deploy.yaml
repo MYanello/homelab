@@ -135,9 +135,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 5
       volumes:
-        # - name: config
-        #   persistentVolumeClaim:
-        #     claimName: config
         - name: torrents
           hostPath:
             path: /data/media/torrents
