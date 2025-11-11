@@ -5,8 +5,6 @@ generators:
   - manifests/secret-generator.yaml
 
 resources:
-  #- manifests/vs.yaml
-  - manifests/gw.yaml
   - manifests/http-route.yaml
 
 helmCharts:

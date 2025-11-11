@@ -16,8 +16,6 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      annotations: 
-        backup.velero.io/backup-volumes: data
       labels:
         app: mealie
     spec:
@@ -75,6 +73,8 @@ spec:
           volumeMounts:
             - mountPath: /app/data
               name: data
+            - mountPath: /tmp/storage
+              name: storage
           readinessProbe:
             httpGet:
               path: /
@@ -96,4 +96,7 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: storage
+          persistentVolumeClaim:
+            claimName: storage
 ---
