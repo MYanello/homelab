@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/part-of: paperless
   name: paperless-env
 data:
-  USERMAP_UID: "1000"
-  USERMAP_GID: "1000"
+  USERMAP_UID: "3000"
+  USERMAP_GID: "3000"
   PAPERLESS_URL: https://paperless.yanello.net
   PAPERLESS_PORT: "8000"
   PAPERLESS_TIME_ZONE: America/Chicago
