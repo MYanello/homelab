@@ -98,8 +98,6 @@ spec:
         - image: docker.io/library/mariadb:12@sha256:439d77b7092f9acde784990bbc623f263b1e4e0540cf5e94fc49e4a33c0994a1
           imagePullPolicy: IfNotPresent
           name: db
-          command: ["sh", "-c"]
-          args: ["sleep 1d"]
           ports:
             - containerPort: 3306
               protocol: TCP
@@ -115,9 +113,9 @@ spec:
                 name: paperless-secrets
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: db
-            - mountPath: /tmp/mysql
               name: mariadb
+            - mountPath: /tmp/mysql-old
+              name: db
           resources:
             limits:
               cpu: 500m
