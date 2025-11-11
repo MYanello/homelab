@@ -25,9 +25,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data
+  name: paperless-export
 spec:
-  storageClassName: nfs-storage
+  storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteOnce
   resources:
@@ -37,33 +37,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media
+  name: paperless-consume
 spec:
-  storageClassName: nfs-storage
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: export
-spec:
-  storageClassName: nfs-storage
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: consume
-spec:
-  storageClassName: nfs-storage
+  storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteOnce
   resources:

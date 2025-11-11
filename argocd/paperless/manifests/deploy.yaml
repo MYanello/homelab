@@ -45,9 +45,9 @@ spec:
               name: paperless-data
             - name: paperless-media
               mountPath: /usr/src/paperless/media
-            - name: export
+            - name: paperless-export
               mountPath: /usr/src/paperless/export
-            - name: consume
+            - name: paperless-consume
               mountPath: /usr/src/paperless/consume
           resources:
             requests:
@@ -63,18 +63,12 @@ spec:
         - name: paperless-media
           persistentVolumeClaim:
             claimName: paperless-media
-        - name: data
+        - name: paperless-export
           persistentVolumeClaim:
-            claimName: data
-        - name: media
+            claimName: paperless-export
+        - name: paperless-consume
           persistentVolumeClaim:
-            claimName: media
-        - name: export
-          persistentVolumeClaim:
-            claimName: export
-        - name: consume
-          persistentVolumeClaim:
-            claimName: consume
+            claimName: paperless-consume
 ---
 apiVersion: apps/v1
 kind: Deployment
