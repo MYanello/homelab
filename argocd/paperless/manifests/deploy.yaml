@@ -43,14 +43,12 @@ spec:
           volumeMounts:
             - mountPath: /usr/src/paperless/data
               name: paperless-data
-            - name: media
+            - name: paperless-media
               mountPath: /usr/src/paperless/media
             - name: export
               mountPath: /usr/src/paperless/export
             - name: consume
               mountPath: /usr/src/paperless/consume
-            - name: paperless-media
-              mountPath: /root/media
           resources:
             requests:
               cpu: 10m
