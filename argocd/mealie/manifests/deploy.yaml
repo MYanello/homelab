@@ -19,15 +19,6 @@ spec:
       labels:
         app: mealie
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
       containers:
         - image: ghcr.io/mealie-recipes/mealie:v3.4.0@sha256:545fb8af4287ad027e4f7eb8a0464fa2e21f157e88fda3d7a514ba1e6d3a86b0
           imagePullPolicy: IfNotPresent
@@ -72,8 +63,6 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /app/data
-              name: data
-            - mountPath: /tmp/storage
               name: storage
           readinessProbe:
             httpGet:
@@ -93,9 +82,6 @@ spec:
             failureThreshold: 5
       restartPolicy: Always
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
         - name: storage
           persistentVolumeClaim:
             claimName: storage
