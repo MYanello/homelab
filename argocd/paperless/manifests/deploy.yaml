@@ -49,8 +49,8 @@ spec:
               mountPath: /usr/src/paperless/export
             - name: consume
               mountPath: /usr/src/paperless/consume
-            - name: paperless
-              mountPath: /root/paperless
+            - name: paperless-data
+              mountPath: /root/data
           resources:
             requests:
               cpu: 10m
@@ -59,9 +59,9 @@ spec:
               memory: 5000Mi
       restartPolicy: Always
       volumes:
-        - name: paperless
+        - name: paperless-data
           persistentVolumeClaim:
-            claimName: paperless
+            claimName: paperless-data
         - name: data
           persistentVolumeClaim:
             claimName: data
