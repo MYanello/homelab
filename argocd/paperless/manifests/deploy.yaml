@@ -49,8 +49,8 @@ spec:
               mountPath: /usr/src/paperless/export
             - name: consume
               mountPath: /usr/src/paperless/consume
-            # - name: paperless
-            #   mountPath: /tmp/paperless
+            - name: paperless
+              mountPath: /root/paperless
           resources:
             requests:
               cpu: 10m
