@@ -63,7 +63,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: redis
 spec:
-  storageClassName: nfs-storage
+  storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteOnce
   resources:
