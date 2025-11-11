@@ -53,6 +53,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountPath: /tmp/config
+              name: truenas
           startupProbe:
             httpGet:
               path: /
@@ -73,3 +75,6 @@ spec:
         - name: config
           hostPath:
             path: /zpool/k8s/ombi/config
+        - name: truenas
+          persistentVolumeClaim:
+            claimName: config
