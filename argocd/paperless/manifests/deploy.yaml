@@ -42,15 +42,15 @@ spec:
                 name: paperless-secrets
           volumeMounts:
             - mountPath: /usr/src/paperless/data
-              name: data
+              name: paperless-data
             - name: media
               mountPath: /usr/src/paperless/media
             - name: export
               mountPath: /usr/src/paperless/export
             - name: consume
               mountPath: /usr/src/paperless/consume
-            - name: paperless-data
-              mountPath: /root/data
+            # - name: paperless-data
+              # mountPath: /root/data
           resources:
             requests:
               cpu: 10m
