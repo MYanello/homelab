@@ -114,8 +114,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mariadb
-            - mountPath: /tmp/mysql-old
-              name: db
           resources:
             limits:
               cpu: 500m
@@ -125,9 +123,6 @@ spec:
               memory: 500Mi
       restartPolicy: Always
       volumes:
-        - name: db
-          persistentVolumeClaim:
-            claimName: db
         - name: mariadb
           persistentVolumeClaim:
             claimName: mariadb
