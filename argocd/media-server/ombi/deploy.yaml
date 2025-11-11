@@ -42,8 +42,6 @@ spec:
             - containerPort: 3579
               protocol: TCP
           volumeMounts:
-            - mountPath: /tmp/old/config
-              name: old
             - mountPath: /config
               name: config
           startupProbe:
@@ -63,9 +61,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 5
       volumes:
-        - name: old
-          hostPath:
-            path: /zpool/k8s/ombi/config
         - name: config
           persistentVolumeClaim:
             claimName: config
