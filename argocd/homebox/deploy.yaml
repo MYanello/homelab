@@ -4,6 +4,7 @@ metadata:
   labels:
     app: homebox
   name: homebox
+  
 spec:
   replicas: 1
   selector:
@@ -19,7 +20,7 @@ spec:
       labels:
         app: homebox
       annotations: 
-        backup.velero.io/backup-volumes: data
+        backup.velero.io/backup-volumes: data,storage
     spec:
       containers:
         - env:
@@ -31,7 +32,7 @@ spec:
               value: "100"
             - name: HBOX_ALLOW_REGISTRATION
               value: "false"
-          image: ghcr.io/sysadminsmedia/homebox:0.21.0@sha256:cd5ab1669c37625b55be7758bd54dc2d2d6146db61c510322d0378312783a9b7
+          image: harbor.yanello.net/ghcr/sysadminsmedia/homebox:0.21.0@sha256:cd5ab1669c37625b55be7758bd54dc2d2d6146db61c510322d0378312783a9b7
           imagePullPolicy: IfNotPresent
           name: homebox
           resources:
@@ -46,8 +47,6 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /data
-              name: data
-            - mountPath: /tmp/storage
               name: storage
           readinessProbe:
             httpGet:
@@ -67,9 +66,6 @@ spec:
             failureThreshold: 3
       restartPolicy: Always
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
         - name: storage
           persistentVolumeClaim:
             claimName: storage
