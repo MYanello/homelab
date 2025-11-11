@@ -33,8 +33,6 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /datastore
-              name: data
-            - mountPath: /tmp/storage
               name: storage
           readinessProbe:
             httpGet:
@@ -61,9 +59,6 @@ spec:
               cpu: "100m"
       restartPolicy: Always
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
         - name: storage
           persistentVolumeClaim:
             claimName: storage
