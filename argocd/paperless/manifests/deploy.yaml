@@ -56,7 +56,6 @@ spec:
               cpu: 10m
               memory: 1000Mi
             limits:
-              cpu: 2000m
               memory: 5000Mi
       restartPolicy: Always
       volumes:
