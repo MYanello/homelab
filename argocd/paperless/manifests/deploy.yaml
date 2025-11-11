@@ -41,16 +41,16 @@ spec:
             - secretRef:
                 name: paperless-secrets
           volumeMounts:
-            - mountPath: /usr/src/paperless/data
-              name: data
-            - name: media
-              mountPath: /usr/src/paperless/media
-            - name: export
-              mountPath: /usr/src/paperless/export
-            - name: consume
-              mountPath: /usr/src/paperless/consume
+            # - mountPath: /usr/src/paperless/data
+            #   name: data
+            # - name: media
+            #   mountPath: /usr/src/paperless/media
+            # - name: export
+            #   mountPath: /usr/src/paperless/export
+            # - name: consume
+            #   mountPath: /usr/src/paperless/consume
             - name: paperless
-              mountPath: /root/paperless
+              mountPath: /usr/src/paperless
           resources:
             requests:
               cpu: 10m
