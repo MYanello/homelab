@@ -92,12 +92,14 @@ spec:
       labels:
         app: db
       annotations:
-        backup.velero.io/backup-volumes: "db"
+        backup.velero.io/backup-volumes: "mariadb"
     spec:
       containers:
         - image: docker.io/library/mariadb:12@sha256:439d77b7092f9acde784990bbc623f263b1e4e0540cf5e94fc49e4a33c0994a1
           imagePullPolicy: IfNotPresent
           name: db
+          command: ["sh", "-c"]
+          args: ["sleep 1d"]
           ports:
             - containerPort: 3306
               protocol: TCP
@@ -114,6 +116,8 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: db
+            - mountPath: /tmp/mysql
+              name: mariadb
           resources:
             limits:
               cpu: 500m
@@ -126,6 +130,9 @@ spec:
         - name: db
           persistentVolumeClaim:
             claimName: db
+        - name: mariadb
+          persistentVolumeClaim:
+            claimName: mariadb
 ---
 apiVersion: apps/v1
 kind: Deployment
