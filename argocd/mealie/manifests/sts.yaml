@@ -27,7 +27,7 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: postgres:18@sha256:1a7c9115671c686384cf4cd9fb50b682f8d5df9bb1d26070001741a064dd04b4
+        - image: postgres:18@sha256:435fe973d0516bf24165976346eced9c841a890b1a2092cb68c45a93679b1b19
           resources:
             limits:
               cpu: 1000m
