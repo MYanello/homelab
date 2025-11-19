@@ -150,7 +150,7 @@ spec:
         app: redis
     spec:
       containers:
-        - image: docker.io/library/redis:8@sha256:5c7c0445ed86918cb9efb96d95a6bfc03ed2059fe2c5f02b4d74f477ffe47915
+        - image: docker.io/library/redis:8@sha256:67ecc8f21e0312c51ea0067b8427da12ca38f167d97f1050452b515c88f80569
           imagePullPolicy: IfNotPresent
           name: redis
           ports:
