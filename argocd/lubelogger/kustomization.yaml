@@ -12,7 +12,7 @@ helmCharts:
     namespace: lubelogger
     releaseName: lubelogger
     repo: https://anza-labs.github.io/charts
-    version: "1.4.0"
+    version: "1.4.1"
     valuesInline:
       config:
         userConfig:
