@@ -4,30 +4,30 @@ kind: Kustomization
 resources:
  - http-route.yaml
 
-# helmCharts:
-#   - name: kiali-operator
-#     repo: https://kiali.org/helm-charts
-#     version: "2.18.0"
-#     releaseName: kiali-operator
-#     namespace: monitoring
-#     valuesFile: ./values.yaml
+helmCharts:
+  - name: kiali-operator
+    repo: https://kiali.org/helm-charts
+    version: "2.18.0"
+    releaseName: kiali-operator
+    namespace: monitoring
+    valuesFile: ./values.yaml
 
-# patches:
-#   - target:
-#       kind: Deployment
-#     patch: |-
-#       - op: replace
-#         path: /spec/replicas
-#         value: 0
-#   - target:
-#       kind: StatefulSet
-#     patch: |-
-#       - op: replace
-#         path: /spec/replicas
-#         value: 0
-#   - target:
-#       kind: DaemonSet
-#     patch: |-
-#       - op: replace
-#         path: /spec/replicas
-#         value: 0
+patches:
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
+  - target:
+      kind: StatefulSet
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
+  - target:
+      kind: DaemonSet
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 0
