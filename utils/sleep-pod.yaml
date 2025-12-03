@@ -12,9 +12,9 @@ spec:
   - name: debug
     image: ubuntu:latest
     command: ["/bin/sh", "-c", "sleep infinity"]
-    volumeMounts:
-    - mountPath: /credentials
-      name: cloud-credentials
+    # volumeMounts:
+    # - mountPath: /credentials
+    #   name: cloud-credentials
     # securityContext:
     #   runAsUser: 0
     #   runAsGroup: 0
@@ -25,17 +25,17 @@ spec:
     #   limits:
     #     memory: "128Mi"
     #     cpu: "500m"
-    # volumeMounts:
-    #   - name: data-vol
-    #     mountPath: /data
+    volumeMounts:
+      - name: data-vol
+        mountPath: /data
   restartPolicy: Never
   volumes:
-  - name: cloud-credentials
-    secret:
-      defaultMode: 420
-      secretName: cloud-credentials
+  # - name: cloud-credentials
+  #   secret:
+  #     defaultMode: 420
+  #     secretName: cloud-credentials
 
   # volumes:
-  #   - name: data-vol
-  #     persistentVolumeClaim:
-  #       claimName: pgdata-postgres-0
+    - name: data-vol
+      persistentVolumeClaim:
+        claimName: uptime-kuma-pvc
