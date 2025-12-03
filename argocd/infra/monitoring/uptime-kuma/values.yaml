@@ -6,4 +6,4 @@ securityContext:
   runAsGroup: 3000
   
 podSecurityContext:
-  fsgroup: 3000
+  fsGroup: 3000
