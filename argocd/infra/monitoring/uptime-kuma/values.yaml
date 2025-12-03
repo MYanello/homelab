@@ -8,8 +8,8 @@ securityContext:
 # podSecurityContext:
 #   fsGroup: 3000
 
-# podEnv:
-#   - name: PUID
-#     value: "3000"
-#   - name: PGID
-#     value: "3000"
+podEnv:
+  - name: PUID
+    value: "3000"
+  - name: PGID
+    value: "3000"
