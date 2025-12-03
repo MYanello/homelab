@@ -116,7 +116,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: ghcr.io/immich-app/immich-machine-learning:v2.2.3-cuda@sha256:39e2be8467bc05f03563af9cff5eafa2da0bf648fdaa9b91493a49830a879599
+          image: ghcr.io/immich-app/immich-machine-learning:v2.3.1-cuda@sha256:723c82610d713bc9bc15d90d8426f96915c2cbd634ef5bec1bf45a098d82d81d
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: photos
