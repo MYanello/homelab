@@ -1,5 +1,5 @@
 image:
-  repository: harbor.yanello.net/docker-hub-cache/louislam/uptime-kuma
+  repository: harbor.yanello.net/docker/louislam/uptime-kuma
   tag: 2.0.2
 
 volume:
