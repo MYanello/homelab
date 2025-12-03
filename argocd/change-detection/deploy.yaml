@@ -20,7 +20,7 @@ spec:
         app: change-detection
     spec:
       containers:
-        - image: ghcr.io/dgtlmoon/changedetection.io:0.50.43@sha256:d4f6b022282e5d06c732592a50a0cbe35217046da6d0a663dcd483119541e65e
+        - image: ghcr.io/dgtlmoon/changedetection.io:0.51.4@sha256:99cf11f04b5d1f1300b5b68f17dc22e76bdb5d6695d7e6590d2df92eca8fb339
           imagePullPolicy: IfNotPresent
           name: change-detection
           env:
