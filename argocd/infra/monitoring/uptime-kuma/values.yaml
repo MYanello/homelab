@@ -1,15 +1,15 @@
 volume:
   storageClassName: truenas-ssd
 
-securityContext:
-  runAsUser: 3000
-  runAsGroup: 3000
+# securityContext:
+#   runAsUser: 3000
+#   runAsGroup: 3000
 
-podSecurityContext:
-  fsGroup: 3000
+# podSecurityContext:
+#   fsGroup: 3000
 
-podEnv:
-  - name: PUID
-    value: "3000"
-  - name: PGID
-    value: "3000"
+# podEnv:
+#   - name: PUID
+#     value: "3000"
+#   - name: PGID
+#     value: "3000"
