@@ -20,7 +20,7 @@ spec:
         app: mealie
     spec:
       containers:
-        - image: ghcr.io/mealie-recipes/mealie:v3.4.0@sha256:545fb8af4287ad027e4f7eb8a0464fa2e21f157e88fda3d7a514ba1e6d3a86b0
+        - image: ghcr.io/mealie-recipes/mealie:v3.6.1@sha256:e4690164cc4ed1bbd82adc00dd9aeed37bd49d938fe2f0ca46cb5082d05ddb71
           imagePullPolicy: IfNotPresent
           resources:
             limits:
