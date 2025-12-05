@@ -37,7 +37,7 @@ spec:
               mountPath: /opt/iocaine/share/data/
       containers:
         - name: iocaine
-          image: git.madhouse-project.org/iocaine/iocaine:2.5.1@sha256:9ba6f3ba5520964f6905ceb10cb1d358144ebfa84f7f101a33e25fbcddb8f867
+          image: git.madhouse-project.org/iocaine/iocaine:3.0.1@sha256:269401bd027c5004be5dfb24bb001f01689ebb4272e33b7ff8bd571b57cae816
           command: ["iocaine"]
           args: ["--config-file", "/etc/iocaine/config.toml"]
           ports:
