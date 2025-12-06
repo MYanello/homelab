@@ -24,7 +24,7 @@ prometheus-server metrics {
 http-server default {
   bind "0.0.0.0:8080"
   use metrics=metrics
-  
+
   sources {
     markov = [
       "/opt/iocaine/share/data/1984.txt",

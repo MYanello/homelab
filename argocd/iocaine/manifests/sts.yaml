@@ -39,7 +39,7 @@ spec:
         - name: iocaine
           image: git.madhouse-project.org/iocaine/iocaine:3.0.1@sha256:269401bd027c5004be5dfb24bb001f01689ebb4272e33b7ff8bd571b57cae816
           command: ["iocaine"]
-          args: ["-c", "/etc/iocaine/config.toml"]
+          args: ["-c", "/etc/iocaine/config.kdl"]
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -55,8 +55,8 @@ spec:
               cpu: "1"
           volumeMounts:
             - name: config
-              mountPath: /etc/iocaine/config.toml
-              subPath: config.toml
+              mountPath: /etc/iocaine/config.kdl
+              subPath: config.kdl
             - name: iocaine-persistent
               mountPath: /opt/iocaine/share/data/
       volumes:

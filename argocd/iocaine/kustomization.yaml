@@ -4,7 +4,7 @@ kind: Kustomization
 configMapGenerator:
   - name: config
     files:
-      - ./manifests/config.toml
+      - ./manifests/config.kdl
 
 resources:
   - manifests/sts.yaml
