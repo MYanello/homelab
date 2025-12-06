@@ -41,7 +41,7 @@ spec:
         - name: DISABLE_EMAIL_AUTH
           value: "false"
         - name: STORAGE_ENDPOINT
-          value: "myanello-rxresume"
+          value: "https://s3.us-west-004.backblazeb2.com"
         - name: STORAGE_REGION
           value: "us-west-004"
         - name: STORAGE_BUCKET
