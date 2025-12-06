@@ -47,11 +47,11 @@ spec:
         - name: STORAGE_BUCKET
           value: "myanello-rxresume"
         - name: STORAGE_USE_SSL
-          value: "false"
+          value: "true"
         - name: SKIP_BUCKET_CHECK
           value: "false"
         - name: STORAGE_PORT
-          value: "80"
+          value: "443"
         - name: STORAGE_URL
           value: "https://myanello-rxresume.s3.us-west-004.backblazeb2.com/"
         envFrom:
