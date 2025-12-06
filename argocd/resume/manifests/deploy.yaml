@@ -41,11 +41,11 @@ spec:
         - name: DISABLE_EMAIL_AUTH
           value: "false"
         - name: STORAGE_ENDPOINT
-          value: "minio.minio.svc.cluster.local"
+          value: "s3.us-west-004.backblazeb2.com"
         - name: STORAGE_REGION
-          value: "homelab"
+          value: "us-west-004"
         - name: STORAGE_BUCKET
-          value: "rxresume"
+          value: "myanello-rxresume"
         - name: STORAGE_USE_SSL
           value: "false"
         - name: SKIP_BUCKET_CHECK
@@ -53,7 +53,7 @@ spec:
         - name: STORAGE_PORT
           value: "80"
         - name: STORAGE_URL
-          value: "https://minio.yanello.net/rxresume"
+          value: "https://myanello-rxrusme.s3.us-west-004.backblazeb2.com/"
         envFrom:
           - secretRef:
               name: resume-secrets
