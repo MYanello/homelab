@@ -2,7 +2,6 @@ prometheus-server "metrics" {
     bind "0.0.0.0:8181"
     persist-path "/opt/iocaine/share/data/metrics.json"
     persist-interval "1h"
-    labels "Host" "UserAgentGroup" "Verdict"
 
     agent-group {
         agent "(?i:ClaudeBot)"
