@@ -41,7 +41,7 @@ spec:
         - name: DISABLE_EMAIL_AUTH
           value: "false"
         - name: STORAGE_ENDPOINT
-          value: "s3.us-west-004.backblazeb2.com"
+          value: "myanello-rxresume"
         - name: STORAGE_REGION
           value: "us-west-004"
         - name: STORAGE_BUCKET
@@ -53,7 +53,7 @@ spec:
         - name: STORAGE_PORT
           value: "443"
         - name: STORAGE_URL
-          value: "https://s3.us-west-004.backblazeb2.com/myanello-rxresume"
+          value: "https://s3.us-west-004.backblazeb2.com"
         envFrom:
           - secretRef:
               name: resume-secrets
