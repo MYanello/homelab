@@ -94,6 +94,8 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: "mariadb"
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: ubuntu-k3s
       containers:
         - image: docker.io/library/mariadb:12@sha256:e1bcd6f85781f4a875abefb11c4166c1d79e4237c23de597bf0df81fec225b40
           imagePullPolicy: IfNotPresent
