@@ -22,7 +22,7 @@ spec:
         runAsGroup: 1000     # Group ID for the process
       restartPolicy: Always
       containers:
-        - image: harbor.yanello.net/ghcr/maintainerr/maintainerr:2.22.1
+        - image: harbor.yanello.net/ghcr/maintainerr/maintainerr:2.22.1@sha256:54390936bd6e3579f1a32e4d00fee9a61c8b373a37012789580e0778c8d11269
           imagePullPolicy: IfNotPresent
           name: maintainerr
           ports:
