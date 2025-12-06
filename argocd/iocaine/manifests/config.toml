@@ -1,27 +1,35 @@
-[default.server]
-bind = "0.0.0.0:8080"
+prometheus-server metrics {
+  bind "0.0.0.0:8181"
+  persist-path "/opt/iocaine/share/data/metrics.json"
+  persist-interval "1h"
+  labels = ["Host", "UserAgentGroup", "Verdict"]
+  agent_group {
+    agent = "(?i:ClaudeBot)"
+    group = "ClaudeBot"
+  }
+  agent_group {
+    agent = "(?i:AmazonBot)"
+    group = "Amazon"
+  }
+  agent_group {
+    agent = "(?i:GPTBot|ChatGPT)"
+    group = "GPTBot"
+  }
+  agent_group {
+    agent = "."
+    group = "Other"
+  }
+}
 
-[default.metrics]
-enable = true
-bind = "0.0.0.0:8181"
-labels = [ "Host", "UserAgentGroup", "Verdict" ]
-[[default.metrics.agent_group]]
-agent = "(?i:ClaudeBot)"
-group = "ClaudeBot"
-[[default.metrics.agent_group]]
-agent = "(?i:AmazonBot)"
-group = "Amazon"
-[[default.metrics.agent_group]]
-agent = "(?i:GPTBot|ChatGPT)"
-group = "GPTBot"
-[[default.metrics.agent_group]]
-agent = "."
-group = "Other"
-persist-path = "/opt/iocaine/share/data/metrics.json"
-
-[default.sources]
-markov = [
-  "/opt/iocaine/share/data/1984.txt",
-  "/opt/iocaine/share/data/brave-new-world.txt"
-]
-words = "/opt/iocaine/share/data/words.txt"
+http-server default {
+  bind "0.0.0.0:8080"
+  use metrics=metrics
+  
+  sources {
+    markov = [
+      "/opt/iocaine/share/data/1984.txt",
+      "/opt/iocaine/share/data/brave-new-world.txt"
+    ]
+    words = "/opt/iocaine/share/data/words.txt"
+  }
+}
