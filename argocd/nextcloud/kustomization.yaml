@@ -35,4 +35,4 @@ images:
   - name: nextcloud
     newTag: 32.0.2@sha256:8cb1dc8c26944115469dd22f4965d2ed35bab9cf8c48d2bb052c8e9f83821ded
   - name: docker.io/library/mariadb
-    newTag: "12.0"
+    newTag: "12.0@sha256:607835cd628b78e2876f6a586d0ec37b296c47683b31ef750002d3d17d3d8f7a"
