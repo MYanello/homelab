@@ -2,34 +2,18 @@ prometheus-server "metrics" {
     bind "0.0.0.0:8181"
     persist-path "/opt/iocaine/share/data/metrics.json"
     persist-interval "1h"
-
-    agent-group {
-        agent "(?i:ClaudeBot)"
-        group "ClaudeBot"
-    }
-
-    agent-group {
-        agent "(?i:AmazonBot)"
-        group "Amazon"
-    }
-
-    agent-group {
-        agent "(?i:GPTBot|ChatGPT)"
-        group "GPTBot"
-    }
-
-    agent-group {
-        agent "."
-        group "Other"
-    }
 }
 
 http-server "default" {
     bind "0.0.0.0:8080"
     use metrics="metrics"
+    use handler-from=default
+}
 
-    sources {
-        markov "/opt/iocaine/share/data/1984.txt" "/opt/iocaine/share/data/brave-new-world.txt"
-        words "/opt/iocaine/share/data/words.txt"
-    }
+declare-handler default {
+  sources {
+    training-corpus "/opt/iocaine/share/data/1984.txt" \
+                    "/opt/iocaine/share/data/brave-new-world.txt"
+    wordlists "/opt/iocaine/share/data/words.txt"
+  }
 }
