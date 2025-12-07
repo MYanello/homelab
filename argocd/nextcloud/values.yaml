@@ -47,7 +47,7 @@ nextcloud:
   objectStore:
     s3:
       enabled: true
-      region: "homelab"
+      region: "us-west-004"
       usePathStyle: true
       existingSecret: nextcloud-secrets
       secretKeys:
@@ -72,27 +72,9 @@ redis:
   master:
     persistence:
       enabled: false
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - marcus-server
   replica:
     persistence:
       enabled: false
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - marcus-server
 
 service:
   type: LoadBalancer
@@ -121,12 +103,3 @@ mariadb:
     persistence:
       enabled: true
       storageClass: longhorn-xfs
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - marcus-server
