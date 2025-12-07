@@ -16,7 +16,7 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - pdf.yanello.net
+    - stirling-pdf.yanello.net
   rules:
     - backendRefs:
         - name: stirling-pdf-chart
