@@ -81,6 +81,10 @@ spec:
       group: gateway.networking.k8s.io
       kind: Gateway
       sectionName: http
+    - name: cilium-public-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      sectionName: http-root
   hostnames:
     - "*.yanello.net"
     - "yanello.net"
