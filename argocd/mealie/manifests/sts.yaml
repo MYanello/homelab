@@ -15,7 +15,7 @@ spec:
       labels:
         app: postgres
       annotations:
-        backup.velero.io/backup-volumes: pg-data
+        backup.velero.io/backup-volumes: pg-data-postgres-0
     spec:
       affinity:
         nodeAffinity:
