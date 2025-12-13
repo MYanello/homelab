@@ -5,6 +5,15 @@ metadata:
   labels:
     app: debug
 spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - marcus-server
   # imagePullSecrets:
   #   - name: gitea-pull-secrets
 #  serviceAccountName: external-secrets
@@ -38,7 +47,7 @@ spec:
   #     secretName: cloud-credentials
     - name: old
       hostPath: 
-        path: /zpool/k8s/vaultwarden
+        path: /zpool/k8s/change-detection
     - name: pvc
       persistentVolumeClaim:
-        claimName: vaultwarden-data-vaultwarden-0
+        claimName: data
