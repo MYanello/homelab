@@ -10,6 +10,8 @@ spec:
         revision: HEAD
         directories:
           - path: argocd/infra/storage/*
+          - path: argocd/infra/storage/minio
+            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
