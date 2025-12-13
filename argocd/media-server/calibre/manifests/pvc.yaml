@@ -3,19 +3,19 @@ kind: PersistentVolumeClaim
 metadata:
   name: config
 spec:
-  storageClassName: nfs-storage
+  storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ingest
 spec:
-  storageClassName: nfs-storage
+  storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteMany
   resources:
@@ -27,7 +27,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: library
 spec:
-  storageClassName: nfs-storage
+  storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteOnce
   resources:
