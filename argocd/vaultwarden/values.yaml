@@ -9,15 +9,9 @@ storage:
   data:
     name: vaultwarden-data
     size: 15Gi
-    class: nfs-storage
+    class: truenas-ssd-nfs
     keepPvc: true
     accessMode: ReadWriteMany
-  attachments:
-    name: vaultwarden-data
-    keepPvc: true
-    accessMode: ReadWriteMany
-    size: 15Gi
-    class: nfs-storage
 adminToken:
   existingSecret: vw-admin-secret
   existingSecretKey: adminToken
