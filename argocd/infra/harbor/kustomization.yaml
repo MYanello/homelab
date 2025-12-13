@@ -9,7 +9,7 @@ helmCharts:
     namespace: harbor
     releaseName: harbor
     repo: https://helm.goharbor.io
-    version: "1.18.0"
+    version: "1.18.1"
     valuesInline:
       database:
         podAnnoations:
