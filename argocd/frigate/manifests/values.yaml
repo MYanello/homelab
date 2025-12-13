@@ -2,7 +2,7 @@ nodeSelector:
   accelerator: coral-tpu
   nvidia.com/gpu.present: "true"
 image:
-  repository: harbor.yanello.net/ghcr-cache/blakeblackshear/frigate
+  repository: harbor.yanello.net/ghcr/blakeblackshear/frigate
   tag: 0.16.3-tensorrt@sha256:7940134770b1f050e7b4ad6cf716fda011e15fe53ea6cc7e5066b8f1df6335bd
   pullPolicy: IfNotPresent
 persistence:
