@@ -57,7 +57,7 @@ spec:
         name: wrapperr-config
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn
+        storageClassName: truenas-hdd-nfs
         resources:
           requests:
-            storage: 25Mi
+            storage: 1Gi
