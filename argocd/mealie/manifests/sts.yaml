@@ -27,7 +27,8 @@ spec:
                     values:
                       - marcus-server
       containers:
-        - image: postgres:18@sha256:38d5c9d522037d8bf0864c9068e4df2f8a60127c6489ab06f98fdeda535560f9
+        - image: ubuntu:latest #postgres:18@sha256:38d5c9d522037d8bf0864c9068e4df2f8a60127c6489ab06f98fdeda535560f9
+          command: ["/bin/bash", "-c", "sleep", "inf"]
           resources:
             limits:
               cpu: 1000m
@@ -48,26 +49,32 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/
               name: pg-data
-          readinessProbe:
-            exec:
-              command:
-              - sh
-              - -c
-              - pg_isready -U mealie -d mealie
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            exec:
-              command:
-              - sh
-              - -c
-              - pg_isready -U mealie -d mealie
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
+            - name: old
+              mountPath: /tmp
+      volumes:
+        - name: old
+          hostPath:
+            path: /zpool/k8s/mealie.bak
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #     - sh
+          #     - -c
+          #     - pg_isready -U mealie -d mealie
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 10
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #     - sh
+          #     - -c
+          #     - pg_isready -U mealie -d mealie
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 5
       restartPolicy: Always          
   volumeClaimTemplates:
     - apiVersion: v1
