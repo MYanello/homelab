@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: postgres
-      annotations: 
+      annotations:
         backup.velero.io/backup-volumes: pg-data
     spec:
       affinity:
@@ -28,7 +28,8 @@ spec:
                       - marcus-server
       containers:
         - image: ubuntu:latest #postgres:18@sha256:38d5c9d522037d8bf0864c9068e4df2f8a60127c6489ab06f98fdeda535560f9
-          command: ["/bin/bash", "-c", "sleep inf"]
+          command: ["/bin/bash"]
+          args: ["-c", "sleep inf"]
           resources:
             limits:
               cpu: 1000m
@@ -75,14 +76,14 @@ spec:
           #   periodSeconds: 10
           #   timeoutSeconds: 5
           #   failureThreshold: 5
-      restartPolicy: Always          
+      restartPolicy: Always
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
         name: pg-data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         storageClassName: truenas-ssd
         resources:
           requests:
