@@ -35,19 +35,41 @@ spec:
     #     memory: "128Mi"
     #     cpu: "500m"
     volumeMounts:
-      - name: pvc
-        mountPath: /pvc
-      - name: old
-        mountPath: old
+      - name: pvc-config
+        mountPath: /pvc/config
+      - name: old-config
+        mountPath: /old/config
+      - name: pvc-library
+        mountPath: /pvc/library
+      - name: old-library
+        mountPath: /old/library
+      - name: pvc-ingest
+        mountPath: /pvc/ingest
+      - name: old-ingest
+        mountPath: /old/ingest
   restartPolicy: Never
   volumes:
   # - name: cloud-credentials
   #   secret:
   #     defaultMode: 420
   #     secretName: cloud-credentials
-    - name: old
+    - name: old-config
       hostPath: 
-        path: /zpool/k8s/change-detection
-    - name: pvc
+        path: /zpool/k8s/calibre/config
+    - name: old-library
+      hostPath: 
+        path: /zpool/k8s/calibre/library
+    - name: old-ingest
+      hostPath: 
+        path: /zpool/k8s/calibre/ingest
+    - name: pvc-config
       persistentVolumeClaim:
-        claimName: data
+        claimName: config
+    - name: pvc-library
+      persistentVolumeClaim:
+        claimName: library
+    - name: pvc-ingest
+      persistentVolumeClaim:
+        claimName: ingest
+
+
