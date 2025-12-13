@@ -26,16 +26,19 @@ spec:
     #     memory: "128Mi"
     #     cpu: "500m"
     volumeMounts:
-      - name: data-vol
-        mountPath: /data
+      - name: pvc
+        mountPath: /pvc
+      - name: old
+        mountPath: old
   restartPolicy: Never
   volumes:
   # - name: cloud-credentials
   #   secret:
   #     defaultMode: 420
   #     secretName: cloud-credentials
-
-  # volumes:
-    - name: data-vol
+    - name: old
+      hostPath: 
+        path: /zpool/k8s/vaultwarden
+    - name: pvc
       persistentVolumeClaim:
-        claimName: uptime-kuma-pvc
+        claimName: vaultwarden-data-vaultwarden-0
