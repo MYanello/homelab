@@ -17,15 +17,6 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: pg-data-postgres-0
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
       containers:
         - image: harbor.yanello.net/docker/postgres:18@sha256:38d5c9d522037d8bf0864c9068e4df2f8a60127c6489ab06f98fdeda535560f9
           resources:
@@ -48,8 +39,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/
               name: pg-data
-            - name: old
-              mountPath: /tmp
           readinessProbe:
             exec:
               command:

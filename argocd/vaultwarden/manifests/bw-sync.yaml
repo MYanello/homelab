@@ -21,7 +21,7 @@ spec:
         app: bitwarden-sync
     spec:
       containers:
-        - image: docker.io/reaper0x1/bitwarden-portal:latest@sha256:a1502fa9af9537e537dc1aa6e189fd39ed8c690fd6eecbd8cb9a0ca10b26b3ea
+        - image: docker.io/reaper0x1/bitwarden-portal:1.0.2@sha256:a1502fa9af9537e537dc1aa6e189fd39ed8c690fd6eecbd8cb9a0ca10b26b3ea
           imagePullPolicy: Always
           name: bitwarden-sync
           env:
