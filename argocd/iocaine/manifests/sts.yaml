@@ -93,7 +93,7 @@ spec:
         name: iocaine-persistent
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: "longhorn-xfs"
+        storageClassName: "truenas-hdd-nfs"
         resources:
           requests:
             storage: 1Gi
