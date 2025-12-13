@@ -5,7 +5,6 @@ kind: Kustomization
 resources:
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
-  - ./manifests/vs.yaml
   - ./manifests/http-route.yaml
 
 configMapGenerator:
