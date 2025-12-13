@@ -76,7 +76,7 @@ spec:
         name: pg-data
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        storageClassName: local-path
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 10Gi
