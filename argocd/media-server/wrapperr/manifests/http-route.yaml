@@ -15,6 +15,9 @@ spec:
     - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
     - wrapperr.yanello.net
   rules:
