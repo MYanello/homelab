@@ -72,9 +72,6 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
       volumes:
-        - name: plex-logs
-          hostPath:
-            path: /zpool/k8s/plex/config/Library/Application Support/Plex Media Server/Logs
         - name: config
           persistentVolumeClaim:
             claimName: config
