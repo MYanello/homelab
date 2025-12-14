@@ -40,6 +40,12 @@ spec:
         - name: media
           hostPath:
             path: /data/media
+        - name: config-new
+          persistentVolumeClaim:
+            claimName: config
+        - name: transcode-new
+          persistentVolumeClaim:
+            claimName: transcode            
       terminationGracePeriodSeconds: 120
       runtimeClassName: nvidia
       containers:
@@ -106,3 +112,7 @@ spec:
               mountPath: /transcode
             - name: media
               mountPath: /data/media
+            - name: config-new
+              mountPath: /new/config
+            - name: transcode-new
+              mountPath: /new/transcode

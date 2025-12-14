@@ -13,7 +13,6 @@ vmagent:
         cpu: 150m
         memory: 500Mi
       limits:
-        cpu: 500m
         memory: 2Gi
 
 
@@ -47,8 +46,7 @@ vmsingle:
         cpu: 150m
         memory: 4Gi
       limits:
-        cpu: 2500m
-        memory: 8Gi
+        memory: 16Gi
         
 defaultDashboards:
   annotations:
