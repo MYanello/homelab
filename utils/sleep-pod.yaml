@@ -35,41 +35,30 @@ spec:
     #     memory: "128Mi"
     #     cpu: "500m"
     volumeMounts:
-      - name: pvc-config
+      - name: config
         mountPath: /pvc/config
       - name: old-config
         mountPath: /old/config
-      - name: pvc-library
-        mountPath: /pvc/library
-      - name: old-library
-        mountPath: /old/library
-      - name: pvc-ingest
-        mountPath: /pvc/ingest
-      - name: old-ingest
-        mountPath: /old/ingest
+      - name: transcode
+        mountPath: /pvc/transcode
+      - name: old-transcode
+        mountPath: /old/transcode
   restartPolicy: Never
   volumes:
   # - name: cloud-credentials
   #   secret:
   #     defaultMode: 420
   #     secretName: cloud-credentials
+    - name: old-transcode
+      hostPath: 
+        path: /zpool/k8s/plex/transcode
     - name: old-config
       hostPath: 
-        path: /zpool/k8s/calibre/config
-    - name: old-library
-      hostPath: 
-        path: /zpool/k8s/calibre/library
-    - name: old-ingest
-      hostPath: 
-        path: /zpool/k8s/calibre/ingest
-    - name: pvc-config
+        path: /zpool/k8s/plex/config
+    - name: config
       persistentVolumeClaim:
         claimName: config
-    - name: pvc-library
+    - name: transcode
       persistentVolumeClaim:
-        claimName: library
-    - name: pvc-ingest
-      persistentVolumeClaim:
-        claimName: ingest
-
+        claimName: transcode
 

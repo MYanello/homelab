@@ -31,21 +31,21 @@ spec:
                     values:
                       - marcus-server
       volumes:
-        - name: transcode
-          hostPath:
-            path: /zpool/k8s/plex/transcode
         - name: config
-          hostPath:
-            path: /zpool/k8s/plex/config
+          persistentVolumeClaim:
+            claimName: config
+        - name: transcode
+          persistentVolumeClaim:
+            claimName: transcode
+        # - name: transcode
+        # hostPath:
+        # path: /zpool/k8s/plex/transcode
+        # - name: config
+        # hostPath:
+        # path: /zpool/k8s/plex/config
         - name: media
           hostPath:
             path: /data/media
-        - name: config-new
-          persistentVolumeClaim:
-            claimName: config
-        - name: transcode-new
-          persistentVolumeClaim:
-            claimName: transcode            
       terminationGracePeriodSeconds: 120
       runtimeClassName: nvidia
       containers:
@@ -112,7 +112,4 @@ spec:
               mountPath: /transcode
             - name: media
               mountPath: /data/media
-            - name: config-new
-              mountPath: /new/config
-            - name: transcode-new
-              mountPath: /new/transcode
+
