@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+generators:
+  - ./secret-generator.yaml
+
 resources:
   - ./http-route.yaml
 
@@ -18,8 +21,15 @@ helmCharts:
           registry: harbor.yanello.net/quay
           repository: argoproj/workflow-controller
           tag: ""
+      authModes:
+        - sso
       server:
         image:
           registry: harbor.yanello.net/quay
           repository: argoproj/argocli
           tag: ""
+        sso:
+          enabled: true
+          issuer: "https://authentik.yanello.net"
+          redirectUrl: "https://workflows.yanello.net/oauth2/callback"
+          
