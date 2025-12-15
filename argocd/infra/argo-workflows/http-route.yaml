@@ -22,5 +22,5 @@ spec:
           weight: 1
       matches:
         - path:
-          type: PathPrefix
-          value: /
+            type: PathPrefix
+            value: /
