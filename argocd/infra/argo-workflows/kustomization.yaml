@@ -21,13 +21,13 @@ helmCharts:
           registry: harbor.yanello.net/quay
           repository: argoproj/workflow-controller
           tag: ""
-      authModes:
-        - sso
       server:
         image:
           registry: harbor.yanello.net/quay
           repository: argoproj/argocli
           tag: ""
+        authModes:
+          - sso
         sso:
           enabled: true
           issuer: "https://authentik.yanello.net/application/o/argo-workflows/"
@@ -42,5 +42,3 @@ helmCharts:
             - openid
             - profile
             - email
-          
-          
