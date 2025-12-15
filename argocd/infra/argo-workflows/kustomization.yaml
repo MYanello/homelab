@@ -1,13 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+resources:
+  - ./http-route.yaml
+
 helmCharts:
   - name: argo-workflows
     namespace: argo-workflows
     releaseName: argo-workflows
     repo: https://argoproj.github.io/argo-helm
     version: "0.46.2"
-    valuesInline: 
+    valuesInline:
       crds:
         full: true
       controller:

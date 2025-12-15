@@ -1,0 +1,17 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: argo-workflows-app
+  name: argo-workflows-http-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - workflows.yanello.net
+  rules:
+    - backendRefs:
+        - name: argo-workflows-server
+          port: 2746
