@@ -30,7 +30,7 @@ helmCharts:
           - sso
         sso:
           enabled: true
-          issuer: "https://authentik.yanello.net/application/o/argo-workflows/.well-known/openid-configuration"
+          issuer: "https://authentik.yanello.net/application/o/argo-workflows/"
           clientId:
             name: argo-server-sso
             key: client-id
