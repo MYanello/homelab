@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: argo-workflows
+    namespace: argo-workflows
+    releaseName: argo-workflows
+    repo: https://argoproj.github.io/argo-helm
+    version: "0.46.2"
+    valuesInline: 
+      crds:
+        full: true
+      controller:
+        image:
+          registry: harbor.yanello.net/quay
+          repository: argoproj/workflow-controller
+          tag: ""
+      server:
+        image:
+          registry: harbor.yanello.net/quay
+          repository: argoproj/argocli
+          tag: ""
