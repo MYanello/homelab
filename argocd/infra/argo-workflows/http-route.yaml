@@ -7,6 +7,8 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: cilium
       sectionName: https
   hostnames:
@@ -14,4 +16,11 @@ spec:
   rules:
     - backendRefs:
         - name: argo-workflows-server
+          group: ""
+          kind: Service
           port: 2746
+          weight: 1
+      matches:
+        - path:
+          type: PathPrefix
+          value: /
