@@ -31,6 +31,12 @@ helmCharts:
         sso:
           enabled: true
           issuer: "https://authentik.yanello.net/application/o/argo-workflows/"
+          clientId:
+            name: argo-server-sso
+            key: client-id
+          clientSecret:
+            name: argo-server-sso
+            key: client-secret
           redirectUrl: "https://workflows.yanello.net/oauth2/callback"
           scopes:
             - openid
