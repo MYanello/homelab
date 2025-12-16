@@ -53,8 +53,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            - mountPath: /logs
-              name: plex-logs
           startupProbe:
             httpGet:
               path: /
