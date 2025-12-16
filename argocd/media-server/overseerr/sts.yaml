@@ -6,7 +6,7 @@ metadata:
     app: overseerr
 spec:
   serviceName: overseerr
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 3
   selector:
     matchLabels:
