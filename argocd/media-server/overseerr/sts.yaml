@@ -6,7 +6,7 @@ metadata:
     app: overseerr
 spec:
   serviceName: overseerr
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -64,7 +64,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: truenas-ssd-nfs
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 1Gi
