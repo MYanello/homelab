@@ -30,6 +30,8 @@ helmCharts:
           - sso
         sso:
           enabled: true
+          rbac:
+            enabled: false
           issuer: "https://authentik.yanello.net/application/o/argo-workflows/"
           clientId:
             name: argo-server-sso
