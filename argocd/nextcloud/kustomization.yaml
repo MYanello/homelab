@@ -30,11 +30,3 @@ helmCharts:
     releaseName: nextcloud
     namespace: nextcloud
     valuesFile: ./values.yaml
-
-images:
-  - name: docker.io/library/nextcloud
-    newName: harbor.yanello.net/docker/library/nextcloud
-    newTag: 32.0.3@sha256:53231a9fb9233af2c15bfe70fc03ebe639fd53243fa42a9369884b1e0008deae
-  - name: docker.io/bitnamilegacy/mariadb
-    newName: harbor.yanello.net/docker/library/mariadb
-    newTag: "11.8.5-noble"
