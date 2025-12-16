@@ -32,7 +32,7 @@ spec:
                 secretKeyRef:
                   name: calibre-secrets
                   key: AA_KEY
-          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:v0.3.3@sha256:1f31289a7982dfdd1bfb965f9bb23e39c56288d7cdb033647365e1b386fdba62
+          image: harbor.yanello.net/ghcr/calibre-web-automated-book-downloader:v0.3.3@sha256:1f31289a7982dfdd1bfb965f9bb23e39c56288d7cdb033647365e1b386fdba62
           imagePullPolicy: IfNotPresent
           name: calibre-dl
           resources:
@@ -105,7 +105,7 @@ spec:
               value: "America/Chicago"
             - name: CWA_PORT_OVERRIDE
               value: "80"
-          image: docker.io/crocodilestick/calibre-web-automated:latest@sha256:577e846f104fd21453ef306eefb4a95dd95b3b9ddd2463a150944494284da0fd
+          image: harbor.yanello.net/docker/crocodilestick/calibre-web-automated:latest@sha256:577e846f104fd21453ef306eefb4a95dd95b3b9ddd2463a150944494284da0fd
           imagePullPolicy: IfNotPresent
           name: calibre
           resources:
