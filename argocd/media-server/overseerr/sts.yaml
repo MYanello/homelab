@@ -15,8 +15,6 @@ spec:
     metadata:
       labels:
         app: overseerr
-      annotations:
-        backup.velero.io/backup-volumes: config
     spec:
       containers:
         - env:
