@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustdesk-hbbs-service
+spec:
+  type: NodePort
+  selector:
+    app: rustdesk-hbbs
+  ports:
+  - name: tcp-21115
+    port: 21115
+    targetPort: 21115
+    protocol: TCP
+  - name: tcp-21116
+    port: 21116
+    targetPort: 21116
+    protocol: TCP
+  - name: udp-21116
+    port: 21116
+    targetPort: 21116
+    protocol: UDP
+  - name: tcp-21118
+    port: 21118
+    targetPort: 21118
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustdesk-hbbr-service
+spec:
+  type: ClusterIP
+  selector:
+    app: rustdesk-hbbr
+  ports:
+  - name: tcp-21117
+    port: 21117
+    targetPort: 21117
+    protocol: TCP
+  - name: tcp-21119
+    port: 21119
+    targetPort: 21119
+    protocol: TCP
