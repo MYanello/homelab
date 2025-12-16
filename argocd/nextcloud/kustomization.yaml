@@ -32,7 +32,9 @@ helmCharts:
     valuesFile: ./values.yaml
 
 images:
-  - name: harbor.yanello.net/docker/nextcloud
+  - name: docker.io/library/nextcloud
+    newName: harbor.yanello.net/docker/library/nextcloud
     newTag: 32.0.3@sha256:53231a9fb9233af2c15bfe70fc03ebe639fd53243fa42a9369884b1e0008deae
-  - name: harbor.yanello.net/docker/library/mariadb
-    newTag: "12.1@sha256:e1bcd6f85781f4a875abefb11c4166c1d79e4237c23de597bf0df81fec225b40"
+  - name: docker.io/bitnamilegacy/mariadb
+    newName: harbor.yanello.net/docker/library/mariadb
+    newTag: "11.4.6-debian-12-r0"
