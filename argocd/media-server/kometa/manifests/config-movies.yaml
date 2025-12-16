@@ -92,11 +92,8 @@ data:
       Universe Collections:
         type: custom
         data:
-          wizard: Wizarding World
           middle: Middle Earth
           beasts: Fantastic Beasts
-          asterix: Asterix
-          harry: Harry Potter
           pixar_shorts: Pixar Shorts
           pixar: Pixar
         template:
@@ -106,11 +103,8 @@ data:
           - custom
         template_variables:
           trakt_list:
-            wizard: https://trakt.tv/users/strangerer/lists/harry-potter
             middle: https://trakt.tv/users/dybro/lists/lord-of-the-rings
             beasts: https://trakt.tv/users/user71/lists/fantastic-beasts
-            asterix: https://trakt.tv/users/tharam/lists/asterix
-            harry: https://trakt.tv/users/hurleyb/lists/harry-potter
             pixar_shorts: https://trakt.tv/users/deccoskyrider/lists/pixar-shorts
             pixar: https://trakt.tv/users/chloe131997/lists/pixar
           image:
@@ -185,6 +179,9 @@ data:
           indiana: Indiana Jones
           jurassic: Jurassic Park
           star_wars: Star Wars
+          harry_potter: Harry Potter
+          wizarding_world: Wizarding World
+          asterix: Asterix et Obelix
         template:
           - lbxd
           - shared
@@ -198,7 +195,7 @@ data:
             john_wick: https://letterboxd.com/fantic/list/john-wick/
             hunger_games: https://letterboxd.com/hogwarthur/list/hunger-games/
             rambo: https://letterboxd.com/nislav2001/list/rambo/
-            naked_gun: https://letterboxd.com/jman_nothing/list/naked-gun/
+            naked_gun: https://letterboxd.com/atlas80101/list/naked-gun/
             mad_max: https://letterboxd.com/fantic/list/mad-max/
             predator: https://letterboxd.com/davecalt/list/predator/
             spider_man_raimi: https://letterboxd.com/marmoto/list/spider-man-raimi/
@@ -218,6 +215,9 @@ data:
             pirates: https://letterboxd.com/fantic/list/pirates-of-the-caribbean/
             indiana: https://letterboxd.com/fantic/list/indiana-jones/
             jurassic: https://letterboxd.com/mrbrundlefly/list/jurassic-park/
+            harry_potter: https://letterboxd.com/thatotherruben/list/harry-potter/
+            wizarding_world: https://letterboxd.com/davidlsims/list/harry-potter/
+            asterix: https://letterboxd.com/fantic/list/asterix/
           image:
             default: universe/<<key>>
           collection_order: 

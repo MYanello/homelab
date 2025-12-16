@@ -37,12 +37,6 @@ spec:
         - name: transcode
           persistentVolumeClaim:
             claimName: transcode
-        # - name: transcode
-        # hostPath:
-        # path: /zpool/k8s/plex/transcode
-        # - name: config
-        # hostPath:
-        # path: /zpool/k8s/plex/config
         - name: media
           hostPath:
             path: /data/media
