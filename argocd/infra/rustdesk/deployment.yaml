@@ -15,6 +15,13 @@ spec:
       labels:
         app: rustdesk-hbbr
     spec:
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
       containers:
       - name: hbbr
         image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest
@@ -49,6 +56,13 @@ spec:
       labels:
         app: rustdesk-hbbs
     spec:
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
       containers:
       - name: hbbs
         image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest
