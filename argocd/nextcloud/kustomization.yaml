@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./manifests/cm.yaml
   - ./manifests/http-route.yaml
-  - ./manifests/ns.yaml
+  - ./manifests/pvc.yaml
 
 patches:
   - target:
