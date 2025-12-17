@@ -2,8 +2,8 @@ replicaCount: 1
 
 persistence:
   enabled: true
-  storageClass: longhorn
-  size: "8589934592" # 8Gi
+  storageClass: truenas-ssd-nfs
+  size: 10Gi
 
 livenessProbe:
   enabled: true
@@ -13,7 +13,7 @@ readinessProbe:
   enabled: true
 
 nextcloud:
-  host: nextcloudk8s.yanello.net
+  host: nextcloud.yanello.net
   existingSecret:
     enabled: true
     secretName: nextcloud-secrets
