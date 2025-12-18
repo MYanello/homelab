@@ -24,6 +24,7 @@ spec:
       securityContext:
         runAsGroup: 0
         runAsUser: 0
+        fsGroup: 0
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
