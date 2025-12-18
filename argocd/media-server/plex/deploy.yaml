@@ -24,14 +24,13 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-                  matchExpressions:
-                    - key: kubernetes.io/hostname
-                      operator: In
-                      values:
-                        - marcus-server
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       volumes:
         - name: config
           persistentVolumeClaim:
