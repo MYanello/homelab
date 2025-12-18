@@ -92,7 +92,7 @@ spec:
               protocol: UDP
           env:
             - name: ADVERTISE_IP
-              value: plex.yanello.net:443,10.10.8.200:32400
+              value: https://plex.yanello.net:443,http://10.10.8.200:32400
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
             - name: NVIDIA_DRIVER_CAPABILITIES
