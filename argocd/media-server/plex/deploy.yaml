@@ -21,6 +21,9 @@ spec:
         app: plex
     spec:
       hostNetwork: true
+      securityContext:
+        runAsGroup: 0
+        runAsUser: 0
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -46,9 +49,6 @@ spec:
         - name: plex-pms
           image: docker.io/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
           imagePullPolicy: IfNotPresent
-          securityContext:
-            privileged: true
-            runAsUser: 0
           resources:
             limits:
               nvidia.com/gpu: "1"
@@ -109,4 +109,3 @@ spec:
               mountPath: /transcode
             - name: media
               mountPath: /data/media
-
