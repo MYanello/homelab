@@ -24,9 +24,9 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - weight: 100
-                preference:
+          - weight: 1
+            preference:
+              matchExpressions:
                   matchExpressions:
                     - key: kubernetes.io/hostname
                       operator: In
