@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
+  # annotations: 
+    # tailscale.com/expose: "true"
   labels:
     app: httpbin
   name: httpbin
@@ -37,6 +39,10 @@ spec:
       containers:
         - image: kennethreitz/httpbin:latest
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "1"
+              memory: 512Mi
           name: httpbin
           ports:
             - containerPort: 80
