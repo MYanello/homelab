@@ -20,10 +20,10 @@ spec:
       labels:
         app: plex
     spec:
-      hostNetwork: true
-      securityContext:
-        runAsGroup: 0
-        runAsUser: 0
+      # hostNetwork: true
+      # securityContext:
+        # runAsGroup: 0
+        # runAsUser: 0
         # fsGroup: 0
       affinity:
         nodeAffinity:
