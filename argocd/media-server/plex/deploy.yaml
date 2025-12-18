@@ -20,13 +20,12 @@ spec:
       labels:
         app: plex
     spec:
-      # hostNetwork: true
+      hostNetwork: true
       affinity:
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
@@ -47,6 +46,9 @@ spec:
         - name: plex-pms
           image: docker.io/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
           imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+            runAsUser: 0
           resources:
             limits:
               nvidia.com/gpu: "1"
@@ -89,7 +91,7 @@ spec:
               protocol: UDP
           env:
             - name: ADVERTISE_IP
-              value: plex.yanello.net:443,10.10.8.200:32400
+              value: plex.yanello.net:443
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
             - name: NVIDIA_DRIVER_CAPABILITIES
@@ -107,3 +109,4 @@ spec:
               mountPath: /transcode
             - name: media
               mountPath: /data/media
+
