@@ -20,7 +20,7 @@ spec:
       labels:
         app: plex
     spec:
-      # hostNetwork: true
+      hostNetwork: true
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -47,6 +47,9 @@ spec:
         - name: plex-pms
           image: docker.io/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
           imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+            runAsUser: 0
           resources:
             limits:
               nvidia.com/gpu: "1"
@@ -95,9 +98,9 @@ spec:
             - name: NVIDIA_DRIVER_CAPABILITIES
               value: compute,video,utility
             - name: PLEX_UID
-              value: "3000"
+              value: "0"
             - name: PLEX_GID
-              value: "3000"
+              value: "0"
             - name: ALLOWED_NETWORKS
               value: "192.168.0.0/16,10.10.8.0/22,10.42.0.0/16"
           volumeMounts:
