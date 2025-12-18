@@ -5,6 +5,7 @@ metadata:
   labels:
     app: plex
 spec:
+  type: LoadBalancer
   ports:
     - port: 32400 
       targetPort: 32400
