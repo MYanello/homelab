@@ -13,7 +13,7 @@ spec:
   strategy: # the new pod will not be scheduable until the old pod is terminated, this allows a more manual update for downtime scheduling. It can be resolved by removing the hostnetworking pieces
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 2
       maxUnavailable: 0
   template:
     metadata:
