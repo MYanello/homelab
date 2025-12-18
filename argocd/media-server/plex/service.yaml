@@ -6,6 +6,7 @@ metadata:
     app: plex
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.10.8.200
   ports:
     - port: 32400 
       targetPort: 32400
