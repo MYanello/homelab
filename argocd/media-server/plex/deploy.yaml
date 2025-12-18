@@ -25,11 +25,13 @@ spec:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
+              - weight: 100
+                preference:
+                  matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                        - marcus-server
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -106,4 +108,3 @@ spec:
               mountPath: /transcode
             - name: media
               mountPath: /data/media
-
