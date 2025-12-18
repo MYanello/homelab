@@ -10,21 +10,16 @@ spec:
   selector:
     matchLabels:
       app: plex
-  strategy: # the new pod will not be scheduable until the old pod is terminated, this allows a more manual update for downtime scheduling. It can be resolved by removing the hostnetworking pieces
+  strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 2
+      maxSurge: 1
       maxUnavailable: 0
   template:
     metadata:
       labels:
         app: plex
     spec:
-      # hostNetwork: true
-      # securityContext:
-        # runAsGroup: 0
-        # runAsUser: 0
-        # fsGroup: 0
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -48,7 +43,7 @@ spec:
       runtimeClassName: nvidia
       containers:
         - name: plex-pms
-          image: docker.io/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
+          image: harbor.yanello.net/docker/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
           imagePullPolicy: IfNotPresent
           resources:
             limits:

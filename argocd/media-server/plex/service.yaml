@@ -7,10 +7,12 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.200
+  selector:
+    app: plex
   ports:
-    - port: 32400 
+    - port: 32400
       targetPort: 32400
-      name: pms-web 
+      name: pms-web
       protocol: TCP
     - port: 3005
       targetPort: 3005
@@ -47,5 +49,3 @@ spec:
       targetPort: 32414
       name: gdm-32414
       protocol: UDP
-  selector:
-    app: plex
