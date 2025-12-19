@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: plex
-  strategy: # the new pod will not be scheduable until the old pod is terminated, this allows a more manual update for downtime scheduling. It can be resolved by removing the hostnetworking pieces
+  strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
@@ -20,7 +20,6 @@ spec:
       labels:
         app: plex
     spec:
-      hostNetwork: true
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -44,7 +43,7 @@ spec:
       runtimeClassName: nvidia
       containers:
         - name: plex-pms
-          image: docker.io/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
+          image: harbor.yanello.net/docker/plexinc/pms-docker:1.42.2.10156-f737b826c@sha256:9c03c26b9479ba9a09935f3367459bfdc8d21545f42ed2a13258983c5be1b252
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -88,7 +87,7 @@ spec:
               protocol: UDP
           env:
             - name: ADVERTISE_IP
-              value: plex.yanello.net:443
+              value: https://plex.yanello.net:443,http://10.10.8.200:32400
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
             - name: NVIDIA_DRIVER_CAPABILITIES
@@ -98,7 +97,7 @@ spec:
             - name: PLEX_GID
               value: "3000"
             - name: ALLOWED_NETWORKS
-              value: "192.168.0.0/16,10.10.8.0/22,10.42.0.0/16"
+              value: "192.168.0.0/16,10.10.8.0/22,10.42.0.0/16,10.10.8.0/24"
           volumeMounts:
             - name: config
               mountPath: /config
@@ -106,4 +105,3 @@ spec:
               mountPath: /transcode
             - name: media
               mountPath: /data/media
-

@@ -35,30 +35,19 @@ spec:
     #     memory: "128Mi"
     #     cpu: "500m"
     volumeMounts:
-      - name: config
-        mountPath: /pvc/config
-      - name: old-config
-        mountPath: /old/config
-      - name: transcode
-        mountPath: /pvc/transcode
-      - name: old-transcode
-        mountPath: /old/transcode
+      - name: old
+        mountPath: /pvc/old
+      - name: backup
+        mountPath: /pvc/backup
   restartPolicy: Never
   volumes:
   # - name: cloud-credentials
   #   secret:
   #     defaultMode: 420
   #     secretName: cloud-credentials
-    - name: old-transcode
-      hostPath: 
-        path: /zpool/k8s/plex/transcode
-    - name: old-config
-      hostPath: 
-        path: /zpool/k8s/plex/config
-    - name: config
+    - name: old
       persistentVolumeClaim:
-        claimName: config
-    - name: transcode
+        claimName: nextcloud-nextcloud
+    - name: backup
       persistentVolumeClaim:
-        claimName: transcode
-
+        claimName: nextcloud-backup
