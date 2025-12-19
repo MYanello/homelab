@@ -59,7 +59,7 @@ config: |
     enabled: True
     provider: openai
     api_key: "{FRIGATE_OPENAI_KEY}"
-    model: tngtech/deepseek-r1t2-chimera:free
+    model: google/gemini-3-flash-preview
 
   classification:
     bird:
