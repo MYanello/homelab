@@ -30,8 +30,8 @@ spec:
           exec:
             command:
             - /usr/local/bin/health-check.py
-          initialDelaySeconds: 300
-          periodSeconds: 60
+          initialDelaySeconds: 60
+          periodSeconds: 30
       volumes:
       - name: health-check-script
         configMap:
