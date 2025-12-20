@@ -231,8 +231,7 @@ spec:
                 number if available\n- The output language is the one used in the document! IMPORTANT!\n\nFor the correspondent:\n- Identify the sender
                 or institution\n  When generating the correspondent, always create the shortest possible form of the company name (e.g. "Amazon" instead
                 of "Amazon EU SARL, German branch")\n\nFor the document date:\n- Extract the date of the document\n- Use the format YYYY-MM-DD\n- If
-                multiple dates are present, use the most relevant one\n\nFor the language:\n- Determine the document language\n- Use language codes like
-                "de" for German or "en" for English\n- If the language is not clear, use "und" as a placeholder`
+                multiple dates are present, use the most relevant one\n\nFor the language:\n- Determine the document language\n- Use language codes like "en" for English\n- If the language is not clear, use "und" as a placeholder`
             - name: PROCESS_PREDEFINED_DOCUMENTS
               value: yes
             - name: TAGS
