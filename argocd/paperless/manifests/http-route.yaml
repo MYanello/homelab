@@ -4,7 +4,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: paperless-app
   name: paperless-httproute
-  namespace: paperless
 spec:
   parentRefs:
     - name: cilium-private-gateway
@@ -17,3 +16,20 @@ spec:
         - name: paperless
           namespace: paperless
           port: 8000
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ai-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - paperless-ai.yanello.net
+  rules:
+    - backendRefs:
+        - name: ai
+          namespace: paperless
+          port: 3000
