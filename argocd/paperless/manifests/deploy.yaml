@@ -23,7 +23,7 @@ spec:
         backup.velero.io/backup-volumes: "export,media,data,consume"
     spec:
       containers:
-        - image: ghcr.io/paperless-ngx/paperless-ngx:2.20.3@sha256:57ad9565bff3bdf2378ab1dcc21ea649dfd68ee58e0eeca2bfba0120a26563e8
+        - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:2.20.3@sha256:57ad9565bff3bdf2378ab1dcc21ea649dfd68ee58e0eeca2bfba0120a26563e8
           imagePullPolicy: IfNotPresent
           name: paperless
           ports:
@@ -94,10 +94,8 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: "mariadb"
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: ubuntu-k3s
       containers:
-        - image: docker.io/library/mariadb:12@sha256:e1bcd6f85781f4a875abefb11c4166c1d79e4237c23de597bf0df81fec225b40
+        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:e1bcd6f85781f4a875abefb11c4166c1d79e4237c23de597bf0df81fec225b40
           imagePullPolicy: IfNotPresent
           name: db
           ports:
@@ -152,7 +150,7 @@ spec:
         app: redis
     spec:
       containers:
-        - image: docker.io/library/redis:8@sha256:3906b477e4b60250660573105110c28bfce93b01243eab37610a484daebceb04
+        - image: harbor.yanello.net/docker/library/redis:8@sha256:3906b477e4b60250660573105110c28bfce93b01243eab37610a484daebceb04
           imagePullPolicy: IfNotPresent
           name: redis
           ports:
