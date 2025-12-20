@@ -213,7 +213,7 @@ spec:
             - name: RAG_SERVICE_ENABLED
               value: "true"
             - name: PAPERLESS_API_URL
-              value: http://paperless:8000
+              value: http://paperless:8000/api
             - name: CUSTOM_BASE_URL
               value: https://openrouter.ai/api/v1
             - name: CUSTOM_MODEL
