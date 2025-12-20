@@ -49,7 +49,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: ghcr.io/immich-app/immich-server:v2.3.1@sha256:f8d06a32b1b2a81053d78e40bf8e35236b9faefb5c3903ce9ca8712c9ed78445
+          image: ghcr.io/immich-app/immich-server:v2.4.1@sha256:e6a6298e67ae077808fdb7d8d5565955f60b0708191576143fc02d30ab1389d1
           ports:
             - containerPort: 2283
               protocol: TCP
@@ -116,7 +116,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: ghcr.io/immich-app/immich-machine-learning:v2.3.1-cuda@sha256:723c82610d713bc9bc15d90d8426f96915c2cbd634ef5bec1bf45a098d82d81d
+          image: ghcr.io/immich-app/immich-machine-learning:v2.4.1-cuda@sha256:39688058f063d2ff0a0789b5b2e6b723f60124f99004b662955ad71d14b855ad
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: photos
