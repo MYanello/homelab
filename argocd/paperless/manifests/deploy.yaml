@@ -236,6 +236,14 @@ spec:
               value: pre-process
             - name: ADD_AI_PROCESSED_TAG
               value: "yes"
+            - name: ACTIVATE_TAGGING
+              value: "yes"
+            - name: ACTIVATE_CORRESPONDENTS
+              value: "yes"
+            - name: ACTIVATE_TITLE
+              value: "yes"
+            - name: ACTIVATE_DOCUMENT_TYPE
+              value: "yes"
           envFrom:
             - secretRef:
                 name: ai-secrets
@@ -247,7 +255,6 @@ spec:
               name: data
           resources:
             limits:
-              cpu: 500m
               memory: 1Gi
             requests:
               cpu: 100m
