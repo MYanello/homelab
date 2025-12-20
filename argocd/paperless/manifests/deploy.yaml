@@ -172,3 +172,59 @@ spec:
           persistentVolumeClaim:
             claimName: redis
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ai
+  name: ai
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: ai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: ai
+    spec:
+      containers:
+        - image: harbor.yanello.net/docker/clusterzx/paperless-ai
+          imagePullPolicy: IfNotPresent
+          name: ai
+          environment:
+            - name: PUID
+              value: "3000"
+            - name: PGID
+              value: "3000"
+            - name: PAPERLESS_AI_PORT
+              value: "3000"
+            - name: RAG_SERVICE_URL
+              value: http://localhost:8000
+            - name: RAG_SERVICE_ENABLED
+              value: "true"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: ai-data
+---

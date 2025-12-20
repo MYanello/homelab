@@ -39,3 +39,17 @@ spec:
       targetPort: 6379
   selector:
     app: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ai
+  name: ai
+spec:
+  ports:
+    - name: ai
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: ai
