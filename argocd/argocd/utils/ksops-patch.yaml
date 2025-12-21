@@ -19,13 +19,35 @@ spec:
       # 2. Use an init container to download/copy custom binaries into the emptyDir
       initContainers:
         - name: install-ksops
-          image: docker.io/viaductoss/ksops:v4.4.0@sha256:78add3d6191b4efce197a3a5ddcb70ea478270bbf4c18101263ea4a3d7e2d2f6
+          image: alpine:3.9.6
           command: ["/bin/sh", "-c"]
           args:
-            - echo "Installing KSOPS...";
-              mv ksops /custom-tools/;
-              mv kustomize /custom-tools/;
-              echo "Done.";
+            - |
+              set -eux
+              apk add --no-cache ca-certificates curl tar coreutils
+              case "$(uname -m)" in
+                x86_64|amd64) ARCH="x86_64" ;;
+                aarch64|arm64) ARCH="arm64" ;;
+                *) echo "unsupported arch: $(uname -m)"; exit 1 ;;
+              esac
+              VERSION="v4.4.0"
+              VERSION_RAW="${VERSION#v}"
+              URL="https://github.com/viaduct-ai/kustomize-sops/releases/download/${VERSION}/ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz"
+              CHECKSUMS="https://github.com/viaduct-ai/kustomize-sops/releases/download/${VERSION}/checksums.txt"
+              curl -fsSL -o "ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz" "${URL}"
+              curl -fsSL -o checksums.txt "${CHECKSUMS}"
+              sha256sum --ignore-missing -c checksums.txt || exit 1
+              tar -C /custom-tools -xzf "ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz" ksops
+              chmod +x /custom-tools/ksops
+              KUSTOMIZE_VERSION="v5.8.0"
+              case "$(uname -m)" in
+                x86_64|amd64) ARCH="amd64" ;;
+                aarch64|arm64) ARCH="arm64" ;;
+                *) echo "unsupported arch: $(uname -m)"; exit 1 ;;
+              esac
+              curl -fsSL -o kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${ARCH}.tar.gz"
+              tar -C /custom-tools -xzf kustomize.tar.gz kustomize
+              chmod +x /custom-tools/kustomize
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
