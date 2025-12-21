@@ -194,11 +194,8 @@ spec:
       labels:
         app: ai
     spec:
-      # securityContext:
-      #   runAsUser: 3000
-      #   runAsGroup: 3000
       containers:
-        - image: harbor.yanello.net/docker/clusterzx/paperless-ai
+        - image: harbor.yanello.net/docker/clusterzx/paperless-ai:3.0.9
           imagePullPolicy: IfNotPresent
           name: ai
           env:
