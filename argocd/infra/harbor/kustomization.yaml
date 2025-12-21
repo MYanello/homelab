@@ -14,9 +14,17 @@ helmCharts:
       database:
         podAnnoations:
           backup.velero.io/backup-volumes: database-data
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
       redis:
         podAnnotations:
           backup.velero.io/backup-volumes: data
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
       existingSecretAdminPassword: harbor-secrets
       expose:
         type: route
@@ -51,3 +59,28 @@ helmCharts:
             storageClass: truenas-hdd
       cache:
         enabled: true
+      portal:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
+      core:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
+      jobservice:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
+      registry:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
+      exporter:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
