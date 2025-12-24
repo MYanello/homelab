@@ -24,7 +24,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: hbbr
-        image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest@sha256:680f8ba5accafc264d15076f33a6fdb9cb6f4d963a0fc92e01023ca0e919cc83
+        image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest@sha256:183cb09e5e11ec85a897bcfa97934bb9eb89a2dfa074d6676838e22569cb77fe
         command: ["hbbr"]
         volumeMounts:
         - name: rustdesk-data
@@ -65,7 +65,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: hbbs
-        image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest@sha256:680f8ba5accafc264d15076f33a6fdb9cb6f4d963a0fc92e01023ca0e919cc83
+        image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest@sha256:183cb09e5e11ec85a897bcfa97934bb9eb89a2dfa074d6676838e22569cb77fe
         command: ["hbbs"]
         volumeMounts:
         - name: rustdesk-data
