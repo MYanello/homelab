@@ -13,7 +13,7 @@ spec:
     - harbor.yanello.net
   rules:
     - backendRefs:
-        - name: harbor-server
+        - name: harbor-portal
           group: ""
           kind: Service
           namespace: harbor
