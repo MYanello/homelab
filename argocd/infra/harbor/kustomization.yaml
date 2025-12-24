@@ -27,18 +27,9 @@ helmCharts:
             effect: "NoSchedule"
       existingSecretAdminPassword: harbor-secrets
       expose:
+        tls:
+          enabled: false
         type: clusterIP        
-        # tls:
-        #   enabled: false
-        # route:
-        #   parentRefs:
-        #     - name: cilium-private-gateway
-        #       group: gateway.networking.k8s.io
-        #       kind: Gateway
-        #       namespace: cilium
-        #       sectionName: https
-        #   hosts:
-        #     - harbor.yanello.net
       externalURL: https://harbor.yanello.net
       persistence:
         persistentVolumeClaim:
