@@ -17,11 +17,6 @@ helmCharts:
       config:
         userConfig:
           UseDarkMode: true
-      updateStrategy:
-        type: RollingUpdate
-        rollingUpdate:
-          maxUnavailable: 100%
-          partition: 0
       persistence:
         data:
           enabled: true
