@@ -20,7 +20,7 @@ helmCharts:
       updateStrategy:
         type: RollingUpdate
         rollingUpdate:
-          maxUnavailable:
+          maxUnavailable: 100%
           partition: 0
       persistence:
         data:
