@@ -1,9 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
   - ./manifests/svc.yaml
   - ./manifests/cm.yaml
-  #- ./manifests/httproute.yaml
   - ./manifests/tlsRoute.yaml
   - ./manifests/deploy.yaml
   - ./manifests/cert.yaml
+
 generators:
   - ./manifests/secret-generator.yaml
+  
+patchesStrategicMerge:
+  - ./ksops-patch.yaml
