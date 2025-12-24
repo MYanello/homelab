@@ -1,0 +1,91 @@
+---
+- name: Update K3s Nodes
+  hosts: all_k3s_nodes
+  become: true
+  serial: 1  # Update one node at a time to maintain cluster availability
+  vars:
+    drain_timeout: 300s
+    uncordon_delay: 30s
+    
+  tasks:
+    - name: Check if node needs updates
+      ansible.builtin.shell: |
+        apt list --upgradable 2>/dev/null | grep -v "WARNING" | wc -l
+      register: updates_available
+      changed_when: false
+      
+    - name: Skip node if no updates available
+      ansible.builtin.debug:
+        msg: "No updates available for {{ inventory_hostname }}"
+      when: updates_available.stdout|int <= 1
+      
+    - name: Continue with updates
+      when: updates_available.stdout|int > 1
+      block:
+        - name: Drain Kubernetes node
+          delegate_to: "{{ groups['initial_k3s_pc_server'][0] }}"
+          kubernetes.core.k8s_drain:
+            name: "{{ node_name }}"
+            kubeconfig: /etc/rancher/k3s/k3s.yaml
+            delete_emptydir_data: true
+            force: true
+            ignore_daemonsets: true
+            timeout: "{{ drain_timeout }}"
+          
+        - name: Update package cache
+          ansible.builtin.apt:
+            update_cache: true
+            cache_valid_time: 86400
+            
+        - name: Upgrade all packages
+          ansible.builtin.apt:
+            upgrade: dist
+            autoremove: true
+            autoclean: true
+          register: apt_upgrade_result
+          
+        - name: Check if reboot is required
+          ansible.builtin.stat:
+            path: /var/run/reboot-required
+          register: reboot_required
+          
+        - name: Reboot node if required
+          ansible.builtin.reboot:
+            msg: "Reboot initiated by Ansible after updates"
+            connect_timeout: 5
+            reboot_timeout: 600
+            pre_reboot_delay: 0
+            post_reboot_delay: 60
+          when: reboot_required.stat.exists or apt_upgrade_result.changed
+          
+        - name: Wait for k3s-node to be ready
+          ansible.builtin.wait_for:
+            port: 10250
+            host: "{{ inventory_hostname }}"
+            delay: 30
+            timeout: 300
+          delegate_to: localhost
+          
+        - name: Uncordon Kubernetes node
+          delegate_to: "{{ groups['initial_k3s_pc_server'][0] }}"
+          kubernetes.core.k8s:
+            name: "{{ node_name }}"
+            api_version: v1
+            kind: Node
+            definition:
+              spec:
+                unschedulable: false
+          
+        - name: Wait for node to be ready
+          delegate_to: "{{ groups['initial_k3s_pc_server'][0] }}"
+          kubernetes.core.k8s_info:
+            api_version: v1
+            kind: Node
+            name: "{{ node_name }}"
+            kubeconfig: /etc/rancher/k3s/k3s.yaml
+          register: node_status
+          until: 
+            - node_status.resources[0].status.conditions | selectattr('type', 'equalto', 'Ready') | map(attribute='status') | first == 'True'
+            - not (node_status.resources[0].spec.unschedulable | default(false))
+          retries: 10
+          delay: 30
