@@ -1,11 +1,6 @@
 config:
   userConfig:
     UseDarkMode: true
-updateStrategy:
-  type: RollingUpdate
-  rollingUpdate:
-    maxUnavailable: ""
-    partition: 0
 persistence:
   data:
     enabled: true
