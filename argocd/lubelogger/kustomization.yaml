@@ -13,24 +13,4 @@ helmCharts:
     releaseName: lubelogger
     repo: https://anza-labs.github.io/charts
     version: "1.4.1"
-    valuesInline:
-      config:
-        userConfig:
-          UseDarkMode: true
-      updateStrategy:
-        type: RollingUpdate
-        rollingUpdate:
-          maxUnavailable: "1"
-          partition: 0
-      persistence:
-        data:
-          enabled: true
-          storageClass: truenas-hdd-nfs
-          accessMode: ReadWriteMany
-      secret:
-        create: false
-        name: lube-secrets
-      oidc:
-        enabled: true
-        name: lube-secrets
-      
+    valuesFile: values.yaml

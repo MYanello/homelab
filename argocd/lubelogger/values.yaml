@@ -1,0 +1,19 @@
+config:
+  userConfig:
+    UseDarkMode: true
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: ""
+    partition: 0
+persistence:
+  data:
+    enabled: true
+    storageClass: truenas-hdd-nfs
+    accessMode: ReadWriteMany
+secret:
+  create: false
+  name: lube-secrets
+oidc:
+  enabled: true
+  name: lube-secrets
