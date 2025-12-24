@@ -10,6 +10,3 @@ resources:
 
 generators:
   - ./manifests/secret-generator.yaml
-  
-patchesStrategicMerge:
-  - ./ksops-patch.yaml
