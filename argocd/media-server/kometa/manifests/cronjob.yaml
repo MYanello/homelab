@@ -30,7 +30,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: copy-config
-              image: harbor.yanello.net/docker/busybox@sha256:183cb09e5e11ec85a897bcfa97934bb9eb89a2dfa074d6676838e22569cb77fe
+              image: harbor.yanello.net/docker/busybox@sha256:d80cd694d3e9467884fcb94b8ca1e20437d8a501096cdf367a5a1918a34fc2fd
               command: ["sh", "-c", "cp -r /tmp/* /config/"]
               volumeMounts:
                 - name: config-kometa
