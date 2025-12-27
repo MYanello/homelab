@@ -1,20 +1,22 @@
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
 metadata:
-  name: signal-cli-network-policy
-  labels:
-    app: signal-cli
+  name: signal-cli-netpol
 spec:
-  podSelector:
+  endpointSelector:
     matchLabels:
       app: signal-cli
-  policyTypes:
-  - Ingress
   ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          name: monitoring
-    ports:
-    - protocol: TCP
-      port: 8080
+  - fromEndpoints:
+    - matchLabels:
+        k8s:io.kubernetes.pod.namespace: monitoring
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+  # - fromEntities:
+  #   - world  # Allow external traffic from gateway
+  #   toPorts:
+  #   - ports:
+  #     - port: "8080"
+  #       protocol: TCP
