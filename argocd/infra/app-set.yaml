@@ -17,6 +17,19 @@ spec:
       name: "{{path.basename}}-app"
     spec:
       project: default
+      ignoreDifferences:
+        - group: "apps"
+          kind: "Deployment"
+          jsonPointers:
+            - /spec/template/metadata/annotations/checksum~1secret
+            - /spec/template/metadata/annotations/checksum~1secret-core
+            - /spec/template/metadata/annotations/checksum~1secret-jobservice
+            - /spec/template/metadata/annotations/checksum~1tls
+        - group: "apps"
+          kind: "StatefulSet"
+          jsonPointers:
+            - /spec/template/metadata/annotations/checksum~1secret
+            - /spec/template/metadata/annotations/checksum~1tls
       syncPolicy:
         automated:
           prune: true
