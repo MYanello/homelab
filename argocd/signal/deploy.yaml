@@ -24,7 +24,7 @@ spec:
               value: "3000"
             - name: SIGNAL_CLI_GID
               value: "3000"
-          image: harbor.yanello.net/docker/bbernhard/signal-cli-rest-api:0.96
+          image: harbor.yanello.net/docker/bbernhard/signal-cli-rest-api:0.96@sha256:04ee57f9819a90c89fbee46f74e080a032f5f05decf6e4b4a4e1f45d050ed9c8
           ports:
             - containerPort: 8080
               protocol: TCP
