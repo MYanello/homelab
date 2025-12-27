@@ -10,11 +10,5 @@ spec:
     - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: monitoring
-    - fromCIDRs:
+    - fromCIDR:
         - "192.168.1.70" # desktop
-  # - fromEntities:
-  #   - world  # Allow external traffic from gateway
-  #   toPorts:
-  #   - ports:
-  #     - port: "8080"
-  #       protocol: TCP
