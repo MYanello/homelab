@@ -37,9 +37,6 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
-        managedNamespaceMetadata:
-          labels:
-            istio-injection: disabled
       destination:
         name: in-cluster
         namespace: "{{path.basename}}"
