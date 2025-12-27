@@ -3,7 +3,12 @@ image:
   tag: 2.0.2@sha256:4c364ef96aaddac7ec4c85f5e5f31c3394d35f631381ccbbf93f18fd26ac7cba
 
 volume:
-  storageClassName: truenas-ssd
+  storageClassName: truenas-ssd-nfs
+
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
 
 # securityContext:
 #   runAsUser: 3000

@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
 
-
 helmCharts:
   - name: uptime-kuma
     releaseName: uptime-kuma
