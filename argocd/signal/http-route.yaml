@@ -8,9 +8,12 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - signal.yanello.net
+    - signal.yanello.net
   rules:
-  - backendRefs:
-    - name: signal-cli
-      port: 8080
-
+    - backendRefs:
+        - name: signal-cli
+          port: 8080
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
