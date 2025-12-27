@@ -20,6 +20,10 @@ spec:
           env:
             - name: MODE
               value: native
+            - name: SIGNAL_CLI_UID
+              value: "3000"
+            - name: SIGNAL_CLI_GID
+              value: "3000"
           image: harbor.yanello.net/docker/bbernhard/signal-cli-rest-api:0.96
           ports:
             - containerPort: 8080
