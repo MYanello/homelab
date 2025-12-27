@@ -19,7 +19,7 @@ ipam:
 devices: eth0
 gatewayAPI:
   enabled: true
-  xffNumTrustedHops: 3
+  xffNumTrustedHops: 2
 
 # for preserving source ips
 loadBalancer:
