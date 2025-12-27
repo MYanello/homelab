@@ -4,12 +4,12 @@ image:
 
 volume:
   storageClassName: truenas-ssd-nfs
+  accessMode: ReadWriteMany
 
 tolerations:
   - key: "node-role.kubernetes.io/control-plane"
     operator: "Exists"
     effect: "NoSchedule"
-
 # securityContext:
 #   runAsUser: 3000
 #   runAsGroup: 3000
