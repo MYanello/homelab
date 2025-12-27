@@ -11,12 +11,20 @@ tolerations:
     operator: "Exists"
     effect: "NoSchedule"
 
-externalDatabase:
-  enabled: true
-  hostname: mariadb
-  port: 3306
-  database: kuma
-  username: kuma
-  existingSecret: mariadb-secrets
-  existingSecretPasswordKey: MARIADB_PASSWORD
-  existingSecretUsernameKey: MARIAD_ROOT_PASSWORD
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+# externalDatabase:
+#   enabled: true
+#   hostname: mariadb
+#   port: 3306
+#   database: kuma
+#   username: kuma
+#   existingSecret: mariadb-secrets
+#   existingSecretPasswordKey: MARIADB_PASSWORD
+#   existingSecretUsernameKey: MARIAD_ROOT_PASSWORD
