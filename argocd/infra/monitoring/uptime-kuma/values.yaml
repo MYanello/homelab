@@ -19,6 +19,9 @@ affinity:
           matchExpressions:
             - key: node-role.kubernetes.io/control-plane
               operator: Exists
+
+mariadb:
+  enabled: true
 # externalDatabase:
 #   enabled: true
 #   hostname: mariadb
