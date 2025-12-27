@@ -20,7 +20,8 @@ affinity:
             - key: node-role.kubernetes.io/control-plane
               operator: Exists
 
-podSecurityContext: 
+podSecurityContext:
+  runAsNonRoot: true
   fsGroup: 3000
 
 securityContext: 
