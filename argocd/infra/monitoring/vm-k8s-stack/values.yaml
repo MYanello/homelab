@@ -13,7 +13,7 @@ vmagent:
         cpu: 150m
         memory: 500Mi
       limits:
-        memory: 2Gi
+        memory: 8Gi
 
 
 vmsingle: 
