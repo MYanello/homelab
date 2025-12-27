@@ -6,10 +6,6 @@ metadata:
     app: signal-cli
 spec:
   replicas: 3
-  tolerations:
-    - key: "node-role.kubernetes.io/control-plane"
-      operator: "Exists"
-      effect: "NoSchedule"
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -19,6 +15,10 @@ spec:
       labels:
         app: signal-cli
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - name: signal-cli
           env:
