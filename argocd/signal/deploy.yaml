@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: signal-cli
+  labels:
+    app: signal-cli
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: signal-cli
+  template:
+    metadata:
+      labels:
+        app: signal-cli
+    spec:
+      containers:
+        - name: signal-cli
+          env:
+            - name: MODE
+              value: native
+          image: harbor.yanello.net/docker/bbernhard/signal-cli-rest-api:0.96
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 100m
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - name: data
+              mountPath: //home/.local/share/signal-cli
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
