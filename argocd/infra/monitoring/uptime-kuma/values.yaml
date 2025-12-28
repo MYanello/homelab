@@ -28,4 +28,4 @@ externalDatabase:
   username: kuma
   existingSecret: mariadb-secrets
   existingSecretPasswordKey: MARIADB_PASSWORD
-  existingSecretUsernameKey: MARIAD_ROOT_PASSWORD
+  existingSecretUsernameKey: MARIADB_ROOT_PASSWORD
