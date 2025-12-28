@@ -5,15 +5,15 @@ metadata:
   labels:
     app: debug
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                  - marcus-server
+  # affinity:
+  #   nodeAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       nodeSelectorTerms:
+  #         - matchExpressions:
+  #             - key: kubernetes.io/hostname
+  #               operator: In
+  #               values:
+  #                 - marcus-server
   # imagePullSecrets:
   #   - name: gitea-pull-secrets
 #  serviceAccountName: external-secrets
@@ -24,9 +24,9 @@ spec:
     # volumeMounts:
     # - mountPath: /credentials
     #   name: cloud-credentials
-    # securityContext:
-    #   runAsUser: 0
-    #   runAsGroup: 0
+    securityContext:
+      runAsUser: 250
+      runAsGroup: 250
     # resources:
     #   requests:
     #     memory: "64Mi"
@@ -35,19 +35,10 @@ spec:
     #     memory: "128Mi"
     #     cpu: "500m"
     volumeMounts:
-      - name: old
-        mountPath: /pvc/old
-      - name: backup
-        mountPath: /pvc/backup
+      - name: data
+        mountPath: /data
   restartPolicy: Never
   volumes:
-  # - name: cloud-credentials
-  #   secret:
-  #     defaultMode: 420
-  #     secretName: cloud-credentials
-    - name: old
+    - name: data
       persistentVolumeClaim:
-        claimName: nextcloud-nextcloud
-    - name: backup
-      persistentVolumeClaim:
-        claimName: nextcloud-backup
+        claimName: uptime-kuma-pvc
