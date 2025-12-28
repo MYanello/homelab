@@ -25,6 +25,6 @@ externalDatabase:
   hostname: mariadb
   port: 3306
   database: kuma
-  username: kuma
   existingSecret: mariadb-secrets
   existingSecretPasswordKey: MARIADB_PASSWORD
+  existingSecretUsernameKey: MARIADB_USER
