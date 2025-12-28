@@ -1,16 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# generators:
-  # - ./manifests/secret-generator.yaml
+generators:
+  - ./manifests/secret-generator.yaml
 
 resources:
   - ./manifests/http-route.yaml
-  # - ./manifests/mariadb.yaml
-
-# replicas:
-#   - name: uptime-kuma
-#     count: 3
+  - ./manifests/mariadb.yaml
 
 helmCharts:
   - name: uptime-kuma
