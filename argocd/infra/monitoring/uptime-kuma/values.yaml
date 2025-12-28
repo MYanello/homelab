@@ -20,16 +20,6 @@ affinity:
             - key: node-role.kubernetes.io/control-plane
               operator: Exists
 
-# podSecurityContext:
-#   runAsNonRoot: true
-#   fsGroup: 3000
-
-# securityContext: 
-#   runAsUser: 3000
-#   runAsGroup: 3000
-
-# mariadb:
-#   enabled: true
 externalDatabase:
   enabled: true
   hostname: mariadb
