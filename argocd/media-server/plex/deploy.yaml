@@ -39,7 +39,7 @@ spec:
         - name: media
           hostPath:
             path: /data/media
-      terminationGracePeriodSeconds: 120
+      terminationGracePeriodSeconds: 10
       runtimeClassName: nvidia
       containers:
         - name: plex-pms
