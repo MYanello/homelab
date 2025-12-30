@@ -31,8 +31,10 @@ spec:
                       - marcus-server
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          hostPath:
+            path: /zpool/k8s/plex
+          # persistentVolumeClaim:
+            # claimName: config
         - name: transcode
           persistentVolumeClaim:
             claimName: transcode
