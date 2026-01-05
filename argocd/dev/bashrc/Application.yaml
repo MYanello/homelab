@@ -9,7 +9,7 @@ spec:
     name: in-cluster
   project: default
   sources:
-    - path: dev/bashrc/bashrc
+    - path: argocd/dev/bashrc/bashrc
       repoURL: https://github.com/myanello/homelab.git
       targetRevision: main
   syncPolicy:
