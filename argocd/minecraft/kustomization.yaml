@@ -14,7 +14,3 @@ configMapGenerator:
 
 generators:
   - ./manifests/secret-generator.yaml
-
-replicas:
-  - name: mc
-    count: 1
