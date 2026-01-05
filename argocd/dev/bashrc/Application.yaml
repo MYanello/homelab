@@ -12,7 +12,7 @@ spec:
     - path: argocd/dev/bashrc/bashrc
       repoURL: https://github.com/myanello/homelab.git
       targetRevision: main
-      # kustomize: {}
+      kustomize: {}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
