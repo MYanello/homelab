@@ -7,7 +7,9 @@ node:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
-
+    - key: "csp/oci"
+      operator: "Exists"
+      effect: "NoSchedule"
 controller:
   driver:
     image:

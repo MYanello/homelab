@@ -12,9 +12,12 @@ preUpgradeChecker:
 
 persistence:
   defaultClassReplicaCount: "2"
-  
+
 global:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "csp/oci"
       operator: "Exists"
       effect: "NoSchedule"
