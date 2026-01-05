@@ -10,7 +10,7 @@ spec:
   project: default
   sources:
     - path: dev/bashrc/bashrc
-      repoURL: git@github.com:myanello/homelab.git
+      repoURL: https://github.com/myanello/homelab.git
       targetRevision: main
   syncPolicy:
     syncOptions:
