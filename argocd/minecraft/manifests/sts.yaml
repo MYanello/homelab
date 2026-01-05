@@ -27,7 +27,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: mc-config
-          image: harbor.yanello.net/docker/itzg/minecraft-server:2025.12.1-java21@sha256:b425b4e58ebf2302b43d6be65f5136d9203addcd7a8b6a667d38d8746dc8e3a4
+          image: harbor.yanello.net/docker/itzg/minecraft-server:2026.1.0-java21@sha256:593e17256247cfb006ce4fc8f61724e123163ecdb87bf6940f6d2ff453ca0bcb
           stdin: true
           tty: true
           volumeMounts:
