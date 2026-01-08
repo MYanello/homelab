@@ -33,7 +33,7 @@ spec:
             runAsUser: 0
             runAsGroup: 0
         - name: wait-for-influxdb
-          image: curlimages/curl:latest@sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40
+          image: curlimages/curl:latest@sha256:5e058e1f726dd941b1db83ed6fad363e00d3aed1186cf9517b245fe111911921
           envFrom:
             - configMapRef:
                 name: garmin-config
