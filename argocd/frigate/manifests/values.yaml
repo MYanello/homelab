@@ -105,6 +105,10 @@ config: |
     quality: 1
     mode: continuous
 
+  face_recognition:
+    enabled: true
+    model_size: large
+
   ffmpeg:
     hwaccel_args: preset-nvidia-h264
 
