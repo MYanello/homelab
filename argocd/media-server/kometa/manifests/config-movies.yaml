@@ -326,6 +326,7 @@ data:
             yorgos: 07
             kaufman: 07
             aster: 07
+            bond: 06
           collection_order:
             ghibli: release.desc
             kaufman: release.desc
