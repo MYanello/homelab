@@ -21,7 +21,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            rfGroup: 1000
+            fsGroup: 1000
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
