@@ -8,10 +8,6 @@ spec:
   schedule: "0 */6 * * *" # every 6h
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
-  securityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    rfGroup: 1000
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 86400
@@ -22,6 +18,10 @@ spec:
           labels:
             app: kometa
         spec:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            rfGroup: 1000
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
