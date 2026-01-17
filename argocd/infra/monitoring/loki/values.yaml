@@ -31,6 +31,8 @@ write:
 # Enable minio for storage
 minio:
   enabled: true
+  persistence:
+    storageClass: truenas-hdd-nfs
 
 gateway:
   service:
