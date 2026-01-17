@@ -19,6 +19,15 @@ loki:
     volume_enabled: true
   ruler:
     enable_api: true
+
+singleBinary:
+  persistence:
+    storageClass: truenas-hdd-nfs
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+
 backend:
   replicas: 0
   persistence:
