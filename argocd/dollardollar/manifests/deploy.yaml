@@ -55,7 +55,7 @@ spec:
             # - MAIL_USERNAME=${MAIL_USERNAME}
             # - MAIL_PASSWORD=${MAIL_PASSWORD}
             # - MAIL_DEFAULT_SENDER=${MAIL_DEFAULT_SENDER}
-          image: harung43/dollardollar:latest@sha256:64b541741586d8c1825cc89b9c4dd767b9df149b5eeae49d46fd9970893464c3
+          image: harung43/dollardollar:latest@sha256:490aae73bf4667e12e7a12b410590fcab6f6838c09b33501bfd8b3b2eb7dd247
           imagePullPolicy: IfNotPresent
           name: dollardollar
           ports:
