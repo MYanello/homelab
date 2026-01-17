@@ -4,111 +4,96 @@ kind: ConfigMap
 metadata:
   name: config-movies
 data:
-  trakt_tracked.yml: |
-    external_templates:
-      pmm: templates
-      template_variables:
-        collection_section: 06
-    
-    translations:
-      pmm: translations
-    
-    templates:
-      universe:
-        default:
-          trakt_list_<<key>>: <<trakt_list>>
-          name_mapping_<<key>>: <<name_mapping>>
-          minimum_items: 2
-        optional:
-          - name_mapping
-          - name_<<key>>
-          - summary_<<key>>
-          - imdb_list_<<key>>
-        minimum_items: <<minimum_items>>
-        name_mapping: <<name_mapping_<<key>>>>
-        imdb_list: <<imdb_list_<<key>>>>
-        trakt_list: <<trakt_list_<<key>>>>
-        summary: <<summary_<<key>>>>
-        name: <<name_<<key>>>>
-    
-    dynamic_collections:
-      Universe Collections:
-        type: custom
-        data:
-          dcu: DC Extended Universe
-          mcu: Marvel Cinematic Universe
-          a24: A24
-        template:
-          - universe
-          - shared
-          - arr
-          - custom
-        template_variables:
-          trakt_list:
-            dcu: https://trakt.tv/users/donxy/lists/dc-extended-universe
-            mcu: https://trakt.tv/users/donxy/lists/marvel-cinematic-universe
-            a24: https://trakt.tv/users/fidel-cb/lists/a24
-          image:
-            default: universe/<<key>>
-          collection_order:
-            dcu: release.desc
-            mcu: release.desc
-            a24: release.desc
-          collection_section:
-            a24: 06
-        
+  # trakt_tracked.yml: |
+    # external_templates:
+    #   pmm: templates
+    #   template_variables:
+    #     collection_section: 06
 
-  trakt_downloaded.yml: |
-    external_templates:
-      pmm: templates
-      template_variables:
-        collection_section: 06
-        radarr_add_missing: true
-        radarr_tag: trakt
-        collection_order: release.asc
-    
-    translations:
-      pmm: translations
-    
-    templates:
-      universe:
-        default:
-          trakt_list_<<key>>: <<trakt_list>>
-          name_mapping_<<key>>: <<name_mapping>>
-          minimum_items: 2
-        optional:
-          - name_mapping
-          - name_<<key>>
-          - summary_<<key>>
-          - imdb_list_<<key>>
-        minimum_items: <<minimum_items>>
-        name_mapping: <<name_mapping_<<key>>>>
-        imdb_list: <<imdb_list_<<key>>>>
-        trakt_list: <<trakt_list_<<key>>>>
-        summary: <<summary_<<key>>>>
-        name: <<name_<<key>>>>
-    
-    dynamic_collections:
-      Universe Collections:
-        type: custom
-        data:
-          middle: Middle Earth
-          beasts: Fantastic Beasts
-          pixar_shorts: Pixar Shorts
-          pixar: Pixar
-        template:
-          - universe
-          - shared
-          - arr
-          - custom
-        template_variables:
-          trakt_list:
-            middle: https://trakt.tv/users/dybro/lists/lord-of-the-rings
-            beasts: https://trakt.tv/users/user71/lists/fantastic-beasts
-            pixar_shorts: https://trakt.tv/users/deccoskyrider/lists/pixar-shorts
-            pixar: https://trakt.tv/users/chloe131997/lists/pixar
-          image:
-            default: universe/<<key>>
+    # translations:
+    #   pmm: translations
+
+    # templates:
+    #   universe:
+    #     default:
+    #       trakt_list_<<key>>: <<trakt_list>>
+    #       name_mapping_<<key>>: <<name_mapping>>
+    #       minimum_items: 2
+    #     optional:
+    #       - name_mapping
+    #       - name_<<key>>
+    #       - summary_<<key>>
+    #       - imdb_list_<<key>>
+    #     minimum_items: <<minimum_items>>
+    #     name_mapping: <<name_mapping_<<key>>>>
+    #     imdb_list: <<imdb_list_<<key>>>>
+    #     trakt_list: <<trakt_list_<<key>>>>
+    #     summary: <<summary_<<key>>>>
+    #     name: <<name_<<key>>>>
+
+    # dynamic_collections:
+    #   Universe Collections:
+    #     type: custom
+    #     data:
+    #       mcu: Marvel Cinematic Universe
+    #     template:
+    #       - universe
+    #       - shared
+    #       - arr
+    #       - custom
+    #     template_variables:
+    #       trakt_list:
+    #         mcu: https://trakt.tv/users/donxy/lists/marvel-cinematic-universe
+    #       image:
+    #         default: universe/<<key>>
+    #       collection_order:
+    #         mcu: release.desc
+
+  # trakt_downloaded.yml: |
+  #   external_templates:
+  #     pmm: templates
+  #     template_variables:
+  #       collection_section: 06
+  #       radarr_add_missing: true
+  #       radarr_tag: trakt
+  #       collection_order: release.asc
+
+  #   translations:
+  #     pmm: translations
+
+  #   templates:
+  #     universe:
+  #       default:
+  #         trakt_list_<<key>>: <<trakt_list>>
+  #         name_mapping_<<key>>: <<name_mapping>>
+  #         minimum_items: 2
+  #       optional:
+  #         - name_mapping
+  #         - name_<<key>>
+  #         - summary_<<key>>
+  #         - imdb_list_<<key>>
+  #       minimum_items: <<minimum_items>>
+  #       name_mapping: <<name_mapping_<<key>>>>
+  #       imdb_list: <<imdb_list_<<key>>>>
+  #       trakt_list: <<trakt_list_<<key>>>>
+  #       summary: <<summary_<<key>>>>
+  #       name: <<name_<<key>>>>
+
+  #   dynamic_collections:
+  #     Universe Collections:
+  #       type: custom
+  #       data:
+  #         pixar: Pixar
+  #       template:
+  #         - universe
+  #         - shared
+  #         - arr
+  #         - custom
+  #       template_variables:
+  #         trakt_list:
+  #           pixar: https://trakt.tv/users/chloe131997/lists/pixar
+  #         image:
+  #           default: universe/<<key>>
 
   ombi.yml: |
     collections:
@@ -120,7 +105,7 @@ data:
         radarr_taglist: tnic52, 23 - tnic52
       Stew's List:
         radarr_taglist: r0nperlman
-        
+
   letterboxd_tracked.yml: |
     external_templates:
       pmm: templates
@@ -128,7 +113,7 @@ data:
         collection_section: 06
         radarr_add_missing: false
         collection_order: release.asc
-    
+
     templates:
       lbxd:
         default:
@@ -146,11 +131,12 @@ data:
         letterboxd_list: <<letterboxd_list_<<key>>>>
         summary: <<summary_<<key>>>>
         name: <<name_<<key>>>>
-    
+
     dynamic_collections:
       Letterboxd_Tracked:
         type: custom
         data:
+          a24: A24
           criterion: Criterion Collection
           lotr: The Lord of the Rings
           john_wick: John Wick
@@ -180,6 +166,12 @@ data:
           harry_potter: Harry Potter
           wizarding_world: Wizarding World
           asterix: Asterix et Obelix
+          dcu: DC Extended Universe
+          mcu: Marvel Cinematic Universe
+          middle_earth: Middle Earth
+          fantastic_beasts: Fantastic Beasts
+          pixar_shorts: Pixar Shorts
+          pixar: Pixar
         template:
           - lbxd
           - shared
@@ -209,21 +201,31 @@ data:
             evil_dead: https://letterboxd.com/fantic/list/evil-dead/
             guardians: https://letterboxd.com/fantic/list/guardians-of-the-galaxy/
             dune: https://letterboxd.com/fantic/list/dune/
-            christmas: https://letterboxd.com/ryukiation/list/christmas/
+            # christmas: https://letterboxd.com/ryukiation/list/christmas/
             pirates: https://letterboxd.com/fantic/list/pirates-of-the-caribbean/
             indiana: https://letterboxd.com/fantic/list/indiana-jones/
             jurassic: https://letterboxd.com/mrbrundlefly/list/jurassic-park/
             harry_potter: https://letterboxd.com/thatotherruben/list/harry-potter/
             wizarding_world: https://letterboxd.com/davidlsims/list/harry-potter/
             asterix: https://letterboxd.com/fantic/list/asterix/
+            a24: https://letterboxd.com/simononfilm/list/a24/by/release/
+            dcu: https://letterboxd.com/arito/list/dc/
+            mcu: https://letterboxd.com/brunamofu/list/marvel/
+            middle_earth: https://letterboxd.com/fantic/list/middle-earth/
+            fantastic_beasts: https://letterboxd.com/dalewatts_/list/fantastic-beasts/
+            pixar_shorts: https://letterboxd.com/alegna94/list/pixar-shorts/
+            pixar: https://letterboxd.com/jaywill/list/pixar/
           image:
             default: universe/<<key>>
-          collection_order: 
+          collection_order:
             criterion: release.desc
-            christmas: release.desc
+            # christmas: release.desc
+            a24: release.desc
+            dcu: release.desc
+            mcu: release.desc
           collection_section:
             criterion: 05
-
+            a24: 06
   letterboxd_downloaded.yaml: |
     external_templates:
       pmm: templates
@@ -231,7 +233,7 @@ data:
         radarr_add_missing: true
         radarr_tag: letterboxd
         collection_order: custom
-    
+
     templates:
       lbxd:
         default:
@@ -249,7 +251,7 @@ data:
         letterboxd_list: <<letterboxd_list_<<key>>>>
         summary: <<summary_<<key>>>>
         name: <<name_<<key>>>>
-    
+
     dynamic_collections:
       Letterboxd:
         type: custom
@@ -275,7 +277,7 @@ data:
         template_variables:
           letterboxd_list:
             bond: https://letterboxd.com/kadiya/list/james-bond/
-            ghibli: https://letterboxd.com/itsannaelisa/list/studio-ghibli/ 
+            ghibli: https://letterboxd.com/itsannaelisa/list/studio-ghibli/
             oscars_23: https://letterboxd.com/oscars/list/the-95th-academy-award-nominees-for-best-22/
             oscars_24: https://letterboxd.com/oscars/list/the-96th-academy-award-nominees-for-best/
             oscars_25: https://letterboxd.com/oscars/list/the-97th-academy-award-feature-film-nominees/
