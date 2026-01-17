@@ -50,3 +50,7 @@ schedules:
     template:
       ttl: "720h" # 1 month 
       storageLocation: backblaze
+kubectl:
+   image:
+      repository: harbor.yanello.net/docker/bitnamilegacy/kubectl
+      tag: "1.33.1"
