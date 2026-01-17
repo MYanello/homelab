@@ -23,10 +23,14 @@ deploymentMode: SimpleScalable
 
 backend:
   replicas: 2
+  persistence:
+    storageClass: truenas-hdd-nfs
 read:
   replicas: 2
 write:
   replicas: 3 # To ensure data durability with replication
+  persistence:
+    storageClass: truenas-hdd-nfs
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
