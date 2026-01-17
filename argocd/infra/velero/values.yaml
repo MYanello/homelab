@@ -53,4 +53,4 @@ schedules:
 kubectl:
    image:
       repository: harbor.yanello.net/docker/bitnamilegacy/kubectl
-      tag: "1.33.1@sha256:9081a6f83f4febf47369fc46b6f0f7683c7db243df5b43fc9defe51b0471a950"
+      tag: "1.33.4@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246"
