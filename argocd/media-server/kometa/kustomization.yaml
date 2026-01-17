@@ -9,3 +9,4 @@ resources:
 - ./manifests/config-movies.yaml
 - ./manifests/config-tv.yaml
 - ./manifests/cronjob.yaml
+- ./manifests/pvc.yaml

@@ -13,8 +13,6 @@ spec:
       ttlSecondsAfterFinished: 86400
       template:
         metadata:
-          annotations:
-            sidecar.istio.io/inject: "false"
           labels:
             app: kometa
         spec:
@@ -71,7 +69,8 @@ spec:
                   cpu: "500m"
           volumes:
             - name: config
-              emptyDir: {}
+              persistentVolumeClaim:
+                claimName: config
             - name: config-kometa
               configMap:
                 name: config-kometa

@@ -110,7 +110,7 @@ data:
           mass_episode_audience_rating_update: tmdb
     
     settings:
-      cache: false
+      cache: true
       cache_expiration: 60
       asset_directory:
       - /data/media/assets/
