@@ -5,49 +5,49 @@ metadata:
   name: config-movies
 data:
   # trakt_tracked.yml: |
-    # external_templates:
-    #   pmm: templates
-    #   template_variables:
-    #     collection_section: 06
+  # external_templates:
+  #   pmm: templates
+  #   template_variables:
+  #     collection_section: 06
 
-    # translations:
-    #   pmm: translations
+  # translations:
+  #   pmm: translations
 
-    # templates:
-    #   universe:
-    #     default:
-    #       trakt_list_<<key>>: <<trakt_list>>
-    #       name_mapping_<<key>>: <<name_mapping>>
-    #       minimum_items: 2
-    #     optional:
-    #       - name_mapping
-    #       - name_<<key>>
-    #       - summary_<<key>>
-    #       - imdb_list_<<key>>
-    #     minimum_items: <<minimum_items>>
-    #     name_mapping: <<name_mapping_<<key>>>>
-    #     imdb_list: <<imdb_list_<<key>>>>
-    #     trakt_list: <<trakt_list_<<key>>>>
-    #     summary: <<summary_<<key>>>>
-    #     name: <<name_<<key>>>>
+  # templates:
+  #   universe:
+  #     default:
+  #       trakt_list_<<key>>: <<trakt_list>>
+  #       name_mapping_<<key>>: <<name_mapping>>
+  #       minimum_items: 2
+  #     optional:
+  #       - name_mapping
+  #       - name_<<key>>
+  #       - summary_<<key>>
+  #       - imdb_list_<<key>>
+  #     minimum_items: <<minimum_items>>
+  #     name_mapping: <<name_mapping_<<key>>>>
+  #     imdb_list: <<imdb_list_<<key>>>>
+  #     trakt_list: <<trakt_list_<<key>>>>
+  #     summary: <<summary_<<key>>>>
+  #     name: <<name_<<key>>>>
 
-    # dynamic_collections:
-    #   Universe Collections:
-    #     type: custom
-    #     data:
-    #       mcu: Marvel Cinematic Universe
-    #     template:
-    #       - universe
-    #       - shared
-    #       - arr
-    #       - custom
-    #     template_variables:
-    #       trakt_list:
-    #         mcu: https://trakt.tv/users/donxy/lists/marvel-cinematic-universe
-    #       image:
-    #         default: universe/<<key>>
-    #       collection_order:
-    #         mcu: release.desc
+  # dynamic_collections:
+  #   Universe Collections:
+  #     type: custom
+  #     data:
+  #       mcu: Marvel Cinematic Universe
+  #     template:
+  #       - universe
+  #       - shared
+  #       - arr
+  #       - custom
+  #     template_variables:
+  #       trakt_list:
+  #         mcu: https://trakt.tv/users/donxy/lists/marvel-cinematic-universe
+  #       image:
+  #         default: universe/<<key>>
+  #       collection_order:
+  #         mcu: release.desc
 
   # trakt_downloaded.yml: |
   #   external_templates:
@@ -274,6 +274,7 @@ data:
           kaufman: Charlie Kaufman
           aster: Ari Aster
           bond: James Bond
+          fast_furious: Fast and Furious
         template_variables:
           letterboxd_list:
             bond: https://letterboxd.com/madskv/list/bond/
@@ -290,6 +291,7 @@ data:
             yorgos: https://letterboxd.com/jaywill/list/yorgos/
             kaufman: https://letterboxd.com/blexinfinity/list/charlie-kaufman/
             aster: https://letterboxd.com/wetty_yammer/list/aster/
+            fast_furious: https://letterboxd.com/davidlsims/list/fast-and-furious/
           image:
             default: universe/<<key>>
           radarr_tag:
@@ -313,7 +315,7 @@ data:
             ghibli: HD-1080P
           collection_section:
             stew: 03
-            ghibli: 06
+            ghibli: 07
             oscars_23: 05
             oscars_24: 05
             oscars_25: 05
@@ -327,6 +329,7 @@ data:
             kaufman: 07
             aster: 07
             bond: 06
+            fast_furious: 06
           collection_order:
             ghibli: release.desc
             kaufman: release.desc
@@ -337,3 +340,4 @@ data:
             yorgos: release.desc
             aster: release.desc
             bond: release.asc
+            fast_furious: release.asc
