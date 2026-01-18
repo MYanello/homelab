@@ -33,7 +33,12 @@ spec:
           initContainers:
             - name: copy-config
               image: harbor.yanello.net/docker/busybox:1.37
-              command: ["sh", "-c", "cp -r /tmp/* /config/"]
+              command: 
+                - sh
+                - -c
+                - |
+                  cp -r /tmp/* /config/
+                  rm -f /config/logs/*
               volumeMounts:
                 - name: config-kometa
                   mountPath: /tmp/config.yml
