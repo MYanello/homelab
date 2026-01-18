@@ -1,0 +1,165 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: lgarage
+spec:
+  hostnames:
+    - lgarage.yanello.net
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: lgarage
+          group: ""
+          kind: Service
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lgarage
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: lgarage-service-1
+  labels:
+    kubernetes.io/service-name: lgarage
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - 192.168.5.26
+    conditions:
+      ready: true
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: mgarage
+spec:
+  hostnames:
+    - mgarage.yanello.net
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: mgarage
+          group: ""
+          kind: Service
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mgarage
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: mgarage-service-1
+  labels:
+    kubernetes.io/service-name: mgarage
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - 192.168.5.27
+    conditions:
+      ready: true
+---
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: rgarage
+spec:
+  hostnames:
+    - rgarage.yanello.net
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: rgarage
+          group: ""
+          kind: Service
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rgarage
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: rgarage-service-1
+  labels:
+    kubernetes.io/service-name: rgarage
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - 192.168.5.28
+    conditions:
+      ready: true

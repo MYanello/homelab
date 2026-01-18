@@ -13,3 +13,4 @@ resources:
   - proxmox.yaml
   - truenas.yaml
   - foundry.yaml
+  - open-garage.yaml
