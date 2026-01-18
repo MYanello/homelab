@@ -74,7 +74,7 @@ data:
             horizontal_position: left
             vertical_position: bottom
         operations:
-          assets_for_all: false
+          assets_for_all: true
           mass_critic_rating_update: mdb_tomatoes
           mass_audience_rating_update: mdb_tomatoesaudience
     
@@ -156,7 +156,7 @@ data:
       overlay_artwork_filetype: jpg
       overlay_artwork_quality:
       show_unfiltered: false
-    plex: # Can be individually specified per library as well; REQUIRED for the script to run
+    plex:
       url: https://plex.yanello.net
       token: <<PLEXTOKEN>>
       timeout: 60
