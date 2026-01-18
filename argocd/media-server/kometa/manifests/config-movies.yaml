@@ -276,7 +276,7 @@ data:
           bond: James Bond
         template_variables:
           letterboxd_list:
-            bond: https://letterboxd.com/kadiya/list/james-bond/
+            bond: https://letterboxd.com/madskv/list/bond/
             ghibli: https://letterboxd.com/itsannaelisa/list/studio-ghibli/
             oscars_23: https://letterboxd.com/oscars/list/the-95th-academy-award-nominees-for-best-22/
             oscars_24: https://letterboxd.com/oscars/list/the-96th-academy-award-nominees-for-best/
