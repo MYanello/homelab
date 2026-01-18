@@ -117,7 +117,7 @@ data:
       asset_folders: true
       asset_depth: 0
       create_asset_folders: true
-      show_missing_assets: false
+      show_missing_assets: true
       prioritize_assets: true
       dimensional_asset_rename: false
       download_url_assets: false
@@ -133,8 +133,8 @@ data:
       missing_only_released: false
       only_filter_missing: false
       show_unmanaged: true
-      show_filtered: false
-      show_options: false
+      show_filtered: true
+      show_options: true
       show_missing: true
       save_report: false
       tvdb_language: eng
