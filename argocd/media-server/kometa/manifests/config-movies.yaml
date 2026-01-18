@@ -336,3 +336,4 @@ data:
             baker: release.desc
             yorgos: release.desc
             aster: release.desc
+            bond: release.asc
