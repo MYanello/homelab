@@ -1,0 +1,56 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: istio-resources
+  name: coffee-httproute
+spec:
+  hostnames:
+    - coffee.yanello.net
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: coffee-service
+          group: ""
+          kind: Service
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffee-service
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: coffee-service-1
+  labels:
+    kubernetes.io/service-name: coffee-service
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - 192.168.5.32
+    conditions:
+      ready: true

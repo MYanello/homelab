@@ -1,0 +1,59 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: foundry-httproute
+spec:
+  hostnames:
+    - foundry.yanello.net
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+    - name: cilium-public-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: foundry-service
+          group: ""
+          kind: Service
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foundry-service
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: foundry-service-1
+  labels:
+    kubernetes.io/service-name: foundry-service
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http 
+    appProtocol: http
+    protocol: TCP
+    port: 8080
+endpoints:
+  - addresses:
+      - 192.168.10.78
+    conditions:
+      ready: true

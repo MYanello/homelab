@@ -13,7 +13,7 @@ resources:
   - manifests/publicGateway.yaml
   - manifests/bgp.yaml
   - manifests/httpRoute.yaml
-  - ./external
+  # - ./external
 
 helmCharts:
   - name: cilium
