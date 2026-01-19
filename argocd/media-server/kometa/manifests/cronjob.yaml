@@ -20,20 +20,11 @@ spec:
             runAsUser: 3000
             runAsGroup: 3000
             fsGroup: 3000
-          # affinity:
-          #   nodeAffinity:
-          #     requiredDuringSchedulingIgnoredDuringExecution:
-          #       nodeSelectorTerms:
-          #         - matchExpressions:
-          #             - key: kubernetes.io/hostname
-          #               operator: In
-          #               values:
-          #                 - marcus-server
           restartPolicy: OnFailure
           initContainers:
             - name: copy-config
               image: harbor.yanello.net/docker/busybox:1.37
-              command: 
+              command:
                 - sh
                 - -c
                 - |
@@ -64,7 +55,7 @@ spec:
                 - name: config
                   mountPath: /config
                 - name: assets
-                  mountPath: /data/media/assets
+                  mountPath: /assets
               resources:
                 requests:
                   memory: "500Mi"
@@ -87,5 +78,3 @@ spec:
             - name: assets
               persistentVolumeClaim:
                 claimName: assets
-              # hostPath:
-              #   path: /data/media/assets
