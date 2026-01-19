@@ -56,7 +56,7 @@ config: |
   # logger:
   #   default: debug
   genai:
-    enabled: True
+    enabled: False
     provider: openai
     api_key: "{FRIGATE_OPENAI_KEY}"
     model: google/gemini-3-flash-preview
