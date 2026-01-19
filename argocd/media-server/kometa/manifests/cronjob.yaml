@@ -17,18 +17,18 @@ spec:
             app: kometa
         spec:
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: kubernetes.io/hostname
-                        operator: In
-                        values:
-                          - marcus-server
+            runAsUser: 3000
+            runAsGroup: 3000
+            fsGroup: 3000
+          # affinity:
+          #   nodeAffinity:
+          #     requiredDuringSchedulingIgnoredDuringExecution:
+          #       nodeSelectorTerms:
+          #         - matchExpressions:
+          #             - key: kubernetes.io/hostname
+          #               operator: In
+          #               values:
+          #                 - marcus-server
           restartPolicy: OnFailure
           initContainers:
             - name: copy-config
@@ -85,5 +85,7 @@ spec:
               configMap:
                 name: config-tv
             - name: assets
-              hostPath:
-                path: /data/media/assets
+              persistentVolumeClaim:
+                claimName: assets
+              # hostPath:
+              #   path: /data/media/assets
