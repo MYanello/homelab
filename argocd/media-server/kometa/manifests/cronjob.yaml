@@ -63,8 +63,8 @@ spec:
               volumeMounts:
                 - name: config
                   mountPath: /config
-                - name: media
-                  mountPath: /data/media
+                - name: assets
+                  mountPath: /data/media/assets
               resources:
                 requests:
                   memory: "500Mi"
@@ -84,6 +84,6 @@ spec:
             - name: config-tv
               configMap:
                 name: config-tv
-            - name: media
+            - name: assets
               hostPath:
-                path: /data/media
+                path: /data/media/assets
