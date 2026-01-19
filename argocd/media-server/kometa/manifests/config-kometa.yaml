@@ -157,7 +157,7 @@ data:
       overlay_artwork_quality:
       show_unfiltered: false
     plex:
-      url: https://plex.yanello.net
+      url: http://plex.plex.svc.cluster.local:32400
       token: <<PLEXTOKEN>>
       timeout: 60
       clean_bundles: true
@@ -186,7 +186,7 @@ data:
       apikey: <<MDBLIST_API_KEY>>
       cache_expiration: 60
     radarr:
-      url: https://radarr.yanello.net
+      url: http://radarr.radarr.svc.cluster.local:7878
       token: <<RADARR_TOKEN>>
       add_missing: false
       add_existing: false
@@ -203,7 +203,7 @@ data:
       ignore_cache: false
       monitor_existing: false
     sonarr:
-      url: https://sonarr.yanello.net
+      url: http://sonarr.sonarr.svc.cluster.local:8989
       token: <<SONARR_TOKEN>>
       add_missing: false
       add_existing: false
