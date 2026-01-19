@@ -19,7 +19,6 @@ spec:
           securityContext:
             runAsUser: 3000
             runAsGroup: 3000
-            fsGroup: 3000
           restartPolicy: OnFailure
           initContainers:
             - name: copy-config
