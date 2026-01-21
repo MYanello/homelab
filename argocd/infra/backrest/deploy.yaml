@@ -102,8 +102,10 @@ spec:
           hostPath:
             path: /fast-k8s
         - name: cache
-          hostPath:
-            path: /zpool/k8s/backrest/cache
+          persistentVolumeClaim:
+            claimName: cache
+          # hostPath:
+            # path: /zpool/k8s/backrest/cache
         - name: zpool
           hostPath:
             path: /zpool/
