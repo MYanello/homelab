@@ -27,8 +27,6 @@ spec:
           env:
             - name: APP_URL
               value: https://resume.yanello.net
-            - name: AUTH_SECRET
-              value: 
             - name: PORT
               value: "3010"
             - name: PUBLIC_URL
