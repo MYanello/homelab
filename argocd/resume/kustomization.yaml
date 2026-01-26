@@ -10,11 +10,3 @@ resources:
 
 generators:
   - manifests/secret-generator.yaml
-
-patches:
-  - patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 1
-    target:
-      kind: StatefulSet
