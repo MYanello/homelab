@@ -20,15 +20,9 @@ spec:
       containers:
         - env:
             - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: resume-config
-                  key: DB_DATABASE_NAME
+              value: postgres
             - name: POSTGRES_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: resume-config
-                  key: DB_USERNAME
+              value: postgres
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
