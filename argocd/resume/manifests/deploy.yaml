@@ -25,11 +25,15 @@ spec:
           ports:
             - containerPort: 3010
           env:
+            - name: APP_URL
+              value: https://resume.yanello.net
+            - name: AUTH_SECRET
+              value: 
             - name: PORT
               value: "3010"
             - name: PUBLIC_URL
               value: "https://resume.yanello.net"
-            - name: CHROME_URL
+            - name: PRINTER_ENDPOINT
               value: "ws://localhost:3000"
             - name: DISABLE_SIGNUPS
               value: "false"
