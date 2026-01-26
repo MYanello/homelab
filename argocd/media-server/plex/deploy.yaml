@@ -32,9 +32,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /zpool/k8s/plex
-          # persistentVolumeClaim:
-            # claimName: config
+            path: /data/media/plex
         - name: transcode
           persistentVolumeClaim:
             claimName: transcode
