@@ -20,72 +20,75 @@ spec:
         app: rx-resume
     spec:
       containers:
-      - name: rx-resume
-        image: harbor.yanello.net/docker/amruthpillai/reactive-resume:v5.0.3
-        ports:
-        - containerPort: 3010
-        env:
-        - name: PORT
-          value: "3010"
-        - name: PUBLIC_URL
-          value: "https://resume.yanello.net"
-        - name: CHROME_URL
-          value: "ws://localhost:3000"
-        - name: CHROME_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: TOKEN
-        - name: DISABLE_SIGNUPS
-          value: "false"
-        - name: DISABLE_EMAIL_AUTH
-          value: "false"
-        - name: STORAGE_ENDPOINT
-          value: "s3.us-west-004.backblazeb2.com"
-        - name: STORAGE_REGION
-          value: "us-west-004"
-        - name: STORAGE_BUCKET
-          value: "myanello-rxresume"
-        - name: STORAGE_USE_SSL
-          value: "true"
-        - name: SKIP_BUCKET_CHECK
-          value: "false"
-        - name: STORAGE_PORT
-          value: "443"
-        - name: STORAGE_URL
-          value: "https://s3.us-west-004.backblazeb2.com/myanello-rxresume"
-        envFrom:
-          - secretRef:
-              name: resume-secrets
-          - configMapRef:
-              name: resume-config
-        resources:
-          limits:
-            memory: 2048Mi
-          requests:
-            cpu: 1000m
-            memory: 2048Mi
-      - name: rx-chrome
-        image: ghcr.io/browserless/chromium:v2.38.4@sha256:747d62971d100e9ef435673b5a0b997c8853c0f59aac6ba66e5f4cc61cf42185
-        ports:
-        - containerPort: 3000
-        env:
-        - name: TIMEOUT
-          value: "300000"
-        - name: CONCURRENT
-          value: "10"
-        - name: TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: resume-secrets
-              key: TOKEN
-        - name: EXIT_ON_HEALTH_FAILURE
-          value: "false"
-        - name: PRE_REQUEST_HEALTH_CHECK
-          value: "false"
-        resources:
-          limits:
-            memory: 8192Mi
-          requests:
-            cpu: 500m
-            memory: 4096Mi
+        - name: rx-resume
+          image: harbor.yanello.net/docker/amruthpillai/reactive-resume:v5.0.3
+          ports:
+            - containerPort: 3010
+          env:
+            - name: PORT
+              value: "3010"
+            - name: PUBLIC_URL
+              value: "https://resume.yanello.net"
+            - name: CHROME_URL
+              value: "ws://localhost:3000"
+            - name: DISABLE_SIGNUPS
+              value: "false"
+            - name: DISABLE_EMAIL_AUTH
+              value: "false"
+            - name: STORAGE_ENDPOINT
+              value: "s3.us-west-004.backblazeb2.com"
+            - name: STORAGE_REGION
+              value: "us-west-004"
+            - name: STORAGE_BUCKET
+              value: "myanello-rxresume"
+            - name: STORAGE_USE_SSL
+              value: "true"
+            - name: SKIP_BUCKET_CHECK
+              value: "false"
+            - name: STORAGE_PORT
+              value: "443"
+            - name: STORAGE_URL
+              value: "https://s3.us-west-004.backblazeb2.com/myanello-rxresume"
+            - name: OAUTH_PROVIDER_NAME
+              value: Authentik
+            - name: OAUTH_DISCOVERY_URL
+              value: https://authentik.yanello.net/application/o/rxr/.well-known/openid-configuration
+            - name: DB_DATABASE_NAME
+              value: postgres
+            - name: DB_HOSTNAME
+              value: postgres
+            - name: DB_USERNAME
+              value: postgres
+          envFrom:
+            - secretRef:
+                name: resume-secrets
+          resources:
+            limits:
+              memory: 2048Mi
+            requests:
+              cpu: 1000m
+              memory: 2048Mi
+        - name: rx-chrome
+          image: ghcr.io/browserless/chromium:v2.38.4@sha256:747d62971d100e9ef435673b5a0b997c8853c0f59aac6ba66e5f4cc61cf42185
+          ports:
+            - containerPort: 3000
+          env:
+            - name: TIMEOUT
+              value: "300000"
+            - name: CONCURRENT
+              value: "10"
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: resume-secrets
+                  key: TOKEN
+            - name: EXIT_ON_HEALTH_FAILURE
+              value: "false"
+            - name: PRE_REQUEST_HEALTH_CHECK
+              value: "false"
+          resources:
+            limits:
+              memory: 8192Mi
+            requests:
+              cpu: 500m
+              memory: 4096Mi

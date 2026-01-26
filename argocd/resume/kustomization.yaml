@@ -5,7 +5,6 @@ resources:
   - manifests/deploy.yaml
   - manifests/service.yaml
   - manifests/sts.yaml
-  - manifests/cm.yaml
   - manifests/http-route.yaml
 
 generators:
