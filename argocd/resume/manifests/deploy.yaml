@@ -32,7 +32,7 @@ spec:
             - name: PUBLIC_URL
               value: "https://resume.yanello.net"
             - name: PRINTER_ENDPOINT
-              value: "ws://localhost:3000"
+              value: "http://chrome:9222"
             - name: DISABLE_SIGNUPS
               value: "false"
             - name: DISABLE_EMAIL_AUTH
@@ -71,23 +71,9 @@ spec:
               cpu: 1000m
               memory: 2048Mi
         - name: rx-chrome
-          image: ghcr.io/browserless/chromium:v2.38.4@sha256:747d62971d100e9ef435673b5a0b997c8853c0f59aac6ba66e5f4cc61cf42185
+          image: harbor.yanello.net/docker/chromedp/headless-shell
           ports:
-            - containerPort: 3000
-          env:
-            - name: TIMEOUT
-              value: "300000"
-            - name: CONCURRENT
-              value: "10"
-            - name: TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: resume-secrets
-                  key: TOKEN
-            - name: EXIT_ON_HEALTH_FAILURE
-              value: "false"
-            - name: PRE_REQUEST_HEALTH_CHECK
-              value: "false"
+            - containerPort: 9222
           resources:
             limits:
               memory: 8192Mi

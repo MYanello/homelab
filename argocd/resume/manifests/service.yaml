@@ -19,3 +19,14 @@ spec:
     targetPort: 5432
   selector:
     app: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: browser
+spec:
+  ports:
+  - port: 9222
+    targetPort: 9222
+  selector:
+    app: browser
