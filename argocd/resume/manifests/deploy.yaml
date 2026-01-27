@@ -32,7 +32,7 @@ spec:
             - name: PUBLIC_URL
               value: "https://resume.yanello.net"
             - name: PRINTER_ENDPOINT
-              value: "http://chrome:9222"
+              value: "http://browser:9222"
             - name: DISABLE_SIGNUPS
               value: "true"
             - name: DISABLE_EMAIL_AUTH
