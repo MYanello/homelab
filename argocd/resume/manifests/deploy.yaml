@@ -34,7 +34,7 @@ spec:
             - name: PRINTER_ENDPOINT
               value: "http://chrome:9222"
             - name: DISABLE_SIGNUPS
-              value: "false"
+              value: "true"
             - name: DISABLE_EMAIL_AUTH
               value: "false"
             - name: STORAGE_ENDPOINT
@@ -70,6 +70,28 @@ spec:
             requests:
               cpu: 1000m
               memory: 2048Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: browser
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: browser
+  template:
+    metadata:
+      labels:
+        app: browser
+    spec:
+      containers:
         - name: rx-chrome
           image: harbor.yanello.net/docker/chromedp/headless-shell
           ports:
