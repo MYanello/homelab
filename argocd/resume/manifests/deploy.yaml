@@ -92,7 +92,7 @@ spec:
         app: browser
     spec:
       containers:
-        - name: rx-chrome
+        - name: browser
           image: harbor.yanello.net/docker/chromedp/headless-shell
           ports:
             - containerPort: 9222
