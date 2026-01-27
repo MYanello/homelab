@@ -32,7 +32,7 @@ spec:
             - name: PUBLIC_URL
               value: "https://resume.yanello.net"
             - name: PRINTER_ENDPOINT
-              value: "http://browser:9222"
+              value: "http://printer:9222"
             - name: DISABLE_SIGNUPS
               value: "true"
             - name: DISABLE_EMAIL_AUTH
@@ -74,7 +74,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: browser
+  name: printer
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -85,20 +85,14 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: browser
+      app: printer
   template:
     metadata:
       labels:
-        app: browser
+        app: printer
     spec:
       containers:
-        - name: browser
+        - name: printer
           image: harbor.yanello.net/docker/chromedp/headless-shell
           ports:
             - containerPort: 9222
-          resources:
-            limits:
-              memory: 8192Mi
-            requests:
-              cpu: 500m
-              memory: 4096Mi

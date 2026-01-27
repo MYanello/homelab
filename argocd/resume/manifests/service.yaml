@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: browser
+  name: printer
 spec:
   ports:
   - port: 9222
     targetPort: 9222
   selector:
-    app: browser
+    app: printer
