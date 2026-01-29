@@ -33,6 +33,8 @@ spec:
               value: "https://resume.yanello.net"
             - name: PRINTER_ENDPOINT
               value: "http://$(PRINTER_SERVICE_HOST):$(PRINTER_SERVICE_PORT)"
+            - name: PRINTER_APP_URL
+              value: http://printer:9222
             - name: FLAG_DISABLE_SIGNUPS
               value: "true"
             - name: FLAG_DEBUG_PRINT
