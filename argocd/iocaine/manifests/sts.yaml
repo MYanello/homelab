@@ -64,7 +64,7 @@ spec:
         - name: iocaine
           image: harbor.yanello.net/madhouse/iocaine/iocaine:3.1.0@sha256:12a07c69363356f045171e432fe6d54eb6b94bc33996eaa52f70d6ab1e46f374
           command: ["iocaine"]
-          args: ["-c", "/etc/iocaine/config.d"]
+          args: ["--config-path", "/etc/iocaine/config.d", "start"]
           ports:
             - containerPort: 8080
               protocol: TCP
