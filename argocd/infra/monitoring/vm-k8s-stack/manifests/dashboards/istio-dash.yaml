@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    grafana_dashboard: "2"
+    grafana_dashboard: "true"
   name: istio-dashboard
 data:
   istio-dashboard.json: |-
