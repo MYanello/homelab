@@ -3,7 +3,7 @@ http-server default {
     use handler-from=default
 }
 
-declare-handler default {
+declare-handler default language=roto {
   sources {
     training-corpus "/opt/iocaine/share/data/1984.txt" \
                     "/opt/iocaine/share/data/brave-new-world.txt"
