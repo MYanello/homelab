@@ -105,7 +105,7 @@ spec:
               value: "America/Chicago"
             - name: CWA_PORT_OVERRIDE
               value: "80"
-          image: harbor.yanello.net/docker/crocodilestick/calibre-web-automated:latest@sha256:fac65096c8c69b392dc26e9f0681e928d0580931473e330faa1ab125b8374dd7
+          image: harbor.yanello.net/docker/crocodilestick/calibre-web-automated:v4.0.2
           imagePullPolicy: IfNotPresent
           name: calibre
           resources:
