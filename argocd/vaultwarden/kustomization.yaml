@@ -21,7 +21,7 @@ patches:
 helmCharts:
     - name: vaultwarden
       repo: https://guerzon.github.io/vaultwarden
-      version: "0.34.4"
+      version: "0.34.5"
       releaseName: vaultwarden
       namespace: vaultwarden
       valuesFile: ./values.yaml
