@@ -1,0 +1,9 @@
+prometheus-server metrics {
+  bind "0.0.0.0:42042"
+  persist-path "/opt/iocaine/share/data/metrics.json"
+  persist-interval "1h"
+}
+
+http-server default {
+  use metrics=metrics
+}
