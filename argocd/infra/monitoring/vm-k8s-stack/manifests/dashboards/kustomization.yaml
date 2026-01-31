@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
   - ./power-dash.yaml
-  - ./istio-dash.yaml
+  # - ./istio-dash.yaml
   - ./iocaine-dash.yaml
