@@ -1,4 +1,4 @@
-victoria-metrics-operator: {}
+victoria-metrics-operator:
 
 vmalert:
   enabled: true
@@ -58,6 +58,9 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
+      maxTotalRetries: 10
+      maxConnectRetries: 20
+      maxReadRetries: 10
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
