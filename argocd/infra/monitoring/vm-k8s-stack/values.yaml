@@ -61,6 +61,8 @@ grafana:
       maxTotalRetries: 10
       maxConnectRetries: 20
       maxReadRetries: 10
+      label: grafana_dashboard
+      labelValue: ""
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
