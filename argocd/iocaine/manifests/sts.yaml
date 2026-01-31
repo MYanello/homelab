@@ -64,7 +64,7 @@ spec:
         - name: iocaine
           image: harbor.yanello.net/madhouse/iocaine/iocaine:3.1.0@sha256:12a07c69363356f045171e432fe6d54eb6b94bc33996eaa52f70d6ab1e46f374
           command: ["iocaine"]
-          args: ["-c", "/etc/iocaine/config.kdl"]
+          args: ["-c", "/etc/iocaine/config.d"]
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -77,13 +77,12 @@ spec:
               cpu: 100m
             limits:
               memory: 200Mi
-              cpu: "1"
           volumeMounts:
             - name: config
-              mountPath: /etc/iocaine/config.kdl
+              mountPath: /etc/iocaine/config.d/config.kdl
               subPath: config.kdl
             - name: metrics
-              mountPath: /etc/iocaine/metrics.kdl
+              mountPath: /etc/iocaine/config.d/metrics.kdl
               subPath: metrics.kdl
             - name: iocaine-persistent
               mountPath: /opt/iocaine/share/data/
@@ -91,6 +90,9 @@ spec:
         - name: config
           configMap:
             name: config
+        - name: metrics
+          configMap:
+            name: metrics
   volumeClaimTemplates:
     - metadata:
         name: iocaine-persistent
