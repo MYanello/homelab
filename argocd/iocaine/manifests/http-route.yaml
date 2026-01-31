@@ -6,12 +6,12 @@ metadata:
   name: iocaine
 spec:
   parentRefs:
-  - name: cilium-public-gateway
-    namespace: cilium
-    sectionName: https-root
-  - name: cilium-public-gateway
-    namespace: cilium
-    sectionName: http-root
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https-root
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: http-root
   # - name: cilium-private-gateway
   #   namespace: cilium
   #   sectionName: http
@@ -19,10 +19,20 @@ spec:
   #   namespace: cilium
   #   sectionName: https
   hostnames:
-  # - iocaine.yanello.net
-  - yanello.net
+    # - iocaine.yanello.net
+    - yanello.net
   rules:
-  - backendRefs:
-    - name: iocaine
-      port: 8080
-      
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /metrics
+      backendRefs:
+        - name: metrics
+          port: 8181
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: iocaine
+          port: 8080
