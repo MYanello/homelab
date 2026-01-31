@@ -22,13 +22,13 @@ spec:
     # - iocaine.yanello.net
     - yanello.net
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /metrics
-      backendRefs:
-        - name: metrics
-          port: 8181
+    # - matches:
+    #     - path:
+    #         type: PathPrefix
+    #         value: /metrics
+    #   backendRefs:
+    #     - name: metrics
+    #       port: 8181
     - matches:
         - path:
             type: PathPrefix
