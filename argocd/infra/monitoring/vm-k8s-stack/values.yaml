@@ -16,7 +16,7 @@ vmagent:
         memory: 8Gi
 
 
-vmsingle: 
+vmsingle:
   enabled: true
   spec:
     retentionPeriod: 365d
@@ -47,7 +47,7 @@ vmsingle:
         memory: 4Gi
       limits:
         memory: 16Gi
-        
+
 defaultDashboards:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
@@ -55,6 +55,9 @@ defaultDashboards:
     enabled: true
 
 grafana:
+  sidecar:
+    dashboards:
+      enabled: true
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
