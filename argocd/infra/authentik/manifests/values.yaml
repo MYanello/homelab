@@ -86,6 +86,11 @@ postgresql:
   diagnosticMode:
     enabled: false
   primary:
+    podSecurityContext:
+      enabled: true
+      fsGroup: 3000
+      runAsUser: 3000 
+      runAsGroup: 3000
     persistence:
       enabled: true
       # storageClass: longhorn-xfs
