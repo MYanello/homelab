@@ -89,6 +89,7 @@ postgresql:
     podSecurityContext:
       enabled: true
       fsGroup: 3000
+    containerSecurityContext:
       runAsUser: 3000 
       runAsGroup: 3000
     persistence:
