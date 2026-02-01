@@ -36,11 +36,11 @@ spec:
             - name: PRINTER_APP_URL
               value: http://rx-resume:3010
             - name: FLAG_DISABLE_SIGNUPS
-              value: "true"
+              value: "false"
             - name: FLAG_DEBUG_PRINT
               value: "true"
             - name: FLAG_DISABLE_EMAIL_AUTH
-              value: "false"
+              value: "true"
             - name: STORAGE_ENDPOINT
               value: "s3.us-west-004.backblazeb2.com"
             - name: STORAGE_REGION
