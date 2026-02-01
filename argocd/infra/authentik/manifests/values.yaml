@@ -90,8 +90,8 @@ postgresql:
       enabled: true
       # storageClass: longhorn-xfs
       # accessMode: ReadWriteOnce
-      # existingClaim: "psql"
-      existingClaim: "psql-backup"
+      existingClaim: "psql"
+      # existingClaim: "psql-backup"
     resources:
       requests:
         cpu: 100m
