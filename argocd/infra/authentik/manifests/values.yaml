@@ -30,7 +30,6 @@ server:
   replicas: 1
   resources:
     limits:
-      cpu: 750m
       memory: 1Gi
     requests:
       cpu: 150m
@@ -39,7 +38,6 @@ worker:
   replicas: 1
   resources:
     limits:
-      cpu: 300m
       memory: 1Gi
     requests:
       cpu: 100m
@@ -60,7 +58,6 @@ redis:
         cpu: 300m
         memory: 50Mi
       limits:
-        cpu: 500m
         memory: 100Mi
   replica:
     persistence:
@@ -70,7 +67,6 @@ redis:
         cpu: 300m
         memory: 50Mi
       limits:
-        cpu: 500m
         memory: 100Mi
   sentinel:
     persistence:
@@ -80,7 +76,6 @@ redis:
         cpu: 300m
         memory: 50Mi
       limits:
-        cpu: 500m
         memory: 100Mi
 postgresql:
   enabled: true
@@ -100,7 +95,6 @@ postgresql:
         cpu: 100m
         memory: 100Mi
       limits:
-        cpu: 200m
         memory: 250Mi
   auth:
     username: authentik
