@@ -63,8 +63,8 @@ nextcloud:
         'allow_local_remote_servers' => true,
       );
   podSecurityContext:
-    fsGroup: 3000
-    fsGroupChangePolicy: "OnRootMismatch"
+    # fsGroup: 3000
+    # fsGroupChangePolicy: "OnRootMismatch"
     runAsUser: 0
     runAsGroup: 0
   securityContext:
