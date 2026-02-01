@@ -62,7 +62,10 @@ nextcloud:
         'maintenance_window_start' => 9,
         'allow_local_remote_servers' => true,
       );
-
+  podSecurityContext:
+    fsGroup: 3000
+    runAsUser: 3000
+    runAsGroup: 3000
 cronjob:
   enabled: true
 redis:
