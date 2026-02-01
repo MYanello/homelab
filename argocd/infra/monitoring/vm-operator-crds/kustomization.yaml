@@ -6,5 +6,5 @@ helmCharts:
    releaseName: victoria-metrics-operator-crds
    namespace: monitoring
    repo: https://victoriametrics.github.io/helm-charts/
-   version: "0.6.1"
+   version: "0.7.0"
    valuesFile: values.yaml
