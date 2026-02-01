@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sidekiq
-          image: docker.io/freikin/dawarich:latest@sha256:8ff048f87b09dc4b8f583767384d6cf73d46ecd47cac4ceb28578466ebf264ec
+          image: docker.io/freikin/dawarich:1.0.4
           command: ["sidekiq-entrypoint.sh"]
           args: ["sidekiq"]
           envFrom:

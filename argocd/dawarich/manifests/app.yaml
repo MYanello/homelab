@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: docker.io/freikin/dawarich:0.37.3@sha256:efab2e677baf912f5cc68363ec26e648015fa2c703b4a0cf8e03418415e1ed0d
+          image: docker.io/freikin/dawarich:1.0.4
           command: ["web-entrypoint.sh"]
           args: ["bin/rails", "server", "-p", "3000", "-b", "::"]
           envFrom:
