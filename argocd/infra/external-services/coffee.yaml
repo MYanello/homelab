@@ -12,7 +12,7 @@ spec:
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: https
+      sectionName: http
   rules:
     - backendRefs:
         - name: coffee-service
