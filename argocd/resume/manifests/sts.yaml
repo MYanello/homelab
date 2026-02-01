@@ -58,8 +58,8 @@ spec:
     - metadata:
         name: pgdata
       spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn
+        accessModes: ["ReadWriteMany"]
+        storageClassName: truenas-ssd-nfs
         resources:
           requests:
             storage: 1Gi
