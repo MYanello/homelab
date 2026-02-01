@@ -65,15 +65,15 @@ nextcloud:
   podSecurityContext:
     fsGroup: 3000
     fsGroupChangePolicy: "OnRootMismatch"
-    runAsUser: 3000
-    runAsGroup: 3000
+    runAsUser: 0
+    runAsGroup: 0
   securityContext:
-    runAsUser: 3000
-    runAsGroup: 3000
+    runAsUser: 0
+    runAsGroup: 0
 nginx:
   securityContext:
-    runAsUser: 3000
-    runAsGroup: 3000
+    runAsUser: 0
+    runAsGroup: 0
 cronjob:
   enabled: true
 redis:
