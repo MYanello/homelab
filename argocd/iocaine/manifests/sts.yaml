@@ -27,42 +27,42 @@ spec:
             - |
               cd /opt/iocaine/share/data
               echo "Checking for existing data files..."
-  
+
               if [ ! -f "1984.txt" ]; then
                 echo "Downloading 1984.txt..."
                 curl -s -L https://archive.org/download/GeorgeOrwells1984/1984_djvu.txt -o 1984.txt
               else
                 echo "1984.txt already exists, skipping download."
               fi
-  
+
               if [ ! -f "brave-new-world.txt" ]; then
                 echo "Downloading brave-new-world.txt..."
                 curl -s -L https://archive.org/download/ost-english-brave_new_world_aldous_huxley/Brave_New_World_Aldous_Huxley_djvu.txt -o brave-new-world.txt
               else
                 echo "brave-new-world.txt already exists, skipping download."
               fi
-  
+
               if [ ! -f "words.txt" ]; then
                 echo "Downloading words.txt..."
                 curl -s -L https://git.savannah.gnu.org/cgit/miscfiles.git/plain/web2 -o words.txt
               else
                 echo "words.txt already exists, skipping download."
               fi
-  
+
               if [ ! -f "ai.robots.txt-robots.json" ]; then
                 echo "Downloading ai.robots.txt-robots.json..."
                 curl -s -L https://github.com/ai-robots-txt/ai.robots.txt/raw/refs/heads/main/robots.json -o ai.robots.txt-robots.json
               else
                 echo "ai.robots.txt-robots.json already exists, skipping download."
               fi
-  
+
               echo "Data initialization complete."
           volumeMounts:
             - name: iocaine-persistent
               mountPath: /opt/iocaine/share/data/
       containers:
         - name: iocaine
-          image: harbor.yanello.net/library/iocaine:3.1.0-debian@sha256:495d0da532416e7016ededf259a4353623994a0e2e879807f2f89b25ddbc5d96 # harbor.yanello.net/madhouse/iocaine/iocaine:3.1.0@sha256:12a07c69363356f045171e432fe6d54eb6b94bc33996eaa52f70d6ab1e46f374
+          image: harbor.yanello.net/madhouse/iocaine/iocaine:3.1.0@sha256:12a07c69363356f045171e432fe6d54eb6b94bc33996eaa52f70d6ab1e46f374
           command: ["iocaine"]
           args: ["--config-path", "/etc/iocaine/config.d", "start"]
           ports:
