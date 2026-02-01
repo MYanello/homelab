@@ -31,11 +31,11 @@ spec:
     #   limits:
     #     memory: "128Mi"
     #     cpu: "500m"
-    volumeMounts:
-      - name: data
-        mountPath: /data
+    # volumeMounts:
+    #   - name: data
+    #     mountPath: /data
   restartPolicy: Never
-  volumes:
-    - name: data
-      persistentVolumeClaim:
-        claimName: data-authentik-postgresql-0
+  # volumes:
+  #   - name: data
+  #     persistentVolumeClaim:
+  #       claimName: data-authentik-postgresql-0
