@@ -8,6 +8,10 @@ resources:
 generators:
   - ./manifests/secret-generator.yaml
 
+replicas:
+  - name: authentik-postgresql
+    count: 0
+
 helmCharts:
   - name: authentik
     namespace: authentik
