@@ -21,12 +21,9 @@ spec:
   - name: debug
     image: ubuntu:latest
     command: ["/bin/sh", "-c", "sleep infinity"]
-    # volumeMounts:
-    # - mountPath: /credentials
-    #   name: cloud-credentials
-    securityContext:
-      runAsUser: 250
-      runAsGroup: 250
+    # securityContext:
+    #   runAsUser: 250
+    #   runAsGroup: 250
     # resources:
     #   requests:
     #     memory: "64Mi"
@@ -41,4 +38,4 @@ spec:
   volumes:
     - name: data
       persistentVolumeClaim:
-        claimName: uptime-kuma-pvc
+        claimName: data-authentik-postgresql-0
