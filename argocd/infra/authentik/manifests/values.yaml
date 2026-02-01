@@ -94,10 +94,8 @@ postgresql:
       runAsGroup: 3000
     persistence:
       enabled: true
-      # storageClass: longhorn-xfs
-      # accessMode: ReadWriteOnce
-      existingClaim: "psql"
-      # existingClaim: "psql-backup"
+      storageClass: truenas-ssd-nfs
+      accessMode: ReadWriteMany
     resources:
       requests:
         cpu: 100m
