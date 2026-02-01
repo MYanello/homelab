@@ -1,4 +1,0 @@
-# resources:
-# - ./manifests/sts.yaml
-# - ./manifests/svc.yaml
-# - ./manifests/http-route.yaml
