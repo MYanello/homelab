@@ -78,7 +78,7 @@ redis:
       limits:
         memory: 100Mi
 postgresql:
-  enabled: true
+  enabled: false
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
