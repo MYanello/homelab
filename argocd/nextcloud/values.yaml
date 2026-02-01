@@ -38,8 +38,8 @@ nextcloud:
       value: nextcloud.yanello.net
     - name: OVERWRITECLIURL
       value: https://nextcloud.yanello.net
-    - name: APACHE_DISABLE_REWRITE_IP
-      value: "1"
+    # - name: APACHE_DISABLE_REWRITE_IP
+    #   value: "1"
     - name: TRUSTED_PROXIES
       value: 10.42.0.0/16
     - name: FORWARDED_FOR_HEADERS
