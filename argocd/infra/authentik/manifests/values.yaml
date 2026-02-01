@@ -95,7 +95,8 @@ postgresql:
     persistence:
       enabled: true
       storageClass: truenas-ssd-nfs
-      accessModes: ReadWriteMany
+      accessModes: 
+        - ReadWriteMany
     resources:
       requests:
         cpu: 100m
