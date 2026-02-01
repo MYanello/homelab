@@ -10,7 +10,7 @@ generators:
 
 replicas:
   - name: authentik-postgresql
-    count: 0
+    count: 1
 
 helmCharts:
   - name: authentik
