@@ -48,6 +48,9 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
           name: postgres
+          securityContext:
+            runAsGroup: 3000
+            runAsUser: 3000
           ports:
             - containerPort: 5432
               protocol: TCP
