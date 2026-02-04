@@ -19,6 +19,8 @@ spec:
   rules:
     - backendRefs:
         - name: harbor-portal
+          group: ""
+          kind: Service
           namespace: harbor
           port: 80
           weight: 1
