@@ -1,0 +1,12 @@
+---
+repos:
+  - repo: https://github.com/lyz-code/yamlfix/
+    rev: 1.19.1
+    hooks:
+      - id: yamlfix
+        exclude: charts/
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+        args: [--strict, -c=.yamllint]

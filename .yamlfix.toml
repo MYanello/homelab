@@ -1,0 +1,8 @@
+[yamlfix]
+sequence_style = "keep_style"
+comments_whitelines = 1
+section_whitelines = 1
+explicit_start = false
+whitelines = 1
+none_representation = "null"
+preserve_quotes = true
