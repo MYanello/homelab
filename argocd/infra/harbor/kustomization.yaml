@@ -9,6 +9,6 @@ helmCharts:
   - name: harbor
     namespace: harbor
     releaseName: harbor
-    repo: https://harbor.yanello.net/library/harbor-helm/
+    repo: oci://harbor.yanello.net/library/harbor-helm
     version: "1.4.0-myanello"
     valuesFile: ./values.yaml
