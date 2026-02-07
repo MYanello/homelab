@@ -9,8 +9,6 @@ spec:
   serviceName: postgres
   replicas: 1
   revisionHistoryLimit: 3
-  securityContext:
-    fsGroup: 3000
   selector:
     matchLabels:
       app: postgres
