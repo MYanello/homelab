@@ -4,11 +4,11 @@ metadata:
   name: harbor-http-route
 spec:
   parentRefs:
-    - name: cilium-public-gateway
-      group: gateway.networking.k8s.io
-      kind: Gateway
-      namespace: cilium
-      sectionName: https
+    # - name: cilium-public-gateway
+    #   group: gateway.networking.k8s.io
+    #   kind: Gateway
+    #   namespace: cilium
+    #   sectionName: https
     - name: cilium-private-gateway
       group: gateway.networking.k8s.io
       kind: Gateway
