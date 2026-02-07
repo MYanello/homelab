@@ -1,3 +1,4 @@
+---
 database:
   podAnnoations:
     backup.velero.io/backup-volumes: database-data
@@ -5,6 +6,7 @@ database:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+
 redis:
   podAnnotations:
     backup.velero.io/backup-volumes: data
@@ -13,6 +15,7 @@ redis:
       operator: "Exists"
       effect: "NoSchedule"
 existingSecretAdminPassword: harbor-secrets
+
 expose:
   tls:
     enabled: false
@@ -27,6 +30,7 @@ expose:
     hosts:
       - harbor.yanello.net
 externalURL: https://harbor.yanello.net
+
 persistence:
   persistentVolumeClaim:
     registry:
@@ -44,28 +48,34 @@ persistence:
       storageClass: truenas-ssd
     trivy:
       storageClass: truenas-hdd
+
 cache:
   enabled: true
+
 portal:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+
 core:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+
 jobservice:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+
 registry:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+
 exporter:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"

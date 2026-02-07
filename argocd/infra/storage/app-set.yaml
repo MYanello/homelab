@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -31,6 +32,10 @@ spec:
           kind: CustomResourceDefinition
           jsonPointers:
             - /spec/preserveUnknownFields
+        - kind: Secret
+          name: harbor-registry
+          jsonPointers:
+            - /data/REGISTRY_HTPASSWD
       source:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
