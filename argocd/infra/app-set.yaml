@@ -40,6 +40,7 @@ spec:
           jqPathExpressions:
             - ".spec.rules[].backendRefs[].group"
             - ".spec.rules[].backendRefs[].kind"
+            - ".spec.rules[].backendRefs[].weight"
       syncPolicy:
         automated:
           prune: true
