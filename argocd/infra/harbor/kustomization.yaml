@@ -5,13 +5,10 @@ kind: Kustomization
 generators:
   - ./secret-generator.yaml
 
-# resources:
-  # - ./http-route.yaml
-
 helmCharts:
   - name: harbor
     namespace: harbor
     releaseName: harbor
-    repo: https://helm.goharbor.io
-    version: "1.18.2"
+    repo: https://harbor.yanello.net/library/harbor-helm/
+    version: "1.4.0-myanello"
     valuesFile: ./values.yaml
