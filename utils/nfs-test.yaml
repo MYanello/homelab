@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -17,15 +18,15 @@ metadata:
   name: test-pod
 spec:
   containers:
-  - name: test-pod
-    image: busybox@sha256:ab33eacc8251e3807b85bb6dba570e4698c3998eca6f0fc2ccb60575a563ea74
-    command:
-      - "/bin/sh"
-      - "-c"
-      - "touch /mnt/SUCCESS && exit 0 || exit 1"
-    volumeMounts:
-      - name: nfs-pvc
-        mountPath: "/mnt"
+    - name: test-pod
+      image: busybox@sha256:ab33eacc8251e3807b85bb6dba570e4698c3998eca6f0fc2ccb60575a563ea74
+      command:
+        - "/bin/sh"
+        - "-c"
+        - "touch /mnt/SUCCESS && exit 0 || exit 1"
+      volumeMounts:
+        - name: nfs-pvc
+          mountPath: "/mnt"
   restartPolicy: "Never"
   volumes:
     - name: nfs-pvc

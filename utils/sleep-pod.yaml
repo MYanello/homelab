@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -16,11 +17,11 @@ spec:
   #                 - marcus-server
   # imagePullSecrets:
   #   - name: gitea-pull-secrets
-#  serviceAccountName: external-secrets
+  #  serviceAccountName: external-secrets
   containers:
-  - name: debug
-    image: ubuntu:latest
-    command: ["/bin/sh", "-c", "sleep infinity"]
+    - name: debug
+      image: ubuntu:latest
+      command: ["/bin/sh", "-c", "sleep infinity"]
     # securityContext:
     #   runAsUser: 250
     #   runAsGroup: 250
