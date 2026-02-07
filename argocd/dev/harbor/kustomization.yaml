@@ -7,8 +7,8 @@ generators:
 
 helmCharts:
   - name: harbor
-    namespace: harbor
+    namespace: harbor-dev
     releaseName: harbor
-    repo: https://helm.goharbor.io
-    version: "1.18.2"
+    repo: oci://harbor.yanello.net/library/harbor-helm
+    version: "1.4.0-myanello"
     valuesFile: ./values.yaml
