@@ -35,6 +35,11 @@ spec:
           name: harbor-registry
           jsonPointers:
             - /data/REGISTRY_HTPASSWD
+        - kind: HTTPRoute
+          name: harbor-route
+          jqPathExpressions:
+            - ".spec.rules[].backendRefs[].group"
+            - ".spec.rules[].backendRefs[].kind"
       syncPolicy:
         automated:
           prune: true
