@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -30,6 +31,10 @@ spec:
           jsonPointers:
             - /spec/template/metadata/annotations/checksum~1secret
             - /spec/template/metadata/annotations/checksum~1tls
+        - kind: Secret
+          name: harbor-registry
+          jsonPointers:
+            - /data/REGISTRY_HTPASSWD
       syncPolicy:
         automated:
           prune: true
