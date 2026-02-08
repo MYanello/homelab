@@ -21,3 +21,8 @@ rbac:
         - "tcproutes"
         - "udproutes"
       verbs: ["get", "watch", "list"]
+
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
