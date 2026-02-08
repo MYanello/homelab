@@ -1,3 +1,4 @@
+---
 kubeProxyReplacement: true
 k8sServiceHost: 192.168.10.100
 k8sServicePort: 6443
@@ -9,13 +10,11 @@ ingressController:
   service:
     annotations:
       io.cilium/lb-ipam-ips: 10.10.8.0/22
-
 rollOutCiliumPods: true
 
 ipam:
   operator:
     clusterPoolIPv4PodCIDRList: 10.42.0.0/16
-
 devices: eth0
 gatewayAPI:
   enabled: true
@@ -55,27 +54,3 @@ authentication:
 cluster:
   name: home
   id: 1
-# clustermesh:
-#   useAPIServer: true
-#   apiserver:
-#     tolerations:
-#       - key: "node-role.kubernetes.io/control-plane"
-#         operator: "Exists"
-#         effect: "NoSchedule"
-#     service:
-#       type: LoadBalancer
-#       loadBalancerIP: 10.10.8.102
-#   config:
-#     enabled: true
-#     clusters:
-#       home:
-#         enabled: true
-#         port: 2379
-#         ips:
-#           - 10.10.8.102
-#       talos:
-#         enabled: true
-#         port: 2379
-#         ips:
-#           - 10.20.8.102
-
