@@ -6,9 +6,9 @@ generators:
   - manifests/secret-generator.yaml
 
 helmCharts:
-  - name: external-dns
+  - name: external-dns-agh
     repo: https://kubernetes-sigs.github.io/external-dns/
     version: "1.20.0"
-    releaseName: external-dns
-    namespace: external-dns
+    releaseName: external-dns-agh
+    namespace: external-dns-agh
     valuesFile: values.yaml
