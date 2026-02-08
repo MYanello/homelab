@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         app: rustdesk-hbbr
+        app.kubernetes.io/name: rustdesk
     spec:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
@@ -57,6 +58,7 @@ spec:
     metadata:
       labels:
         app: rustdesk-hbbs
+        app.kubernetes.io/name: rustdesk
     spec:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
