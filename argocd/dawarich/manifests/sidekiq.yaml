@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -55,7 +56,6 @@ spec:
               cpu: "250m"
             limits:
               memory: "2Gi"
-              cpu: "500m"
           stdin: true
           tty: true
       volumes:

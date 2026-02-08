@@ -17,9 +17,9 @@ spec:
         app: maintainerr
     spec:
       securityContext:
-        fsGroup: 1000        # Group ID for volume access
-        runAsUser: 1000      # User ID to run the container
-        runAsGroup: 1000     # Group ID for the process
+        fsGroup: 1000  # Group ID for volume access
+        runAsUser: 1000  # User ID to run the container
+        runAsGroup: 1000  # Group ID for the process
       restartPolicy: Always
       containers:
         - image: harbor.yanello.net/ghcr/maintainerr/maintainerr:2.26.1@sha256:35f5e04151298e828e804f54be0ef00104c35dbf9bfd8e03dacc42e525d2f336
@@ -46,7 +46,6 @@ spec:
             failureThreshold: 3
           resources:
             limits:
-              cpu: 250m
               memory: 1Gi
             requests:
               cpu: 250m

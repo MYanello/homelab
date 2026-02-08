@@ -1,3 +1,4 @@
+---
 global:
   resources:
     requests:
@@ -5,7 +6,6 @@ global:
       cpu: 250m
     limits:
       memory: 512Mi
-      cpu: 500m
   tlsDisable: false
 injector:
   enabled: false
@@ -35,7 +35,7 @@ server:
     - type: secret
       name: vault-letsencrypt
   volumes:
-    - secret: 
+    - secret:
         secretName: oci-config
       name: oci-config
   volumeMounts:
@@ -57,14 +57,14 @@ server:
           tls_cert_file = "/vault/userconfig/vault-letsencrypt/tls.crt"
           tls_key_file = "/vault/userconfig/vault-letsencrypt/tls.key"
         }
-        
+
         listener "tcp" {
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           tls_cert_file = "/vault/userconfig/vault-tls/tls.crt"
           tls_key_file = "/vault/userconfig/vault-tls/tls.key"
         }
-        
+
         storage "raft" {
           path = "/vault/data"
           retry_join {

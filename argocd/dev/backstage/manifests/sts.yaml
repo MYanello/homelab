@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -29,7 +30,6 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              cpu: 1000m
               memory: 1Gi
             requests:
               cpu: 10m
@@ -54,9 +54,9 @@ spec:
           readinessProbe:
             exec:
               command:
-              - sh
-              - -c
-              - pg_isready -U backstage -d backstage
+                - sh
+                - -c
+                - pg_isready -U backstage -d backstage
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
@@ -64,21 +64,21 @@ spec:
           livenessProbe:
             exec:
               command:
-              - sh
-              - -c
-              - pg_isready -U backstage -d backstage
+                - sh
+                - -c
+                - pg_isready -U backstage -d backstage
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 5
-      restartPolicy: Always          
+      restartPolicy: Always
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
         name: pg-data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         storageClassName: local-path
         resources:
           requests:

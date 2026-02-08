@@ -1,3 +1,4 @@
+---
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMSingle
 metadata:
@@ -13,16 +14,15 @@ spec:
     maxLabelsPerTimeseries: "300"
     storage.minFreeDiskSpaceBytes: "20GB"
   extraEnvs:
-      - name: influx_databaseNames
-        value: "GarminStats"
-      - name: search_cacheTimestampOffset
-        value: "17520h"
-      - name: search_cacheMaxAge
-        value: "720d"
+    - name: influx_databaseNames
+      value: "GarminStats"
+    - name: search_cacheTimestampOffset
+      value: "17520h"
+    - name: search_cacheMaxAge
+      value: "720d"
   resources:
     requests:
       cpu: 100m
       memory: 200Mi
     limits:
-      cpu: 1000m
       memory: 2Gi

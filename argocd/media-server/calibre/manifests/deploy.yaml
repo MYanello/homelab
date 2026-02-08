@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,7 +38,6 @@ spec:
           name: calibre-dl
           resources:
             limits:
-              cpu: 250m
               memory: 2Gi
             requests:
               cpu: 50m
@@ -73,7 +73,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations: 
+  annotations:
     backup.velero.io/backup-volumes: "config,ingest,library"
   labels:
     app: calibre
@@ -110,7 +110,6 @@ spec:
           name: calibre
           resources:
             limits:
-              cpu: 1000m
               memory: 1Gi
             requests:
               cpu: 50m

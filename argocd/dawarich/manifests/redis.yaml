@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -16,51 +17,50 @@ spec:
         backup.velero.io/backup-volumes: data-dawarich-redis-0
     spec:
       containers:
-      - name: redis
-        image: docker.io/redis:8.4-alpine@sha256:4eec4565e45aa0b3966554c866bc73211e281b0b3d89fe9a33c982e6faca809d
-        command: ["redis-server"]
-        ports:
-        - containerPort: 6379
-          name: redis
-        volumeMounts:
-        - name: data
-          mountPath: /data
+        - name: redis
+          image: docker.io/redis:8.4-alpine@sha256:4eec4565e45aa0b3966554c866bc73211e281b0b3d89fe9a33c982e6faca809d
+          command: ["redis-server"]
+          ports:
+            - containerPort: 6379
+              name: redis
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: shared
+              mountPath: /shared
+          livenessProbe:
+            exec:
+              command: ["redis-cli", "--raw", "incr", "ping"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            exec:
+              command: ["redis-cli", "--raw", "incr", "ping"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+      volumes:
         - name: shared
-          mountPath: /shared
-        livenessProbe:
-          exec:
-            command: ["redis-cli", "--raw", "incr", "ping"]
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10
-          failureThreshold: 5
-        readinessProbe:
-          exec:
-            command: ["redis-cli", "--raw", "incr", "ping"]
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 10
-          failureThreshold: 5
+          persistentVolumeClaim:
+            claimName: dawarich-shared
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "100m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-      volumes:
-      - name: shared
-        persistentVolumeClaim:
-          claimName: dawarich-shared
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: truenas-ssd
-      resources:
-        requests:
-          storage: 1Gi
+            storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
@@ -70,7 +70,7 @@ spec:
   selector:
     app: dawarich-redis
   ports:
-  - port: 6379
-    targetPort: 6379
-    name: redis
+    - port: 6379
+      targetPort: 6379
+      name: redis
   clusterIP: None

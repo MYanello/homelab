@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -12,7 +13,7 @@ spec:
       app: linkwarden
   template:
     metadata:
-      annotations: 
+      annotations:
         backup.velero.io/backup-volumes: data
       labels:
         app: linkwarden
@@ -27,14 +28,14 @@ spec:
             - secretRef:
                 name: linkwarden-secrets
           env:
-          - name: DATABASE_URL
-            value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
-          - name: NEXTAUTH_URL
-            value: https://linkwarden.yanello.net/api/v1/auth
-          - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
-            value: "true"
-          - name: AUTHENTIK_ISSUER
-            value: https://authentik.yanello.net/application/o/linkwarden
+            - name: DATABASE_URL
+              value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+            - name: NEXTAUTH_URL
+              value: https://linkwarden.yanello.net/api/v1/auth
+            - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
+              value: "true"
+            - name: AUTHENTIK_ISSUER
+              value: https://authentik.yanello.net/application/o/linkwarden
           image: ghcr.io/linkwarden/linkwarden:v2.13.5@sha256:1588811d7b7d249d387782bb94c7eb189082b82b542ac1667d2ac3d7e7f70ce6
           volumeMounts:
             - mountPath: /data/data
@@ -44,7 +45,6 @@ spec:
               cpu: 200m
               memory: 1Gi
             limits:
-              cpu: "1"
               memory: 4Gi
   volumeClaimTemplates:
     - apiVersion: v1
@@ -62,7 +62,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  annotations: 
+  annotations:
     backup.velero.io/backup-volumes: pgdata
   labels:
     app: postgres
@@ -95,7 +95,6 @@ spec:
               cpu: 150m
               memory: 500Mi
             limits:
-              cpu: 500m
               memory: 1Gi
   volumeClaimTemplates:
     - apiVersion: v1

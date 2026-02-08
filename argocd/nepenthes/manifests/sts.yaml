@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -49,7 +50,6 @@ spec:
               cpu: 100m
             limits:
               memory: 200Mi
-              cpu: "1"
           volumeMounts:
             - name: config
               mountPath: /etc/nepenthes-config.yml

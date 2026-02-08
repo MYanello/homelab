@@ -1,3 +1,4 @@
+---
 tolerations:
   - key: "node-role.kubernetes.io/control-plane"
     operator: "Exists"
@@ -23,7 +24,6 @@ adminToken:
   existingSecretKey: adminToken
 resources:
   limits:
-    cpu: 200m
     memory: 200Mi
   requests:
     cpu: 20m

@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -21,7 +22,6 @@ spec:
         - image: harbor.yanello.net/docker/postgres:18@sha256:1090bc3a8ccfb0b55f78a494d76f8d603434f7e4553543d6e807bc7bd6bbd17f
           resources:
             limits:
-              cpu: 1000m
               memory: 1Gi
             requests:
               cpu: 500m
@@ -42,9 +42,9 @@ spec:
           readinessProbe:
             exec:
               command:
-              - sh
-              - -c
-              - pg_isready -U mealie -d mealie
+                - sh
+                - -c
+                - pg_isready -U mealie -d mealie
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
@@ -52,9 +52,9 @@ spec:
           livenessProbe:
             exec:
               command:
-              - sh
-              - -c
-              - pg_isready -U mealie -d mealie
+                - sh
+                - -c
+                - pg_isready -U mealie -d mealie
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5

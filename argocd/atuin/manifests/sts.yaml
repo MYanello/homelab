@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -82,9 +83,9 @@ spec:
         app: atuin
     spec:
       securityContext:
-        fsGroup: 1000        # Group ID for volume access
-        runAsUser: 1000      # User ID to run the container
-        runAsGroup: 1000     # Group ID for the process
+        fsGroup: 1000  # Group ID for volume access
+        runAsUser: 1000  # User ID to run the container
+        runAsGroup: 1000  # Group ID for the process
       containers:
         - args:
             - server
@@ -109,7 +110,6 @@ spec:
           name: atuin
           resources:
             limits:
-              cpu: 250m
               memory: 1Gi
             requests:
               cpu: 250m
@@ -134,8 +134,8 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 3
           volumeMounts:
-          - mountPath: /config
-            name: atuin-config
+            - mountPath: /config
+              name: atuin-config
       restartPolicy: Always
   volumeClaimTemplates:
     - apiVersion: v1

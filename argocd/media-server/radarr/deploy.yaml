@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -8,7 +9,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-     app: radarr
+      app: radarr
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,7 +17,7 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      annotations:
+      annotations: null
       labels:
         app: radarr
     spec:
@@ -42,7 +43,6 @@ spec:
           name: radarr
           resources:
             limits:
-              cpu: 500m
               memory: 1Gi
             requests:
               cpu: 10m

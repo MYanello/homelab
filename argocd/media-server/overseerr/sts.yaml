@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -29,7 +30,6 @@ spec:
           name: overseerr
           resources:
             limits:
-              cpu: 150m
               memory: 750Mi
             requests:
               cpu: 10m

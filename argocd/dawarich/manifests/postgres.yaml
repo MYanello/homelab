@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -40,16 +41,14 @@ spec:
               mountPath: /var/shared
           livenessProbe:
             exec:
-              command:
-                ["pg_isready", "-U", "postgres", "-d", "dawarich_development"]
+              command: ["pg_isready", "-U", "postgres", "-d", "dawarich_development"]
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 5
           readinessProbe:
             exec:
-              command:
-                ["pg_isready", "-U", "postgres", "-d", "dawarich_development"]
+              command: ["pg_isready", "-U", "postgres", "-d", "dawarich_development"]
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 10
@@ -60,7 +59,6 @@ spec:
               cpu: "250m"
             limits:
               memory: "2Gi"
-              cpu: "1000m"
       volumes:
         - name: shared
           persistentVolumeClaim:

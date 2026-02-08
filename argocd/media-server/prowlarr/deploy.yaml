@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,7 +25,7 @@ spec:
         - name: wait-for-flaresolverr
           image: harbor.yanello.net/docker/busybox:1.37.0
           command: ["sh", "-c"]
-          args: 
+          args:
             - |
               echo "Waiting for flaresolverr..."
               until wget --spider --quiet http://flaresolverr:8191/ || [ $? -eq 8 ]; do
@@ -67,7 +68,6 @@ spec:
             failureThreshold: 3
           resources:
             limits:
-              cpu: 500m
               memory: 300Mi
             requests:
               cpu: 1m
@@ -100,25 +100,25 @@ spec:
         app: flaresolverr
     spec:
       containers:
-      - image: harbor.yanello.net/ghcr/flaresolverr/flaresolverr:v3.4.6@sha256:7962759d99d7e125e108e0f5e7f3cdbcd36161776d058d1d9b7153b92ef1af9e
-        imagePullPolicy: IfNotPresent
-        name: flaresolverr
-        ports:
-          - containerPort: 8191
-            protocol: TCP
-        startupProbe:
-          httpGet:
-            path: /
-            port: 8191
-          initialDelaySeconds: 30
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8191
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
+        - image: harbor.yanello.net/ghcr/flaresolverr/flaresolverr:v3.4.6@sha256:7962759d99d7e125e108e0f5e7f3cdbcd36161776d058d1d9b7153b92ef1af9e
+          imagePullPolicy: IfNotPresent
+          name: flaresolverr
+          ports:
+            - containerPort: 8191
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8191
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8191
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3

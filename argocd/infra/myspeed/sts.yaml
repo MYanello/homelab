@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -21,7 +22,6 @@ spec:
           name: myspeed
           resources:
             limits:
-              cpu: 500m
               memory: 1Gi
             requests:
               cpu: 10m
@@ -60,4 +60,3 @@ spec:
         resources:
           requests:
             storage: 1Gi
-

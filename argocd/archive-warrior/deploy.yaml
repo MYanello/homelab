@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,26 +16,25 @@ spec:
         app: warrior
     spec:
       containers:
-      - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest@sha256:db162f841c520696c3d2655efd4fdbbdab7c3f50f338fb6d671d6f875ecabf58
-        name: warrior
-        ports:
+        - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest@sha256:db162f841c520696c3d2655efd4fdbbdab7c3f50f338fb6d671d6f875ecabf58
+          name: warrior
+          ports:
             - containerPort: 8001
               protocol: TCP
-        resources:
-          limits:
-            cpu: "1000m"
-            memory: "1200Mi"
-          requests:
-            cpu: "50m"
-            memory: "750Mi"
-        env:
-        - name: DOWNLOADER
-          value: mjy
-        - name: SELECTED_PROJECT
-          value: auto
-        - name: CONCURRENT_ITEMS
-          value: "5"
-        - name: SHARED_RSYNC_THREADS
-          value: "20"
+          resources:
+            limits:
+              memory: "1200Mi"
+            requests:
+              cpu: "50m"
+              memory: "750Mi"
+          env:
+            - name: DOWNLOADER
+              value: mjy
+            - name: SELECTED_PROJECT
+              value: auto
+            - name: CONCURRENT_ITEMS
+              value: "5"
+            - name: SHARED_RSYNC_THREADS
+              value: "20"
       nodeSelector:
         kubernetes.io/arch: amd64

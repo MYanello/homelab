@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -116,7 +117,6 @@ spec:
               name: mariadb
           resources:
             limits:
-              cpu: 500m
               memory: 1Gi
             requests:
               cpu: 100m
@@ -161,7 +161,6 @@ spec:
               name: redis
           resources:
             limits:
-              cpu: 500m
               memory: 1Gi
             requests:
               cpu: 100m
@@ -217,20 +216,33 @@ spec:
               value: google/gemini-3-flash-preview
             - name: SYSTEM_PROMPT
               value: >-
-                `You are a personalized document analyzer. Your task is to analyze documents and extract relevant information.\n\nAnalyze the document
-                content and extract the following information into a structured JSON object:\n\n1. title: Create a concise, meaningful title for the
-                document\n2. correspondent: Identify the sender/institution but do not include addresses\n3. tags: Select up to 4 relevant thematic tags
-                \n4. document_date: Extract the document date (format: YYYY-MM-DD)\n5. language: Determine the document language (e.g. "de" or
-                "en")\n      \nImportant rules for the analysis:\n\nFor tags:\n- FIRST check the existing tags before suggesting new ones\n- Use only
-                relevant categories\n- Maximum 4 tags per document, less if sufficient (at least 1)\n- Avoid generic or too specific tags\n- Use only
-                the most important information for tag creation\n- The output language is the one used in the document! IMPORTANT!\n\nFor the title:\n-
-                Short and concise, NO ADDRESSES\n- Contains the most important identification features\n- For invoices/orders, mention invoice/order
-                number if available\n- The output language is the one used in the document! IMPORTANT!\n\nFor the correspondent:\n- Identify the sender
-                or institution\n  When generating the correspondent, always create the shortest possible form of the company name (e.g. "Amazon" instead
-                of "Amazon EU SARL, German branch")\n\nFor the document date:\n- Extract the date of the document\n- Use the format YYYY-MM-DD\n- If
-                multiple dates are present, use the most relevant one\n\nFor the language:\n- Determine the document language\n- Use language codes like "en" for English\n- If the language is not clear, use "und" as a placeholder`
+                `You are a personalized document analyzer. Your task is to analyze
+                documents and extract relevant information.\n\nAnalyze the document
+                content and extract the following information into a structured JSON
+                object:\n\n1. title: Create a concise, meaningful title for the
+                document\n2. correspondent: Identify the sender/institution but do
+                not include addresses\n3. tags: Select up to 4 relevant thematic tags
+                \n4. document_date: Extract the document date (format: YYYY-MM-DD)\n5.
+                language: Determine the document language (e.g. "de" or
+                "en")\n      \nImportant rules for the analysis:\n\nFor tags:\n- FIRST
+                check the existing tags before suggesting new ones\n- Use only
+                relevant categories\n- Maximum 4 tags per document, less if sufficient
+                (at least 1)\n- Avoid generic or too specific tags\n- Use only
+                the most important information for tag creation\n- The output language
+                is the one used in the document! IMPORTANT!\n\nFor the title:\n-
+                Short and concise, NO ADDRESSES\n- Contains the most important identification
+                features\n- For invoices/orders, mention invoice/order
+                number if available\n- The output language is the one used in the
+                document! IMPORTANT!\n\nFor the correspondent:\n- Identify the sender
+                or institution\n  When generating the correspondent, always create
+                the shortest possible form of the company name (e.g. "Amazon" instead
+                of "Amazon EU SARL, German branch")\n\nFor the document date:\n- Extract
+                the date of the document\n- Use the format YYYY-MM-DD\n- If
+                multiple dates are present, use the most relevant one\n\nFor the language:\n-
+                Determine the document language\n- Use language codes like "en" for
+                English\n- If the language is not clear, use "und" as a placeholder`
             # - name: PROCESS_PREDEFINED_DOCUMENTS
-            #   value: yes
+            #   value: true
             # - name: TAGS
             #   value: pre-process
             - name: ADD_AI_PROCESSED_TAG
@@ -263,5 +275,5 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: ai-data
----
-
+--- null
+...

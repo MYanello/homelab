@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,7 +30,6 @@ spec:
               subPath: config
           resources:
             limits:
-              cpu: 100m
               memory: 1Gi
             requests:
               cpu: 1m

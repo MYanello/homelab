@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -62,7 +63,6 @@ spec:
             limits:
               memory: 16Gi
               nvidia.com/gpu: "1"
-              cpu: "4"
           readinessProbe:
             tcpSocket:
               port: 7865
