@@ -16,28 +16,28 @@ spec:
         app: rustdesk-hbbr
     spec:
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
       containers:
-      - name: hbbr
-        image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest@sha256:10818ec05b179039c6660f4d8e74b303f0db2858bbad2b18e24992ea22d54cd6
-        command: ["hbbr"]
-        volumeMounts:
-        - name: rustdesk-data
-          mountPath: /root
-        ports:
-        - containerPort: 21117
-          protocol: TCP
-        - containerPort: 21119
-          protocol: TCP
+        - name: hbbr
+          image: harbor.yanello.net/docker/rustdesk/rustdesk-server:1.4.5-amd64@sha256:10818ec05b179039c6660f4d8e74b303f0db2858bbad2b18e24992ea22d54cd6
+          command: ["hbbr"]
+          volumeMounts:
+            - name: rustdesk-data
+              mountPath: /root
+          ports:
+            - containerPort: 21117
+              protocol: TCP
+            - containerPort: 21119
+              protocol: TCP
       volumes:
-      - name: rustdesk-data
-        persistentVolumeClaim:
-          claimName: rustdesk-data
+        - name: rustdesk-data
+          persistentVolumeClaim:
+            claimName: rustdesk-data
       restartPolicy: Always
 ---
 apiVersion: apps/v1
@@ -57,30 +57,30 @@ spec:
         app: rustdesk-hbbs
     spec:
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
       containers:
-      - name: hbbs
-        image: harbor.yanello.net/docker/rustdesk/rustdesk-server:latest@sha256:10818ec05b179039c6660f4d8e74b303f0db2858bbad2b18e24992ea22d54cd6
-        command: ["hbbs"]
-        volumeMounts:
-        - name: rustdesk-data
-          mountPath: /root
-        ports:
-        - containerPort: 21115
-          protocol: TCP
-        - containerPort: 21116
-          protocol: TCP
-        - containerPort: 21116
-          protocol: UDP
-        - containerPort: 21118
-          protocol: TCP
+        - name: hbbs
+          image: harbor.yanello.net/docker/rustdesk/rustdesk-server:1.4.5-amd64@sha256:10818ec05b179039c6660f4d8e74b303f0db2858bbad2b18e24992ea22d54cd6
+          command: ["hbbs"]
+          volumeMounts:
+            - name: rustdesk-data
+              mountPath: /root
+          ports:
+            - containerPort: 21115
+              protocol: TCP
+            - containerPort: 21116
+              protocol: TCP
+            - containerPort: 21116
+              protocol: UDP
+            - containerPort: 21118
+              protocol: TCP
       volumes:
-      - name: rustdesk-data
-        persistentVolumeClaim:
-          claimName: rustdesk-data
+        - name: rustdesk-data
+          persistentVolumeClaim:
+            claimName: rustdesk-data
       restartPolicy: Always
