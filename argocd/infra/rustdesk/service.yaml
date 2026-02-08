@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: rustdesk-hbbs
+    app.kubernetes.io/name: rustdesk
   ports:
     # hbbs
     - name: tcp-21115

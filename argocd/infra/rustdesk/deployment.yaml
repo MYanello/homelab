@@ -5,6 +5,7 @@ metadata:
   name: hbbr
   labels:
     app: rustdesk-hbbr
+    app.kubernetes.io/name: rustdesk
 spec:
   replicas: 1
   selector:
@@ -46,6 +47,7 @@ metadata:
   name: hbbs
   labels:
     app: rustdesk-hbbs
+    app.kubernetes.io/name: rustdesk
 spec:
   replicas: 1
   selector:
