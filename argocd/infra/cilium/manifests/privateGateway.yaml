@@ -4,7 +4,7 @@ kind: Gateway
 metadata:
   name: cilium-private-gateway
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: yanello.net
+    external-dns.alpha.kubernetes.io/target: yanello.net
 spec:
   gatewayClassName: cilium
   addresses:
