@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: rx-resume
-          image: harbor.yanello.net/ghcr/amruthpillai/reactive-resume:v5.0.5@sha256:c92a23eb45ce6813260c5f24501e793ed04d2a9fade3ad0b2801dfc86b786c32
+          image: harbor.yanello.net/ghcr/amruthpillai/reactive-resume:v5.0.6@sha256:e286c647558b8f46d92e2145aff5ca9e2f8174ef3e89c72284dab0ff43fa03c0
           ports:
             - containerPort: 3010
           env:
