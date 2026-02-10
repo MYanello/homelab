@@ -1,6 +1,6 @@
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: TLSRoute
+kind: HTTPRoute
 metadata:
   name: proxmox-tlsroute
 spec:
@@ -12,11 +12,6 @@ spec:
       kind: Gateway
       namespace: cilium
       sectionName: https
-    # - name: cilium-public-gateway
-    #   group: gateway.networking.k8s.io
-    #   kind: Gateway
-    #   namespace: cilium
-    #   sectionName: proxmox-tls-passthrough
   rules:
     - backendRefs:
         - name: proxmox-service
@@ -39,7 +34,7 @@ spec:
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
-  name: proxmox-service-1  # by convention, use the name of the Service
+  name: proxmox-service-1 # by convention, use the name of the Service
   # as a prefix for the name of the EndpointSlice
   labels:
     # You should set the "kubernetes.io/service-name" label.
@@ -48,7 +43,7 @@ metadata:
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http  # should match with the name of the service port defined above
+  - name: http # should match with the name of the service port defined above
     appProtocol: http
     protocol: TCP
     port: 8006
@@ -57,17 +52,3 @@ endpoints:
       - 192.168.10.77
     conditions:
       ready: true
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: proxmox-public
-spec:
-  commonName: proxmox.yanello.net
-  dnsNames:
-    - "proxmox.yanello.net"
-  secretName: proxmox-server-tls
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-    group: cert-manager.io
