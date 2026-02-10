@@ -4,4 +4,4 @@ explicit_start = true
 whitelines = 1
 none_representation = "null"
 preserve_quotes = true
-comments_min_spaces_from_content = 2
+comments_min_spaces_from_content = 1
