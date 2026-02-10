@@ -19,6 +19,10 @@ spec:
           kind: Service
           port: 80
           weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
 ---
 apiVersion: v1
 kind: Service
@@ -34,7 +38,7 @@ spec:
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
-  name: truenas-service-1 # by convention, use the name of the Service
+  name: truenas-service-1  # by convention, use the name of the Service
   # as a prefix for the name of the EndpointSlice
   labels:
     # You should set the "kubernetes.io/service-name" label.
@@ -43,7 +47,7 @@ metadata:
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http # should match with the name of the service port defined above
+  - name: http  # should match with the name of the service port defined above
     appProtocol: http
     protocol: TCP
     port: 80
