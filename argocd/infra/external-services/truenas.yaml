@@ -52,17 +52,3 @@ endpoints:
       - 192.168.10.78
     conditions:
       ready: true
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: truenas-public
-spec:
-  commonName: truenas.yanello.net
-  dnsNames:
-    - "truenas.yanello.net"
-  secretName: truenas-server-tls
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-    group: cert-manager.io
