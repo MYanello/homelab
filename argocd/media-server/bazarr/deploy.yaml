@@ -40,7 +40,7 @@ spec:
               value: America/Chicago
             - name: DOCKER_MODS
               value: harbor.yanello.net/docker/wayller/bazarr-mod-subsync:latest
-          image: harbor.yanello.net/lscr/linuxserver/bazarr:1.5.5@sha256:d40ee61030a9afafddfdd58d160281b865bfcad7cb66e920116fd6fd40668cbb
+          image: harbor.yanello.net/lscr/linuxserver/bazarr:1.5.5@sha256:18ff732dffcebd559d15a91845fc3360d49652ea01dccfbfd98b8248ceb86e38
           imagePullPolicy: IfNotPresent
           name: bazarr
           resources:
