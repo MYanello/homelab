@@ -1,6 +1,6 @@
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
 metadata:
   name: proxmox
 spec:
@@ -11,7 +11,12 @@ spec:
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: https
+      sectionName: proxmox-tls-passthrough
+    # - name: cilium-public-gateway
+    #   group: gateway.networking.k8s.io
+    #   kind: Gateway
+    #   namespace: cilium
+    #   sectionName: proxmox-tls-passthrough
   rules:
     - backendRefs:
         - name: proxmox-service
@@ -19,10 +24,6 @@ spec:
           kind: Service
           port: 8006
           weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
 ---
 apiVersion: v1
 kind: Service
@@ -30,7 +31,7 @@ metadata:
   name: proxmox-service
 spec:
   ports:
-    - name: http
+    - name: https
       protocol: TCP
       port: 8006
       targetPort: 8006
@@ -47,8 +48,8 @@ metadata:
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http # should match with the name of the service port defined above
-    appProtocol: http
+  - name: https
+    appProtocol: https
     protocol: TCP
     port: 8006
 endpoints:

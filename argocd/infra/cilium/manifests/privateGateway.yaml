@@ -18,15 +18,15 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    # - name: proxmox-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "proxmox.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
+    - name: proxmox-tls-passthrough
+      protocol: TLS
+      hostname: "proxmox.yanello.net"
+      port: 443
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
     # - name: truenas-tls-passthrough
     #   protocol: TLS
     #   hostname: "truenas.yanello.net"
