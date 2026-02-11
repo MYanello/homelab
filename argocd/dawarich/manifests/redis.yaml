@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: docker.io/redis:8.4-alpine@sha256:7ec246078fed8e4192d34b15861d865d5dbdddabff60bd2f3097db471f434abc
+          image: docker.io/redis:8.4-alpine@sha256:e55195a3afbb812a14306909caad6583a1ab6c79f393f53490e42cb2111084a9
           command: ["redis-server"]
           ports:
             - containerPort: 6379
