@@ -12,6 +12,21 @@ spec:
             - name: health-check-script
               mountPath: /usr/local/bin/health-check.sh
               subPath: health-check.sh
+          livenessProbe: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frigate
+spec:
+  template:
+    spec:
+      containers:
+        - name: frigate
+          volumeMounts:
+            - name: health-check-script
+              mountPath: /usr/local/bin/health-check.sh
+              subPath: health-check.sh
           livenessProbe:
             exec:
               command:
