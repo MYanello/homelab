@@ -1,50 +1,73 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: frigate-health-check
 data:
-  health-check.py: |
-    #!/usr/bin/env python3
-    import sys
-    import subprocess
-    #subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
-    import requests
+  health-check.sh: |
+    #!/bin/sh
+    set -e
 
-    def check_camera_fps():
-        try:
-            # Make request to Frigate API
-            response = requests.get('http://frigate.frigate.svc.cluster.local:5000/api/stats')
-            response.raise_for_status()  # Raise exception for non-200 status codes
-            
-            data = response.json()
-            cameras = data.get('cameras', {})
-            
-            # Check if any camera has non-zero FPS
-            all_zero = True
-            zero_fps_cameras = []
-            
-            for camera_name, stats in cameras.items():
-                if stats.get('camera_fps', 0) == 0:
-                    zero_fps_cameras.append(camera_name)
-                else:
-                    all_zero = False
-            
-            if all_zero:
-                print(f"CRITICAL: All cameras have 0 FPS. Affected cameras: {', '.join(zero_fps_cameras)}")
-                sys.exit(2)
-            elif zero_fps_cameras:
-                print(f"WARNING: Some cameras have 0 FPS: {', '.join(zero_fps_cameras)}")
-                sys.exit(1)
-            else:
-                print("OK: All cameras are receiving frames")
-                sys.exit(0)
-                
-        except requests.exceptions.RequestException as e:
-            print(f"CRITICAL: Failed to connect to Frigate API: {str(e)}")
-            sys.exit(2)
-        except Exception as e:
-            print(f"UNKNOWN: An error occurred: {str(e)}")
-            sys.exit(3)
+    # Make request to Frigate API
+    response=$(curl -s -f http://frigate.frigate.svc.cluster.local:5000/api/stats || exit 2)
 
-    if __name__ == "__main__":
-        check_camera_fps()
+    # Parse JSON and check camera FPS (using grep/awk since we don't have jq)
+    zero_fps_cameras=$(echo "$response" | grep -o '"camera_fps"[[:space:]]*:[[:space:]]*0' | wc -l)
+    total_cameras=$(echo "$response" | grep -o '"camera_fps"[[:space:]]*:[[:space:]]*[0-9]*' | wc -l)
+
+    if [ "$zero_fps_cameras" -eq "$total_cameras" ] && [ "$total_cameras" -gt 0 ]; then
+      echo "CRITICAL: All cameras have 0 FPS"
+      exit 2
+    elif [ "$zero_fps_cameras" -gt 0 ]; then
+      echo "WARNING: Some cameras ($zero_fps_cameras/$total_cameras) have 0 FPS"
+      exit 1
+    else
+      echo "OK: All cameras are receiving frames"
+      exit 0
+    fi
+
+  # health-check.py: |
+  #   #!/usr/bin/env python3
+  #   import sys
+  #   import subprocess
+  #   # subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
+  #   import requests
+
+  #   def check_camera_fps():
+  #       try:
+  #           # Make request to Frigate API
+  #           response = requests.get('http://frigate.frigate.svc.cluster.local:5000/api/stats')
+  #           response.raise_for_status()  # Raise exception for non-200 status codes
+
+  #           data = response.json()
+  #           cameras = data.get('cameras', {})
+
+  #           # Check if any camera has non-zero FPS
+  #           all_zero = True
+  #           zero_fps_cameras = []
+
+  #           for camera_name, stats in cameras.items():
+  #               if stats.get('camera_fps', 0) == 0:
+  #                   zero_fps_cameras.append(camera_name)
+  #               else:
+  #                   all_zero = False
+
+  #           if all_zero:
+  #               print(f"CRITICAL: All cameras have 0 FPS. Affected cameras: {', '.join(zero_fps_cameras)}")
+  #               sys.exit(2)
+  #           elif zero_fps_cameras:
+  #               print(f"WARNING: Some cameras have 0 FPS: {', '.join(zero_fps_cameras)}")
+  #               sys.exit(1)
+  #           else:
+  #               print("OK: All cameras are receiving frames")
+  #               sys.exit(0)
+
+  #       except requests.exceptions.RequestException as e:
+  #           print(f"CRITICAL: Failed to connect to Frigate API: {str(e)}")
+  #           sys.exit(2)
+  #       except Exception as e:
+  #           print(f"UNKNOWN: An error occurred: {str(e)}")
+  #           sys.exit(3)
+
+  #   if __name__ == "__main__":
+  #       check_camera_fps()

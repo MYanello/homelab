@@ -1,17 +1,3 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: frigate
-spec:
-  template:
-    spec:
-      containers:
-      - name: frigate
-        volumeMounts:
-        - name: health-check-script
-          mountPath: /usr/local/bin/health-check.py
-          subPath: health-check.py
-        livenessProbe: null
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -21,19 +7,35 @@ spec:
   template:
     spec:
       containers:
-      - name: frigate
-        volumeMounts:
-        - name: health-check-script
-          mountPath: /usr/local/bin/health-check.py
-          subPath: health-check.py
-        livenessProbe:
-          exec:
-            command:
-            - /usr/local/bin/health-check.py
-          initialDelaySeconds: 60
-          periodSeconds: 30
+        - name: frigate
+          volumeMounts:
+            - name: health-check-script
+              mountPath: /usr/local/bin/health-check.py
+              subPath: health-check.py
+          livenessProbe: null
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frigate
+spec:
+  template:
+    spec:
+      containers:
+        - name: frigate
+          volumeMounts:
+            - name: health-check-script
+              mountPath: /usr/local/bin/health-check.sh
+              subPath: health-check.sh
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - /usr/local/bin/health-check.sh
+            initialDelaySeconds: 60
+            periodSeconds: 30
       volumes:
-      - name: health-check-script
-        configMap:
-          name: frigate-health-check
-          defaultMode: 0555
+        - name: health-check-script
+          configMap:
+            name: frigate-health-check
+            defaultMode: 0555
