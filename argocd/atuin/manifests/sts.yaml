@@ -88,7 +88,7 @@ spec:
         runAsGroup: 1000
       containers:
         - args:
-            - server
+            # - server
             - start
           envFrom:
             - secretRef:
