@@ -47,7 +47,7 @@ data:
     else
       echo "OK: All $total_count cameras are receiving frames"
       exit 0
-
+    fi
   # health-check.py: |
   #   #!/usr/bin/env python3
   #   import sys
