@@ -11,7 +11,7 @@ generators:
 
 helmCharts:
   - name: forgejo
-    repo: oci://code.forgejo.org/forgejo-helm/forgejo
+    repo: oci://code.forgejo.org/forgejo-helm
     version: "16.1.0"
     releaseName: forgejo
     namespace: forgejo
