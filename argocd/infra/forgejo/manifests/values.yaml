@@ -1,8 +1,8 @@
 ---
-replicaCount: 1
-global:
-  security:
-    allowInsecureImages: true
+# replicaCount: 1
+# global:
+#   security:
+#     allowInsecureImages: true
 
 gitea:
   admin:
@@ -19,9 +19,9 @@ gitea:
       ROOT_URL: https://forgejo.yanello.net/
       ENABLE_AUTO_REGISTRATION: "true"
       DOMAIN: "forgejo.yanello.net"
-  additionalConfigSources:
-    - secret:
-        secretName: forgejo-secrets
+  # additionalConfigSources:
+  #   - secret:
+  #       secretName: forgejo-secrets
   additionalConfigFromEnvs:
     - name: GITEA__ENABLE_AUTO_REGISTRATION
       value: "true"
@@ -33,28 +33,27 @@ persistence:
 
 metrics:
   enabled: true
-
-postgresql:
-  enabled: true
-  image:
-    registry: harbor.yanello.net/docker
-    repository: bitnamilegacy/postgresql
-    tag: 17.6.0-debian-12-r4@sha256:926356130b77d5742d8ce605b258d35db9b62f2f8fd1601f9dbaef0c8a710a8d
-  global:
-    postgresql:
-      auth:
-        database: forgejo
-        username: forgejo
-        # password: gitea
-        # gitea only supports plaintext pw currently.
-        existingSecret: forgejo-secrets
-        secretKeys:
-          adminPasswordKey: PASSWD
-        #   userPasswordKey: user_db_password
-      service:
-        ports:
-          postgresql: 5432
-  primary:
-    persistence:
-      storageClass: truenas-ssd
-      size: 10Gi
+# postgresql:
+#   enabled: true
+#   image:
+#     registry: harbor.yanello.net/docker
+#     repository: bitnamilegacy/postgresql
+#     tag: 17.6.0-debian-12-r4@sha256:926356130b77d5742d8ce605b258d35db9b62f2f8fd1601f9dbaef0c8a710a8d
+#   global:
+#     postgresql:
+#       auth:
+#         database: forgejo
+#         username: forgejo
+#         # password: gitea
+#         # gitea only supports plaintext pw currently.
+#         existingSecret: forgejo-secrets
+#         secretKeys:
+#           adminPasswordKey: PASSWD
+#         #   userPasswordKey: user_db_password
+#       service:
+#         ports:
+#           postgresql: 5432
+#   primary:
+#     persistence:
+#       storageClass: truenas-ssd
+#       size: 10Gi
