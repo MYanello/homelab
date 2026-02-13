@@ -19,6 +19,11 @@ gitea:
   additionalConfigFromEnvs:
     - name: GITEA__ENABLE_AUTO_REGISTRATION
       value: "true"
+  persistence:
+    enabled: true
+    storageClass: truenas-ssd-nfs
+    accessMode: ReadWriteMany
+    size: 10Gi
 
 metrics:
   enabled: true
