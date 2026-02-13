@@ -275,5 +275,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: ai-data
---- null
-...

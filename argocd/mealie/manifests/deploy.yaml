@@ -85,5 +85,3 @@ spec:
         - name: storage
           persistentVolumeClaim:
             claimName: storage
---- null
-...
