@@ -51,9 +51,11 @@ postgresql:
   global:
     postgresql:
       auth:
-        password: gitea
         database: gitea
         username: gitea
+        existingSecret: gitea-secrets
+        secretKeys:
+          userPasswordKey: db_password
       service:
         ports:
           postgresql: 5432
