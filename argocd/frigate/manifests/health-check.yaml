@@ -8,21 +8,34 @@ data:
     #!/bin/sh
     set -e
 
-    # Make request to Frigate API
-    response=$(curl -s -f http://frigate.frigate.svc.cluster.local:5000/api/stats || exit 2)
-
-    # Parse JSON and check camera FPS (using grep/awk since we don't have jq)
-    zero_fps_cameras=$(echo "$response" | grep -o '"camera_fps"[[:space:]]*:[[:space:]]*0' | wc -l)
-    total_cameras=$(echo "$response" | grep -o '"camera_fps"[[:space:]]*:[[:space:]]*[0-9]*' | wc -l)
-
-    if [ "$zero_fps_cameras" -eq "$total_cameras" ] && [ "$total_cameras" -gt 0 ]; then
-      echo "CRITICAL: All cameras have 0 FPS"
+    response=$(curl -s -f http://frigate.frigate.svc.cluster.local:5000/api/stats 2>&1) || {
+      echo "CRITICAL: Failed to connect to Frigate API"
       exit 2
-    elif [ "$zero_fps_cameras" -gt 0 ]; then
-      echo "WARNING: Some cameras ($zero_fps_cameras/$total_cameras) have 0 FPS"
+    }
+
+    # Parse JSON and extract camera FPS values
+    zero_fps_cameras=$(echo "$response" | jq -r '.cameras | to_entries[] | select(.value.camera_fps == 0) | .key' 2>/dev/null)
+    all_cameras=$(echo "$response" | jq -r '.cameras | keys[]' 2>/dev/null)
+
+    # Count cameras
+    zero_count=$(echo "$zero_fps_cameras" | grep -c . || echo "0")
+    total_count=$(echo "$all_cameras" | grep -c . || echo "0")
+
+    # Check for errors
+    if [ "$total_count" -eq 0 ]; then
+      echo "WARNING: No cameras found in API response"
+      exit 1
+    fi
+
+    # Check FPS status
+    if [ "$zero_count" -eq "$total_count" ]; then
+      echo "CRITICAL: All cameras have 0 FPS. Affected: $(echo $zero_fps_cameras | tr '\n' ', ' | sed 's/,$//')"
+      exit 2
+    elif [ "$zero_count" -gt 0 ]; then
+      echo "WARNING: $zero_count/$total_count cameras have 0 FPS: $(echo $zero_fps_cameras | tr '\n' ', ' | sed 's/,$//')"
       exit 1
     else
-      echo "OK: All cameras are receiving frames"
+      echo "OK: All $total_count cameras are receiving frames"
       exit 0
     fi
 
