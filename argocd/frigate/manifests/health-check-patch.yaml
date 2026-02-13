@@ -32,7 +32,7 @@ spec:
               command:
                 - /bin/sh
                 - /usr/local/bin/health-check.sh
-            initialDelaySeconds: 60
+            initialDelaySeconds: 180
             periodSeconds: 30
       volumes:
         - name: health-check-script
