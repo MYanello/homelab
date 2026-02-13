@@ -175,5 +175,3 @@ spec:
               cpu: 30m
             limits:
               memory: 50Mi
---- null
-...
