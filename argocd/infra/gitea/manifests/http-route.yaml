@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Gitea
     gethomepage.dev/icon: gitea
-    gethomepage.dev/description: "Gitea is a painless, self-hosted, all-in-one software development service."
+    gethomepage.dev/description: "Gitea is a painless, self-hosted, all-in-one software\
+      \ development service."
     gethomepage.dev/pod-selector: app.kubernetes.io/name=gitea
   labels:
     app.kubernetes.io/instance: gitea-app
@@ -18,37 +20,16 @@ spec:
       kind: Gateway
       namespace: cilium
       sectionName: https
-    - name: cilium-public-gateway
-      group: gateway.networking.k8s.io
-      kind: Gateway
-      namespace: cilium
-      sectionName: https
   hostnames:
-  - gitea.yanello.net
+    - gitea.yanello.net
   rules:
-  - backendRefs:
-    - name: gitea-http
-      group: ""
-      kind: Service
-      port: 3000
-      weight: 1
-    matches:
-      - path:
-          type: PathPrefix
-          value: /
-# ---
-# apiVersion: gateway.networking.k8s.io/v1alpha2
-# kind: TCPRoute
-# metadata:
-#   name: gitea-ssh
-#   namespace: gitea
-# spec:
-#   parentRefs:
-#     - name: gateway-api
-#       namespace: istio-system
-#       sectionName: ssh
-#   rules:
-#     - backendRefs:
-#         - name: gitea-ssh
-#           port: 22
-# ---
+    - backendRefs:
+        - name: gitea-http
+          group: ""
+          kind: Service
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
