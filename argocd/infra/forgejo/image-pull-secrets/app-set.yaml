@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: forgejo-pull-secrets-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - namespace: backstage
+  template:
+    metadata:
+      name: "{{namespace}}-forgejo-pull-secrets"
+      labels:
+        app.kubernetes.io/part-of: "{{namespace}}-app"
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      destination:
+        name: in-cluster
+        namespace: "{{namespace}}"
+      source:
+        path: "argocd/infra/forgejo/image-pull-secrets/manifests"
+        repoURL: https://github.com/myanello/homelab.git
+        targetRevision: HEAD

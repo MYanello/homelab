@@ -1,0 +1,32 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Forgejo
+    gethomepage.dev/icon: Forgejo
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=forgejo
+  labels:
+    app.kubernetes.io/instance: forgejo-app
+  name: forgejo-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - forgejo.yanello.net
+  rules:
+    - backendRefs:
+        - name: forgejo-http
+          group: ""
+          kind: Service
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
