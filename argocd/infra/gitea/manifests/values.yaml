@@ -53,10 +53,12 @@ postgresql:
       auth:
         database: gitea
         username: gitea
-        existingSecret: gitea-secrets
-        secretKeys:
-          adminPasswordKey: admin_db_password
-          userPasswordKey: user_db_password
+        password: gitea
+        # gitea only supports plaintext pw currently. 
+        # existingSecret: gitea-secrets
+        # secretKeys:
+        #   adminPasswordKey: admin_db_password
+        #   userPasswordKey: user_db_password
       service:
         ports:
           postgresql: 5432
