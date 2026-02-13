@@ -55,7 +55,8 @@ postgresql:
         username: gitea
         existingSecret: gitea-secrets
         secretKeys:
-          userPasswordKey: db_password
+          adminPasswordKey: admin_db_password
+          userPasswordKey: user_db_password
       service:
         ports:
           postgresql: 5432
