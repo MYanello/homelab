@@ -29,7 +29,7 @@ spec:
           image: postgres:18@sha256:b6b4d0b75c699a2c94dfc5a94fe09f38630f3b67ab0e1653ede1b7ac8e13c197
           volumeMounts:
             - mountPath: /var/lib/postgresql/
-              name: pgdata
+              name: data
           resources:
             requests:
               cpu: 150m
@@ -57,7 +57,7 @@ spec:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: pgdata-truenas
+        name: data
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: truenas-ssd
