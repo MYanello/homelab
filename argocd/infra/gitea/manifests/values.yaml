@@ -35,15 +35,13 @@ valkey-cluster:
   enabled: false
 valkey:
   enabled: true
-  persistence:
-    storageClass: truenas-ssd
   image:
     registry: harbor.yanello.net/docker
     repository: bitnamilegacy/valkey
     tag: 8.1.3-debian-12-r3@sha256:4f0191fba7d3ffc38362381fa0ecac3c570dac56621278bcda513b477c8308c4
-  master:
-    count: 1
-
+  primary:
+    persistence:
+      storageClass: truenas-ssd
 postgresql-ha:
   enabled: false
 
@@ -59,7 +57,7 @@ postgresql:
         database: gitea
         username: gitea
         password: gitea
-        # gitea only supports plaintext pw currently. 
+        # gitea only supports plaintext pw currently.
         # existingSecret: gitea-secrets
         # secretKeys:
         #   adminPasswordKey: admin_db_password
