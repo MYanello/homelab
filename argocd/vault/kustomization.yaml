@@ -1,39 +1,38 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 generators:
   - ./manifests/secretGenerator.yaml
+# resources:
+#   - ./manifests/tlsRoute.yaml
+#   - ./manifests/pki.yaml
+#   - ./manifests/clusterSecretStore.yaml
+#   - ./manifests/rbac.yaml
 
-resources:
-  - ./manifests/tlsRoute.yaml
-  - ./manifests/pki.yaml
-  - ./manifests/clusterSecretStore.yaml
-  - ./manifests/rbac.yaml
-
-helmCharts:
-  - name: vault
-    repo: https://helm.releases.hashicorp.com
-    version: "0.32.0"
-    releaseName: vault
-    namespace: vault
-    valuesFile: ./values.yaml
-    
-patches:
-  - target:
-      kind: Deployment
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 0
-  - target:
-      kind: StatefulSet
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 0
-  - target:
-      kind: DaemonSet
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 0
+# helmCharts:
+#   - name: vault
+#     repo: https://helm.releases.hashicorp.com
+#     version: "0.32.0"
+#     releaseName: vault
+#     namespace: vault
+#     valuesFile: ./values.yaml
+# patches:
+#   - target:
+#       kind: Deployment
+#     patch: |-
+#       - op: replace
+#         path: /spec/replicas
+#         value: 0
+#   - target:
+#       kind: StatefulSet
+#     patch: |-
+#       - op: replace
+#         path: /spec/replicas
+#         value: 0
+#   - target:
+#       kind: DaemonSet
+#     patch: |-
+#       - op: replace
+#         path: /spec/replicas
+#         value: 0
