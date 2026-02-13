@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -7,9 +8,8 @@ generators:
 resources:
   - ./manifests/health-check.yaml
   - ./manifests/http-route.yaml
-  # - ./manifests/tls-route.yaml
   - ./manifests/cert.yaml
-  
+
 patches:
   - path: ./manifests/health-check-patch.yaml
 

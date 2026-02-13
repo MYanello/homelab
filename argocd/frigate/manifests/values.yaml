@@ -1,3 +1,4 @@
+---
 nodeSelector:
   accelerator: coral-tpu
   nvidia.com/gpu.present: "true"
@@ -38,25 +39,11 @@ resources:
 service:
   type: LoadBalancer
   loadBalancerIP: 10.10.8.3
-# extraVolumeMounts:
-#   - name: frigate-tls
-#     mountPath: /etc/letsencrypt/live/frigate
-extraVolumes:
-  - name: frigate-tls
-    secret:
-      secretName: frigate-tls
-      defaultMode: 420
-      items:
-        - key: tls.crt
-          path: fullchain.pem
-        - key: tls.key
-          path: privkey.pem
-
-config: |
+config: |-
   # logger:
   #   default: debug
   genai:
-    enabled: False
+    enabled: false
     provider: openai
     api_key: "{FRIGATE_OPENAI_KEY}"
     model: google/gemini-3-flash-preview
@@ -66,7 +53,7 @@ config: |
       enabled: true
 
   tls:
-    enabled: False
+    enabled: false
   mqtt:
     host: 192.168.1.4
     port: 1883
