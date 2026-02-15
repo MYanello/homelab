@@ -17,17 +17,19 @@ spec:
       labels:
         app: overseerr
     spec:
+      securityContext:
+        fsGroup: 3000
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - env:
-            - name: PGID
-              value: "1000"
-            - name: PUID
-              value: "1000"
             - name: TZ
               value: America/Chicago
-          image: harbor.yanello.net/docker/sctx/overseerr:1.34.0@sha256:4f38f58d68555004d3f487a4c5cbe2823e6a0942d946a25a2d9391d8492240a4
+          image: harbor.yanello.net/ghcr/seerr-team/seerr:v3.0.1
           imagePullPolicy: IfNotPresent
           name: overseerr
+          securityContext:
+            runAsUser: 3000
+            runAsGroup: 3000
           resources:
             limits:
               memory: 750Mi
