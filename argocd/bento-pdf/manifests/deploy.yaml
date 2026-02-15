@@ -21,7 +21,7 @@ spec:
         app: bentopdf
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr/alam00000/bentopdf:v2.2.0
+        - image: harbor.yanello.net/ghcr/alam00000/bentopdf:v2.2.1@sha256:b123f74921c079fb2be8a5a04eb576ab542d4a551bc26b291173580b7d037968
           imagePullPolicy: IfNotPresent
           name: bentopdf
           resources:
