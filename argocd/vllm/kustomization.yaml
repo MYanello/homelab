@@ -8,3 +8,7 @@ helmCharts:
     releaseName: vllm
     namespace: vllm
     valuesFile: ./values.yaml
+
+replicas:
+  - name: vllm-deployment-router
+    count: 0
