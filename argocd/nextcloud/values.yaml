@@ -66,8 +66,8 @@ nextcloud:
     fsGroup: 3000
     fsGroupChangePolicy: OnRootMismatch
   securityContext:
-    runAsUser: 3000
-    runAsGroup: 3000
+    runAsUser: 0
+    runAsGroup: 0
 # nginx:
 #   securityContext:
 #     runAsUser: 0
