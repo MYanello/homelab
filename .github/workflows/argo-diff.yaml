@@ -81,7 +81,6 @@ jobs:
       #                   name: sops-age
       #                   subPath: key.txt
       #       EOF
-            
       - name: Set Argo CD Custom Values
         run: |
           cat > values.yaml <<-EOF

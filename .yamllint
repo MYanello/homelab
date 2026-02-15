@@ -1,4 +1,3 @@
----
 yaml-files: ['*.yaml', '*.yml', .yamllint]
 ignore: |
   charts/
@@ -25,7 +24,11 @@ rules:
   new-line-at-end-of-file: enable
   new-lines: enable
   octal-values: disable
-  quoted-strings: disable
+  quoted-strings:
+    quote-type: any
+    required: only-when-needed
+    check-keys: true
   trailing-spaces: disable
   truthy:
     level: warning
+    allowed-values: ['true', 'false', 'on']
