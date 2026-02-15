@@ -55,13 +55,13 @@ nextcloud:
         accessKey: s3-access-key
         secretKey: s3-secret-key
         bucket: s3-bucket
-  configs:
-    other.config.php: |-
-      <?php
-      $CONFIG = array (
-        'maintenance_window_start' => 9,
-        'allow_local_remote_servers' => true,
-      );
+  # configs:
+  #   other.config.php: |-
+  #     <?php
+  #     $CONFIG = array (
+  #       'maintenance_window_start' => 9,
+  #       'allow_local_remote_servers' => true,
+  #     );
   podSecurityContext:
     fsGroup: 3000
     fsGroupChangePolicy: OnRootMismatch
