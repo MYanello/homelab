@@ -62,12 +62,12 @@ nextcloud:
         'maintenance_window_start' => 9,
         'allow_local_remote_servers' => true,
       );
-  podSecurityContext:
-    fsGroup: 3000
-    fsGroupChangePolicy: OnRootMismatch
-  securityContext:
-    runAsUser: 0
-    runAsGroup: 0
+  # podSecurityContext:
+  #   fsGroup: 3000
+  #   fsGroupChangePolicy: OnRootMismatch
+  # securityContext:
+  #   runAsUser: 0
+  #   runAsGroup: 0
 # nginx:
 #   securityContext:
 #     runAsUser: 0
