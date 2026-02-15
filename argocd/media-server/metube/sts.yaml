@@ -22,7 +22,7 @@ spec:
             - name: YTDL_OPTIONS
               value: | 
                 {"cookiefile":"/downloads/cookies.txt"}
-          image: harbor.yanello.net/ghcr/alexta69/metube:2026.02.13@sha256:0a8a575017b92818bae78813317119d7adfc531e5301f56e5bb0a78f8382d6b6
+          image: harbor.yanello.net/ghcr/alexta69/metube:2026.02.14@sha256:eddc5430c1e3299f2df3a3c413af7b50fdbcbb12c7065fe32d29b4bc83557aac
           imagePullPolicy: IfNotPresent
           resources:
             limits:
