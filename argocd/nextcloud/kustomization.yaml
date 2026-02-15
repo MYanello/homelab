@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ./manifests/cm.yaml
   - ./manifests/http-route.yaml
-  - ./manifests/pvc.yaml
 
 patches:
   - target:
@@ -26,7 +25,7 @@ generators:
 helmCharts:
   - name: nextcloud
     repo: https://nextcloud.github.io/helm/
-    version: "8.9.1"
+    version: 8.9.1
     releaseName: nextcloud
     namespace: nextcloud
     valuesFile: ./values.yaml
