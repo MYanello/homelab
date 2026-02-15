@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -10,7 +11,7 @@ resources:
 helmCharts:
   - name: open-webui
     repo: https://helm.openwebui.com/
-    version: "10.2.1"
+    version: "12.0.1"
     releaseName: open-webui
     namespace: open-webui
     valuesFile: manifests/values.yaml
