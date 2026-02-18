@@ -40,7 +40,7 @@ spec:
                 secretKeyRef:
                   name: immich-secrets
                   key: DB_PASSWORD
-          image: ghcr.io/immich-app/postgres:16-vectorchord0.5.3-pgvector0.8.1@sha256:835f18de5397992bc284dec41e00954fc1934a1ef768802a2271c0bfebc10ea2
+          image: ghcr.io/immich-app/postgres:16-vectorchord0.5.3-pgvector0.8.1@sha256:949dd10e094bb8330eaf2037f828a83e73871c5a3f869c215af7cf6bb382451d
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
