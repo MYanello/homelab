@@ -1,3 +1,4 @@
+---
 yaml-files: ['*.yaml', '*.yml', .yamllint]
 ignore: |
   charts/
@@ -26,7 +27,7 @@ rules:
   octal-values: disable
   quoted-strings:
     quote-type: any
-    required: only-when-needed
+    required: false
     check-keys: true
   trailing-spaces: disable
   truthy:
