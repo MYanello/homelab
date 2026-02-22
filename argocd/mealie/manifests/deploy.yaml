@@ -38,11 +38,11 @@ spec:
             - name: PGID
               value: "1000"
             - name: BASE_URL
-              value: "https://recipes.yanello.net"
+              value: "https://mealie.yanello.net"
             - name: TZ
               value: "America/Chicago"
             - name: BASE_URL
-              value: "https://recipes.yanello.net"
+              value: "https://mealie.yanello.net"
             - name: OIDC_AUTH_ENABLED
               value: "true"
             - name: OIDC_SIGNUP_ENABLED
