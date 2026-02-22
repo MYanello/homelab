@@ -1,6 +1,6 @@
 sequence_style = "keep_style"
 comments_whitelines = 1
-explicit_start = false
+explicit_start = true
 whitelines = 1
 none_representation = "null"
 preserve_quotes = true

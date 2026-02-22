@@ -24,7 +24,7 @@ spec:
         backup.velero.io/backup-volumes: "export,media,data,consume"
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:2.20.6@sha256:a28330462994b937938e02aaa5632a1effcc7f9acfba96c1bef9c50e1167a027
+        - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:2.20.7@sha256:7b937cb2fa2885ab0ecfceb8c7e8827e2312472d9d897a270097ba7f5522dcdc
           imagePullPolicy: IfNotPresent
           name: paperless
           ports:
@@ -96,7 +96,7 @@ spec:
         backup.velero.io/backup-volumes: "mariadb"
     spec:
       containers:
-        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:3ba727e641ef0ea24054e47c72a831b1067da32d5139c0405b629c25b115eb89
+        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:b1cb255a9939d28a1856815f0de6046c20c28c21b92a9f2696bc782b247a47ee
           imagePullPolicy: IfNotPresent
           name: db
           ports:

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: rx-resume
-          image: harbor.yanello.net/ghcr/amruthpillai/reactive-resume:v5.0.9@sha256:6dc11d67a4d4b086c4abf149973c97bea26d54cdbb0cf73eb4e2feb0ff780491
+          image: harbor.yanello.net/ghcr/amruthpillai/reactive-resume:v5.0.9@sha256:4b7eeee75dde8dbc211aec6eca8761a6d6eb0b7422bfe5bca987e471c953f7cd
           ports:
             - containerPort: 3010
           env:
@@ -97,6 +97,6 @@ spec:
     spec:
       containers:
         - name: printer
-          image: harbor.yanello.net/docker/chromedp/headless-shell@sha256:363bd3d5aa239b83def2ea036f34ac72543b1cba2316dceeafcba2b4d135da81
+          image: harbor.yanello.net/docker/chromedp/headless-shell@sha256:1c8a3e0050592e014b19577fa8a2f1196dc2b71892211e60059d8af38b4ef32f
           ports:
             - containerPort: 9222
