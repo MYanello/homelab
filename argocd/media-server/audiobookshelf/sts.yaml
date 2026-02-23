@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        backup.velero.io/backup-volumes: config,metadata
+        backup.velero.io/backup-volumes: config,metadata,audiobooks,podcasts
       labels:
         app: audiobookshelf
     spec:

@@ -62,8 +62,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  annotations:
-    backup.velero.io/backup-volumes: pgdata
   labels:
     app: postgres
 spec:
@@ -76,6 +74,8 @@ spec:
     metadata:
       labels:
         app: postgres
+      annotations:
+        backup.velero.io/backup-volumes: pgdata
     spec:
       containers:
         - name: postgres

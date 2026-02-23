@@ -1,7 +1,7 @@
 ---
 database:
   podAnnoations:
-    backup.velero.io/backup-volumes: database-data
+    backup.velero.io/backup-volumes: database
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
@@ -65,12 +65,16 @@ core:
       effect: "NoSchedule"
 
 jobservice:
+  annotations:
+    backup.velero.io/backup-volumes: harbor-jobservice
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
 
 registry:
+  annotations:
+    backup.velero.io/backup-volumes: harbor-registry
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"

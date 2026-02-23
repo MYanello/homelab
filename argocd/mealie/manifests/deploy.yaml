@@ -19,6 +19,8 @@ spec:
     metadata:
       labels:
         app: mealie
+      annotations:
+        backup.velero.io/backup-volumes: storage
     spec:
       containers:
         - image: harbor.yanello.net/ghcr/mealie-recipes/mealie:v3.10.2@sha256:58b54bca4c729fcc7f272cfac5086623866430956838de3f5d763fcaf9e64115

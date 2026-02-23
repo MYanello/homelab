@@ -15,12 +15,14 @@ spec:
     metadata:
       labels:
         app: metube
+      annotations:
+        backup.velero.io/backup-volumes: downloads
     spec:
       containers:
         - name: metube
           env:
             - name: YTDL_OPTIONS
-              value: | 
+              value: |
                 {"cookiefile":"/downloads/cookies.txt"}
           image: harbor.yanello.net/ghcr/alexta69/metube:2026.02.22@sha256:7a10c8a53a50a2c3c6e5599cab16b6be62a99a9ce9e0e48769328c6ce59b30c9
           imagePullPolicy: IfNotPresent

@@ -1,3 +1,4 @@
+---
 initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.13.2@sha256:25c3a0a043fc396a0593a3da0aa16ed1f39df74883bda42c4588fc8877b72bde
@@ -5,9 +6,11 @@ initContainers:
     volumeMounts:
       - mountPath: /target
         name: plugins
+
 credentials:
   useSecret: true
   existingSecret: cloud-credentials
+
 configuration:
   backupStorageLocation:
     - name: backblaze
@@ -41,6 +44,7 @@ nodeAgent:
       operator: Exists
     - effect: NoExecute
       operator: Exists
+
 schedules:
   weekly:
     disabled: false
@@ -48,9 +52,10 @@ schedules:
     paused: false
     skipImmediately: false
     template:
-      ttl: "720h" # 1 month 
+      ttl: "720h" # 1 month
       storageLocation: backblaze
+
 kubectl:
-   image:
-      repository: harbor.yanello.net/docker/bitnamilegacy/kubectl
-      tag: "1.33.4@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246"
+  image:
+    repository: harbor.yanello.net/docker/bitnamilegacy/kubectl
+    tag: "1.33.4@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246"

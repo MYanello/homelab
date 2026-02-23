@@ -16,6 +16,8 @@ spec:
     metadata:
       labels:
         app: postgres
+      annotations:
+        backup.velero.io/backup-volumes: data
     spec:
       containers:
         - name: postgres
@@ -88,7 +90,6 @@ spec:
         runAsGroup: 1000
       containers:
         - args:
-            # - server
             - start
           envFrom:
             - secretRef:
