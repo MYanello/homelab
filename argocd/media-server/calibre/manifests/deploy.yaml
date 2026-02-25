@@ -3,13 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: calibre-dl
-  name: calibre-dl
+    app: shelfmark
+  name: shelfmark
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: calibre-dl
+      app: shelfmark
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: calibre-dl
+        app: shelfmark
     spec:
       nodeSelector:
         beta.kubernetes.io/arch: amd64
@@ -27,15 +27,15 @@ spec:
             - name: FLASK_PORT
               value: "8084"
             - name: FLASK_DEBUG
-              value: 'false'
+              value: "false"
             - name: AA_DONATOR_KEY
               valueFrom:
                 secretKeyRef:
                   name: calibre-secrets
                   key: AA_KEY
-          image: harbor.yanello.net/ghcr/calibrain/calibre-web-automated-book-downloader:v1.1.1@sha256:5a2ffced0d09c38083b17386f2272cfd91af9906431918a8569ed50fb273129c
+          image: harbor.yanello.net/ghcr/calibrain/shelfmark:v1.1.2
           imagePullPolicy: IfNotPresent
-          name: calibre-dl
+          name: shelfmark
           resources:
             limits:
               memory: 2Gi
@@ -48,6 +48,8 @@ spec:
           volumeMounts:
             - name: ingest
               mountPath: /cwa-book-ingest
+            - name: config
+              mountPath: /config
           readinessProbe:
             httpGet:
               path: /
@@ -69,6 +71,9 @@ spec:
         - name: ingest
           persistentVolumeClaim:
             claimName: ingest
+        - name: config
+          persistentVolumeClaim:
+            claimName: shelfmark-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -100,7 +105,7 @@ spec:
             - name: PUID
               value: "1000"
             - name: PGID
-              value: '1000'
+              value: "1000"
             - name: TZ
               value: "America/Chicago"
             - name: CWA_PORT_OVERRIDE

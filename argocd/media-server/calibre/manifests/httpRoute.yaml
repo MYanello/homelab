@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Calibre
     gethomepage.dev/icon: calibre
-    gethomepage.dev/description: "Calibre is an e-book manager. It can view, convert, edit and catalog e-books in all of the major e-book formats."
+    gethomepage.dev/description: "Calibre is an e-book manager. It can view, convert,\
+      \ edit and catalog e-books in all of the major e-book formats."
     gethomepage.dev/pod-selector: app=calibre
   labels:
     app.kubernetes.io/instance: calibre-app
@@ -42,18 +44,19 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "CalibreDL"
     gethomepage.dev/icon: mdi-folder-download-outline
-    gethomepage.dev/description: "An intuitive web interface for searching and requesting book downloads."
-    gethomepage.dev/pod-selector: app=calibre-dl
-  name: calibre-dl-httproute
+    gethomepage.dev/description: "An intuitive web interface for searching and requesting\
+      \ book downloads."
+    gethomepage.dev/pod-selector: app=shelfmark
+  name: shelfmark-httproute
 spec:
   parentRefs:
     - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
   hostnames:
-    - calibre-dl.yanello.net
+    - shelfmark.yanello.net
   rules:
     - backendRefs:
-        - name: calibre-dl
+        - name: shelfmark
           namespace: calibre
           port: 8084

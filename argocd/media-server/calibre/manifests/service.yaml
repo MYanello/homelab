@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -19,27 +20,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: calibre-dl
-  name: calibre-dl
+    app: shelfmark
+  name: shelfmark
 spec:
   ports:
     - name: "http"
       port: 8084
       targetPort: 8084
   selector:
-    app: calibre-dl
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: cloudflareproxy
-  name: cloudflareproxy
-spec:
-  ports:
-    - name: "api"
-      port: 8000
-      targetPort: 8000
-  selector:
-    app: cloudflareproxy
-
+    app: shelfmark
