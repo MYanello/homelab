@@ -19,7 +19,7 @@ spec:
         backup.velero.io/backup-volumes: pg-data-postgres-0
     spec:
       containers:
-        - image: harbor.yanello.net/docker/postgres:18@sha256:55586516b2fd477faa8f0f05ec0a72b196fb7e2bce8df3adfb9c6a0ed607214f
+        - image: harbor.yanello.net/docker/postgres:18@sha256:69e8582b781cb44fa4557b98ed586fe68361e320d9b12f9707494335634f4f3d
           resources:
             limits:
               memory: 1Gi
