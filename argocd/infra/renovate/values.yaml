@@ -1,8 +1,9 @@
+---
 cachePersistence:
-  enabled: false
+  enabled: true
   storageClass: truenas-ssd-nfs
-  size: 5Gi
-  
+  size: 20Gi
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -28,7 +29,7 @@ renovate:
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: "0 0 * * *"
   logLevel: DEBUG
-  config: |
+  config: |-
     module.exports = {
       extends: [
         "config:best-practices",
