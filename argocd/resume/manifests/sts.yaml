@@ -25,7 +25,7 @@ spec:
               value: postgres
             - name: POSTGRES_PASSWORD
               value: postgres
-          image: postgres:18-alpine@sha256:035b9ab53cfa147d7202b61f5f7782b939ae815b7d6bc81c96b7b42ff1fca950
+          image: postgres:18-alpine@sha256:4da1a4828be12604092fa55311276f08f9224a74a62dcb4708bd7439e2a03911
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
