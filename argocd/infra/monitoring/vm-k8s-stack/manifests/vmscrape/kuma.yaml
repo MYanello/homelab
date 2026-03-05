@@ -33,3 +33,6 @@ spec:
     password:
       name: kuma-auth
       key: oracleApi
+    username:
+      name: kuma-auth
+      key: username
