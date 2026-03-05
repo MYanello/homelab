@@ -1,3 +1,4 @@
+---
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMScrapeConfig
 metadata:
@@ -9,10 +10,26 @@ spec:
       key: password
     username:
       name: kuma-auth
-      key: username      
+      key: username
   scrape_interval: 60s
   staticConfigs:
-  - targets:
-    - kuma.yanello.net
+    - targets:
+        - kuma.yanello.net
   path: /metrics
   scheme: https
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: oracle-kuma
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+    - targets:
+        - 150.136.155.17:3001
+  path: /metrics
+  scheme: http
+  basicAuth:
+    password:
+      name: kuma-auth
+      key: oracleApi
