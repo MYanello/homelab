@@ -37,7 +37,7 @@ spec:
             - name: AUTHENTIK_ISSUER
               value: https://authentik.yanello.net/application/o/linkwarden
             - name: STORAGE_FOLDER
-              value: /data/data/storage
+              value: /data/storage
           image: harbor.yanello.net/ghcr/linkwarden/linkwarden:v2.13.5@sha256:1588811d7b7d249d387782bb94c7eb189082b82b542ac1667d2ac3d7e7f70ce6
           volumeMounts:
             - mountPath: /data/data
