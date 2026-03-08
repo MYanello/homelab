@@ -1,3 +1,4 @@
+---
 ollama:
   enabled: true
   ollama:
@@ -8,8 +9,8 @@ ollama:
   runtimeClassName: nvidia
   persistentVolume:
     enabled: true
-    storageClass: longhorn
-  
+    storageClass: truenas-ssd-nfs
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -25,14 +26,14 @@ tika:
 
 persistence:
   enabled: true
-  storageClass: longhorn
+  storageClass: truenas-ssd-nfs
   accessMode: ReadWriteOnce
   size: 10Gi
 
 pipelines:
   persistence:
     enabled: true
-    storageClass: longhorn
+    storageClass: truenas-ssd-nfs
     accessMode: ReadWriteOnce
     size: 10Gi
 
