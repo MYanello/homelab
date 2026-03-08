@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: vllm-stack
     repo: https://vllm-project.github.io/production-stack
-    version: 0.1.9
+    version: 0.1.10
     releaseName: vllm
     namespace: vllm
     valuesFile: ./values.yaml
