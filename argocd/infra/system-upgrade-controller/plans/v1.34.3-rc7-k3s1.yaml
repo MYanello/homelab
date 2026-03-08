@@ -18,7 +18,7 @@ spec:
       value: "true"
   serviceAccountName: system-upgrade
   upgrade:
-    image: rancher/k3s-upgrade@sha256:e0792a40c738590b1f0482ba3ee0811ccbe1ab25824eea36848a9655f5cab0b6
+    image: rancher/k3s-upgrade@sha256:ed1b539a6840468e9d386fbcc7830fa3ca9603de4c69c2b7c5b16f719bd1d41c
   version: v1.34.3-rc7+k3s1
 ---
 # Agent plan
@@ -37,8 +37,8 @@ spec:
     args:
     - prepare
     - server-plan
-    image: rancher/k3s-upgrade@sha256:e0792a40c738590b1f0482ba3ee0811ccbe1ab25824eea36848a9655f5cab0b6
+    image: rancher/k3s-upgrade@sha256:ed1b539a6840468e9d386fbcc7830fa3ca9603de4c69c2b7c5b16f719bd1d41c
   serviceAccountName: system-upgrade
   upgrade:
-    image: rancher/k3s-upgrade@sha256:e0792a40c738590b1f0482ba3ee0811ccbe1ab25824eea36848a9655f5cab0b6
+    image: rancher/k3s-upgrade@sha256:ed1b539a6840468e9d386fbcc7830fa3ca9603de4c69c2b7c5b16f719bd1d41c
   version: v1.34.3-rc7+k3s1
