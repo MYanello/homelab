@@ -31,17 +31,17 @@ server:
   replicas: 1
   resources:
     limits:
-      memory: 1Gi
+      memory: 2Gi
     requests:
-      cpu: 150m
+      cpu: 250m
       memory: 750Mi
 worker:
   replicas: 1
   resources:
     limits:
-      memory: 1Gi
+      memory: 2Gi
     requests:
-      cpu: 100m
+      cpu: 250m
       memory: 500Mi
   livenessProbe:
     timeoutSeconds: 5
@@ -59,7 +59,7 @@ redis:
         cpu: 300m
         memory: 50Mi
       limits:
-        memory: 100Mi
+        memory: 250Mi
   replica:
     persistence:
       enabled: false
@@ -68,7 +68,7 @@ redis:
         cpu: 300m
         memory: 50Mi
       limits:
-        memory: 100Mi
+        memory: 250Mi
   sentinel:
     persistence:
       enabled: false
@@ -100,10 +100,10 @@ postgresql:
         - ReadWriteOnce
     resources:
       requests:
-        cpu: 100m
+        cpu: 250m
         memory: 250Mi
       limits:
-        memory: 1Gi
+        memory: 2Gi
   auth:
     username: authentik
     database: authentik
