@@ -15,10 +15,10 @@ spec:
       sectionName: http-root
     - name: cilium-private-gateway
       namespace: cilium
-      sectionName: http
+      sectionName: http-root
     - name: cilium-private-gateway
       namespace: cilium
-      sectionName: https
+      sectionName: https-root
   hostnames:
     # - iocaine.yanello.net
     - yanello.net
