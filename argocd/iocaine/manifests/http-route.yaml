@@ -13,12 +13,12 @@ spec:
     - name: cilium-public-gateway
       namespace: cilium
       sectionName: http-root
-    # - name: cilium-private-gateway
-      # namespace: cilium
-      # sectionName: http
-    # - name: cilium-private-gateway
-      # namespace: cilium
-      # sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: http
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
     # - iocaine.yanello.net
     - yanello.net

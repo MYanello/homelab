@@ -1,33 +1,27 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  # annotations:
-  #   gethomepage.dev/enabled: "true"
-  #   gethomepage.dev/name: Immich
-  #   gethomepage.dev/icon: immich
-  #   gethomepage.dev/description: "High performance self-hosted photo and video management solution."
-  #   gethomepage.dev/pod-selector: app=immich-server
   labels:
     app.kubernetes.io/name: hubble-ui
   name: hubble-ui-httproute
 spec:
   parentRefs:
-  - name: cilium-private-gateway
-    group: gateway.networking.k8s.io
-    kind: Gateway
-    namespace: cilium
-    sectionName: https
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
-  - hubble.yanello.net
+    - hubble.yanello.net
   rules:
-  - backendRefs:
-    - name: hubble-ui
-      kind: Service
-      group: ""
-      port: 80
-      weight: 1
-    matches:
-      - path:
-          type: PathPrefix
-          value: /
-      
+    - backendRefs:
+        - name: hubble-ui
+          kind: Service
+          group: ""
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
