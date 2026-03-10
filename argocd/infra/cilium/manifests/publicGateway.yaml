@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -87,7 +88,7 @@ spec:
       sectionName: http-root
   hostnames:
     - "*.yanello.net"
-    - "yanello.net"
+    # - "yanello.net"
   rules:
     - filters:
         - type: RequestRedirect
