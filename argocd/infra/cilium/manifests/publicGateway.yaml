@@ -34,8 +34,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        # kinds:
-        #   - kind: HTTPRoute
     - name: http-root
       protocol: HTTP
       hostname: "yanello.net"
@@ -43,8 +41,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-        # kinds:
-        #   - kind: HTTPRoute
     - name: https
       protocol: HTTPS
       hostname: "*.yanello.net"
