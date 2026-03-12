@@ -2,15 +2,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rustdesk-service
+  name: rustdesk-hbbs
   annotations:
     lbipam.cilium.io/ips: 10.10.8.50
 spec:
   type: LoadBalancer
   selector:
-    app.kubernetes.io/name: rustdesk
+    app: rustdesk-hbbs
   ports:
-    # hbbs
     - name: tcp-21115
       port: 21115
       targetPort: 21115
@@ -27,7 +26,18 @@ spec:
       port: 21118
       targetPort: 21118
       protocol: TCP
-    # hbbr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustdesk-hbbr
+  annotations:
+    lbipam.cilium.io/ips: 10.10.8.51
+spec:
+  type: LoadBalancer
+  selector:
+    app: rustdesk-hbbr
+  ports:
     - name: tcp-21117
       port: 21117
       targetPort: 21117
