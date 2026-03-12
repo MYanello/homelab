@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,101 +28,102 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/part-of: argocd
-              topologyKey: kubernetes.io/hostname
-            weight: 5
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/part-of: argocd
+                topologyKey: kubernetes.io/hostname
+              weight: 5
       containers:
-      - command:
-        - /shared/argocd-dex
-        - rundex
-        env:
-        - name: ARGOCD_DEX_SERVER_LOGFORMAT
-          valueFrom:
-            configMapKeyRef:
-              key: dexserver.log.format
-              name: argocd-cmd-params-cm
-              optional: true
-        - name: ARGOCD_DEX_SERVER_LOGLEVEL
-          valueFrom:
-            configMapKeyRef:
-              key: dexserver.log.level
-              name: argocd-cmd-params-cm
-              optional: true
-        - name: ARGOCD_DEX_SERVER_DISABLE_TLS
-          valueFrom:
-            configMapKeyRef:
-              key: dexserver.disable.tls
-              name: argocd-cmd-params-cm
-              optional: true
-        image: ghcr.io/dexidp/dex:v2.45.1@sha256:8499afd690c437f52301efd2b05b2455da5bd2dfc20332cd697dc9937f808462
-        imagePullPolicy: Always
-        name: dex
-        ports:
-        - containerPort: 5556
-          protocol: TCP
-        - containerPort: 5557
-          protocol: TCP
-        - containerPort: 5558
-          protocol: TCP
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /shared
-          name: static-files
-        - mountPath: /tmp
-          name: dexconfig
-        - mountPath: /tls
-          name: argocd-dex-server-tls
-        livenessProbe:
-              httpGet:
-                scheme: HTTP
-                path: /healthz/live
-                port: 5558
-        readinessProbe:
+        - command:
+            - /shared/argocd-dex
+            - rundex
+          env:
+            - name: ARGOCD_DEX_SERVER_LOGFORMAT
+              valueFrom:
+                configMapKeyRef:
+                  key: dexserver.log.format
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_DEX_SERVER_LOGLEVEL
+              valueFrom:
+                configMapKeyRef:
+                  key: dexserver.log.level
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_DEX_SERVER_DISABLE_TLS
+              valueFrom:
+                configMapKeyRef:
+                  key: dexserver.disable.tls
+                  name: argocd-cmd-params-cm
+                  optional: true
+          image: ghcr.io/dexidp/dex:v2.45.1@sha256:8499afd690c437f52301efd2b05b2455da5bd2dfc20332cd697dc9937f808462
+          imagePullPolicy: Always
+          name: dex
+          ports:
+            - containerPort: 5556
+              protocol: TCP
+            - containerPort: 5557
+              protocol: TCP
+            - containerPort: 5558
+              protocol: TCP
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /shared
+              name: static-files
+            - mountPath: /tmp
+              name: dexconfig
+            - mountPath: /tls
+              name: argocd-dex-server-tls
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /healthz/live
+              port: 5558
+          readinessProbe:
             httpGet:
               scheme: HTTP
               path: /healthz/ready
               port: 5558
       dnsPolicy: ClusterFirst
       initContainers:
-      - command:
-        - /bin/cp
-        - -n
-        - /usr/local/bin/argocd
-        - /shared/argocd-dex
-        image: quay.io/argoproj/argocd:v3.3.3@sha256:8b9a0993937850c1ee6e2ada47a2be8259d512e959ae58afa39936658f7b52e7
-        imagePullPolicy: Always
-        name: copyutil
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /shared
-          name: static-files
-        - mountPath: /tmp
-          name: dexconfig
+        - command:
+            - /bin/cp
+            - -n
+            - /usr/local/bin/argocd
+            - /shared/argocd-dex
+          image: quay.io/argoproj/argocd:v3.3.3@sha256:8b9a0993937850c1ee6e2ada47a2be8259d512e959ae58afa39936658f7b52e7
+          imagePullPolicy: Always
+          name: copyutil
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /shared
+              name: static-files
+            - mountPath: /tmp
+              name: dexconfig
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: Always
@@ -131,19 +133,19 @@ spec:
       serviceAccountName: argocd-dex-server
       terminationGracePeriodSeconds: 30
       volumes:
-      - emptyDir: {}
-        name: static-files
-      - emptyDir: {}
-        name: dexconfig
-      - name: argocd-dex-server-tls
-        secret:
-          defaultMode: 420
-          items:
-          - key: tls.crt
-            path: tls.crt
-          - key: tls.key
-            path: tls.key
-          - key: ca.crt
-            path: ca.crt
-          optional: true
-          secretName: argocd-dex-server-tls
+        - emptyDir: {}
+          name: static-files
+        - emptyDir: {}
+          name: dexconfig
+        - name: argocd-dex-server-tls
+          secret:
+            defaultMode: 420
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+              - key: ca.crt
+                path: ca.crt
+            optional: true
+            secretName: argocd-dex-server-tls
