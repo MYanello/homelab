@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -5,8 +6,3 @@ resources:
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml
-
-replicas:
-  - name: fooocus
-    count: 0
-  
