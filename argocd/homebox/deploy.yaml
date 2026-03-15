@@ -33,7 +33,17 @@ spec:
               value: "100"
             - name: HBOX_ALLOW_REGISTRATION
               value: "false"
-          image: harbor.yanello.net/ghcr/sysadminsmedia/homebox:0.23.1@sha256:facd9b795952602d5c54eacfcd0f3533040e6b556f461e423a2d2445ed8736f9
+            - name: HBOX_OIDC_ENABLED
+              value: "true"
+            - name: HBOX_OPTIONS_TRUST_PROXY
+              value: "true"
+            - name: HBOX_OPTIONS_HOSTNAME
+              value: homebox.yanello.net
+            - name: HBOX_OIDC_SCOPES
+              value: openid profile email groups
+            - name: HBOX_OPTIONS_ALLOW_LOCAL_LOGIN
+              value: "true"
+          image: harbor.yanello.net/ghcr/sysadminsmedia/homebox:0.24.2
           imagePullPolicy: IfNotPresent
           name: homebox
           resources:
