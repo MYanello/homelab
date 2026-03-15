@@ -213,7 +213,7 @@ spec:
             - name: CUSTOM_BASE_URL
               value: https://openrouter.ai/api/v1
             - name: CUSTOM_MODEL
-              value: google/gemini-3-flash-preview
+              value: deepseek/deepseek-v3.2
             - name: SYSTEM_PROMPT
               value: >-
                 `You are a personalized document analyzer. Your task is to analyze
