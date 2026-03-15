@@ -8,7 +8,7 @@ metadata:
 spec:
   serviceName: fooocus
   revisionHistoryLimit: 3
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: fooocus
