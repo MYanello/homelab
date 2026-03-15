@@ -46,7 +46,7 @@ spec:
               value: "true"
           envFrom:
             - secretRef:
-                name: homebox-secrets
+                name: hbox-secrets
           image: harbor.yanello.net/ghcr/sysadminsmedia/homebox:0.24.2
           imagePullPolicy: IfNotPresent
           name: homebox
