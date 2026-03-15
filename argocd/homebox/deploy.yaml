@@ -43,6 +43,9 @@ spec:
               value: openid profile email groups
             - name: HBOX_OPTIONS_ALLOW_LOCAL_LOGIN
               value: "true"
+          envFrom:
+            - secretRef:
+                name: homebox-secrets
           image: harbor.yanello.net/ghcr/sysadminsmedia/homebox:0.24.2
           imagePullPolicy: IfNotPresent
           name: homebox
