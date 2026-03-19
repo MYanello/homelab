@@ -20,7 +20,7 @@ spec:
         - name: ubiquiti-service
           group: ""
           kind: Service
-          port: 8880
+          port: 8443
           weight: 1
       matches:
         - path:
@@ -35,8 +35,8 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 8880
-      targetPort: 8880
+      port: 8443
+      targetPort: 8443
 ---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
@@ -53,7 +53,7 @@ ports:
   - name: http  # should match with the name of the service port defined above
     appProtocol: http
     protocol: TCP
-    port: 8880
+    port: 8443
 endpoints:
   - addresses:
       - 192.168.1.4
