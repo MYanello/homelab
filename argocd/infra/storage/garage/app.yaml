@@ -19,7 +19,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://git.deuxfleurs.fr/Deuxfleurs/garage
-    targetRevision: main
+    targetRevision: main-v2
     path: script/helm/garage
     helm:
       releaseName: garage
