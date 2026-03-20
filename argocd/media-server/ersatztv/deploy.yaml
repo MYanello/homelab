@@ -3,13 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ersattv
-  name: ersattv
+    app: ersatztv
+  name: ersatztv
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ersattv
+      app: ersatztv
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: ersattv
+        app: ersatztv
     spec:
       affinity:
         nodeAffinity:
@@ -39,14 +39,15 @@ spec:
               value: all
           image: harbor.yanello.net/ghcr/ersatztv/ersatztv:v26.3.0
           imagePullPolicy: IfNotPresent
-          name: ersattv
+          name: ersatztv
           resources:
             limits:
               memory: 1Gi
+              nvidia.com/gpu: "1"
             requests:
               cpu: 50m
               memory: 100Mi
-            nvidia.com/gpu: "1"
+              nvidia.com/gpu: "1"
           ports:
             - containerPort: 8409
               protocol: TCP
