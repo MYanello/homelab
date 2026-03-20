@@ -1,0 +1,76 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ersattv
+  name: ersattv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ersattv
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: ersattv
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+          image: harbor.yanello.net/ghcr/ersatztv/ersatztv:v26.3.0
+          imagePullPolicy: IfNotPresent
+          name: ersattv
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          ports:
+            - containerPort: 8409
+              protocol: TCP
+          volumeMounts:
+            - name: media
+              mountPath: /data/media
+            - name: config
+              mountPath: /config
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8409
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8409
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 5
+      restartPolicy: Always
+      volumes:
+        - name: media
+          hostPath:
+            path: /data/media
+        - name: config
+          persistentVolumeClaim:
+            claimName: config

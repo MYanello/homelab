@@ -1,0 +1,18 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: ersatztv
+  name: ersatztv-http-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - ersatztv.yanello.net
+  rules:
+    - backendRefs:
+        - name: ersatztv
+          port: 8409
