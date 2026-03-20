@@ -33,6 +33,10 @@ spec:
         - env:
             - name: TZ
               value: America/Chicago
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
           image: harbor.yanello.net/ghcr/ersatztv/ersatztv:v26.3.0
           imagePullPolicy: IfNotPresent
           name: ersattv
@@ -42,6 +46,7 @@ spec:
             requests:
               cpu: 50m
               memory: 100Mi
+            nvidia.com/gpu: "1"
           ports:
             - containerPort: 8409
               protocol: TCP
