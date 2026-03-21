@@ -5,7 +5,7 @@ metadata:
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Forgejo
-    gethomepage.dev/icon: Forgejo
+    gethomepage.dev/icon: sh-forgejo
     gethomepage.dev/pod-selector: app.kubernetes.io/name=forgejo
   labels:
     app.kubernetes.io/instance: forgejo-app

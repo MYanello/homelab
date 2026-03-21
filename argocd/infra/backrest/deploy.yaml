@@ -20,6 +20,10 @@ spec:
       labels:
         app: backrest
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -105,7 +109,7 @@ spec:
           persistentVolumeClaim:
             claimName: cache
           # hostPath:
-            # path: /zpool/k8s/backrest/cache
+          # path: /zpool/k8s/backrest/cache
         - name: zpool
           hostPath:
             path: /zpool/
