@@ -4,7 +4,7 @@ nodeSelector:
   nvidia.com/gpu.present: "true"
 image:
   repository: harbor.yanello.net/ghcr/blakeblackshear/frigate
-  tag: 0.17.0-tensorrt@sha256:ff5c5e062582a1263fb1639563f2d2af555551084ab09a30769cbcf36a759ad9
+  tag: 0.17.1-tensorrt@sha256:a8d21fae3d49aea25384d56eec20a0414e24bae91b17d5f9e8f9b2f89d574a3f
   pullPolicy: IfNotPresent
 persistence:
   config:
