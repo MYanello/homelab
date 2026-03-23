@@ -37,7 +37,7 @@ spec:
               value: all
             - name: NVIDIA_DRIVER_CAPABILITIES
               value: all
-          image: harbor.yanello.net/ghcr/ersatztv/ersatztv:v26.3.0
+          image: harbor.yanello.net/ghcr/ersatztv/ersatztv:v26.3.0@sha256:7c402e5f348184359e0951b44d55fb6db3df671fa77fc91dcbd609034d28778b
           imagePullPolicy: IfNotPresent
           name: ersatztv
           resources:
