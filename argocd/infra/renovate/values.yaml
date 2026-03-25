@@ -74,6 +74,12 @@ renovate:
         managerFilePatterns: ["argocd/**/*.yaml", "talos/**/*.yaml"],
       },
       ignorePaths: ["argocd/dev/**"],
+      registryAliases: {
+        "harbor.yanello.net/docker": "registry-1.docker.io",
+        "harbor.yanello.net/ghcr": "ghcr.io",
+        "harbor.yanello.net/quay": "quay.io",
+        "harbor.yanello.net/lscr": "lscr.io",
+      },
       "branchConcurrentLimit": 50,
       "prConcurrentLimit": 50,
       "prHourlyLimit": 0,
