@@ -1,4 +1,3 @@
----
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -7,17 +6,16 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Plex
     gethomepage.dev/icon: plex
-    gethomepage.dev/description: "A one-stop destination to stream movies, TV shows,\
-      \ and music."
+    gethomepage.dev/description: "A one-stop destination to stream movies, TV shows, and music."
     gethomepage.dev/pod-selector: app=plex
 spec:
   parentRefs:
     - name: cilium-public-gateway
       namespace: cilium
       sectionName: https
-    # - name: cilium-private-gateway
-    #   namespace: cilium
-    #   sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
     - plex.yanello.net
   rules:
