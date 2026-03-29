@@ -6,6 +6,7 @@
   any_errors_fatal: false
   ignore_unreachable: true
   serial: 1
+  max_fail_percentage: 100
 
   tasks:
     - name: Update apt cache
@@ -71,7 +72,7 @@
   gather_facts: false
   tasks:
     - name: Build summary report
-      ansible.builtin.debug:
+      ansible.builtin.set_fact:
         msg: |
           ══════════════════════════════════════════
                      UPDATE SUMMARY REPORT
@@ -79,13 +80,19 @@
           {% for host in ansible_play_hosts %}
           {% set summary = hostvars[host].host_update_summary | default({'failed': true, 'packages_upgraded': '0', 'was_rebooted': false}) %}
           {% if summary.failed %}
-          ✗ {{ host }}: UNREACHABLE / FAILED
+          {{ host }}: UNREACHABLE / FAILED
           {% else %}
-          ✓ {{ host }}: {{ summary.packages_upgraded }} packages upgraded{{ ' (rebooted)' if summary.was_rebooted else '' }}
+          {{ host }}: {{ summary.packages_upgraded }} packages upgraded{{ ' (rebooted)' if summary.was_rebooted else '' }}
           {% endif %}
           {% endfor %}
           ══════════════════════════════════════════
           Hosts succeeded: {{ ansible_play_hosts | map('extract', hostvars) | selectattr('host_update_summary.failed', 'equalto', false) | list | length }}
           Hosts failed:    {{ ansible_play_hosts | map('extract', hostvars) | selectattr('host_update_summary.failed', 'equalto', true) | list | length }}
           ══════════════════════════════════════════
+      run_once: true
+
+    - name: Print summary report
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ summary_lines.split('\n') | reject('equalto', '') | list }}"
       run_once: true
