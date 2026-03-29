@@ -3,7 +3,9 @@
   hosts: ubuntu_hosts
   become: true
   gather_facts: true
-  serial: 1 # "{{ serial | default('100%') }}" # Update all at once by default, or use -e "serial=1" for one-at-a-time
+  any_errors_fatal: false
+  ignore_unreachable: true
+  serial: 1
 
   tasks:
     - name: Update apt cache
@@ -21,6 +23,7 @@
       ansible.builtin.debug:
         msg: "{{ inventory_hostname }}: {{ updates_count.stdout }} packages available\
           \ for upgrade"
+      when: updates_count.stdout is defined
 
     - name: Upgrade all packages to latest version
       ansible.builtin.apt:
@@ -28,32 +31,13 @@
         autoremove: true
         autoclean: true
       register: apt_result
-
-    - name: Display upgrade summary
-      ansible.builtin.debug:
-        msg: |
-          {{ inventory_hostname }} upgrade summary:
-          - Changed: {{ apt_result.changed }}
-          - Packages upgraded: {{ updates_count.stdout }}
-          {% if apt_result.changed %}
-          - Packages installed: {{ apt_result.stdout_lines | select('search', '^Inst ') | list | length | default(0) }}
-          {% endif %}
-      when: updates_count.stdout | int > 0
-
-    - name: Display no updates message
-      ansible.builtin.debug:
-        msg: "{{ inventory_hostname }}: No updates available"
-      when: updates_count.stdout | int == 0
+      when: updates_count.stdout is defined
 
     - name: Check if reboot is required
       ansible.builtin.stat:
         path: /var/run/reboot-required
       register: reboot_required
-
-    - name: Display reboot requirement
-      ansible.builtin.debug:
-        msg: "{{ inventory_hostname }}: Reboot {{ 'IS' if reboot_required.stat.exists else 'is NOT' }}\
-          \ required"
+      when: updates_count.stdout is defined
 
     - name: Reboot if required
       ansible.builtin.reboot:
@@ -63,18 +47,45 @@
         pre_reboot_delay: 0
         post_reboot_delay: 30
         test_command: uptime
-      when: reboot_required.stat.exists
+      when: reboot_required.stat is defined and reboot_required.stat.exists
       register: reboot_result
 
-    - name: Display reboot status
-      ansible.builtin.debug:
-        msg: "{{ inventory_hostname }}: {{ 'Rebooted successfully' if reboot_result.changed else 'No reboot needed' }}"
+    - name: Store result facts for summary
+      ansible.builtin.set_fact:
+        host_update_summary:
+          packages_upgraded: "{{ updates_count.stdout | default('0') }}"
+          was_rebooted: "{{ reboot_result.changed | default(false) }}"
+          failed: false
+      when: updates_count.stdout is defined
+
+    - name: Store failure fact for summary
+      ansible.builtin.set_fact:
+        host_update_summary:
+          packages_upgraded: "0"
+          was_rebooted: false
+          failed: true
+      when: updates_count.stdout is not defined
 
 - name: Final Summary
   hosts: ubuntu_hosts
   gather_facts: false
   tasks:
-    - name: Display completion message
+    - name: Build summary report
       ansible.builtin.debug:
-        msg: "✓ All {{ ansible_play_hosts | length }} hosts updated successfully!"
+        msg: |
+          ══════════════════════════════════════════
+                     UPDATE SUMMARY REPORT
+          ══════════════════════════════════════════
+          {% for host in ansible_play_hosts %}
+          {% set summary = hostvars[host].host_update_summary | default({'failed': true, 'packages_upgraded': '0', 'was_rebooted': false}) %}
+          {% if summary.failed %}
+          ✗ {{ host }}: UNREACHABLE / FAILED
+          {% else %}
+          ✓ {{ host }}: {{ summary.packages_upgraded }} packages upgraded{{ ' (rebooted)' if summary.was_rebooted else '' }}
+          {% endif %}
+          {% endfor %}
+          ══════════════════════════════════════════
+          Hosts succeeded: {{ ansible_play_hosts | map('extract', hostvars) | selectattr('host_update_summary.failed', 'equalto', false) | list | length }}
+          Hosts failed:    {{ ansible_play_hosts | map('extract', hostvars) | selectattr('host_update_summary.failed', 'equalto', true) | list | length }}
+          ══════════════════════════════════════════
       run_once: true
