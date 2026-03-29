@@ -13,6 +13,8 @@ spec:
           - path: argocd/infra/storage/*
           - path: argocd/infra/storage/minio
             exclude: true
+          - path: argocd/infra/storage/nfs
+            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
