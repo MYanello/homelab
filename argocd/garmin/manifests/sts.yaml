@@ -47,7 +47,7 @@ spec:
               done
               echo "InfluxDB is ready!"
       containers:
-        - image: harbor.yanello.net/ghcr/arpanghosh8453/garmin-fetch-data:v0.4.0
+        - image: harbor.yanello.net/ghcr/arpanghosh8453/garmin-fetch-data:v0.4.0@sha256:0a41f5e68f9555470e5fe8d97d84e90697777825a89543dc1d501df329358598
           imagePullPolicy: IfNotPresent
           name: garmin-fetch
           securityContext:

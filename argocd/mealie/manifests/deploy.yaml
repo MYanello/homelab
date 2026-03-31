@@ -23,7 +23,7 @@ spec:
         backup.velero.io/backup-volumes: storage
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr/mealie-recipes/mealie:v3.14.0
+        - image: harbor.yanello.net/ghcr/mealie-recipes/mealie:v3.14.0@sha256:b9fac07e6daaabd8c29d0dc97965c2f500ce7d6b188b0c51f494627f23ad32f2
           imagePullPolicy: IfNotPresent
           resources:
             limits:
