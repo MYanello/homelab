@@ -35,6 +35,7 @@ renovate:
   mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: "0 0 * * *"
+  mendRnvDiskUsageThreshold: "90"
   logLevel: DEBUG
   config: |-
     module.exports = {
