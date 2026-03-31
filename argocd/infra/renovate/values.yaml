@@ -76,8 +76,8 @@ renovate:
       packageRules: [
         {
           matchManagers: ["kustomize"],
-          matchDatasources: ["helm"],
-          pinDigests: false,
+          matchUpdateTypes: ["pinDigest"],
+          enabled: false,
         },
         {
           matchDatasources: ["docker"],
