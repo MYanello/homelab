@@ -23,7 +23,7 @@ spec:
             - containerPort: 3000
               protocol: TCP
               name: http
-          image: ghcr.io/claabs/epicgames-freegames-node:debian@sha256:273fd3fa2f92f4ff2437c6ba4d12bcba6f19da5b9a500064a394076dcf5f7619
+          image: ghcr.io/claabs/epicgames-freegames-node:debian@sha256:ab703cf4c0ebd9227fc3174b3cf869ebd113d69945bccc5fa6659ce619d0a07b
           volumeMounts:
             - mountPath: /usr/app/config/config.json5
               name: config
