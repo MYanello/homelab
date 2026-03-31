@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -8,9 +9,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/myanello/homelab'
-    path: 'argocd/garmin/manifests'
-    targetRevision: 'main'
+    repoURL: "https://github.com/myanello/homelab"
+    path: "argocd/garmin/manifests"
+    targetRevision: "main"
   destination:
     name: in-cluster
     namespace: garmin

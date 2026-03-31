@@ -63,7 +63,7 @@ spec:
               mountPath: /opt/iocaine/share/data/
       containers:
         - name: iocaine
-          image: harbor.yanello.net/madhouse/iocaine/iocaine:3.2.1@sha256:0f9eadc1319e807d9e9d3285a116bc0188acaac5e21cd938e973b6597b250d62
+          image: harbor.yanello.net/madhouse/iocaine/iocaine:3.3.0
           command: ["iocaine"]
           args: ["--config-path", "/etc/iocaine/config.d", "start"]
           ports:

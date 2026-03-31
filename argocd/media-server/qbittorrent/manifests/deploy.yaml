@@ -73,7 +73,7 @@ spec:
           #   failureThreshold: 10
       initContainers:
         - name: gluetun
-          image: "ghcr.io/qdm12/gluetun:v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab"
+          image: ghcr.io/qdm12/gluetun:v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab
           restartPolicy: Always
           imagePullPolicy: IfNotPresent
           lifecycle:

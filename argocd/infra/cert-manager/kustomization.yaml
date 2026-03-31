@@ -1,3 +1,4 @@
+---
 resources:
   - ./manifests/resources.yaml
 
@@ -7,10 +8,10 @@ generators:
 helmCharts:
   - name: cert-manager
     repo: https://charts.jetstack.io
-    version: "v1.19.4"
+    version: "v1.20.0"
     releaseName: cert-manager
     namespace: cert-manager
-    valuesInline: 
+    valuesInline:
       installCRDs: true
       featureGates: NameConstraints=true
       webhook:
@@ -19,17 +20,17 @@ helmCharts:
         - --dns01-recursive-nameservers-only
         - --dns01-recursive-nameservers=8.8.8.8:53
       tolerations:
-      - key: "node-role.kubernetes.io/control-plane"
-        operator: "Exists"
-        effect: "NoSchedule"
-  - name: trust-manager
-    repo: https://charts.jetstack.io
-    version: "v0.20.3"
-    namespace: cert-manager
-    releaseName: trust-manager
-    valuesInline:
-      secretTargets:
-        enabled: true
-        authorizedSecrets:
-          - vault-tls
-          - vault-trust-bundle
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+  # - name: trust-manager
+  #   repo: https://charts.jetstack.io
+  #   version: "v0.20.3"
+  #   namespace: cert-manager
+  #   releaseName: trust-manager
+  #   valuesInline:
+  #     secretTargets:
+  #       enabled: true
+  #       authorizedSecrets:
+  #         - vault-tls
+  #         - vault-trust-bundle

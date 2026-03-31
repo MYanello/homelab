@@ -33,7 +33,7 @@ spec:
                 secretKeyRef:
                   name: calibre-secrets
                   key: AA_KEY
-          image: harbor.yanello.net/ghcr/calibrain/shelfmark:v1.1.2@sha256:963af1a83e0b2022fa8b75f06533177bdcac61d71408190aa668fea4f52a77c8
+          image: harbor.yanello.net/ghcr/calibrain/shelfmark:v1.2.1
           imagePullPolicy: IfNotPresent
           name: shelfmark
           resources:

@@ -46,7 +46,7 @@ spec:
           envFrom:
             - secretRef:
                 name: unpackerr-secrets
-          image: golift/unpackerr:0.15.2@sha256:057e34740d26c34d81ec8e2faf8ec11f8dbfc77489b7a42826f52b37e5ee1b6c
+          image: docker.io/golift/unpackerr:0.15.2@sha256:057e34740d26c34d81ec8e2faf8ec11f8dbfc77489b7a42826f52b37e5ee1b6c
           imagePullPolicy: IfNotPresent
           resources:
             limits:

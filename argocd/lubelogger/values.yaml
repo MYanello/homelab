@@ -1,3 +1,7 @@
+---
+image:
+  repository: harbor.yanello.net/ghcr/hargata/lubelogger
+  tag: v1.6.2
 config:
   userConfig:
     UseDarkMode: true

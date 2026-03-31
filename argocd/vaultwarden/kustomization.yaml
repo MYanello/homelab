@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -19,9 +20,9 @@ patches:
           backup.velero.io/backup-volumes: vaultwarden-data-vaultwarden-0
 
 helmCharts:
-    - name: vaultwarden
-      repo: https://guerzon.github.io/vaultwarden
-      version: "0.34.6"
-      releaseName: vaultwarden
-      namespace: vaultwarden
-      valuesFile: ./values.yaml
+  - name: vaultwarden
+    repo: https://guerzon.github.io/vaultwarden
+    version: "0.35.1"
+    releaseName: vaultwarden
+    namespace: vaultwarden
+    valuesFile: ./values.yaml
