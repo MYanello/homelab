@@ -1,3 +1,4 @@
+---
 # .github/workflows/generate-diff.yml
 name: Argo CD Diff Preview
 
@@ -133,7 +134,7 @@ jobs:
             -v $(pwd)/values.yaml:/argocd-config/values.yaml \
             -e TARGET_BRANCH=refs/pull/${{ github.event.number }}/merge \
             -e REPO=${{ github.repository }} \
-            dagandersen/argocd-diff-preview:v0.1.25 \
+            dagandersen/argocd-diff-preview:v0.2.2 \
             --diff-ignore="checksum|caBundle"
 
       - name: Post diff as comment
