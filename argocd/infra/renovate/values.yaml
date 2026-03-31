@@ -73,6 +73,22 @@ renovate:
       kubernetes: {
         managerFilePatterns: ["argocd/**/*.yaml", "talos/**/*.yaml"],
       },
+      packageRules: [
+        {
+          matchManagers: ["kustomize"],
+          matchDatasources: ["helm"],
+          pinDigests: false,
+        },
+        {
+          matchDatasources: ["docker"],
+          allowedVersions: "/^v?[0-9]+\\.[0-9]+/",
+        },
+        {
+          matchDepNames: ["harbor.yanello.net/ghcr/hotio/prowlarr"],
+          versioning: "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
+          allowedVersions: "/^release-[0-9]+\\.[0-9]+/",
+        },
+      ],
       ignorePaths: ["argocd/dev/**"],
       registryAliases: {
         "harbor.yanello.net/docker": "registry-1.docker.io",
