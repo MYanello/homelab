@@ -25,7 +25,7 @@ servingEngineSpec:
       modelURL: "/models/qwen-2.5-7b-heretic"
       replicaCount: 1
       requestCPU: "1"
-      requestMemory: "16Gi"
+      requestMemory: "12Gi"
       requestGPU: 1
       extraVolumes:
         - name: model-storage
