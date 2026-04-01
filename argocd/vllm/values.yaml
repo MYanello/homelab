@@ -25,6 +25,9 @@ servingEngineSpec:
               values:
                 - marcus-server
 
+      vllmConfig:
+        maxModelLen: 8192
+        gpuMemoryUtilization: 0.7
       extraVolumes:
         - name: model-storage
           persistentVolumeClaim:
