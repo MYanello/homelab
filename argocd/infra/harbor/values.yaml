@@ -27,11 +27,11 @@ expose:
         kind: Gateway
         namespace: cilium
         sectionName: https
-      - name: cilium-public-gateway
-        group: gateway.networking.k8s.io
-        kind: Gateway
-        namespace: cilium
-        sectionName: https
+      # - name: cilium-public-gateway
+      #   group: gateway.networking.k8s.io
+      #   kind: Gateway
+      #   namespace: cilium
+      #   sectionName: https
 
     hosts:
       - harbor.yanello.net
