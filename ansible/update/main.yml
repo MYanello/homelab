@@ -73,7 +73,7 @@
   tasks:
     - name: Build summary report
       ansible.builtin.set_fact:
-        msg: |
+        summary_lines: |
           ══════════════════════════════════════════
                      UPDATE SUMMARY REPORT
           ══════════════════════════════════════════

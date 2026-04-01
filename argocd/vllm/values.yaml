@@ -1,3 +1,4 @@
+---
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -15,3 +16,19 @@ resources:
     nvidia.com/gpu: "1"
     cpu: "1"
     memory: 1Gi
+
+servingEngineSpec:
+  modelSpec:
+    - name: "qwen-2.5-7b-heretic"
+      repository: "/models"
+      replicaCount: 1
+      requestCPU: "1"
+      requestMemory: "16Gi"
+      requestGPU: 1
+      extraVolumes:
+        - name: model-storage
+          persistentVolumeClaim:
+            claimName: vllm-model-storage
+      extraVolumeMounts:
+        - name: model-storage
+          mountPath: /models

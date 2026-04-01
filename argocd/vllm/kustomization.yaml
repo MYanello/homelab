@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -8,6 +9,9 @@ helmCharts:
     releaseName: vllm
     namespace: vllm
     valuesFile: ./values.yaml
+
+resources:
+  - manifests/pvc.yaml
 
 replicas:
   - name: vllm-deployment-router
