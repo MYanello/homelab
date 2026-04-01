@@ -6,6 +6,9 @@ metadata:
   labels:
     app: debug
 spec:
+  securityContext:
+    runAsUser: 3000
+    runAsGroup: 3000
   # affinity:
   #   nodeAffinity:
   #     requiredDuringSchedulingIgnoredDuringExecution:
@@ -22,20 +25,20 @@ spec:
     - name: debug
       image: ubuntu:latest
       command: ["/bin/sh", "-c", "sleep infinity"]
-    # securityContext:
-    #   runAsUser: 250
-    #   runAsGroup: 250
-    # resources:
-    #   requests:
-    #     memory: "64Mi"
-    #     cpu: "250m"
-    #   limits:
-    #     memory: "128Mi"
-    # volumeMounts:
-    #   - name: data
-    #     mountPath: /data
+      # securityContext:
+      #   runAsUser: 250
+      #   runAsGroup: 250
+      # resources:
+      #   requests:
+      #     memory: "64Mi"
+      #     cpu: "250m"
+      #   limits:
+      #     memory: "128Mi"
+      volumeMounts:
+        - name: model-storage
+          mountPath: /data
   restartPolicy: Never
-  # volumes:
-  #   - name: data
-  #     persistentVolumeClaim:
-  #       claimName: data-authentik-postgresql-0
+  volumes:
+    - name: model-storage
+      persistentVolumeClaim:
+        claimName: vllm-model-storage

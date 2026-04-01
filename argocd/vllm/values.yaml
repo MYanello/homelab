@@ -19,9 +19,10 @@ resources:
 
 servingEngineSpec:
   modelSpec:
-    - name: "qwen-2-5-7b-heretic"
-      repository: "/models/qwen-2-5-7b-heretic"
-      tag: local
+    - name: qwen-2-5-7b-heretic
+      repository: lmcache/vllm-openai
+      tag: latest
+      modelURL: "/models/qwen-2.5-7b-heretic"
       replicaCount: 1
       requestCPU: "1"
       requestMemory: "16Gi"
