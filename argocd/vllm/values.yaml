@@ -1,13 +1,4 @@
 ---
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - marcus-server
 resources:
   limits:
     nvidia.com/gpu: "1"
@@ -34,3 +25,12 @@ servingEngineSpec:
       extraVolumeMounts:
         - name: model-storage
           mountPath: /models
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server

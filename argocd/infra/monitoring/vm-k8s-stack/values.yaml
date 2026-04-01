@@ -1,4 +1,5 @@
-victoria-metrics-operator:
+---
+victoria-metrics-operator: null
 
 vmalert:
   enabled: true
@@ -15,7 +16,6 @@ vmagent:
       limits:
         memory: 8Gi
 
-
 vmsingle:
   enabled: true
   spec:
@@ -31,12 +31,14 @@ vmsingle:
       - name: search_cacheTimestampOffset
         value: "10000h"
       - name: search_cacheMaxAge
-        value: "360d"
+        value: "30d"
       - name: influx_databaseNames
         value: "home"
     extraArgs:
       maxLabelsPerTimeseries: "500"
       storage.minFreeDiskSpaceBytes: "10GB"
+      search.maxQueryDuration: "60s"
+      memory.allowedPercent: "60"
     serviceSpec:
       spec:
         type: LoadBalancer
@@ -75,7 +77,9 @@ grafana:
     GF_AUTH_GENERIC_OAUTH_NAME: 'authentik'
     GF_AUTH_GENERIC_OAUTH_SCOPES: 'openid profile email'
     GF_AUTH_OAUTH_AUTO_LOGIN: 'true'
-    GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups, 'admin') && 'Admin' || contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'"
+    GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups, 'admin') && 'Admin'\
+      \ || contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana\
+      \ Editors') && 'Editor' || 'Viewer'"
     GF_SERVER_ROOT_URL: 'https://grafana.yanello.net'
   plugins:
     - victoriametrics-logs-datasource
@@ -84,28 +88,28 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-      - name: VictoriaLogs
-        type: victoriametrics-logs-datasource
-        url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
-      - name: Garmin-InfluxDB
-        uid: garmin_influxdb
-        type: influxdb
-        access: proxy
-        url: http://influxdb.monitoring.svc.cluster.local:8086
-        user: "${influxdb-user}"
-        database: GarminStats
-        secureJsonData:
-          password: $influxdb-password
-        jsonData:
-          httpMode: GET
-      - name: Iota-InfluxDB
-        uid: DS_GARMIN_STATS
-        type: influxdb
-        access: proxy
-        url: http://influxdb.monitoring.svc.cluster.local:8086
-        user: "${influxdb-user}"
-        database: home
-        secureJsonData:
-          password: $influxdb-password
-        jsonData:
-          httpMode: GET
+        - name: VictoriaLogs
+          type: victoriametrics-logs-datasource
+          url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+        - name: Garmin-InfluxDB
+          uid: garmin_influxdb
+          type: influxdb
+          access: proxy
+          url: http://influxdb.monitoring.svc.cluster.local:8086
+          user: "${influxdb-user}"
+          database: GarminStats
+          secureJsonData:
+            password: $influxdb-password
+          jsonData:
+            httpMode: GET
+        - name: Iota-InfluxDB
+          uid: DS_GARMIN_STATS
+          type: influxdb
+          access: proxy
+          url: http://influxdb.monitoring.svc.cluster.local:8086
+          user: "${influxdb-user}"
+          database: home
+          secureJsonData:
+            password: $influxdb-password
+          jsonData:
+            httpMode: GET
