@@ -18,6 +18,13 @@ servingEngineSpec:
       requestCPU: "1"
       requestMemory: "12Gi"
       requestGPU: 1
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - marcus-server
+
       extraVolumes:
         - name: model-storage
           persistentVolumeClaim:
@@ -25,12 +32,3 @@ servingEngineSpec:
       extraVolumeMounts:
         - name: model-storage
           mountPath: /models
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
