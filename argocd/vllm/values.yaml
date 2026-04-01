@@ -20,7 +20,7 @@ resources:
 servingEngineSpec:
   modelSpec:
     - name: "qwen-2.5-7b-heretic"
-      repository: "/models"
+      repository: "/models/qwen-2.5-7b-heretic"
       replicaCount: 1
       requestCPU: "1"
       requestMemory: "16Gi"

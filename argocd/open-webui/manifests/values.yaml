@@ -59,3 +59,7 @@ extraEnvVars:
     value: "true"
   - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
     value: "true"
+  - name: OPENAI_API_BASE_URL
+    value: "http://vllm-router-service.vllm.svc.cluster.local:80/v1"
+  - name: OPENAI_API_KEY
+    value: "none"
