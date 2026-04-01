@@ -11,8 +11,8 @@ resources:
 servingEngineSpec:
   modelSpec:
     - name: qwen-2-5-7b-heretic
-      repository: lmcache/vllm-openai
-      tag: latest
+      repository: harbor.yanello.net/docker/vllm/vllm-openai
+      tag: v0.9.2
       modelURL: "/models/qwen-2.5-7b-heretic"
       replicaCount: 1
       requestCPU: "1"
