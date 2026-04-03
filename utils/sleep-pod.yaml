@@ -41,4 +41,4 @@ spec:
   volumes:
     - name: model-storage
       persistentVolumeClaim:
-        claimName: vllm-model-storage
+        claimName: vllm-qwen-25-7b-storage-claim
