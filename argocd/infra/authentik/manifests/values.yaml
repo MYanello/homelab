@@ -87,6 +87,10 @@ postgresql:
   diagnosticMode:
     enabled: false
   primary:
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
     podSecurityContext:
       enabled: true
       fsGroup: 3000
