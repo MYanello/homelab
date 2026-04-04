@@ -5,13 +5,6 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
 
-# generatorOptions:
-#   disableNameSuffixHash: true
-# configMapGenerator:
-#   - name: mend-renovate-ce-config-js
-#     files:
-#       - ./manifests/config.js
-
 generators:
   - ./manifests/secret-generator.yaml
 
