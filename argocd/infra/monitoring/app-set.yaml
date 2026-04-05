@@ -17,8 +17,6 @@ spec:
             exclude: true
           - path: argocd/infra/monitoring/vm-operator-crds
             exclude: true
-          - path: argocd/infra/monitoring/influxdb
-            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
