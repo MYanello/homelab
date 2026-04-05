@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -16,6 +17,8 @@ spec:
             exclude: true
           - path: argocd/infra/monitoring/vm-operator-crds
             exclude: true
+          - path: argocd/infra/monitoring/influxdb
+            exclude: false
   template:
     metadata:
       name: "{{path.basename}}-app"
