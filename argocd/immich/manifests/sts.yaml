@@ -17,7 +17,7 @@ spec:
       labels:
         app: postgres
       annotations:
-        backup.velero.io/backup-volumes: pg-data
+        backup.velero.io/backup-volumes: postgres-data
     spec:
       containers:
         - name: postgres
@@ -81,7 +81,7 @@ spec:
       metadata:
         name: postgres-data
       spec:
-        accessModes: ["ReadWriteMany"]
+        accessModes: ["ReadWriteOnce"]
         storageClassName: truenas-ssd
         resources:
           requests:
