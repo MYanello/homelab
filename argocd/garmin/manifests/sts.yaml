@@ -71,7 +71,7 @@ spec:
         name: garmin-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 10Mi
