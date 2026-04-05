@@ -61,7 +61,7 @@ spec:
         name: maintainerr-config
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn
+        storageClassName: truenas-ssd-nfs
         resources:
           requests:
             storage: 100Mi
