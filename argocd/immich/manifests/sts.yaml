@@ -82,7 +82,7 @@ spec:
         name: postgres-data
       spec:
         accessModes: ["ReadWriteMany"]
-        storageClassName: democratic-ssd
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 10Gi
