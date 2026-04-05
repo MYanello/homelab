@@ -35,10 +35,10 @@ spec:
       #   limits:
       #     memory: "128Mi"
       volumeMounts:
-        - name: model-storage
+        - name: storage
           mountPath: /data
   restartPolicy: Never
   volumes:
-    - name: model-storage
+    - name: storage
       persistentVolumeClaim:
-        claimName: vllm-qwen-25-7b-storage-claim
+        claimName: postgres-data-postgres-0
