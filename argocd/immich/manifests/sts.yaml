@@ -67,7 +67,7 @@ spec:
             - containerPort: 5432
               protocol: TCP
           volumeMounts:
-            - name: pg-data
+            - name: postgres-data
               mountPath: /var/lib/postgresql/data
           resources:
             requests:
