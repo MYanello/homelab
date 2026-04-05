@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -10,26 +11,26 @@ helmCharts:
     version: "4.12.5"
     releaseName: influxdb
     namespace: monitoring
-    valuesInline: 
+    valuesInline:
       image:
         tag: 1.12.2-alpine
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
-      service: 
+      service:
         type: LoadBalancer
         loadBalancerIP: 10.10.8.0
       persistence:
-        storageClassName: truenas-hdd
+        storageClass: truenas-hdd
       setDefaultUser:
         enabled: true
         user:
           existingSecret: influx-secrets
       initScripts:
         enabled: true
-        scripts: 
-          init.iql: |+
+        scripts:
+          init.iql: |
             CREATE DATABASE "home"
             CREATE RETENTION POLICY "2_years" ON "home" DURATION 730d REPLICATION 1 DEFAULT
             CREATE DATABASE "GarminStats"
