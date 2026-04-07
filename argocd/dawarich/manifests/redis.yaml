@@ -57,7 +57,7 @@ spec:
         name: data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: truenas-ssd
+        storageClassName: truenas-ssd-nfs
         resources:
           requests:
             storage: 1Gi
