@@ -11,7 +11,7 @@ resources:
 helmCharts:
   - name: open-webui
     repo: https://helm.openwebui.com/
-    version: "12.13.0"
+    version: "13.0.1"
     releaseName: open-webui
     namespace: open-webui
     valuesFile: manifests/values.yaml
