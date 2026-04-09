@@ -97,6 +97,6 @@ spec:
     spec:
       containers:
         - name: printer
-          image: harbor.yanello.net/docker/chromedp/headless-shell@sha256:54a95ab0e5364e672d36031be4dffb1ac8cb71d5a780620ae00a4b61e0765532
+          image: harbor.yanello.net/docker/chromedp/headless-shell@sha256:74e466462498480420abc2a77c49fac64382404ade51ce518d45d17e9393dff8
           ports:
             - containerPort: 9222
