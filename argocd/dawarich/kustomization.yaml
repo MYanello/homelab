@@ -7,6 +7,7 @@ resources:
   - manifests/pvc.yaml
   - manifests/redis.yaml
   - manifests/postgres.yaml
+  - manifests/cnpg.yaml
   - manifests/app.yaml
   - manifests/sidekiq.yaml
   - manifests/http-route.yaml
