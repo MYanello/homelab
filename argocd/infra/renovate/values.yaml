@@ -29,6 +29,8 @@ renovate:
       value: "safe.directory"
     - name: GIT_CONFIG_VALUE_0
       value: "*"
+    - name: MEND_RNV_DISK_USAGE_WARN_THRESHOLD
+      value: "95"
   mendRnvAcceptTos: y
   mendRnvPlatform: github
   mendRnvEndPoint: https://api.github.com/
