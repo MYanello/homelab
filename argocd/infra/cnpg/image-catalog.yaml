@@ -1,0 +1,27 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ImageCatalog
+metadata:
+  name: postgresql
+  namespace: cnpg
+spec:
+  images:
+    - major: 16
+      name: ghcr.io/cloudnative-pg/postgresql:16.6
+    - major: 17
+      name: ghcr.io/cloudnative-pg/postgresql:17.9
+    
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ImageCatalog
+metadata:
+  name: postgis
+  namespace: cnpg
+spec:
+  images:
+    - major: 16
+      name: ghcr.io/cloudnative-pg/postgis:16-3.5-standard-trixie
+    - major: 17
+      name: ghcr.io/cloudnative-pg/postgis:17-3.5-standard-trixie
+    - major: 18
+      name: ghcr.io/cloudnative-pg/postgis:18-3.5-standard-trixie  
