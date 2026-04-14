@@ -2,18 +2,6 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ImageCatalog
 metadata:
-  name: postgresql
-spec:
-  images:
-    - major: 16
-      image: ghcr.io/cloudnative-pg/postgresql:16.6
-    - major: 17
-      image: ghcr.io/cloudnative-pg/postgresql:17.9
-    
----
-apiVersion: postgresql.cnpg.io/v1
-kind: ImageCatalog
-metadata:
   name: postgis
 spec:
   images:

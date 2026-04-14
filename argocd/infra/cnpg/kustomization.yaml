@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ./image-catalog.yaml
-
+  - https://github.com/cloudnative-pg/artifacts/blob/main/image-catalogs/catalog-standard-trixie.yaml
 helmCharts:
   - name: cloudnative-pg
     repo: https://cloudnative-pg.github.io/charts
