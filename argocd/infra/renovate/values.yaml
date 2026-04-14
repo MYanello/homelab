@@ -36,7 +36,7 @@ renovate:
   mendRnvEndPoint: https://api.github.com/
   mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
-  mendRnvCronJobSchedulerAll: "0 0 * * *"
+  mendRnvCronJobSchedulerAll: "0 * * * *"
   logLevel: DEBUG
   config: |-
     module.exports = {
