@@ -14,5 +14,5 @@ helmCharts:
    releaseName: victoria-metrics-k8s-stack
    namespace: monitoring
    repo: https://victoriametrics.github.io/helm-charts/
-   version: "0.72.6"
+   version: "0.73.0"
    valuesFile: values.yaml
