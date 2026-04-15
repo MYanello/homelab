@@ -3,7 +3,8 @@ kind: Kustomization
 
 resources:
   - ./image-catalog.yaml
-  - https://raw.githubusercontent.com/cloudnative-pg/artifacts/refs/heads/main/image-catalogs-extensions/kustomization.yaml
+  -  https://github.com/cloudnative-pg/artifacts//image-catalogs-extensions
+
 helmCharts:
   - name: cloudnative-pg
     repo: https://cloudnative-pg.github.io/charts
