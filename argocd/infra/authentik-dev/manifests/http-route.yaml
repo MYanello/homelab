@@ -31,36 +31,36 @@ spec:
         - path:
             type: PathPrefix
             value: /
-# ---
-# apiVersion: gateway.networking.k8s.io/v1
-# kind: HTTPRoute
-# metadata:
-#   labels:
-#     app.kubernetes.io/instance: authentik-app
-#   name: authentik-ldap-route
-# spec:
-#   parentRefs:
-#     - name: cilium-private-gateway
-#       group: gateway.networking.k8s.io
-#       kind: Gateway
-#       namespace: cilium
-#       sectionName: https
-#     - name: cilium-public-gateway
-#       group: gateway.networking.k8s.io
-#       kind: Gateway
-#       namespace: cilium
-#       sectionName: https
-#   hostnames:
-#     - authentik-dev-ldap.yanello.net
-#   rules:
-#     - backendRefs:
-#         - name: ak-outpost-ldap
-#           group: ""
-#           kind: Service
-#           namespace: authentik-dev
-#           port: 636
-#           weight: 1
-#       matches:
-#         - path:
-#             type: PathPrefix
-#             value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: authentik-app
+  name: authentik-ldap-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: ldap-tls-passthrough
+    - name: cilium-public-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: ldap-tls-passthrough
+  hostnames:
+    - ldap.yanello.net
+  rules:
+    - backendRefs:
+        - name: ak-outpost-ldap
+          group: ""
+          kind: Service
+          namespace: authentik-dev
+          port: 389
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
