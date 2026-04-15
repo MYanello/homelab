@@ -8,7 +8,7 @@ spec:
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
-    name: postgis-alpine
+    name: postgis
     major: 18
   storage:
     size: 10Gi
