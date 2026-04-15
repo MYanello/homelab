@@ -1,6 +1,6 @@
 ---
 apiVersion: postgresql.cnpg.io/v1
-kind: ImageCatalog
+kind: ClusterImageCatalog
 metadata:
   name: postgis
 spec:
