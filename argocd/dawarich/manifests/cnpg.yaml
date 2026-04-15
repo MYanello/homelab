@@ -21,8 +21,4 @@ spec:
     initdb:
       database: dawarich
       owner: dawarich
-      secret:
-        name: dawarich-db-credentials
   enableSuperuserAccess: true
-  superuserSecret:
-    name: dawarich-superuser
