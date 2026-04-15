@@ -57,3 +57,4 @@ spec:
           kind: Service
           namespace: authentik-dev
           port: 389
+          weight: 1
