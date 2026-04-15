@@ -62,15 +62,12 @@ nextcloud:
         'maintenance_window_start' => 9,
         'allow_local_remote_servers' => true,
       );
-  podSecurityContext:
-    runAsUser: 3000
-    runAsGroup: 3000
-    fsGroup: 3000
-    fsGroupChangePolicy: OnRootMismatch
-  securityContext:
-    runAsUser: 3000
-    runAsGroup: 3000
-    runAsNonRoot: true
+  # Note: Nextcloud official image entrypoint needs root to write PHP configs
+  # The container runs Apache as www-data (UID 33), but entrypoint runs as root
+  # podSecurityContext:
+  #   fsGroup: 3000
+  # securityContext:
+  #   runAsUser: 0
 # nginx:
 #   securityContext:
 #     runAsUser: 0
