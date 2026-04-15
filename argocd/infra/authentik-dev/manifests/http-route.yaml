@@ -32,11 +32,9 @@ spec:
             type: PathPrefix
             value: /
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
 metadata:
-  labels:
-    app.kubernetes.io/instance: authentik-app
   name: authentik-ldap-route
 spec:
   parentRefs:
@@ -59,8 +57,3 @@ spec:
           kind: Service
           namespace: authentik-dev
           port: 389
-          weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
