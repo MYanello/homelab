@@ -7,14 +7,14 @@ resources:
     nvidia.com/gpu: "1"
     cpu: "500m"
     memory: 500Mi
-livenessProbe:
-  initialDelaySeconds: 10
-  tcpSocket:
-    port: http
-  # successThreshold: 1
-  failureThreshold: 5
-  # timeoutSeconds: 1
-  periodSeconds: 15
+# livenessProbe:
+#   initialDelaySeconds: 10
+#   tcpSocket:
+#     port: http
+#   # successThreshold: 1
+#   failureThreshold: 5
+#   # timeoutSeconds: 1
+#   periodSeconds: 15
 
 # readinessProbe:
 #   initialDelaySeconds: 15
