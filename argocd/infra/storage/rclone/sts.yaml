@@ -18,7 +18,7 @@ spec:
     spec:
       initContainers:
         - name: generate-htpasswd
-          image: docker.io/httpd:alpine@sha256:fd9f958a7e0642a6f40bc29bfa7391906768afb1a997cb73c9481aab7dbbd052
+          image: docker.io/httpd:alpine@sha256:968c8b4098fcecb473762b45f6c541a3b2b2cfab2caccb1edbd2cece071ef160
           command: ["sh", "-c"]
           args:
             - |
