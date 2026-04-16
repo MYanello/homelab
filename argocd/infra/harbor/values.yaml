@@ -21,6 +21,8 @@ expose:
     enabled: false
   type: route
   route:
+    hosts:
+      - harbor.yanello.net
     parentRefs:
       - name: cilium-private-gateway
         group: gateway.networking.k8s.io
@@ -32,9 +34,6 @@ expose:
       #   kind: Gateway
       #   namespace: cilium
       #   sectionName: https
-
-    hosts:
-      - harbor.yanello.net
 externalURL: https://harbor.yanello.net
 
 persistence:
