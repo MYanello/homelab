@@ -24,7 +24,7 @@ spec:
         - env:
             - name: TZ
               value: America/Chicago
-          image: harbor.yanello.net/ghcr/seerr-team/seerr:v3.1.1
+          image: harbor.yanello.net/ghcr/seerr-team/seerr:v3.1.0
           imagePullPolicy: IfNotPresent
           name: overseerr
           securityContext:
