@@ -31,14 +31,13 @@ vmsingle:
       - name: search_cacheTimestampOffset
         value: "10000h"
       - name: search_cacheMaxAge
-        value: "30d"
+        value: "7d"
       - name: influx_databaseNames
         value: "home"
     extraArgs:
       maxLabelsPerTimeseries: "500"
       storage.minFreeDiskSpaceBytes: "10GB"
       search.maxQueryDuration: "60s"
-      memory.allowedPercent: "60"
     serviceSpec:
       spec:
         type: LoadBalancer
@@ -48,7 +47,7 @@ vmsingle:
         cpu: 150m
         memory: 4Gi
       limits:
-        memory: 16Gi
+        memory: 24Gi
 
 defaultDashboards:
   annotations:
