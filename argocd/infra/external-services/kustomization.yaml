@@ -14,3 +14,4 @@ resources:
   - truenas.yaml
   - foundry.yaml
   - open-garage.yaml
+  - valetudo.yaml
