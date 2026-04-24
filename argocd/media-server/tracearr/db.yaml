@@ -21,8 +21,17 @@ spec:
       containers:
         - name: timescaledb
           image: timescale/timescaledb-ha:pg18.1-ts2.25.0
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false # PG writes temp files + runtime config
+            capabilities:
+              drop: [ALL]
+            seccompProfile: null
+            type: RuntimeDefault
           args:
-            - "postgres"
             - "-c"
             - "timescaledb.license=timescale"
             - "-c"
@@ -31,12 +40,33 @@ spec:
             - "max_locks_per_transaction=4096"
             - "-c"
             - "timescaledb.telemetry_level=off"
+            # Tuned for 4 GB limit, SSD storage
+            - "-c"
+            - "shared_buffers=512MB"
+            - "-c"
+            - "effective_cache_size=2GB"
+            - "-c"
+            - "work_mem=16MB"
+            - "-c"
+            - "maintenance_work_mem=256MB"
+            - "-c"
+            - "wal_buffers=64MB"
+            - "-c"
+            - "max_wal_size=2GB"
+            - "-c"
+            - "checkpoint_completion_target=0.9"
+            - "-c"
+            - "random_page_cost=1.1"
+            - "-c"
+            - "effective_io_concurrency=200"
           ports:
             - containerPort: 5432
               name: postgres
           env:
             - name: POSTGRES_USER
               value: tracearr
+            - name: PGDATA
+              value: /home/postgres/pgdata/data
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -47,6 +77,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /home/postgres/pgdata/data
+            - name: dshm
+              mountPath: /dev/shm
           livenessProbe:
             exec:
               command: ["pg_isready", "-U", "tracearr"]
@@ -67,6 +99,11 @@ spec:
               cpu: "100m"
             limits:
               memory: "1Gi"
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 512Mi
   volumeClaimTemplates:
     - metadata:
         name: data
@@ -75,7 +112,7 @@ spec:
         storageClassName: truenas-ssd
         resources:
           requests:
-            storage: 10Gi
+            storage: 50Gi
 ---
 apiVersion: v1
 kind: Service
