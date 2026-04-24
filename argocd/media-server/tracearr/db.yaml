@@ -23,7 +23,7 @@ spec:
       containers:
         - name: timescaledb
           image: timescale/timescaledb-ha:pg18.1-ts2.25.0
-          command:
+          args:
             - "postgres"
             - "-c"
             - "timescaledb.license=timescale"
@@ -48,7 +48,7 @@ spec:
               value: tracearr
           volumeMounts:
             - name: data
-              mountPath: /home/postgres/pgdata/data
+              mountPath: /var/lib/postgresql/data/pgdata
           livenessProbe:
             exec:
               command: ["pg_isready", "-U", "tracearr"]
