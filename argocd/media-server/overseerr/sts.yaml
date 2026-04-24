@@ -21,11 +21,6 @@ spec:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
-      securityContext:
-        fsGroup: 3000
-        runAsUser: 3000
-        runAsGroup: 3000
-        fsGroupChangePolicy: OnRootMismatch
       containers:
         - env:
             - name: TZ
