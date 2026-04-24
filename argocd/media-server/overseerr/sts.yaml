@@ -17,6 +17,10 @@ spec:
       labels:
         app: overseerr
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       securityContext:
         fsGroup: 3000
         fsGroupChangePolicy: OnRootMismatch
