@@ -76,7 +76,7 @@ spec:
               value: tracearr
           volumeMounts:
             - name: data
-              mountPath: /home/postgres/pgdata/data
+              mountPath: /home/postgres/pgdata/
             - name: dshm
               mountPath: /dev/shm
           livenessProbe:
