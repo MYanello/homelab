@@ -12,7 +12,7 @@ spec:
     major: 18
   storage:
     size: 10Gi
-    storageClass: truenas-ssd
+    storageClass: truenas-ssd-nfs
   postgresql:
     shared_preload_libraries:
       - timescaledb
@@ -27,8 +27,6 @@ spec:
     initdb:
       database: tracearr
       owner: tracearr
-      secret:
-        name: tracearr-db-credentials
   enableSuperuserAccess: true
   superuserSecret:
     name: tracearr-superuser
