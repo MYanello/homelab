@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dragonfly
-          image: docker.io/dragonflydb/dragonfly:v1.28.2
+          image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.38.0
           args:
             - --appendonly
             - "yes"
