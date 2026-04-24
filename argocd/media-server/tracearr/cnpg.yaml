@@ -34,3 +34,7 @@ spec:
     metadata:
       annotations:
         backup.velerio.io/backup-volumes: pgdata
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
