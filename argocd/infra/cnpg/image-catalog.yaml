@@ -11,3 +11,12 @@ spec:
       image: ghcr.io/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:60c500afb8f2351c9b4965a4cd8881c8ba2230d21f33b9e4376f434b39394898
     - major: 18
       image: ghcr.io/cloudnative-pg/postgis:18-3.6-standard-trixie@sha256:2dbdd17605e922f32ce607a97a370e5fe8f6877964667ca934a23d3521d50eae
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ClusterImageCatalog
+metadata:
+  name: timescaledb
+spec:
+  images:
+    - major: 18
+      image: docker.io/timescale/timescaledb-ha:pg18.1-ts2.25.0
