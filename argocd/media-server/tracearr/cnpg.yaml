@@ -5,7 +5,7 @@ metadata:
   name: tracearr-db
 spec:
   instances: 1
-  imageName: timescale/timescaledb-ha:pg18.1-ts2.25.0
+  imageName: docker.io/timescale/timescaledb-ha:pg18.1-ts2.25.0
   storage:
     size: 10Gi
     storageClass: truenas-ssd
