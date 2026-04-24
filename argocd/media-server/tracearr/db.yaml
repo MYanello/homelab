@@ -16,11 +16,11 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: data
     spec:
-      securityContext:
-        fsGroup: 3000
-        runAsUser: 3000
-        runAsGroup: 3000
-        fsGroupChangePolicy: OnRootMismatch
+      # securityContext:
+      #   fsGroup: 3000
+      #   runAsUser: 3000
+      #   runAsGroup: 3000
+      #   fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: timescaledb
           image: timescale/timescaledb-ha:pg18.1-ts2.25.0
