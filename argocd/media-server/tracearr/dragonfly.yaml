@@ -21,6 +21,8 @@ spec:
       containers:
         - name: dragonfly
           image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.38.0
+          args:
+            - --num_cpus=2
           ports:
             - containerPort: 6379
               name: redis
@@ -43,10 +45,11 @@ spec:
             failureThreshold: 5
           resources:
             requests:
-              memory: "1.5GiB"
+              memory: "512Mi"
               cpu: "100m"
             limits:
               memory: "512Mi"
+              cpu: "2"
   volumeClaimTemplates:
     - metadata:
         name: data
