@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tracearr
+spec:
+  serviceName: tracearr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tracearr
+  template:
+    metadata:
+      labels:
+        app: tracearr
+    spec:
+      securityContext:
+        runAsUser: 3000
+        runAsGroup: 3000
+        fsGroup: 3000
+      containers:
+        - name: tracearr
+          image: ghcr.io/connorgallopo/tracearr:latest
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3000"
+            - name: HOST
+              value: 0.0.0.0
+            - name: TZ
+              value: America/Chicago
+            - name: REDIS_URL
+              value: redis://redis:6379
+            - name: LOG_LEVEL
+              value: info
+            - name: CORS_ORIGIN
+              value: "*"
+          envFrom:
+            - secretRef:
+                name: tracearr-secrets
+          ports:
+            - containerPort: 3000
+              name: tracearr
+          volumeMounts:
+            - name: backup
+              mountPath: /data/backup
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+  volumeClaimTemplates:
+    - metadata:
+        name: backup
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd-nfs
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tracearr
+spec:
+  selector:
+    app: tracearr
+  ports:
+    - port: 3000
+      targetPort: 3000
+      name: tracearr

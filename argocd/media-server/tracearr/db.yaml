@@ -2,24 +2,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: tracearr-db
+  name: db
 spec:
-  serviceName: tracearr-db
+  serviceName: db
   replicas: 1
   selector:
     matchLabels:
-      app: tracearr-db
+      app: db
   template:
     metadata:
       labels:
-        app: tracearr-db
+        app: db
       annotations:
-        backup.velero.io/backup-volumes: pgdata
+        backup.velero.io/backup-volumes: data
     spec:
-      # securityContext:
-      #   runAsUser: 70
-      #   runAsGroup: 70
-      #   fsGroup: 70
       containers:
         - name: timescaledb
           image: timescale/timescaledb-ha:pg18.1-ts2.25.0
@@ -82,10 +78,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tracearr-db
+  name: db
 spec:
   selector:
-    app: tracearr-db
+    app: db
   ports:
     - port: 5432
       targetPort: 5432

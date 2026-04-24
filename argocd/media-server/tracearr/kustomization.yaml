@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - db.yaml
   - dragonfly.yaml
+  - tracearr.yaml
 
 generators:
   - secretGenerator.yaml

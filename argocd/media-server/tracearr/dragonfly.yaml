@@ -2,17 +2,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: tracearr-redis
+  name: redis
 spec:
-  serviceName: tracearr-redis
+  serviceName: redis
   replicas: 1
   selector:
     matchLabels:
-      app: tracearr-redis
+      app: redis
   template:
     metadata:
       labels:
-        app: tracearr-redis
+        app: redis
     spec:
       securityContext:
         runAsUser: 3000
@@ -61,12 +61,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tracearr-redis
+  name: redis
 spec:
   selector:
-    app: tracearr-redis
+    app: redis
   ports:
     - port: 6379
       targetPort: 6379
       name: redis
-  clusterIP: None
