@@ -19,8 +19,12 @@ spec:
         runAsGroup: 3000
         fsGroup: 3000
       containers:
-        - name: dragonfly
-          image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.38.0
+        - name: redis
+          image: docker.io/redis:8.6.2
+          command:
+            - redis-server
+            - --appendonly
+            - true
           ports:
             - containerPort: 6379
               name: redis

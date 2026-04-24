@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - db.yaml
-  - dragonfly.yaml
+  - redis.yaml
   - tracearr.yaml
 
 generators:
