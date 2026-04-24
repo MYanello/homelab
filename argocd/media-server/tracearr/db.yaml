@@ -44,7 +44,7 @@ spec:
               value: tracearr
           volumeMounts:
             - name: data
-              mountPath: /var/lib/postgresql/data/pgdata
+              mountPath: /home/postgres/pgdata/data
           livenessProbe:
             exec:
               command: ["pg_isready", "-U", "tracearr"]
