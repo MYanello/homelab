@@ -12,7 +12,7 @@ spec:
     major: 18
   storage:
     size: 10Gi
-    storageClass: truenas-ssd-nfs
+    storageClass: truenas-ssd
   postgresql:
     shared_preload_libraries:
       - timescaledb
@@ -30,3 +30,7 @@ spec:
   enableSuperuserAccess: true
   superuserSecret:
     name: tracearr-superuser
+  podTemplate:
+    metadata:
+      annotations:
+        backup.velerio.io/backup-volumes: pgdata
