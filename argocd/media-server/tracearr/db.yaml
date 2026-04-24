@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tracearr-db
+spec:
+  serviceName: tracearr-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tracearr-db
+  template:
+    metadata:
+      labels:
+        app: tracearr-db
+      annotations:
+        backup.velero.io/backup-volumes: pgdata
+    spec:
+      # securityContext:
+      #   runAsUser: 70
+      #   runAsGroup: 70
+      #   fsGroup: 70
+      containers:
+        - name: timescaledb
+          image: timescale/timescaledb-ha:pg18.1-ts2.25.0
+          command:
+            - "postgres"
+            - "-c"
+            - "timescaledb.license=timescale"
+            - "-c"
+            - "timescaledb.max_tuples_decompressed_per_dml_transaction=0"
+            - "-c"
+            - "max_locks_per_transaction=4096"
+            - "-c"
+            - "timescaledb.telemetry_level=off"
+          ports:
+            - containerPort: 5432
+              name: postgres
+          env:
+            - name: POSTGRES_USER
+              value: tracearr
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tracearr-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              value: tracearr
+          volumeMounts:
+            - name: data
+              mountPath: /home/postgres/pgdata/data
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", "tracearr"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "tracearr"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: truenas-ssd
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tracearr-db
+spec:
+  selector:
+    app: tracearr-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: postgres
