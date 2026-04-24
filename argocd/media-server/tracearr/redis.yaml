@@ -24,7 +24,7 @@ spec:
           command:
             - redis-server
             - --appendonly
-            - true
+            - "yes"
           ports:
             - containerPort: 6379
               name: redis
