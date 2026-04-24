@@ -16,6 +16,8 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: data
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: timescaledb
           image: timescale/timescaledb-ha:pg18.1-ts2.25.0
