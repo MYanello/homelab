@@ -1,0 +1,30 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: tracearr-db
+spec:
+  instances: 1
+  imageName: timescale/timescaledb-ha:pg18.1-ts2.25.0
+  storage:
+    size: 10Gi
+    storageClass: truenas-ssd
+  postgresql:
+    shared_preload_libraries:
+      - timescaledb
+    parameters:
+      timescaledb.license: "timescale"
+      timescaledb.max_tuples_decompressed_per_dml_transaction: "0"
+      max_locks_per_transaction: "4096"
+      timescaledb.telemetry_level: "off"
+      max_connections: "100"
+      shared_buffers: "512MB"
+  bootstrap:
+    initdb:
+      database: tracearr
+      owner: tracearr
+      secret:
+        name: tracearr-db-credentials
+  enableSuperuserAccess: true
+  superuserSecret:
+    name: tracearr-superuser
