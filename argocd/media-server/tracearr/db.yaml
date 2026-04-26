@@ -20,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: timescaledb
-          image: timescale/timescaledb-ha:pg18.1-ts2.25.0
+          image: timescale/timescaledb-ha:pg18.1-ts2.25.0@sha256:9dcbd18e5cb966398ae19f3882fd5fb2e19b3cb98be54d290ab9f69c75bf0a8b
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
