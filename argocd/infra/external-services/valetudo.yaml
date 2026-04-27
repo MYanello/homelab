@@ -6,6 +6,7 @@ metadata:
 spec:
   hostnames:
     - valetudo.yanello.net
+    - vacuum.yanello.net
   parentRefs:
     - name: cilium-private-gateway
       group: gateway.networking.k8s.io
