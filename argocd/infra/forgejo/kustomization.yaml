@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/http-route.yaml
+  - ./manifests/tcp-route.yaml
   - ./image-pull-secrets/app-set.yaml
 
 generators:

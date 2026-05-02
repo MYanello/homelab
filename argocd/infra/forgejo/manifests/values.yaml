@@ -19,6 +19,8 @@ gitea:
       ROOT_URL: https://forgejo.yanello.net/
       ENABLE_AUTO_REGISTRATION: "true"
       DOMAIN: "forgejo.yanello.net"
+      SSH_DOMAIN: "forgejo.yanello.net"
+      SSH_PORT: "22"
   # additionalConfigSources:
   #   - secret:
   #       secretName: forgejo-secrets
