@@ -7,9 +7,14 @@ spec:
   parentRefs:
     - name: cilium-private-gateway
       namespace: cilium
+      group: gateway.networking.k8s.io
+      kind: Gateway
       sectionName: forgejo-ssh
   rules:
     - backendRefs:
         - name: forgejo-ssh
           namespace: forgejo
+          group: ""
+          kind: Service
           port: 22
+          weight: 1
