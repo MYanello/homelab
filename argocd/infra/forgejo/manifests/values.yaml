@@ -30,6 +30,26 @@ gitea:
     - name: GITEA__ENABLE_AUTO_REGISTRATION
       value: "true"
 
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /api/healthz
+    port: http
+  initialDelaySeconds: 5
+  timeoutSeconds: 5
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 5
+livenessProbe:
+  enabled: true
+  tcpSocket:
+    port: http
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 10
+
 service:
   ssh:
     type: LoadBalancer
