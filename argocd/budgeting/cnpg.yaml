@@ -21,8 +21,6 @@ spec:
     initdb:
       database: budgeting
       owner: budgeting
-      secret:
-        name: db-credentials
   enableSuperuserAccess: true
   superuserSecret:
     name: superuser
