@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./cnpg.yaml
+  - ./httproute.yaml
 
 helmCharts:
   - name: budgeting
