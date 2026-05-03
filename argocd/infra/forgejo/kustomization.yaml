@@ -6,6 +6,7 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/runner.yaml
   - ./image-pull-secrets/app-set.yaml
+  - ./manifests/cnpg.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
