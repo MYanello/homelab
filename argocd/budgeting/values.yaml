@@ -9,11 +9,3 @@ config:
     existingSecret: "db-app"
     existingSecretUserKey: user
     existingSecretPasswordKey: password
-httpRoute:
-  enabled: true
-  parentRefs:
-    - name: cilium-private-gateway
-      namespace: cilium
-      sectionName: https
-  hostnames:
-    - budgeting.yanello.net
