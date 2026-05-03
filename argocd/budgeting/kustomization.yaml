@@ -8,6 +8,7 @@ resources:
 helmCharts:
   - name: budgeting
     repo: oci://harbor.yanello.net/helm
-    version: "0.4.6"
+    version: "0.5.0"
     releaseName: budgeting
     namespace: budgeting
+    valuesFile: ./values.yaml
