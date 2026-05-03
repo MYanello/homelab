@@ -63,12 +63,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - name: forgejo-ssh
-      protocol: TCP
-      port: 2222
-      allowedRoutes:
-        namespaces:
-          from: All
     - name: http
       protocol: HTTP
       hostname: "*.yanello.net"
