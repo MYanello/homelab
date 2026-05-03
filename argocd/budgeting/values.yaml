@@ -6,8 +6,14 @@ config:
     host: "db-rw"
     port: "5432"
     name: "budgeting"
-    sslmode: "disable"
-    # Reference a pre-existing secret with DB_USER and DB_PASSWORD keys
     existingSecret: "db-app"
     existingSecretUserKey: user
     existingSecretPasswordKey: password
+httpRoute:
+  enabled: true
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - budgeting.yanello.net
