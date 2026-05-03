@@ -2,7 +2,6 @@
 config:
   db:
     driver: "postgres"
-    # PostgreSQL
     host: "db-rw"
     port: "5432"
     name: "budgeting"
