@@ -14,10 +14,6 @@ gitea:
       autoDiscoverUrl: https://authentik.yanello.net/application/o/forgejo/.well-known/openid-configuration
       iconUrl: "https://goauthentik.io/img/icon.png"
       scopes: "email profile forgejo"
-  actions:
-    enabled: true
-    provisioning:
-      enabled: true
   config:
     server:
       ROOT_URL: https://forgejo.yanello.net/
