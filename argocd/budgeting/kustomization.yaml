@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./cnpg.yaml
+
+helmCharts:
+  - name: budgeting
+    repo: oci://harbor.yanello.net/library
+    version: "0.4.1"
+    releaseName: budgeting
+    namespace: budgeting
