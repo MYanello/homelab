@@ -18,9 +18,8 @@ data:
     cache:
       enabled: false
     container:
-      docker_host: "-"
-    host:
-      workdir_parent: /tmp/runner
+      docker_host: tcp://localhost:2375
+      privileged: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -51,7 +50,7 @@ spec:
                   --instance https://forgejo.yanello.net \
                   --token "$(REGISTRATION_TOKEN)" \
                   --name forgejo-runner \
-                  --labels forgejo-runner:host
+                  --labels forgejo-runner:docker
               fi
           env:
             - name: REGISTRATION_TOKEN
@@ -67,14 +66,29 @@ spec:
           image: docker.io/gitea/act_runner:0.6.1
           command: ["act_runner", "daemon", "--config", "/config/config.yaml"]
           workingDir: /data
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2375
           volumeMounts:
             - name: data
               mountPath: /data
             - name: config
               mountPath: /config
+        - name: dind
+          image: docker.io/docker:27-dind
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: ""
+          volumeMounts:
+            - name: docker-storage
+              mountPath: /var/lib/docker
       volumes:
         - name: data
           emptyDir: {}
         - name: config
           configMap:
             name: forgejo-runner-config
+        - name: docker-storage
+          emptyDir: {}
