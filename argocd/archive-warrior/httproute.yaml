@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -10,18 +11,15 @@ metadata:
   labels:
     app.kubernetes.io/instance: archive-warrior-app
   name: warrior-httproute
-  namespace: archive-warrior
 spec:
   parentRefs:
-  - name: cilium-private-gateway
-    namespace: cilium
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
-  - warrior.yanello.net
+    - warrior.yanello.net
   rules:
-  - backendRefs:
-    - name: warrior
-      namespace: archive-warrior
-      port: 8001
-      
-
+    - backendRefs:
+        - name: warrior
+          namespace: archive-warrior
+          port: 8001
