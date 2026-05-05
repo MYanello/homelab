@@ -28,6 +28,10 @@ module.exports = {
     enabled: true,
     vulnerabilityFixStrategy: "lowest",
   },
+  lockFileMaintenance: {
+    enabled: true,
+    automerge: true,
+  },
   argocd: {
     managerFilePatterns: ["argocd/**/*.yaml$", "talos/**/*.yaml$"],
   },
