@@ -10,7 +10,7 @@ config:
     existingSecretPasswordKey: password
 oidc:
   enabled: true
-  issuer: "Authentik"
+  issuer: "https://authentik.yanello.net/application/o/budgeting/"
   redirectUrl: "https://authentik.yanello.net/application/o/budgeting/"
   # Reference a pre-existing secret instead of creating one
   existingSecret: "budgeting-secrets"
