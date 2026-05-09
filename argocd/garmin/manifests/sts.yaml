@@ -74,4 +74,4 @@ spec:
         storageClassName: truenas-ssd
         resources:
           requests:
-            storage: 10Mi
+            storage: 1Gi
