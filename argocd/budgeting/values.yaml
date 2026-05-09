@@ -11,7 +11,7 @@ config:
 oidc:
   enabled: true
   issuer: "https://authentik.yanello.net/application/o/budgeting/"
-  redirectUrl: "https://authentik.yanello.net/application/o/budgeting/"
+  redirectUrl: "https://budgeting.yanello.net/auth/callback"
   existingSecret: "budgeting-secrets"
   existingSecretClientIdKey: "OIDC_CLIENT_ID"
   existingSecretClientSecretKey: "OIDC_CLIENT_SECRET"
