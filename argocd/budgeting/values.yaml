@@ -12,7 +12,6 @@ oidc:
   enabled: true
   issuer: "https://authentik.yanello.net/application/o/budgeting/"
   redirectUrl: "https://authentik.yanello.net/application/o/budgeting/"
-  # Reference a pre-existing secret instead of creating one
   existingSecret: "budgeting-secrets"
   existingSecretClientIdKey: "OIDC_CLIENT_ID"
   existingSecretClientSecretKey: "OIDC_CLIENT_SECRET"
