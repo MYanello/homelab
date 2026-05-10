@@ -20,6 +20,8 @@ spec:
       value: "17520h"
     - name: search_cacheMaxAge
       value: "720d"
+  insertPorts:
+    influxPort: "8086"
   resources:
     requests:
       cpu: 100m
