@@ -21,6 +21,6 @@ spec:
         type: PathPrefix
         value: "/"
     backendRefs:
-    - name: ak-outpost-sonarr
+    - name: ak-outpost-authentik-embedded-outpost
       namespace: authentik
       port: 9000

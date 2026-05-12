@@ -20,7 +20,8 @@ spec:
   - radarr.yanello.net
   rules:
   - backendRefs:
-    - name: ak-outpost-radarr
+    - name: ak-outpost-authentik-embedded-outpost
       namespace: authentik
       port: 9000
+
 
