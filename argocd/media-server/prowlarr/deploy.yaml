@@ -70,7 +70,7 @@ spec:
             limits:
               memory: 300Mi
             requests:
-              cpu: 1m
+              cpu: 100m
               memory: 150Mi
       volumes:
         - name: config
