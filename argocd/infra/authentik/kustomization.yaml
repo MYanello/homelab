@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./manifests/vs.yaml
   - ./manifests/http-route.yaml
+  - ./manifests/reference-grants.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
