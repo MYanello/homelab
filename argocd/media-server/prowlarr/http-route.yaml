@@ -20,8 +20,7 @@ spec:
   - prowlarr.yanello.net
   rules:
   - backendRefs:
-    - name: prowlarr
-      namespace: prowlarr
-      port: 9696
-      
+    - name: ak-outpost-authentik-embedded-outpost
+      namespace: authentik
+      port: 9000
 
