@@ -2,42 +2,14 @@
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
-  name: allow-sonarr-to-embedded-outpost
+  name: allow-apps-to-embedded-outpost
+  namespace: authentik
 spec:
   from:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      namespace: sonarr
+      namespace: "*"
   to:
     - group: ""
       kind: Service
       name: ak-outpost-authentik-embedded-outpost
----
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: allow-radarr-to-embedded-outpost
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      namespace: radarr
-  to:
-    - group: ""
-      kind: Service
-      name: ak-outpost-authentik-embedded-outpost
----
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: allow-prowlarr-to-embedded-outpost
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      namespace: prowlarr
-  to:
-    - group: ""
-      kind: Service
-      name: ak-outpost-authentik-embedded-outpost
-

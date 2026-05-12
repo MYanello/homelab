@@ -24,9 +24,9 @@ spec:
     - backendRefs:
         - group: ""
           kind: Service
-          name: backrest
-          namespace: backrest
-          port: 9898
+          name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
           weight: 1
       matches:
         - path:
