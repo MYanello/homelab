@@ -8,7 +8,16 @@ spec:
   from:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      namespace: "*"
+      namespace: sonarr
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: radarr
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: prowlarr
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: backrest
   to:
     - group: ""
       kind: Service
