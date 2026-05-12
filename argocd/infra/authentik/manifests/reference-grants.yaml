@@ -21,6 +21,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       namespace: backrest
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: calibre
   to:
     - group: ""
       kind: Service

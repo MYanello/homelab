@@ -42,7 +42,7 @@ kind: HTTPRoute
 metadata:
   annotations:
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "CalibreDL"
+    gethomepage.dev/name: "Shelfmark"
     gethomepage.dev/icon: mdi-folder-download-outline
     gethomepage.dev/description: "An intuitive web interface for searching and requesting\
       \ book downloads."
@@ -57,6 +57,6 @@ spec:
     - shelfmark.yanello.net
   rules:
     - backendRefs:
-        - name: shelfmark
-          namespace: calibre
-          port: 8084
+        - name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
