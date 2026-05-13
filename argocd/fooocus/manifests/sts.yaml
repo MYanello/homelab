@@ -57,7 +57,7 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: 8Gi
+              memory: 16Gi
               nvidia.com/gpu: "1"
               cpu: 500m
             limits:
