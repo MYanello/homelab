@@ -19,6 +19,6 @@ spec:
   - qbit.yanello.net
   rules:
   - backendRefs:
-    - name: ak-outpost-authentik-embedded-outpost
-      namespace: authentik
-      port: 9000
+    - name: qbittorrent #ak-outpost-authentik-embedded-outpost
+      namespace: qbittorrent #authentik
+      port: 8080 #9000

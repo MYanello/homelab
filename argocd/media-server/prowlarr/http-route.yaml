@@ -23,4 +23,3 @@ spec:
     - name: ak-outpost-authentik-embedded-outpost
       namespace: authentik
       port: 9000
-
