@@ -61,7 +61,7 @@ spec:
               nvidia.com/gpu: "1"
               cpu: 500m
             limits:
-              memory: 16Gi
+              memory: 24Gi
               nvidia.com/gpu: "1"
           readinessProbe:
             tcpSocket:
