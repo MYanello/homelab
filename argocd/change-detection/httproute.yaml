@@ -20,7 +20,7 @@ spec:
   - change.yanello.net
   rules:
   - backendRefs:
-    - name: change-detection
-      namespace: change-detection
-      port: 5000
+    - name: ak-outpost-authentik-embedded-outpost
+      namespace: authentik
+      port: 9000
       

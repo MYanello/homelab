@@ -24,6 +24,15 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       namespace: calibre
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: bazarr
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: maintainerr
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: change-detection
   to:
     - group: ""
       kind: Service

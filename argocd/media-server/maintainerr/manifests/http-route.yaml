@@ -20,5 +20,6 @@ spec:
     - maintainerr.yanello.net
   rules:
     - backendRefs:
-        - name: maintainerr
-          port: 6246
+        - name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000

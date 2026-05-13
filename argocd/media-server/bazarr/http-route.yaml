@@ -20,6 +20,6 @@ spec:
     - bazarr.yanello.net
   rules:
     - backendRefs:
-        - name: bazarr
-          namespace: bazarr
-          port: 6767
+        - name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
