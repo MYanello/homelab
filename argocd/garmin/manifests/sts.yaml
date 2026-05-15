@@ -55,7 +55,7 @@ spec:
             runAsGroup: 1000
           env:
             - name: MANUAL_START_DATE
-              value: "2024-01-01"
+              value: "2024-06-01"
           envFrom:
             - secretRef:
                 name: garmin-secrets
