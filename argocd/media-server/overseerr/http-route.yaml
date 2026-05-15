@@ -21,6 +21,7 @@ spec:
       sectionName: https
   hostnames:
   - overseerr.yanello.net
+  - seerr.yanello.net
   rules:
   - backendRefs:
     - name: overseerr
