@@ -19,4 +19,4 @@ helmCharts:
     version: "7.8.0"
     releaseName: frigate
     namespace: frigate
-    valuesFile: ./manifests/showings.yaml
+    valuesFile: ./manifests/values.yaml
