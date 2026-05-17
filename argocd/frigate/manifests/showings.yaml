@@ -1,0 +1,240 @@
+---
+image:
+  repository: harbor.yanello.net/ghcr/blakeblackshear/frigate
+  tag: 0.17.1-tensorrt@sha256:a8d21fae3d49aea25384d56eec20a0414e24bae91b17d5f9e8f9b2f89d574a3f
+  pullPolicy: IfNotPresent
+persistence:
+  config:
+    enabled: true
+    storageClass: truenas-hdd-nfs
+    accessMode: ReadWriteOnce
+    size: 1Gi
+  media:
+    enabled: true
+    storageClass: longhorn
+    accessMode: ReadWriteOnce
+    size: 100Gi
+envFromSecrets:
+  - frigate-secrets
+env:
+  OPENAI_BASE_URL: https://openrouter.ai/api/v1
+resources:
+  requests:
+    memory: "4Gi"
+    cpu: "200m"
+  limits:
+    memory: "16Gi"
+service:
+  type: LoadBalancer
+  loadBalancerIP: 10.10.8.3
+config: |-
+  # logger:
+  #   default: debug
+  genai:
+    enabled: false
+    provider: openai
+    api_key: "{FRIGATE_OPENAI_KEY}"
+    model: google/gemini-3-flash-preview
+
+  classification:
+    bird:
+      enabled: true
+
+  tls:
+    enabled: false
+  mqtt:
+    host: 192.168.1.4
+    port: 1883
+    topic_prefix: frigate
+    client_id: frigate
+    user: mosquitto
+    password: "{FRIGATE_MQTT_PASSWORD}"
+
+  model:
+    labelmap:
+      1: vehicle
+      2: vehicle
+      3: vehicle
+      5: vehicle
+      7: vehicle
+      15: animal
+      16: animal
+      17: animal
+      18: animal
+      19: animal
+      20: animal
+      21: animal
+      22: animal
+      23: animal
+      24: animal
+
+  birdseye:
+    enabled: false
+    width: 1920
+    height: 1080
+    quality: 1
+    mode: continuous
+
+  face_recognition:
+    enabled: true
+    model_size: large
+
+  detect:
+    enabled: false
+
+
+  record:
+    enabled: true
+    retain:
+      days: 1
+      mode: all
+
+  snapshots:
+    enabled: false
+
+  live:
+    height: 720
+    quality: 8
+
+  timestamp_style:
+    position: tl
+    format: '%m/%d/%Y %H:%M:%S'
+    color:
+      red: 255
+      green: 255
+      blue: 255
+    thickness: 1
+    effect: solid
+
+  cameras:
+    Pool:
+      ffmpeg:
+        inputs:
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch02/0
+            roles:
+              - record
+              - detect
+      zones:
+        pool:
+          coordinates: 350,368,324,501,948,499,913,319,862,116,492,74,92,124,0,364
+          objects:
+            - person
+            - animal
+
+    Back:
+      ffmpeg:
+        inputs:
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch03/0
+            roles:
+              - record
+              - detect
+      zones:
+        back_yard:
+          coordinates:
+            0,253,429,260,569,720,837,720,1280,720,1184,477,1066,310,951,170,801,0,566,0,268,0,0,0
+          objects:
+            - person
+            - animal
+        pool:
+          coordinates: 553,641,489,462,425,296,235,302,99,309,91,273,0,283,0,694
+          objects:
+            - person
+            - animal
+            - vehicle
+      motion:
+        mask:
+          - 1280,720,775,0,1280,0,1280,0,1280,0
+
+    Front_Left:
+      ffmpeg:
+        inputs:
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch01/0
+            roles:
+              - record
+              - detect
+      zones:
+        front_yard:
+          coordinates: 572,720,575,596,652,529,733,458,308,445,198,720
+          objects:
+            - person
+            - animal
+            - vehicle
+        driveway:
+          coordinates:
+            1208,414,1280,462,1280,558,1280,720,1057,720,920,720,797,720,707,720,572,720,575,611,701,484,791,430
+          objects:
+            - person
+            - animal
+            - vehicle
+        sidewalk:
+          coordinates: 281,440,815,425,774,342,682,317,332,319
+          objects:
+            - animal
+        street:
+          coordinates: 0,258,230,225,641,225,994,234,1280,287,1280,395,0,395
+          objects:
+            - person
+            - animal
+            - vehicle
+      snapshots:
+        required_zones:
+          - driveway
+          - sidewalk
+          - front_yard
+      motion:
+        mask:
+          - 0,496,391,466,679,624,885,720,0,720
+
+      review:
+        alerts:
+          required_zones:
+            - driveway
+            - front_yard
+            - sidewalk
+    Front_Right:
+      ffmpeg:
+        inputs:
+          - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.20.20:554/ch04/0
+            roles:
+              - record
+              - detect
+      zones:
+        front_yard:
+          coordinates: 0.365,1,0.629,1,0.625,0.825,0.605,0.398,0.153,0.437,0.055,0.736,0,1,0.087,1,0,1
+          objects:
+            - person
+            - animal
+          inertia: 3
+          loitering_time: 0
+        driveway:
+          coordinates: 21,638,0,644,0,338,199,313
+          objects:
+            - person
+            - animal
+            - vehicle
+        sidewalk:
+          coordinates: 0.151,0.44,0.224,0.311,0.588,0.271,0.605,0.393
+          objects: animal
+          inertia: 3
+          loitering_time: 0
+        street:
+          coordinates: 0,193,335,96,672,61,1008,66,1280,116,1280,274,0,321
+          objects:
+            - person
+            - animal
+            - vehicle
+      objects:
+        filters:
+          animal: {}
+      snapshots:
+        required_zones:
+          - driveway
+          - sidewalk
+          - front_yard
+      review:
+        alerts:
+          required_zones:
+            - driveway
+            - sidewalk
+            - front_yard
+  version: '0.14'
