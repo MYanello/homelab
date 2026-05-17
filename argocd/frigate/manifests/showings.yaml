@@ -3,6 +3,10 @@ image:
   repository: harbor.yanello.net/ghcr/blakeblackshear/frigate
   tag: 0.17.1-tensorrt@sha256:a8d21fae3d49aea25384d56eec20a0414e24bae91b17d5f9e8f9b2f89d574a3f
   pullPolicy: IfNotPresent
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
 persistence:
   config:
     enabled: true
