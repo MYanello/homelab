@@ -1,6 +1,6 @@
 ---
 database:
-  podAnnoations:
+  podAnnotations:
     backup.velero.io/backup-volumes: database
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
