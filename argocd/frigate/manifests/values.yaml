@@ -9,14 +9,14 @@ image:
 persistence:
   config:
     enabled: true
-    storageClass: truenas-hdd-nfs
+    storageClass: longhorn
     accessMode: ReadWriteOnce
     size: 1Gi
   media:
     enabled: true
-    storageClass: truenas-hdd-nfs
+    storageClass: longhorn
     accessMode: ReadWriteOnce
-    size: 1Ti
+    size: 100Gi
 envFromSecrets:
   - frigate-secrets
 env:
