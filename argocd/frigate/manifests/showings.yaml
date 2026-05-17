@@ -6,7 +6,7 @@ image:
 persistence:
   config:
     enabled: true
-    storageClass: truenas-hdd-nfs
+    storageClass: longhorn
     accessMode: ReadWriteOnce
     size: 1Gi
   media:
