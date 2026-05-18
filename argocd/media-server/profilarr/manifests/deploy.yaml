@@ -23,7 +23,7 @@ spec:
     spec:
       initContainers:
         - name: wait-for-parser
-          image: busybox:1.37
+          image: busybox:1.37@sha256:1487d0af5f52b4ba31c7e465126ee2123fe3f2305d638e7827681e7cf6c83d5e
           command:
             - sh
             - -c
@@ -51,7 +51,7 @@ spec:
           envFrom:
             - secretRef:
                 name: profilarr-secrets
-          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:2.0.0
+          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:2.0.0@sha256:f66cfde53ba85987d699f56783193bc5b6a42aa40ca9e0d2115135fad733e017
           imagePullPolicy: IfNotPresent
           name: profilarr
           ports:
