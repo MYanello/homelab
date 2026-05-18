@@ -39,7 +39,7 @@ spec:
             - name: PGID
               value: "3000"
             - name: TZ
-              value: Etc/UTC
+              value: America/Chicago
             - name: PARSER_HOST
               value: parser
             - name: PARSER_PORT

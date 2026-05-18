@@ -10,7 +10,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: profilarr-app
   name: profilarr-httproute
-  namespace: profilarr
 spec:
   parentRefs:
     - name: cilium-private-gateway
