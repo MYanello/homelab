@@ -1,7 +1,10 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: profilarr
+
+generators:
+  - manifests/secret-generator.yaml
+
 resources:
   - manifests/deploy.yaml
   - manifests/parser-deploy.yaml

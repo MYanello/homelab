@@ -48,6 +48,9 @@ spec:
               value: https://profilarr.yanello.net
             - name: AUTH
               value: OIDC
+          envFrom:
+            - secretRef:
+                name: profilarr-secrets
           image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:2.0.0
           imagePullPolicy: IfNotPresent
           name: profilarr
