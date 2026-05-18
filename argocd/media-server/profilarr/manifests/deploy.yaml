@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profilarr
+  labels:
+    app: profilarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: profilarr
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: profilarr
+    spec:
+      initContainers:
+        - name: wait-for-parser
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              until nc -z parser 5000; do
+                echo "Waiting for parser..."
+                sleep 2
+              done
+      containers:
+        - env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Etc/UTC
+            - name: PARSER_HOST
+              value: parser
+            - name: PARSER_PORT
+              value: "5000"
+            - name: ORIGIN
+              value: https://profilarr.yanello.net
+          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:latest
+          imagePullPolicy: IfNotPresent
+          name: profilarr
+          ports:
+            - containerPort: 6868
+              protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
