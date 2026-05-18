@@ -46,7 +46,7 @@ spec:
               value: "5000"
             - name: ORIGIN
               value: https://profilarr.yanello.net
-          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:latest
+          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:2.0.0
           imagePullPolicy: IfNotPresent
           name: profilarr
           ports:
