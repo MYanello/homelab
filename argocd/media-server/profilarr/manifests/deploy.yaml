@@ -35,9 +35,9 @@ spec:
       containers:
         - env:
             - name: PUID
-              value: "1000"
+              value: "3000"
             - name: PGID
-              value: "1000"
+              value: "3000"
             - name: TZ
               value: Etc/UTC
             - name: PARSER_HOST
