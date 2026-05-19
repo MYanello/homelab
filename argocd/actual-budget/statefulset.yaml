@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: actual-budget
-          image: harbor.yanello.net/ghcr/actualbudget/actual-server:26.5.2
+          image: harbor.yanello.net/ghcr/actualbudget/actual-server:26.5.2@sha256:1aeeb3985db55556e716dec25e08f6ce09308c2571b65cddbc6746ee6d5e0d45
           ports:
             - containerPort: 5006
               protocol: TCP
