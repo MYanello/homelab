@@ -20,6 +20,23 @@ spec:
           ports:
             - containerPort: 5006
               protocol: TCP
+          env:
+            - name: ACTUAL_OPENID_DISCOVERY_URL
+              value: "https://authentik.yanello.net/application/o/actual-budget/"
+            - name: ACTUAL_OPENID_SERVER_HOSTNAME
+              value: "https://actual.yanello.net"
+            - name: ACTUAL_OPENID_ENFORCE
+              value: "true"
+            - name: ACTUAL_OPENID_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: actual-budget-secrets
+                  key: ACTUAL_OPENID_CLIENT_ID
+            - name: ACTUAL_OPENID_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: actual-budget-secrets
+                  key: ACTUAL_OPENID_CLIENT_SECRET
           volumeMounts:
             - name: data
               mountPath: /data
