@@ -45,6 +45,7 @@ renovate:
         "mergeConfidence:all-badges",
         "default:automergeDigest",
       ],
+      minimumReleaseAge: "3 days",
       digest: {
         automerge: true,
       },
