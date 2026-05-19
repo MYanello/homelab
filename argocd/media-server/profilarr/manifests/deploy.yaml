@@ -51,7 +51,7 @@ spec:
           envFrom:
             - secretRef:
                 name: profilarr-secrets
-          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:2.0.0@sha256:f66cfde53ba85987d699f56783193bc5b6a42aa40ca9e0d2115135fad733e017
+          image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr:2.0.1@sha256:f0a13a979436da3314057605b9ee506a81ece46eade5533749ce4fcb81c426d6
           imagePullPolicy: IfNotPresent
           name: profilarr
           ports:
