@@ -1,0 +1,25 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Excalidraw
+    gethomepage.dev/icon: excalidraw
+    gethomepage.dev/description: "Virtual collaborative whiteboard tool."
+    gethomepage.dev/pod-selector: app=excalidraw
+  labels:
+    app.kubernetes.io/instance: excalidraw-app
+  name: excalidraw-httproute
+  namespace: excalidraw
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - draw.yanello.net
+  rules:
+    - backendRefs:
+        - name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
