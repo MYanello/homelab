@@ -150,7 +150,7 @@ spec:
         app: redis
     spec:
       containers:
-        - image: harbor.yanello.net/docker/library/redis:8@sha256:d4a4a4db02748731e6313d60adfd92985b6ad7bc2f2400a6cb0f8b35a2a6b492
+        - image: harbor.yanello.net/docker/library/redis:8@sha256:e628485c98f8cfe942d8b6f34d461dabf069884bf18932ccbdd9dd9af20b1acc
           imagePullPolicy: IfNotPresent
           name: redis
           ports:
