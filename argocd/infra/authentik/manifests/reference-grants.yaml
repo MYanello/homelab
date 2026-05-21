@@ -36,6 +36,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       namespace: excalidraw
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: external-services
   to:
     - group: ""
       kind: Service
