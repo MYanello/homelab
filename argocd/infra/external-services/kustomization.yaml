@@ -15,3 +15,4 @@ resources:
   - foundry.yaml
   - open-garage.yaml
   - valetudo.yaml
+  - hermes.yaml
