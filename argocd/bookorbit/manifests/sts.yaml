@@ -1,0 +1,94 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bookorbit
+  labels:
+    app: bookorbit
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: bookorbit
+  template:
+    metadata:
+      annotations:
+        backup.velero.io/backup-volumes: data
+      labels:
+        app: bookorbit
+    spec:
+      containers:
+        - name: bookorbit
+          image: harbor.yanello.net/ghcr/bookorbit/bookorbit:1.7.0@sha256:754f2a0ba6a5f45e7e36d31c1659f1d58c3a5e1cba2178fb492b6e6dc3325862
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: bookorbit-secrets
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: bookorbit-db-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bookorbit-db-app
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: bookorbit-db-app
+                  key: dbname
+            - name: POSTGRES_HOST
+              value: bookorbit-db-rw
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3000"
+            - name: APP_URL
+              value: https://bookorbit.yanello.net
+            - name: CLIENT_URL
+              value: https://bookorbit.yanello.net
+            - name: NODE_MAX_OLD_SPACE_SIZE
+              value: "2048"
+          volumeMounts:
+            - mountPath: /books
+              name: books
+            - mountPath: /data
+              name: data
+          resources:
+            requests:
+              cpu: 200m
+              memory: 1Gi
+            limits:
+              memory: 4Gi
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: truenas-hdd
+        resources:
+          requests:
+            storage: 10Gi
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: books
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: truenas-hdd
+        resources:
+          requests:
+            storage: 50Gi
