@@ -58,6 +58,8 @@ spec:
               value: https://bookorbit.yanello.net
             - name: NODE_MAX_OLD_SPACE_SIZE
               value: "2048"
+            - name: OIDC_ALLOW_LOCAL_ISSUERS
+              value: "true"
           volumeMounts:
             - mountPath: /books
               name: books
