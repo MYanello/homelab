@@ -23,4 +23,8 @@ spec:
     initdb:
       database: bookorbit
       owner: bookorbit
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS vector
+        - CREATE EXTENSION IF NOT EXISTS pg_trgm
+        - CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
   enableSuperuserAccess: true
