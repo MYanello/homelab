@@ -96,7 +96,7 @@ spec:
         backup.velero.io/backup-volumes: "mariadb"
     spec:
       containers:
-        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:e86a2f4b2e2dc59d5136cf6308058dc3a6caeb59fc9dec7984024be2b9b97ab8
+        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:6a4c4bbf0447c2247801309513fcc0dd17c3f35390368139ce419387fdd1144d
           imagePullPolicy: IfNotPresent
           name: db
           ports:
