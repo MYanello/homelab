@@ -8,7 +8,7 @@ spec:
     - major: 16
       image: ghcr.io/cloudnative-pg/postgis:16-3.6-standard-trixie@sha256:fd77a67e3bae92c0219d9ba8f105bed7b2423ff03553d1a0fa60bd2522b29c4c
     - major: 17
-      image: ghcr.io/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:a8420e5019448c50b8a3d48868b0a67c61e26857e6cc63e26b11cd46241cf25e
+      image: ghcr.io/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:dc85d15f220355fe8f55b0200db61abe6ad3751271a351bcfe88d4290e7abba4
     - major: 18
       image: ghcr.io/cloudnative-pg/postgis:18-3.6-standard-trixie@sha256:423feacb526eed675f0a25bd2c60b196c759f76cade26d42c139e14b6b93a1f7
 ---
