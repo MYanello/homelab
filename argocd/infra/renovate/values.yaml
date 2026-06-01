@@ -99,7 +99,11 @@ renovate:
         "harbor.yanello.net/quay": "quay.io",
         "harbor.yanello.net/lscr": "lscr.io",
       },
-      "branchConcurrentLimit": 50,
-      "prConcurrentLimit": 50,
-      "prHourlyLimit": 0,
+      lockFileMaintenance: {
+        enabled: true,
+        automerge: true,
+      },
+      branchConcurrentLimit: 50,
+      prConcurrentLimit: 50,
+      prHourlyLimit: 0,
     };
