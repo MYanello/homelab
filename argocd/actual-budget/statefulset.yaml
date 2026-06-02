@@ -25,10 +25,6 @@ spec:
               value: "https://authentik.yanello.net/application/o/actual-budget/"
             - name: ACTUAL_OPENID_SERVER_HOSTNAME
               value: "https://actual.yanello.net"
-            - name: ACTUAL_LOGIN_METHOD
-              value: "openid"
-            - name: ACTUAL_ALLOWED_LOGIN_METHODS
-              value: "openid"
             - name: ACTUAL_OPENID_CLIENT_ID
               valueFrom:
                 secretKeyRef:
