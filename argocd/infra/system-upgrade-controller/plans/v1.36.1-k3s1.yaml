@@ -1,0 +1,45 @@
+---
+# Server plan
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: server-plan
+spec:
+  concurrency: 1
+  cordon: true
+  nodeSelector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: In
+        values:
+          - "true"
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Equal
+      value: "true"
+  serviceAccountName: system-upgrade
+  upgrade:
+    image: rancher/k3s-upgrade@sha256:4e132f53e1f7486c9ee9d5fb8f0e0ff1492b28d70b809577669d52267d2a9447
+  version: v1.36.1+k3s1
+---
+# Agent plan
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: agent-plan
+spec:
+  concurrency: 1
+  cordon: true
+  nodeSelector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: DoesNotExist
+  prepare:
+    args:
+      - prepare
+      - server-plan
+    image: rancher/k3s-upgrade@sha256:4e132f53e1f7486c9ee9d5fb8f0e0ff1492b28d70b809577669d52267d2a9447
+  serviceAccountName: system-upgrade
+  upgrade:
+    image: rancher/k3s-upgrade@sha256:4e132f53e1f7486c9ee9d5fb8f0e0ff1492b28d70b809577669d52267d2a9447
+  version: v1.36.1+k3s1
