@@ -6,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Hermes
     gethomepage.dev/icon: hermes-agent
-    gethomepage.dev/description: "Hermes Agent web dashboard for managing config, API keys, and sessions."
+    gethomepage.dev/description: "Hermes Agent web dashboard for managing config,\
+      \ API keys, and sessions."
   name: hermes-httproute
 spec:
   hostnames:
@@ -23,6 +24,8 @@ spec:
           namespace: authentik
           port: 9000
           weight: 1
+          group: ""
+          kind: Service
       matches:
         - path:
             type: PathPrefix
