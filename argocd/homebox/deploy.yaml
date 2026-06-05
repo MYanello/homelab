@@ -64,7 +64,7 @@ spec:
               name: storage
           readinessProbe:
             httpGet:
-              path: /
+              path: /api/v1/status
               port: 7745
             initialDelaySeconds: 30
             periodSeconds: 10
@@ -72,7 +72,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /
+              path: /api/v1/status
               port: 7745
             initialDelaySeconds: 60
             periodSeconds: 15
