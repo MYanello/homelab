@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lumo-tamer
+  name: lumo-tamer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lumo-tamer
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: lumo-tamer
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: lumo-tamer
+          image: harbor.yanello.net/library/luma-tamer:v0.5.0
+          imagePullPolicy: Always
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - |
+              mkdir -p /data/sessions
+              if [ ! -f /data/config.yaml ]; then
+                cp /app/config.defaults.yaml /data/config.yaml
+              fi
+              rm -f /app/config.yaml
+              ln -sf /data/config.yaml /app/config.yaml
+              if [ -d /app/sessions ] && [ -z "$(ls -A /app/sessions 2>/dev/null)" ]; then
+                rmdir /app/sessions 2>/dev/null || true
+              fi
+              ln -sf /data/sessions /app/sessions
+              exec node dist/src/tamer.js server
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          ports:
+            - containerPort: 3003
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: vault-key
+              mountPath: /run/secrets
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: lumo-tamer-config
+        - name: vault-key
+          secret:
+            secretName: lumo-tamer-secrets
+            items:
+              - key: LUMO_VAULT_KEY
+                path: lumo-vault-key
+      restartPolicy: Always
