@@ -17,7 +17,7 @@ spec:
         app: parser
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr-parser:2.0.2@sha256:a7f6b6ad774d1f9f8a394e2449872eb8733e3ac1c6307491936ec9fcb3ee6c37
+        - image: harbor.yanello.net/ghcr/dictionarry-hub/profilarr-parser:2.0.8@sha256:083a6bcd3234c1eb98cf3a202daa4070cd93fecce08f8cf51e4ab0a035d95a56
           imagePullPolicy: IfNotPresent
           name: parser
           ports:
