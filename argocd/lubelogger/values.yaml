@@ -1,7 +1,7 @@
 ---
 image:
   repository: harbor.yanello.net/ghcr/hargata/lubelogger
-  tag: v1.6.5@sha256:293604d85b021b6489ef3d0b22c792cefcc802bf8eec0b5c4766a4a979b8a998
+  tag: v1.6.7@sha256:a9d00d747fcf4fc0f1d0d3007957cdce2b68d4e8ddba200f273c3db460a56e22
 config:
   userConfig:
     UseDarkMode: true
