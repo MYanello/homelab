@@ -3,9 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - deploy.yaml
-  - service.yaml
-  - httproute.yaml
-  - pvc.yaml
-  - configmap.yaml
-  - secret-generator.yaml
+  - manifests/deploy.yaml
+  - manifests/service.yaml
+  - manifests/httproute.yaml
+  - manifests/pvc.yaml
+  - manifests/secret-generator.yaml
