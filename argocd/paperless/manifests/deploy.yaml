@@ -57,11 +57,11 @@ spec:
             limits:
               memory: 5Gi
         - name: protonmail-bridge
-          image: harbor.yanello.net/docker/shenxn/protonmail-bridge:3.19.0-1
+          image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.24.2
           volumeMounts:
             - mountPath: "/root"
               name: protonmail-data
-              command: ["sleep", "inf"]
+          command: ["sleep", "inf"]
       restartPolicy: Always
       volumes:
         - name: paperless-data
