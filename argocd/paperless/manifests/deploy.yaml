@@ -56,6 +56,11 @@ spec:
               memory: 1000Mi
             limits:
               memory: 5000Mi
+        - name: protonmail-bridge
+          image: harbor.yanello.net/docker/shenxn/protonmail-bridge:3.19.0-1
+          volumeMounts:
+            - mountPath: "/root"
+              name: protonmail-data
       restartPolicy: Always
       volumes:
         - name: paperless-data
@@ -70,6 +75,9 @@ spec:
         - name: paperless-consume
           persistentVolumeClaim:
             claimName: paperless-consume
+        - name: protonmail-data
+          persistentVolumeClaim:
+            claimName: protonmail-data
 ---
 apiVersion: apps/v1
 kind: Deployment
