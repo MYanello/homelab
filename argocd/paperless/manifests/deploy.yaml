@@ -61,12 +61,7 @@ spec:
           volumeMounts:
             - mountPath: "/root"
               name: protonmail-data
-          securityContext:
-            capabilities:
-              add:
-                - Kill
-            seccompProfile:
-              type: Unconfined
+              command: ["sleep", "inf"]
       restartPolicy: Always
       volumes:
         - name: paperless-data
