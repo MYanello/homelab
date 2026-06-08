@@ -56,12 +56,25 @@ spec:
               memory: 1Gi
             limits:
               memory: 5Gi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            periodSeconds: 30
+            timeoutSeconds: 10
         - name: protonmail-bridge
           image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.24.2
           volumeMounts:
             - mountPath: "/root"
               name: protonmail-data
-          command: ["sleep", "inf"]
+          # command: ["sleep", "inf"]
       restartPolicy: Always
       volumes:
         - name: paperless-data
