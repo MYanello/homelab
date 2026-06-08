@@ -53,14 +53,20 @@ spec:
           resources:
             requests:
               cpu: 10m
-              memory: 1000Mi
+              memory: 1Gi
             limits:
-              memory: 5000Mi
+              memory: 5Gi
         - name: protonmail-bridge
           image: harbor.yanello.net/docker/shenxn/protonmail-bridge:3.19.0-1
           volumeMounts:
             - mountPath: "/root"
               name: protonmail-data
+          securityContext:
+            capabilities:
+              add:
+                - Kill
+            seccompProfile:
+              type: Unconfined
       restartPolicy: Always
       volumes:
         - name: paperless-data
