@@ -331,6 +331,19 @@ spec:
           ports:
             - containerPort: 3000
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            periodSeconds: 30
+            timeoutSeconds: 10
           resources:
             requests:
               cpu: 10m
@@ -368,10 +381,17 @@ spec:
           ports:
             - containerPort: 9998
               protocol: TCP
-          resources:
-            requests:
-              cpu: 10m
-              memory: 64Mi
-            limits:
-              memory: 1Gi
+          livenessProbe:
+            httpGet:
+              path: /tika
+              port: 9998
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /tika
+              port: 9998
+            periodSeconds: 30
+            timeoutSeconds: 10
       restartPolicy: Always
