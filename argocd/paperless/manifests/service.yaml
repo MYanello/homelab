@@ -53,3 +53,31 @@ spec:
       targetPort: 3000
   selector:
     app: ai
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gotenberg
+  name: gotenberg
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: gotenberg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: tika
+  name: tika
+spec:
+  ports:
+    - name: http
+      port: 9998
+      targetPort: 9998
+  selector:
+    app: tika

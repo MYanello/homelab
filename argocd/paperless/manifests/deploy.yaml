@@ -297,3 +297,81 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: ai-data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gotenberg
+  name: gotenberg
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: gotenberg
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: gotenberg
+    spec:
+      containers:
+        - image: harbor.yanello.net/docker/gotenberg/gotenberg:8.33.0
+          imagePullPolicy: IfNotPresent
+          name: gotenberg
+          command:
+            - "gotenberg"
+            - "--chromium-disable-javascript=true"
+            - "--chromium-allow-list=file:///tmp/.*"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 1Gi
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tika
+  name: tika
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: tika
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: tika
+    spec:
+      containers:
+        - image: harbor.yanello.net/docker/apache/tika:3.3.1.0
+          imagePullPolicy: IfNotPresent
+          name: tika
+          ports:
+            - containerPort: 9998
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 1Gi
+      restartPolicy: Always
