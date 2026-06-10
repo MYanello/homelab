@@ -4,6 +4,9 @@ kind: Cluster
 metadata:
   name: authentik-cnpg
 spec:
+  inheritedMetadata:
+    annotations:
+      backup.velero.io/backup-volumes: pgdata
   instances: 1
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io

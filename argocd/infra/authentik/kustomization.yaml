@@ -11,12 +11,12 @@ generators:
   - ./manifests/secret-generator.yaml
 
 replicas:
-  - name: authentik-postgresql
-    count: 1
+  # - name: authentik-postgresql
+    # count: 1
   - name: authentik-server
-    count: 0
+    count: 1
   - name: authentik-worker
-    count: 0
+    count: 1
 
 helmCharts:
   - name: authentik

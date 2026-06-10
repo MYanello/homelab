@@ -3,6 +3,27 @@ global:
   envFrom:
     - secretRef:
         name: authentik-secrets
+  env:
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      valueFrom:
+        secretKeyRef:
+          name: authentik-cnpg-app
+          key: host
+    - name: AUTHENTIK_POSTGRESQL__USER
+      valueFrom:
+        secretKeyRef:
+          name: authentik-cnpg-app
+          key: username
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-cnpg-app
+          key: password
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      valueFrom:
+        secretKeyRef:
+          name: authentik-cnpg-app
+          key: dbname
   affinity:
     nodeAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -85,7 +106,7 @@ redis:
       limits:
         memory: 100Mi
 postgresql:
-  enabled: true
+  enabled: false
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
