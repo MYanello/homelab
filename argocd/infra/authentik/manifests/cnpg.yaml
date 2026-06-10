@@ -1,0 +1,24 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-cnpg
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-standard-trixie
+    major: 18
+  storage:
+    size: 8Gi
+    storageClass: truenas-ssd
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "256MB"
+  bootstrap:
+    initdb:
+      database: authentik
+      owner: authentik
+  enableSuperuserAccess: true

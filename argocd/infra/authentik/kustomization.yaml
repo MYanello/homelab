@@ -6,6 +6,7 @@ resources:
   - ./manifests/vs.yaml
   - ./manifests/http-route.yaml
   - ./manifests/reference-grants.yaml
+  - ./manifests/cnpg.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
