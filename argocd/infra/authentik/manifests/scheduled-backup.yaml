@@ -4,7 +4,7 @@ kind: ScheduledBackup
 metadata:
   name: authentik-cnpg-backup
 spec:
-  schedule: "0 * * * 0"
+  schedule: "0 0 2 * * 0"
   backupOwnerReference: self
   cluster:
     name: authentik-cnpg
