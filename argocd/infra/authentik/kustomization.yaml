@@ -13,6 +13,10 @@ generators:
 replicas:
   - name: authentik-postgresql
     count: 1
+  - name: authentik-server
+    count: 0
+  - name: authentik-worker
+    count: 0
 
 helmCharts:
   - name: authentik
