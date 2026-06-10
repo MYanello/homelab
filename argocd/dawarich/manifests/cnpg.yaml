@@ -25,6 +25,8 @@ spec:
         name: dawarich-db-credentials
   plugins:
     - name: barman-cloud.cloudnative-pg.io
+      enabled: true
+      isWALArchiver: true
       parameters:
         barmanObjectName: dawarich-backups
   enableSuperuserAccess: true
@@ -80,9 +82,17 @@ spec:
     name: backblaze-cnpg-creds
     creationPolicy: Owner
   data:
-    - secretKey: ACCESS_KEY_ID
-      remoteRef:
-        key: BACKBLAZE_KEY_ID
-    - secretKey: ACCESS_SECRET_KEY
-      remoteRef:
-        key: BACKBLAZE_APPLICATION_KEY
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: BACKBLAZE_CNPG_KEY_ID
+        metadataPolicy: None
+        nullBytePolicy: Ignore
+      secretKey: ACCESS_KEY_ID
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: BACKBLAZE_CNPG_SECRET_KEY
+        metadataPolicy: None
+        nullBytePolicy: Ignore
+      secretKey: ACCESS_SECRET_KEY
