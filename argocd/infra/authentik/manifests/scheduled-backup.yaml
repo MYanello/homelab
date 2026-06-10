@@ -10,6 +10,6 @@ spec:
     name: authentik-cnpg
   method: plugin
   pluginConfiguration:
-    name: cnpg-plugin-barman-cloud.cloudnative-pg.io
+    name: barman-cloud.cloudnative-pg.io
     parameters:
       barmanObjectName: authentik-backups

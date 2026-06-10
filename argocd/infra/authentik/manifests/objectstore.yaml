@@ -1,5 +1,5 @@
 ---
-apiVersion: barmancloudplugin.cloudnative-pg.io/v1
+apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
   name: authentik-backups
