@@ -8,3 +8,8 @@ spec:
   backupOwnerReference: self
   cluster:
     name: authentik-cnpg
+  method: plugin
+  pluginConfiguration:
+    name: cnpg-plugin-barman-cloud.cloudnative-pg.io
+    parameters:
+      barmanObjectName: authentik-backups
