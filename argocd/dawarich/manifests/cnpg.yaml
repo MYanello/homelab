@@ -23,6 +23,66 @@ spec:
       owner: dawarich
       secret:
         name: dawarich-db-credentials
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: dawarich-backups
   enableSuperuserAccess: true
   superuserSecret:
     name: dawarich-superuser
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: dawarich-backups
+spec:
+  configuration:
+    destinationPath: s3://myanello-cnpg/dawarich
+    endpointURL: https://s3.us-west-004.backblazeb2.com
+    s3Credentials:
+      accessKeyId:
+        name: backblaze-cnpg-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: backblaze-cnpg-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: "30d"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: dawarich-db-backup
+spec:
+  schedule: "0 0 2 * * 0"
+  backupOwnerReference: self
+  cluster:
+    name: dawarich-db
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+    parameters:
+      barmanObjectName: dawarich-backups
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: backblaze-cnpg-creds
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: doppler
+    kind: ClusterSecretStore
+  target:
+    name: backblaze-cnpg-creds
+    creationPolicy: Owner
+  data:
+    - secretKey: ACCESS_KEY_ID
+      remoteRef:
+        key: BACKBLAZE_KEY_ID
+    - secretKey: ACCESS_SECRET_KEY
+      remoteRef:
+        key: BACKBLAZE_APPLICATION_KEY

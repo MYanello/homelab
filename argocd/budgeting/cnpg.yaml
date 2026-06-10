@@ -21,6 +21,66 @@ spec:
     initdb:
       database: budgeting
       owner: budgeting
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: budgeting-backups
   enableSuperuserAccess: true
   superuserSecret:
     name: superuser
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: budgeting-backups
+spec:
+  configuration:
+    destinationPath: s3://myanello-cnpg/budgeting
+    endpointURL: https://s3.us-west-004.backblazeb2.com
+    s3Credentials:
+      accessKeyId:
+        name: backblaze-cnpg-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: backblaze-cnpg-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: "30d"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: db-backup
+spec:
+  schedule: "0 0 2 * * 0"
+  backupOwnerReference: self
+  cluster:
+    name: db
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+    parameters:
+      barmanObjectName: budgeting-backups
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: backblaze-cnpg-creds
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: doppler
+    kind: ClusterSecretStore
+  target:
+    name: backblaze-cnpg-creds
+    creationPolicy: Owner
+  data:
+    - secretKey: ACCESS_KEY_ID
+      remoteRef:
+        key: BACKBLAZE_KEY_ID
+    - secretKey: ACCESS_SECRET_KEY
+      remoteRef:
+        key: BACKBLAZE_APPLICATION_KEY

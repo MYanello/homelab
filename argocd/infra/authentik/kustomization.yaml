@@ -6,9 +6,6 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/reference-grants.yaml
   - ./manifests/cnpg.yaml
-  - ./manifests/backblaze-external-secret.yaml
-  - ./manifests/objectstore.yaml
-  - ./manifests/scheduled-backup.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
