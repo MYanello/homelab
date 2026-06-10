@@ -31,16 +31,10 @@ spec:
           jsonPointers:
             - /spec/template/metadata/annotations/checksum~1secret
             - /spec/template/metadata/annotations/checksum~1tls
-         - kind: Secret
+        - kind: Secret
           name: harbor-registry
           jsonPointers:
             - /data/REGISTRY_HTPASSWD
-        - group: "apiextensions.k8s.io"
-          kind: "CustomResourceDefinition"
-          jsonPointers:
-            - /status/storedVersions
-            - /status/acceptedNames
-            - /status/conditions
       syncPolicy:
         automated:
           prune: true
