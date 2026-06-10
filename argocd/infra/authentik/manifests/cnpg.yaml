@@ -21,4 +21,9 @@ spec:
     initdb:
       database: authentik
       owner: authentik
+  affinity:
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
   enableSuperuserAccess: true
