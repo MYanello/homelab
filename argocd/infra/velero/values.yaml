@@ -35,6 +35,9 @@ configuration:
         region: us-west-004
         profile: default
         enableSharedConfig: "true"
+  extraEnvVars:
+    - name: AWS_DISABLE_TAGGING
+      value: "true"
 deployNodeAgent: true
 nodeAgent:
   podVolumePath: /var/lib/kubelet/pods
