@@ -19,7 +19,7 @@ spec:
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
           envFrom:
             - secretRef:
-                name: honcho-db
+                name: honcho-env
       containers:
         - name: deriver
           image: harbor.yanello.net/library/honcho:v3.0.10
@@ -28,8 +28,6 @@ spec:
           envFrom:
             - secretRef:
                 name: honcho-env
-            - secretRef:
-                name: honcho-db
             - configMapRef:
                 name: honcho-config
           resources:
