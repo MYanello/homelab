@@ -8,7 +8,6 @@ data:
   CACHE_ENABLED: "true"
   METRICS_ENABLED: "false"
   AUTH_USE_AUTH: "true"
-  JWT_SECRET: "honcho-homelab-jwt-secret-change-me"
   LLM_VLLM_BASE_URL: "https://api.inference.wandb.ai/v1"
   LLM_EMBEDDING_BASE_URL: "https://api.inference.wandb.ai/v1"
   LLM_EMBEDDING_MODEL: "openai/text-embedding-3-small"
