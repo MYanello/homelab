@@ -13,6 +13,13 @@ spec:
       labels:
         app: honcho-deriver
     spec:
+      initContainers:
+        - name: db-migrate
+          image: harbor.yanello.net/library/honcho:v3.0.10
+          command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
+          envFrom:
+            - secretRef:
+                name: honcho-db
       containers:
         - name: deriver
           image: harbor.yanello.net/library/honcho:v3.0.10
