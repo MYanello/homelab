@@ -4,9 +4,11 @@ kind: Kustomization
 
 generators:
   - secret-generator.yaml
+
 resources:
   - cnpg.yaml
   - redis.yaml
   - api.yaml
   - deriver.yaml
   - http-route.yaml
+  - cm.yaml
