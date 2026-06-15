@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: honcho-api
+  template:
+    metadata:
+      labels:
+        app: honcho-api
+    spec:
+      containers:
+        - name: api
+          image: harbor.yanello.net/library/honcho:v3.0.10
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          env:
+            - name: DB_CONNECTION_URI
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: uri
+            - name: CACHE_URL
+              value: redis://redis:6379/0?suppress=true
+            - name: CACHE_ENABLED
+              value: "true"
+            - name: METRICS_ENABLED
+              value: "false"
+            - name: AUTH_ENABLED
+              value: "true"
+          envFrom:
+            - secretRef:
+                name: honcho-env
+            - configMapRef:
+                name: honcho-config
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: honcho-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: http
+  selector:
+    app: honcho-api

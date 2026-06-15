@@ -1,0 +1,23 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: db
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-system-trixie
+    major: 18
+  storage:
+    size: 10Gi
+    storageClass: truenas-ssd
+  postgresql:
+    parameters:
+      max_connections: "200"
+      shared_buffers: "512MB"
+  bootstrap:
+    initdb:
+      database: honcho
+      owner: honcho

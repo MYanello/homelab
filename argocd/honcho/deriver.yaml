@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deriver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: honcho-deriver
+  template:
+    metadata:
+      labels:
+        app: honcho-deriver
+    spec:
+      containers:
+        - name: deriver
+          image: harbor.yanello.net/library/honcho:v3.0.10
+          imagePullPolicy: Always
+          command: ["/app/.venv/bin/python", "-m", "src.deriver"]
+          env:
+            - name: DB_CONNECTION_URI
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: uri
+            - name: CACHE_URL
+              value: redis://redis:6379/0?suppress=true
+            - name: CACHE_ENABLED
+              value: "true"
+            - name: METRICS_ENABLED
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: honcho-env
+            - configMapRef:
+                name: honcho-config
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
