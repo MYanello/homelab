@@ -1,0 +1,17 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: honcho
+spec:
+  endpointSelector:
+    matchLabels:
+      app: honcho-api
+  ingress:
+    - fromCIDR:
+        - 192.168.10.0/24
+        - 192.168.1.0/24
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
