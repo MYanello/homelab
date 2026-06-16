@@ -8,13 +8,6 @@ spec:
     matchLabels:
       app: honcho-api
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s-app: cilium-envoy
-      toPorts:
-        - ports:
-            - port: "8000"
-              protocol: TCP
     - fromCIDR:
         - 192.168.10.0/24
         - 192.168.1.0/24
