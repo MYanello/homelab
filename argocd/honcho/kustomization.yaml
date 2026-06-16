@@ -12,4 +12,4 @@ resources:
   - deriver.yaml
   - http-route.yaml
   - cm.yaml
-  - netpol.yaml
+  # - netpol.yaml
