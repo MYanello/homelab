@@ -60,11 +60,25 @@ spec:
             - name: OAUTH_DISCOVERY_URL
               value: https://authentik.yanello.net/application/o/rxr/.well-known/openid-configuration
             - name: DB_DATABASE_NAME
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: dbname
             - name: DB_HOSTNAME
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: host
             - name: DB_USERNAME
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: password
           envFrom:
             - secretRef:
                 name: resume-secrets
