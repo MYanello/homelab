@@ -7,7 +7,7 @@ data:
   CACHE_URL: "redis://redis:6379/0?suppress=true"
   CACHE_ENABLED: "true"
   METRICS_ENABLED: "false"
-  AUTH_USE_AUTH: "false"
+  AUTH_USE_AUTH: "true"
   LLM_VLLM_BASE_URL: "https://api.inference.wandb.ai/v1"
   LLM_EMBEDDING_BASE_URL: "https://openrouter.ai/api/v1"
   EMBEDDING_MODEL_CONFIG__TRANSPORT: "openai"
