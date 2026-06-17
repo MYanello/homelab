@@ -59,26 +59,6 @@ spec:
               value: Authentik
             - name: OAUTH_DISCOVERY_URL
               value: https://authentik.yanello.net/application/o/rxr/.well-known/openid-configuration
-            - name: DB_DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: db-app
-                  key: dbname
-            - name: DB_HOSTNAME
-              valueFrom:
-                secretKeyRef:
-                  name: db-app
-                  key: host
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: db-app
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-app
-                  key: password
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
