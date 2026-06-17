@@ -79,6 +79,11 @@ spec:
                 secretKeyRef:
                   name: db-app
                   key: password
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: uri
           envFrom:
             - secretRef:
                 name: resume-secrets
