@@ -32,7 +32,7 @@ spec:
                 name: honcho-config
           resources:
             requests:
-              cpu: 250m
+              cpu: 20m
               memory: 256Mi
             limits:
               memory: 512Mi
