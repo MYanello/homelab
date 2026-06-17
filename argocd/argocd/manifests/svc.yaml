@@ -1,3 +1,4 @@
+---
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
@@ -11,7 +12,6 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-server-lb
   annotations:
-    metallb.io/loadBalancerIPs: 10.10.8.4
     lbipam.cilium.io/ips: 10.10.8.4
 spec:
   ports:
