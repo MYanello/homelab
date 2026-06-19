@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -6,7 +7,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Tautulli
     gethomepage.dev/icon: tautulli
-    gethomepage.dev/description: "A python based web application for monitoring, analytics and notifications for Plex Media Server."
+    gethomepage.dev/description: "A python based web application for monitoring, analytics\
+      \ and notifications for Plex Media Server."
     gethomepage.dev/pod-selector: app=tautulli
 spec:
   parentRefs:
@@ -14,12 +16,39 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - tautulli.yanello.net
+    - tautulli.yanello.net
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/"
-    backendRefs:
-    - name: tautulli
-      port: 8181
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/"
+      backendRefs:
+        - name: tautulli
+          port: 8181
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: tautulli-images
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Tautulli
+    gethomepage.dev/icon: tautulli
+    gethomepage.dev/description: "A python based web application for monitoring, analytics\
+      \ and notifications for Plex Media Server."
+    gethomepage.dev/pod-selector: app=tautulli
+spec:
+  parentRefs:
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - tautulli.yanello.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/image"
+      backendRefs:
+        - name: tautulli
+          port: 8181
