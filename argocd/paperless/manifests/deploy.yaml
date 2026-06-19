@@ -200,7 +200,7 @@ metadata:
     app: ai
   name: ai
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 5
   selector:
     matchLabels:
