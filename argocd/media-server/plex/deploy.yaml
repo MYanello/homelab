@@ -35,8 +35,7 @@ spec:
           hostPath:
             path: /data/media/plex
         - name: transcode
-          persistentVolumeClaim:
-            claimName: transcode
+          emptyDir: {}
         - name: media
           hostPath:
             path: /data/media
