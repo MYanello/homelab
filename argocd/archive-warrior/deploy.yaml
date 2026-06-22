@@ -23,10 +23,10 @@ spec:
               protocol: TCP
           resources:
             limits:
-              memory: "1200Mi"
+              memory: "1Gi"
             requests:
-              cpu: "50m"
-              memory: "750Mi"
+              cpu: "100m"
+              memory: "500Mi"
           env:
             - name: DOWNLOADER
               value: mjy
