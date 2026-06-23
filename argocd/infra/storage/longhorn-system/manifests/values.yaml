@@ -12,6 +12,7 @@ preUpgradeChecker:
 
 persistence:
   defaultClassReplicaCount: "2"
+  defaultDataLocality: best-effort
 
 global:
   nodeSelector:

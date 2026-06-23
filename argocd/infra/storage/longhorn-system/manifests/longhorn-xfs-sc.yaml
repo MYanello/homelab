@@ -13,5 +13,5 @@ parameters:
   staleReplicaTimeout: "30"
   fromBackup: ""
   fsType: "xfs"
-  dataLocality: "disabled"
+  dataLocality: "best-effort"
   unmapMarkSnapChainRemoved: "ignored"
