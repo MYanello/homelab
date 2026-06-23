@@ -15,8 +15,6 @@ persistence:
   defaultDataLocality: best-effort
 
 global:
-  nodeSelector:
-    node-role.kubernetes.io/control-plane: "true"
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
