@@ -1,0 +1,99 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: radarr-db
+spec:
+  inheritedMetadata:
+    annotations:
+      backup.velero.io/backup-volumes: pgdata
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql-standard-trixie
+    major: 18
+  storage:
+    size: 1Gi
+    storageClass: truenas-ssd
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: 256MB
+  bootstrap:
+    initdb:
+      database: radarr-main
+      owner: radarr
+    postInitApplicationSQL:
+      - CREATE DATABASE radarr-log OWNER radarr;
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      enabled: true
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: radarr-backups
+  enableSuperuserAccess: true
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: radarr-backups
+spec:
+  configuration:
+    destinationPath: s3://myanello-cnpg/radarr
+    endpointURL: https://s3.us-west-004.backblazeb2.com
+    s3Credentials:
+      accessKeyId:
+        name: backblaze-cnpg-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: backblaze-cnpg-creds
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+  retentionPolicy: "30d"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: radarr-db-backup
+spec:
+  schedule: "0 0 2 * * 0"
+  backupOwnerReference: self
+  cluster:
+    name: radarr-db
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+    parameters:
+      barmanObjectName: radarr-backups
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: backblaze-cnpg-creds
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: doppler
+    kind: ClusterSecretStore
+  target:
+    name: backblaze-cnpg-creds
+    creationPolicy: Owner
+  data:
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: BACKBLAZE_CNPG_KEY_ID
+        metadataPolicy: None
+        nullBytePolicy: Ignore
+      secretKey: ACCESS_KEY_ID
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: BACKBLAZE_CNPG_SECRET_KEY
+        metadataPolicy: None
+        nullBytePolicy: Ignore
+      secretKey: ACCESS_SECRET_KEY
