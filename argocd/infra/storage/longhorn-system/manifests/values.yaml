@@ -1,6 +1,6 @@
 defaultSettings:
   defaultDataPath: "/app/longhorn/"
-  defaultReplicaCount: "2"
+  defaultReplicaCount: "3"
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
 defaultBackupStore:
@@ -14,10 +14,9 @@ persistence:
   defaultClassReplicaCount: "2"
 
 global:
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: "true"
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
-      operator: "Exists"
-      effect: "NoSchedule"
-    - key: "csp/oci"
       operator: "Exists"
       effect: "NoSchedule"
