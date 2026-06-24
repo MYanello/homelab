@@ -6,7 +6,7 @@ metadata:
     app: sonarr
   name: sonarr
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -45,8 +45,11 @@ spec:
             - containerPort: 8989
               protocol: TCP
           volumeMounts:
-            - mountPath: /config
-              name: config
+            # - mountPath: /config
+            #   name: config
+            - name: config
+              mountPath: /config/config.xml
+              subPath: config.xml
             - mountPath: /data/media
               name: media
           readinessProbe:
@@ -76,6 +79,9 @@ spec:
         - name: media
           hostPath:
             path: /data/media
+        # - name: config
+        #   persistentVolumeClaim:
+        #     claimName: config
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          secret:
+            secretName: config
