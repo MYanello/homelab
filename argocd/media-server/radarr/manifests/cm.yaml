@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  RADARR__AUTHENTICATION__METHOD: Forms
+  RADARR__AUTHENTICATION__REQUIRED: DisabledForLocalAddresses
+  RADARR__ANALYTICS_ENABLED: "False"
+  RADARR__BIND_ADDRESS: "*"
+  RADARR__BRANCH: master
+  RADARR__ENABLE_SSL: "False"
+  RADARR__INSTANCE__NAME: Radarr
+  RADARR__LAUNCH_BROWSER: "True"
+  RADARR__LOG_LEVEL: Info
+  RADARR__PORT: "7878"
+  RADARR__POSTGRES__HOST: radarr-db-rw
+  RADARR__POSTGRES__PORT: "5432"
+  RADARR__POSTGRES__USER: radarr
+  RADARR__POSTGRES__MAINDB: "radarr_main"
+  RADARR__POSTGRES__LOGDB: "radarr_log"
+  RADARR__SSL_PORT: "9898"
+  RADARR__THEME: dark
+  RADARR__UPDATE_AUTOMATICALLY: "True"
+  RADARR__UPDATE_MECHANISM: Docker
+  RADARR__URL_BASE: "radarr.yanello.net"

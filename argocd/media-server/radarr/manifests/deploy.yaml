@@ -17,7 +17,6 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      annotations: null
       labels:
         app: radarr
     spec:
@@ -38,6 +37,16 @@ spec:
               value: "3000"
             - name: TZ
               value: America/Chicago
+            - name: RADARR__POSTGRES__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: radarr-db-app
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: config
+            - secretRef:
+                name: config
           image: docker.io/linuxserver/radarr:6.2.1@sha256:1e95b5c13fe015361a9ae1c4d99fc2336816790aaea60fa74b2ffebe076a69e0
           imagePullPolicy: IfNotPresent
           name: radarr
@@ -51,8 +60,6 @@ spec:
             - containerPort: 7878
               protocol: TCP
           volumeMounts:
-            - mountPath: /config
-              name: config
             - mountPath: /data/media
               name: media
           readinessProbe:
@@ -76,6 +83,3 @@ spec:
         - name: media
           hostPath:
             path: /data/media
-        - name: config
-          persistentVolumeClaim:
-            claimName: config
