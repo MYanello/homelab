@@ -21,6 +21,9 @@ spec:
   # imagePullSecrets:
   #   - name: gitea-pull-secrets
   #  serviceAccountName: external-secrets
+  securityContext:
+    seccompProfile:
+      type: Unconfined
   containers:
     - name: debug
       image: ubuntu:latest
