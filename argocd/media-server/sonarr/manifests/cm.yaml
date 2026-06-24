@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  SONARR__AUTHENTICATION_METHOD: Forms
+  SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+  SONARR__BRANCH: main
+  SONARR__INSTANCE_NAME: Sonarr
+  SONARR__LOG_LEVEL: Info
+  SONARR__POSTGRES_HOST: sonarr-db-rw
+  SONARR__POSTGRES_PORT: "5432"
+  SONARR__POSTGRES_USER: sonarr
+  SONARR__POSTGRES_MAIN_DB: "sonarr_main"
+  SONARR__POSTGRES_LOG_DB: "sonarr_log"

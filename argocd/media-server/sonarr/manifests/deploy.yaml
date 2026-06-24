@@ -38,6 +38,16 @@ spec:
               value: "3000"
             - name: TZ
               value: America/Chicago
+            - name: SONARR__POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sonarr-db-app
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: config
+            - secretRef:
+                name: config
           image: docker.io/linuxserver/sonarr:4.0.17@sha256:02bc962946fef994e67a38152446df25c10a52f8583aefeeb6467f9dd44cab99
           imagePullPolicy: IfNotPresent
           name: sonarr
@@ -45,13 +55,8 @@ spec:
             - containerPort: 8989
               protocol: TCP
           volumeMounts:
-            # - mountPath: /config
-            #   name: config
-            - name: config
-              mountPath: /config/config.xml
-              subPath: config.xml
-            - mountPath: /data/media
-              name: media
+            - name: media
+              mountPath: /data/media
           readinessProbe:
             httpGet:
               path: /
@@ -79,9 +84,3 @@ spec:
         - name: media
           hostPath:
             path: /data/media
-        # - name: config
-        #   persistentVolumeClaim:
-        #     claimName: config
-        - name: config
-          secret:
-            secretName: config
