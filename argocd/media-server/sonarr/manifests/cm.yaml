@@ -4,13 +4,13 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  SONARR__AUTHENTICATION_METHOD: Forms
-  SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+  SONARR__AUTHENTICATION__METHOD: Forms
+  SONARR__AUTHENTICATION__REQUIRED: DisabledForLocalAddresses
   SONARR__BRANCH: main
-  SONARR__INSTANCE_NAME: Sonarr
-  SONARR__LOG_LEVEL: Info
-  SONARR__POSTGRES_HOST: sonarr-db-rw
-  SONARR__POSTGRES_PORT: "5432"
-  SONARR__POSTGRES_USER: sonarr
-  SONARR__POSTGRES_MAIN_DB: "sonarr_main"
-  SONARR__POSTGRES_LOG_DB: "sonarr_log"
+  SONARR__INSTANCE__NAME: Sonarr
+  SONARR__LOG__LEVEL: Info
+  SONARR__POSTGRES__HOST: sonarr-db-rw
+  SONARR__POSTGRES__PORT: "5432"
+  SONARR__POSTGRES__USER: sonarr
+  SONARR__POSTGRES__MAINDB: "sonarr_main"
+  SONARR__POSTGRES__LOGDB: "sonarr_log"
