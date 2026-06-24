@@ -57,6 +57,8 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /data/media
+            - name: config
+              mountPath: /config
           readinessProbe:
             httpGet:
               path: /
@@ -84,3 +86,6 @@ spec:
         - name: media
           hostPath:
             path: /data/media
+        - name: config
+          persistentVolumeClaim:
+            claimName: config

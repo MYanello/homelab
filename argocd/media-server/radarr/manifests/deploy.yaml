@@ -60,6 +60,8 @@ spec:
             - containerPort: 7878
               protocol: TCP
           volumeMounts:
+            - mountPath: /config
+              name: config
             - mountPath: /data/media
               name: media
           readinessProbe:
@@ -83,3 +85,6 @@ spec:
         - name: media
           hostPath:
             path: /data/media
+        - name: config
+          persistentVolumeClaim:
+            claimName: config
