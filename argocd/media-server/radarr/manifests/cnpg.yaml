@@ -14,7 +14,7 @@ spec:
     name: postgresql-standard-trixie
     major: 18
   storage:
-    size: 1Gi
+    size: 5Gi
     storageClass: truenas-ssd
   postgresql:
     parameters:
