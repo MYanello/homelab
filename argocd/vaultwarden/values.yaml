@@ -8,11 +8,11 @@ signupsAllowed: false
 replicas: 1
 storage:
   data:
-    name: vaultwarden-data
+    name: data
     size: 15Gi
-    class: truenas-ssd-nfs
+    class: longhorn-xfs
     keepPvc: true
-    accessMode: ReadWriteMany
+    accessMode: ReadWriteOnce
 adminToken:
   existingSecret: vw-admin-secret
   existingSecretKey: adminToken
