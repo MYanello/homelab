@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -43,7 +44,7 @@ spec:
           image: ghcr.io/jordan-dalby/bytestash:1.5.12@sha256:eb4f736b8cd45443be0ed6d8da3ee49b76dbf27f4d3925b81b3c407207e62531
           volumeMounts:
             - mountPath: /data/snippets
-              name: snippets
+              name: snip
           resources:
             requests:
               cpu: 10m
@@ -52,10 +53,10 @@ spec:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: snippets
+        name: snip
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: longhorn-xfs
+        storageClassName: truenas-ssd
         resources:
           requests:
             storage: 5Gi
