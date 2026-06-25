@@ -12,3 +12,7 @@ helmCharts:
     releaseName: external-dns-cloudflare
     namespace: external-dns-cloudflare
     valuesFile: values.yaml
+
+replicas:
+  - name: external-dns-cloudflare
+    count: 0
