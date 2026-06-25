@@ -49,7 +49,7 @@ authentik:
   error_reporting:
     enabled: true
 server:
-  replicas: 1
+  replicas: 0
   resources:
     limits:
       memory: 2Gi
@@ -63,7 +63,7 @@ server:
   startupProbe:
     timeoutSeconds: 10
 worker:
-  replicas: 1
+  replicas: 0
   resources:
     limits:
       memory: 2Gi
