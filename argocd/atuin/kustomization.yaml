@@ -7,6 +7,3 @@ resources:
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml
   - ./manifests/cnpg.yaml
-
-generators:
-  - ./manifests/secret-generator.yaml
