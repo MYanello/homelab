@@ -2,7 +2,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: bookorbit-db
+  name: atuin-db
 spec:
   instances: 1
   imageCatalogRef:
@@ -11,35 +11,31 @@ spec:
     name: postgresql-standard-trixie
     major: 18
   storage:
-    size: 5Gi
-    storageClass: truenas-ssd
+    size: 10Gi
+    storageClass: longhorn-xfs
   postgresql:
     parameters:
       max_connections: "100"
-      shared_buffers: 256MB
+      shared_buffers: "512MB"
   bootstrap:
     initdb:
-      database: bookorbit
-      owner: bookorbit
-      postInitApplicationSQL:
-        - CREATE EXTENSION IF NOT EXISTS vector
-        - CREATE EXTENSION IF NOT EXISTS pg_trgm
-        - CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+      database: atuin
+      owner: atuin
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       enabled: true
       isWALArchiver: true
       parameters:
-        barmanObjectName: bookorbit-backups
+        barmanObjectName: atuin-backups
   enableSuperuserAccess: true
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
-  name: bookorbit-backups
+  name: atuin-backups
 spec:
   configuration:
-    destinationPath: s3://myanello-cnpg/bookorbit
+    destinationPath: s3://myanello-cnpg/atuin
     endpointURL: https://s3.us-west-004.backblazeb2.com
     s3Credentials:
       accessKeyId:
@@ -57,17 +53,17 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: bookorbit-db-backup
+  name: atuin-db-backup
 spec:
   schedule: "0 0 2 * * 0"
   backupOwnerReference: self
   cluster:
-    name: bookorbit-db
+    name: atuin-db
   method: plugin
   pluginConfiguration:
     name: barman-cloud.cloudnative-pg.io
     parameters:
-      barmanObjectName: bookorbit-backups
+      barmanObjectName: atuin-backups
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
