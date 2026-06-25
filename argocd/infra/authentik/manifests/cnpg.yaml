@@ -15,7 +15,7 @@ spec:
     major: 18
   storage:
     size: 8Gi
-    storageClass: truenas-ssd
+    storageClass: longhorn-xfs
   postgresql:
     parameters:
       max_connections: "100"
