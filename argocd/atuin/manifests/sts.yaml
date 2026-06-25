@@ -23,9 +23,6 @@ spec:
       containers:
         - args:
             - start
-          envFrom:
-            - secretRef:
-                name: atuin-secrets
           env:
             - name: ATUIN_DB_URI
               valueFrom:
