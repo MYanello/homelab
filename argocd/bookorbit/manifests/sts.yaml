@@ -79,7 +79,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: truenas-hdd
+        storageClassName: longhorn-xfs
         resources:
           requests:
             storage: 10Gi
@@ -90,7 +90,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: truenas-hdd
+        storageClassName: longhorn-xfs
         resources:
           requests:
-            storage: 50Gi
+            storage: 30Gi
