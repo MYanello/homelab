@@ -41,7 +41,7 @@ spec:
                   mountPath: /config
           containers:
             - name: kometa
-              image: harbor.yanello.net/docker/kometateam/kometa:v2.4.0@sha256:1b2e2d71bc8aaf7830a32219035fd1b92ddb75bbd14575cac649d2f7fbdef951
+              image: harbor.yanello.net/docker/kometateam/kometa:v2.4.1@sha256:b7add33495ed929f3ca7ea0b5ff41382613698b5056a18156564aa0acdc4b97f
               imagePullPolicy: Always
               command: ["python", "kometa.py", "-r"]
               env:
