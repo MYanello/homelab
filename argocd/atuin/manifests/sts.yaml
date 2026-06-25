@@ -2,74 +2,6 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres
-  labels:
-    app: postgres
-spec:
-  replicas: 1
-  serviceName: postgres
-  revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      app: postgres
-  template:
-    metadata:
-      labels:
-        app: postgres
-      annotations:
-        backup.velero.io/backup-volumes: data
-    spec:
-      containers:
-        - name: postgres
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 5432
-              protocol: TCP
-          envFrom:
-            - secretRef:
-                name: atuin-secrets
-          image: postgres:18@sha256:1a5b3e745bbd82d6deb146505e504da3c2f248cac15e431951b148fbe4f8613a
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/
-              name: data
-          resources:
-            requests:
-              cpu: 150m
-              memory: 1Gi
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - |
-                  pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" || exit 1;
-                  Chksum="$(psql --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
-                  echo "checksum failure count is $$Chksum";
-                  [ "$Chksum" = '0' ] || exit 1
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - pg_isready --dbname="${POSTGRES_DB}" --username="${POSTGRES_USER}"
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: truenas-ssd
-        resources:
-          requests:
-            storage: 1Gi
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
   labels:
     app: atuin
   name: atuin
@@ -98,8 +30,8 @@ spec:
             - name: ATUIN_DB_URI
               valueFrom:
                 secretKeyRef:
-                  name: atuin-secrets
-                  key: ATUIN_DB_URI
+                  name: atuin-db-app
+                  key: fqdn-uri
             - name: ATUIN_HOST
               value: 0.0.0.0
             - name: ATUIN_PORT
