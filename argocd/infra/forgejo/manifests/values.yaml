@@ -59,7 +59,7 @@ service:
 
 persistence:
   enabled: true
-  storageClass: truenas-ssd-nfs
+  storageClass: longhorn-xfs
   accessMode: ReadWriteMany
   size: 10Gi
 
