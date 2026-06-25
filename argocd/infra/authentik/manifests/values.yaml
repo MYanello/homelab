@@ -7,22 +7,22 @@ global:
     - name: AUTHENTIK_POSTGRESQL__HOST
       valueFrom:
         secretKeyRef:
-          name: authentik-cnpg-app
+          name: authentik-db-app
           key: host
     - name: AUTHENTIK_POSTGRESQL__USER
       valueFrom:
         secretKeyRef:
-          name: authentik-cnpg-app
+          name: authentik-db-app
           key: username
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:
-          name: authentik-cnpg-app
+          name: authentik-db-app
           key: password
     - name: AUTHENTIK_POSTGRESQL__NAME
       valueFrom:
         secretKeyRef:
-          name: authentik-cnpg-app
+          name: authentik-db-app
           key: dbname
   affinity:
     nodeAffinity:
@@ -105,41 +105,3 @@ redis:
         memory: 50Mi
       limits:
         memory: 100Mi
-postgresql:
-  enabled: false
-  tolerations:
-    - key: "node-role.kubernetes.io/control-plane"
-      operator: "Exists"
-      effect: "NoSchedule"
-  diagnosticMode:
-    enabled: false
-  primary:
-    tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists
-        effect: NoSchedule
-    podSecurityContext:
-      enabled: true
-      fsGroup: 3000
-    containerSecurityContext:
-      runAsUser: 3000
-      runAsGroup: 3000
-    persistence:
-      enabled: true
-      storageClass: truenas-ssd-nfs
-      accessModes:
-        - ReadWriteOnce
-    resources:
-      requests:
-        cpu: 250m
-        memory: 250Mi
-      limits:
-        memory: 2Gi
-  auth:
-    username: authentik
-    database: authentik
-    existingSecret: authentik-secrets
-    secretKeys:
-      adminPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
-      userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
-      replicationPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
