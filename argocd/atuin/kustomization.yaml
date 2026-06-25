@@ -7,3 +7,9 @@ resources:
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml
   - ./manifests/cnpg.yaml
+  - ./manifests/deploy.yaml
+
+configMapGenerator:
+  - name: atuin-config
+    files:
+      - ./manifests/server.toml

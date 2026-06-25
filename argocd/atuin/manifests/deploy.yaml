@@ -1,12 +1,12 @@
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   labels:
     app: atuin
   name: atuin
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
@@ -16,10 +16,6 @@ spec:
       labels:
         app: atuin
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
-        runAsGroup: 1000
       containers:
         - args:
             - start
@@ -66,15 +62,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: atuin-config
+      volumes:
+        - name: atuin-config
+          configMap:
+            name: atuin-config
       restartPolicy: Always
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: atuin-config
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: truenas-ssd-nfs
-        resources:
-          requests:
-            storage: 1Gi
