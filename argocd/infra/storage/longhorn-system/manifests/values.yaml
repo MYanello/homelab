@@ -1,6 +1,7 @@
 defaultSettings:
   defaultDataPath: "/app/longhorn/"
   defaultReplicaCount: "3"
+  defaultDataLocality: "best-effort"
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
 
 defaultBackupStore:
