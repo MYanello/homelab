@@ -39,6 +39,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       namespace: external-services
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: books
   to:
     - group: ""
       kind: Service
