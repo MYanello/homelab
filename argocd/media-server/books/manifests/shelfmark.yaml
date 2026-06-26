@@ -104,8 +104,8 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - shelfmark.yanello.ne
-    - calibre-dl.yanello.net
+    - bookorbit-dl.yanello.net
+    - shelfmark-bo.yanello.net
   rules:
     - backendRefs:
         - name: ak-outpost-authentik-embedded-outpost

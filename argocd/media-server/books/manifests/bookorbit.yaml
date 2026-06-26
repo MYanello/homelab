@@ -77,26 +77,95 @@ spec:
         - name: ingest
           persistentVolumeClaim:
             claimName: ingest
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        storageClassName: longhorn-xfs
-        resources:
-          requests:
-            storage: 10Gi
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: books
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        storageClassName: longhorn-xfs
-        resources:
-          requests:
-            storage: 30Gi
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+        - name: books
+          persistentVolumeClaim:
+            claimName: books
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bookorbit-http-route
+  namespace: bookorbit
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: BookOrbit
+    gethomepage.dev/icon: bookorbit
+    gethomepage.dev/description: Self-hosted library management and reading platform.
+    gethomepage.dev/pod-selector: app=bookorbit
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - bookorbit.yanello.net
+  rules:
+    - backendRefs:
+        - name: bookorbit
+          namespace: bookorbit
+          port: 3000
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shelfmark-config
+spec:
+  storageClassName: longhorn-xfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: books
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data
+spec:
+  storageClassName: longhorn-xfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ingest
+spec:
+  storageClassName: longhorn-xfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookorbit
+  labels:
+    app: bookorbit
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: bookorbit
