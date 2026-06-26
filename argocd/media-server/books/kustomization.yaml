@@ -9,3 +9,4 @@ resources:
   - manifests/cnpg.yaml
   - manifests/bookorbit.yaml
   - manifests/shelfmark.yaml
+  - manifests/pvc.yaml
