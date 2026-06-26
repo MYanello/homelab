@@ -31,7 +31,7 @@ spec:
             - name: AA_DONATOR_KEY
               valueFrom:
                 secretKeyRef:
-                  name: calibre-secrets
+                  name: bookorbit-secrets
                   key: AA_KEY
           image: harbor.yanello.net/ghcr/calibrain/shelfmark:v1.3.2@sha256:8700c1d3b6bb94e1b5f9482bac12e39652ed737de02f256920e1ad982a7ac0f1
           imagePullPolicy: IfNotPresent
