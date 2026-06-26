@@ -23,6 +23,10 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: "paperless-export,paperless-media,paperless-data,paperless-consume"
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:2.20.15@sha256:6c86cad803970ea782683a8e80e7403444c5bf3cf70de63b4d3c8e87500db92f
           imagePullPolicy: IfNotPresent
@@ -116,6 +120,10 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: "mariadb"
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - image: harbor.yanello.net/docker/library/mariadb:12@sha256:b1c7bf836e64ed9406a8984af29509f40089d55cea14b32f12c4726a1f17104b
           imagePullPolicy: IfNotPresent
@@ -170,6 +178,10 @@ spec:
       labels:
         app: redis
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - image: harbor.yanello.net/docker/library/redis:8@sha256:027002f3d4161eb427643e0cc71023b582fb461c6199e699f46db843f0b39fb1
           imagePullPolicy: IfNotPresent
@@ -214,6 +226,10 @@ spec:
       labels:
         app: gotenberg
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - image: harbor.yanello.net/docker/gotenberg/gotenberg:8.34.0@sha256:67097317623a503ba2a6a7e9ae8db6929a1f7e1bbd88077bacf2d325fbdab923
           imagePullPolicy: IfNotPresent
@@ -268,6 +284,10 @@ spec:
       labels:
         app: tika
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - image: harbor.yanello.net/docker/apache/tika:3.3.1.0@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
           imagePullPolicy: IfNotPresent
