@@ -6,8 +6,6 @@ generators:
   - ./manifests/secretGenerator.yaml
 
 resources:
-  - ./manifests/pvc.yaml
-  - ./manifests/deploy.yaml
-  - ./manifests/service.yaml
-  - ./manifests/http-route.yaml
-  - ./bookorbit
+  - ./manifests/calibre.yaml
+  - ./manifests/shelfmark.yaml
+#  - ./bookorbit

@@ -1,0 +1,126 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: shelfmark
+  name: shelfmark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shelfmark
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: shelfmark
+    spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
+      containers:
+        - env:
+            - name: FLASK_PORT
+              value: "8084"
+            - name: FLASK_DEBUG
+              value: "false"
+            - name: AA_DONATOR_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: calibre-secrets
+                  key: AA_KEY
+          image: harbor.yanello.net/ghcr/calibrain/shelfmark:v1.3.2@sha256:8700c1d3b6bb94e1b5f9482bac12e39652ed737de02f256920e1ad982a7ac0f1
+          imagePullPolicy: IfNotPresent
+          name: shelfmark
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          ports:
+            - containerPort: 8084
+              protocol: TCP
+          volumeMounts:
+            - name: ingest
+              mountPath: /cwa-book-ingest
+            - name: config
+              mountPath: /config
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8084
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8084
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 5
+      restartPolicy: Always
+      volumes:
+        - name: ingest
+          persistentVolumeClaim:
+            claimName: ingest
+        - name: config
+          persistentVolumeClaim:
+            claimName: shelfmark-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shelfmark-config
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Shelfmark"
+    gethomepage.dev/icon: mdi-folder-download-outline
+    gethomepage.dev/description: "An intuitive web interface for searching and requesting\
+      \ book downloads."
+    gethomepage.dev/pod-selector: app=shelfmark
+  name: shelfmark-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - shelfmark.yanello.net
+  rules:
+    - backendRefs:
+        - name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: shelfmark
+  name: shelfmark
+spec:
+  ports:
+    - name: "http"
+      port: 8084
+      targetPort: 8084
+  selector:
+    app: shelfmark

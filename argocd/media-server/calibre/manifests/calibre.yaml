@@ -2,82 +2,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: shelfmark
-  name: shelfmark
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: shelfmark
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
-  template:
-    metadata:
-      labels:
-        app: shelfmark
-    spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
-      containers:
-        - env:
-            - name: FLASK_PORT
-              value: "8084"
-            - name: FLASK_DEBUG
-              value: "false"
-            - name: AA_DONATOR_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: calibre-secrets
-                  key: AA_KEY
-          image: harbor.yanello.net/ghcr/calibrain/shelfmark:v1.3.2@sha256:8700c1d3b6bb94e1b5f9482bac12e39652ed737de02f256920e1ad982a7ac0f1
-          imagePullPolicy: IfNotPresent
-          name: shelfmark
-          resources:
-            limits:
-              memory: 2Gi
-            requests:
-              cpu: 50m
-              memory: 100Mi
-          ports:
-            - containerPort: 8084
-              protocol: TCP
-          volumeMounts:
-            - name: ingest
-              mountPath: /cwa-book-ingest
-            - name: config
-              mountPath: /config
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8084
-            initialDelaySeconds: 30
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8084
-            initialDelaySeconds: 60
-            periodSeconds: 15
-            timeoutSeconds: 5
-            failureThreshold: 5
-      restartPolicy: Always
-      volumes:
-        - name: ingest
-          persistentVolumeClaim:
-            claimName: ingest
-        - name: config
-          persistentVolumeClaim:
-            claimName: shelfmark-config
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   annotations:
     backup.velero.io/backup-volumes: "config,ingest,library"
   labels:
@@ -156,3 +80,94 @@ spec:
         - name: library
           persistentVolumeClaim:
             claimName: library
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ingest
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: library
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: calibre
+  name: calibre
+  annotations:
+    lbipam.cilium.io/ips: 10.10.8.2
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: 80
+  selector:
+    app: calibre
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Calibre
+    gethomepage.dev/icon: calibre
+    gethomepage.dev/description: "Calibre is an e-book manager. It can view, convert,\
+      \ edit and catalog e-books in all of the major e-book formats."
+    gethomepage.dev/pod-selector: app=calibre
+  labels:
+    app.kubernetes.io/instance: calibre-app
+  name: calibre-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: http
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - calibre.yanello.net
+  rules:
+    - backendRefs:
+        - name: calibre
+          namespace: calibre
+          port: 80
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            add:
+              - name: X-Scheme
+                value: https
+      #       set:
+      #         - name: Host
+      #           value: calibre.yanello.net
