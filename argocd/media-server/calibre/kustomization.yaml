@@ -1,12 +1,13 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 generators:
-- ./manifests/secretGenerator.yaml
+  - ./manifests/secretGenerator.yaml
 
 resources:
-- ./manifests/pvc.yaml
-- ./manifests/deploy.yaml
-- ./manifests/service.yaml
-- ./manifests/httpRoute.yaml
-# - ./manifests/envoyConfig.yaml
+  - ./manifests/pvc.yaml
+  - ./manifests/deploy.yaml
+  - ./manifests/service.yaml
+  - ./manifests/http-route.yaml
+  - ./bookorbit

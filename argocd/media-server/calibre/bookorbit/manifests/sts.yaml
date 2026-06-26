@@ -65,12 +65,18 @@ spec:
               name: books
             - mountPath: /data
               name: data
+            - mountPath: /ingest
+              name: ingest
           resources:
             requests:
               cpu: 200m
               memory: 1Gi
             limits:
               memory: 4Gi
+      volumes:
+        - name: ingest
+          persistentVolumeClaim:
+            claimName: ingest
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
