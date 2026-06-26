@@ -1,0 +1,148 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ai
+  name: ai
+spec:
+  replicas: 0
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: ai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: ai
+    spec:
+      containers:
+        - image: harbor.yanello.net/docker/clusterzx/paperless-ai:3.0.9@sha256:2b65888163fd59716f1c8285b31c5bd0b30c9c3c192c42b516688e3887d4ba60
+          imagePullPolicy: IfNotPresent
+          name: ai
+          env:
+            - name: PUID
+              value: "3000"
+            - name: PGID
+              value: "3000"
+            - name: PAPERLESS_AI_PORT
+              value: "3000"
+            - name: RAG_SERVICE_URL
+              value: http://localhost:8000
+            - name: RAG_SERVICE_ENABLED
+              value: "true"
+            - name: PAPERLESS_API_URL
+              value: http://paperless:8000/api
+            - name: CUSTOM_BASE_URL
+              value: https://openrouter.ai/api/v1
+            - name: CUSTOM_MODEL
+              value: deepseek/deepseek-v4-flash
+            - name: SYSTEM_PROMPT
+              value: >-
+                `You are a personalized document analyzer. Your task is to analyze
+                documents and extract relevant information.\n\nAnalyze the document
+                content and extract the following information into a structured JSON
+                object:\n\n1. title: Create a concise, meaningful title for the
+                document\n2. correspondent: Identify the sender/institution but do
+                not include addresses\n3. tags: Select up to 4 relevant thematic tags
+                \n4. document_date: Extract the document date (format: YYYY-MM-DD)\n5.
+                language: Determine the document language (e.g. "de" or
+                "en")\n      \nImportant rules for the analysis:\n\nFor tags:\n- FIRST
+                check the existing tags before suggesting new ones\n- Use only
+                relevant categories\n- Maximum 4 tags per document, less if sufficient
+                (at least 1)\n- Avoid generic or too specific tags\n- Use only
+                the most important information for tag creation\n- The output language
+                is the one used in the document! IMPORTANT!\n\nFor the title:\n-
+                Short and concise, NO ADDRESSES\n- Contains the most important identification
+                features\n- For invoices/orders, mention invoice/order
+                number if available\n- The output language is the one used in the
+                document! IMPORTANT!\n\nFor the correspondent:\n- Identify the sender
+                or institution\n  When generating the correspondent, always create
+                the shortest possible form of the company name (e.g. "Amazon" instead
+                of "Amazon EU SARL, German branch")\n\nFor the document date:\n- Extract
+                the date of the document\n- Use the format YYYY-MM-DD\n- If
+                multiple dates are present, use the most relevant one\n\nFor the language:\n-
+                Determine the document language\n- Use language codes like "en" for
+                English\n- If the language is not clear, use "und" as a placeholder`
+            # - name: PROCESS_PREDEFINED_DOCUMENTS
+            #   value: true
+            # - name: TAGS
+            #   value: pre-process
+            - name: ADD_AI_PROCESSED_TAG
+              value: "yes"
+            - name: ACTIVATE_TAGGING
+              value: "yes"
+            - name: ACTIVATE_CORRESPONDENTS
+              value: "yes"
+            - name: ACTIVATE_TITLE
+              value: "yes"
+            - name: ACTIVATE_DOCUMENT_TYPE
+              value: "yes"
+          envFrom:
+            - secretRef:
+                name: ai-secrets
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/data
+              name: data
+          resources:
+            limits:
+              memory: 8Gi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: ai-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-data
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ai
+  name: ai
+spec:
+  ports:
+    - name: ai
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: ai
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ai-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - paperless-ai.yanello.net
+  rules:
+    - backendRefs:
+        - name: ai
+          namespace: paperless
+          port: 3000
