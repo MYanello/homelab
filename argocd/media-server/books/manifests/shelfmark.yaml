@@ -93,7 +93,6 @@ spec:
       sectionName: https
   hostnames:
     - bookorbit-dl.yanello.net
-    - shelfmark-bo.yanello.net
   rules:
     - backendRefs:
         - name: ak-outpost-authentik-embedded-outpost
