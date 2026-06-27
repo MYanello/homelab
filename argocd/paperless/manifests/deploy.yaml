@@ -38,8 +38,8 @@ spec:
             - name: PAPERLESS_DBPASS
               valueFrom:
                 secretKeyRef:
-                  name: paperless-db-app # paperless-secrets
-                  key: password # MARIADB_PASSWORD
+                  name: paperless-secrets
+                  key: MARIADB_PASSWORD
           envFrom:
             - configMapRef:
                 name: paperless-env
