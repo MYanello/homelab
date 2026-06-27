@@ -28,6 +28,11 @@ spec:
       parameters:
         barmanObjectName: paperless-backups
   enableSuperuserAccess: true
+  affinity:
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
