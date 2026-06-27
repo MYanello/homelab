@@ -45,15 +45,15 @@ spec:
                 name: paperless-env
             - secretRef:
                 name: paperless-secrets
-          volumeMounts:
-            - mountPath: /usr/src/paperless/data
-              name: paperless-data
-            - name: paperless-media
-              mountPath: /usr/src/paperless/media
-            - name: paperless-export
-              mountPath: /usr/src/paperless/export
-            - name: paperless-consume
-              mountPath: /usr/src/paperless/consume
+          # volumeMounts:
+          #   - mountPath: /usr/src/paperless/data
+          #     name: paperless-data
+          #   - name: paperless-media
+          #     mountPath: /usr/src/paperless/media
+          #   - name: paperless-export
+          #     mountPath: /usr/src/paperless/export
+          #   - name: paperless-consume
+          #     mountPath: /usr/src/paperless/consume
           resources:
             requests:
               cpu: 10m
