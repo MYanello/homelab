@@ -45,13 +45,11 @@ spec:
                 name: paperless-env
             - secretRef:
                 name: paperless-secrets
-          # volumeMounts:
-          #   - mountPath: /usr/src/paperless/data
-          #     name: paperless-data
-          #   - name: paperless-media
-          #     mountPath: /usr/src/paperless/media
-          #   - name: paperless-export
-          #     mountPath: /usr/src/paperless/export
+          volumeMounts:
+            - name: paperless-data
+              mountPath: /usr/src/paperless/data
+            - name: paperless-media
+              mountPath: /usr/src/paperless/media
           #   - name: paperless-consume
           #     mountPath: /usr/src/paperless/consume
           resources:
@@ -86,12 +84,6 @@ spec:
         - name: paperless-media
           persistentVolumeClaim:
             claimName: paperless-media
-        - name: paperless-export
-          persistentVolumeClaim:
-            claimName: paperless-export
-        - name: paperless-consume
-          persistentVolumeClaim:
-            claimName: paperless-consume
         - name: protonmail-data
           persistentVolumeClaim:
             claimName: protonmail-data
@@ -103,7 +95,7 @@ metadata:
     app: db
   name: db
 spec:
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 5
   selector:
     matchLabels:
@@ -189,9 +181,6 @@ spec:
           ports:
             - containerPort: 6379
               protocol: TCP
-          volumeMounts:
-            - mountPath: /data
-              name: redis
           resources:
             limits:
               memory: 1Gi
@@ -199,10 +188,6 @@ spec:
               cpu: 100m
               memory: 500Mi
       restartPolicy: Always
-      volumes:
-        - name: redis
-          persistentVolumeClaim:
-            claimName: redis
 ---
 apiVersion: apps/v1
 kind: Deployment

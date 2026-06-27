@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: paperless-data
 spec:
-  storageClassName: truenas-ssd-nfs
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
@@ -16,7 +16,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: paperless-media
 spec:
-  storageClassName: truenas-ssd-nfs
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
@@ -28,19 +28,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: paperless-export
 spec:
-  storageClassName: truenas-ssd-nfs
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: paperless-consume
-spec:
-  storageClassName: truenas-ssd-nfs
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
@@ -62,21 +50,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: redis
-spec:
-  storageClassName: truenas-ssd-nfs
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: protonmail-data
 spec:
-  storageClassName: truenas-ssd-nfs
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
