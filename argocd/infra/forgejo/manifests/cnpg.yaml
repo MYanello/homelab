@@ -30,6 +30,11 @@ spec:
   enableSuperuserAccess: true
   superuserSecret:
     name: superuser
+  affinity:
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
