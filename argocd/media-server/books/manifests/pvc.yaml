@@ -30,7 +30,7 @@ metadata:
 spec:
   storageClassName: longhorn-xfs
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
