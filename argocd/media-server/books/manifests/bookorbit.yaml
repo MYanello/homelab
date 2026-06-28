@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: bookorbit
-          image: harbor.yanello.net/ghcr/bookorbit/bookorbit:1.10.0@sha256:be53a38b88d18c702a7f9759b3fc4e1584f583a66baa9ee0c66a50595fe1611c
+          image: harbor.yanello.net/ghcr/bookorbit/bookorbit:1.12.0@sha256:1e16c70ec3bcb2d3fd88327fb5cd49b9b0feed373fc33ef0cd14940f4b96fda1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
