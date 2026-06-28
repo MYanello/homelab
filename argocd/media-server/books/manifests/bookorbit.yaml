@@ -88,7 +88,6 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: bookorbit-http-route
-  namespace: bookorbit
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: BookOrbit
@@ -105,7 +104,7 @@ spec:
   rules:
     - backendRefs:
         - name: bookorbit
-          namespace: bookorbit
+          namespace: books
           port: 3000
 ---
 apiVersion: v1
