@@ -25,6 +25,11 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS vector
         - CREATE EXTENSION IF NOT EXISTS pg_trgm
         - CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+  affinity:
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       enabled: true
