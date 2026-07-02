@@ -2,8 +2,8 @@
 resources:
   - ./manifests/resources.yaml
 
-generators:
-  - ./manifests/secret-generator.yaml
+# generators:
+  # - ./manifests/secret-generator.yaml
 
 helmCharts:
   - name: cert-manager
@@ -16,6 +16,10 @@ helmCharts:
       featureGates: NameConstraints=true
       webhook:
         featureGates: NameConstraints=true
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
       extraArgs:
         - --dns01-recursive-nameservers-only
         - --dns01-recursive-nameservers=8.8.8.8:53
@@ -23,6 +27,16 @@ helmCharts:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
+      cainjector:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
+      startupapicheck:
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
   # - name: trust-manager
   #   repo: https://charts.jetstack.io
   #   version: "v0.20.3"
