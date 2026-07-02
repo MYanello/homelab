@@ -11,8 +11,10 @@ helmCharts:
     version: "0.28.3"
     releaseName: cloudnative-pg
     namespace: cnpg
+    valuesFile: ./values.yaml
   - name: plugin-barman-cloud
     repo: https://cloudnative-pg.github.io/charts
     version: "0.7.0"
     releaseName: cnpg-plugin-barman-cloud
     namespace: cnpg
+    valuesFile: ./values.yaml
