@@ -2,8 +2,8 @@
 resources:
   - ./manifests/resources.yaml
 
-# generators:
-  # - ./manifests/secret-generator.yaml
+generators:
+  - ./manifests/secret-generator.yaml
 
 helmCharts:
   - name: cert-manager

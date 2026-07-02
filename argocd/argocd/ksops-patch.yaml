@@ -31,7 +31,7 @@ spec:
                 aarch64|arm64) ARCH="arm64" ;;
                 *) echo "unsupported arch: $(uname -m)"; exit 1 ;;
               esac
-              VERSION="v4.4.0"
+              VERSION="v4.5.1"
               VERSION_RAW="${VERSION#v}"
               URL="https://github.com/viaduct-ai/kustomize-sops/releases/download/${VERSION}/ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz"
               CHECKSUMS="https://github.com/viaduct-ai/kustomize-sops/releases/download/${VERSION}/checksums.txt"
@@ -40,7 +40,7 @@ spec:
               sha256sum --ignore-missing -c checksums.txt || exit 1
               tar -C /custom-tools -xzf "ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz" ksops
               chmod +x /custom-tools/ksops
-              KUSTOMIZE_VERSION="v5.8.0"
+              KUSTOMIZE_VERSION="v5.8.1"
               case "$(uname -m)" in
                 x86_64|amd64) ARCH="amd64" ;;
                 aarch64|arm64) ARCH="arm64" ;;
