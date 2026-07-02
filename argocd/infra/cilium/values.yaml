@@ -15,7 +15,7 @@ rollOutCiliumPods: true
 ipam:
   operator:
     clusterPoolIPv4PodCIDRList: 10.42.0.0/16
-devices: eth0
+devices: wlp1s0
 gatewayAPI:
   enabled: true
   xffNumTrustedHops: 2
