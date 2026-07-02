@@ -16,6 +16,11 @@ spec:
       labels:
         app: atuin
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+
       containers:
         - args:
             - start
