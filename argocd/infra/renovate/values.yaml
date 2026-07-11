@@ -1,7 +1,7 @@
 ---
 cachePersistence:
   enabled: true
-  storageClass: truenas-ssd
+  storageClass: longhorn
   size: 20Gi
 
 containerSecurityContext:
