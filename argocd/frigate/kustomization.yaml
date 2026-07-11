@@ -20,3 +20,7 @@ helmCharts:
     releaseName: frigate
     namespace: frigate
     valuesFile: ./manifests/values.yaml
+
+replicas:
+   - name: frigate
+     count: 0
