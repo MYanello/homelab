@@ -117,7 +117,7 @@ spec:
           operator: "Exists"
           effect: "NoSchedule"
       containers:
-        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:b1c7bf836e64ed9406a8984af29509f40089d55cea14b32f12c4726a1f17104b
+        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:628f228f0fd5913a220438693576b29b6fe4dc1fa0a1298c0e98579fae28635f
           imagePullPolicy: IfNotPresent
           name: db
           ports:
