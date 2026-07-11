@@ -59,7 +59,4 @@ spec:
         addresses:
           - LoadBalancerIP
       selector:
-        matchExpressions:
-          - key: io.cilium/bgp-announce
-            operator: NotIn
-            values: [fakevalue]
+        matchLabels: {}
