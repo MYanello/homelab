@@ -4,5 +4,10 @@ kind: Kustomization
 resources:
 - manifests/deploy.yaml
 
+configMapGenerator:
+  - name: config
+    files:
+      - manifests/config.toml
+
 generators:
   -  manifests/secret-generator.yaml

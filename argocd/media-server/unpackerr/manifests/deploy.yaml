@@ -65,6 +65,6 @@ spec:
         - name: logs
           emptyDir: {}
         - name: media
-          nfs:
-            server: marcus-server.lan
+          hostPath:
+            type: Directory
             path: /data/media
