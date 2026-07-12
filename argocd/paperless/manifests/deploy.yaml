@@ -71,11 +71,11 @@ spec:
               port: 8000
             periodSeconds: 30
             timeoutSeconds: 10
-        - name: protonmail-bridge
-          image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.25.0@sha256:2f804b70bbb5693254dfc9e2f5f0bc3570734f5b841c6b374686a3db82b1ea9d
-          volumeMounts:
-            - mountPath: "/root"
-              name: protonmail-data
+        # - name: protonmail-bridge
+        #   image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.25.0@sha256:2f804b70bbb5693254dfc9e2f5f0bc3570734f5b841c6b374686a3db82b1ea9d
+        #   volumeMounts:
+        #     - mountPath: "/root"
+        #       name: protonmail-data
       restartPolicy: Always
       volumes:
         - name: paperless-data
