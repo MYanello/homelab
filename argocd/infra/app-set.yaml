@@ -11,6 +11,8 @@ spec:
         revision: HEAD
         directories:
           - path: argocd/infra/*
+          - path: argocd/infra/kube-vip
+            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
