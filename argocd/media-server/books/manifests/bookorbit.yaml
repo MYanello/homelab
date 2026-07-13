@@ -24,7 +24,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: bookorbit
-          image: harbor.yanello.net/ghcr/bookorbit/bookorbit:2.0.1@sha256:70bef7bef8b0d0fa938c980b5a128f86bbde656cde04f4ab0549b9b91ebb2e14
+          image: harbor.yanello.net/ghcr/bookorbit/bookorbit:2.2.0@sha256:c2b01e655562dd95d785b515890c4c8c31325d90671efd1ae7db5b9f378a80ce
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
