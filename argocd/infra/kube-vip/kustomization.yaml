@@ -8,12 +8,12 @@ helmCharts:
     version: "0.9.9"
     releaseName: kube-vip
     namespace: kube-system
-    valuesInline: 
+    valuesInline:
       config:
         address: "192.168.10.100"
       env:
         vip_interface: eth0
-        vip_arp: false
+        vip_arp: true
         vip_leaderelection: true
         cp_enable: true
         svc_enable: false
