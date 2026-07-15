@@ -8,11 +8,7 @@ resources:
   - manifests/http-route.yaml
   - manifests/sts.yaml
   - manifests/pvc.yaml
-
-configMapGenerator:
-  - name: immich-config
-    files: 
-      - ./manifests/config.env
+  - manifests/cm.yaml
 
 generators:
   - manifests/secret-generator.yaml
