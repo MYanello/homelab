@@ -64,6 +64,8 @@ spec:
               value: "2048"
             - name: OIDC_ALLOW_LOCAL_ISSUERS
               value: "true"
+            - name: BOOK_DOCK_PATH
+              value: "/ingest"
           volumeMounts:
             - mountPath: /books
               name: books
