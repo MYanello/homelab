@@ -23,6 +23,7 @@ data:
   OIDC_ISSUER: https://authentik.yanello.net/application/o/dawarich/
   OIDC_REDIRECT_URI: https://dawarich.yanello.net/users/auth/openid_connect/callback
   OIDC_PROVIDER: Authentik
+  OIDC_PKCE_ENABLED: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
