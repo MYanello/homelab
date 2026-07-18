@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airtrail-config
+data:
+  UPLOAD_LOCATION: /app/uploads
+  ORIGIN: https://airtrail.yanello.net
+  OAUTH_ENABLED: "true"
+  OAUTH_ISSUER_URL: https://authentik.yanello.net/application/o/airtrail/
+  OAUTH_BUTTON_TEXT: Authentik

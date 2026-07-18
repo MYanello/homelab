@@ -23,15 +23,14 @@ spec:
     spec:
       containers:
         - env:
-            - name: ORIGIN
-              value: https://airtrail.yanello.net
             - name: DB_URL
               valueFrom:
                 secretKeyRef:
                   name: airtrail-db-app
                   key: uri
-            - name: UPLOAD_LOCATION
-              value: /app/uploads
+          envFrom:
+            - configMapRef:
+                name: airtrail-config
           image: harbor.yanello.net/docker/johly/airtrail:v3.11.1@sha256:9f702b91e0e7874d3c48a245dc10b9d1f726e2c1582d62237905ad905e5c35eb
           imagePullPolicy: IfNotPresent
           name: airtrail
