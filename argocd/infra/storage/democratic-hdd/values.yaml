@@ -1,3 +1,4 @@
+---
 csiDriver:
   # should be globally unique for a given cluster
   name: "org.democratic-csi.iscsi.hdd"
@@ -37,9 +38,9 @@ storageClasses:
 
     mountOptions: []
     secrets:
-      provisioner-secret:
-      controller-publish-secret:
-      node-stage-secret:
+      provisioner-secret: null
+      controller-publish-secret: null
+      node-stage-secret: null
       #      # any arbitrary iscsiadm entries can be add by creating keys starting with node-db.<entry.name>
       #      # if doing CHAP
       #      node-db.node.session.auth.authmethod: CHAP
@@ -49,9 +50,8 @@ storageClasses:
       #      # if doing mutual CHAP
       #      node-db.node.session.auth.username_in: baz
       #      node-db.node.session.auth.password_in: bar
-      node-publish-secret:
-      controller-expand-secret:
-
+      node-publish-secret: null
+      controller-expand-secret: null
 # if your cluster supports snapshots you may enable below
 volumeSnapshotClasses: []
 #- name: freenas-iscsi-csi

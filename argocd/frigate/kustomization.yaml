@@ -22,5 +22,5 @@ helmCharts:
     valuesFile: ./manifests/values.yaml
 
 replicas:
-   - name: frigate
-     count: 0
+  - name: frigate
+    count: 0

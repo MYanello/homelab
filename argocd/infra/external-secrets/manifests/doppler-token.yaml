@@ -1,23 +1,24 @@
+---
 apiVersion: v1
 kind: Secret
 metadata:
-    name: doppler-token
-    namespace: external-secrets
+  name: doppler-token
+  namespace: external-secrets
 type: Opaque
 stringData:
-    dopplerToken: ENC[AES256_GCM,data:Zk4DjDvX2KhTk0krc7hdJCqsDv0TWisOpcwIxg0ysA1dIBz2wM5yirPdjptn9qCisTvx5vU=,iv:Ktqc8ESLpsYmszkQwec+3HvW3NXsiCDi4K0hmtMc40I=,tag:MmurX8MBW7ToTlZRGcUSGg==,type:str]
+  dopplerToken: ENC[AES256_GCM,data:Zk4DjDvX2KhTk0krc7hdJCqsDv0TWisOpcwIxg0ysA1dIBz2wM5yirPdjptn9qCisTvx5vU=,iv:Ktqc8ESLpsYmszkQwec+3HvW3NXsiCDi4K0hmtMc40I=,tag:MmurX8MBW7ToTlZRGcUSGg==,type:str]
 sops:
-    age:
-        - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBZFdPcHJVV285T0JmZFIy
-            SXJZSEMyYVoveDRvOU9uMTJDTzd5ekhaTmdVCnc3NklPa2tnWWNVSmRQZHpUOWJt
-            Z0RpUlMvRjFKVndIa3p1ek95WTN1b0UKLS0tIFA2RkRZTEVMQjVlWjE2TCs1S1hF
-            TS9VckFMSjNGaDVEUnkwbzB6d29GWFkKjfTNt5mbqttfjs3a/UlVNwD/tEMF4ZOZ
-            5PzNZvubQ+P+wmdlykbhApAfbsGlg1npGCGxIs7NL1pdgVw2tCluYQ==
-            -----END AGE ENCRYPTED FILE-----
-          recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
-    lastmodified: "2026-06-10T21:50:17Z"
-    mac: ENC[AES256_GCM,data:zTuOSvYO6ZXnRpZ6BALtik60SyVPSJturVnAoJT3QVwRR3xk5aXuEqMRfBehlLKlOCDXGerqm18HixZ4gklaotCU8ZdqDy+LaFjOr2QnFAtgTPwPoQlvhAtWoVEGHrM3+Am5FRgkMBQKjs+L6RzPTtY3MGSzjY28EZenKupe1i0=,iv:9lsGWEV+BwFllxwr4ZdFn7lW3lbMxsVW7/7SyAw3g1A=,tag:LYaQUGaoQoTeXjONrofolw==,type:str]
-    unencrypted_regex: ^(apiVersion|metadata|kind|type)$
-    version: 3.13.1
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBZFdPcHJVV285T0JmZFIy
+        SXJZSEMyYVoveDRvOU9uMTJDTzd5ekhaTmdVCnc3NklPa2tnWWNVSmRQZHpUOWJt
+        Z0RpUlMvRjFKVndIa3p1ek95WTN1b0UKLS0tIFA2RkRZTEVMQjVlWjE2TCs1S1hF
+        TS9VckFMSjNGaDVEUnkwbzB6d29GWFkKjfTNt5mbqttfjs3a/UlVNwD/tEMF4ZOZ
+        5PzNZvubQ+P+wmdlykbhApAfbsGlg1npGCGxIs7NL1pdgVw2tCluYQ==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+  lastmodified: "2026-06-10T21:50:17Z"
+  mac: ENC[AES256_GCM,data:zTuOSvYO6ZXnRpZ6BALtik60SyVPSJturVnAoJT3QVwRR3xk5aXuEqMRfBehlLKlOCDXGerqm18HixZ4gklaotCU8ZdqDy+LaFjOr2QnFAtgTPwPoQlvhAtWoVEGHrM3+Am5FRgkMBQKjs+L6RzPTtY3MGSzjY28EZenKupe1i0=,iv:9lsGWEV+BwFllxwr4ZdFn7lW3lbMxsVW7/7SyAw3g1A=,tag:LYaQUGaoQoTeXjONrofolw==,type:str]
+  unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+  version: 3.13.1

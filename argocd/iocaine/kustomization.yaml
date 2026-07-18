@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -7,7 +8,7 @@ configMapGenerator:
       - ./manifests/config.kdl
   - name: metrics
     files:
-      - ./manifests/metrics.kdl  
+      - ./manifests/metrics.kdl
 
 resources:
   - manifests/sts.yaml

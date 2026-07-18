@@ -1,3 +1,4 @@
+---
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMScrapeConfig
 metadata:
@@ -8,7 +9,7 @@ spec:
     key: bearer_token
   scrape_interval: 60s
   staticConfigs:
-  - targets:
-    - homeassistant.yanello.net
+    - targets:
+        - homeassistant.yanello.net
   path: /api/prometheus
   scheme: https

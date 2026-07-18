@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
@@ -5,7 +6,9 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Vault
     gethomepage.dev/icon: sh-hashicorp-vault
-    gethomepage.dev/description: "Vault provides organizations with identity-based security to automatically authenticate and authorize access to secrets and other sensitive data."
+    gethomepage.dev/description: "Vault provides organizations with identity-based\
+      \ security to automatically authenticate and authorize access to secrets and\
+      \ other sensitive data."
     gethomepage.dev/pod-selector: app.kubernetes.io/name=vault
   labels:
     app.kubernetes.io/instance: vault-app

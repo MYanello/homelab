@@ -1,3 +1,4 @@
+---
 image:
   repository: harbor.yanello.net/docker/louislam/uptime-kuma
   tag: 2.4.0@sha256:91e963bfda569ba115206e843febb446f473ab525add4e08b2b9e3beffa16985

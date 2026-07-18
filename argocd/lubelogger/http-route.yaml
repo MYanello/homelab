@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -8,9 +9,8 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - lube.yanello.net
+    - lube.yanello.net
   rules:
-  - backendRefs:
-    - name: lubelogger
-      port: 80
-
+    - backendRefs:
+        - name: lubelogger
+          port: 80

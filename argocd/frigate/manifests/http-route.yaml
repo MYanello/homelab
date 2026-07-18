@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Frigate
     gethomepage.dev/icon: frigate
-    gethomepage.dev/description: "A complete and local NVR designed for Home Assistant with AI object detection."
+    gethomepage.dev/description: "A complete and local NVR designed for Home Assistant\
+      \ with AI object detection."
     gethomepage.dev/pod-selector: app.kubernetes.io/name=frigate
   labels:
     app.kubernetes.io/instance: frigate-app

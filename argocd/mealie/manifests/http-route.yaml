@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Mealie
     gethomepage.dev/icon: mealie
-    gethomepage.dev/description: "Mealie is an intuitive and easy to use recipe management app."
+    gethomepage.dev/description: "Mealie is an intuitive and easy to use recipe management\
+      \ app."
     gethomepage.dev/pod-selector: app=mealie
   labels:
     app.kubernetes.io/instance: mealie-app
@@ -20,10 +22,9 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - mealie.yanello.net
+    - mealie.yanello.net
   rules:
-  - backendRefs:
-    - name: mealie
-      namespace: mealie
-      port: 9000
-      
+    - backendRefs:
+        - name: mealie
+          namespace: mealie
+          port: 9000

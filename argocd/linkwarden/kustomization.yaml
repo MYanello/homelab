@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -5,10 +6,10 @@ resources:
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
   - ./manifests/httpRoute.yaml
-  
+
 generators:
   - ./manifests/secretGenerator.yaml
-  
+
 patches:
   - patch: |-
       - op: replace
@@ -16,4 +17,3 @@ patches:
         value: 1
     target:
       kind: StatefulSet
-      

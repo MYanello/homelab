@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -48,7 +49,7 @@ metadata:
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http 
+  - name: http
     appProtocol: http
     protocol: TCP
     port: 8080

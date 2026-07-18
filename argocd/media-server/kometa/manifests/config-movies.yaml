@@ -226,7 +226,7 @@ data:
           collection_section:
             criterion: 05
             a24: 06
-  letterboxd_downloaded.yaml: |
+  letterboxd_downloaded.yaml: |-
     external_templates:
       pmm: templates
       template_variables:

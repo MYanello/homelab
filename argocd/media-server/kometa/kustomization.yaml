@@ -1,12 +1,13 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 generators:
-- ./manifests/secret-generator.yaml
+  - ./manifests/secret-generator.yaml
 
 resources:
-- ./manifests/config-kometa.yaml
-- ./manifests/config-movies.yaml
-- ./manifests/config-tv.yaml
-- ./manifests/cronjob.yaml
-- ./manifests/pvc.yaml
+  - ./manifests/config-kometa.yaml
+  - ./manifests/config-movies.yaml
+  - ./manifests/config-tv.yaml
+  - ./manifests/cronjob.yaml
+  - ./manifests/pvc.yaml

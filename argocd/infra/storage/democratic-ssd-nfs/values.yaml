@@ -1,3 +1,4 @@
+---
 csiDriver:
   # should be globally unique for a given cluster
   name: "org.democratic-csi.nfs.ssd"
@@ -45,11 +46,11 @@ storageClasses:
       - timeo=600
       - retrans=2
     secrets:
-      provisioner-secret:
-      controller-publish-secret:
-      node-stage-secret:
-      node-publish-secret:
-      controller-expand-secret:
+      provisioner-secret: null
+      controller-publish-secret: null
+      node-stage-secret: null
+      node-publish-secret: null
+      controller-expand-secret: null
 
 driver:
   existingConfigSecret: democratic-secret

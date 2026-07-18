@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: RxResume
     gethomepage.dev/icon: sh-reactive-resume
-    gethomepage.dev/description: "A free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume. "
+    gethomepage.dev/description: "A free and open-source resume builder that simplifies\
+      \ the process of creating, updating, and sharing your resume. "
     gethomepage.dev/pod-selector: app=rx-resume
   labels:
     app.kubernetes.io/instance: resume-app

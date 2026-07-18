@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -5,7 +6,7 @@ metadata:
 spec:
   commonName: vault.yanello.net
   dnsNames:
-  - "vault.yanello.net"
+    - "vault.yanello.net"
   secretName: vault-letsencrypt
   issuerRef:
     name: letsencrypt-prod
@@ -36,7 +37,7 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "cert-manager"
   secretName: vault-tls
-  duration: 168h 
+  duration: 168h
   renewBefore: 24h
   issuerRef:
     name: vault-selfsigned
@@ -70,12 +71,12 @@ spec:
   # used to validate most TLS certificates on the internet, such as
   # those issued by Let's Encrypt, Google, Amazon and others.
   # NB: Unless you pin the package providing these CAs, the default can change!
-  - useDefaultCAs: false
+    - useDefaultCAs: false
 
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
-  - secret:
-      key: "ca.crt"
-      name: vault-tls
+    - secret:
+        key: "ca.crt"
+        name: vault-tls
       # selector:
       #   matchLabels:
       #     cert-manager.io/certificate-name: vault-tls

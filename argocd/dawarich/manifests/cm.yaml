@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,6 +20,9 @@ data:
   DISTANCE_UNIT: mi
   PHOTON_API_HOST: photon.komoot.io
   PHOTON_API_USE_HTTPS: "true"
+  OIDC_ISSUER: https://authentik.yanello.net/application/o/dawarich/
+  OIDC_REDIRECT_URI: https://dawarich.yanello.net/users/auth/openid_connect/callback
+  OIDC_PROVIDER: Authentik
 ---
 apiVersion: v1
 kind: ConfigMap

@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Profilarr
     gethomepage.dev/icon: profilarr
-    gethomepage.dev/description: "Profilarr is a custom format and quality profile manager for Radarr and Sonarr."
+    gethomepage.dev/description: "Profilarr is a custom format and quality profile\
+      \ manager for Radarr and Sonarr."
     gethomepage.dev/pod-selector: app=profilarr
   labels:
     app.kubernetes.io/instance: profilarr-app

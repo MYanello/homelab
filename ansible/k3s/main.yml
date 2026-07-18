@@ -1,3 +1,4 @@
+---
 # playbook to setup the cluster. mostly sourced from https://fredrickb.com/2024/10/29/making-the-k3s-cluster-ha/
 
 # - name: Configure Raspberry Pi cgroup settings
@@ -14,8 +15,6 @@
 #     - name: Reboot if boot parameters were changed
 #       ansible.builtin.reboot:
 #       when: cmdline.changed
-      
-  
 - name: Get install k3s script
   hosts: k3s_servers
   vars:
@@ -81,7 +80,6 @@
       delegate_to: "{{ item }}"
       delegate_facts: true
       with_items: "{{ groups['remaining_k3s_servers'] }}"
-      
     - name: Debug Print k3s token
       ansible.builtin.debug:
         msg: "K3s Token: {{ k3s_token }}"
@@ -158,7 +156,7 @@
 #         K3S_URL: "https://{{ k3s_control_plane_vip }}:6443"
 #         K3S_NODE_NAME: "{{ inventory_hostname }}"
 #       when: not k3s.stat.exists
-    #TODO
+    # TODO
   # - name: Copy kubectl config from server to temp .kube directory on control node
   #   become: true
   #   ansible.builtin.fetch:
