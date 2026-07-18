@@ -4,12 +4,12 @@ kind: ClusterRole
 metadata:
   name: otel-collector
 rules:
-- apiGroups: [""]
-  resources: ["pods", "namespaces", "nodes"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["apps"]
-  resources: ["replicasets", "deployments"]
-  verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods", "namespaces", "nodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["replicasets", "deployments"]
+    verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -20,6 +20,6 @@ roleRef:
   kind: ClusterRole
   name: otel-collector
 subjects:
-- kind: ServiceAccount
-  name: podlog-collector
-  namespace: monitoring
+  - kind: ServiceAccount
+    name: podlog-collector
+    namespace: monitoring

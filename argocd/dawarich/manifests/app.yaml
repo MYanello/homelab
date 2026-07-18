@@ -26,12 +26,15 @@ spec:
                 name: app-config
             - configMapRef:
                 name: shared-config
+            - secretRef:
+                name: dawarich-secrets
           env:
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: dawarich-secrets
                   key: POSTGRES_PASSWORD
+
           ports:
             - containerPort: 3000
               name: http

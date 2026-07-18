@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: 'true'
     gethomepage.dev/name: Homebox
     gethomepage.dev/icon: homebox
-    gethomepage.dev/description: 'HomeBox is the inventory and organization system built for the Home User!'
+    gethomepage.dev/description: 'HomeBox is the inventory and organization system
+      built for the Home User!'
     gethomepage.dev/pod-selector: app=homebox
   labels:
     app.kubernetes.io/instance: homebox-app
@@ -13,14 +15,13 @@ metadata:
   namespace: homebox
 spec:
   parentRefs:
-  - name: cilium-private-gateway
-    namespace: cilium
-    sectionName: https
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
-  - homebox.yanello.net
+    - homebox.yanello.net
   rules:
-  - backendRefs:
-    - name: homebox
-      namespace: homebox
-      port: 7745
-
+    - backendRefs:
+        - name: homebox
+          namespace: homebox
+          port: 7745

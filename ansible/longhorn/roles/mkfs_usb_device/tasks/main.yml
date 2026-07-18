@@ -1,3 +1,4 @@
+---
 - name: Create a ext4 filesystem on /dev/sda1 and check disk blocks
   filesystem:
     fstype: ext4

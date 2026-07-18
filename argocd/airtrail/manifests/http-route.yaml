@@ -1,0 +1,24 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: AirTrail
+    gethomepage.dev/icon: sh-airplane
+    gethomepage.dev/description: "Personal flight tracking"
+    gethomepage.dev/pod-selector: app=airtrail
+  labels:
+    app.kubernetes.io/instance: airtrail-app
+  name: airtrail-http-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - airtrail.yanello.net
+  rules:
+    - backendRefs:
+        - name: airtrail
+          port: 3000

@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -8,9 +9,8 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - epic.yanello.net
+    - epic.yanello.net
   rules:
-  - backendRefs:
-    - name: epic-games
-      port: 3000
-
+    - backendRefs:
+        - name: epic-games
+          port: 3000

@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: config-tv
 data:
-  ombi.yml: |
+  ombi.yml: |-
     collections:
       Camille:
         sonarr_taglist: camille.rodriguez, 8 - camille.rodriguez

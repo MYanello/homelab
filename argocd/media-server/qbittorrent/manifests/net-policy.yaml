@@ -1,3 +1,4 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -12,7 +13,7 @@ spec:
     # VPN endpoint for port forwarding
     - from:
         - ipBlock:
-            cidr: 146.70.217.66/32 
+            cidr: 146.70.217.66/32
     - from:
         - namespaceSelector:
             matchLabels:
@@ -26,7 +27,7 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
-              
+
   egress:
     # Responses to services which use qBittorrent
     - to:
@@ -45,7 +46,7 @@ spec:
     # VPN endpoint so gluetun can establish the vpn connection
     - to:
         - ipBlock:
-            cidr: 146.70.217.66/32 
+            cidr: 146.70.217.66/32
     - to:
         - namespaceSelector: {}
           podSelector:

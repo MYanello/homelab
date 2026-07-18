@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: airtrail
+  name: airtrail
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: airtrail
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: airtrail
+    spec:
+      containers:
+        - env:
+            - name: ORIGIN
+              value: https://airtrail.yanello.net
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: airtrail-db-app
+                  key: uri
+            - name: UPLOAD_LOCATION
+              value: /app/uploads
+          image: harbor.yanello.net/docker/johly/airtrail:v3.9.0
+          imagePullPolicy: IfNotPresent
+          name: airtrail
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/uploads
+              name: uploads
+          readinessProbe:
+            httpGet:
+              path: /api/ping
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/ping
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: airtrail-uploads

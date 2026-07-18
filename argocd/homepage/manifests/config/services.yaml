@@ -1,3 +1,4 @@
+---
 - Infrastructure:
     - OPNSense:
         href: https://opn.yanello.net
@@ -5,8 +6,8 @@
         widget:
           type: opnsense
           url: https://router.yanello.net
-          username: {{HOMEPAGE_VAR_OPN_USER}}
-          password: {{HOMEPAGE_VAR_OPN_PASS}}
+          username: {{HOMEPAGE_VAR_OPN_USER: null}: null}
+          password: {{HOMEPAGE_VAR_OPN_PASS: null}: null}
     - MySpeed:
         href: https://myspeed.yanello.net
         icon: myspeed
@@ -20,7 +21,7 @@
         widget:
           type: tautulli
           url: https://tautulli.yanello.net
-          key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
+          key: {{HOMEPAGE_VAR_TAUTULLI_KEY: null}: null}
           enableUser: 'true'
           showEpisodeNumber: 'true'
     - qBittorrent:
@@ -29,7 +30,7 @@
         widget:
           type: qbittorrent
           url: https://qbit.yanello.net
-          fields: 
+          fields:
             - download
             - seed
             - upload

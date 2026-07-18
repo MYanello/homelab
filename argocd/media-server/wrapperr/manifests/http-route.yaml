@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -5,7 +6,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Wrapperr
     gethomepage.dev/icon: mdi-gift
-    gethomepage.dev/description: "Wrapperr is a website-based application for pulling Plex user statistics within a set timeframe."
+    gethomepage.dev/description: "Wrapperr is a website-based application for pulling\
+      \ Plex user statistics within a set timeframe."
     gethomepage.dev/pod-selector: app=wrapperr
   labels:
     app.kubernetes.io/instance: wrapperr-app

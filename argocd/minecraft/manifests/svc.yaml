@@ -9,10 +9,10 @@ metadata:
     service: mc
 spec:
   ports:
-  - name: tcp
-    port: 25565
-    protocol: TCP
-    targetPort: 25565
+    - name: tcp
+      port: 25565
+      protocol: TCP
+      targetPort: 25565
   selector:
     server: mc
   type: LoadBalancer

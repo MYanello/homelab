@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -18,16 +19,16 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - renovate.yanello.net
+    - renovate.yanello.net
   rules:
-  - backendRefs:
-    - name: mend-renovate-ce
-      group: ""
-      kind: Service
-      namespace: renovate
-      port: 80
-      weight: 1
-    matches:
-      - path:
-          type: PathPrefix
-          value: /
+    - backendRefs:
+        - name: mend-renovate-ce
+          group: ""
+          kind: Service
+          namespace: renovate
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

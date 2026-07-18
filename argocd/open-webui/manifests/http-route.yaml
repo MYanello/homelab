@@ -15,9 +15,9 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-  - chat.yanello.net
+    - chat.yanello.net
   rules:
-  - backendRefs:
-    - name: open-webui
-      namespace: open-webui
-      port: 80
+    - backendRefs:
+        - name: open-webui
+          namespace: open-webui
+          port: 80

@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -8,7 +9,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Nextcloud
     gethomepage.dev/icon: nextcloud
-    gethomepage.dev/description: "Nextcloud is a suite of client-server software for creating and using file hosting services."
+    gethomepage.dev/description: "Nextcloud is a suite of client-server software for\
+      \ creating and using file hosting services."
     gethomepage.dev/pod-selector: app.kubernetes.io/name=nextcloud
 spec:
   parentRefs:

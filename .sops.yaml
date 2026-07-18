@@ -1,3 +1,4 @@
+---
 creation_rules:
   - path_regex: .*\.(yaml|json|json5)$
     unencrypted_regex: "^(apiVersion|metadata|kind|type)$"
