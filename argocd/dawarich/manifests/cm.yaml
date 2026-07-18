@@ -17,7 +17,7 @@ data:
   BACKGROUND_PROCESSING_CONCURRENCY: "10"
   TIME_ZONE: "America/Toronto"
   MIN_MINUTES_SPENT_IN_CITY: "60"
-  DISTANCE_UNIT: mi
+  DISTANCE_UNIT: km
   PHOTON_API_HOST: photon.komoot.io
   PHOTON_API_USE_HTTPS: "true"
   OIDC_ISSUER: https://authentik.yanello.net/application/o/dawarich/
