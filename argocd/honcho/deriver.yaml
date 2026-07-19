@@ -15,14 +15,14 @@ spec:
     spec:
       initContainers:
         - name: db-migrate
-          image: harbor.yanello.net/library/honcho:v3.0.10@sha256:febba9a2b119e7f7f12f84f7929ab3d788f2271bbb164ad27bd24f146d28d48c
+          image: harbor.yanello.net/library/honcho:v3.0.10@sha256:fb443067febe9d82aefd2a490c919d01fc31ebbb50042e8dc5d5cdb75c790c85
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
           envFrom:
             - secretRef:
                 name: honcho-env
       containers:
         - name: deriver
-          image: harbor.yanello.net/library/honcho:v3.0.10@sha256:febba9a2b119e7f7f12f84f7929ab3d788f2271bbb164ad27bd24f146d28d48c
+          image: harbor.yanello.net/library/honcho:v3.0.10@sha256:fb443067febe9d82aefd2a490c919d01fc31ebbb50042e8dc5d5cdb75c790c85
           imagePullPolicy: Always
           command: ["/app/.venv/bin/python", "-m", "src.deriver"]
           envFrom:
