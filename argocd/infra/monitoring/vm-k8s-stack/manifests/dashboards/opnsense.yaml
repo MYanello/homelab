@@ -14,8 +14,8 @@ data:
         "name": "a88e6c5d-c5ea-4acc-b079-47c3fc6467f1",
         "namespace": "default",
         "uid": "86fdc46d-a436-495a-8906-d20072fbd4c4",
-        "resourceVersion": "1784478972080983",
-        "generation": 10,
+        "resourceVersion": "1784480736658980",
+        "generation": 11,
         "creationTimestamp": "2026-07-19T14:01:17Z",
         "labels": {
           "grafana.app/deprecatedInternalID": "2683188283981824"
@@ -24,11 +24,11 @@ data:
           "grafana.app/createdBy": "user:ffskvcy360934b",
           "grafana.app/managedBy": "classic-file-provisioning",
           "grafana.app/managerId": "default",
-          "grafana.app/sourceChecksum": "12d4cf6b95b4bbcfbd87faafc41d1665",
+          "grafana.app/sourceChecksum": "402ed11e13170c38f005562dace178ab",
           "grafana.app/sourcePath": "/var/lib/grafana/dashboards/default/opnsense-dashboard.json",
-          "grafana.app/sourceTimestamp": "1784478972000",
+          "grafana.app/sourceTimestamp": "1784480736000",
           "grafana.app/updatedBy": "access-policy:service",
-          "grafana.app/updatedTimestamp": "2026-07-19T16:36:12Z",
+          "grafana.app/updatedTimestamp": "2026-07-19T17:05:36Z",
           "grafana.app/folder": ""
         }
       },
@@ -2683,9 +2683,9 @@ data:
                           "group": "prometheus",
                           "kind": "DataQuery",
                           "spec": {
-                            "editorMode": "builder",
+                            "editorMode": "code",
                             "exemplar": false,
-                            "expr": "wan_ip_last_change",
+                            "expr": "wan_ip_last_change * 1000",
                             "legendFormat": "__auto",
                             "range": true
                           },
@@ -2736,9 +2736,9 @@ data:
                       "calcs": [
                         "lastNotNull"
                       ],
-                      "fields": "/^Time$/",
+                      "fields": "",
                       "limit": 1,
-                      "values": false
+                      "values": true
                     },
                     "showPercentChange": false,
                     "textMode": "value",
