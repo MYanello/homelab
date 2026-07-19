@@ -14,8 +14,8 @@ data:
         "name": "a88e6c5d-c5ea-4acc-b079-47c3fc6467f1",
         "namespace": "default",
         "uid": "86fdc46d-a436-495a-8906-d20072fbd4c4",
-        "resourceVersion": "1784470157280998",
-        "generation": 8,
+        "resourceVersion": "1784470496194991",
+        "generation": 9,
         "creationTimestamp": "2026-07-19T14:01:17Z",
         "labels": {
           "grafana.app/deprecatedInternalID": "2683188283981824"
@@ -24,11 +24,11 @@ data:
           "grafana.app/createdBy": "user:ffskvcy360934b",
           "grafana.app/managedBy": "classic-file-provisioning",
           "grafana.app/managerId": "default",
-          "grafana.app/sourceChecksum": "ebce6460cc8cf823fefcc7693c1799ba",
+          "grafana.app/sourceChecksum": "f709aeeea0c3c0b5b940bfd515832b81",
           "grafana.app/sourcePath": "/var/lib/grafana/dashboards/default/opnsense-dashboard.json",
-          "grafana.app/sourceTimestamp": "1784470157000",
+          "grafana.app/sourceTimestamp": "1784470496000",
           "grafana.app/updatedBy": "access-policy:service",
-          "grafana.app/updatedTimestamp": "2026-07-19T14:09:17Z",
+          "grafana.app/updatedTimestamp": "2026-07-19T14:14:56Z",
           "grafana.app/folder": ""
         }
       },
@@ -2685,6 +2685,106 @@ data:
               }
             }
           },
+          "panel-37": {
+            "kind": "Panel",
+            "spec": {
+              "data": {
+                "kind": "QueryGroup",
+                "spec": {
+                  "queries": [
+                    {
+                      "kind": "PanelQuery",
+                      "spec": {
+                        "hidden": false,
+                        "query": {
+                          "datasource": {
+                            "name": "VictoriaMetrics"
+                          },
+                          "group": "prometheus",
+                          "kind": "DataQuery",
+                          "spec": {
+                            "editorMode": "builder",
+                            "exemplar": false,
+                            "expr": "wan_ip_info",
+                            "legendFormat": "__auto",
+                            "range": true
+                          },
+                          "version": "v0"
+                        },
+                        "refId": "A"
+                      }
+                    }
+                  ],
+                  "queryOptions": {},
+                  "transformations": [
+                    {
+                      "group": "labelsToFields",
+                      "kind": "Transformation",
+                      "spec": {
+                        "options": {
+                          "keepLabels": [
+                            "ip"
+                          ],
+                          "valueLabel": "hostname"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "description": "",
+              "id": 37,
+              "links": [],
+              "title": "WAN IP",
+              "vizConfig": {
+                "group": "stat",
+                "kind": "VizConfig",
+                "spec": {
+                  "fieldConfig": {
+                    "defaults": {
+                      "color": {
+                        "fixedColor": "blue",
+                        "mode": "fixed"
+                      },
+                      "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                          {
+                            "color": "green",
+                            "value": 0
+                          },
+                          {
+                            "color": "red",
+                            "value": 80
+                          }
+                        ]
+                      }
+                    },
+                    "overrides": []
+                  },
+                  "options": {
+                    "colorMode": "none",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "horizontal",
+                    "percentChangeColorMode": "standard",
+                    "reduceOptions": {
+                      "calcs": [
+                        "lastNotNull"
+                      ],
+                      "fields": "/^ip$/",
+                      "limit": 1,
+                      "values": true
+                    },
+                    "showPercentChange": false,
+                    "textMode": "value",
+                    "wideLayout": true
+                  }
+                },
+                "version": "13.1.0"
+              }
+            }
+          },
           "panel-5": {
             "kind": "Panel",
             "spec": {
@@ -3249,6 +3349,19 @@ data:
                   "height": 3,
                   "width": 4,
                   "x": 16,
+                  "y": 0
+                }
+              },
+              {
+                "kind": "GridLayoutItem",
+                "spec": {
+                  "element": {
+                    "kind": "ElementReference",
+                    "name": "panel-37"
+                  },
+                  "height": 3,
+                  "width": 3,
+                  "x": 20,
                   "y": 0
                 }
               },
