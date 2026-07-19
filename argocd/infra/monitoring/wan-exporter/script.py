@@ -1,7 +1,6 @@
 import json
 import os
 import time
-import urllib.error
 import urllib.request
 
 from prometheus_client import Gauge, Info, start_http_server
@@ -51,7 +50,7 @@ def query_vm():
 def fetch_ip():
     req = urllib.request.Request(
         "https://ifconfig.co",
-        headers={"Accept": "application/json"},
+        headers={"Accept": "application/json", "User-Agent": "curl/8.21"},
     )
     resp = urllib.request.urlopen(req, timeout=10)
     return json.loads(resp.read())
