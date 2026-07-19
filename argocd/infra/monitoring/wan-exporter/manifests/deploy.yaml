@@ -35,16 +35,16 @@ spec:
           readinessProbe:
             httpGet:
               path: /metrics
-              port: 9091
-            initialDelaySeconds: 30
-            periodSeconds: 10
+              port: 9101
+            initialDelaySeconds: 5
+            periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /
-              port: 9091
-            initialDelaySeconds: 30
+              port: 9101
+            initialDelaySeconds: 5
             periodSeconds: 30
             timeoutSeconds: 5
             failureThreshold: 5
