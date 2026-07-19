@@ -7,3 +7,6 @@ resources:
   - ./manifests/deploy.yaml
   - ./manifests/svc.yaml
   - ./manifests/scrape.yaml
+
+generators:
+  - ./manifests/secret-generator.yaml

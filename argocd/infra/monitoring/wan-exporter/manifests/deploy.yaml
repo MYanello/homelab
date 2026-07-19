@@ -20,9 +20,9 @@ spec:
         - image: harbor.yanello.net/library/wan-exporter:v0.3.0
           name: wan-exporter
           imagePullPolicy: Always
-          env:
-            name: NTFY_TOPIC
-            value: myanello_homelab
+          envFrom:
+            - secretRef:
+                name: wan-exporter-secrets
           ports:
             - containerPort: 9101
               protocol: TCP
@@ -32,3 +32,19 @@ spec:
             requests:
               memory: 16Mi
               cpu: 10m
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 9091
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9091
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
