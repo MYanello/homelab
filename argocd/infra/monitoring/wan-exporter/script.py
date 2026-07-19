@@ -9,6 +9,21 @@ wan_ip = Info("wan_ip", "Current public IP")
 last_ip = Gauge("wan_last_scrape", "Timestamp of last successful scrape")
 last_change = Gauge("wan_ip_last_change", "Timestamp of last IP change")
 
+fields = (
+    "ip",
+    "country",
+    "country_iso",
+    "region_name",
+    "city",
+    "zip_code",
+    "latitude",
+    "longitude",
+    "asn",
+    "asn_org",
+    "hostname",
+    "time_zone",
+)
+
 
 async def update():
     async with aiohttp.ClientSession() as session:
@@ -22,7 +37,7 @@ async def update():
                 ) as resp:
                     data = await resp.json()
                     ip = data.get("ip", "unknown")
-                    wan_ip.info({"ip": ip})
+                    wan_ip.info({k: str(data.get(k, "")) for k in fields})
                     last_ip.set(time.time())
                     if ip != prev_ip:
                         last_change.set(time.time())

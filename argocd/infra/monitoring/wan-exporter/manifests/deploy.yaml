@@ -19,6 +19,7 @@ spec:
       containers:
         - image: harbor.yanello.net/library/wan-exporter:v0.1.0@sha256:c9ef8e1a4ad999647380c080d69a3d98f441ef65855ffa2cbb3c2b6979946b47
           name: wan-exporter
+          imagePullPolicy: Always
           ports:
             - containerPort: 9101
               protocol: TCP
