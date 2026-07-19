@@ -30,12 +30,6 @@ kind: HTTPRoute
 metadata:
   labels:
     app.kubernetes.io/instance: monitoring-app
-  # annotations:
-  #   gethomepage.dev/enabled: "true"
-  #   gethomepage.dev/name: VictoriaMetrics
-  #   gethomepage.dev/icon: victoriametrics
-  #   gethomepage.dev/description: "VictoriaMetrics is a fast, cost-effective monitoring solution and time series database."
-  #   gethomepage.dev/pod-selector: app.kubernetes.io/name=vmsingle
   name: vmagent-httproute
 spec:
   parentRefs:
@@ -76,5 +70,3 @@ spec:
         - name: victoria-metrics-k8s-stack-grafana
           namespace: monitoring
           port: 80
---- null
-...
