@@ -2,6 +2,7 @@ import json
 import os
 import time
 import urllib.request
+from datetime import datetime
 
 from prometheus_client import Gauge, Info, start_http_server
 
@@ -32,19 +33,30 @@ PORT = int(os.getenv("PORT", 9101))
 INTERVAL = int(os.getenv("INTERVAL", 120))
 
 
-def query_vm():
+def query_vm() -> tuple[dict, float]:
     url = f"{VM_URL}/api/v1/query?query=wan_ip_info"
+    result, ts = {}, time.time()
+
     try:
         resp = urllib.request.urlopen(url, timeout=5)
         data = json.loads(resp.read())
         for r in data.get("data", {}).get("result", []):
-            ip = r.get("metric", {}).get("ip", "").strip()
-            if ip:
-                ts = r.get("value", ["", "0"])[1]
-                return ip, float(ts)
+            result = r.get("metric", {})
+            if result:
+                break
+        resp = urllib.request.urlopen(
+            f"{VM_URL}/api/v1/query?query=wan_ip_last_change", timeout=5
+        )
+        data = json.loads(resp.read())
+        for r in data.get("data", {}).get("result", []):
+            v = float(r.get("value", ["", str(ts)])[1])
+            # only trust timestamps from 2024 onward
+            if v > 1_700_000_000:
+                ts = v
+            break
     except Exception as e:
         print(f"VM query failed: {e}")
-    return "", time.time()
+    return result, ts
 
 
 def fetch_ip():
@@ -59,12 +71,17 @@ def fetch_ip():
 def main():
     print("Starting WAN IP exporter")
 
-    prev_ip, change_time = query_vm()
-    if prev_ip:
-        wan_ip.info({"ip": prev_ip})
-        print(f"Restored IP: {prev_ip}")
-    last_change.set(change_time)
-
+    previous, change_time = query_vm()
+    prev_ip = previous.get("ip")
+    if previous:
+        wan_ip.info(previous)
+        if change_time:
+            last_change.set(change_time)
+            print(
+                f"Restored IP: {previous.get('ip')}; last change: {datetime.fromtimestamp(change_time).isoformat(timespec='seconds')}"
+            )
+        else:
+            print(f"Restored IP: {previous.get('ip')}; last change unknown")
     start_http_server(PORT)
 
     while True:
