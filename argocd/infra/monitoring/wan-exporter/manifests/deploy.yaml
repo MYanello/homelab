@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wan-exporter
+  name: wan-exporter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: wan-exporter
+  template:
+    metadata:
+      labels:
+        app: wan-exporter
+    spec:
+      containers:
+        - image: harbor.yanello.net/library/wan-exporter:v0.1.0@sha256:c9ef8e1a4ad999647380c080d69a3d98f441ef65855ffa2cbb3c2b6979946b47
+          name: wan-exporter
+          ports:
+            - containerPort: 9101
+              protocol: TCP
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              memory: 16Mi
+              cpu: 10m

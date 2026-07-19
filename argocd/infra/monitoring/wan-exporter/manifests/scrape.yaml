@@ -1,0 +1,12 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: wan-exporter
+spec:
+  scrape_interval: 120s
+  staticConfigs:
+    - targets:
+        - wan-exporter.monitoring.svc.cluster.local:9101
+  path: /metrics
+  scheme: http

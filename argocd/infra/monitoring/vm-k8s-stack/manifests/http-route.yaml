@@ -23,7 +23,7 @@ spec:
     - backendRefs:
         - name: vmsingle-victoria-metrics-k8s-stack
           namespace: monitoring
-          port: 8428
+          port: 8429
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute

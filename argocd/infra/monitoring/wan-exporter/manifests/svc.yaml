@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wan-exporter
+  name: wan-exporter
+spec:
+  ports:
+    - name: metrics
+      port: 9101
+      protocol: TCP
+      targetPort: 9101
+  selector:
+    app: wan-exporter
