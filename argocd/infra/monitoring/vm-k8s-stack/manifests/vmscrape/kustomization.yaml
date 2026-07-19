@@ -7,3 +7,4 @@ resources:
   - ./haproxy.yaml
   - ./netdata.yaml
   - ./kuma.yaml
+  - ./opnsense.yaml
