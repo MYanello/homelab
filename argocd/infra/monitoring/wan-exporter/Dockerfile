@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY script.py .
 
-RUN apk add curl
+RUN apk add curl jq
 ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/app/venv
 RUN uv venv && uv pip install aiohttp prometheus_client
