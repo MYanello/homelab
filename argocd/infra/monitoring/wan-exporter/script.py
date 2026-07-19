@@ -36,8 +36,9 @@ async def update():
                     headers={"Accept": "application/json"},
                 ) as resp:
                     data = await resp.json()
-                    ip = data.get("ip", "unknown")
-                    wan_ip.info({k: str(data.get(k, "")) for k in fields})
+                    out = {k: str(data.get(k, "")) for k in fields}
+                    ip = out.get("ip", "")
+                    wan_ip.info(out)
                     last_ip.set(time.time())
                     if ip != prev_ip:
                         last_change.set(time.time())
