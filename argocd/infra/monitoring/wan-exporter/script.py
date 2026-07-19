@@ -31,6 +31,7 @@ VM_URL = os.getenv(
 )
 PORT = int(os.getenv("PORT", 9101))
 INTERVAL = int(os.getenv("INTERVAL", 120))
+NTFY_URL = f"ntfy.sh/{os.getenv('NTFY_TOPIC')}"
 
 
 def query_vm() -> tuple[dict, float]:
@@ -68,6 +69,19 @@ def fetch_ip():
     return json.loads(resp.read())
 
 
+def notify(title: str, message: str) -> None:
+    try:
+        req = urllib.request.Request(
+            NTFY_URL,
+            data=message.encode(),
+            headers={"Title": title, "Tags": "globe"},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=5)
+    except Exception as e:
+        print(f"ntfy failed: {e}")
+
+
 def main():
     print("Starting WAN IP exporter")
 
@@ -95,6 +109,7 @@ def main():
                 change_time = time.time()
                 last_change.set(change_time)
                 print(f"IP changed: {ip}")
+                notify("WAN IP changed", f"{prev_ip or 'unknown'} -> {ip}")
                 prev_ip = ip
         except Exception as e:
             print(f"Scrape error: {e}")

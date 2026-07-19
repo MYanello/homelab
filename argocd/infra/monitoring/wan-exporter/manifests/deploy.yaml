@@ -20,6 +20,9 @@ spec:
         - image: harbor.yanello.net/library/wan-exporter:v0.2.0
           name: wan-exporter
           imagePullPolicy: Always
+          env:
+            name: NTFY_TOPIC
+            value: myanello_homelab
           ports:
             - containerPort: 9101
               protocol: TCP
