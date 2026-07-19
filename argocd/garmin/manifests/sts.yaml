@@ -17,6 +17,8 @@ spec:
       labels:
         app: garmin-fetch
     spec:
+      securityContext:
+        fsGroup: 1000
       initContainers:
         - name: wait-for-influxdb
           image: curlimages/curl:latest@sha256:7c12af72ceb38b7432ab85e1a265cff6ae58e06f95539d539b654f2cfa64bb13
@@ -37,7 +39,6 @@ spec:
           imagePullPolicy: IfNotPresent
           name: garmin-fetch
           securityContext:
-            fsGroup: 1000
             runAsUser: 1000
             runAsGroup: 1000
           env:
