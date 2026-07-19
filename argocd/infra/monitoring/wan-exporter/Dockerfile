@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY script.py .
 
+ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/app/venv
 RUN uv venv && uv pip install aiohttp prometheus_client
 
