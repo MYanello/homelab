@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: docker.io/postgis/postgis:17-3.5-alpine@sha256:fe9821935d163abca5611e3e0a6a7c73c8c547f3412ed2036ec0ed8f789390da
+          image: docker.io/postgis/postgis:17-3.5-alpine@sha256:bcab61c139a9644dcf0bb00b0cff8ab84e36b3b6f74983cf229ddb4ea0c22897
           env:
             - name: POSTGRES_USER
               value: postgres
