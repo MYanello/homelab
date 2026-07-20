@@ -14,8 +14,8 @@ data:
         "name": "a88e6c5d-c5ea-4acc-b079-47c3fc6467f1",
         "namespace": "default",
         "uid": "86fdc46d-a436-495a-8906-d20072fbd4c4",
-        "resourceVersion": "1784484249205005",
-        "generation": 13,
+        "resourceVersion": "1784484362601010",
+        "generation": 14,
         "creationTimestamp": "2026-07-19T14:01:17Z",
         "labels": {
           "grafana.app/deprecatedInternalID": "2683188283981824"
@@ -24,11 +24,11 @@ data:
           "grafana.app/createdBy": "user:ffskvcy360934b",
           "grafana.app/managedBy": "classic-file-provisioning",
           "grafana.app/managerId": "default",
-          "grafana.app/sourceChecksum": "48b97ad8c9060bcb67731946f8105169",
+          "grafana.app/sourceChecksum": "c96b4857d650a4b0d4aba215ebfd4e0e",
           "grafana.app/sourcePath": "/var/lib/grafana/dashboards/default/opnsense-dashboard.json",
-          "grafana.app/sourceTimestamp": "1784484249000",
+          "grafana.app/sourceTimestamp": "1784484362000",
           "grafana.app/updatedBy": "access-policy:service",
-          "grafana.app/updatedTimestamp": "2026-07-19T18:04:09Z",
+          "grafana.app/updatedTimestamp": "2026-07-19T18:06:02Z",
           "grafana.app/folder": ""
         }
       },
@@ -1458,7 +1458,7 @@ data:
                           "group": "prometheus",
                           "kind": "DataQuery",
                           "spec": {
-                            "editorMode": "builder",
+                            "editorMode": "code",
                             "expr": "irate(node_network_receive_bytes_total{job=\"$job\", device=\"$lan_interface_1\"}[1m])",
                             "intervalFactor": 1,
                             "legendFormat": "In: {{ device }}",
@@ -1559,7 +1559,8 @@ data:
                             "value": 80
                           }
                         ]
-                      }
+                      },
+                      "unit": "Bps"
                     },
                     "overrides": []
                   },
@@ -2541,7 +2542,8 @@ data:
                             "value": 80
                           }
                         ]
-                      }
+                      },
+                      "unit": "Bps"
                     },
                     "overrides": []
                   },

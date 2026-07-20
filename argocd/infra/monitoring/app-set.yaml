@@ -11,8 +11,6 @@ spec:
         revision: main
         directories:
           - path: argocd/infra/monitoring/*
-          - path: argocd/infra/monitoring/kiali
-            exclude: true
           - path: argocd/infra/monitoring/loki
             exclude: true
           - path: argocd/infra/monitoring/vm-operator-crds
