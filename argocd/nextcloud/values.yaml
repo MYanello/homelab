@@ -106,8 +106,8 @@ mariadb:
   auth:
     existingSecret: nextcloud-secrets
   global:
-    defaultStorageClass: truenas-ssd
+    defaultStorageClass: longhorn-xfs
   primary:
     persistence:
       enabled: true
-      storageClass: truenas-ssd
+      storageClass: longhorn-xfs
