@@ -108,8 +108,6 @@ endpoints:
       - 192.168.5.27
     conditions:
       ready: true
---- null
-...
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
