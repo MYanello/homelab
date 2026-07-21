@@ -11,7 +11,7 @@ resources:
 configMapGenerator:
   - name: mc-config
     envs:
-      - ./manifests/cm.yaml
+      - ./manifests/cm.env
 
 generators:
   - ./manifests/secret-generator.yaml
