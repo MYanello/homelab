@@ -66,7 +66,7 @@ spec:
                   name: unifi-secrets
                   key: unifi-password
       containers:
-        - image: lscr.io/linuxserver/unifi-network-application:10.4.57-ls138
+        - image: lscr.io/linuxserver/unifi-network-application:10.4.57-ls138@sha256:30c19017c4f849ee4285cf7bcd0d3f292b0b6055735912c009d2a16c15319a51
           imagePullPolicy: IfNotPresent
           name: unifi-network-application
           resources:
