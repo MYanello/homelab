@@ -13,22 +13,20 @@ data:
       "metadata": {
         "name": "a88e6c5d-c5ea-4acc-b079-47c3fc6467f1",
         "namespace": "default",
-        "uid": "86fdc46d-a436-495a-8906-d20072fbd4c4",
-        "resourceVersion": "1784484362601010",
-        "generation": 14,
-        "creationTimestamp": "2026-07-19T14:01:17Z",
+        "uid": "8637e1e4-b0f0-4a37-9950-4e91cdfdbd4f",
+        "resourceVersion": "1784732066521985",
+        "generation": 1,
+        "creationTimestamp": "2026-07-22T14:54:26Z",
         "labels": {
-          "grafana.app/deprecatedInternalID": "2683188283981824"
+          "grafana.app/deprecatedInternalID": "3783727774285824"
         },
         "annotations": {
-          "grafana.app/createdBy": "user:ffskvcy360934b",
+          "grafana.app/createdBy": "access-policy:service",
           "grafana.app/managedBy": "classic-file-provisioning",
           "grafana.app/managerId": "default",
-          "grafana.app/sourceChecksum": "c96b4857d650a4b0d4aba215ebfd4e0e",
+          "grafana.app/sourceChecksum": "d4789cfda20d0530615bfdde19a98334",
           "grafana.app/sourcePath": "/var/lib/grafana/dashboards/default/opnsense-dashboard.json",
-          "grafana.app/sourceTimestamp": "1784484362000",
-          "grafana.app/updatedBy": "access-policy:service",
-          "grafana.app/updatedTimestamp": "2026-07-19T18:06:02Z",
+          "grafana.app/sourceTimestamp": "1784732054000",
           "grafana.app/folder": ""
         }
       },
@@ -1440,154 +1438,6 @@ data:
               }
             }
           },
-          "panel-26": {
-            "kind": "Panel",
-            "spec": {
-              "data": {
-                "kind": "QueryGroup",
-                "spec": {
-                  "queries": [
-                    {
-                      "kind": "PanelQuery",
-                      "spec": {
-                        "hidden": false,
-                        "query": {
-                          "datasource": {
-                            "name": "VictoriaMetrics"
-                          },
-                          "group": "prometheus",
-                          "kind": "DataQuery",
-                          "spec": {
-                            "editorMode": "code",
-                            "expr": "irate(node_network_receive_bytes_total{job=\"$job\", device=\"$lan_interface_1\"}[1m])",
-                            "intervalFactor": 1,
-                            "legendFormat": "In: {{ device }}",
-                            "metric": "node_network_receive_bytes_total",
-                            "range": true,
-                            "step": 1
-                          },
-                          "version": "v0"
-                        },
-                        "refId": "A"
-                      }
-                    },
-                    {
-                      "kind": "PanelQuery",
-                      "spec": {
-                        "hidden": false,
-                        "query": {
-                          "datasource": {
-                            "name": "VictoriaMetrics"
-                          },
-                          "group": "prometheus",
-                          "kind": "DataQuery",
-                          "spec": {
-                            "editorMode": "builder",
-                            "expr": "irate(node_network_transmit_bytes_total{job=\"$job\", device=\"$lan_interface_1\"}[1m])",
-                            "intervalFactor": 1,
-                            "legendFormat": "Out: {{ device }}",
-                            "metric": "node_network_receive_bytes_total",
-                            "range": true,
-                            "step": 1
-                          },
-                          "version": "v0"
-                        },
-                        "refId": "B"
-                      }
-                    }
-                  ],
-                  "queryOptions": {},
-                  "transformations": []
-                }
-              },
-              "description": "",
-              "id": 26,
-              "links": [],
-              "title": "LAN1 In/Out",
-              "vizConfig": {
-                "group": "timeseries",
-                "kind": "VizConfig",
-                "spec": {
-                  "fieldConfig": {
-                    "defaults": {
-                      "color": {
-                        "mode": "palette-classic"
-                      },
-                      "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "barWidthFactor": 0.6,
-                        "drawStyle": "line",
-                        "fillOpacity": 25,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                          "legend": false,
-                          "tooltip": false,
-                          "viz": false
-                        },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                          "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "showValues": false,
-                        "spanNulls": false,
-                        "stacking": {
-                          "group": "A",
-                          "mode": "normal"
-                        },
-                        "thresholdsStyle": {
-                          "mode": "off"
-                        }
-                      },
-                      "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                          {
-                            "color": "green",
-                            "value": 0
-                          },
-                          {
-                            "color": "red",
-                            "value": 80
-                          }
-                        ]
-                      },
-                      "unit": "Bps"
-                    },
-                    "overrides": []
-                  },
-                  "options": {
-                    "annotations": {
-                      "clustering": -1,
-                      "multiLane": false
-                    },
-                    "legend": {
-                      "calcs": [],
-                      "displayMode": "list",
-                      "enableFacetedFilter": false,
-                      "overflow": "ellipsis",
-                      "placement": "bottom",
-                      "showLegend": true
-                    },
-                    "tooltip": {
-                      "hideZeros": false,
-                      "mode": "single",
-                      "sort": "none"
-                    }
-                  }
-                },
-                "version": "13.1.0"
-              }
-            }
-          },
           "panel-29": {
             "kind": "Panel",
             "spec": {
@@ -2396,154 +2246,6 @@ data:
                           }
                         ]
                       }
-                    },
-                    "overrides": []
-                  },
-                  "options": {
-                    "annotations": {
-                      "clustering": -1,
-                      "multiLane": false
-                    },
-                    "legend": {
-                      "calcs": [],
-                      "displayMode": "list",
-                      "enableFacetedFilter": false,
-                      "overflow": "ellipsis",
-                      "placement": "bottom",
-                      "showLegend": true
-                    },
-                    "tooltip": {
-                      "hideZeros": false,
-                      "mode": "single",
-                      "sort": "none"
-                    }
-                  }
-                },
-                "version": "13.1.0"
-              }
-            }
-          },
-          "panel-36": {
-            "kind": "Panel",
-            "spec": {
-              "data": {
-                "kind": "QueryGroup",
-                "spec": {
-                  "queries": [
-                    {
-                      "kind": "PanelQuery",
-                      "spec": {
-                        "hidden": false,
-                        "query": {
-                          "datasource": {
-                            "name": "VictoriaMetrics"
-                          },
-                          "group": "prometheus",
-                          "kind": "DataQuery",
-                          "spec": {
-                            "editorMode": "builder",
-                            "expr": "irate(node_network_receive_bytes_total{job=\"$job\", device=\"$wan_interface_1\"}[1m])",
-                            "intervalFactor": 1,
-                            "legendFormat": "In: {{ device }}",
-                            "metric": "node_network_receive_bytes_total",
-                            "range": true,
-                            "step": 1
-                          },
-                          "version": "v0"
-                        },
-                        "refId": "A"
-                      }
-                    },
-                    {
-                      "kind": "PanelQuery",
-                      "spec": {
-                        "hidden": false,
-                        "query": {
-                          "datasource": {
-                            "name": "VictoriaMetrics"
-                          },
-                          "group": "prometheus",
-                          "kind": "DataQuery",
-                          "spec": {
-                            "editorMode": "builder",
-                            "expr": "irate(node_network_transmit_bytes_total{job=\"$job\", device=\"$wan_interface_1\"}[1m])",
-                            "intervalFactor": 1,
-                            "legendFormat": "Out: {{ device }}",
-                            "metric": "node_network_receive_bytes_total",
-                            "range": true,
-                            "step": 1
-                          },
-                          "version": "v0"
-                        },
-                        "refId": "B"
-                      }
-                    }
-                  ],
-                  "queryOptions": {},
-                  "transformations": []
-                }
-              },
-              "description": "",
-              "id": 36,
-              "links": [],
-              "title": "WAN1 In/Out",
-              "vizConfig": {
-                "group": "timeseries",
-                "kind": "VizConfig",
-                "spec": {
-                  "fieldConfig": {
-                    "defaults": {
-                      "color": {
-                        "mode": "palette-classic"
-                      },
-                      "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "barWidthFactor": 0.6,
-                        "drawStyle": "line",
-                        "fillOpacity": 25,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                          "legend": false,
-                          "tooltip": false,
-                          "viz": false
-                        },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                          "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "showValues": false,
-                        "spanNulls": false,
-                        "stacking": {
-                          "group": "A",
-                          "mode": "normal"
-                        },
-                        "thresholdsStyle": {
-                          "mode": "off"
-                        }
-                      },
-                      "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                          {
-                            "color": "green",
-                            "value": 0
-                          },
-                          {
-                            "color": "red",
-                            "value": 80
-                          }
-                        ]
-                      },
-                      "unit": "Bps"
                     },
                     "overrides": []
                   },
@@ -3502,32 +3204,6 @@ data:
                   "width": 12,
                   "x": 12,
                   "y": 18
-                }
-              },
-              {
-                "kind": "GridLayoutItem",
-                "spec": {
-                  "element": {
-                    "kind": "ElementReference",
-                    "name": "panel-26"
-                  },
-                  "height": 5,
-                  "width": 12,
-                  "x": 0,
-                  "y": 24
-                }
-              },
-              {
-                "kind": "GridLayoutItem",
-                "spec": {
-                  "element": {
-                    "kind": "ElementReference",
-                    "name": "panel-36"
-                  },
-                  "height": 5,
-                  "width": 12,
-                  "x": 0,
-                  "y": 29
                 }
               }
             ]
