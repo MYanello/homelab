@@ -40,17 +40,20 @@ spec:
                 -u root -p "$ROOT_PASSWORD" \
                 --authenticationDatabase admin <<EOF
               db.getSiblingDB("admin").auth("root", "$ROOT_PASSWORD");
-              db.getSiblingDB("unifi").createUser({
-                user: "$UNIFI_USER",
-                pwd: "$UNIFI_PASS",
-                roles: [
-                  "clusterMonitor",
-                  { db: "unifi", role: "dbOwner" },
-                  { db: "unifi_stat", role: "dbOwner" },
-                  { db: "unifi_audit", role: "dbOwner" },
-                  { db: "unifi_restore", role: "dbOwner" }
-                ]
-              });
+              const existing = db.getSiblingDB("admin").getUser("$UNIFI_USER");
+              if (!existing) {
+                db.getSiblingDB("admin").createUser({
+                  user: "$UNIFI_USER",
+                  pwd: "$UNIFI_PASS",
+                  roles: [
+                    "clusterMonitor",
+                    { db: "unifi", role: "dbOwner" },
+                    { db: "unifi_stat", role: "dbOwner" },
+                    { db: "unifi_audit", role: "dbOwner" },
+                    { db: "unifi_restore", role: "dbOwner" }
+                  ]
+                });
+              }
               EOF
           env:
             - name: ROOT_PASSWORD
@@ -87,7 +90,7 @@ spec:
             - name: MONGO_PASS
               valueFrom:
                 secretKeyRef:
-                  name: unifi-mongodb
+                  name: unifi-secrets
                   key: unifi-password
             - name: MONGO_HOST
               value: unifi-mongodb
