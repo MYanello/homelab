@@ -3,224 +3,143 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: unifi-network-application
-  name: unifi-network-application
+    app: unifi
+  name: unifi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: unifi-network-application
+      app: unifi
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: unifi-network-application
+        app: unifi
     spec:
       tolerations:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
-      initContainers:
-        - name: init-mongodb
-          image: docker.io/mongo:7.0@sha256:9bdaeb6dac6e7e762e84e2f84103d1f9bb078fa1ba6bde8bb9d2274f655ad173
-          imagePullPolicy: IfNotPresent
-          command:
-            - /bin/sh
-            - -c
-            - |
-              until mongosh --host unifi-mongodb --port 27017 \
-                -u root -p "$ROOT_PASSWORD" \
-                --authenticationDatabase admin \
-                --eval "db.adminCommand('ping')" 2>/dev/null; do
-                echo "waiting for mongodb..."
-                sleep 2
-              done
-              mongosh --host unifi-mongodb --port 27017 \
-                -u root -p "$ROOT_PASSWORD" \
-                --authenticationDatabase admin <<EOF
-              db.getSiblingDB("admin").auth("root", "$ROOT_PASSWORD");
-              const existing = db.getSiblingDB("admin").getUser("$UNIFI_USER");
-              if (!existing) {
-                db.getSiblingDB("admin").createUser({
-                  user: "$UNIFI_USER",
-                  pwd: "$UNIFI_PASS",
-                  roles: [
-                    "clusterMonitor",
-                    { db: "unifi", role: "dbOwner" },
-                    { db: "unifi_stat", role: "dbOwner" },
-                    { db: "unifi_audit", role: "dbOwner" },
-                    { db: "unifi_restore", role: "dbOwner" }
-                  ]
-                });
-              }
-              EOF
-          env:
-            - name: ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: unifi-secrets
-                  key: root-password
-            - name: UNIFI_USER
-              value: unifi
-            - name: UNIFI_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: unifi-secrets
-                  key: unifi-password
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
       containers:
-        - image: lscr.io/linuxserver/unifi-network-application:10.4.57-ls138
+        - image: ghcr.io/lemker/unifi-os-server:v1.4.0
           imagePullPolicy: IfNotPresent
-          name: unifi-network-application
+          name: unifi-os-server
+          securityContext:
+            privileged: true
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: UOS_SYSTEM_IP
+              value: "unifi.yanello.net"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/bash
+                  - -c
+                  - echo $HOST_IP host.docker.internal >> /etc/hosts
           resources:
             limits:
-              memory: 2Gi
+              memory: 4Gi
             requests:
               cpu: 200m
               memory: 1Gi
-          env:
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
-            - name: TZ
-              value: America/Chicago
-            - name: MONGO_USER
-              value: unifi
-            - name: MONGO_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: unifi-secrets
-                  key: unifi-password
-            - name: MONGO_HOST
-              value: unifi-mongodb
-            - name: MONGO_PORT
-              value: "27017"
-            - name: MONGO_DBNAME
-              value: unifi
-            - name: MONGO_AUTHSOURCE
-              value: admin
-            - name: MEM_LIMIT
-              value: "1024"
-            - name: MEM_STARTUP
-              value: "1024"
           ports:
-            - containerPort: 8443
+            - containerPort: 443
               protocol: TCP
               name: webui
             - containerPort: 8080
               protocol: TCP
               name: device
+            - containerPort: 8444
+              protocol: TCP
+              name: hotspot-secured
             - containerPort: 3478
               protocol: UDP
               name: stun
-            - containerPort: 10001
+            - containerPort: 10003
               protocol: UDP
               name: discovery
-            - containerPort: 8843
-              protocol: TCP
-              name: portal-https
-            - containerPort: 8880
-              protocol: TCP
-              name: portal-http
-            - containerPort: 6789
-              protocol: TCP
-              name: speedtest
             - containerPort: 5514
               protocol: UDP
               name: syslog
+            - containerPort: 6789
+              protocol: TCP
+              name: speedtest
+            - containerPort: 5005
+              protocol: TCP
+              name: rtp
+            - containerPort: 9543
+              protocol: TCP
+              name: id-hub
+            - containerPort: 28082
+              protocol: TCP
+              name: support-files
+            - containerPort: 5671
+              protocol: TCP
+              name: aqmps
+            - containerPort: 8880
+              protocol: TCP
+              name: hotspot-redirect-0
+            - containerPort: 8881
+              protocol: TCP
+              name: hotspot-redirect-1
+            - containerPort: 8882
+              protocol: TCP
+              name: hotspot-redirect-2
+            - containerPort: 11084
+              protocol: TCP
+              name: metrics
           volumeMounts:
-            - mountPath: /config
-              name: config
-          readinessProbe:
-            tcpSocket:
-              port: 8443
-            initialDelaySeconds: 60
-            periodSeconds: 15
+            - mountPath: /persistent
+              name: data
+              subPath: persistent
+            - mountPath: /var/log
+              name: data
+              subPath: log
+            - mountPath: /data
+              name: data
+              subPath: data
+            - mountPath: /srv
+              name: data
+              subPath: srv
+            - mountPath: /var/lib/unifi
+              name: data
+              subPath: unifi
+            - mountPath: /var/lib/mongodb
+              name: data
+              subPath: mongodb
+            - mountPath: /etc/rabbitmq/ssl
+              name: data
+              subPath: rabbitmq
+          livenessProbe:
+            httpGet:
+              path: /api/ping
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 60
             timeoutSeconds: 10
             failureThreshold: 5
-          livenessProbe:
-            tcpSocket:
-              port: 8443
-            initialDelaySeconds: 120
-            periodSeconds: 20
-            timeoutSeconds: 10
-            failureThreshold: 3
       restartPolicy: Always
       volumes:
-        - name: config
+        - name: data
           persistentVolumeClaim:
-            claimName: unifi-config
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: unifi-network-application
-  name: unifi-network-application
-spec:
-  ports:
-    - name: webui
-      port: 8443
-      targetPort: 8443
-    - name: device
-      port: 8080
-      targetPort: 8080
-    - name: stun
-      port: 3478
-      targetPort: 3478
-      protocol: UDP
-    - name: discovery
-      port: 10001
-      targetPort: 10001
-      protocol: UDP
-    - name: portal-https
-      port: 8843
-      targetPort: 8843
-    - name: portal-http
-      port: 8880
-      targetPort: 8880
-    - name: speedtest
-      port: 6789
-      targetPort: 6789
-    - name: syslog
-      port: 5514
-      targetPort: 5514
-      protocol: UDP
-  selector:
-    app: unifi-network-application
----
-apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: TLSRoute
-metadata:
-  labels:
-    app.kubernetes.io/instance: unifi-network-application-app
-  name: unifi-tlsroute
-spec:
-  hostnames:
-    - unifi.yanello.net
-  parentRefs:
-    - name: cilium-private-gateway
-      group: gateway.networking.k8s.io
-      kind: Gateway
-      namespace: cilium
-      sectionName: unifi-tls-passthrough
-  rules:
-    - backendRefs:
-        - name: unifi-network-application
-          group: ""
-          kind: Service
-          port: 8443
-          weight: 1
+            claimName: unifi-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: unifi-config
+  name: unifi-data
 spec:
   storageClassName: truenas-ssd-nfs
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 32Gi
