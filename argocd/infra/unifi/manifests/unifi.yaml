@@ -137,7 +137,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: unifi-data
 spec:
-  storageClassName: truenas-ssd-nfs
+  storageClassName: truenas-ssd
   accessModes:
     - ReadWriteOnce
   resources:
