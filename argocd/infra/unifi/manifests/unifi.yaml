@@ -86,13 +86,13 @@ spec:
               name: aqmps
             - containerPort: 8880
               protocol: TCP
-              name: hotspot-redirect-0
+              name: hotspot-0
             - containerPort: 8881
               protocol: TCP
-              name: hotspot-redirect-1
+              name: hotspot-1
             - containerPort: 8882
               protocol: TCP
-              name: hotspot-redirect-2
+              name: hotspot-2
             - containerPort: 11084
               protocol: TCP
               name: metrics
