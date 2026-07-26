@@ -104,7 +104,6 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - shelfmark.yanello.ne
     - calibre-dl.yanello.net
   rules:
     - backendRefs:
