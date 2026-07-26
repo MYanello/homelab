@@ -1,5 +1,14 @@
 ---
-victoria-metrics-operator: null
+victoria-metrics-operator:
+  enabled: true
+  admissionWebhooks:
+    enabled: true
+    policy: Ignore
+    certManager:
+      enabled: true
+      name: local-intermediate-ca1-issuer
+      kind: ClusterIssuer
+      group: cert-manager.io
 
 vmalert:
   enabled: true
