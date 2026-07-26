@@ -37,11 +37,11 @@ spec:
       #     cpu: "250m"
       #   limits:
       #     memory: "128Mi"
-      volumeMounts:
-        - name: storage
-          mountPath: /data
+      # volumeMounts:
+      #   - name: storage
+      #     mountPath: /data
   restartPolicy: Never
-  volumes:
-    - name: storage
-      persistentVolumeClaim:
-        claimName: data-bookorbit-0
+  # volumes:
+  #   - name: storage
+  #     persistentVolumeClaim:
+  #       claimName: data-bookorbit-0
