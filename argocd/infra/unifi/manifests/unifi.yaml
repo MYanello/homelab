@@ -27,7 +27,7 @@ spec:
         runAsUser: 0
         runAsGroup: 0
       containers:
-        - image: ghcr.io/lemker/unifi-os-server:v1.4.0
+        - image: ghcr.io/lemker/unifi-os-server:v1.4.0@sha256:bb07cac8005000893d239b9d88cfdca0376b28cf222ddb21081a73d5f67eef36
           imagePullPolicy: IfNotPresent
           name: unifi-os-server
           securityContext:
