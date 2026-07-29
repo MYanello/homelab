@@ -126,3 +126,27 @@ spec:
       targetPort: 3000
   selector:
     app: bookorbit
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: books
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data
+spec:
+  storageClassName: longhorn-xfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

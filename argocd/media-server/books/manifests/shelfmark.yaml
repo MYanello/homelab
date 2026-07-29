@@ -112,3 +112,15 @@ spec:
       targetPort: 8084
   selector:
     app: shelfmark
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shelfmark-conf
+spec:
+  storageClassName: longhorn-xfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
