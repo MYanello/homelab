@@ -73,7 +73,7 @@ spec:
             claimName: ingest
         - name: config
           persistentVolumeClaim:
-            claimName: shelfmark-config
+            claimName: shelfmark-conf
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
