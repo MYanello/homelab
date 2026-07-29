@@ -38,9 +38,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: shelfmark-config
+  name: shelfmark-conf
 spec:
-  storageClassName: truenas-ssd-nfs
+  storageClassName: longhorn-xfs
   accessModes:
     - ReadWriteOnce
   resources:
