@@ -10,6 +10,9 @@ spec:
     - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
     - paperless.yanello.net
   rules:
