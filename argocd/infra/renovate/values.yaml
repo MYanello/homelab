@@ -34,10 +34,14 @@ resources:
 renovate:
   extraEnvVars:
     - name: GIT_CONFIG_COUNT
-      value: "1"
+      value: "2"
     - name: GIT_CONFIG_KEY_0
       value: "safe.directory"
     - name: GIT_CONFIG_VALUE_0
+      value: "*"
+    - name: GIT_CONFIG_KEY_1
+      value: "safe.directory"
+    - name: GIT_CONFIG_VALUE_1
       value: "*"
     - name: MEND_RNV_DISK_USAGE_WARN_THRESHOLD
       value: "95"
