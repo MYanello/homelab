@@ -37,8 +37,6 @@ renovate:
     #   value: "safe.directory"
     # - name: GIT_CONFIG_VALUE_1
     #   value: "*"
-    - name: HOME
-      value: /tmp
     - name: MEND_RNV_DISK_USAGE_WARN_THRESHOLD
       value: "95"
   mendRnvAcceptTos: y
