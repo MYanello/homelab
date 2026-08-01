@@ -36,10 +36,16 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountPath: /config
+              name: config-file
+              subPath: config.js
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: cross-seed-config
+        - name: config-file
+          configMap:
+            name: cross-seed-config-file
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
