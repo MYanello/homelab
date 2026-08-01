@@ -1,6 +1,6 @@
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: TLSRoute
+kind: TCPRoute
 metadata:
   name: proxmox
 spec:
@@ -11,12 +11,7 @@ spec:
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: proxmox-tls-passthrough
-    # - name: cilium-public-gateway
-    #   group: gateway.networking.k8s.io
-    #   kind: Gateway
-    #   namespace: cilium
-    #   sectionName: proxmox-tls-passthrough
+      sectionName: https
   rules:
     - backendRefs:
         - name: proxmox-service
