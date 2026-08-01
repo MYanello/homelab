@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cross-seed
+  name: cross-seed
+spec:
+  selector:
+    matchLabels:
+      app: cross-seed
+  replicas: 1
+  revisionHistoryLimit: 3
+  template:
+    metadata:
+      labels:
+        app: cross-seed
+    spec:
+      containers:
+        - name: cross-seed
+          image: harbor.yanello.net/ghcr/cross-seed/cross-seed:7.0.0-22
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 3000
+            runAsGroup: 3000
+          resources:
+            requests:
+              memory: "10Mi"
+              cpu: 50m
+            limits:
+              memory: "100Mi"
+          ports:
+            - containerPort: 2468
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: cross-seed-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cross-seed-config
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cross-seed
+  name: cross-seed
+spec:
+  ports:
+    - name: "http"
+      port: 2468
+      targetPort: 2468
+  selector:
+    app: cross-seed
