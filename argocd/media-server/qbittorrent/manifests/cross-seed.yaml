@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: cross-seed
-          image: harbor.yanello.net/ghcr/cross-seed/cross-seed:7.0.0-22
+          image: harbor.yanello.net/ghcr/cross-seed/cross-seed:7.0.0-22@sha256:876f39fcf4e898624f084980c9542d8ceb03c38a2325a171ee3a8416480740c7
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 3000
