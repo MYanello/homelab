@@ -7,7 +7,7 @@ resources:
   - ./manifests/cm.yaml
   - ./manifests/http-route.yaml
   - ./manifests/deploy.yaml
-  - ./manifests/cert.yaml
+  # - ./manifests/cert.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
