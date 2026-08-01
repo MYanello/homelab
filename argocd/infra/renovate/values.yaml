@@ -4,6 +4,12 @@ cachePersistence:
   storageClass: longhorn
   size: 20Gi
 
+containerSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+podSecurityContext:
+  fsGroup: 1000
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
