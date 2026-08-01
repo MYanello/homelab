@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./manifests/svc.yaml
   - ./manifests/cm.yaml
-  - ./manifests/tlsRoute.yaml
+  - ./manifests/http-route.yaml
   - ./manifests/deploy.yaml
   - ./manifests/cert.yaml
 

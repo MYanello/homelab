@@ -9,8 +9,6 @@ data:
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
   controller.diff.server.side: "true"
   webhook.github.secret: $argocd-custom-secrets:webhook.github.secret
-  accounts.port-ocean-user: apiKey, login
-  accounts.port-ocean-user.enabled: "true"
   url: https://argocd.yanello.net
   resource.links: |
     - url: https://{{index .resource.spec.hostnames 0}}
@@ -46,7 +44,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-cmd-params-cm
 data:
-  server.insecure: "false"
+  server.insecure: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -63,4 +61,3 @@ data:
     p, role:read-only-role, repositories, get, *, allow
     p, role:read-only-role, projects, get, *, allow
     p, role:read-only-role, logs, get, *, allow
-    g, port-ocean-user, role:read-only-role
