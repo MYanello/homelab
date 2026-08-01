@@ -38,7 +38,7 @@ spec:
               name: config
             - mountPath: /config/config.js
               name: config-file
-              subPath: config.js
+              subPath: cross-seed-config.js
       volumes:
         - name: config
           persistentVolumeClaim:
