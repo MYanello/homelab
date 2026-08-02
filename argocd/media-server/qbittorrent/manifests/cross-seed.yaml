@@ -16,6 +16,15 @@ spec:
       labels:
         app: cross-seed
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - name: cross-seed
           image: harbor.yanello.net/ghcr/cross-seed/cross-seed:7.0.0-22@sha256:876f39fcf4e898624f084980c9542d8ceb03c38a2325a171ee3a8416480740c7
@@ -39,6 +48,8 @@ spec:
             - mountPath: /config/config.js
               name: config-file
               subPath: cross-seed-config.js
+            - mountPath: /data/media/torrents
+              name: torrents
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -46,6 +57,9 @@ spec:
         - name: config-file
           configMap:
             name: cross-seed-config-file
+        - name: torrents
+          hostPath:
+            path: /data/media/torrents
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
