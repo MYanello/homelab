@@ -9,33 +9,6 @@ spec:
     - value: 10.10.8.101
       type: IPAddress
   listeners:
-    # - name: ldap-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "ldap.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
-    # - name: argo-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "argocd.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
-    # - name: proxmox-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "proxmox.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
     - name: http
       protocol: HTTP
       hostname: "*.yanello.net"
@@ -80,7 +53,7 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: http-redirect-public # send http traffic to the https listener
+  name: http-redirect-public
 spec:
   parentRefs:
     - name: cilium-public-gateway
@@ -93,7 +66,7 @@ spec:
       sectionName: http-root
   hostnames:
     - "*.yanello.net"
-    # - "yanello.net"
+    - "yanello.net"
   rules:
     - filters:
         - type: RequestRedirect

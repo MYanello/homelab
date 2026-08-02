@@ -9,51 +9,6 @@ spec:
     - value: 10.10.8.100
       type: IPAddress
   listeners:
-    # - name: ldap-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "ldap.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
-    # - name: argo-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "argocd.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
-    # - name: proxmox-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "proxmox.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
-    # - name: truenas-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "truenas.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
-    # - name: frigate-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "frigate.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
     # - name: unifi-tls-passthrough
     #   protocol: TLS
     #   hostname: "unifi.yanello.net"
@@ -103,27 +58,27 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-# ---
-# apiVersion: gateway.networking.k8s.io/v1
-# kind: HTTPRoute
-# metadata:
-#   name: http-redirect-private  # send http traffic to the https listener
-# spec:
-#   parentRefs:
-#     - name: cilium-private-gateway
-#       group: gateway.networking.k8s.io
-#       kind: Gateway
-#       sectionName: http
-#   hostnames:
-#     - "*.yanello.net"
-#     - "yanello.net"
-#   rules:
-#     - filters:
-#         - type: RequestRedirect
-#           requestRedirect:
-#             scheme: https
-#             statusCode: 301
-#       matches:
-#         - path:
-#             type: PathPrefix
-#             value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: http-redirect-private
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      sectionName: http
+  hostnames:
+    - "*.yanello.net"
+    - "yanello.net"
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
