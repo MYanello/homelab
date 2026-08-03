@@ -45,18 +45,18 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            - mountPath: /config/config.js
-              name: config-file
-              subPath: config.js
+            # - mountPath: /config/config.js
+            #   name: config-file
+            #   subPath: config.js
             - mountPath: /data/media/torrents
               name: torrents
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: cross-seed-config
-        - name: config-file
-          secret:
-            secretName: cross-seed-conf
+        # - name: config-file
+        #   secret:
+        #     secretName: cross-seed-conf
         - name: torrents
           hostPath:
             path: /data/media/torrents
@@ -86,3 +86,22 @@ spec:
       targetPort: 2468
   selector:
     app: cross-seed
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: cross-seed-app
+  name: cross-seed-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - cross-seed.yanello.net
+  rules:
+    - backendRefs:
+        - name: cross-seed
+          namespace: qbittorrent
+          port: 2468
