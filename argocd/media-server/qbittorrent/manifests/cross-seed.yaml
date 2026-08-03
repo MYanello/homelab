@@ -38,7 +38,7 @@ spec:
               memory: 10Mi
               cpu: 50m
             limits:
-              memory: 100Mi
+              memory: 1Gi
           ports:
             - containerPort: 2468
               protocol: TCP
