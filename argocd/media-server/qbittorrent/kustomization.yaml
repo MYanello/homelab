@@ -11,8 +11,3 @@ resources:
 
 generators:
   - manifests/secret-generator.yaml
-
-configMapGenerator:
-  - name: cross-seed-config-file
-    files:
-      - manifests/cross-seed-config.js
