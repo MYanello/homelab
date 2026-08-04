@@ -2,6 +2,7 @@ import base64
 import hashlib
 import ipaddress
 import json
+import logging
 import os
 import time
 import urllib.request
@@ -11,6 +12,13 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
 from prometheus_client import Gauge, Info, start_http_server
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 wan_ip = Info("wan_ip", "Current public IP")
 last_scrape = Gauge("wan_last_scrape", "Timestamp of last successful scrape")
@@ -61,8 +69,8 @@ def query_vm() -> tuple[dict, float]:
             if v > 1_700_000_000:
                 ts = v
             break
-    except Exception as e:
-        print(f"VM query failed: {e}")
+    except Exception:
+        logger.exception("VM query failed")
     return result, ts
 
 
@@ -84,8 +92,8 @@ def notify(title: str, message: str) -> None:
             method="POST",
         )
         urllib.request.urlopen(req, timeout=5)
-    except Exception as e:
-        print(f"ntfy failed: {e}")
+    except Exception:
+        logger.exception("ntfy failed")
 
 
 def _oci_sign(
@@ -141,7 +149,7 @@ def _oci_sign(
 
 def update_oracle(ip: str) -> None:
     if not ip:
-        print("Oracle: empty IP, skipping")
+        logger.warning("Oracle: empty IP, skipping")
         return
 
     region = os.getenv("ORACLE_REGION", "us-ashburn-1")
@@ -161,7 +169,7 @@ def update_oracle(ip: str) -> None:
         or not user_ocid
         or not security_list_id
     ):
-        print("Oracle: incomplete credentials, skipping update")
+        logger.warning("Oracle: incomplete credentials, skipping update")
         return
 
     key_id = f"{tenancy_ocid}/{user_ocid}/{fingerprint}"
@@ -189,7 +197,7 @@ def update_oracle(ip: str) -> None:
                 break
 
         if not updated:
-            print("Oracle: no all-traffic ingress rule found in security list")
+            logger.warning("Oracle: no all-traffic ingress rule found in security list")
             return
 
         put_body: dict = {
@@ -206,13 +214,13 @@ def update_oracle(ip: str) -> None:
             f"{endpoint}{path}", data=body_bytes, headers=req_headers, method="PUT"
         )
         resp = urllib.request.urlopen(req, timeout=10)
-        print(f"Oracle: security list updated to allow {ip}/{prefix}")
-    except Exception as e:
-        print(f"Oracle update failed: {e}")
+        logger.info(f"Oracle: security list updated to allow {ip}/{prefix}")
+    except Exception:
+        logger.exception("Oracle update failed")
 
 
 def main():
-    print("Starting WAN IP exporter")
+    logger.info("Starting WAN IP exporter")
 
     previous, change_time = query_vm()
     prev_ip = previous.get("ip")
@@ -220,11 +228,11 @@ def main():
         wan_ip.info(previous)
         if change_time:
             last_change.set(change_time)
-            print(
+            logger.info(
                 f"Restored IP: {previous.get('ip')}; last change: {datetime.fromtimestamp(change_time).isoformat(timespec='seconds')}"
             )
         else:
-            print(f"Restored IP: {previous.get('ip')}; last change unknown")
+            logger.info(f"Restored IP: {previous.get('ip')}; last change unknown")
     start_http_server(PORT)
 
     while True:
@@ -237,12 +245,12 @@ def main():
             if ip != prev_ip:
                 change_time = time.time()
                 last_change.set(change_time)
-                print(f"IP changed: {ip}")
+                logger.info(f"IP changed: {ip}")
                 notify("WAN IP changed", f"{prev_ip or 'unknown'} -> {ip}")
                 update_oracle(ip)
                 prev_ip = ip
-        except Exception as e:
-            print(f"Scrape error: {e}")
+        except Exception:
+            logger.exception("Scrape error")
         time.sleep(INTERVAL)
 
 
