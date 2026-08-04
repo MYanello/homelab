@@ -7,6 +7,6 @@ COPY script.py .
 RUN apk add curl jq
 ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/app/venv
-RUN uv venv && uv pip install aiohttp prometheus_client
+RUN uv venv && uv pip install aiohttp cryptography prometheus_client
 
 ENTRYPOINT ["uv", "run", "script.py"]

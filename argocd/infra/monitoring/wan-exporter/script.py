@@ -1,9 +1,14 @@
+import base64
+import hashlib
+import ipaddress
 import json
 import os
 import time
 import urllib.request
 from datetime import datetime
 
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import padding
 from prometheus_client import Gauge, Info, start_http_server
 
 wan_ip = Info("wan_ip", "Current public IP")
@@ -82,6 +87,127 @@ def notify(title: str, message: str) -> None:
         print(f"ntfy failed: {e}")
 
 
+def _oci_sign(
+    method: str, path: str, body: bytes, private_key_pem: str, key_id: str, host: str
+) -> dict[str, str]:
+    date = time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime())
+    headers: dict = {"Date": date, "Host": host}
+    signed_headers = "(request-target) date host"
+
+    if body:
+        headers["x-content-sha256"] = hashlib.sha256(body).hexdigest()
+        headers["Content-Length"] = str(len(body))
+        headers["Content-Type"] = "application/json"
+        signed_headers = (
+            "(request-target) date host x-content-sha256 content-length content-type"
+        )
+
+    signing_lines = []
+    for h in signed_headers.split():
+        if h == "(request-target)":
+            signing_lines.append(f"(request-target): {method.lower()} {path}")
+        elif h == "date":
+            signing_lines.append(f"date: {headers['Date']}")
+        elif h == "host":
+            signing_lines.append(f"host: {headers['Host']}")
+        elif h == "x-content-sha256":
+            signing_lines.append(f"x-content-sha256: {headers['x-content-sha256']}")
+        elif h == "content-length":
+            signing_lines.append(f"content-length: {headers['Content-Length']}")
+        elif h == "content-type":
+            signing_lines.append(f"content-type: {headers['Content-Type']}")
+
+    signing_string = "\n".join(signing_lines)
+    private_key = serialization.load_pem_private_key(
+        private_key_pem.encode(), password=None
+    )
+    signature = private_key.sign(
+        signing_string.encode(), padding.PKCS1v15(), hashes.SHA256()
+    )
+    sig_b64 = base64.b64encode(signature).decode()
+
+    headers["Authorization"] = (
+        f'Signature version="1",'
+        f'keyId="{key_id}",'
+        f'algorithm="rsa-sha256",'
+        f'headers="{signed_headers}",'
+        f'signature="{sig_b64}"'
+    )
+    return headers
+
+
+def update_oracle(ip: str) -> None:
+    if not ip:
+        print("Oracle: empty IP, skipping")
+        return
+
+    region = os.getenv("ORACLE_REGION", "us-ashburn-1")
+    host = f"iaas.{region}.oraclecloud.com"
+    endpoint = f"https://{host}"
+
+    api_key = os.getenv("ORACLE_API_KEY")
+    fingerprint = os.getenv("ORACLE_FINGERPRINT")
+    tenancy_ocid = os.getenv("ORACLE_TENANCY_OCID")
+    user_ocid = os.getenv("ORACLE_USER_OCID")
+    security_list_id = os.getenv("ORACLE_SECURITY_LIST_ID")
+
+    if (
+        not api_key
+        or not fingerprint
+        or not tenancy_ocid
+        or not user_ocid
+        or not security_list_id
+    ):
+        print("Oracle: incomplete credentials, skipping update")
+        return
+
+    key_id = f"{tenancy_ocid}/{user_ocid}/{fingerprint}"
+
+    try:
+        path = f"/20160918/securityLists/{security_list_id}"
+
+        req_headers = _oci_sign("GET", path, b"", api_key, key_id, host)
+        req = urllib.request.Request(f"{endpoint}{path}", headers=req_headers)
+        resp = urllib.request.urlopen(req, timeout=10)
+        data: dict = json.loads(resp.read())
+
+        ingress_rules = list(data.get("ingressSecurityRules", []))
+        updated = False
+        prefix = "32"
+        for rule in ingress_rules:
+            if rule.get("protocol") == "all":
+                prefix = (
+                    "32"
+                    if isinstance(ipaddress.ip_address(ip), ipaddress.IPv4Address)
+                    else "128"
+                )
+                rule["source"] = f"{ip}/{prefix}"
+                updated = True
+                break
+
+        if not updated:
+            print("Oracle: no all-traffic ingress rule found in security list")
+            return
+
+        put_body: dict = {
+            "ingressSecurityRules": ingress_rules,
+            "egressSecurityRules": data.get("egressSecurityRules", []),
+        }
+        for field in ("definedTags", "freeformTags", "displayName"):
+            if field in data:
+                put_body[field] = data[field]
+
+        body_bytes = json.dumps(put_body).encode()
+        req_headers = _oci_sign("PUT", path, body_bytes, api_key, key_id, host)
+        req = urllib.request.Request(
+            f"{endpoint}{path}", data=body_bytes, headers=req_headers, method="PUT"
+        )
+        resp = urllib.request.urlopen(req, timeout=10)
+        print(f"Oracle: security list updated to allow {ip}/{prefix}")
+    except Exception as e:
+        print(f"Oracle update failed: {e}")
+
+
 def main():
     print("Starting WAN IP exporter")
 
@@ -110,6 +236,7 @@ def main():
                 last_change.set(change_time)
                 print(f"IP changed: {ip}")
                 notify("WAN IP changed", f"{prev_ip or 'unknown'} -> {ip}")
+                update_oracle(ip)
                 prev_ip = ip
         except Exception as e:
             print(f"Scrape error: {e}")
