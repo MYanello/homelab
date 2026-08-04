@@ -9,6 +9,7 @@ from datetime import datetime
 
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
 from prometheus_client import Gauge, Info, start_http_server
 
 wan_ip = Info("wan_ip", "Current public IP")
@@ -121,6 +122,8 @@ def _oci_sign(
     private_key = serialization.load_pem_private_key(
         private_key_pem.encode(), password=None
     )
+    if not isinstance(private_key, RSAPrivateKey):
+        raise TypeError("ORACLE_API_KEY must be an RSA private key")
     signature = private_key.sign(
         signing_string.encode(), padding.PKCS1v15(), hashes.SHA256()
     )
