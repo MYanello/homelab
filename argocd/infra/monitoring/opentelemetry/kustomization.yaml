@@ -11,5 +11,5 @@ helmCharts:
     releaseName: opentelemetry-collector
     namespace: monitoring
     repo: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: "0.165.0"
+    version: "0.166.0"
     valuesFile: values.yaml
