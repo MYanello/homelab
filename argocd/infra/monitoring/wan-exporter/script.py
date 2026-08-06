@@ -104,7 +104,9 @@ def _oci_sign(
     signed_headers = "(request-target) date host"
 
     if body:
-        headers["x-content-sha256"] = hashlib.sha256(body).hexdigest()
+        headers["x-content-sha256"] = base64.b64encode(
+            hashlib.sha256(body).digest()
+        ).decode()
         headers["Content-Length"] = str(len(body))
         headers["Content-Type"] = "application/json"
         signed_headers = (
