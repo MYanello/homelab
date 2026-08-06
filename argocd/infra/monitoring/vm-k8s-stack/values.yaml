@@ -33,7 +33,7 @@ vmsingle:
       storageClassName: "truenas-hdd"
       resources:
         requests:
-          storage: 250Gi
+          storage: 500Gi
     insertPorts:
       influxPort: "8086"
     extraEnvs:
