@@ -54,9 +54,9 @@ vmsingle:
     resources:
       requests:
         cpu: 150m
-        memory: 4Gi
+        memory: 8Gi
       limits:
-        memory: 24Gi
+        memory: 32Gi
 
 defaultDashboards:
   annotations:
