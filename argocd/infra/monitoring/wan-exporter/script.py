@@ -45,7 +45,7 @@ VM_URL = os.getenv(
 )
 PORT = int(os.getenv("PORT", 9101))
 INTERVAL = int(os.getenv("INTERVAL", 120))
-NTFY_URL = f"ntfy.sh/{os.getenv('NTFY_TOPIC')}"
+NTFY_URL = f"https://ntfy.sh/{os.getenv('NTFY_TOPIC')}"
 
 
 def query_vm() -> tuple[dict, float]:
@@ -160,7 +160,7 @@ def update_oracle(ip: str) -> None:
     fingerprint = os.getenv("ORACLE_FINGERPRINT")
     tenancy_ocid = os.getenv("ORACLE_TENANCY_OCID")
     user_ocid = os.getenv("ORACLE_USER_OCID")
-    security_list_id = os.getenv("ORACLE_SECURITY_LIST_ID")
+    security_list_id = os.getenv("ORACLE_SECURITY_LIST_OCID")
 
     if (
         not api_key
