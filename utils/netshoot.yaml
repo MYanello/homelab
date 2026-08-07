@@ -6,6 +6,8 @@ metadata:
   labels:
     app: debug
 spec:
+  automountServiceAccountToken: true
+  serviceAccountName: traefik
   containers:
     - name: debug
       image: nicolaka/netshoot:latest
