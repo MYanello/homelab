@@ -8,7 +8,6 @@ generators:
 resources:
   - manifests/cm.yaml
   - manifests/paperless.yaml
-  - manifests/pvc.yaml
   - manifests/service.yaml
   - manifests/cnpg.yaml
   - manifests/kreuzakt.yaml

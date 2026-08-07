@@ -92,66 +92,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: db
-  name: db
-spec:
-  replicas: 0
-  revisionHistoryLimit: 5
-  selector:
-    matchLabels:
-      app: db
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
-  template:
-    metadata:
-      labels:
-        app: db
-      annotations:
-        backup.velero.io/backup-volumes: "mariadb"
-    spec:
-      tolerations:
-        - key: "node-role.kubernetes.io/control-plane"
-          operator: "Exists"
-          effect: "NoSchedule"
-      containers:
-        - image: harbor.yanello.net/docker/library/mariadb:12@sha256:759869cb6f003234a95c6384cdee245b4bce7de26913fe607a8110362c0c007d
-          imagePullPolicy: IfNotPresent
-          name: db
-          ports:
-            - containerPort: 3306
-              protocol: TCP
-          env:
-            - name: MARIADB_HOST
-              value: paperless
-            - name: MARIADB_DATABASE
-              value: paperless
-            - name: MARIADB_USER
-              value: paperless
-          envFrom:
-            - secretRef:
-                name: paperless-secrets
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: mariadb
-          resources:
-            limits:
-              memory: 1Gi
-            requests:
-              cpu: 100m
-              memory: 500Mi
-      restartPolicy: Always
-      volumes:
-        - name: mariadb
-          persistentVolumeClaim:
-            claimName: mariadb
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
     app: redis
   name: redis
 spec:
@@ -327,3 +267,39 @@ spec:
         - path:
             type: PathPrefix
             value: /
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-data
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-media
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: protonmail-data
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi

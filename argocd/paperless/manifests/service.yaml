@@ -7,7 +7,7 @@ metadata:
   name: paperless
 spec:
   ports:
-    - name: "http"
+    - name: http
       port: 8000
       targetPort: 8000
   selector:
@@ -17,25 +17,11 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: db
-  name: db
-spec:
-  ports:
-    - name: "mariadb"
-      port: 3306
-      targetPort: 3306
-  selector:
-    app: db
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
     app: redis
   name: redis
 spec:
   ports:
-    - name: "redis"
+    - name: redis
       port: 6379
       targetPort: 6379
   selector:

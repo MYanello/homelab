@@ -20,6 +20,10 @@ spec:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
         - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.3
           imagePullPolicy: IfNotPresent
