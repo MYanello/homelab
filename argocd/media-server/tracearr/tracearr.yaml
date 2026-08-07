@@ -20,7 +20,7 @@ spec:
         fsGroup: 3000
       containers:
         - name: tracearr
-          image: ghcr.io/connorgallopo/tracearr:latest@sha256:2aa63d4b96e96b0ef474e86757ca5208ba42e0ac020f5d6f95782dfed4c43686
+          image: ghcr.io/connorgallopo/tracearr:latest@sha256:3d57d9b032b4a57919c48c919c16c3d6640b83f9116feb2c2cdf907747702ec8
           env:
             - name: NODE_ENV
               value: production
