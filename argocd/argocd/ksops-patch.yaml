@@ -1,12 +1,10 @@
 ---
-# manually apply for ksops to work
-#  k patch deployment argocd-repo-server -n argocd --patch-file ksops-patch.yaml --type strategic
+# Managed declaratively via kustomization.yaml patches
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: argocd-repo-server
-  namespace: argocd
 spec:
   template:
     spec:

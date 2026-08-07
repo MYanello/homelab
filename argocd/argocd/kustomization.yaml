@@ -3,23 +3,24 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - ./manifests/svc.yaml
-  - ./manifests/cm.yaml
   - ./manifests/http-route.yaml
-  - ./manifests/deploy.yaml
-  # - ./manifests/cert.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
 
 patches:
+  - path: ./manifests/cm.yaml
+  - path: ksops-patch.yaml
+  - path: manifests/dex-probes-patch.yaml
   - target:
       kind: Deployment
     patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: ignore
+        name: ignored
       spec:
         template:
           spec:
@@ -33,7 +34,7 @@ patches:
       apiVersion: apps/v1
       kind: StatefulSet
       metadata:
-        name: ignore
+        name: ignored
       spec:
         template:
           spec:
@@ -47,7 +48,7 @@ patches:
       apiVersion: apps/v1
       kind: DaemonSet
       metadata:
-        name: ignore
+        name: ignored
       spec:
         template:
           spec:

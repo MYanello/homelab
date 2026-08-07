@@ -12,7 +12,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: argocd-app
   name: argocd-route
-  namespace: argocd
 spec:
   parentRefs:
     - name: cilium-private-gateway

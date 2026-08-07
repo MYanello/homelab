@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/part-of: argocd
   name: argocd-dex-server
-  namespace: argocd
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
