@@ -1,0 +1,95 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kreuzakt
+  name: kreuzakt
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: kreuzakt
+  template:
+    metadata:
+      labels:
+        app: kreuzakt
+    spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+      containers:
+        - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.3
+          imagePullPolicy: IfNotPresent
+          name: kreuzakt
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            periodSeconds: 30
+            timeoutSeconds: 10
+          volumeMounts:
+            - mountPath: /data
+              name: kreuzakt-data
+      volumes:
+        - name: kreuzakt-data
+          persistentVolumeClaim:
+            claimName: kreuzakt-data
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kreuzakt-data
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kreuzakt
+  name: kreuzakt
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: kreuzakt
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: kreuzakt-app
+  name: kreuzakt-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - kreuzakt.yanello.net
+  rules:
+    - backendRefs:
+        - name: kreuzakt
+          namespace: kreuzakt
+          port: 3000
