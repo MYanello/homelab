@@ -294,3 +294,36 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 10
       restartPolicy: Always
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: paperless-app
+  name: paperless-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+      kind: Gateway
+      group: gateway.networking.k8s.io
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+      kind: Gateway
+      group: gateway.networking.k8s.io
+  hostnames:
+    - paperless.yanello.net
+  rules:
+    - backendRefs:
+        - name: paperless
+          namespace: paperless
+          group: ""
+          kind: Service
+          port: 8000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
