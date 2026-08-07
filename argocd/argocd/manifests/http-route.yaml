@@ -6,8 +6,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: ArgoCD
     gethomepage.dev/icon: sh-argo-cd
-    gethomepage.dev/description: "Argo CD is a declarative, GitOps continuous delivery\
-      \ tool for Kubernetes."
+    gethomepage.dev/description: "Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes."
     gethomepage.dev/pod-selector: app.kubernetes.io/name=argocd-server
   labels:
     app.kubernetes.io/instance: argocd-app
@@ -17,12 +16,23 @@ spec:
     - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
+      group: gateway.networking.k8s.io	
+      kind: Gateway
     - name: cilium-public-gateway
       namespace: cilium
       sectionName: https
+      group: gateway.networking.k8s.io	
+      kind: Gateway
   hostnames:
     - argocd.yanello.net
   rules:
     - backendRefs:
         - name: argocd-server
+          group: ''
+          kind: Service
           port: 80
+          weight: 1	
+      matches:	
+        - path:	
+            type: PathPrefix	
+            value: /

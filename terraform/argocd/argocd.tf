@@ -76,7 +76,7 @@ resource "kubernetes_manifest" "argocd_appset" {
             }
             "syncOptions" = [
               "CreateNamespace=true",
-              "ServerSideApply=false"
+              "ServerSideApply=true"
             ]
           }
         }
