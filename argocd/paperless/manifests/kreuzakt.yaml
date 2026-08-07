@@ -21,7 +21,7 @@ spec:
           operator: "Exists"
           effect: "NoSchedule"
       containers:
-        - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.3
+        - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.3@sha256:d7f640c154d565454ed84945ee954ca9f5dc1a6d8d3b2f1f71d1bb93b54458b7
           imagePullPolicy: IfNotPresent
           name: kreuzakt
           ports:
