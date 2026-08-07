@@ -30,6 +30,14 @@ spec:
         - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.3
           imagePullPolicy: IfNotPresent
           name: kreuzakt
+          env:
+            - name: TZ
+              value: America/Toronto
+            - name: INGEST_DIR
+              value: /ingest
+          envFrom:
+            - secretRef:
+                name: kreuzakt-secrets
           ports:
             - containerPort: 3000
               protocol: TCP
@@ -48,9 +56,14 @@ spec:
             timeoutSeconds: 10
           volumeMounts:
             - mountPath: /data
-              name: kreuzakt-data
+              name: data
+            - mountPath: /ingest
+              name: ingest
       volumes:
-        - name: kreuzakt-data
+        - name: data
+          persistentVolumeClaim:
+            claimName: kreuzakt-data
+        - name: ingest
           persistentVolumeClaim:
             claimName: kreuzakt-data
       restartPolicy: Always
@@ -66,6 +79,18 @@ spec:
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kreuzakt-ingest
+spec:
+  storageClassName: truenas-hdd-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
 ---
 apiVersion: v1
 kind: Service
