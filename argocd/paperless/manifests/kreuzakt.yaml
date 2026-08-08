@@ -73,7 +73,7 @@ spec:
             claimName: kreuzakt-data
         - name: ingest
           persistentVolumeClaim:
-            claimName: kreuzakt-data
+            claimName: kreuzakt-ingest
       restartPolicy: Always
 ---
 apiVersion: v1
