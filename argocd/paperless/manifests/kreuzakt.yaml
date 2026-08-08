@@ -35,6 +35,14 @@ spec:
               value: America/Toronto
             - name: INGEST_DIR
               value: /ingest
+            - name: DATA_DIR
+              value: /data
+            - name: IMPORT_DIR
+              value: /data/import
+            - name: ORIGINALS_DIR
+              value: /data/originals
+            - name: DB_PATH
+              value: /data/docs-ai.db
           envFrom:
             - secretRef:
                 name: kreuzakt-secrets
