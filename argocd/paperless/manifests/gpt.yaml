@@ -1,0 +1,158 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gpt
+  name: gpt
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: gpt
+  template:
+    metadata:
+      labels:
+        app: gpt
+    spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+      securityContext:
+        fsGroup: 10001
+        runAsUser: 10001
+        runAsGroup: 10001
+      containers:
+        - image: harbor.yanello.net/docker/icereed/paperless-gpt:v0.27.0
+          imagePullPolicy: IfNotPresent
+          name: gpt
+          envFrom:
+            - configMapRef:
+                name: gpt-config
+            - secretRef:
+                name: ai-secrets
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: kreuzakt-secrets
+                  key: OPENROUTER_KEY
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 30
+            timeoutSeconds: 10
+          resources:
+            requests:
+              cpu: 10m
+              memory: 20Mi
+          volumeMounts:
+            - name: gpt-prompts
+              mountPath: /app/prompts
+            - name: gpt-app-config
+              mountPath: /app/config
+      volumes:
+        - name: gpt-prompts
+          persistentVolumeClaim:
+            claimName: gpt-prompts
+        - name: gpt-app-config
+          persistentVolumeClaim:
+            claimName: gpt-app-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/part-of: paperless
+  name: gpt-config
+data:
+  PAPERLESS_BASE_URL: http://paperless:8000
+  PAPERLESS_PUBLIC_URL: https://paperless.yanello.net
+  MANUAL_TAG: ai-processed
+  AUTO_TAG: ai-processed
+  OPENAI_BASE_URL: https://openrouter.ai/api/v1
+  LLM_PROVIDER: openai
+  LLM_MODEL: openai/gpt-4o
+  VISION_LLM_PROVIDER: openai
+  VISION_LLM_MODEL: openai/gpt-4o
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gpt-prompts
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gpt-app-config
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gpt
+  name: gpt
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: gpt
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: gpt-app
+  name: gpt-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      kind: Gateway
+      group: gateway.networking.k8s.io
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - paperless-gpt.yanello.net
+  rules:
+    - backendRefs:
+        - name: gpt
+          namespace: paperless
+          group: ""
+          kind: Service
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

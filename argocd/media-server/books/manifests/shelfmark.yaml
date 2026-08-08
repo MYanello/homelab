@@ -82,7 +82,8 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Shelfmark"
     gethomepage.dev/icon: mdi-folder-download-outline
-    gethomepage.dev/description: "An intuitive web interface for searching and requesting book downloads."
+    gethomepage.dev/description: "An intuitive web interface for searching and requesting\
+      \ book downloads."
     gethomepage.dev/pod-selector: app=shelfmark
   name: shelfmark-httproute
 spec:

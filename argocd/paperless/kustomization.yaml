@@ -11,3 +11,4 @@ resources:
   - manifests/service.yaml
   - manifests/cnpg.yaml
   - manifests/kreuzakt.yaml
+  - manifests/gpt.yaml
