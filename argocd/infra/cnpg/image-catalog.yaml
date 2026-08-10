@@ -6,7 +6,7 @@ metadata:
 spec:
   images:
     - major: 16
-      image: ghcr.io/cloudnative-pg/postgis:16-3.6-standard-trixie@sha256:ac335edb6c8a52961ee4ffc14f831415d953be040cf6e4b7c8387ae83d9fc458
+      image: ghcr.io/cloudnative-pg/postgis:16-3.6-standard-trixie@sha256:90b10c315a6ba7ab6f31bab096e3bae69b92dcdae48186e72fea852f05fbf593
     - major: 17
       image: ghcr.io/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:11e8d7f5e7d5b8f0a7a37f632f7146e93167fa7c1369e12e4c055cb57b3434b7
     - major: 18
