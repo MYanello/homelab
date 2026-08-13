@@ -10,3 +10,7 @@ resources:
 
 generators:
   - ./manifests/secret-generator.yaml
+
+images:
+  - name: harbor.yanello.net/library/wan-exporter
+    newTag: v0.4.3

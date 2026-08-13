@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import time
+import urllib.error
 import urllib.request
 from datetime import datetime
 
@@ -251,8 +252,12 @@ def main():
                 notify("WAN IP changed", f"{prev_ip or 'unknown'} -> {ip}")
                 update_oracle(ip)
                 prev_ip = ip
+        except urllib.error.HTTPError as e:
+            logger.error(f"HTTP Error getting IP: {e.code}: {e.reason}")
+        except urllib.error.URLError as e:
+            logger.error(f"URL Error getting IP: {e.reason}")
         except Exception:
-            logger.exception("Scrape error")
+            logger.exception("Error getting IP")
         time.sleep(INTERVAL)
 
 
