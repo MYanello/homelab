@@ -17,7 +17,7 @@ spec:
         app: wan-exporter
     spec:
       containers:
-        - image: harbor.yanello.net/library/wan-exporter:v0.4.2@sha256:8db7e00c168954d1050084c0933695d42c8224295596305577a403ddf88521bd
+        - image: harbor.yanello.net/library/wan-exporter:v0.4.3@sha256:6bfcae9e16ccd1442ef21428569cbedda7fdf760fd2e6482a38bbadd0acfb9ec
           name: wan-exporter
           imagePullPolicy: Always
           envFrom:
