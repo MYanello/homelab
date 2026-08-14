@@ -59,6 +59,8 @@ spec:
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 500Mi
           volumeMounts:
             - name: gpt-prompts
               mountPath: /app/prompts
