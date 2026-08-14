@@ -24,8 +24,6 @@ spec:
           effect: "NoSchedule"
       securityContext:
         fsGroup: 10001
-        runAsUser: 10001
-        runAsGroup: 10001
       containers:
         - image: harbor.yanello.net/docker/icereed/paperless-gpt:v0.27.0
           imagePullPolicy: IfNotPresent
