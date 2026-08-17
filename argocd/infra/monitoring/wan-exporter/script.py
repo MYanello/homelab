@@ -8,6 +8,7 @@ import time
 import urllib.error
 import urllib.request
 from datetime import datetime
+from typing import Any
 
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
@@ -46,18 +47,19 @@ VM_URL = os.getenv(
 )
 PORT = int(os.getenv("PORT", 9101))
 INTERVAL = int(os.getenv("INTERVAL", 120))
-NTFY_URL = f"https://ntfy.sh/{os.getenv('NTFY_TOPIC')}"
+NTFY_URL = f"https://ntfy.sh/{os.getenv('NTFY_TOPIC', '')}"
 
 
-def query_vm() -> tuple[dict, float]:
+def query_vm() -> tuple[dict[str, str], float]:
     url = f"{VM_URL}/api/v1/query?query=wan_ip_info"
-    result, ts = {}, time.time()
+    result: dict[str, str] = {}
+    ts = time.time()
 
     try:
         resp = urllib.request.urlopen(url, timeout=5)
-        data = json.loads(resp.read())
+        data: Any = json.loads(resp.read())
         for r in data.get("data", {}).get("result", []):
-            result = r.get("metric", {})
+            result = {str(k): str(v) for k, v in r.get("metric", {}).items()}
             if result:
                 break
         resp = urllib.request.urlopen(
@@ -75,13 +77,14 @@ def query_vm() -> tuple[dict, float]:
     return result, ts
 
 
-def fetch_ip():
+def fetch_ip() -> dict[str, str]:
     req = urllib.request.Request(
         "https://ifconfig.co",
         headers={"Accept": "application/json", "User-Agent": "curl/8.21"},
     )
     resp = urllib.request.urlopen(req, timeout=10)
-    return json.loads(resp.read())
+    data: Any = json.loads(resp.read())
+    return {k: str(data.get(k, "")) for k in fields}
 
 
 def notify(title: str, message: str) -> None:
@@ -114,7 +117,7 @@ def _oci_sign(
             "(request-target) date host x-content-sha256 content-length content-type"
         )
 
-    signing_lines = []
+    signing_lines: list[str] = []
     for h in signed_headers.split():
         if h == "(request-target)":
             signing_lines.append(f"(request-target): {method.lower()} {path}")
@@ -183,9 +186,9 @@ def update_oracle(ip: str) -> None:
         req_headers = _oci_sign("GET", path, b"", api_key, key_id, host)
         req = urllib.request.Request(f"{endpoint}{path}", headers=req_headers)
         resp = urllib.request.urlopen(req, timeout=10)
-        data: dict = json.loads(resp.read())
+        data: Any = json.loads(resp.read())
 
-        ingress_rules = list(data.get("ingressSecurityRules", []))
+        ingress_rules: list[Any] = list(data.get("ingressSecurityRules", []))
         updated = False
         prefix = "32"
         for rule in ingress_rules:
@@ -203,7 +206,7 @@ def update_oracle(ip: str) -> None:
             logger.warning("Oracle: no all-traffic ingress rule found in security list")
             return
 
-        put_body: dict = {
+        put_body: dict[str, Any] = {
             "ingressSecurityRules": ingress_rules,
             "egressSecurityRules": data.get("egressSecurityRules", []),
         }
@@ -236,7 +239,7 @@ def main():
             )
         else:
             logger.info(f"Restored IP: {previous.get('ip')}; last change unknown")
-    start_http_server(PORT)
+    _ = start_http_server(PORT)
 
     while True:
         try:
