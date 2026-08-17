@@ -11,7 +11,7 @@ resources:
 
 helmCharts:
   - name: budgeting
-    repo: oci://harbor.yanello.net/helm
+    repo: oci://cw-myanello.cwcr.io/budgeting # oci://harbor.yanello.net/helm
     version: "1.19.3"
     releaseName: budgeting
     namespace: budgeting
