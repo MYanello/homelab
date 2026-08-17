@@ -61,6 +61,14 @@ resource "kubernetes_manifest" "argocd_appset" {
           }
           "ignoreDifferences" = [
             {
+              "group" = "apps"
+              "kind" = "StatefulSet"
+              "jqPathExpressions" = [
+                ".spec.volumeClaimTemplates[].apiVersion",
+                ".spec.volumeClaimTemplates[].kind"
+              ]
+            },
+            {
               "group" = "admissionregistration.k8s.io"
               "kind"  = "MutatingWebhookConfiguration"
               "name"  = "vault-agent-injector-cfg"
