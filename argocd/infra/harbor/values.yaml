@@ -18,6 +18,7 @@ existingSecretAdminPassword: harbor-secrets
 
 updateStrategy:
   type: Recreate
+  rollingUpdate: null
 
 expose:
   tls:
