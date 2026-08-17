@@ -20,7 +20,7 @@ spec:
             "cw-myanello.cwcr.io":{
               "username":"docker",
               "password":{{ $token | toJson }},
-              "auth": {{ printf "docker:%s" $token | base64 | toJson }}
+              "auth": {{ printf "docker:%s" $token | b64enc | toJson }}
               }
             }
           }

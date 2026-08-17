@@ -16,6 +16,8 @@ spec:
       labels:
         app: wan-exporter
     spec:
+      imagePullSecrets:
+        - name: cwcr-dockerconfig
       containers:
         - image: harbor.yanello.net/library/wan-exporter:v0.4.3@sha256:6bfcae9e16ccd1442ef21428569cbedda7fdf760fd2e6482a38bbadd0acfb9ec
           name: wan-exporter
