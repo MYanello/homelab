@@ -16,6 +16,9 @@ redis:
       effect: "NoSchedule"
 existingSecretAdminPassword: harbor-secrets
 
+updateStrategy:
+  type: Recreate
+
 expose:
   tls:
     enabled: false

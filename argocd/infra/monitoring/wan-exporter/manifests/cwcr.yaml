@@ -1,0 +1,34 @@
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: cwcr-dockerconfig
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: doppler
+    kind: ClusterSecretStore
+  target:
+    name: cwcr-dockerconfig
+    creationPolicy: Owner
+    template:
+      type: kubernetes.io/dockerconfigjson
+      data:
+        .dockerconfigjson: |
+          {{ $token := .TOKEN }}
+          {"auths":{
+            "cw-myanello.cwcr.io":{
+              "username":"docker",
+              "password":{{ $token | toJson }},
+              "auth": {{ printf "docker:%s" $token | base64 | toJson }}
+              }
+            }
+          }
+  data:
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: CWCR_TOKEN
+        metadataPolicy: None
+        nullBytePolicy: Ignore
+      secretKey: TOKEN

@@ -7,10 +7,12 @@ resources:
   - ./manifests/deploy.yaml
   - ./manifests/svc.yaml
   - ./manifests/scrape.yaml
+  - ./manifests/cwcr.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
 
 images:
   - name: harbor.yanello.net/library/wan-exporter
+    newName: cw-myanello.cwcr.io/wan-exporter
     newTag: v0.4.3
