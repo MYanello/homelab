@@ -2,11 +2,11 @@ FROM ghcr.io/astral-sh/uv:0.12.3-python3.14-alpine@sha256:8caaf73b05ffd22c8789b2
 
 WORKDIR /app
 
-COPY script.py .
+COPY pyproject.toml .
 
 RUN apk add curl jq
 ENV PYTHONUNBUFFERED=1
-ENV VIRTUAL_ENV=/app/venv
-RUN uv venv && uv pip install aiohttp cryptography prometheus_client
+RUN uv sync
 
+COPY script.py .
 ENTRYPOINT ["uv", "run", "script.py"]

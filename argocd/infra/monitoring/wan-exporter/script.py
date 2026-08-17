@@ -101,7 +101,7 @@ def _oci_sign(
     method: str, path: str, body: bytes, private_key_pem: str, key_id: str, host: str
 ) -> dict[str, str]:
     date = time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime())
-    headers: dict = {"Date": date, "Host": host}
+    headers: dict[str, str] = {"Date": date, "Host": host}
     signed_headers = "(request-target) date host"
 
     if body:
