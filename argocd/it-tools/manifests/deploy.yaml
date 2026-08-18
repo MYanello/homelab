@@ -25,6 +25,12 @@ spec:
         - image: ghcr.io/corentinth/it-tools:2024.10.22-7ca5933@sha256:8b8128748339583ca951af03dfe02a9a4d7363f61a216226fc28030731a5a61f
           imagePullPolicy: IfNotPresent
           name: it-tools
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              memory: 64Mi
           ports:
             - containerPort: 8080
               protocol: TCP

@@ -15,6 +15,12 @@ spec:
     spec:
       initContainers:
         - name: db-migrate
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
           image: harbor.yanello.net/library/honcho:v3.0.12@sha256:19d0f1bf5b184969ffeee41ddd69cff5a88f528eeda9a82b46e76708a3ba1e0b
           imagePullPolicy: Always
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]

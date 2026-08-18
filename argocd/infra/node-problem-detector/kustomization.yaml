@@ -8,3 +8,10 @@ helmCharts:
     releaseName: node-problem-detector
     repo: https://charts.deliveryhero.io/
     version: "2.3.14"
+    valuesInline:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          memory: 64Mi

@@ -11,12 +11,79 @@ node:
     - key: "csp/oci"
       operator: "Exists"
       effect: "NoSchedule"
+  driver:
+    resources:
+      requests:
+        cpu: 30m
+        memory: 96Mi
+      limits:
+        memory: 96Mi
+    cleanup:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          memory: 64Mi
+  csiProxy:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
+  driverRegistrar:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 32Mi
 controller:
   driver:
     image:
       tag: next
-
-# add note here about volume expansion requirements
+    resources:
+      requests:
+        cpu: 10m
+        memory: 96Mi
+      limits:
+        memory: 96Mi
+  csiProxy:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
+  externalAttacher:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        memory: 16Mi
+  externalProvisioner:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 32Mi
+  externalResizer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
+  externalSnapshotter:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        memory: 16Mi
 storageClasses:
   - name: truenas-hdd
     defaultClass: false
@@ -54,7 +121,7 @@ storageClasses:
       controller-expand-secret: null
 # if your cluster supports snapshots you may enable below
 volumeSnapshotClasses: []
-#- name: freenas-iscsi-csi
+# - name: freenas-iscsi-csi
 #  parameters:
 #  # if true, snapshots will be created with zfs send/receive
 #  # detachedSnapshots: "false"

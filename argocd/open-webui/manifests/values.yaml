@@ -10,7 +10,12 @@ ollama:
   persistentVolume:
     enabled: true
     storageClass: truenas-ssd-nfs
-
+  resources:
+    requests:
+      cpu: 10m
+      memory: 192Mi
+    limits:
+      memory: 192Mi
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -36,7 +41,12 @@ pipelines:
     storageClass: truenas-ssd-nfs
     accessMode: ReadWriteOnce
     size: 10Gi
-
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 96Mi
 extraEnvVars:
   - name: OAUTH_CLIENT_ID
     valueFrom:
@@ -63,3 +73,23 @@ extraEnvVars:
     value: "http://vllm-router-service.vllm.svc.cluster.local:80/v1"
   - name: OPENAI_API_KEY
     value: "none"
+redis:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 16Mi
+    limits:
+      memory: 16Mi
+resources:
+  requests:
+    cpu: 10m
+    memory: 768Mi
+  limits:
+    memory: 896Mi
+initContainer:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 128Mi

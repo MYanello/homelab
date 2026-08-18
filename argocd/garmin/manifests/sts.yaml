@@ -21,6 +21,12 @@ spec:
         fsGroup: 1000
       initContainers:
         - name: wait-for-influxdb
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
           image: curlimages/curl:latest@sha256:7c12af72ceb38b7432ab85e1a265cff6ae58e06f95539d539b654f2cfa64bb13
           envFrom:
             - configMapRef:
@@ -52,6 +58,11 @@ spec:
           volumeMounts:
             - mountPath: /home/appuser/.garminconnect
               name: garmin-data
+          resources:
+            requests:
+              memory: 128Mi
+            limits:
+              memory: 192Mi
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim

@@ -36,6 +36,11 @@ spec:
               protocol: TCP
             - containerPort: 21119
               protocol: TCP
+          resources:
+            requests:
+              memory: 64Mi
+            limits:
+              memory: 128Mi
       volumes:
         - name: rustdesk-data
           persistentVolumeClaim:
@@ -83,6 +88,11 @@ spec:
               protocol: UDP
             - containerPort: 21118
               protocol: TCP
+          resources:
+            requests:
+              memory: 64Mi
+            limits:
+              memory: 128Mi
       volumes:
         - name: rustdesk-data
           persistentVolumeClaim:

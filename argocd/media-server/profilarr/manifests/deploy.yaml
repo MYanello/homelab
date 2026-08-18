@@ -32,6 +32,11 @@ spec:
                 echo "Waiting for parser..."
                 sleep 2
               done
+          resources:
+            requests:
+              memory: 64Mi
+            limits:
+              memory: 128Mi
       containers:
         - env:
             - name: PUID

@@ -32,6 +32,11 @@ spec:
   enableSuperuserAccess: true
   superuserSecret:
     name: dawarich-superuser
+  resources:
+    requests:
+      memory: 64Mi
+    limits:
+      memory: 128Mi
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore

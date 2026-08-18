@@ -7,6 +7,12 @@ database:
       operator: "Exists"
       effect: "NoSchedule"
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 96Mi
+    limits:
+      memory: 128Mi
 redis:
   podAnnotations:
     backup.velero.io/backup-volumes: data
@@ -14,6 +20,12 @@ redis:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+  resources:
+    requests:
+      cpu: 10m
+      memory: 16Mi
+    limits:
+      memory: 16Mi
 existingSecretAdminPassword: harbor-secrets
 
 updateStrategy:
@@ -67,12 +79,24 @@ portal:
       operator: "Exists"
       effect: "NoSchedule"
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 16Mi
+    limits:
+      memory: 16Mi
 core:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 64Mi
 jobservice:
   annotations:
     backup.velero.io/backup-volumes: harbor-jobservice
@@ -81,6 +105,12 @@ jobservice:
       operator: "Exists"
       effect: "NoSchedule"
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 16Mi
+    limits:
+      memory: 32Mi
 registry:
   annotations:
     backup.velero.io/backup-volumes: harbor-registry
@@ -89,6 +119,12 @@ registry:
       operator: "Exists"
       effect: "NoSchedule"
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 16Mi
+    limits:
+      memory: 16Mi
 exporter:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"

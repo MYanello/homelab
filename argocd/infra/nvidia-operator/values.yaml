@@ -8,10 +8,36 @@ toolkit:
       value: /run/k3s/containerd/containerd.sock
     - name: CONTAINERD_CONFIG
       value: /var/lib/rancher/k3s/agent/etc/containerd/config.toml
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 64Mi
+  initContainer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 128Mi
 devicePlugin:
   config:
     name: time-slicing-config-all
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      memory: 32Mi
+  initContainer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        memory: 16Mi
 daemonsets:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
@@ -27,3 +53,45 @@ operator:
               - key: "nvidia.com/gpu.present"
                 operator: In
                 values: ["true"]
+dcgmExporter:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 448Mi
+    limits:
+      memory: 512Mi
+  initContainer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 128Mi
+gpuFeatureDiscovery:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 64Mi
+  initContainer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        memory: 16Mi
+validator:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+  initContainer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 128Mi

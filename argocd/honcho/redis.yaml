@@ -16,6 +16,12 @@ spec:
     spec:
       containers:
         - name: redis
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 32Mi
           image: redis:8.10@sha256:344e3945a0b431c8ff1eecd58c5573538126bd756f02fc7e218ddf1fc2546366
           ports:
             - containerPort: 6379

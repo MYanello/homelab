@@ -49,6 +49,8 @@ spec:
             requests:
               cpu: 10m
               memory: 500Mi
+            limits:
+              memory: 640Mi
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
