@@ -13,7 +13,7 @@ helmCharts:
     namespace: argo-workflows
     releaseName: argo-workflows
     repo: https://argoproj.github.io/argo-helm
-    version: "2.0.0"
+    version: "2.0.1"
     valuesInline:
       crds:
         full: true
