@@ -111,6 +111,12 @@ mariadb:
     persistence:
       enabled: true
       storageClass: longhorn-xfs
+  resources:
+    requests:
+      cpu: 10m
+      memory: 192Mi
+    limits:
+      memory: 192Mi
 resources:
   requests:
     cpu: 10m
