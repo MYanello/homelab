@@ -134,7 +134,7 @@ jobs:
             -v $(pwd)/values.yaml:/argocd-config/values.yaml \
             -e TARGET_BRANCH=${{ github.head_ref }} \
             -e REPO=${{ github.repository }} \
-            dagandersen/argocd-diff-preview:v0.2.12 \
+            dagandersen/argocd-diff-preview:v0.2.13 \
             --diff-ignore="checksum|caBundle"
 
       - name: Post diff as comment
