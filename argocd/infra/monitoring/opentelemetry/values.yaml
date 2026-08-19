@@ -33,6 +33,11 @@ config:
         receivers: [otlp]
         processors: [deltatocumulative]
         exporters: [otlphttp/victoriametrics]
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+
 resources:
   requests:
     cpu: 20m
