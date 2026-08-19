@@ -50,14 +50,14 @@ hubble:
           cpu: 10m
           memory: 16Mi
         limits:
-          memory: 16Mi
+          memory: 100Mi
     frontend:
       resources:
         requests:
           cpu: 10m
           memory: 16Mi
         limits:
-          memory: 16Mi
+          memory: 100Mi
   relay:
     enabled: true
     resources:
