@@ -83,14 +83,14 @@ grafana:
           cpu: 10m
           memory: 96Mi
         limits:
-          memory: 500Mi
+          memory: 128Mi
     datasources:
       resources:
         requests:
           cpu: 10m
           memory: 96Mi
         limits:
-          memory: 96Mi
+          memory: 500Mi
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
