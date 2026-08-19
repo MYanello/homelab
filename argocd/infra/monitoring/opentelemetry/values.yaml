@@ -35,7 +35,7 @@ config:
         exporters: [otlphttp/victoriametrics]
 resources:
   requests:
-    cpu: 120m
-    memory: 96Mi
+    cpu: 50m
+    memory: 40Mi
   limits:
     memory: 96Mi
