@@ -34,13 +34,38 @@ envoy:
     capabilities:
       keepCapNetBindService: true
 
+  resources:
+    requests:
+      cpu: 20m
+      memory: 96Mi
+    limits:
+      memory: 128Mi
 hubble:
   enabled: true
   ui:
     enabled: true
+    backend:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          memory: 16Mi
+    frontend:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          memory: 16Mi
   relay:
     enabled: true
-
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        memory: 16Mi
 bgpControlPlane:
   enabled: true
 
@@ -54,3 +79,16 @@ authentication:
 cluster:
   name: home
   id: 1
+resources:
+  requests:
+    cpu: 90m
+    memory: 768Mi
+  limits:
+    memory: 896Mi
+operator:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 128Mi
+    limits:
+      memory: 128Mi

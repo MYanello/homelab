@@ -36,6 +36,12 @@ spec:
           image: harbor.yanello.net/docker/johly/airtrail:v3.12.0@sha256:c5616704defabd82d2dde97e93a5417e59c7acfdb06c0e589209257543b50f8c
           imagePullPolicy: IfNotPresent
           name: airtrail
+          resources:
+            requests:
+              cpu: 10m
+              memory: 96Mi
+            limits:
+              memory: 128Mi
           ports:
             - containerPort: 3000
               protocol: TCP

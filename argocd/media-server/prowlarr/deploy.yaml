@@ -23,6 +23,12 @@ spec:
     spec:
       initContainers:
         - name: wait-for-flaresolverr
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
           image: harbor.yanello.net/docker/busybox:1.38.0@sha256:dc2d74b28e4cf8984fa52af1f39bc7c3d9c73760b41a74d629f5d11b1ab28616
           command: ["sh", "-c"]
           args:
@@ -103,6 +109,12 @@ spec:
         - image: harbor.yanello.net/ghcr/flaresolverr/flaresolverr:v3.5.0@sha256:139dfee1c6f89249c8d665d1333a42e8ec74ec0a86bc6bb1c8461e10d3a66a47
           imagePullPolicy: IfNotPresent
           name: flaresolverr
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
           ports:
             - containerPort: 8191
               protocol: TCP

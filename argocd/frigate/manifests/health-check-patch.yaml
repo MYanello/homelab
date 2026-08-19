@@ -13,6 +13,11 @@ spec:
               mountPath: /usr/local/bin/health-check.sh
               subPath: health-check.sh
           livenessProbe: null
+          resources:
+            requests:
+              memory: 64Mi
+            limits:
+              memory: 128Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,6 +39,11 @@ spec:
                 - /usr/local/bin/health-check.sh
             initialDelaySeconds: 180
             periodSeconds: 30
+          resources:
+            requests:
+              memory: 64Mi
+            limits:
+              memory: 128Mi
       volumes:
         - name: health-check-script
           configMap:

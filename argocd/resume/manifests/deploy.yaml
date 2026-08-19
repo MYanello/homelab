@@ -96,6 +96,12 @@ spec:
     spec:
       containers:
         - name: printer
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 96Mi
           image: harbor.yanello.net/docker/chromedp/headless-shell@sha256:2d349b544a1ea6b5b5fd7c0fe99215ff662339c57407ee2e8c0a11af93516b04
           ports:
             - containerPort: 9222

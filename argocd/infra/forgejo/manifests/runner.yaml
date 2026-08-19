@@ -38,6 +38,12 @@ spec:
     spec:
       initContainers:
         - name: register
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
           image: docker.io/gitea/act_runner:0.6.1@sha256:b5c35d6bdbb9bb25e531230bfc7cc663cb751406cbec90a2a891b85fea54de86
           workingDir: /data
           command:
@@ -63,6 +69,12 @@ spec:
               mountPath: /data
       containers:
         - name: runner
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 32Mi
           image: docker.io/gitea/act_runner:0.6.1@sha256:b5c35d6bdbb9bb25e531230bfc7cc663cb751406cbec90a2a891b85fea54de86
           command: ["act_runner", "daemon", "--config", "/config/config.yaml"]
           workingDir: /data
@@ -75,6 +87,12 @@ spec:
             - name: config
               mountPath: /config
         - name: dind
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              memory: 64Mi
           image: docker.io/docker:27-dind@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
           securityContext:
             privileged: true

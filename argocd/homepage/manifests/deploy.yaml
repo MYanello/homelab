@@ -22,6 +22,12 @@ spec:
       enableServiceLinks: true
       containers:
         - name: homepage
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+            limits:
+              memory: 192Mi
           image: ghcr.io/gethomepage/homepage:v2.0.0@sha256:638dacf5c844e908dc06c1fd57a2b5694f8efd91f91f152829ea0c2f547458f2
           imagePullPolicy: Always
           envFrom:

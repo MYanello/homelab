@@ -33,6 +33,12 @@ spec:
       parameters:
         barmanObjectName: radarr-backups
   enableSuperuserAccess: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 128Mi
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore

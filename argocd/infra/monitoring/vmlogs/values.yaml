@@ -7,3 +7,9 @@ server:
       enabled: true
   retentionPeriod: 3d
   retentionDiskSpaceUsage: 2.5
+  resources:
+    requests:
+      cpu: 10m
+      memory: 192Mi
+    limits:
+      memory: 256Mi

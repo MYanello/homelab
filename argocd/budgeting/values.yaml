@@ -19,3 +19,9 @@ oidc:
   existingSecret: "budgeting-secrets"
   existingSecretClientIdKey: "OIDC_CLIENT_ID"
   existingSecretClientSecretKey: "OIDC_CLIENT_SECRET"
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    memory: 16Mi

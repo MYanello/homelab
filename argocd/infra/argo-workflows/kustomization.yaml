@@ -22,6 +22,12 @@ helmCharts:
           registry: harbor.yanello.net/quay
           repository: argoproj/workflow-controller
           tag: ""
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            memory: 32Mi
       server:
         image:
           registry: harbor.yanello.net/quay
@@ -45,3 +51,9 @@ helmCharts:
             - openid
             - profile
             - email
+        resources:
+          requests:
+            cpu: 10m
+            memory: 96Mi
+          limits:
+            memory: 96Mi

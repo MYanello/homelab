@@ -46,7 +46,12 @@ nodeAgent:
       operator: Exists
     - effect: NoExecute
       operator: Exists
-
+  resources:
+    requests:
+      cpu: 10m
+      memory: 96Mi
+    limits:
+      memory: 128Mi
 schedules:
   weekly:
     disabled: false
@@ -61,3 +66,16 @@ kubectl:
   image:
     repository: harbor.yanello.net/docker/bitnamilegacy/kubectl
     tag: "1.33.4@sha256:ed0b31a0508da84ee655c5c6e01bd3897fc56ad6cf69debb27fa1893a06d2246"
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
+  limits:
+    memory: 192Mi
+initContainer:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 128Mi

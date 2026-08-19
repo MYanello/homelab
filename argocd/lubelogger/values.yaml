@@ -16,3 +16,16 @@ secret:
 oidc:
   enabled: true
   name: lube-secrets
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
+  limits:
+    memory: 192Mi
+initContainer:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 128Mi

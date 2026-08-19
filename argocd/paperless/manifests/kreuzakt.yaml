@@ -30,6 +30,12 @@ spec:
         - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.4@sha256:7a44f94ca3ecc584bdbf07acd4f73933a6f6c896546c1c30468c3494a820ea05
           imagePullPolicy: IfNotPresent
           name: kreuzakt
+          resources:
+            requests:
+              cpu: 50m
+              memory: 1280Mi
+            limits:
+              memory: 1664Mi
           env:
             - name: TZ
               value: America/Toronto

@@ -50,6 +50,7 @@ spec:
               memory: 1Gi
             requests:
               memory: 500Mi
+              cpu: 10m
       restartPolicy: Always
       volumes:
         - name: mariadb

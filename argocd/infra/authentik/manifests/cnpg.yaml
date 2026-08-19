@@ -36,6 +36,12 @@ spec:
       parameters:
         barmanObjectName: authentik-backups
   enableSuperuserAccess: true
+  resources:
+    requests:
+      cpu: 30m
+      memory: 256Mi
+    limits:
+      memory: 320Mi
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore

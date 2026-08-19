@@ -16,3 +16,23 @@ helmCharts:
     namespace: external-secrets
     valuesInline:
       installCRDs: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 64Mi
+        limits:
+          memory: 96Mi
+      certController:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 96Mi
+          limits:
+            memory: 96Mi
+      webhook:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            memory: 64Mi

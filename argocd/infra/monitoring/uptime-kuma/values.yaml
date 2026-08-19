@@ -29,3 +29,9 @@ externalDatabase:
   existingSecret: mariadb-secrets
   existingSecretPasswordKey: MARIADB_PASSWORD
   existingSecretUsernameKey: MARIADB_USER
+resources:
+  requests:
+    cpu: 20m
+    memory: 192Mi
+  limits:
+    memory: 192Mi
