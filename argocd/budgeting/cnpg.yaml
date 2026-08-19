@@ -31,9 +31,9 @@ spec:
   resources:
     requests:
       cpu: 10m
-      memory: 128Mi
+      memory: 576Mi
     limits:
-      memory: 192Mi
+      memory: 704Mi
   superuserSecret:
     name: superuser
 ---

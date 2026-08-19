@@ -31,9 +31,9 @@ spec:
   resources:
     requests:
       cpu: 10m
-      memory: 96Mi
+      memory: 576Mi
     limits:
-      memory: 192Mi
+      memory: 704Mi
   superuserSecret:
     name: superuser
   affinity:

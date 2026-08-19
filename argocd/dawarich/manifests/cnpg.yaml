@@ -34,9 +34,10 @@ spec:
     name: dawarich-superuser
   resources:
     requests:
-      memory: 64Mi
+      cpu: 10m
+      memory: 576Mi
     limits:
-      memory: 128Mi
+      memory: 704Mi
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore

@@ -31,10 +31,9 @@ spec:
   resources:
     requests:
       cpu: 10m
-
-      memory: 128Mi
+      memory: 576Mi
     limits:
-      memory: 192Mi
+      memory: 704Mi
   affinity:
     tolerations:
       - key: "node-role.kubernetes.io/control-plane"
