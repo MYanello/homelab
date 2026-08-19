@@ -90,7 +90,7 @@ grafana:
           cpu: 10m
           memory: 96Mi
         limits:
-          memory: 500Mi
+          memory: 96Mi
   admin:
     existingSecret: grafana-secrets
     userKey: grafana-admin-user
@@ -144,7 +144,7 @@ grafana:
       cpu: 20m
       memory: 320Mi
     limits:
-      memory: 320Mi
+      memory: 1Gi
 kube-state-metrics:
   resources:
     requests:
