@@ -24,6 +24,8 @@ global:
         secretKeyRef:
           name: authentik-db-app
           key: dbname
+    - name: AUTHENTIK_WEB__BASE_URL
+      value: https://authentik.yanello.net
   affinity:
     nodeAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
