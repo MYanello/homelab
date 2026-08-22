@@ -40,8 +40,6 @@ spec:
               value: "8000"
             - name: NODE_ENV
               value: production
-            - name: AUTH_MODE
-              value: local
             - name: TRUST_PROXY
               value: "true"
             - name: FRONTEND_URL
@@ -55,7 +53,11 @@ spec:
             - name: OIDC_ISSUER_URL
               value: https://authentik.yanello.net/application/o/excalidash/
             - name: OIDC_REDIRECT_URI
-              value: https://excalidash.yanello.net/api/auth/callback/oidc
+              value: https://excalidash.yanello.net/api/auth/oidc/callback
+            - name: AUTH_MODE
+              value: oidc_enforced
+            - name: OIDC_ADMIN_GROUPS
+              value: admin
           envFrom:
             - secretRef:
                 name: excalidash-secrets
