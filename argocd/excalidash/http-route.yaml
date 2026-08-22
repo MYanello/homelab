@@ -1,0 +1,26 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: 'true'
+    gethomepage.dev/name: ExcaliDash
+    gethomepage.dev/icon: excalidraw
+    gethomepage.dev/description: 'A self-hosted dashboard and organizer for Excalidraw.'
+    gethomepage.dev/pod-selector: app=excalidash-frontend
+  labels:
+    app.kubernetes.io/instance: excalidash-app
+  name: excalidash-http-route
+  namespace: excalidash
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - excalidash.yanello.net
+  rules:
+    - backendRefs:
+        - name: excalidash
+          namespace: excalidash
+          port: 80

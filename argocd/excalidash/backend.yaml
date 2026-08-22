@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: excalidash-backend
+  name: excalidash-backend
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: excalidash-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: excalidash-backend
+    spec:
+      containers:
+        - name: backend
+          image: harbor.yanello.net/docker/zimengxiong/excalidash-backend:0.6.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: DATABASE_PROVIDER
+              value: postgresql
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: excalidash-db-app
+                  key: uri
+            - name: PORT
+              value: "8000"
+            - name: NODE_ENV
+              value: production
+            - name: AUTH_MODE
+              value: local
+            - name: TRUST_PROXY
+              value: "true"
+            - name: FRONTEND_URL
+              value: https://excalidash.yanello.net
+            - name: ENFORCE_HTTPS_REDIRECT
+              value: "false"
+            - name: UPDATE_CHECK_OUTBOUND
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: excalidash-secrets
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 25m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: excalidash-backend
+  name: excalidash-backend
+spec:
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: excalidash-backend
