@@ -106,7 +106,7 @@ spec:
               mountPath: /data/media
           readinessProbe:
             httpGet:
-              path: /web/index.html
+              path: /identity
               port: 32400
               scheme: HTTP
             initialDelaySeconds: 10
@@ -116,7 +116,7 @@ spec:
             failureThreshold: 10
           livenessProbe:
             httpGet:
-              path: /web/index.html
+              path: /identity
               port: 32400
               scheme: HTTP
             initialDelaySeconds: 30
@@ -126,7 +126,7 @@ spec:
             failureThreshold: 3
           startupProbe:
             httpGet:
-              path: /web/index.html
+              path: /identity
               port: 32400
               scheme: HTTP
             initialDelaySeconds: 10

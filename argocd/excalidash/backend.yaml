@@ -58,6 +58,8 @@ spec:
               value: oidc_enforced
             - name: OIDC_ADMIN_GROUPS
               value: admin
+            - name: OIDC_REQUIRE_EMAIL_VERIFIED
+              value: "false"
           envFrom:
             - secretRef:
                 name: excalidash-secrets
