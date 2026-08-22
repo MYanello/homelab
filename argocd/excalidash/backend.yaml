@@ -50,6 +50,12 @@ spec:
               value: "false"
             - name: UPDATE_CHECK_OUTBOUND
               value: "false"
+            - name: OIDC_PROVIDER_NAME
+              value: Authentik
+            - name: OIDC_ISSUER_URL
+              value: https://authentik.yanello.net/application/o/excalidash/
+            - name: OIDC_REDIRECT_URI
+              value: https://excalidash.yanello.net/api/auth/callback/oidc
           envFrom:
             - secretRef:
                 name: excalidash-secrets
