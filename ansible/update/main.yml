@@ -67,8 +67,43 @@
           failed: true
       when: updates_count.stdout is not defined
 
+- name: Update PiKVM Hosts
+  hosts: pikvm_hosts
+  gather_facts: false
+  serial: 1
+  max_fail_percentage: 100
+
+  tasks:
+    - name: Set filesystem to read-write
+      ansible.builtin.shell: |
+        rw
+      changed_when: true
+
+    - name: Update packages via pacman
+      ansible.builtin.shell: |
+        pacman -Syu --noconfirm
+      register: pacman_result
+      changed_when: '"nothing to do" not in pacman_result.stdout'
+
+    - name: Reboot PiKVM after update
+      ansible.builtin.reboot:
+        msg: "Reboot initiated by Ansible after PiKVM package updates"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 5
+        post_reboot_delay: 30
+        test_command: uptime
+      when: pacman_result.changed
+
+    - name: Store result fact for summary
+      ansible.builtin.set_fact:
+        host_update_summary:
+          packages_upgraded: "0"
+          was_rebooted: "{{ pacman_result.changed }}"
+          failed: false
+
 - name: Final Summary
-  hosts: ubuntu_hosts
+  hosts: ubuntu_hosts:pikvm_hosts
   gather_facts: false
   tasks:
     - name: Build summary report
