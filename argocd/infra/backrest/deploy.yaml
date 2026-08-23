@@ -94,7 +94,7 @@ spec:
       volumes:
         - name: ssd
           hostPath:
-            path: /ssd
+            path: /mnt/ssd
         - name: cache
           persistentVolumeClaim:
             claimName: cache
