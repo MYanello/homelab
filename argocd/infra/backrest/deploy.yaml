@@ -66,18 +66,14 @@ spec:
               mountPath: /cache
             - name: zpool
               mountPath: /userdata/zpool/
-            - name: fast-k8s
-              mountPath: /userdata/fast-k8s/
+            - name: ssd
+              mountPath: /userdata/ssd/
             - name: hostdata
               mountPath: /userdata/data
             - name: etc
               mountPath: /userdata/etc
             - name: mnt
               mountPath: /userdata/mnt
-            # - name: truenas-data
-            #   mountPath: /tmp/data
-            # - name: truenas-config
-            #   mountPath: /tmp/config
           readinessProbe:
             httpGet:
               path: /
@@ -96,20 +92,12 @@ spec:
             failureThreshold: 3
       restartPolicy: Always
       volumes:
-        # - name: data
-        #   hostPath:
-        #     path: /zpool/k8s/backrest/data
-        # - name: config
-        #   hostPath:
-        #     path: /zpool/k8s/backrest/config
-        - name: fast-k8s
+        - name: ssd
           hostPath:
-            path: /fast-k8s
+            path: /ssd
         - name: cache
           persistentVolumeClaim:
             claimName: cache
-          # hostPath:
-          # path: /zpool/k8s/backrest/cache
         - name: zpool
           hostPath:
             path: /zpool/
