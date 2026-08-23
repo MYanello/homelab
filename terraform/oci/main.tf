@@ -84,7 +84,7 @@ module "free_compartment" {
   instance_memory           = 1
   instance_boot_volume_size = 50
   instance_public_key_path  = local.instance_public_key_path
-  personal_ip               = "162.194.16.64/32"
+  personal_ip               = "174.93.25.53/32"
   name                      = "free_instance_0"
 }
 
