@@ -1,0 +1,17 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: myspeed
+spec:
+  endpoints:
+    - port: http
+      path: /api/prometheus/metrics
+      interval: 60s
+      scrapeTimeout: 10s
+  namespaceSelector:
+    matchNames:
+      - myspeed
+  selector:
+    matchLabels:
+      app: myspeed
