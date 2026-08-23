@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /data/media/plex
+            path: /mnt/ssd/k8s/plex
         - name: transcode
           emptyDir: {}
         - name: media
