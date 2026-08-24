@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: harbor.yanello.net/docker/zimengxiong/excalidash-backend:0.5.1
+          image: harbor.yanello.net/docker/zimengxiong/excalidash-backend:0.6.0@sha256:cbdab75f31b21e342b464d6404a454791e5da7452e3614b137021a800fc4cac6
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
