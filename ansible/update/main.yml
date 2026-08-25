@@ -81,9 +81,9 @@
 
     - name: Update packages via pacman
       ansible.builtin.shell: |
-        pacman -Syu --noconfirm
+        pikvm-update
       register: pacman_result
-      changed_when: '"nothing to do" not in pacman_result.stdout'
+      changed_when: '"Your PiKVM is already up-to-date" not in pacman_result.stdout'
 
     - name: Reboot PiKVM after update
       ansible.builtin.reboot:
