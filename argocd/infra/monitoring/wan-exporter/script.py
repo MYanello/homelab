@@ -47,7 +47,7 @@ VM_URL = os.getenv(
 )
 PORT = int(os.getenv("PORT", 9101))
 INTERVAL = int(os.getenv("INTERVAL", 120))
-NTFY_URL = f"https://ntfy.sh/{os.getenv('NTFY_TOPIC', '')}"
+NTFY_URL = f"https://ntfy.sh/{os.environ.get('NTFY_TOPIC')}"
 
 
 def query_vm() -> tuple[dict[str, str], float]:
@@ -96,6 +96,7 @@ def notify(title: str, message: str) -> None:
             method="POST",
         )
         urllib.request.urlopen(req, timeout=5)
+        logger.info(f"Sent notification to {NTFY_URL}")
     except Exception:
         logger.exception("ntfy failed")
 
