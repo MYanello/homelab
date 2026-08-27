@@ -15,4 +15,4 @@ generators:
 images:
   - name: harbor.yanello.net/library/wan-exporter
     newName: cw-myanello.cwcr.io/wan-exporter
-    newTag: v0.4.5@sha256:2965c13e905f64327a71f94a21201863502c5aaf119bb6fe5af4750b83aa24a8
+    newTag: v0.4.6@sha256:b1c79c447a0e0c307e8f0e0f0e476d38bbaa4451b334b0745d37cbc18e15d990
