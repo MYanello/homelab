@@ -1,7 +1,7 @@
 locals {
   oidc_mappings = [
     data.authentik_property_mapping_provider_scope.openid.id,
-    data.authentik_property_mapping_provider_scope.email.id,
+    authentik_property_mapping_provider_scope.email.id,
     data.authentik_property_mapping_provider_scope.profile.id,
   ]
 }
@@ -119,6 +119,23 @@ module "proxmox" {
   ]
   sub_mode        = "user_email"
   meta_launch_url = "https://proxmox.yanello.net"
+}
+
+module "mealie" {
+  source = "./modules/oauth2-app"
+
+  name               = "Mealie"
+  slug               = "mealie"
+  client_id          = "cVppqDAfrdBc1t0RO3o2nxddLmUkF7Ib6RtDpJ5v"
+  authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
+  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
+  property_mappings  = local.oidc_mappings
+  redirect_uris = [{
+    matching_mode     = "strict"
+    url               = "https://mealie.yanello.net/login"
+    redirect_uri_type = "authorization"
+  }]
+  meta_launch_url = "https://mealie.yanello.net"
 }
 
 module "backrest" {

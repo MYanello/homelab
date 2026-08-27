@@ -14,8 +14,16 @@ data "authentik_property_mapping_provider_scope" "openid" {
   managed = "goauthentik.io/providers/oauth2/scope-openid"
 }
 
-data "authentik_property_mapping_provider_scope" "email" {
-  managed = "goauthentik.io/providers/oauth2/scope-email"
+resource "authentik_property_mapping_provider_scope" "email" {
+  name        = "email"
+  scope_name  = "email"
+  description = "Email scope with email_verified=true"
+  expression  = <<EOF
+return {
+    "email": request.user.email,
+    "email_verified": True,
+}
+EOF
 }
 
 data "authentik_property_mapping_provider_scope" "profile" {
@@ -35,7 +43,7 @@ locals {
     data.authentik_property_mapping_provider_scope.ak_proxy.id,
     data.authentik_property_mapping_provider_scope.openid.id,
     data.authentik_property_mapping_provider_scope.profile.id,
-    data.authentik_property_mapping_provider_scope.email.id,
+    authentik_property_mapping_provider_scope.email.id,
     data.authentik_property_mapping_provider_scope.entitlements.id,
   ]
 }
