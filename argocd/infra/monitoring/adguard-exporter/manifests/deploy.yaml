@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: adguard-exporter
+  name: adguard-exporter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: adguard-exporter
+  template:
+    metadata:
+      labels:
+        app: adguard-exporter
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+      containers:
+        - image: harbor.yanello.net/ghcr/znandev/adguardexporter:v1.2.3
+          name: adguard-exporter
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: adguard-exporter-secrets
+          env:
+            - name: EXPORTER_PORT
+              value: "9617"
+            - name: SCRAPE_INTERVAL
+              value: 15s
+            - name: LOG_LEVEL
+              value: INFO
+          ports:
+            - containerPort: 9617
+              protocol: TCP
+              name: metrics
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              memory: 32Mi
+              cpu: 10m
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
