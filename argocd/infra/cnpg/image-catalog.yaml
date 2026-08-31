@@ -10,7 +10,7 @@ spec:
     - major: 17
       image: ghcr.io/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:b0fda4c440fd871cc2ab67699e04a69e5024532c4f22520a33cd3ca5d89cdad5
     - major: 18
-      image: ghcr.io/cloudnative-pg/postgis:18-3.6-standard-trixie@sha256:0db493bcd3ad77d31d52e3b7a9f94106fb16032a10974951d9445ca1e810768a
+      image: ghcr.io/cloudnative-pg/postgis:18-3.6-standard-trixie@sha256:2f2b987c5ba3c271a883ac8d76d47470098de3b6436cd1907aa6d0f681fa18fd
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ClusterImageCatalog
