@@ -28,7 +28,7 @@ spec:
           operator: "Exists"
           effect: "NoSchedule"
       containers:
-        - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:3.0.5@sha256:65a4cabf0169ea7fbd90ab7bb28ba3f8b5909613635acda1a03ad606f34b456b
+        - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:3.1.1@sha256:73a1d0bcc5b50cb501f084da795722aa5e2988c6bc9b26ca1ae493a57a490c06
           imagePullPolicy: IfNotPresent
           name: paperless
           ports:
