@@ -6,3 +6,4 @@ resources:
   - ./iocaine.yaml
   - ./kuma.yaml
   - ./opnsense.yaml
+  - ./vllm.yaml

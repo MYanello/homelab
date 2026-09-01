@@ -1,0 +1,12 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vllm
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+    - targets:
+        - https://vllm.cw623e-myanello.coreweave.app
+  path: /metrics
+  scheme: https
