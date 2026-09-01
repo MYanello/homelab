@@ -26,6 +26,17 @@ return {
 EOF
 }
 
+resource "authentik_property_mapping_provider_scope" "groups" {
+  name        = "groups"
+  scope_name  = "groups"
+  description = "User group memberships"
+  expression  = <<EOF
+return {
+    "groups": [group.name for group in request.user.ak_groups.all()],
+}
+EOF
+}
+
 data "authentik_property_mapping_provider_scope" "profile" {
   managed = "goauthentik.io/providers/oauth2/scope-profile"
 }

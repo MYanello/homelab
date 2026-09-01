@@ -31,9 +31,9 @@ variable "property_mappings" {
 variable "redirect_uris" {
   description = "List of redirect URI configs"
   type = list(object({
-    matching_mode     = string
+    matching_mode     = optional(string, "strict")
     url               = string
-    redirect_uri_type = string
+    redirect_uri_type = optional(string, "authorization")
   }))
 }
 
@@ -75,7 +75,7 @@ variable "meta_launch_url" {
 variable "open_in_new_tab" {
   description = "Open launch URL in new tab"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "grant_types" {

@@ -1,16 +1,17 @@
-token: ENC[AES256_GCM,data:qCbNwm6HJ/jIVsLGdsF+57nU+s5Sz5XIX7lLiGiDlW51I3PvoHzFrOPnfNZmBCie+1P7ZqAAF19D+gpD,iv:WsAvwkQmeTEYa/VsTYXNB+D9iDJT2I4zpLEgh49alkU=,tag:TQJDw2CTNYxUKHCVdHeyJQ==,type:str]
+---
+token: ENC[AES256_GCM,data:95imYWu20D4D1wuDR5QlX8Lc2umYlPHByxmaR1p3mFU1rPxno5ytRs+FUr+P/HEfkebauRW5G9aHU2kI,iv:ySpWkAO8jROcTZOP98ocf35kLJNog6ogK7eSNXLDY00=,tag:KScGn84jM/fizmRqzM8h1Q==,type:str]
 sops:
-    age:
-        - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyM1FpUXFhT1BDd2NSSEJu
-            UyszaGFaazgzUEswS3U0Q3hYUy9XbXdZaDFJCmovUjg2U2Q2OE92RHNJeUNDMC9s
-            WHd0R0NWS09iUEZhTUhMQndWdHFHVlEKLS0tIDRjQ0tRNWNhTnVtT3YvV2tjUG90
-            MG9mNjU1bjhXbXlCVThwVVBZK3N6VEEKOdPw2yEZ/9fdL8x1GidSAKc67mkBOb+c
-            rcNToKy4Jd2u6t56mPet99thPhb3D81lNYmTIxm9QMcdaGw5NnPQGQ==
-            -----END AGE ENCRYPTED FILE-----
-          recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
-    lastmodified: "2026-08-27T21:27:47Z"
-    mac: ENC[AES256_GCM,data:BPPEWe3jqLaMSx8S86bxbpyv9x9YOD7PFZ1SBRNSCWU5xGdlXBhMkQDXL5GgII7iGV0APwC7xi97McMKV8dYBITOkVamVGJo2bF4c2PL+v2W31kJWtkxPEKZGaHyxNNK+ibQfm1XWq1WRAVRAuB9cYZReEN2w4bVGvbT7R3B+y0=,iv:2AzcyUlRELvfP3GIUVNZAYFhYRVtyfOKJR/cocYCtvM=,tag:S10bI4JrKvDVtZ5H501QyA==,type:str]
-    unencrypted_regex: ^(apiVersion|metadata|kind|type)$
-    version: 3.13.3
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyM1FpUXFhT1BDd2NSSEJu
+        UyszaGFaazgzUEswS3U0Q3hYUy9XbXdZaDFJCmovUjg2U2Q2OE92RHNJeUNDMC9s
+        WHd0R0NWS09iUEZhTUhMQndWdHFHVlEKLS0tIDRjQ0tRNWNhTnVtT3YvV2tjUG90
+        MG9mNjU1bjhXbXlCVThwVVBZK3N6VEEKOdPw2yEZ/9fdL8x1GidSAKc67mkBOb+c
+        rcNToKy4Jd2u6t56mPet99thPhb3D81lNYmTIxm9QMcdaGw5NnPQGQ==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+  lastmodified: "2026-09-01T01:54:04Z"
+  mac: ENC[AES256_GCM,data:vqN3aI6G3H90OgVch3XqzadqM5+XkBNBp1+t79nP4pq3VTS3+rYpTHrLIXER8GABfYi8q0hy//QDduIqAP4kuG50HiPBiqhu4dHF6J76GH0Pmin0DBew035juPbPXqTZW86TffZxKIKe+Op6gP7gS/ApGrVzEYRradwsEHJ/LUo=,iv:J/HuY+zqZMo72otbikgk47o0+NstmqgFdvjLqWE1lRI=,tag:syAgdlyTIkvKTB2r62Laew==,type:str]
+  unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+  version: 3.13.3

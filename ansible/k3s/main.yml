@@ -2,7 +2,7 @@
 # playbook to setup the cluster. mostly sourced from https://fredrickb.com/2024/10/29/making-the-k3s-cluster-ha/
 
 # - name: Configure Raspberry Pi cgroup settings
-#   hosts: k3s_servers:k3s_agents
+#   hosts: raspberry_pi
 #   become: true
 #   tasks:
 #     - name: Enable cgroups in boot parameters
@@ -111,7 +111,6 @@
           server --disable servicelb --flannel-backend=none --disable-network-policy --tls-san {{ k3s_control_plane_vip }} --disable=traefik
           --cluster-cidr=10.42.0.0/16
       when: (reinstall | bool) or not k3s.stat.exists
-
 # - name: Wait for all agent nodes to complete their registraion
 #   hosts: k3s_servers
 #   vars:
@@ -156,14 +155,14 @@
 #         K3S_URL: "https://{{ k3s_control_plane_vip }}:6443"
 #         K3S_NODE_NAME: "{{ inventory_hostname }}"
 #       when: not k3s.stat.exists
-    # TODO
-  # - name: Copy kubectl config from server to temp .kube directory on control node
-  #   become: true
-  #   ansible.builtin.fetch:
-  #     src: /etc/rancher/k3s/k3s.yaml
-  #     dest: .kube/k3s-config
-  #     # The kubeconfig should be identical for all servers
-  #     flat: true
+# TODO
+# - name: Copy kubectl config from server to temp .kube directory on control node
+#   become: true
+#   ansible.builtin.fetch:
+#     src: /etc/rancher/k3s/k3s.yaml
+#     dest: .kube/k3s-config
+#     # The kubeconfig should be identical for all servers
+#     flat: true
 # - name: Setup kubectl on control node with new context
 #   hosts: localhost
 #   tasks:
