@@ -1,0 +1,44 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vllm-benchmark
+  namespace: vllm
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: vllm-bench
+          image: docker.io/vllm/vllm-openai:v0.28.0
+          command:
+            - /bin/sh
+            - -c
+            - |
+              vllm bench serve \
+                --backend openai \
+                --base-url http://vllm-router-service.vllm.svc.cluster.local:80/v1 \
+                --model deepseek-ai/DeepSeek-V4-Flash-0731 \
+                --tokenizer deepseek-ai/DeepSeek-V4-Flash-0731 \
+                --num-prompts 200 \
+                --input-len 1024 \
+                --output-len 512 \
+                --request-rate inf \
+                --max-concurrency 32 \
+                --save-result
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-key
+                  key: api-key
+                  optional: true
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 2Gi
