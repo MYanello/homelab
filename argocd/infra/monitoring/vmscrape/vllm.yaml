@@ -10,3 +10,15 @@ spec:
         - https://vllm.cw623e-myanello.coreweave.app
   path: /metrics
   scheme: https
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vllm-deepseek
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+    - targets:
+        - https://vllm-deepseek.cw623e-myanello.coreweave.app
+  path: /metrics
+  scheme: https
