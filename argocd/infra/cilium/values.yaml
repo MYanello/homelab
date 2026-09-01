@@ -65,7 +65,7 @@ hubble:
         cpu: 10m
         memory: 16Mi
       limits:
-        memory: 16Mi
+        memory: 50Mi
 bgpControlPlane:
   enabled: true
 
