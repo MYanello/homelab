@@ -13,9 +13,9 @@ ollama:
   resources:
     requests:
       cpu: 10m
-      memory: 192Mi
+      memory: 200Mi
     limits:
-      memory: 192Mi
+      memory: 1Gi
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
