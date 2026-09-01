@@ -7,7 +7,7 @@ resource "authentik_provider_proxy" "this" {
   external_host          = var.external_host
   internal_host          = var.internal_host
   access_token_validity  = var.access_token_validity
-  refresh_token_validity = "days=30"
+  refresh_token_validity = var.refresh_token_validity
 }
 
 resource "authentik_application" "this" {

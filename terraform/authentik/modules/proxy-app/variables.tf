@@ -47,5 +47,11 @@ variable "open_in_new_tab" {
 variable "access_token_validity" {
   description = "Access token validity duration"
   type        = string
-  default     = "hours=720"
+  default     = "minutes=60"
+}
+
+variable "refresh_token_validity" {
+  description = "Refresh token validity duration"
+  type        = string
+  default     = "days=30"
 }

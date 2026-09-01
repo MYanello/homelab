@@ -18,7 +18,6 @@ module "argocd" {
   redirect_uris = [{
     url               = "https://argocd.yanello.net/api/dex/callback"
   }]
-  access_token_validity = "minutes=15"
   meta_launch_url       = "https://argocd.yanello.net/auth/login"
 }
 
@@ -184,7 +183,6 @@ module "prowlarr" {
   external_host         = "https://prowlarr.yanello.net"
   internal_host         = "http://prowlarr.prowlarr.svc.cluster.local:9696"
   meta_launch_url       = "https://prowlarr.yanello.net"
-  access_token_validity = "hours=720"
 }
 
 module "qbittorrent" {
@@ -211,7 +209,6 @@ module "radarr" {
   external_host         = "https://radarr.yanello.net"
   internal_host         = "http://radarr.radarr.svc.cluster.local:7878"
   meta_launch_url       = "https://radarr.yanello.net"
-  access_token_validity = "hours=168"
 }
 
 module "shelfmark" {
@@ -225,7 +222,6 @@ module "shelfmark" {
   external_host         = "https://shelfmark.yanello.net"
   internal_host         = "http://shelfmark.calibre.svc.cluster.local:8084"
   meta_launch_url       = "https://shelfmark.yanello.net"
-  access_token_validity = "hours=720"
 }
 
 module "sonarr" {
@@ -239,7 +235,6 @@ module "sonarr" {
   external_host         = "https://sonarr.yanello.net"
   internal_host         = "http://sonarr.sonarr.svc.cluster.local:8989"
   meta_launch_url       = "https://sonarr.yanello.net"
-  access_token_validity = "hours=24"
 }
 
 module "homecontext" {
@@ -277,8 +272,7 @@ module "airtrail" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
+
 }
 
 module "book-orbit" {
@@ -296,8 +290,6 @@ module "book-orbit" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "budgeting" {
@@ -315,8 +307,6 @@ module "budgeting" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "calibre" {
@@ -334,8 +324,6 @@ module "calibre" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "core-weave-argo" {
@@ -353,8 +341,6 @@ module "core-weave-argo" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "dawarich" {
@@ -372,8 +358,6 @@ module "dawarich" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "excalidash" {
@@ -391,8 +375,6 @@ module "excalidash" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "forgejo" {
@@ -410,8 +392,6 @@ module "forgejo" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "harbor" {
@@ -429,8 +409,6 @@ module "harbor" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "hermes" {
@@ -461,8 +439,6 @@ module "homebox" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "immich" {
@@ -492,8 +468,6 @@ module "immich" {
     },
   ]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "linkwarden" {
@@ -511,8 +485,6 @@ module "linkwarden" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "lube-logger" {
@@ -537,8 +509,6 @@ module "lube-logger" {
     },
   ]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "nextcloud" {
@@ -559,8 +529,6 @@ module "nextcloud" {
   }]
   sub_mode = "user_username"
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "open-webui" {
@@ -578,9 +546,6 @@ module "open-webui" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  access_token_validity = "hours=72"
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "paperless" {
@@ -598,8 +563,6 @@ module "paperless" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "seconds=0"
 }
 
 module "rxr" {
@@ -617,8 +580,6 @@ module "rxr" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
-  refresh_token_validity = "days=30"
-  refresh_token_threshold = "hours=1"
 }
 
 module "shelfmark-books" {

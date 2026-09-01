@@ -46,13 +46,13 @@ variable "access_code_validity" {
 variable "access_token_validity" {
   description = "Access token validity duration"
   type        = string
-  default     = "minutes=5"
+  default     = "minutes=60"
 }
 
 variable "refresh_token_validity" {
   description = "Refresh token validity duration"
   type        = string
-  default     = "days=7"
+  default     = "days=30"
 }
 
 variable "refresh_token_threshold" {
