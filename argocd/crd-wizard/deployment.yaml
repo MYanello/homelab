@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crd-wizard
+  labels:
+    app: crd-wizard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crd-wizard
+  template:
+    metadata:
+      labels:
+        app: crd-wizard
+    spec:
+      serviceAccountName: crd-wizard-sa
+      containers:
+        - name: crd-wizard
+          image: harbor.yanello.net/ghcr/pehlicd/crd-wizard:0.1.9
+          imagePullPolicy: Always
+          command: ["crd-wizard"]
+          args: ["web"]
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
