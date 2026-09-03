@@ -20,10 +20,10 @@ spec:
         - name: crd-wizard
           image: harbor.yanello.net/ghcr/pehlicd/crd-wizard:0.1.9
           imagePullPolicy: Always
-          command: ["/usr/bin/env", "sh", "-c"]
-          args: ["sleep 1d"]
-          # command: ["crd-wizard"]
-          # args: ["web"]
+          # command: ["/usr/bin/env", "sh", "-c"]
+          # args: ["sleep 1d"]
+          command: ["crd-wizard"]
+          args: ["web"]
           ports:
             - containerPort: 8080
               name: http
