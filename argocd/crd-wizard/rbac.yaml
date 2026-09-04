@@ -20,7 +20,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: crd-wizard-sa
-    namespace: default
+    namespace: crd-wizard
 roleRef:
   kind: ClusterRole
   name: crd-wizard-role
