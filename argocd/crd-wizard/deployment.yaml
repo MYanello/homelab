@@ -18,10 +18,8 @@ spec:
       serviceAccountName: crd-wizard-sa
       containers:
         - name: crd-wizard
-          image: harbor.yanello.net/ghcr/pehlicd/crd-wizard:latest
+          image: harbor.yanello.net/library/crd-wizard:0.1.20
           imagePullPolicy: Always
-          # command: ["/usr/bin/env", "sh", "-c"]
-          # args: ["sleep 1d"]
           command: ["crd-wizard"]
           args: ["web"]
           ports:
