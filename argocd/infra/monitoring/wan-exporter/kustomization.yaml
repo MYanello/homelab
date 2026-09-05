@@ -12,7 +12,7 @@ resources:
 generators:
   - ./manifests/secret-generator.yaml
 
-images:
-  - name: harbor.yanello.net/library/wan-exporter
-    newName: cw-myanello.cwcr.io/wan-exporter
-    newTag: v0.4.6@sha256:b1c79c447a0e0c307e8f0e0f0e476d38bbaa4451b334b0745d37cbc18e15d990
+# images:
+  # - name: harbor.yanello.net/library/wan-exporter
+    # newName: cw-myanello.cwcr.io/wan-exporter
+    # newTag: v0.4.6@sha256:b1c79c447a0e0c307e8f0e0f0e476d38bbaa4451b334b0745d37cbc18e15d990
