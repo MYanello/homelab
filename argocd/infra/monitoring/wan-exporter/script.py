@@ -7,9 +7,10 @@ import os
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
+import backoff
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
@@ -20,6 +21,7 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%dT%H:%M:%S",
 )
+logging.getLogger("backoff").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 wan_ip = Info("wan_ip", "Current public IP")
@@ -45,8 +47,8 @@ VM_URL = os.getenv(
     "VM_URL",
     "http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8428",
 )
-PORT = int(os.getenv("PORT", 9101))
-INTERVAL = int(os.getenv("INTERVAL", 120))
+PORT = int(os.getenv("PORT", "9101"))
+INTERVAL = int(os.getenv("INTERVAL", "120"))
 NTFY_URL = f"https://ntfy.sh/{os.environ.get('NTFY_TOPIC')}"
 
 
@@ -154,6 +156,18 @@ def _oci_sign(
     return headers
 
 
+class OracleException(Exception):
+    pass
+
+
+@backoff.on_exception(
+    backoff.expo,
+    Exception,
+    max_tries=4,
+    jitter=None,
+    base=2,
+    factor=5,
+)
 def update_oracle(ip: str) -> None:
     if not ip:
         logger.warning("Oracle: empty IP, skipping")
@@ -180,50 +194,47 @@ def update_oracle(ip: str) -> None:
         return
 
     key_id = f"{tenancy_ocid}/{user_ocid}/{fingerprint}"
+    path = f"/20160918/securityLists/{security_list_id}"
 
-    try:
-        path = f"/20160918/securityLists/{security_list_id}"
+    req_headers = _oci_sign("GET", path, b"", api_key, key_id, host)
+    req = urllib.request.Request(f"{endpoint}{path}", headers=req_headers)
+    resp = urllib.request.urlopen(req, timeout=10)
+    data: Any = json.loads(resp.read())
 
-        req_headers = _oci_sign("GET", path, b"", api_key, key_id, host)
-        req = urllib.request.Request(f"{endpoint}{path}", headers=req_headers)
-        resp = urllib.request.urlopen(req, timeout=10)
-        data: Any = json.loads(resp.read())
+    ingress_rules: list[Any] = list(data.get("ingressSecurityRules", []))
+    updated = False
+    prefix = "32"
+    for rule in ingress_rules:
+        if rule.get("protocol") == "all":
+            prefix = (
+                "32"
+                if isinstance(ipaddress.ip_address(ip), ipaddress.IPv4Address)
+                else "128"
+            )
+            rule["source"] = f"{ip}/{prefix}"
+            updated = True
+            break
 
-        ingress_rules: list[Any] = list(data.get("ingressSecurityRules", []))
-        updated = False
-        prefix = "32"
-        for rule in ingress_rules:
-            if rule.get("protocol") == "all":
-                prefix = (
-                    "32"
-                    if isinstance(ipaddress.ip_address(ip), ipaddress.IPv4Address)
-                    else "128"
-                )
-                rule["source"] = f"{ip}/{prefix}"
-                updated = True
-                break
-
-        if not updated:
-            logger.warning("Oracle: no all-traffic ingress rule found in security list")
-            return
-
-        put_body: dict[str, Any] = {
-            "ingressSecurityRules": ingress_rules,
-            "egressSecurityRules": data.get("egressSecurityRules", []),
-        }
-        for field in ("definedTags", "freeformTags", "displayName"):
-            if field in data:
-                put_body[field] = data[field]
-
-        body_bytes = json.dumps(put_body).encode()
-        req_headers = _oci_sign("PUT", path, body_bytes, api_key, key_id, host)
-        req = urllib.request.Request(
-            f"{endpoint}{path}", data=body_bytes, headers=req_headers, method="PUT"
+    if not updated:
+        raise OracleException(
+            "Oracle: no all-traffic ingress rule found in security list"
         )
-        resp = urllib.request.urlopen(req, timeout=10)
-        logger.info(f"Oracle: security list updated to allow {ip}/{prefix}")
-    except Exception:
-        logger.exception("Oracle update failed")
+
+    put_body: dict[str, Any] = {
+        "ingressSecurityRules": ingress_rules,
+        "egressSecurityRules": data.get("egressSecurityRules", []),
+    }
+    for field in ("definedTags", "freeformTags", "displayName"):
+        if field in data:
+            put_body[field] = data[field]
+
+    body_bytes = json.dumps(put_body).encode()
+    req_headers = _oci_sign("PUT", path, body_bytes, api_key, key_id, host)
+    req = urllib.request.Request(
+        f"{endpoint}{path}", data=body_bytes, headers=req_headers, method="PUT"
+    )
+    urllib.request.urlopen(req, timeout=10)
+    logger.info(f"Oracle: security list updated to allow {ip}/{prefix}")
 
 
 def main():
@@ -236,11 +247,13 @@ def main():
         if change_time:
             last_change.set(change_time)
             logger.info(
-                f"Restored IP: {previous.get('ip')}; last change: {datetime.fromtimestamp(change_time).isoformat(timespec='seconds')}"
+                f"Restored IP: {previous.get('ip')}; last change: {datetime.fromtimestamp(change_time, UTC).isoformat(timespec='seconds')}"
             )
         else:
             logger.info(f"Restored IP: {previous.get('ip')}; last change unknown")
     _ = start_http_server(PORT)
+
+    alerted_ip = None
 
     while True:
         try:
@@ -250,12 +263,27 @@ def main():
             wan_ip.info(out)
             last_scrape.set(time.time())
             if ip != prev_ip:
-                change_time = time.time()
-                last_change.set(change_time)
-                logger.info(f"IP changed: {ip}")
-                notify("WAN IP changed", f"{prev_ip or 'unknown'} -> {ip}")
-                update_oracle(ip)
-                prev_ip = ip
+                if alerted_ip != ip:
+                    change_time = time.time()
+                    last_change.set(change_time)
+                    logger.info(f"IP changed: {ip}")
+                    notify("WAN IP changed", f"{prev_ip or 'unknown'} -> {ip}")
+                try:
+                    update_oracle(ip)
+                    prev_ip = ip
+                    alerted_ip = None
+                except Exception as e:  # NOQA: BLE001
+                    logger.error(f"Oracle update failed for {ip}: {e!r}")
+                    if alerted_ip != ip:
+                        alerted_ip = ip
+                        notify(
+                            "Oracle security list update FAILED",
+                            f"""
+Failed to update the OCI security list to allow {ip}.
+The oracle instance will be unreachable until this
+succeeds.
+""",
+                        )
         except urllib.error.HTTPError as e:
             logger.error(f"HTTP Error getting IP: {e.code}: {e.reason}")
         except urllib.error.URLError as e:

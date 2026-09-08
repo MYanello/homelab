@@ -7,8 +7,9 @@ authors = [
 
 requires-python = ">=3.14"
 dependencies = [
+    "backoff>=2.2.1",
     "cryptography",
-    "prometheus_client"
+    "prometheus_client",
 ]
 
 [tool.uv]
