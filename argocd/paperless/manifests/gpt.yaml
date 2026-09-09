@@ -25,7 +25,7 @@ spec:
       securityContext:
         fsGroup: 10001
       containers:
-        - image: harbor.yanello.net/docker/icereed/paperless-gpt:v0.27.0
+        - image: harbor.yanello.net/docker/icereed/paperless-gpt:v0.27.0@sha256:855d9df5bacb2bed60bd520f1ffe0d118695aef9f77d37466ae85823001f547d
           imagePullPolicy: IfNotPresent
           name: gpt
           envFrom:
