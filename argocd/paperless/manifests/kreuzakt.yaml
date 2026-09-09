@@ -27,7 +27,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-        - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v0.9.4@sha256:7a44f94ca3ecc584bdbf07acd4f73933a6f6c896546c1c30468c3494a820ea05
+        - image: harbor.yanello.net/ghcr/anaisbetts/kreuzakt:v1.0.0@sha256:4a0109d03d663338fd967662aa0151ec7684d2ba31cdfd12f1bf4f3901b1cd8d
           imagePullPolicy: IfNotPresent
           name: kreuzakt
           resources:
