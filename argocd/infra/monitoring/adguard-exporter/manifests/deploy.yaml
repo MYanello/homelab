@@ -22,7 +22,7 @@ spec:
         runAsGroup: 65532
         fsGroup: 65532
       containers:
-        - image: harbor.yanello.net/ghcr/znandev/adguardexporter:v1.2.3
+        - image: harbor.yanello.net/ghcr/znandev/adguardexporter:v1.2.3@sha256:4e581f7aa1795eb0f5ec55268e77b18ac6f1399d783fc38ad7632f2909280236
           name: adguard-exporter
           imagePullPolicy: Always
           envFrom:
