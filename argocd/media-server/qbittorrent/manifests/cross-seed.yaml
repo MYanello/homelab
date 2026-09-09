@@ -45,18 +45,12 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            # - mountPath: /config/config.js
-            #   name: config-file
-            #   subPath: config.js
             - mountPath: /data/media/torrents
               name: torrents
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: cross-seed-config
-        # - name: config-file
-        #   secret:
-        #     secretName: cross-seed-conf
         - name: torrents
           hostPath:
             path: /data/media/torrents
