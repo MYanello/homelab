@@ -19,7 +19,7 @@ spec:
       imagePullSecrets:
         - name: cwcr-dockerconfig
       containers:
-        - image: harbor.yanello.net/library/wan-exporter:v0.4.7@sha256:f350f7746a28ae9ec108e532d1e06fb06d58c2460f892f60f676c055c0718de9
+        - image: harbor.yanello.net/library/wan-exporter:v0.4.7@sha256:6468ee3b41f3a5272a30ef62ba0b742c9055b1aa3c770ddc04f8d616c9ffb203
           name: wan-exporter
           imagePullPolicy: Always
           envFrom:
