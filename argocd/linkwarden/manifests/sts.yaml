@@ -36,7 +36,7 @@ spec:
               value: "true"
             - name: AUTHENTIK_ISSUER
               value: https://authentik.yanello.net/application/o/linkwarden
-          image: harbor.yanello.net/ghcr/linkwarden/linkwarden:v2.16.1@sha256:6902e62a6d68e1906045310dbf9b2df7f3d784a7b2e9d0f02c23666023791634
+          image: harbor.yanello.net/ghcr/linkwarden/linkwarden:v2.16.3@sha256:0664c28a039bda8ffa6663389e8536b2fc717219e329f85b83faca7efed3b144
           volumeMounts:
             - mountPath: /data/data
               name: data
