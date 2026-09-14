@@ -18,7 +18,7 @@ spec:
       serviceAccountName: crd-wizard-sa
       containers:
         - name: crd-wizard
-          image: harbor.yanello.net/ghcr/pehlicd/crd-wizard:0.2.1@sha256:1ef539d22e2bc07c3fa7bc633112783777757a54311422bf7594450cb3538541
+          image: harbor.yanello.net/ghcr/pehlicd/crd-wizard:0.2.2@sha256:35535efaa9b13fd2df0d071a77b3c2d07ad7d7be98229d89e8d4cc06ae6ec593
           imagePullPolicy: Always
           command: ["crd-wizard"]
           args: ["web"]
