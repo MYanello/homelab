@@ -20,7 +20,7 @@ spec:
       containers:
         - name: bytestash
           imagePullPolicy: IfNotPresent
-          command: ["/bin/sh", "-c", "sleep inf"]
+          # command: ["/bin/sh", "-c", "sleep inf"]
           ports:
             - containerPort: 5000
               protocol: TCP
