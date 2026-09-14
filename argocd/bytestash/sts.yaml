@@ -38,6 +38,14 @@ spec:
               value: ""
             - name: TOKEN_EXPIRY
               value: 24h
+            - name: OIDC_ENABLED
+              value: "true"
+            - name: OIDC_DISPLAY_NAME
+              value: "Authentik"
+            - name: OIDC_ISSUER_URL
+              value: "https://authentik.yanello.net/application/o/bytestash/"
+            - name: OIDC_SCOPES
+              value: "openid profile email"
           envFrom:
             - secretRef:
                 name: bytestash-secrets
