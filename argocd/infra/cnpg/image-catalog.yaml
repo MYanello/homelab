@@ -8,7 +8,7 @@ spec:
     - major: 16
       image: harbor.yanello.net/ghcr/cloudnative-pg/postgis:16-3.6-standard-trixie@sha256:f6296fc51cd3d697822bd89525cd0b8adc5992e78695c2b12538ae54ef7f8bc3
     - major: 17
-      image: harbor.yanello.net/ghcr/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:43f9deb30d3fb27338d3ae4280c50260c9bd9efb0eaf4f619674e5b3ca52ffd8
+      image: harbor.yanello.net/ghcr/cloudnative-pg/postgis:17-3.6-standard-trixie@sha256:f7b7496d881c0a2208cf2b4b3047f53fc73616af1aca1163605fe453c5711077
     - major: 18
       image: harbor.yanello.net/ghcr/cloudnative-pg/postgis:18-3.6-standard-trixie@sha256:f6296fc51cd3d697822bd89525cd0b8adc5992e78695c2b12538ae54ef7f8bc3
 ---
