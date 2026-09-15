@@ -36,7 +36,7 @@ spec:
               value: "8888"
             - name: ATUIN_OPEN_REGISTRATION
               value: "true"
-          image: ghcr.io/atuinsh/atuin:18.22.0@sha256:1e94eb5c2fb6bb1e46da2591648efa11aa9507fcd80ddf812e4acbfe51d8a840
+          image: harbor.yanello.net/ghcr/atuinsh/atuin:18.22.0@sha256:1e94eb5c2fb6bb1e46da2591648efa11aa9507fcd80ddf812e4acbfe51d8a840
           imagePullPolicy: IfNotPresent
           name: atuin
           resources:
