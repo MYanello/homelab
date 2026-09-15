@@ -16,3 +16,7 @@ helmCharts:
     releaseName: budgeting
     namespace: budgeting
     valuesFile: ./values.yaml
+
+replicas:
+  - name: budgeting
+    count: 0
