@@ -1,4 +1,4 @@
-FROM harbor.yanello.net/ghcr/astral-sh/uv:0.12.13-python3.14-alpine@sha256:eb47c391d3a252d9d912270dd2b5e234af5493e92039fedb483f1dd1cb5659ce
+FROM harbor.yanello.net/ghcr/astral-sh/uv:0.12.15-python3.14-alpine@sha256:5722f48fd41005cf9ab51096fd17cd810dfd42c45490f70be7639ff2ef7960ba
 
 WORKDIR /app
 
