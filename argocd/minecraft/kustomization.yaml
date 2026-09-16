@@ -6,7 +6,7 @@ kind: Kustomization
 resources:
   - ./manifests/sts.yaml
   - ./manifests/svc.yaml
-  - ./manifests/http-route.yaml
+  - ./manifests/route.yaml
 
 configMapGenerator:
   - name: mc-config
