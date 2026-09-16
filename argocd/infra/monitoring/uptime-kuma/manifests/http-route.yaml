@@ -5,21 +5,23 @@ metadata:
   name: uptime-kuma-httproute
   labels:
     app.kubernetes.io/instance: uptime-kuma
-  # annotations:
-  #   gethomepage.dev/enabled: "true"
-  #   gethomepage.dev/name: VictoriaMetrics
-  #   gethomepage.dev/icon: victoriametrics
-  #   gethomepage.dev/description: "VictoriaMetrics is a fast, cost-effective monitoring solution and time series database."
-  #   gethomepage.dev/pod-selector: app.kubernetes.io/name=vmsingle
-  # name: vm-httproute
 spec:
   parentRefs:
-    - name: cilium-private-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
       namespace: cilium
       sectionName: https
   hostnames:
     - kuma.yanello.net
   rules:
     - backendRefs:
-        - name: uptime-kuma
+        - group: ""
+          kind: Service
+          name: uptime-kuma
           port: 3001
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

@@ -13,12 +13,21 @@ metadata:
   name: vmlogs-httproute
 spec:
   parentRefs:
-    - name: cilium-private-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
       namespace: cilium
       sectionName: https
   hostnames:
     - logs.yanello.net
   rules:
     - backendRefs:
-        - name: victoria-logs-single-server
+        - group: ""
+          kind: Service
+          name: victoria-logs-single-server
           port: 9428
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
