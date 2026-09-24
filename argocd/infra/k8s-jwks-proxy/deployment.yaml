@@ -29,7 +29,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: k8s-jwks-proxy
-          image: harbor.yanello.net/ghcr/gawsoftpl/k8s-jwks-proxy:v1.0.19@sha256:9c2e7a5cdaa4303607000859dc35cc65d98b5b2cf552549afeb1a923d17c08f7
+          image: harbor.yanello.net/ghcr/gawsoftpl/k8s-jwks-proxy:v1.1.1@sha256:7a029467f4c465ee3b1821f76ecb9140667d1f0a81ad55fcf6dca1faf2f9cfbc
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
