@@ -60,17 +60,25 @@ spec:
             - name: config
               mountPath: /config
           readinessProbe:
-            httpGet:
-              path: /
-              port: 8989
+            exec:
+              command:
+                - /usr/bin/curl
+                - -fsS
+                - --max-time
+                - "4"
+                - http://127.0.0.1:8989/ping
             initialDelaySeconds: 30
             periodSeconds: 30
             timeoutSeconds: 5
             failureThreshold: 5
           livenessProbe:
-            httpGet:
-              path: /
-              port: 8989
+            exec:
+              command:
+                - /usr/bin/curl
+                - -fsS
+                - --max-time
+                - "4"
+                - http://127.0.0.1:8989/ping
             initialDelaySeconds: 300
             periodSeconds: 30
             timeoutSeconds: 5
