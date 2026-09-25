@@ -86,8 +86,6 @@ portal:
     limits:
       memory: 16Mi
 core:
-  # Pin values the chart would otherwise regenerate on every render
-  # (randAlphaNum/genCA), which rotates secrets and rolls pods on each sync.
   existingSecret: harbor-secrets
   existingXsrfSecret: harbor-secrets
   secretName: harbor-token-tls
