@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: harbor-token-ca
+  namespace: harbor
+spec:
+  commonName: harbor-token-ca
+  duration: 87600h
+  issuerRef:
+    name: local-intermediate-ca1-issuer
+    kind: ClusterIssuer
+  secretName: harbor-token-tls

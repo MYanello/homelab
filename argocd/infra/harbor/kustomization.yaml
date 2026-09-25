@@ -5,6 +5,9 @@ kind: Kustomization
 generators:
   - ./secret-generator.yaml
 
+resources:
+  - ./cert.yaml
+
 helmCharts:
   - name: harbor
     namespace: harbor

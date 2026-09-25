@@ -86,6 +86,11 @@ portal:
     limits:
       memory: 16Mi
 core:
+  # Pin values the chart would otherwise regenerate on every render
+  # (randAlphaNum/genCA), which rotates secrets and rolls pods on each sync.
+  existingSecret: harbor-secrets
+  existingXsrfSecret: harbor-secrets
+  secretName: harbor-token-tls
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
@@ -98,6 +103,7 @@ core:
     limits:
       memory: 1Gi
 jobservice:
+  existingSecret: harbor-secrets
   annotations:
     backup.velero.io/backup-volumes: harbor-jobservice
   tolerations:
@@ -112,6 +118,9 @@ jobservice:
     limits:
       memory: 32Mi
 registry:
+  existingSecret: harbor-secrets
+  credentials:
+    existingSecret: harbor-secrets
   annotations:
     backup.velero.io/backup-volumes: harbor-registry
   tolerations:
