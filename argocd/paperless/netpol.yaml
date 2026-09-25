@@ -8,10 +8,8 @@ spec:
     matchLabels:
       app: paperless
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "8000"
@@ -65,10 +63,8 @@ spec:
     matchLabels:
       app: gpt
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "8080"
@@ -98,10 +94,8 @@ spec:
     matchLabels:
       app: ai
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "3000"
@@ -131,10 +125,8 @@ spec:
     matchLabels:
       app: kreuzakt
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "3000"

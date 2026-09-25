@@ -9,10 +9,8 @@ spec:
       app.kubernetes.io/name: open-webui
       app.kubernetes.io/instance: open-webui
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "8080"

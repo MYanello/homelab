@@ -6,10 +6,8 @@ metadata:
 spec:
   endpointSelector: {}
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
     - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: monitoring

@@ -12,10 +12,8 @@ spec:
           - argo-workflows-server
           - argo-workflows-workflow-controller
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "2746"
@@ -24,10 +22,11 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: argo-workflows
   egress:
-    - toServices:
-        - k8s:
-            serviceName: kubernetes
-            namespace: default
+    - toCIDR:
+        - 192.168.10.44/32
+        - 192.168.10.55/32
+        - 192.168.10.66/32
+        - 192.168.10.100/32
       toPorts:
         - ports:
             - port: "443"

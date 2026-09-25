@@ -16,10 +16,8 @@ spec:
         - ports:
             - port: "8989"
               protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "8989"
@@ -96,6 +94,14 @@ spec:
       toPorts:
         - ports:
             - port: "8080"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: prowlarr
+            app: prowlarr
+      toPorts:
+        - ports:
+            - port: "9696"
               protocol: TCP
     - toEndpoints:
         - matchLabels:

@@ -9,10 +9,8 @@ spec:
       app.kubernetes.io/name: forgejo
       app.kubernetes.io/instance: forgejo
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "3000"

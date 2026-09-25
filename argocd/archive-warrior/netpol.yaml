@@ -8,10 +8,8 @@ spec:
     matchLabels:
       app: warrior
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+    - fromEntities:
+        - ingress
       toPorts:
         - ports:
             - port: "8001"
@@ -19,11 +17,3 @@ spec:
   egress:
     - toEntities:
         - world
-      toPorts:
-        - ports:
-            - port: "443"
-              protocol: TCP
-            - port: "873"
-              protocol: TCP
-            - port: "22"
-              protocol: TCP

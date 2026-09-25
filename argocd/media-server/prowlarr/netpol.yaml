@@ -16,10 +16,32 @@ spec:
         - ports:
             - port: "9696"
               protocol: TCP
+    - fromEntities:
+        - ingress
+      toPorts:
+        - ports:
+            - port: "9696"
+              protocol: TCP
     - fromEndpoints:
         - matchLabels:
-            k8s:io.kubernetes.pod.namespace: cilium
-            k8s-app: cilium-envoy
+            k8s:io.kubernetes.pod.namespace: radarr
+            app: radarr
+      toPorts:
+        - ports:
+            - port: "9696"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: sonarr
+            app: sonarr
+      toPorts:
+        - ports:
+            - port: "9696"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: qbittorrent
+            app: cross-seed
       toPorts:
         - ports:
             - port: "9696"

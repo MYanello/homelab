@@ -13,10 +13,11 @@ spec:
           - node-agent
   ingress: []
   egress:
-    - toServices:
-        - k8s:
-            serviceName: kubernetes
-            namespace: default
+    - toCIDR:
+        - 192.168.10.44/32
+        - 192.168.10.55/32
+        - 192.168.10.66/32
+        - 192.168.10.100/32
       toPorts:
         - ports:
             - port: "443"
