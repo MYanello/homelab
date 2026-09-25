@@ -6,6 +6,7 @@ generators:
   - ./manifests/secret-generator.yaml
 
 resources:
+  - ./manifests/netpol.yaml
   - ./manifests/health-check.yaml
   - ./manifests/http-route.yaml
   - ./manifests/cert.yaml

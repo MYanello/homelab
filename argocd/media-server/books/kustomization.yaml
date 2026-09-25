@@ -6,6 +6,7 @@ generators:
   - manifests/secretGenerator.yaml
 
 resources:
+  - manifestsnetpol.yaml
   - manifests/cnpg.yaml
   - manifests/bookorbit.yaml
   - manifests/shelfmark.yaml

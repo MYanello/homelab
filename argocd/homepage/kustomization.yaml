@@ -18,6 +18,7 @@ configMapGenerator:
       - ./manifests/config/widgets.yaml
 
 resources:
+  - ./manifests/netpol.yaml
   - ./manifests/deploy.yaml
   - ./manifests/svc.yaml
   - ./manifests/http-route.yaml

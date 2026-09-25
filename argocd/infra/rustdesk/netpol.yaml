@@ -1,0 +1,51 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: rustdesk
+spec:
+  endpointSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - rustdesk-hbbs
+          - rustdesk-hbbr
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "21115"
+              protocol: TCP
+            - port: "21116"
+              protocol: TCP
+            - port: "21116"
+              protocol: UDP
+            - port: "21117"
+              protocol: TCP
+            - port: "21118"
+              protocol: TCP
+            - port: "21119"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "21115"
+              protocol: TCP
+            - port: "21116"
+              protocol: TCP
+            - port: "21116"
+              protocol: UDP
+            - port: "21117"
+              protocol: TCP
+            - port: "21118"
+              protocol: TCP
+            - port: "21119"
+              protocol: TCP
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: rustdesk

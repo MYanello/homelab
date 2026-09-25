@@ -1,0 +1,21 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: chartdb
+spec:
+  endpointSelector:
+    matchLabels:
+      app: chartdb
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cilium
+            k8s-app: cilium-envoy
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+  egressDeny:
+    - toEntities:
+        - world

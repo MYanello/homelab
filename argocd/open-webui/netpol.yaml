@@ -1,0 +1,89 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: open-webui
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: open-webui
+      app.kubernetes.io/instance: open-webui
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cilium
+            k8s-app: cilium-envoy
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: open-webui
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+            - port: "11434"
+              protocol: TCP
+            - port: "9099"
+              protocol: TCP
+            - port: "9998"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: vllm
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+    - toFQDNs:
+        - matchName: authentik.yanello.net
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: open-webui-deps
+spec:
+  endpointSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - ollama
+          - pipelines
+          - tika
+          - open-webui-redis
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: open-webui
+            k8s:app.kubernetes.io/name: open-webui
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+            - port: "11434"
+              protocol: TCP
+            - port: "9099"
+              protocol: TCP
+            - port: "9998"
+              protocol: TCP
+  egress:
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP

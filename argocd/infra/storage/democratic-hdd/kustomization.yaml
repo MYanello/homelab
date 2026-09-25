@@ -12,3 +12,6 @@ helmCharts:
     repo: https://democratic-csi.github.io/charts/
     version: "0.15.1"
     valuesFile: values.yaml
+
+resources:
+  - netpol.yaml

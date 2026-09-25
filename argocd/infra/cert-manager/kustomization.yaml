@@ -1,5 +1,6 @@
 ---
 resources:
+  - ./manifests/netpol.yaml
   - ./manifests/resources.yaml
 
 generators:

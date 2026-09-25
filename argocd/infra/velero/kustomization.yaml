@@ -12,3 +12,6 @@ helmCharts:
     repo: https://vmware-tanzu.github.io/helm-charts
     version: 12.2.0
     valuesFile: ./values.yaml
+
+resources:
+  - netpol.yaml

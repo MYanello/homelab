@@ -5,6 +5,7 @@ kind: Kustomization
 generators:
   - manifests/secret-generator.yaml
 resources:
+  - ./manifests/netpol.yaml
   - manifests/pvc.yaml
   - manifests/redis.yaml
   - manifests/postgres.yaml

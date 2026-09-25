@@ -6,6 +6,7 @@ generators:
   - secret-generator.yaml
 
 resources:
+  - netpol.yaml
   - statefulset.yaml
   - service.yaml
   - httproute.yaml

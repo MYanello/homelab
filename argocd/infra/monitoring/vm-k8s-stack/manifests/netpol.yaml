@@ -1,0 +1,44 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: monitoring
+spec:
+  endpointSelector: {}
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cilium
+            k8s-app: cilium-envoy
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+            - port: "3001"
+              protocol: TCP
+            - port: "8428"
+              protocol: TCP
+            - port: "8429"
+              protocol: TCP
+            - port: "9428"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "8428"
+              protocol: TCP
+            - port: "8086"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: garmin
+            app: garmin-fetch
+      toPorts:
+        - ports:
+            - port: "8086"
+              protocol: TCP

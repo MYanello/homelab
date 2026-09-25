@@ -6,6 +6,7 @@ generators:
   - ./manifests/secret-generator.yaml
 
 resources:
+  - ./manifestsnetpol.yaml
   - ./manifests/deploy.yaml
   - ./manifests/service.yaml
   - ./manifests/pvc.yaml

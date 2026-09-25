@@ -11,6 +11,7 @@ configMapGenerator:
       - ./manifests/metrics.kdl
 
 resources:
+  - ./manifests/netpol.yaml
   - manifests/sts.yaml
   - manifests/service.yaml
   - manifests/http-route.yaml

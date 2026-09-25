@@ -5,6 +5,7 @@ kind: Kustomization
 generators:
   - secret-generator.yaml
 resources:
+  - netpol.yaml
   - deploy.yaml
   - http-route.yaml
   - pvc.yaml

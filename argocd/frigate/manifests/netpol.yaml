@@ -1,0 +1,68 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: frigate
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: frigate
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cilium
+            k8s-app: cilium-envoy
+      toPorts:
+        - ports:
+            - port: "8971"
+              protocol: TCP
+            - port: "5000"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "5000"
+              protocol: TCP
+            - port: "8554"
+              protocol: TCP
+            - port: "1935"
+              protocol: TCP
+            - port: "8555"
+              protocol: TCP
+            - port: "8555"
+              protocol: UDP
+            - port: "1984"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: frigate
+            k8s:app.kubernetes.io/name: frigate
+      toPorts:
+        - ports:
+            - port: "5000"
+              protocol: TCP
+  egress:
+    - toCIDR:
+        - 192.168.0.0/16
+      toPorts:
+        - ports:
+            - port: "1883"
+              protocol: TCP
+            - port: "554"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: frigate
+            k8s:app.kubernetes.io/name: frigate
+      toPorts:
+        - ports:
+            - port: "5000"
+              protocol: TCP
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP

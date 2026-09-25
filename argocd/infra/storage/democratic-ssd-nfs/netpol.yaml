@@ -1,0 +1,25 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: democratic-ssd-nfs-controller
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/csi-role: controller
+  ingress: []
+  egress:
+    - toServices:
+        - k8s:
+            serviceName: kubernetes
+            namespace: default
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+    - toCIDR:
+        - 192.168.10.78/32
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP

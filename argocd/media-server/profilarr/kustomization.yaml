@@ -6,9 +6,10 @@ generators:
   - manifests/secret-generator.yaml
 
 resources:
-  - manifests/deploy.yaml
-  - manifests/parser-deploy.yaml
-  - manifests/parser-svc.yaml
-  - manifests/svc.yaml
+  - manifests/netpol.yaml
+  # - manifests/deploy.yaml
+  # - manifests/parser-deploy.yaml
+  # - manifests/parser-svc.yaml
+  # - manifests/svc.yaml
   - manifests/pvc.yaml
-  - manifests/http-route.yaml
+  # - manifests/http-route.yaml

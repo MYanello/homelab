@@ -1,0 +1,48 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: ersatztv
+spec:
+  endpointSelector:
+    matchLabels:
+      app: ersatztv
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cilium
+            k8s-app: cilium-envoy
+      toPorts:
+        - ports:
+            - port: "8409"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "8409"
+              protocol: TCP
+  egress:
+    - toCIDR:
+        - 192.168.0.0/16
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+            - port: "5004"
+              protocol: TCP
+            - port: "8840"
+              protocol: TCP
+            - port: "65001"
+              protocol: TCP
+            - port: "65001"
+              protocol: UDP
+            - port: "1900"
+              protocol: UDP
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP

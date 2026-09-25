@@ -3,7 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ./deploy.yaml
+  # - ./netpol.yaml
+  # - ./deploy.yaml
   - ./pvc.yaml
-  - ./http-route.yaml
-  - ./svc.yaml
+  # - ./http-route.yaml
+  # - ./svc.yaml

@@ -15,3 +15,6 @@ helmCharts:
           memory: 32Mi
         limits:
           memory: 64Mi
+
+resources:
+  - netpol.yaml

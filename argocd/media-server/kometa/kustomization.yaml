@@ -6,6 +6,7 @@ generators:
   - ./manifests/secret-generator.yaml
 
 resources:
+  - ./manifests/netpol.yaml
   - ./manifests/config-kometa.yaml
   - ./manifests/config-movies.yaml
   - ./manifests/config-tv.yaml

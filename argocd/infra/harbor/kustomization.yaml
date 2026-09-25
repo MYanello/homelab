@@ -6,6 +6,7 @@ generators:
   - ./secret-generator.yaml
 
 resources:
+  - netpol.yaml
   - ./cert.yaml
 
 helmCharts:

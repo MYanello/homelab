@@ -1,0 +1,25 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: actual-budget
+spec:
+  endpointSelector:
+    matchLabels:
+      app: actual-budget
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cilium
+            k8s-app: cilium-envoy
+      toPorts:
+        - ports:
+            - port: "5006"
+              protocol: TCP
+  egress:
+    - toFQDNs:
+        - matchName: authentik.yanello.net
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP

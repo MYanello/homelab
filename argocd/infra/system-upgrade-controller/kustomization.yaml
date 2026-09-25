@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: system-upgrade
 
 resources:
+  - netpol.yaml
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.20.1/crd.yaml
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.20.1/system-upgrade-controller.yaml
   - ./plans/v1.37.0-k3s1.yaml

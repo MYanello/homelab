@@ -6,6 +6,7 @@ generators:
   - manifests/secret-generator.yaml
 
 resources:
+  - netpol.yaml
   - manifests/http-route.yaml
 
 helmCharts:
