@@ -10,16 +10,13 @@ spec:
   ingress: []
   egress:
     - toCIDR:
-        - 192.168.10.44/32
-        - 192.168.10.55/32
-        - 192.168.10.66/32
-        - 192.168.10.100/32
+        - 192.168.10.0/24
       toPorts:
         - ports:
-            - port: "443"
+            - port: "6443"
               protocol: TCP
-    - toCIDR:
-        - 192.168.10.78/32
+    - toFQDNs:
+        - matchName: truenas.yanello.net
       toPorts:
         - ports:
             - port: "443"
