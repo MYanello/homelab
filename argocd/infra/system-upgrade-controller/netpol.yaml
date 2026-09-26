@@ -7,8 +7,9 @@ spec:
   endpointSelector: {}
   ingress: []
   egress:
-    - toCIDR:
-        - 192.168.10.0/24
+    - toEntities:
+        - kube-apiserver
+        - host
       toPorts:
         - ports:
             - port: "6443"

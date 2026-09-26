@@ -14,7 +14,7 @@ spec:
         - ports:
             - port: "8080"
               protocol: TCP
-  egress: null
+  egress: []
 ---
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy

@@ -8,6 +8,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: open-webui
       app.kubernetes.io/instance: open-webui
+      app.kubernetes.io/component: open-webui
   ingress:
     - fromEntities:
         - ingress
@@ -64,7 +65,11 @@ spec:
           - ollama
           - pipelines
           - tika
-          - open-webui-redis
+          - open-webui
+      - key: app.kubernetes.io/component
+        operator: NotIn
+        values:
+          - open-webui
   ingress:
     - fromEndpoints:
         - matchLabels:

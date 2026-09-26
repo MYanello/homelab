@@ -13,7 +13,7 @@ spec:
         - ingress
       toPorts:
         - ports:
-            - port: "80"
+            - port: "3000"
               protocol: TCP
             - port: "3001"
               protocol: TCP

@@ -19,8 +19,9 @@ spec:
     - toEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: argocd
-    - toCIDR:
-        - 192.168.10.0/24
+    - toEntities:
+        - kube-apiserver
+        - host
       toPorts:
         - ports:
             - port: "6443"

@@ -15,8 +15,9 @@ spec:
             - port: "3000"
               protocol: TCP
   egress:
-    - toCIDR:
-        - 192.168.10.0/24
+    - toEntities:
+        - kube-apiserver
+        - host
       toPorts:
         - ports:
             - port: "6443"
@@ -45,8 +46,8 @@ spec:
         - ports:
             - port: "5216"
               protocol: TCP
-    - toCIDR:
-        - 192.168.1.1/32
+    - toEntities:
+        - world
       toPorts:
         - ports:
             - port: "1000"
