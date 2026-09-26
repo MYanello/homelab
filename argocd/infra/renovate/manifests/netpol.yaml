@@ -18,6 +18,12 @@ spec:
             - port: "80"
               protocol: TCP
   egress:
+    - toFQDNs:
+        - matchName: harbor.yanello.net
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
     - toEntities:
         - world
       toPorts:

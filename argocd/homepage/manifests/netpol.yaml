@@ -21,6 +21,15 @@ spec:
         - ports:
             - port: "6443"
               protocol: TCP
+    - toFQDNs:
+        - matchName: router.yanello.net
+        - matchName: myspeed.yanello.net
+        - matchName: tautulli.yanello.net
+        - matchName: qbit.yanello.net
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
     - toEntities:
         - world
       toPorts:
