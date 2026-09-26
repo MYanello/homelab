@@ -23,8 +23,8 @@ spec:
     - toEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: harbor
-    - toFQDNs:
-        - matchName: authentik.yanello.net
+    - toCIDR:
+        - 10.10.8.0/22
       toPorts:
         - ports:
             - port: "443"

@@ -15,8 +15,8 @@ spec:
         - ports:
             - port: "6443"
               protocol: TCP
-    - toFQDNs:
-        - matchName: truenas.yanello.net
+    - toCIDR:
+        - 10.10.8.0/22
       toPorts:
         - ports:
             - port: "443"
