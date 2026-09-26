@@ -15,9 +15,11 @@ spec:
             - port: "5006"
               protocol: TCP
   egress:
-    - toCIDR:
-        - 10.10.8.0/22
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: authentik
+            k8s:app.kubernetes.io/name: authentik
       toPorts:
         - ports:
-            - port: "443"
+            - port: "9000"
               protocol: TCP

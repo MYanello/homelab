@@ -14,13 +14,7 @@ spec:
         - ports:
             - port: "8080"
               protocol: TCP
-  egress:
-    - toCIDR:
-        - 10.10.8.0/22
-      toPorts:
-        - ports:
-            - port: "443"
-              protocol: TCP
+  egress: null
 ---
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
@@ -39,10 +33,4 @@ spec:
       toPorts:
         - ports:
             - port: "8080"
-              protocol: TCP
-    - toCIDR:
-        - 10.10.8.0/22
-      toPorts:
-        - ports:
-            - port: "443"
               protocol: TCP

@@ -25,11 +25,22 @@ spec:
         - ports:
             - port: "6443"
               protocol: TCP
-    - toCIDR:
-        - 10.10.8.0/22
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: authentik
+            k8s:app.kubernetes.io/name: authentik
       toPorts:
         - ports:
-            - port: "443"
+            - port: "9000"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: harbor
+            k8s:app.kubernetes.io/instance: harbor
+            component: core
+      toPorts:
+        - ports:
+            - port: "8080"
               protocol: TCP
     - toEntities:
         - world
