@@ -25,6 +25,18 @@ spec:
         - ports:
             - port: "6443"
               protocol: TCP
+    - toFQDNs:
+        - matchName: authentik.yanello.net
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+    - toFQDNs:
+        - matchName: harbor.yanello.net
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
     - toEntities:
         - world
       toPorts:
