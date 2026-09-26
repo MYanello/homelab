@@ -23,6 +23,13 @@ spec:
               protocol: TCP
             - port: "9428"
               protocol: TCP
+    - fromEntities:
+        - kube-apiserver
+        - host
+      toPorts:
+        - ports:
+            - port: "9443"
+              protocol: TCP
     - fromCIDR:
         - 192.168.0.0/16
         - 10.10.8.0/22

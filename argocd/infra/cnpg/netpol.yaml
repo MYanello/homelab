@@ -16,4 +16,11 @@ spec:
               protocol: TCP
     - toEndpoints:
         - matchLabels:
+            k8s:cnpg.io/podRole: instance
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
             k8s:io.kubernetes.pod.namespace: cnpg
