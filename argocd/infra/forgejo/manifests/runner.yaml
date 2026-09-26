@@ -93,7 +93,7 @@ spec:
               memory: 32Mi
             limits:
               memory: 64Mi
-          image: docker.io/docker:29.8.1-dind-rootless
+          image: docker.io/docker:29.8.1-dind-rootless@sha256:1f029db43a32fbb1465fe8ff4327d405154876946986170e97d7861232a8227a
           # securityContext:
           #   privileged: true
           env:
