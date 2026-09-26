@@ -16,14 +16,6 @@ spec:
               protocol: TCP
     - fromEndpoints:
         - matchLabels:
-            k8s:io.kubernetes.pod.namespace: plex
-            app: plex
-      toPorts:
-        - ports:
-            - port: "3000"
-              protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
             k8s:io.kubernetes.pod.namespace: jellyfin
             k8s:app.kubernetes.io/name: jellyfin
       toPorts:

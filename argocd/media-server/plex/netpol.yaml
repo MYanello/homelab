@@ -75,14 +75,6 @@ spec:
             - port: "32414"
               protocol: UDP
   egress:
-    - toEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: tracearr
-            app: tracearr
-      toPorts:
-        - ports:
-            - port: "3000"
-              protocol: TCP
     - toCIDR:
         - 192.168.0.0/16
         - 10.10.8.0/22
