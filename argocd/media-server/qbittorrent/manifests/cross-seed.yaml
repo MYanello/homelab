@@ -40,7 +40,8 @@ spec:
             limits:
               memory: 1Gi
           ports:
-            - containerPort: 2468
+            - name: http
+              containerPort: 2468
               protocol: TCP
           volumeMounts:
             - mountPath: /config
@@ -77,7 +78,7 @@ spec:
   ports:
     - name: "http"
       port: 2468
-      targetPort: 2468
+      targetPort: http
   selector:
     app: cross-seed
 ---
