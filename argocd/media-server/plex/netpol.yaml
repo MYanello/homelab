@@ -14,10 +14,44 @@ spec:
         - ports:
             - port: "32400"
               protocol: TCP
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "32400"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: tautulli
+            app: tautulli
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: overseerr
+            app: overseerr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: ombi
+            app: ombi
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: maintainerr
+            app: maintainerr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kometa
+            app: kometa
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: wrapperr
+            app: wrapperr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: tracearr
+            app: tracearr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+            k8s:app.kubernetes.io/name: uptime-kuma
+      toPorts:
+        - ports:
+            - port: "32400"
+              protocol: TCP
     - fromCIDR:
         - 192.168.0.0/16
         - 10.10.8.0/22
-        - 10.42.0.0/16
       toPorts:
         - ports:
             - port: "32400"
@@ -41,6 +75,14 @@ spec:
             - port: "32414"
               protocol: UDP
   egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: tracearr
+            app: tracearr
+      toPorts:
+        - ports:
+            - port: "3000"
+              protocol: TCP
     - toCIDR:
         - 192.168.0.0/16
         - 10.10.8.0/22

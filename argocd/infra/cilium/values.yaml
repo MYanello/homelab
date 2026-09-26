@@ -44,6 +44,7 @@ envoy:
       memory: 128Mi
 hubble:
   enabled: true
+  eventBufferCapacity: "65535"
   ui:
     enabled: true
     backend:

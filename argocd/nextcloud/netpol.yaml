@@ -21,7 +21,7 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: nextcloud
             k8s:app.kubernetes.io/name: mariadb
-            k8s:app.kubernetes.io/instance: nextcloud-mariadb
+            k8s:app.kubernetes.io/instance: nextcloud
       toPorts:
         - ports:
             - port: "3306"
@@ -30,7 +30,7 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: nextcloud
             k8s:app.kubernetes.io/name: redis
-            k8s:app.kubernetes.io/instance: nextcloud-redis
+            k8s:app.kubernetes.io/instance: nextcloud
       toPorts:
         - ports:
             - port: "6379"
@@ -52,7 +52,7 @@ spec:
   endpointSelector:
     matchLabels:
       app.kubernetes.io/name: mariadb
-      app.kubernetes.io/instance: nextcloud-mariadb
+      app.kubernetes.io/instance: nextcloud
   ingress:
     - fromEndpoints:
         - matchLabels:
@@ -75,7 +75,7 @@ spec:
   endpointSelector:
     matchLabels:
       app.kubernetes.io/name: redis
-      app.kubernetes.io/instance: nextcloud-redis
+      app.kubernetes.io/instance: nextcloud
   ingress:
     - fromEndpoints:
         - matchLabels:
