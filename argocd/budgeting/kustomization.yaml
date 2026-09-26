@@ -6,7 +6,7 @@ generators:
   - secret-generator.yaml
 
 resources:
-  - netpol.yaml
+  - ./netpol.yaml
   - ./cnpg.yaml
   - ./httproute.yaml
 
