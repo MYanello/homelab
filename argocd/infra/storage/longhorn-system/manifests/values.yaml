@@ -4,6 +4,7 @@ defaultSettings:
   defaultReplicaCount: "3"
   defaultDataLocality: "best-effort"
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
+  nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
 
 defaultBackupStore:
   backupTarget: "s3://myanello-longhorn@s3.us-west-004/"
