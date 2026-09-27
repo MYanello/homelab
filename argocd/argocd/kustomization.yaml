@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.3/manifests/install.yaml
-  # - ./manifests/svc.yaml
+  - ./manifests/sops.yaml
   - ./manifests/http-route.yaml
   - ./manifests/netpol.yaml
 

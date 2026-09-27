@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/longhorn-xfs-sc.yaml
-  - ./manifests/recurringJob.yaml
+  - ./manifests/recurring-job.yaml
 
 generators:
   - ./manifests/secret-generator.yaml

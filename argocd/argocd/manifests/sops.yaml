@@ -1,0 +1,17 @@
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: sops-age
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: doppler
+    kind: ClusterSecretStore
+  target:
+    name: sops-age
+    creationPolicy: Owner
+  data:
+    - remoteRef:
+        key: SOPS_AGE_KEY
+      secretKey: key.txt
