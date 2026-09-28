@@ -11,6 +11,9 @@ credentials:
   useSecret: true
   existingSecret: cloud-credentials
 
+rbac:
+  clusterAdministrator: false
+
 configuration:
   backupStorageLocation:
     - name: backblaze
