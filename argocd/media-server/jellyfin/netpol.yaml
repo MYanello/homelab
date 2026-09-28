@@ -21,6 +21,17 @@ spec:
         - ports:
             - port: "8096"
               protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: overseerr
+            app: overseerr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: tracearr
+            app: tracearr
+      toPorts:
+        - ports:
+            - port: "8096"
+              protocol: TCP
   egress:
     - toEndpoints:
         - matchLabels:

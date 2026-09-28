@@ -8,25 +8,16 @@ spec:
     matchLabels:
       app: sonarr
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: authentik
-            k8s:app.kubernetes.io/name: authentik
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
     - fromEntities:
         - ingress
       toPorts:
         - ports:
             - port: "8989"
               protocol: TCP
-    - toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-      fromEndpoints:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: authentik
+            k8s:app.kubernetes.io/name: authentik
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: kometa
             app: kometa
@@ -51,6 +42,13 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: unpackerr
             app: unpackerr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: qbittorrent
+            app: cross-seed
+      toPorts:
+        - ports:
+            - port: "8989"
+              protocol: TCP
   egress:
     - toEndpoints:
         - matchLabels:

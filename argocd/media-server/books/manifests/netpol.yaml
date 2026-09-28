@@ -24,6 +24,12 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: authentik
             k8s:app.kubernetes.io/name: authentik
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: books
+            app: bookorbit
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: books
+            app: shelfmark
       toPorts:
         - ports:
             - port: "3000"
