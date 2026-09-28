@@ -22,70 +22,35 @@ spec:
         - ports:
             - port: "8989"
               protocol: TCP
-    - fromEndpoints:
+    - toPorts:
+        - ports:
+            - port: "8989"
+              protocol: TCP
+      fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: kometa
             app: kometa
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: overseerr
             app: overseerr
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: ombi
             app: ombi
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: maintainerr
             app: maintainerr
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: prowlarr
             app: prowlarr
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: profilarr
             app: profilarr
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: bazarr
             app: bazarr
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: unpackerr
             app: unpackerr
-      toPorts:
-        - ports:
-            - port: "8989"
-              protocol: TCP
   egress:
     - toEndpoints:
         - matchLabels:

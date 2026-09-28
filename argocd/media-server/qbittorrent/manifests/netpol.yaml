@@ -18,19 +18,9 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: radarr
             app: radarr
-      toPorts:
-        - ports:
-            - port: "8080"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: sonarr
             app: sonarr
-      toPorts:
-        - ports:
-            - port: "8080"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: qbittorrent
             app: cross-seed

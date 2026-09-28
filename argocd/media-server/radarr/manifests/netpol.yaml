@@ -8,14 +8,6 @@ spec:
     matchLabels:
       app: radarr
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: authentik
-            k8s:app.kubernetes.io/name: authentik
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
     - fromEntities:
         - ingress
       toPorts:
@@ -24,61 +16,32 @@ spec:
               protocol: TCP
     - fromEndpoints:
         - matchLabels:
-            k8s:io.kubernetes.pod.namespace: kometa
-            app: kometa
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
             k8s:io.kubernetes.pod.namespace: overseerr
             app: overseerr
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: qbittorrent
+            app: cross-seed
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kometa
+            app: kometa
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: authentik
+            k8s:app.kubernetes.io/name: authentik
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: ombi
             app: ombi
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: maintainerr
             app: maintainerr
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: prowlarr
             app: prowlarr
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: profilarr
             app: profilarr
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: bazarr
             app: bazarr
-      toPorts:
-        - ports:
-            - port: "7878"
-              protocol: TCP
-    - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: unpackerr
             app: unpackerr
