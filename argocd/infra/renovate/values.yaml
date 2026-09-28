@@ -120,4 +120,10 @@ renovate:
       branchConcurrentLimit: 50,
       prConcurrentLimit: 50,
       prHourlyLimit: 0,
+      hostRules: [
+        {
+          matchHost: "harbor.yanello.net",
+          allowInternal: true,
+        },
+      ],
     };
