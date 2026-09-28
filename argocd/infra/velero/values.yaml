@@ -12,7 +12,7 @@ credentials:
   existingSecret: cloud-credentials
 
 rbac:
-  clusterAdministrator: false
+  clusterAdministrator: true
 
 configuration:
   backupStorageLocation:
