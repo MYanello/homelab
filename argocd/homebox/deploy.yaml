@@ -66,10 +66,10 @@ spec:
             httpGet:
               path: /api/v1/status
               port: 7745
-            initialDelaySeconds: 30
+            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 3
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /api/v1/status

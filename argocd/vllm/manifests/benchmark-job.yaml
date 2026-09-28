@@ -26,7 +26,7 @@ spec:
                 --input-len 1024 \
                 --output-len 512 \
                 --request-rate inf \
-                --max-concurrency 32 \
+                --max-concurrency 8 \
           env:
             - name: OPENAI_API_KEY
               valueFrom:
