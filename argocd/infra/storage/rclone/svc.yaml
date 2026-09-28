@@ -7,8 +7,8 @@ metadata:
   name: rclone
 spec:
   ports:
-    - name: "http"
+    - name: http
       port: 5572
-      targetPort: 5572
+      targetPort: http
   selector:
     app: rclone

@@ -49,6 +49,7 @@ spec:
           ports:
             - containerPort: 5572
               protocol: TCP
+              name: http
           volumeMounts:
             - mountPath: /config/rclone
               name: config
