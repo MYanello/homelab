@@ -17,6 +17,9 @@ spec:
     - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
   hostnames:
     - excalidash.yanello.net
   rules:
