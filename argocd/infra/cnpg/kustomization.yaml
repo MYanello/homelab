@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - netpol.yaml
+  - operator-egress.yaml
   - ./image-catalog.yaml
   - https://github.com/cloudnative-pg/artifacts//image-catalogs-extensions
 
