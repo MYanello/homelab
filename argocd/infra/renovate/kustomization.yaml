@@ -2,12 +2,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: renovate
+
 resources:
   - ./manifests/netpol.yaml
   - ./manifests/http-route.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
+
+configMapGenerator:
+  - name: renovate-config-js
+    files:
+      - config.js=manifests/config.js
 
 helmCharts:
   - name: mend-renovate-ce
@@ -17,6 +24,18 @@ helmCharts:
     namespace: renovate
     valuesFile: ./values.yaml
 
+replacements:
+  - source:
+      kind: ConfigMap
+      name: renovate-config-js
+      fieldPath: metadata.name
+    targets:
+      - select:
+          kind: Deployment
+          name: mend-renovate-ce
+        fieldPaths:
+          - spec.template.spec.volumes.[name=mend-renovate-ce-config-js-volume].configMap.name
+
 patches:
   - target:
       kind: Deployment
@@ -25,3 +44,12 @@ patches:
       - op: replace
         path: /spec/revisionHistoryLimit
         value: 3
+  - target:
+      kind: ConfigMap
+      name: mend-renovate-ce-config-js
+    patch: |- # Remove the config from the helm chart, use the suffixed one from configmapgenerator
+      $patch: delete
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: mend-renovate-ce-config-js
