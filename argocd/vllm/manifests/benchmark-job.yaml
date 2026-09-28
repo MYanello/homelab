@@ -20,8 +20,8 @@ spec:
               vllm bench serve \
                 --backend openai \
                 --base-url https://vllm.cw623e-myanello.coreweave.app \
-                --model deepseek-ai/DeepSeek-V4-Flash-0731 \
-                --tokenizer deepseek-ai/DeepSeek-V4-Flash-0731 \
+                --model deepseek-ai/DeepSeek-V4.1-Flash \
+                --tokenizer deepseek-ai/DeepSeek-V4.1-Flash \
                 --num-prompts 200 \
                 --input-len 1024 \
                 --output-len 512 \
