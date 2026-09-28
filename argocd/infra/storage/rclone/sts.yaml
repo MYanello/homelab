@@ -45,7 +45,7 @@ spec:
             - --rc-web-gui
             - --rc-web-gui-no-open-browser
             - --rc-addr=:5572
-            # - --rc-htpasswd=/config/rclone/htpasswd
+            - --rc-htpasswd=/config/rclone/htpasswd
           ports:
             - containerPort: 5572
               protocol: TCP
