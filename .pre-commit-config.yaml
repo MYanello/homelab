@@ -10,3 +10,10 @@ repos:
     hooks:
       - id: yamllint
         args: [--strict, -c=.yamllint]
+  - repo: local
+    hooks:
+      - id: sanitize-grafana-dashboards
+        name: sanitize grafana dashboards
+        entry: uv run utils/scripts/sanitize-grafana-dashboards.py
+        language: system
+        files: ^argocd/infra/monitoring/dashboards/.*\.json$

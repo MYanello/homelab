@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "panels": [
     {
@@ -1461,6 +1460,5 @@
   "timepicker": {},
   "timezone": "",
   "title": "Power",
-  "uid": "2xKrzYa7z",
-  "version": 1
+  "uid": "2xKrzYa7z"
 }

@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 21,
   "links": [],
   "panels": [
     {
@@ -1238,6 +1237,5 @@
   "timepicker": {},
   "timezone": "",
   "title": "Uptime Kuma - SLA/Latency/Certs",
-  "uid": "See9ai7AhphoaY9phai6aewee3chia",
-  "version": 1
+  "uid": "See9ai7AhphoaY9phai6aewee3chia"
 }

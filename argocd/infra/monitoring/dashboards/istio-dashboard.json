@@ -19,7 +19,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 19,
   "links": [],
   "panels": [
     {
@@ -1792,6 +1791,5 @@
   "timezone": "browser",
   "title": "Istio Mesh Dashboard",
   "uid": "ceit9217jyrr4d",
-  "version": 1,
   "weekStart": ""
 }

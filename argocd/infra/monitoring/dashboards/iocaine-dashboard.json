@@ -19,7 +19,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "panels": [
     {
@@ -1052,6 +1051,5 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "Iocaine (Generic)",
-  "uid": "c2446140-2087-4911-bb5b-dacd55a82df9",
-  "version": 1
+  "uid": "c2446140-2087-4911-bb5b-dacd55a82df9"
 }
