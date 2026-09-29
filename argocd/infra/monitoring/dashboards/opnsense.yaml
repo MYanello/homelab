@@ -2395,7 +2395,7 @@ data:
                             "exemplar": false,
                             "expr": "wan_ip_last_change * 1000",
                             "legendFormat": "__auto",
-                            "range": true
+                            "range": false
                           },
                           "version": "v0"
                         },
