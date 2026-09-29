@@ -21,6 +21,9 @@ helmCharts:
       service:
         type: LoadBalancer
         loadBalancerIP: 10.10.8.0
+      config:
+        http:
+          write-timeout: "60s"
       persistence:
         storageClass: truenas-hdd
       setDefaultUser:
