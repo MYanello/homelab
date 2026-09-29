@@ -17,6 +17,8 @@ spec:
             exclude: true
           - path: argocd/infra/storage/garage
             exclude: true
+          - path: argocd/infra/storage/local-storage
+            exclude: true
   template:
     metadata:
       name: "{{path.basename}}-app"
