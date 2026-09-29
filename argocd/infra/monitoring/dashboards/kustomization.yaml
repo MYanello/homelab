@@ -2,8 +2,43 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - ./iocaine.yaml
-  - ./kuma.yaml
-  - ./opnsense.yaml
-  - ./vllm.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: iocaine-dashboard
+    files:
+      - ./iocaine-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+  - name: istio-dashboard
+    files:
+      - ./istio-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+  - name: kuma-dashboard
+    files:
+      - ./kuma-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+  - name: opnsense-dashboard
+    files:
+      - ./opnsense-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+  - name: power-dashboard
+    files:
+      - ./power-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+  - name: vllm-dashboard
+    files:
+      - ./vllm-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
