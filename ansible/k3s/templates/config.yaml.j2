@@ -6,3 +6,8 @@ kube-apiserver-arg:
   - "oidc-groups-prefix={{ k3s_oidc_groups_prefix }}"
   - "service-account-issuer={{ k3s_service_account_issuer }}"
   - "service-account-jwks-uri={{ k3s_service_account_jwks_uri }}"
+tls-san:
+  - {{ k3s_control_plane_vip }}
+{% for san in (k3s_additional_tls_sans | default('')).split(',') if san | trim %}
+  - {{ san | trim }}
+{% endfor %}

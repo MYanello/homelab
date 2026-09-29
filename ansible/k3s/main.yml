@@ -73,7 +73,7 @@
         INSTALL_K3S_VERSION: "{{ k3s_version }}"
         K3S_NODE_NAME: "{{ inventory_hostname }}"
         INSTALL_K3S_EXEC: |
-          --disable servicelb --tls-san {{ k3s_control_plane_vip }} --cluster-init
+          --disable servicelb --cluster-init
           --flannel-backend=none --disable-network-policy --cluster-cidr=10.42.0.0/16 --disable=traefik
       when: not k3s.stat.exists or (reinstall | bool)
 
@@ -120,7 +120,7 @@
         K3S_NODE_NAME: "{{ inventory_hostname }}"
         # This needs to include `server` first so it does not get registered as an agent. Set the --tls-san to the VIP
         INSTALL_K3S_EXEC: |
-          server --disable servicelb --flannel-backend=none --disable-network-policy --tls-san {{ k3s_control_plane_vip }} --disable=traefik
+          server --disable servicelb --flannel-backend=none --disable-network-policy --disable=traefik
           --cluster-cidr=10.42.0.0/16
       when: (reinstall | bool) or not k3s.stat.exists
 # - name: Wait for all agent nodes to complete their registraion
