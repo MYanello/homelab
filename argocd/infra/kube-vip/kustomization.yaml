@@ -9,6 +9,8 @@ helmCharts:
     releaseName: kube-vip
     namespace: kube-vip
     valuesInline:
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: "true"
       config:
         address: "192.168.10.100"
       env:
