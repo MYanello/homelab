@@ -11,5 +11,4 @@ node_modules
 # iocaine data
 argocd/iocaine/data/
 
-# kustomize --enable-helm chart cache
 charts/
