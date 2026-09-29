@@ -12,12 +12,6 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
-  - name: istio-dashboard
-    files:
-      - ./istio-dashboard.json
-    options:
-      labels:
-        grafana_dashboard: "1"
   - name: kuma-dashboard
     files:
       - ./kuma-dashboard.json
@@ -27,12 +21,6 @@ configMapGenerator:
   - name: opnsense-dashboard
     files:
       - ./opnsense-dashboard.json
-    options:
-      labels:
-        grafana_dashboard: "1"
-  - name: power-dashboard
-    files:
-      - ./power-dashboard.json
     options:
       labels:
         grafana_dashboard: "1"
