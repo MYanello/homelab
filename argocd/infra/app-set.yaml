@@ -12,7 +12,7 @@ spec:
         directories:
           - path: argocd/infra/*
           - path: argocd/infra/kube-vip
-            exclude: true
+            exclude: false
   template:
     metadata:
       name: "{{path.basename}}-app"
