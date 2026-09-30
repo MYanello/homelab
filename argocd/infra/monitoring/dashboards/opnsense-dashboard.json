@@ -5,8 +5,8 @@
     "name": "a88e6c5d-c5ea-4acc-b079-47c3fc6467f1",
     "namespace": "default",
     "uid": "d462d555-e26f-4554-89c5-6ea5b27a99a7",
-    "resourceVersion": "1790684151060019",
-    "generation": 2,
+    "resourceVersion": "1790684417376981",
+    "generation": 3,
     "creationTimestamp": "2026-09-10T12:48:35Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "3857051884929024"
@@ -15,11 +15,11 @@
       "grafana.app/createdBy": "access-policy:service",
       "grafana.app/managedBy": "classic-file-provisioning",
       "grafana.app/managerId": "default",
-      "grafana.app/sourceChecksum": "a9629a044d8eee1ecf57fb2c0296f7da",
+      "grafana.app/sourceChecksum": "0057ed11cbe87561f64e9a45ce39ba45",
       "grafana.app/sourcePath": "/var/lib/grafana/dashboards/default/opnsense-dashboard.json",
-      "grafana.app/sourceTimestamp": "1790684150000",
+      "grafana.app/sourceTimestamp": "1790684417000",
       "grafana.app/updatedBy": "access-policy:service",
-      "grafana.app/updatedTimestamp": "2026-09-29T12:15:51Z",
+      "grafana.app/updatedTimestamp": "2026-09-29T12:20:17Z",
       "grafana.app/folder": ""
     }
   },
@@ -141,7 +141,9 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["mean"],
+                  "calcs": [
+                    "mean"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -285,7 +287,9 @@
                 "namePlacement": "auto",
                 "orientation": "horizontal",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -388,7 +392,9 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["mean"],
+                  "calcs": [
+                    "mean"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -751,7 +757,9 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["mean"],
+                  "calcs": [
+                    "mean"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -926,7 +934,11 @@
                   "multiLane": false
                 },
                 "legend": {
-                  "calcs": ["mean", "max", "min"],
+                  "calcs": [
+                    "mean",
+                    "max",
+                    "min"
+                  ],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
                   "overflow": "ellipsis",
@@ -1397,7 +1409,11 @@
                   "multiLane": false
                 },
                 "legend": {
-                  "calcs": ["mean", "max", "min"],
+                  "calcs": [
+                    "mean",
+                    "max",
+                    "min"
+                  ],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
                   "overflow": "ellipsis",
@@ -1697,7 +1713,9 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["mean"],
+                  "calcs": [
+                    "mean"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -2285,7 +2303,9 @@
                   "kind": "Transformation",
                   "spec": {
                     "options": {
-                      "keepLabels": ["ip"],
+                      "keepLabels": [
+                        "ip"
+                      ],
                       "valueLabel": "hostname"
                     }
                   }
@@ -2330,7 +2350,9 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "/^ip$/",
                   "limit": 1,
                   "values": true
@@ -2413,7 +2435,9 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "limit": 1,
                   "values": true
@@ -2445,8 +2469,11 @@
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
-                        "expr": "myspeed_download",
+                        "editorMode": "builder",
+                        "exemplar": false,
+                        "expr": "avg(myspeed_download)",
+                        "instant": false,
+                        "interval": "",
                         "legendFormat": "Download",
                         "range": true
                       },
@@ -2466,8 +2493,8 @@
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
-                        "expr": "myspeed_upload",
+                        "editorMode": "builder",
+                        "expr": "avg(myspeed_upload)",
                         "legendFormat": "Upload",
                         "range": true
                       },
@@ -2487,8 +2514,9 @@
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
-                        "expr": "myspeed_ping",
+                        "editorMode": "builder",
+                        "expr": "avg(myspeed_ping)",
+                        "interval": "",
                         "legendFormat": "Ping",
                         "range": true
                       },
@@ -2498,7 +2526,9 @@
                   }
                 }
               ],
-              "queryOptions": {},
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
               "transformations": []
             }
           },
@@ -2745,7 +2775,11 @@
                   "multiLane": false
                 },
                 "legend": {
-                  "calcs": ["mean", "max", "min"],
+                  "calcs": [
+                    "mean",
+                    "max",
+                    "min"
+                  ],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
                   "overflow": "ellipsis",
