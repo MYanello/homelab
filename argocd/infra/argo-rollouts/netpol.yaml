@@ -11,8 +11,10 @@ spec:
         values:
           - argo-rollouts
   ingress:
-    - fromEntities:
-        - ingress
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: authentik
+            k8s:app.kubernetes.io/name: authentik
       toPorts:
         - ports:
             - port: "3100"

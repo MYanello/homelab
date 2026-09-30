@@ -133,6 +133,11 @@ module "argo-rollouts" {
   meta_launch_url    = "https://rollouts.yanello.net"
 }
 
+resource "authentik_outpost_provider_attachment" "argo-rollouts" {
+  outpost           = data.authentik_outpost.embedded.id
+  protocol_provider = module.argo-rollouts.provider_id
+}
+
 module "backrest" {
   source = "./modules/proxy-app"
 

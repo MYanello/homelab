@@ -1,0 +1,34 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Argo Rollouts
+    gethomepage.dev/icon: argocd
+    gethomepage.dev/description: "Progressive delivery controller for Kubernetes."
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=argo-rollouts
+  labels:
+    app.kubernetes.io/instance: argo-rollouts-app
+  name: argo-rollouts-httproute
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - rollouts.yanello.net
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik
+          port: 9000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

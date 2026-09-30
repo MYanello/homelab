@@ -49,6 +49,10 @@ data "authentik_property_mapping_provider_scope" "entitlements" {
   managed = "goauthentik.io/providers/oauth2/scope-entitlements"
 }
 
+data "authentik_outpost" "embedded" {
+  name = "authentik Embedded Outpost"
+}
+
 locals {
   proxy_property_mappings = [
     data.authentik_property_mapping_provider_scope.ak_proxy.id,

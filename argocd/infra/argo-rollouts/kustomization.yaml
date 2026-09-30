@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - netpol.yaml
+  - http-route.yaml
 
 helmCharts:
   - name: argo-rollouts
@@ -37,11 +38,3 @@ helmCharts:
             memory: 32Mi
           limits:
             memory: 64Mi
-        httproute:
-          enabled: true
-          parentRefs:
-            - name: cilium-private-gateway
-              namespace: cilium
-              sectionName: https
-          hostnames:
-            - rollouts.yanello.net
