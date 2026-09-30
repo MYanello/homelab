@@ -141,9 +141,7 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
+                  "calcs": ["mean"],
                   "fields": "",
                   "values": false
                 },
@@ -287,9 +285,7 @@
                 "namePlacement": "auto",
                 "orientation": "horizontal",
                 "reduceOptions": {
-                  "calcs": [
-                    "lastNotNull"
-                  ],
+                  "calcs": ["lastNotNull"],
                   "fields": "",
                   "values": false
                 },
@@ -392,9 +388,7 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
+                  "calcs": ["mean"],
                   "fields": "",
                   "values": false
                 },
@@ -757,9 +751,7 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
+                  "calcs": ["mean"],
                   "fields": "",
                   "values": false
                 },
@@ -934,11 +926,7 @@
                   "multiLane": false
                 },
                 "legend": {
-                  "calcs": [
-                    "mean",
-                    "max",
-                    "min"
-                  ],
+                  "calcs": ["mean", "max", "min"],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
                   "overflow": "ellipsis",
@@ -1409,11 +1397,7 @@
                   "multiLane": false
                 },
                 "legend": {
-                  "calcs": [
-                    "mean",
-                    "max",
-                    "min"
-                  ],
+                  "calcs": ["mean", "max", "min"],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
                   "overflow": "ellipsis",
@@ -1713,9 +1697,7 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
+                  "calcs": ["mean"],
                   "fields": "",
                   "values": false
                 },
@@ -2303,9 +2285,7 @@
                   "kind": "Transformation",
                   "spec": {
                     "options": {
-                      "keepLabels": [
-                        "ip"
-                      ],
+                      "keepLabels": ["ip"],
                       "valueLabel": "hostname"
                     }
                   }
@@ -2350,9 +2330,7 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": [
-                    "lastNotNull"
-                  ],
+                  "calcs": ["lastNotNull"],
                   "fields": "/^ip$/",
                   "limit": 1,
                   "values": true
@@ -2435,9 +2413,7 @@
                 "orientation": "horizontal",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": [
-                    "lastNotNull"
-                  ],
+                  "calcs": ["lastNotNull"],
                   "fields": "",
                   "limit": 1,
                   "values": true
@@ -2471,7 +2447,7 @@
                       "spec": {
                         "editorMode": "builder",
                         "exemplar": false,
-                        "expr": "avg(myspeed_download)",
+                        "expr": "avg_over_time(myspeed_download[$__interval])",
                         "instant": false,
                         "interval": "",
                         "legendFormat": "Download",
@@ -2494,7 +2470,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "builder",
-                        "expr": "avg(myspeed_upload)",
+                        "expr": "avg_over_time(myspeed_upload[$__interval])",
                         "legendFormat": "Upload",
                         "range": true
                       },
@@ -2515,7 +2491,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "builder",
-                        "expr": "avg(myspeed_ping)",
+                        "expr": "avg_over_time(myspeed_ping[$__interval])",
                         "interval": "",
                         "legendFormat": "Ping",
                         "range": true
@@ -2775,11 +2751,7 @@
                   "multiLane": false
                 },
                 "legend": {
-                  "calcs": [
-                    "mean",
-                    "max",
-                    "min"
-                  ],
+                  "calcs": ["mean", "max", "min"],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
                   "overflow": "ellipsis",
