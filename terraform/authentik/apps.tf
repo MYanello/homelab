@@ -120,6 +120,19 @@ module "mealie" {
   meta_launch_url = "https://mealie.yanello.net"
 }
 
+module "argo-rollouts" {
+  source = "./modules/proxy-app"
+
+  name               = "Argo Rollouts"
+  slug               = "argo-rollouts"
+  authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
+  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
+  property_mappings  = local.proxy_property_mappings
+  external_host      = "https://rollouts.yanello.net"
+  internal_host      = "http://argo-rollouts-dashboard.argo-rollouts.svc.cluster.local:3100"
+  meta_launch_url    = "https://rollouts.yanello.net"
+}
+
 module "backrest" {
   source = "./modules/proxy-app"
 
