@@ -20,7 +20,7 @@ spec:
         fsGroup: 3000
       containers:
         - name: redis
-          image: docker.io/redis:8.10.2@sha256:d5ac52db24d4e70566fe9944f22cf5bdc2bc739b05c0f426335161ea6c23f3b3
+          image: docker.io/redis:8.10.2-alpine@sha256:d5ac52db24d4e70566fe9944f22cf5bdc2bc739b05c0f426335161ea6c23f3b3
           command:
             - redis-server
             - --appendonly

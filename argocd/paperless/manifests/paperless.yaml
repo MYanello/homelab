@@ -115,7 +115,7 @@ spec:
           operator: "Exists"
           effect: "NoSchedule"
       containers:
-        - image: harbor.yanello.net/docker/library/redis:8@sha256:718f745deb7dfefeac6eed7041fc7ec9476b50e61b247932682457c41adafa0e
+        - image: harbor.yanello.net/docker/library/redis:8.10.2-alpine@sha256:718f745deb7dfefeac6eed7041fc7ec9476b50e61b247932682457c41adafa0e
           imagePullPolicy: IfNotPresent
           name: redis
           ports:

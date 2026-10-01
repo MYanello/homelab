@@ -22,7 +22,7 @@ spec:
               memory: 16Mi
             limits:
               memory: 32Mi
-          image: redis:8.10@sha256:718f745deb7dfefeac6eed7041fc7ec9476b50e61b247932682457c41adafa0e
+          image: redis:8.10.2-alpine@sha256:718f745deb7dfefeac6eed7041fc7ec9476b50e61b247932682457c41adafa0e
           ports:
             - containerPort: 6379
               name: redis
