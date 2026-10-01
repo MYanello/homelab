@@ -36,3 +36,9 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: truenas-dashboard
+    files:
+      - ./truenas-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
