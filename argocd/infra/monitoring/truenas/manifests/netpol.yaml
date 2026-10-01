@@ -17,8 +17,7 @@ spec:
             - port: "9108"
               protocol: TCP
     - fromCIDR:
-        - 192.168.10.0/24
-        - 10.10.8.0/22
+        - 192.168.10.78/32
       toPorts:
         - ports:
             - port: "9109"
