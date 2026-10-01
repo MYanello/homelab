@@ -9,7 +9,7 @@ resources:
 
 replicas:
   - name: nextcloud
-    count: 1
+    count: 0
 
 generators:
   - ./manifests/secret-generator.yaml
