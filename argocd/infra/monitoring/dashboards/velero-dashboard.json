@@ -44,7 +44,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "description": "The sum of one-off backup and schedule backup success total ",
       "fieldConfig": {
@@ -115,7 +115,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "exemplar": false,
           "expr": "velero_backup_total",
@@ -133,7 +133,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "description": "The Success Rate is lower when a Backup is running.",
       "fieldConfig": {
@@ -202,7 +202,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "sum(velero_backup_success_total{schedule=~\"$schedule\"}) / sum(velero_backup_attempt_total{schedule=~\"$schedule\"})",
@@ -219,7 +219,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -287,7 +287,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "exemplar": false,
           "expr": "sum(velero_backup_deletion_success_total{schedule=~\"$schedule\"}) / sum(velero_backup_deletion_attempt_total{schedule=~\"$schedule\"})",
@@ -305,7 +305,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -373,7 +373,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "exemplar": false,
           "expr": "sum(velero_volume_snapshot_success_total{schedule=~\"$schedule\"}) / sum(velero_volume_snapshot_attempt_total{schedule=~\"$schedule\"})\n",
@@ -390,7 +390,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "description": "for schedule backup use only",
       "fieldConfig": {
@@ -465,7 +465,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "exemplar": false,
           "expr": "(time() - velero_backup_last_successful_timestamp{schedule!=\"\"}) / 60 / 60",
@@ -504,7 +504,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -589,7 +589,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "expr": "sum(velero_backup_total)",
           "hide": false,
@@ -599,7 +599,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "velero_backup_active_total{schedule=~\"$schedule\"}\r\n#missing metric (https://github.com/vmware-tanzu/velero/issues/2254)",
@@ -615,7 +615,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -737,7 +737,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "expr": "sum(increase(velero_backup_success_total{schedule=~\"$schedule\"}[1h])) > 0",
           "format": "time_series",
@@ -749,7 +749,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "expr": "sum(increase(velero_backup_failure_total{schedule=~\"$schedule\"}[1h])) > 0",
           "hide": false,
@@ -759,7 +759,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "expr": "sum(increase(velero_backup_partial_failure_total{schedule=~\"$schedule\"}[1h])) > 0",
           "legendFormat": "Backup partial failure",
@@ -768,7 +768,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "expr": "sum(increase(velero_backup_deletion_success_total{schedule=~\"$schedule\"}[1h])) > 0",
           "legendFormat": "Backup deletion success",
@@ -777,7 +777,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "expr": "sum(increase(velero_backup_deletion_failure_total{schedule=~\"$schedule\"}[1h])) > 0",
           "legendFormat": "Backup deletion failure",
@@ -790,7 +790,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -857,7 +857,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -876,7 +876,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P4169E866C3094E38"
+        "uid": "VictoriaMetrics"
       },
       "description": "If your Storage component creates the Volume-Snapshots and not Velero, for example with Longhorn, then this will not displayed in the panel.",
       "fieldConfig": {
@@ -966,7 +966,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "avg by (schedule) (avg_over_time(velero_backup_tarball_size_bytes{schedule=~\"$schedule\"}[15m]))",
@@ -977,7 +977,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "avg_over_time(velero_backup_tarball_size_bytes{schedule!~\".+\"}[15m])",
@@ -1003,7 +1003,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "description": "",
           "fieldConfig": {
@@ -1075,7 +1075,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "velero_restore_total",
@@ -1093,7 +1093,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -1161,7 +1161,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "sum(velero_restore_success_total{schedule=~\"$schedule\"}) / sum(velero_restore_attempt_total{schedule=~\"$schedule\"})",
@@ -1179,7 +1179,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -1267,7 +1267,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "round(sum(increase(velero_restore_success_total{schedule=~\"$schedule\"}[1h])))",
@@ -1280,7 +1280,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "round(sum(increase(velero_restore_failed_total{schedule=~\"$schedule\"}[1h])))",
@@ -1292,7 +1292,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "round(sum(increase(velero_restore_validation_failed_total{schedule=~\"$schedule\"}[1h])))",
@@ -1304,7 +1304,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "round(sum(increase(velero_restore_partial_failure_total{schedule=~\"$schedule\"}[1h])))",
@@ -1320,7 +1320,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -1405,7 +1405,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(velero_restore_total)",
@@ -1434,7 +1434,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P4169E866C3094E38"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -1518,7 +1518,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1532,7 +1532,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "round(sum(increase(velero_csi_snapshot_success_total{schedule=~\"$schedule\", backupName=~\"$csi_backup_name\"}[1h])))",
@@ -1544,7 +1544,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "P4169E866C3094E38"
+                "uid": "VictoriaMetrics"
               },
               "exemplar": false,
               "expr": "round(sum(increase(velero_csi_snapshot_failure_total{schedule=~\"$schedule\", backupName=~\"$csi_backup_name\"}[1h])))",
@@ -1574,7 +1574,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "P4169E866C3094E38"
+          "uid": "VictoriaMetrics"
         },
         "definition": "label_values(velero_backup_attempt_total,schedule)",
         "includeAll": true,
@@ -1594,7 +1594,7 @@
       {
         "current": {},
         "datasource": {
-          "uid": "P4169E866C3094E38",
+          "uid": "VictoriaMetrics",
           "type": "prometheus"
         },
         "definition": "label_values(velero_csi_snapshot_attempt_total{schedule=~\"$schedule\"},backupName)",
@@ -1621,7 +1621,7 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "Velero Overview",
-  "uid": "P4169E866C3094E38",
+  "uid": "VictoriaMetrics",
   "weekStart": "",
   "type": "prometheus"
 }

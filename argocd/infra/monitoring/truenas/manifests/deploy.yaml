@@ -21,8 +21,8 @@ spec:
           image: harbor.yanello.net/docker/prom/graphite-exporter:v0.17.0@sha256:c1a266f63a84fd11048ab6ad1552a4c497b14522d02823925247698e41eeac2b
           imagePullPolicy: IfNotPresent
           args:
-            - -web.listen-address=:9108
-            - -graphite.listen-address=:9109
+            - --web.listen-address=:9108
+            - --graphite.listen-address=:9109
           ports:
             - name: metrics
               containerPort: 9108
