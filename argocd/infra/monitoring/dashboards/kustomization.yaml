@@ -30,3 +30,9 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: velero-dashboard
+    files:
+      - ./velero-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
