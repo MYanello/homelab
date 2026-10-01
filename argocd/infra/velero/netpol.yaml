@@ -11,7 +11,15 @@ spec:
         values:
           - velero
           - node-agent
-  ingress: []
+  ingress: 
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+            app.kubernetes.io/name: vmagent
+      toPorts:
+        - ports:
+            - port: "8085"
+              protocol: TCP
   egress:
     - toEntities:
         - kube-apiserver
