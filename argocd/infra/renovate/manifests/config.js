@@ -50,6 +50,11 @@ module.exports = {
       versioning: "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
       allowedVersions: "/^release-[0-9]+\\.[0-9]+/",
     },
+    {
+      "groupName": "victoria-metrics and CRDS move together",
+      "matchDatasources": ["helm"],
+      "matchPackageNames": ["victoria-metrics-k8s-stack", "victoria-metrics-operator-crds"]
+    }
   ],
   ignorePaths: ["argocd/dev/**"],
   registryAliases: {
