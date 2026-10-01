@@ -10,6 +10,12 @@ resources:
 replicas:
   - name: nextcloud
     count: 0
+  - name: nextcloud-mariadb
+    count: 0
+  - name: nextcloud-redis-master
+    count: 0
+  - name: nextcloud-redis-replicas
+    count: 0
 
 generators:
   - ./manifests/secret-generator.yaml
