@@ -1,22 +1,22 @@
-    ---
-    apiVersion: operator.victoriametrics.com/v1beta1
-    kind: VMServiceScrape
-    metadata:
-      name: velero
-      namespace: velero
-      labels:
-        app.kubernetes.io/name: velero
-    spec:
-      selector:
-        matchLabels:
-          app.kubernetes.io/name: velero
-          app.kubernetes.io/instance: velero
-      namespaceSelector:
-        matchNames:
-          - velero
-      endpoints:
-        - port: http-monitoring
-          path: /metrics
-          scheme: http
-          interval: 30s
-          scrapeTimeout: 10s
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: velero
+  namespace: velero
+  labels:
+    app.kubernetes.io/name: velero
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: velero
+      app.kubernetes.io/instance: velero
+  namespaceSelector:
+    matchNames:
+      - velero
+  endpoints:
+    - port: http-monitoring
+      path: /metrics
+      scheme: http
+      interval: 30s
+      scrapeTimeout: 10s
