@@ -10,6 +10,14 @@ spec:
   ingress:
     - fromEndpoints:
         - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+            app.kubernetes.io/name: vmagent
+      toPorts:
+        - ports:
+            - port: "8085"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
             k8s:io.kubernetes.pod.namespace: authentik
             k8s:app.kubernetes.io/name: authentik
       toPorts:
