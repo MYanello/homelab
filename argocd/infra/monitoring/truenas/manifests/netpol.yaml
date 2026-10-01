@@ -1,0 +1,27 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: truenas-graphite
+spec:
+  endpointSelector:
+    matchLabels:
+      app: truenas-graphite
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+            app.kubernetes.io/name: vmagent
+      toPorts:
+        - ports:
+            - port: "9108"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.10.0/24
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "9109"
+              protocol: TCP
+            - port: "9109"
+              protocol: UDP

@@ -1,0 +1,15 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: truenas-graphite
+spec:
+  selector:
+    matchLabels:
+      app: truenas-graphite
+  endpoints:
+    - port: metrics
+      path: /metrics
+      scheme: http
+      interval: 60s
+      scrapeTimeout: 20s

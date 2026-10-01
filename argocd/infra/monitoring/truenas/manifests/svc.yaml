@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: truenas-graphite
+  name: truenas-graphite
+spec:
+  selector:
+    app: truenas-graphite
+  ports:
+    - name: metrics
+      port: 9108
+      protocol: TCP
+      targetPort: 9108
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: truenas-graphite
+  name: truenas-graphite-ingest
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.10.8.20
+  selector:
+    app: truenas-graphite
+  ports:
+    - name: graphite-tcp
+      port: 9109
+      protocol: TCP
+      targetPort: 9109
+    - name: graphite-udp
+      port: 9109
+      protocol: UDP
+      targetPort: 9109
