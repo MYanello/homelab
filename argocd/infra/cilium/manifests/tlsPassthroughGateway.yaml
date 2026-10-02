@@ -23,3 +23,15 @@ spec:
           selector:
             matchLabels:
               kubernetes.io/metadata.name: external-services
+    - name: ubiquiti-tls-passthrough
+      protocol: TLS
+      hostname: "ui.yanello.net"
+      port: 443
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: external-services

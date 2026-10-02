@@ -1,18 +1,18 @@
 ---
 apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+kind: TLSRoute
 metadata:
-  name: ubiquiti-httproute
+  name: ubiquiti
 spec:
   hostnames:
     - ubiquiti.yanello.net
     - ui.yanello.net
   parentRefs:
-    - name: cilium-private-gateway
+    - name: cilium-private-tls-gateway
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: https
+      sectionName: ubiquiti-tls-passthrough
   rules:
     - backendRefs:
         - name: ubiquiti-service
@@ -20,10 +20,6 @@ spec:
           kind: Service
           port: 8443
           weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
 ---
 apiVersion: v1
 kind: Service
@@ -39,16 +35,13 @@ spec:
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
-  name: ubiquiti-service-1  # by convention, use the name of the Service
-  # as a prefix for the name of the EndpointSlice
+  name: ubiquiti-service-1
   labels:
-    # You should set the "kubernetes.io/service-name" label.
-    # Set its value to match the name of the Service
     kubernetes.io/service-name: ubiquiti-service
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http  # should match with the name of the service port defined above
+  - name: http
     appProtocol: http
     protocol: TCP
     port: 8443
