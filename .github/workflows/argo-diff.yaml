@@ -56,12 +56,7 @@ jobs:
             initContainers:
               - name: install-ksops
                 image: viaductoss/ksops:v4.5.1@sha256:4def9fdd4e2f850265740ebe9592c5455d19b76891e88e602df8b52d74b95334
-                command: ["/bin/sh", "-c"]
-                args:
-                  - echo "Installing KSOPS...";
-                    mv ksops /custom-tools/;
-                    mv kustomize /custom-tools/;
-                    echo "Done.";
+                command: ["/usr/local/bin/ksops", "install", "--with-kustomize", "/custom-tools"]
                 volumeMounts:
                   - mountPath: /custom-tools
                     name: custom-tools
