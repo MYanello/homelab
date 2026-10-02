@@ -33,6 +33,7 @@ config:
         receivers: [otlp]
         processors: [deltatocumulative]
         exporters: [otlphttp/victoriametrics]
+
 tolerations:
   - key: node-role.kubernetes.io/control-plane
     operator: Exists

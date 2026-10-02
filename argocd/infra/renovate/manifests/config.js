@@ -13,7 +13,7 @@ module.exports = {
   rebaseWhen: "behind-base-branch",
   dependencyDashboard: true,
   major: {
-    dependencyDashboardApproval: true,
+    dependencyDashboardApproval: false,
   },
   minor: {
     automerge: true,
@@ -47,19 +47,23 @@ module.exports = {
     },
     {
       matchDepNames: ["harbor.yanello.net/ghcr/hotio/prowlarr"],
-      versioning: "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
+      versioning:
+        "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
       allowedVersions: "/^release-[0-9]+\\.[0-9]+/",
     },
     {
-      "groupName": "victoria-metrics and CRDS move together",
-      "matchDatasources": ["helm"],
-      "matchPackageNames": ["victoria-metrics-k8s-stack", "victoria-metrics-operator-crds"]
-    }
+      groupName: "victoria-metrics and CRDS move together",
+      matchDatasources: ["helm"],
+      matchPackageNames: [
+        "victoria-metrics-k8s-stack",
+        "victoria-metrics-operator-crds",
+      ],
+    },
   ],
   ignorePaths: ["argocd/dev/**"],
   registryAliases: {
     "harbor.yanello.net/docker": "registry-1.docker.io",
-    "harbor.yanello.net/ghcr": "harbor.yanello.net/ghcr",
+    "harbor.yanello.net/ghcr": "ghcr.io",
     "harbor.yanello.net/quay": "quay.io",
     "harbor.yanello.net/lscr": "lscr.io",
   },
