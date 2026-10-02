@@ -3,6 +3,15 @@ image:
   tag: latest
   pullPolicy: Always
 
+rollout:
+  enabled: true
+  revisionHistoryLimit: 2
+  strategy:
+    blueGreen:
+      activeService: budgeting
+      previewService: budgeting-preview
+      autoPromotionEnabled: false
+
 config:
   db:
     driver: "postgres"

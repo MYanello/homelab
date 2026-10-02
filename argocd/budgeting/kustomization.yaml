@@ -9,6 +9,7 @@ resources:
   - ./netpol.yaml
   - ./cnpg.yaml
   - ./httproute.yaml
+  - ./preview-service.yaml
 
 helmCharts:
   - name: budgeting
@@ -17,7 +18,3 @@ helmCharts:
     releaseName: budgeting
     namespace: budgeting
     valuesFile: ./values.yaml
-
-replicas:
-  - name: budgeting
-    count: 1
