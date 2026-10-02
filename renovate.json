@@ -1,3 +1,30 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "ignorePaths": ["argocd/dev/**"],
+  "argocd": {
+    "managerFilePatterns": ["argocd/**/*.yaml$", "talos/**/*.yaml$"]
+  },
+  "kubernetes": {
+    "managerFilePatterns": ["argocd/**/*.yaml", "talos/**/*.yaml"]
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["kustomize"],
+      "matchUpdateTypes": ["pinDigest"],
+      "enabled": true
+    },
+    {
+      "matchDepNames": ["harbor.yanello.net/ghcr/hotio/prowlarr"],
+      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
+      "allowedVersions": "/^release-[0-9]+\\.[0-9]+/"
+    },
+    {
+      "groupName": "victoria-metrics and CRDS move together",
+      "matchDatasources": ["helm"],
+      "matchPackageNames": [
+        "victoria-metrics-k8s-stack",
+        "victoria-metrics-operator-crds"
+      ]
+    }
+  ]
 }

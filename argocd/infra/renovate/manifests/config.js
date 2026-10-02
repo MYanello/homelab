@@ -29,38 +29,12 @@ module.exports = {
     enabled: true,
     vulnerabilityFixStrategy: "lowest",
   },
-  argocd: {
-    managerFilePatterns: ["argocd/**/*.yaml$", "talos/**/*.yaml$"],
-  },
-  kubernetes: {
-    managerFilePatterns: ["argocd/**/*.yaml", "talos/**/*.yaml"],
-  },
   packageRules: [
-    {
-      matchManagers: ["kustomize"],
-      matchUpdateTypes: ["pinDigest"],
-      enabled: false,
-    },
     {
       matchDatasources: ["docker"],
       allowedVersions: "/^v?[0-9]+\\.[0-9]+/",
     },
-    {
-      matchDepNames: ["harbor.yanello.net/ghcr/hotio/prowlarr"],
-      versioning:
-        "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
-      allowedVersions: "/^release-[0-9]+\\.[0-9]+/",
-    },
-    {
-      groupName: "victoria-metrics and CRDS move together",
-      matchDatasources: ["helm"],
-      matchPackageNames: [
-        "victoria-metrics-k8s-stack",
-        "victoria-metrics-operator-crds",
-      ],
-    },
   ],
-  ignorePaths: ["argocd/dev/**"],
   registryAliases: {
     "harbor.yanello.net/docker": "registry-1.docker.io",
     "harbor.yanello.net/ghcr": "ghcr.io",
