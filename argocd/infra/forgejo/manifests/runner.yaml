@@ -19,7 +19,6 @@ data:
       enabled: false
     container:
       docker_host: tcp://localhost:2375
-      # privileged: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -36,6 +35,7 @@ spec:
       labels:
         app: forgejo-runner
     spec:
+      automountServiceAccountToken: false
       initContainers:
         - name: register
           resources:
@@ -54,7 +54,7 @@ spec:
                 act_runner register \
                   --no-interactive \
                   --instance https://forgejo.yanello.net \
-                  --token "$(REGISTRATION_TOKEN)" \
+                  --token "$REGISTRATION_TOKEN" \
                   --name forgejo-runner \
                   --labels forgejo-runner:docker
               fi
@@ -94,8 +94,6 @@ spec:
             limits:
               memory: 64Mi
           image: docker.io/docker:29.8.1-dind-rootless@sha256:1f029db43a32fbb1465fe8ff4327d405154876946986170e97d7861232a8227a
-          # securityContext:
-          #   privileged: true
           env:
             - name: DOCKER_TLS_CERTDIR
               value: ""
@@ -110,3 +108,21 @@ spec:
             name: forgejo-runner-config
         - name: docker-storage
           emptyDir: {}
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: forgejo-runner
+spec:
+  endpointSelector:
+    matchLabels:
+      app: forgejo-runner
+  egress:
+    - toEntities:
+        - cluster
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
