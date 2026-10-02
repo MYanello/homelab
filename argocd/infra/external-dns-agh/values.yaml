@@ -68,7 +68,7 @@ provider:
             name: provider-secrets
             key: adguardPassword
       - name: LOG_LEVEL
-        value: debug
+        value: info
       - name: DRY_RUN
         value: "false"
 
