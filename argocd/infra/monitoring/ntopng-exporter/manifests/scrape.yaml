@@ -1,0 +1,15 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: ntopng-exporter
+spec:
+  selector:
+    matchLabels:
+      app: ntopng-exporter
+  endpoints:
+    - port: metrics
+      path: /metrics
+      scheme: http
+      scrapeTimeout: 20s
+      interval: 60s

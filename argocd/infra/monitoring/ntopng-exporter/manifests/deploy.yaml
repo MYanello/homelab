@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ntopng-exporter
+  name: ntopng-exporter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: ntopng-exporter
+  template:
+    metadata:
+      labels:
+        app: ntopng-exporter
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+      containers:
+        - image: harbor.yanello.net/docker/aauren/ntopng-exporter:v1.7.1@sha256:1dda4646e970a8a0ca0d5b734464ad8b74d35343fab8dcd4c92bd178f905163a
+          name: ntopng-exporter
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3001
+              protocol: TCP
+              name: metrics
+          volumeMounts:
+            - name: config
+              mountPath: /etc/ntopng-exporter
+              readOnly: true
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              memory: 32Mi
+              cpu: 10m
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+      volumes:
+        - name: config
+          secret:
+            secretName: ntopng-exporter-config

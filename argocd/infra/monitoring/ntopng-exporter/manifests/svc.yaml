@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ntopng-exporter
+  name: ntopng-exporter
+spec:
+  selector:
+    app: ntopng-exporter
+  ports:
+    - name: metrics
+      port: 3001
+      protocol: TCP
+      targetPort: 3001
