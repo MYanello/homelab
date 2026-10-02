@@ -10,6 +10,7 @@ resources:
   - manifests/publicGateway.yaml
   - manifests/bgp.yaml
   - manifests/httpRoute.yaml
+  - manifests/tlsPassthroughGateway.yaml
 
 helmCharts:
   - name: cilium

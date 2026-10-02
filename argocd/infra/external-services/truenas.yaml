@@ -7,7 +7,7 @@ spec:
   hostnames:
     - truenas.yanello.net
   parentRefs:
-    - name: cilium-private-gateway
+    - name: cilium-private-tls-gateway
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
