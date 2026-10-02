@@ -61,6 +61,9 @@ jobs:
                   - mountPath: /custom-tools
                     name: custom-tools
             volumeMounts:
+              - mountPath: /usr/local/bin/kustomize
+                name: custom-tools
+                subPath: kustomize
               - mountPath: /usr/local/bin/ksops
                 name: custom-tools
                 subPath: ksops
@@ -68,7 +71,6 @@ jobs:
                 name: sops-age
                 subPath: key.txt
           EOF
-
       - name: Generate Diff
         run: |
           docker run \

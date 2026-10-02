@@ -15,38 +15,11 @@ spec:
         - name: sops-age
           secret:
             secretName: sops-age
-      # 2. Use an init container to download/copy custom binaries into the emptyDir
+      # 2. Use an init container to copy custom binaries into the emptyDir
       initContainers:
         - name: install-ksops
-          image: alpine:3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              set -eux
-              apk add --no-cache ca-certificates curl tar coreutils
-              case "$(uname -m)" in
-                x86_64|amd64) ARCH="x86_64" ;;
-                aarch64|arm64) ARCH="arm64" ;;
-                *) echo "unsupported arch: $(uname -m)"; exit 1 ;;
-              esac
-              VERSION="v4.5.1"
-              VERSION_RAW="${VERSION#v}"
-              URL="https://github.com/viaduct-ai/kustomize-sops/releases/download/${VERSION}/ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz"
-              CHECKSUMS="https://github.com/viaduct-ai/kustomize-sops/releases/download/${VERSION}/checksums.txt"
-              curl -fsSL -o "ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz" "${URL}"
-              curl -fsSL -o checksums.txt "${CHECKSUMS}"
-              sha256sum --ignore-missing -c checksums.txt || exit 1
-              tar -C /custom-tools -xzf "ksops_${VERSION_RAW}_Linux_${ARCH}.tar.gz" ksops
-              chmod +x /custom-tools/ksops
-              KUSTOMIZE_VERSION="v5.8.1"
-              case "$(uname -m)" in
-                x86_64|amd64) ARCH="amd64" ;;
-                aarch64|arm64) ARCH="arm64" ;;
-                *) echo "unsupported arch: $(uname -m)"; exit 1 ;;
-              esac
-              curl -fsSL -o kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_${ARCH}.tar.gz"
-              tar -C /custom-tools -xzf kustomize.tar.gz kustomize
-              chmod +x /custom-tools/kustomize
+          image: viaductoss/ksops:v4.5.1@sha256:4def9fdd4e2f850265740ebe9592c5455d19b76891e88e602df8b52d74b95334
+          command: ["/usr/local/bin/ksops", "install", "--with-kustomize", "/custom-tools"]
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
