@@ -39,7 +39,7 @@ jobs:
 
       - name: Set Argo CD Custom Values
         run: |
-          cat > values.yaml <<-EOF
+          cat > values.yaml <<-'EOF'
           configs:
             cm:
               kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
@@ -56,14 +56,12 @@ jobs:
             initContainers:
               - name: install-ksops
                 image: viaductoss/ksops:v4.5.1@sha256:4def9fdd4e2f850265740ebe9592c5455d19b76891e88e602df8b52d74b95334
-                command: ["/usr/local/bin/ksops", "install", "--with-kustomize", "/custom-tools"]
+                command: ["/usr/local/bin/ksops", "install", "/custom-tools"]
                 volumeMounts:
                   - mountPath: /custom-tools
                     name: custom-tools
+              # Only ksops is added; ArgoCD already ships a suitable kustomize.
             volumeMounts:
-              - mountPath: /usr/local/bin/kustomize
-                name: custom-tools
-                subPath: kustomize
               - mountPath: /usr/local/bin/ksops
                 name: custom-tools
                 subPath: ksops
