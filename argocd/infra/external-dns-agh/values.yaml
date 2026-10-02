@@ -19,8 +19,11 @@ sources:
   - gateway-grpcroute
   - gateway-tlsroute
   - service
+  - crd
 gatewayNamespace: cilium
 
+extraArgs:
+  - --gateway-label-filter=external-dns.yanello.net/gateway=private
 policy: upsert-only
 registry: txt
 txtOwnerId: agh
