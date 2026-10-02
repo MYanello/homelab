@@ -1,6 +1,6 @@
 ---
 apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+kind: TLSRoute
 metadata:
   name: truenas
 spec:
@@ -11,13 +11,13 @@ spec:
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: https
+      sectionName: truenas-tls-passthrough
   rules:
     - backendRefs:
         - name: truenas-service
           group: ""
           kind: Service
-          port: 80
+          port: 443
           weight: 1
       matches:
         - path:
@@ -32,25 +32,22 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 443
+      targetPort: 443
 ---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
-  name: truenas-service-1  # by convention, use the name of the Service
-  # as a prefix for the name of the EndpointSlice
+  name: truenas-service-1
   labels:
-    # You should set the "kubernetes.io/service-name" label.
-    # Set its value to match the name of the Service
     kubernetes.io/service-name: truenas-service
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http  # should match with the name of the service port defined above
-    appProtocol: http
+  - name: http
+    appProtocol: https
     protocol: TCP
-    port: 80
+    port: 443
 endpoints:
   - addresses:
       - 192.168.10.78
