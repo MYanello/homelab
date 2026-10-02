@@ -31,3 +31,9 @@ spec:
               protocol: TCP
             - port: "8080"
               protocol: TCP
+    - toEntities:
+        - world
+      icmps:
+        - fields:
+            - type: 8
+              family: IPv4

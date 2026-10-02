@@ -97,8 +97,18 @@ spec:
             - port: "32400"
               protocol: TCP
     - toEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "5351"
+              protocol: UDP
+    - toEntities:
         - world
       toPorts:
         - ports:
             - port: "443"
+              protocol: TCP
+            - port: "1900"
+              protocol: UDP
+            - port: "32400"
               protocol: TCP

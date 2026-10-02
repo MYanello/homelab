@@ -13,6 +13,13 @@ spec:
         - ports:
             - port: "9443"
               protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: cnpg
+      toPorts:
+        - ports:
+            - port: "9090"
+              protocol: TCP
   egress:
     - toEntities:
         - kube-apiserver
