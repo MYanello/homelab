@@ -151,7 +151,7 @@ spec:
         app: redis
     spec:
       containers:
-        - image: harbor.yanello.net/docker/valkey/valkey:9.1.2-alpine
+        - image: harbor.yanello.net/docker/valkey/valkey:9.1.2-alpine@sha256:48332870af354a799964c0012ae1194a0bf2bf894eb508f945810596dc2d8d11
           imagePullPolicy: IfNotPresent
           name: redis
           ports:
