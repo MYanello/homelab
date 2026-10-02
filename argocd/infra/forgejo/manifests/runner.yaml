@@ -1,18 +1,5 @@
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: forgejo-runner-data
-  namespace: forgejo
-spec:
-  storageClassName: truenas-ssd-nfs
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: forgejo-runner-config
@@ -22,14 +9,22 @@ data:
     log:
       level: info
     runner:
-      file: /data/.runner
       capacity: 2
       timeout: 3h
-      insecure: false
       fetch_timeout: 5s
       fetch_interval: 2s
+      labels:
+        - forgejo-runner:host
     cache:
       enabled: false
+    host:
+      workdir_parent: /workspace
+    server:
+      connections:
+        forgejo:
+          url: https://forgejo.yanello.net/
+          uuid: ea1ce480-004b-4769-b7cb-cf071541f397
+          token_url: file:///etc/runner/token
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,6 +33,8 @@ metadata:
   namespace: forgejo
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: forgejo-runner
@@ -47,37 +44,6 @@ spec:
         app: forgejo-runner
     spec:
       automountServiceAccountToken: false
-      initContainers:
-        - name: register
-          resources:
-            requests:
-              cpu: 10m
-              memory: 64Mi
-            limits:
-              memory: 128Mi
-          image: docker.io/gitea/act_runner:0.6.1@sha256:b5c35d6bdbb9bb25e531230bfc7cc663cb751406cbec90a2a891b85fea54de86
-          workingDir: /data
-          command:
-            - sh
-            - -c
-            - |
-              if [ ! -f /data/.runner ]; then
-                act_runner register \
-                  --no-interactive \
-                  --instance https://forgejo.yanello.net \
-                  --token "$REGISTRATION_TOKEN" \
-                  --name forgejo-runner \
-                  --labels forgejo-runner:host
-              fi
-          env:
-            - name: REGISTRATION_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: forgejo-secrets
-                  key: runner-token
-          volumeMounts:
-            - name: data
-              mountPath: /data
       containers:
         - name: runner
           resources:
@@ -86,26 +52,32 @@ spec:
               memory: 256Mi
             limits:
               memory: 2Gi
-          image: harbor.yanello.net/library/forgejo-runner:latest
-          command: ["act_runner", "daemon", "--config", "/config/config.yaml"]
-          workingDir: /data
+          image: harbor.yanello.net/library/forgejo-runner:v13.2.0
+          command: ["forgejo-runner", "daemon", "--config", "/config/config.yaml"]
           env:
             - name: BUILDAH_ISOLATION
               value: chroot
           volumeMounts:
-            - name: data
-              mountPath: /data
             - name: config
               mountPath: /config
+            - name: token
+              mountPath: /etc/runner
+            - name: workspace
+              mountPath: /workspace
             - name: containers-storage
               mountPath: /var/lib/containers
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: forgejo-runner-data
         - name: config
           configMap:
             name: forgejo-runner-config
+        - name: token
+          secret:
+            secretName: forgejo-secrets
+            items:
+              - key: runner-token
+                path: token
+        - name: workspace
+          emptyDir: {}
         - name: containers-storage
           emptyDir: {}
 ---
