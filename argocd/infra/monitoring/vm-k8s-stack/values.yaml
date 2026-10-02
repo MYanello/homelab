@@ -15,8 +15,6 @@ victoria-metrics-operator:
       memory: 128Mi
     limits:
       memory: 128Mi
-vmalert:
-  enabled: true
 
 vmagent:
   enabled: true
@@ -99,14 +97,14 @@ grafana:
     - name: grafana-env-secrets
     - name: influx-secrets
   env:
-    GF_AUTH_GENERIC_OAUTH_ENABLED: 'true'
-    GF_AUTH_GENERIC_OAUTH_NAME: 'authentik'
-    GF_AUTH_GENERIC_OAUTH_SCOPES: 'openid profile email'
-    GF_AUTH_OAUTH_AUTO_LOGIN: 'true'
+    GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+    GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
+    GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email"
+    GF_AUTH_OAUTH_AUTO_LOGIN: "true"
     GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups, 'admin') && 'Admin'\
       \ || contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana\
       \ Editors') && 'Editor' || 'Viewer'"
-    GF_SERVER_ROOT_URL: 'https://grafana.yanello.net'
+    GF_SERVER_ROOT_URL: "https://grafana.yanello.net"
   plugins:
     - victoriametrics-logs-datasource
     - marcusolsson-hourly-heatmap-panel
@@ -160,7 +158,30 @@ prometheus-node-exporter:
     limits:
       memory: 64Mi
 
+vmalert:
+  enabled: true
+  route:
+    enabled: true
+    parentRefs:
+      - name: cilium-private-gateway
+        group: gateway.networking.k8s.io
+        kind: Gateway
+        namespace: cilium
+        sectionName: https
+    hostnames:
+      - vmalert.yanello.net
+
 alertmanager:
+  route:
+    enabled: true
+    parentRefs:
+      - name: cilium-private-gateway
+        group: gateway.networking.k8s.io
+        kind: Gateway
+        namespace: cilium
+        sectionName: https
+    hostnames:
+      - alertmanager.yanello.net
   config:
     global:
       resolve_timeout: 5m
@@ -183,12 +204,13 @@ alertmanager:
             http_config:
               http_headers:
                 Title:
-                  values: ['{{ .CommonLabels.alertname }} [{{ .Status }}]']
+                  values:
+                    - "{{ .CommonLabels.alertname }} [{{ .Status }}]"
                 Priority:
-                  values: ['{{ if eq .Status "firing" }}high{{ else }}default{{ end
-                        }}']
+                  values:
+                    - '{{ if eq .Status "firing" }}high{{ else }}default{{ end }}'
                 Tags:
-                  values: ['rotating_light']
+                  values: ["rotating_light"]
   spec:
     volumes:
       - name: ntfy-url
