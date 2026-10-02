@@ -5,21 +5,16 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    # # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
-    # # Email address used for ACME registration
     email: marcus@yanello.net
-    # # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-prod
-    # # Enable the HTTP-01 challenge provider
     solvers:
       - dns01:
           cloudflare:
-            email: marcus.yanello@gmail.com
-            apiKeySecretRef:
-              name: cloudflare-api-key
-              key: api-key
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -27,21 +22,16 @@ metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    # The ACME server URL
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    # Email address used for ACME registration
     email: marcus@yanello.net
-    # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-staging
-    # Enable the HTTP-01 challenge provider
     solvers:
       - dns01:
           cloudflare:
-            email: marcus.yanello@gmail.com
-            apiKeySecretRef:
-              name: cloudflare-api-key
-              key: api-key
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
 ---
 # Creates self-signed certificates (bootstrap issuer). Only used for creating root CA. Need something to sign the root CA
 apiVersion: cert-manager.io/v1
@@ -51,12 +41,11 @@ metadata:
 spec:
   selfSigned: {}
 ---
-# Root CA. The trust anchor. Should probably go in vault
+# Root CA. The trust anchor.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: local-root-ca
-  namespace: cert-manager
 spec:
   isCA: true
   commonName: local-root-ca
@@ -90,7 +79,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: local-intermediate-ca1
-  namespace: cert-manager
 spec:
   isCA: true
   commonName: local-intermediate-ca1
