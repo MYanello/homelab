@@ -13,11 +13,11 @@ resources:
 helmCharts:
   - name: budgeting
     repo: oci://harbor.yanello.net/helm
-    version: 1.19.3
+    version: 0.2.0
     releaseName: budgeting
     namespace: budgeting
     valuesFile: ./values.yaml
 
 replicas:
   - name: budgeting
-    count: 0
+    count: 1
