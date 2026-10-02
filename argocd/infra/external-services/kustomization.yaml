@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - agh.yaml
   - homeassistant.yaml
-  - iotawatt.yaml
+  # - iotawatt.yaml
   - ntopng.yaml
   - pikvm.yaml
   - router.yaml
@@ -13,7 +13,7 @@ resources:
   - coffee.yaml
   - proxmox.yaml
   - truenas.yaml
-  - foundry.yaml
-  - open-garage.yaml
+  # - foundry.yaml
+  # - open-garage.yaml
   - valetudo.yaml
-  - hermes.yaml
+  # - hermes.yaml

@@ -54,6 +54,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: http-redirect-public
+  annotations:
+    external-dns.kubernetes.io/controller: ignore
 spec:
   parentRefs:
     - name: cilium-public-gateway

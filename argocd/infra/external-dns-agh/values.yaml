@@ -24,7 +24,7 @@ gatewayNamespace: cilium
 
 extraArgs:
   - --gateway-label-filter=external-dns.yanello.net/gateway=private
-policy: upsert-only
+policy: sync
 registry: txt
 txtOwnerId: agh
 
