@@ -1,6 +1,4 @@
 ---
-logLevel: debug
-
 rbac:
   additionalPermissions:
     - apiGroups: [""]
