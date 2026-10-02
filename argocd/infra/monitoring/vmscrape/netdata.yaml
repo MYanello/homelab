@@ -7,6 +7,9 @@ spec:
   scrape_interval: 60s
   staticConfigs:
     - targets:
-        - 192.168.1.1:9100
-  path: /metrics
+        - 192.168.10.1:19999
+  path: /api/v1/allmetrics
+  params:
+    format:
+      - prometheus
   scheme: http
