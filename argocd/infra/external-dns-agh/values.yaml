@@ -18,8 +18,6 @@ sources:
   - gateway-httproute
   - gateway-grpcroute
   - gateway-tlsroute
-  - gateway-tcproute
-  - gateway-udproute
 gatewayNamespace: cilium
 
 policy: upsert-only
