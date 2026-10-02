@@ -11,4 +11,5 @@ helmCharts:
     version: "1.23.0"
     releaseName: external-dns-agh
     namespace: external-dns-agh
+    includeCRDs: true
     valuesFile: values.yaml
