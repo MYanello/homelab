@@ -159,3 +159,42 @@ prometheus-node-exporter:
       memory: 32Mi
     limits:
       memory: 64Mi
+
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: ntfy
+      group_by: ["alertname", "namespace"]
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      routes:
+        - receiver: ntfy
+          matchers:
+            - alertname = "Watchdog"
+          repeat_interval: 24h
+    receivers:
+      - name: ntfy
+        webhook_configs:
+          - url_file: /etc/alertmanager-ntfy/url
+            send_resolved: true
+            http_config:
+              http_headers:
+                Title:
+                  values: ['{{ .CommonLabels.alertname }} [{{ .Status }}]']
+                Priority:
+                  values: ['{{ if eq .Status "firing" }}high{{ else }}default{{ end
+                        }}']
+                Tags:
+                  values: ['rotating_light']
+  spec:
+    volumes:
+      - name: ntfy-url
+        secret:
+          secretName: vmalertmanager-ntfy
+    volumeMounts:
+      - name: ntfy-url
+        mountPath: /etc/alertmanager-ntfy
+        readOnly: true
