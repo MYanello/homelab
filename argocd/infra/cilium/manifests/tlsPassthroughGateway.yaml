@@ -11,18 +11,18 @@ spec:
     - value: 10.10.8.103
       type: IPAddress
   listeners:
-    - name: truenas-tls-passthrough
-      protocol: TLS
-      hostname: "truenas.yanello.net"
-      port: 443
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              kubernetes.io/metadata.name: external-services
+    # - name: truenas-tls-passthrough
+    #   protocol: TLS
+    #   hostname: "truenas.yanello.net"
+    #   port: 443
+    #   tls:
+    #     mode: Passthrough
+    #   allowedRoutes:
+    #     namespaces:
+    #       from: Selector
+    #       selector:
+    #         matchLabels:
+    #           kubernetes.io/metadata.name: external-services
     - name: ubiquiti-tls-passthrough
       protocol: TLS
       hostname: "ui.yanello.net"

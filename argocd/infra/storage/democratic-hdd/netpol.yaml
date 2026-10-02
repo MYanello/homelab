@@ -22,3 +22,11 @@ spec:
         - ports:
             - port: "80"
               protocol: TCP
+            - port: "443"
+              protocol: TCP
+    - toEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
