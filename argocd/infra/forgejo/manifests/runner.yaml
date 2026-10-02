@@ -86,7 +86,7 @@ spec:
               memory: 256Mi
             limits:
               memory: 2Gi
-          image: harbor.yanello.net/library/forgejo-runner:latest
+          image: harbor.yanello.net/library/forgejo-runner:latest@sha256:8f444bc472c23f16bb66ac896ade4f04ec0e42c0c994c47a5d8061949eebdd9c
           command: ["act_runner", "daemon", "--config", "/config/config.yaml"]
           workingDir: /data
           env:
