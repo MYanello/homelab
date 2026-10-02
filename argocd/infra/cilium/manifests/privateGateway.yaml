@@ -9,15 +9,15 @@ spec:
     - value: 10.10.8.100
       type: IPAddress
   listeners:
-    # - name: unifi-tls-passthrough
-    #   protocol: TLS
-    #   hostname: "unifi.yanello.net"
-    #   port: 443
-    #   tls:
-    #     mode: Passthrough
-    #   allowedRoutes:
-    #     namespaces:
-    #       from: All
+    - name: truenas-tls-passthrough
+      protocol: TLS
+      hostname: "truenas.yanello.net"
+      port: 443
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: external-services
     - name: http
       protocol: HTTP
       hostname: "*.yanello.net"
