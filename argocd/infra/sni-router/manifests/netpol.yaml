@@ -1,0 +1,19 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: sni-router
+spec:
+  endpointSelector:
+    matchLabels:
+      app: sni-router
+  enableDefaultDeny:
+    ingress: true
+    egress: false
+  ingress:
+    - toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+            - port: "8080"
+              protocol: TCP
