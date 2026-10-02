@@ -14,13 +14,14 @@ rollout:
 
 config:
   db:
-    driver: "postgres"
-    host: "db-rw"
+    driver: postgres
+    host: db-rw
     port: "5432"
-    name: "budgeting"
-    existingSecret: "db-app"
+    name: budgeting
+    existingSecret: db-app
     existingSecretUserKey: user
     existingSecretPasswordKey: password
+
 oidc:
   enabled: true
   issuer: "https://authentik.yanello.net/application/o/budgeting/"
@@ -28,6 +29,7 @@ oidc:
   existingSecret: "budgeting-secrets"
   existingSecretClientIdKey: "OIDC_CLIENT_ID"
   existingSecretClientSecretKey: "OIDC_CLIENT_SECRET"
+
 resources:
   requests:
     cpu: 10m
