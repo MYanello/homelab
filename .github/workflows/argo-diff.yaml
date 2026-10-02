@@ -56,12 +56,7 @@ jobs:
             initContainers:
               - name: install-ksops
                 image: viaductoss/ksops:v4.5.1@sha256:4def9fdd4e2f850265740ebe9592c5455d19b76891e88e602df8b52d74b95334
-                command: ["/bin/sh", "-c"]
-                args:
-                  - echo "Installing KSOPS...";
-                    mv ksops /custom-tools/;
-                    mv kustomize /custom-tools/;
-                    echo "Done.";
+                command: ["/usr/local/bin/ksops", "install", "--with-kustomize", "/custom-tools"]
                 volumeMounts:
                   - mountPath: /custom-tools
                     name: custom-tools
@@ -87,7 +82,8 @@ jobs:
             -e TARGET_BRANCH=${{ github.head_ref }} \
             -e REPO=${{ github.repository }} \
             dagandersen/argocd-diff-preview:v0.2.15@sha256:01c4712f945f9183ef1eacbaf5974ced42624b8bdfc6dab876a07ab89bd0cd83 \
-            --diff-ignore="checksum|caBundle"
+            --diff-ignore="checksum|caBundle" \
+            --debug
 
       - name: Post diff as comment
         run: |
