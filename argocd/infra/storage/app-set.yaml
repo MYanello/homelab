@@ -42,3 +42,47 @@ spec:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
         targetRevision: HEAD
+        kustomize:
+          patches:
+            - target:
+                kind: Deployment
+              patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: ignored
+                spec:
+                  template:
+                    spec:
+                      tolerations:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
+                          effect: NoSchedule
+            - target:
+                kind: StatefulSet
+              patch: |-
+                apiVersion: apps/v1
+                kind: StatefulSet
+                metadata:
+                  name: ignored
+                spec:
+                  template:
+                    spec:
+                      tolerations:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
+                          effect: NoSchedule
+            - target:
+                kind: DaemonSet
+              patch: |-
+                apiVersion: apps/v1
+                kind: DaemonSet
+                metadata:
+                  name: ignored
+                spec:
+                  template:
+                    spec:
+                      tolerations:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
+                          effect: NoSchedule

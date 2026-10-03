@@ -31,10 +31,6 @@ spec:
           jsonPointers:
             - /spec/template/metadata/annotations/checksum~1secret
             - /spec/template/metadata/annotations/checksum~1tls
-        - kind: Secret
-          name: harbor-registry
-          jsonPointers:
-            - /data/REGISTRY_HTPASSWD
       syncPolicy:
         automated:
           prune: true
@@ -49,3 +45,47 @@ spec:
         path: "{{path}}"
         repoURL: https://github.com/myanello/homelab.git
         targetRevision: main
+        kustomize:
+          patches:
+            - target:
+                kind: Deployment
+              patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: ignored
+                spec:
+                  template:
+                    spec:
+                      tolerations:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
+                          effect: NoSchedule
+            - target:
+                kind: StatefulSet
+              patch: |-
+                apiVersion: apps/v1
+                kind: StatefulSet
+                metadata:
+                  name: ignored
+                spec:
+                  template:
+                    spec:
+                      tolerations:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
+                          effect: NoSchedule
+            - target:
+                kind: DaemonSet
+              patch: |-
+                apiVersion: apps/v1
+                kind: DaemonSet
+                metadata:
+                  name: ignored
+                spec:
+                  template:
+                    spec:
+                      tolerations:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
+                          effect: NoSchedule
