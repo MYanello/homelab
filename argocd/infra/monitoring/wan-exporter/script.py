@@ -43,13 +43,13 @@ fields = (
     "time_zone",
 )
 
-VM_URL = os.getenv(
+VM_URL = os.environ.get(
     "VM_URL",
     "http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8428",
 )
-PORT = int(os.getenv("PORT", "9101"))
-INTERVAL = int(os.getenv("INTERVAL", "120"))
-NTFY_URL = f"https://ntfy.sh/{os.environ.get('NTFY_TOPIC')}"
+PORT = int(os.environ.get("PORT", "9101"))
+INTERVAL = int(os.environ.get("INTERVAL", "120"))
+NTFY_URL = f"https://ntfy.sh/{os.environ['NTFY_TOPIC']}"
 
 
 def query_vm() -> tuple[dict[str, str], float]:
@@ -173,15 +173,15 @@ def update_oracle(ip: str) -> None:
         logger.warning("Oracle: empty IP, skipping")
         return
 
-    region = os.getenv("ORACLE_REGION", "us-ashburn-1")
+    region = os.environ.get("ORACLE_REGION", "us-ashburn-1")
     host = f"iaas.{region}.oraclecloud.com"
     endpoint = f"https://{host}"
 
-    api_key = os.getenv("ORACLE_API_KEY")
-    fingerprint = os.getenv("ORACLE_FINGERPRINT")
-    tenancy_ocid = os.getenv("ORACLE_TENANCY_OCID")
-    user_ocid = os.getenv("ORACLE_USER_OCID")
-    security_list_id = os.getenv("ORACLE_SECURITY_LIST_OCID")
+    api_key = os.environ.get("ORACLE_API_KEY")
+    fingerprint = os.environ.get("ORACLE_FINGERPRINT")
+    tenancy_ocid = os.environ.get("ORACLE_TENANCY_OCID")
+    user_ocid = os.environ.get("ORACLE_USER_OCID")
+    security_list_id = os.environ.get("ORACLE_SECURITY_LIST_OCID")
 
     if (
         not api_key
