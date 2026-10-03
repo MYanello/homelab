@@ -9,15 +9,12 @@ resources:
   - ./netpol.yaml
   - ./cnpg.yaml
   - ./httproute.yaml
+  - ./preview-service.yaml
 
 helmCharts:
   - name: budgeting
     repo: oci://harbor.yanello.net/helm
-    version: 1.19.3
+    version: 0.2.1
     releaseName: budgeting
     namespace: budgeting
     valuesFile: ./values.yaml
-
-replicas:
-  - name: budgeting
-    count: 0

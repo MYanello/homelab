@@ -39,9 +39,9 @@ envoy:
   resources:
     requests:
       cpu: 20m
-      memory: 96Mi
+      memory: 100Mi
     limits:
-      memory: 128Mi
+      memory: 200Mi
 hubble:
   enabled: true
   eventBufferCapacity: "65535"
@@ -51,14 +51,14 @@ hubble:
       resources:
         requests:
           cpu: 10m
-          memory: 16Mi
+          memory: 10Mi
         limits:
           memory: 100Mi
     frontend:
       resources:
         requests:
           cpu: 10m
-          memory: 16Mi
+          memory: 20Mi
         limits:
           memory: 100Mi
   relay:
@@ -66,7 +66,7 @@ hubble:
     resources:
       requests:
         cpu: 10m
-        memory: 16Mi
+        memory: 20Mi
       limits:
         memory: 50Mi
 bgpControlPlane:
@@ -85,13 +85,13 @@ cluster:
 resources:
   requests:
     cpu: 90m
-    memory: 768Mi
+    memory: 800Mi
   limits:
-    memory: 896Mi
+    memory: 1Gi
 operator:
   resources:
     requests:
       cpu: 20m
-      memory: 128Mi
+      memory: 100Mi
     limits:
-      memory: 128Mi
+      memory: 200Mi
