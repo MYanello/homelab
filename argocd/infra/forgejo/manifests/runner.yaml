@@ -52,6 +52,7 @@ spec:
               memory: 256Mi
             limits:
               memory: 2Gi
+          workingDir: /data
           image: harbor.yanello.net/library/forgejo-runner:v13.2.0
           command: ["forgejo-runner", "daemon", "--config", "/config/config.yaml"]
           env:
