@@ -104,10 +104,17 @@ spec:
             - name: DOT
               value: "off"
           securityContext:
-            privileged: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
+              drop:
+                - ALL
               add:
                 - NET_ADMIN
+          volumeMounts:
+            - mountPath: /dev/net/tun
+              name: tun
           startupProbe:
             exec:
               command: ["/gluetun-entrypoint", "healthcheck"]
@@ -129,3 +136,7 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: tun
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
