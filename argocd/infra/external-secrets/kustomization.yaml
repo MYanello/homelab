@@ -17,6 +17,13 @@ helmCharts:
     namespace: external-secrets
     valuesInline:
       installCRDs: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           operator: Equal
@@ -29,6 +36,13 @@ helmCharts:
         limits:
           memory: 96Mi
       certController:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: node-role.kubernetes.io/control-plane
+                      operator: Exists
         tolerations:
           - key: node-role.kubernetes.io/control-plane
             operator: Equal
@@ -41,6 +55,13 @@ helmCharts:
           limits:
             memory: 250Mi
       webhook:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: node-role.kubernetes.io/control-plane
+                      operator: Exists
         tolerations:
           - key: node-role.kubernetes.io/control-plane
             operator: Equal

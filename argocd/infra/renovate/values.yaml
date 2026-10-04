@@ -15,10 +15,8 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
         - matchExpressions:
-            - key: kubernetes.io/arch
-              operator: In
-              values:
-                - amd64
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
 tolerations:
   - key: "node-role.kubernetes.io/control-plane"
     operator: "Exists"

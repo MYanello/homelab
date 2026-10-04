@@ -27,14 +27,12 @@ global:
     - name: AUTHENTIK_WEB__BASE_URL
       value: https://authentik.yanello.net
   affinity:
+    podAntiAffinity: soft
     nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                  - amd64
+      type: hard
+      matchExpressions:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"

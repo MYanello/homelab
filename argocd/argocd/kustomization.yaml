@@ -29,6 +29,13 @@ patches:
               - key: node-role.kubernetes.io/control-plane
                 operator: Exists
                 effect: NoSchedule
+            affinity:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                    - matchExpressions:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
   - target:
       kind: StatefulSet
     patch: |-
@@ -43,6 +50,13 @@ patches:
               - key: node-role.kubernetes.io/control-plane
                 operator: Exists
                 effect: NoSchedule
+            affinity:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                    - matchExpressions:
+                        - key: node-role.kubernetes.io/control-plane
+                          operator: Exists
   - target:
       kind: DaemonSet
     patch: |-
