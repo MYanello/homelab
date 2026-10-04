@@ -84,6 +84,10 @@ spec:
             - secretRef:
                 name: vpn-secrets
           env:
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
             - name: TZ
               value: "America/Chicago"
             - name: FIREWALL_INPUT_PORTS
@@ -115,6 +119,8 @@ spec:
           volumeMounts:
             - mountPath: /dev/net/tun
               name: tun
+            - mountPath: /tmp/gluetun
+              name: tmp-gluetun
           startupProbe:
             exec:
               command: ["/gluetun-entrypoint", "healthcheck"]
@@ -140,3 +146,5 @@ spec:
           hostPath:
             path: /dev/net/tun
             type: CharDevice
+        - name: tmp-gluetun
+          emptyDir: {}
