@@ -96,6 +96,11 @@ grafana:
   envFromSecrets:
     - name: grafana-env-secrets
     - name: influx-secrets
+  envValueFrom:
+    vmlogs-password:
+      secretKeyRef:
+        name: victorialogs-auth
+        key: password
   env:
     GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
     GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
@@ -115,6 +120,10 @@ grafana:
         - name: VictoriaLogs
           type: victoriametrics-logs-datasource
           url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+          basicAuth: true
+          basicAuthUser: vmlogs
+          secureJsonData:
+            basicAuthPassword: $vmlogs-password
         - name: Garmin-InfluxDB
           uid: garmin_influxdb
           type: influxdb

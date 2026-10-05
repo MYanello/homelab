@@ -1,0 +1,163 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mcp-victorialogs
+  name: mcp-victorialogs
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: mcp-victorialogs
+  template:
+    metadata:
+      labels:
+        app: mcp-victorialogs
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - image: harbor.yanello.net/ghcr/victoriametrics/mcp-victorialogs:v1.9.0@sha256:753bb4fbe402ca1a782842f44636830f9895736f11d7fe783b924f8a0daf083d
+          name: mcp-victorialogs
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: VL_INSTANCE_ENTRYPOINT
+              value: http://victoria-logs-single-server:9428
+            - name: MCP_SERVER_MODE
+              value: http
+            - name: MCP_LISTEN_ADDR
+              value: ":8080"
+            - name: VL_INSTANCE_HEADERS
+              valueFrom:
+                secretKeyRef:
+                  name: victorialogs-auth
+                  key: vl-instance-headers
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          resources:
+            limits:
+              memory: 500Mi
+            requests:
+              memory: 100Mi
+              cpu: 50m
+          startupProbe:
+            httpGet:
+              path: /health/readiness
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mcp-victorialogs
+  name: mcp-victorialogs
+spec:
+  selector:
+    app: mcp-victorialogs
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: monitoring-app
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: VictoriaLogs MCP
+    gethomepage.dev/icon: victoriametrics
+    gethomepage.dev/description: "MCP server for VictoriaLogs"
+    gethomepage.dev/pod-selector: app=mcp-victorialogs
+  name: mcp-victorialogs-httproute
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - vmlogs-mcp.yanello.net
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: mcp-victorialogs
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: mcp-victorialogs
+spec:
+  endpointSelector:
+    matchLabels:
+      app: mcp-victorialogs
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+    - fromEntities:
+        - ingress
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+    - fromEntities:
+        - host
+        - health
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
