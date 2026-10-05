@@ -43,6 +43,10 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: sonarr
             app: sonarr
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: overseerr
+            app: overseerr
       toPorts:
         - ports:
             - port: "8989"
