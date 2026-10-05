@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "vmlogs": {
+      "type": "remote",
+      "url": "https://vmlogs-mcp.yanello.net/mcp",
+      "enabled": true
+    }
+  }
+}
