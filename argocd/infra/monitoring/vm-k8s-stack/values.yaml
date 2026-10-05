@@ -28,6 +28,74 @@ vmagent:
       limits:
         memory: 8Gi
 
+kubelet:
+  enabled: true
+  vmScrape:
+    spec:
+      interval: 60s
+      metricRelabelConfigs:
+        - action: labeldrop
+          regex: (uid)
+        - action: labeldrop
+          regex: (id|name)
+        - action: drop
+          source_labels: [__name__]
+          regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
+        - action: drop
+          source_labels: [__name__]
+          regex: apiserver_request_duration_seconds_bucket|apiserver_request_sli_duration_seconds_bucket|apiserver_request_body_size_bytes_bucket|apiserver_response_sizes_bucket|apiserver_storage_list_duration_seconds_bucket|apiserver_watch_events_dispatch_duration_seconds_bucket|apiserver_watch_events_sizes_bucket|apiserver_watch_list_duration_seconds_bucket|apiserver_watch_cache_initialization_duration_seconds_bucket|apiserver_watch_cache_read_wait_seconds_bucket|etcd_request_duration_seconds_bucket
+
+kubeApiServer:
+  enabled: true
+  vmScrape:
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          interval: 60s
+          metricRelabelConfigs:
+            - action: drop
+              source_labels: [__name__]
+              regex: apiserver_request_duration_seconds_bucket|apiserver_request_sli_duration_seconds_bucket|apiserver_request_body_size_bytes_bucket|apiserver_response_sizes_bucket|apiserver_storage_list_duration_seconds_bucket|apiserver_watch_events_dispatch_duration_seconds_bucket|apiserver_watch_events_sizes_bucket|apiserver_watch_list_duration_seconds_bucket|apiserver_watch_cache_initialization_duration_seconds_bucket|apiserver_watch_cache_read_wait_seconds_bucket
+          port: https
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            serverName: kubernetes
+
+kube-state-metrics:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      memory: 96Mi
+  collectorsExclude:
+    - configmaps
+    - secrets
+    - mutatingwebhookconfigurations
+    - validatingwebhookconfigurations
+    - replicasets
+    - replicationcontrollers
+    - clusterrolebindings
+    - clusterroles
+    - rolebindings
+    - roles
+    - serviceaccounts
+    - endpointslice
+  vmScrape:
+    enabled: true
+    spec:
+      endpoints:
+        - port: http
+          honorLabels: true
+          interval: 60s
+          metricRelabelConfigs:
+            - action: labeldrop
+              regex: (uid|container_id|image_id)
+            - action: drop
+              source_labels: [__name__]
+              regex: kube_.*_created|kube_.*_metadata_resource_version|kube_configmap_.*|kube_secret_.*|kube_mutatingwebhookconfiguration_.*|kube_validatingwebhookconfiguration_.*|kube_replicaset_.*|kube_replicationcontroller_.*|kube_clusterrolebinding_.*|kube_clusterrole_.*|kube_rolebinding_.*|kube_role_.*|kube_serviceaccount_.*|kube_endpointslice_.*
+
 vmsingle:
   enabled: true
   spec:
@@ -143,13 +211,6 @@ grafana:
       memory: 320Mi
     limits:
       memory: 1Gi
-kube-state-metrics:
-  resources:
-    requests:
-      cpu: 10m
-      memory: 64Mi
-    limits:
-      memory: 96Mi
 prometheus-node-exporter:
   resources:
     requests:
