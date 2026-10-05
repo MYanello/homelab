@@ -30,7 +30,7 @@ devicePlugin:
       cpu: 10m
       memory: 32Mi
     limits:
-      memory: 32Mi
+      memory: 100Mi
   initContainer:
     resources:
       requests:
@@ -57,9 +57,9 @@ dcgmExporter:
   resources:
     requests:
       cpu: 10m
-      memory: 448Mi
+      memory: 500Mi
     limits:
-      memory: 512Mi
+      memory: 1Gi
   initContainer:
     resources:
       requests:
