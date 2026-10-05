@@ -1,0 +1,30 @@
+---
+vault_hostname: vault.yanello.net
+vault_config_dir: /etc/vault.d
+vault_data_dir: /opt/vault/data
+vault_tls_dir: /etc/vault.d/tls
+vault_home: /home/vault
+vault_user: vault
+vault_group: vault
+acme_email: "marcus@yanello.net"
+
+# Secrets below are plaintext placeholders.
+# Run: ansible-vault encrypt ansible/vault/group_vars/vault.yml
+# after filling them in.
+
+# Cloudflare API token. Same one cert-manager uses for the
+# letsencrypt-prod dns01 solver (argocd/infra/cert-manager/manifests/cert-secret.yaml).
+# Needs Zone:DNS:Edit on yanello.net.
+cloudflare_api_token: "CHANGEME"
+
+# OCI KMS autounseal. Copy values from:
+#   argocd/vault/manifests/ociEnvVars-secret.yaml
+#   argocd/vault/manifests/ociConfig-secret.yaml
+#   terraform/oci/sops/vault-autounseal-private.enc.pem
+vault_ocikms_crypto_endpoint: "CHANGEME"
+vault_ocikms_management_endpoint: "CHANGEME"
+vault_ocikms_seal_key_id: "CHANGEME"
+# Full contents of ~/.oci/config (see ociConfig-secret.yaml)
+vault_oci_config: "CHANGEME"
+# The API signing key the config references (PEM)
+vault_oci_api_key: "CHANGEME"

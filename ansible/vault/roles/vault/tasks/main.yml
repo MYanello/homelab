@@ -1,0 +1,157 @@
+---
+- name: Install base packages
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - git
+      - unzip
+      - socat
+    state: present
+    update_cache: true
+
+- name: HashiCorp apt keyring
+  ansible.builtin.get_url:
+    url: https://apt.releases.hashicorp.com/gpg
+    dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    mode: "0644"
+
+- name: HashiCorp apt repository
+  ansible.builtin.apt_repository:
+    filename: hashicorp
+    repo: >-
+      deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]
+      https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+    state: present
+
+- name: Install vault
+  ansible.builtin.apt:
+    name: vault
+    state: present
+    update_cache: true
+
+- name: Create config, data and tls directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - {path: "{{ vault_config_dir }}", mode: "0750"}
+    - {path: "{{ vault_data_dir }}", mode: "0700"}
+    - {path: "{{ vault_tls_dir }}", mode: "0750"}
+
+- name: OCI directory
+  ansible.builtin.file:
+    path: "{{ vault_home }}/.oci"
+    state: directory
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "0700"
+
+- name: OCI API config
+  ansible.builtin.copy:
+    content: "{{ vault_oci_config }}"
+    dest: "{{ vault_home }}/.oci/config"
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "0600"
+
+- name: OCI API signing key
+  ansible.builtin.copy:
+    content: "{{ vault_oci_api_key }}"
+    dest: "{{ vault_home }}/.oci/oci_api_key.pem"
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "0600"
+
+# --- TLS: issue BEFORE Vault starts, because the listener needs the cert files ---
+
+- name: Install acme.sh
+  ansible.builtin.git:
+    repo: https://github.com/acmesh-official/acme.sh.git
+    dest: /opt/acme.sh
+    version: master
+    depth: 1
+
+- name: Check for existing certificate
+  ansible.builtin.stat:
+    path: "{{ vault_tls_dir }}/tls.crt"
+  register: vault_cert
+
+- name: Issue certificate (Cloudflare DNS-01)
+  ansible.builtin.command:
+    cmd: >-
+      /opt/acme.sh/acme.sh --issue --dns dns_cf
+      -d {{ vault_hostname }}
+      --server letsencrypt
+  environment:
+    CF_Token: "{{ cloudflare_api_token }}"
+  when: not vault_cert.stat.exists
+  changed_when: true
+
+- name: Install certificate and renewal hook
+  ansible.builtin.command:
+    cmd: >-
+      /opt/acme.sh/acme.sh --install-cert -d {{ vault_hostname }}
+      --key-file {{ vault_tls_dir }}/tls.key
+      --fullchain-file {{ vault_tls_dir }}/tls.crt
+      --reloadcmd "systemctl reload vault"
+  when: not vault_cert.stat.exists
+  changed_when: true
+
+- name: TLS file ownership
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "0640"
+  loop:
+    - "{{ vault_tls_dir }}/tls.crt"
+    - "{{ vault_tls_dir }}/tls.key"
+
+- name: Vault server config
+  ansible.builtin.template:
+    src: vault.hcl.j2
+    dest: "{{ vault_config_dir }}/vault.hcl"
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "0640"
+  notify: restart vault
+
+- name: Vault systemd unit
+  ansible.builtin.template:
+    src: vault.service.j2
+    dest: /etc/systemd/system/vault.service
+    mode: "0644"
+  notify:
+    - daemon reload
+    - restart vault
+
+- name: Enable and start vault
+  ansible.builtin.systemd:
+    name: vault
+    enabled: true
+    state: started
+    daemon_reload: true
+
+- name: Report seal status
+  ansible.builtin.uri:
+    url: "https://{{ vault_hostname }}:8200/v1/sys/seal-status"
+    validate_certs: true
+  register: vault_seal
+  retries: 12
+  delay: 5
+  until: vault_seal.status == 200
+  ignore_errors: true
+
+- name: Seal status
+  ansible.builtin.debug:
+    msg: >-
+      sealed={{ vault_seal.json.sealed | default('n/a') }}
+      initialized={{ vault_seal.json.initialized | default('n/a') }}
+      (uninitialized Vault: run `vault operator init` once, store the keys)
+  when: vault_seal.json is defined
