@@ -32,11 +32,6 @@ spec:
               value: http
             - name: MCP_LISTEN_ADDR
               value: ":8080"
-            - name: VL_INSTANCE_HEADERS
-              valueFrom:
-                secretKeyRef:
-                  name: victorialogs-auth
-                  key: vl-instance-headers
           ports:
             - containerPort: 8080
               protocol: TCP

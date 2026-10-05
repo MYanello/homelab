@@ -6,9 +6,6 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/mcp.yaml
 
-generators:
-  - ./manifests/secret-generator.yaml
-
 helmCharts:
   - name: victoria-logs-single
     releaseName: victoria-logs-single

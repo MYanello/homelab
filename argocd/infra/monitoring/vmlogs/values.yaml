@@ -7,17 +7,6 @@ server:
       enabled: true
   retentionPeriod: 3d
   retentionDiskSpaceUsage: 2.5
-  extraArgs:
-    httpAuth.username: vmlogs
-    httpAuth.password: file:///etc/victoria-logs-auth/password
-  extraVolumes:
-    - name: auth
-      secret:
-        secretName: victorialogs-auth
-  extraVolumeMounts:
-    - name: auth
-      mountPath: /etc/victoria-logs-auth
-      readOnly: true
   resources:
     requests:
       cpu: 10m

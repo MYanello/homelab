@@ -2,12 +2,6 @@
 image:
   repository: harbor.yanello.net/ghcr/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s
 mode: daemonset
-extraEnvs:
-  - name: VLOGS_AUTHORIZATION
-    valueFrom:
-      secretKeyRef:
-        name: victorialogs-auth
-        key: authorization
 presets:
   logsCollection:
     enabled: true
@@ -27,8 +21,6 @@ config:
       compression: gzip
       metrics_endpoint: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local:8429/opentelemetry/v1/metrics
       logs_endpoint: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428/insert/opentelemetry/v1/logs
-      headers:
-        Authorization: ${env:VLOGS_AUTHORIZATION}
     debug:
       verbosity: detailed
   service:
