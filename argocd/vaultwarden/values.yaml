@@ -21,7 +21,7 @@ storage:
     keepPvc: true
     accessMode: ReadWriteOnce
 adminToken:
-  existingSecret: vw-admin-secret
+  existingSecret: bitwarden-secrets
   existingSecretKey: adminToken
 resources:
   limits:

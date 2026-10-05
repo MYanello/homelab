@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: doppler-token
+type: Opaque
+stringData:
+  dopplerToken: ENC[AES256_GCM,data:op4bg0pJED02dXZgQVyuUd7KQwantid7KnvLHcOUk1GsDJ/LjnMMhdRjMB2BieG8jp3UMyQ=,iv:eHjP+zRV0NoSTBa6voICVUKVs9yyUz9199Vyel9NRMw=,tag:adML5hKLQAnf6AGXKlGFkg==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBZFdPcHJVV285T0JmZFIy
+        SXJZSEMyYVoveDRvOU9uMTJDTzd5ekhaTmdVCnc3NklPa2tnWWNVSmRQZHpUOWJt
+        Z0RpUlMvRjFKVndIa3p1ek95WTN1b0UKLS0tIFA2RkRZTEVMQjVlWjE2TCs1S1hF
+        TS9VckFMSjNGaDVEUnkwbzB6d29GWFkKjfTNt5mbqttfjs3a/UlVNwD/tEMF4ZOZ
+        5PzNZvubQ+P+wmdlykbhApAfbsGlg1npGCGxIs7NL1pdgVw2tCluYQ==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+  lastmodified: "2026-10-05T12:38:16Z"
+  mac: ENC[AES256_GCM,data:E+JmEjHiLLIqPtVvOeCPrQrKWDjjwoM7jBO8w4FUuquoK7PPZT1L67mlPb0V7b8cMJ6Asi7Rb4ZbplmaWsRJpRSGbB3nD11Rmuparx57TeXgh+OUz0PRbtyrpEGUxST4SOm7JQ1MxVOCBgTegc5Il75wnzBeE08I0MpHiHYeD4w=,iv:OzK2EBqvoinPaG5+5AhCpTtPOuQEbc4P9AdJptaTqdM=,tag:O1tJpJIuyCr4+tSXQepokw==,type:str]
+  unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+  version: 3.13.3

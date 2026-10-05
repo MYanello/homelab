@@ -38,7 +38,7 @@ spec:
           name: bitwarden-sync
           env:
             - name: CRON_SCHEDULE
-              value: "0 0 * * *" # daily at noon
+              value: "0 0 * * *" # daily at midnight
             - name: TZ
               value: "America/Chicago"
             - name: PUID
@@ -53,7 +53,7 @@ spec:
               value: "0"
           envFrom:
             - secretRef:
-                name: bw-sync
+                name: bitwarden-secrets
           resources:
             requests:
               cpu: 50m
