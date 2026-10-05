@@ -5,6 +5,11 @@
       "type": "remote",
       "url": "https://vmlogs-mcp.yanello.net/mcp",
       "enabled": true
+    },
+    "vmetrics": {
+      "type": "remote",
+      "url": "https://vm-mcp.yanello.net/mcp",
+      "enabled": true
     }
   }
 }

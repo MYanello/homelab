@@ -1,0 +1,160 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mcp-victoriametrics
+  name: mcp-victoriametrics
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: mcp-victoriametrics
+  template:
+    metadata:
+      labels:
+        app: mcp-victoriametrics
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - image: harbor.yanello.net/ghcr/victoriametrics/mcp-victoriametrics:v1.20.2@sha256:bcbf84f945d6efb03fb8b2d2ccc3294420dccdc0b445752dce96f02619416dfe
+          name: mcp-victoriametrics
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: VM_INSTANCE_ENTRYPOINT
+              value: http://vmsingle-victoria-metrics-k8s-stack:8428
+            - name: VM_INSTANCE_TYPE
+              value: single
+            - name: MCP_SERVER_MODE
+              value: http
+            - name: MCP_LISTEN_ADDR
+              value: ":8080"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              memory: 250Mi
+              cpu: 50m
+          startupProbe:
+            httpGet:
+              path: /health/readiness
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mcp-victoriametrics
+  name: mcp-victoriametrics
+spec:
+  selector:
+    app: mcp-victoriametrics
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: monitoring-app
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: VictoriaMetrics MCP
+    gethomepage.dev/icon: victoriametrics
+    gethomepage.dev/description: "MCP server for VictoriaMetrics"
+    gethomepage.dev/pod-selector: app=mcp-victoriametrics
+  name: mcp-victoriametrics-httproute
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - vm-mcp.yanello.net
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: mcp-victoriametrics
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: mcp-victoriametrics
+spec:
+  endpointSelector:
+    matchLabels:
+      app: mcp-victoriametrics
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+    - fromEntities:
+        - ingress
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+    - fromEntities:
+        - host
+        - health
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP

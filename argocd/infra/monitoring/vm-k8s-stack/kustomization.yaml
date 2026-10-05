@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./manifests/netpol.yaml
   - ./manifests/http-route.yaml
+  - ./manifests/mcp-victoriametrics.yaml
 
 generators:
   - ./manifests/secrets/secret-generator.yaml
