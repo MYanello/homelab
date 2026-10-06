@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=none
 - Infrastructure:
     - OPNSense:
         href: https://opn.yanello.net
