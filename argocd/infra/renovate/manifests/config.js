@@ -10,7 +10,7 @@ module.exports = {
   },
   ignoreTests: true,
   prBodyColumns: ["Package", "Update", "Change", "Package file"],
-  rebaseWhen: "behind-base-branch",
+  rebaseWhen: "auto",
   dependencyDashboard: true,
   major: {
     dependencyDashboardApproval: false,
