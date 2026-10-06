@@ -19,7 +19,7 @@ configMapGenerator:
 helmCharts:
   - name: mend-renovate-ce
     repo: https://mend.github.io/renovate-ce-ee
-    version: "15.6.0"
+    version: "15.7.0"
     releaseName: mend-renovate-ce
     namespace: renovate
     valuesFile: ./values.yaml
