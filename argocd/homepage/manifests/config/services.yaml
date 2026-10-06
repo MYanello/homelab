@@ -13,10 +13,10 @@
         icon: myspeed
         widget:
           type: myspeed
-          url: https://myspeed.yanello.net
+          url: http://myspeed.myspeed:5216
 - Media:
     - Tautulli:
-        href: https://tautulli.yanello.net
+        href: htts://tautulli.tautulli:5216
         icon: tautulli
         widget:
           type: tautulli
@@ -29,7 +29,7 @@
         icon: qbittorrent
         widget:
           type: qbittorrent
-          url: https://qbit.yanello.net
+          url: http://qbittorrent.qbittorrent:8080
           fields:
             - download
             - seed
