@@ -6,8 +6,8 @@
         widget:
           type: opnsense
           url: https://opn.yanello.net
-          username: {{HOMEPAGE_VAR_OPN_USER: null}: null}
-          password: {{HOMEPAGE_VAR_OPN_PASS: null}: null}
+          username: "{{HOMEPAGE_VAR_OPN_USER}}"
+          password: "{{HOMEPAGE_VAR_OPN_PASS}}"
     - MySpeed:
         href: https://myspeed.yanello.net
         icon: myspeed
@@ -16,12 +16,12 @@
           url: http://myspeed.myspeed:5216
 - Media:
     - Tautulli:
-        href: htts://tautulli.tautulli:5216
+        href: https://tautulli.tautulli:5216
         icon: tautulli
         widget:
           type: tautulli
           url: https://tautulli.yanello.net
-          key: {{HOMEPAGE_VAR_TAUTULLI_KEY: null}: null}
+          key: "{{HOMEPAGE_VAR_TAUTULLI_KEY}}"
           enableUser: "true"
           showEpisodeNumber: "true"
     - qBittorrent:
