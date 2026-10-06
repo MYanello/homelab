@@ -11,7 +11,7 @@ helmCharts:
     namespace: argo-rollouts
     releaseName: argo-rollouts
     repo: https://argoproj.github.io/argo-helm
-    version: "2.43.5"
+    version: "2.43.6"
     valuesInline:
       installCRDs: true
       controller:
