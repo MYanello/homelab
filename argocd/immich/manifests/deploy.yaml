@@ -38,7 +38,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: harbor.yanello.net/ghcr/immich-app/immich-server:v3.2.4
+          image: harbor.yanello.net/ghcr/immich-app/immich-server:v3.2.4@sha256:d317916b28090c33eb36b308464ea391f8b7df1d850fcfea227a39ec879718c2
           ports:
             - containerPort: 2283
               protocol: TCP
@@ -105,7 +105,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: harbor.yanello.net/ghcr/immich-app/immich-machine-learning:v3.2.4-cuda
+          image: harbor.yanello.net/ghcr/immich-app/immich-machine-learning:v3.2.4-cuda@sha256:b9fdebfe7f07ff71f77e9d67d509d83c5e055da486a07c12080669c82a80c65e
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: photos
