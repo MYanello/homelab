@@ -31,6 +31,10 @@ module.exports = {
   },
   packageRules: [
     {
+      matchUpdateTypes: ["pin", "pinDigest"],
+      minimumReleaseAge: null,
+    },
+    {
       matchDatasources: ["docker"],
       allowedVersions: "/^v?[0-9]+\\.[0-9]+/",
     },

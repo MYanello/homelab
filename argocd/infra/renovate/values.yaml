@@ -39,4 +39,4 @@ renovate:
   mendRnvWebhookURL: https://renovate.yanello.net/webhook
   existingSecret: renovate-secrets
   mendRnvCronJobSchedulerAll: "0 * * * *"
-  logLevel: INFO
+  logLevel: DEBUG
