@@ -19,7 +19,7 @@ spec:
     spec:
       initContainers:
         - name: generate-htpasswd
-          image: docker.io/httpd:alpine@sha256:b1ed1aaa73df4d6af529519aa6d88dfa6f2da64088dda436bc884224a5702dba
+          image: harbor.yanello.net/docker/httpd:alpine3.24@sha256:b1ed1aaa73df4d6af529519aa6d88dfa6f2da64088dda436bc884224a5702dba
           command: ["sh", "-c"]
           args:
             - |
@@ -39,7 +39,7 @@ spec:
       containers:
         - name: rclone
           imagePullPolicy: IfNotPresent
-          image: docker.io/rclone/rclone:1.75.1@sha256:45401ad7410db1d67ffdb58e19059ad20b0d8e0285a60e38bbec55cc1019c7a5
+          image: harbor.yanello.net/docker/rclone/rclone:1.75.1@sha256:45401ad7410db1d67ffdb58e19059ad20b0d8e0285a60e38bbec55cc1019c7a5
           args:
             - rcd
             - --rc-web-gui
