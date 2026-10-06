@@ -28,7 +28,7 @@ spec:
               memory: 100Mi
             limits:
               memory: 500Mi
-          image: harbor.yanello.net/ghcr/gethomepage/homepage:v2.0.0@sha256:638dacf5c844e908dc06c1fd57a2b5694f8efd91f91f152829ea0c2f547458f2
+          image: harbor.yanello.net/ghcr/gethomepage/homepage:v2.4.0@sha256:643bd0be730d40f69d58028a55d1a896739333e8815786df42bc97f109ecbe61
           imagePullPolicy: Always
           envFrom:
             - secretRef:

@@ -22,8 +22,8 @@
           type: tautulli
           url: https://tautulli.yanello.net
           key: {{HOMEPAGE_VAR_TAUTULLI_KEY: null}: null}
-          enableUser: 'true'
-          showEpisodeNumber: 'true'
+          enableUser: "true"
+          showEpisodeNumber: "true"
     - qBittorrent:
         href: https://qbit.yanello.net
         icon: qbittorrent
