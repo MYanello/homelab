@@ -9,11 +9,6 @@
   },
   "packageRules": [
     {
-      "matchManagers": ["kustomize"],
-      "matchUpdateTypes": ["pinDigest"],
-      "enabled": true
-    },
-    {
       "matchDepNames": ["harbor.yanello.net/ghcr/hotio/prowlarr"],
       "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
       "allowedVersions": "/^release-[0-9]+\\.[0-9]+/"

@@ -35,6 +35,13 @@ module.exports = {
       minimumReleaseAge: null,
     },
     {
+      // kustomize helmCharts cannot hold a digest, so pinning them produces no
+      // change and fails the whole pin job
+      matchManagers: ["kustomize"],
+      matchUpdateTypes: ["pinDigest"],
+      enabled: false,
+    },
+    {
       matchDatasources: ["docker"],
       allowedVersions: "/^v?[0-9]+\\.[0-9]+/",
     },
