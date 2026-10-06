@@ -486,6 +486,7 @@ module "immich" {
     },
   ]
   meta_launch_url = ""
+  logout_uri = "https://immich.yanello.net/api/oauth/backchannel-logout"
 }
 
 module "linkwarden" {
@@ -608,7 +609,7 @@ module "shelfmark-books" {
   authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   property_mappings  = local.proxy_property_mappings
-  external_host      = "https://bookorbit-dl.yanello.net"
+  external_host      = "https://shelfmark.yanello.net"
   internal_host      = "http://shelfmark.books.svc.cluster.local:8084"
   meta_launch_url = ""
 }

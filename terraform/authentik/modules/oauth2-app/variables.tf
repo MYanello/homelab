@@ -92,3 +92,15 @@ variable "signing_key" {
   type        = string
   default     = "26f428c7-9534-4ea6-a839-9a6cf003c9c6"
 }
+
+variable "logout_method" {
+  description = "Logout method: backchannel or frontchannel"
+  type        = string
+  default     = "backchannel"
+}
+
+variable "logout_uri" {
+  description = "Logout URI (backchannel or frontchannel, depending on logout_method)"
+  type        = string
+  default     = ""
+}

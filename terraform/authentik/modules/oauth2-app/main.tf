@@ -13,6 +13,8 @@ resource "authentik_provider_oauth2" "this" {
   issuer_mode             = "per_provider"
   sub_mode                = var.sub_mode
   signing_key             = var.signing_key
+  logout_uri = var.logout_uri
+  logout_method = var.logout_method
 }
 
 resource "authentik_application" "this" {
