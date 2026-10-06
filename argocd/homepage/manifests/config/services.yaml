@@ -5,7 +5,7 @@
         icon: opnsense
         widget:
           type: opnsense
-          url: https://router.yanello.net
+          url: https://opn.yanello.net
           username: {{HOMEPAGE_VAR_OPN_USER: null}: null}
           password: {{HOMEPAGE_VAR_OPN_PASS: null}: null}
     - MySpeed:

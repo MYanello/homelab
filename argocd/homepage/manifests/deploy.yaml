@@ -25,9 +25,9 @@ spec:
           resources:
             requests:
               cpu: 10m
-              memory: 128Mi
+              memory: 100Mi
             limits:
-              memory: 192Mi
+              memory: 500Mi
           image: harbor.yanello.net/ghcr/gethomepage/homepage:v2.0.0@sha256:638dacf5c844e908dc06c1fd57a2b5694f8efd91f91f152829ea0c2f547458f2
           imagePullPolicy: Always
           envFrom:
