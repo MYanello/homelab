@@ -19,7 +19,7 @@ spec:
     spec:
       initContainers:
         - name: generate-htpasswd
-          image: harbor.yanello.net/docker/httpd:alpine3.24@sha256:b1ed1aaa73df4d6af529519aa6d88dfa6f2da64088dda436bc884224a5702dba
+          image: harbor.yanello.net/docker/httpd:alpine3.24@sha256:3440c39d8d6f54fa9ad2549e5a60c19ddd435faadc29c1ad28aa795f71888889
           command: ["sh", "-c"]
           args:
             - |
