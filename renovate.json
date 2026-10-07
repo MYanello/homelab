@@ -10,6 +10,26 @@
   "kubernetes": {
     "managerFilePatterns": ["argocd/**/*.yaml", "talos/**/*.yaml"]
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update GitHub release asset references in YAML manifests",
+      "managerFilePatterns": ["**/*.yaml", "**/*.yml"],
+      "matchStrings": [
+        "https:\\/\\/github\\.com\\/(?<depName>[^\\/\\s]+\\/[^\\/\\s]+)\\/releases\\/download\\/(?<currentValue>[\\w.\\-]+)\\/"
+      ],
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "description": "Update GitHub tag references in YAML manifests",
+      "managerFilePatterns": ["**/*.yaml", "**/*.yml"],
+      "matchStrings": [
+        "https:\\/\\/raw\\.githubusercontent\\.com\\/(?<depName>[^\\/\\s]+\\/[^\\/\\s]+)\\/(?<currentValue>[\\w.\\-]+)\\/"
+      ],
+      "datasourceTemplate": "github-tags"
+    }
+  ],
   "packageRules": [
     {
       "matchDepNames": ["harbor.yanello.net/ghcr/hotio/prowlarr"],
