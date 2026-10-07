@@ -6,6 +6,6 @@ namespace: system-upgrade
 
 resources:
   - netpol.yaml
-  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.20.1/crd.yaml
-  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.20.1/system-upgrade-controller.yaml
+  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.20.2/crd.yaml
+  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.20.2/system-upgrade-controller.yaml
   - ./plans/v1.37.1-k3s1.yaml
