@@ -64,8 +64,6 @@ spec:
               mountPath: /config
             - name: cache
               mountPath: /cache
-            - name: zpool
-              mountPath: /userdata/zpool/
             - name: ssd
               mountPath: /userdata/ssd/
             - name: hostdata
@@ -98,9 +96,6 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: cache
-        - name: zpool
-          hostPath:
-            path: /zpool/
         - name: hostdata
           hostPath:
             path: /data

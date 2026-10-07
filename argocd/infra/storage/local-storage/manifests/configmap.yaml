@@ -13,7 +13,7 @@ data:
         },
         {
           "node":"marcus-server",
-          "paths":["/zpool/k8s/"]
+          "paths":["/mnt/ssd/k8s/"]
         },
         {
           "node":"picluster0",
