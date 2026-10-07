@@ -16,6 +16,8 @@ spec:
     metadata:
       labels:
         app: bytestash
+      annotations:
+        backup.velero.io/backup-volumes: snip
     spec:
       containers:
         - name: bytestash

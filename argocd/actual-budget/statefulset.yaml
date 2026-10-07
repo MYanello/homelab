@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: actual-budget
+      annotations:
+        backup.velero.io/backup-volumes: data
     spec:
       containers:
         - name: actual-budget
