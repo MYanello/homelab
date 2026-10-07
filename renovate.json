@@ -1,6 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "ignorePaths": ["argocd/dev/**"],
+  "ignorePaths": [
+    "argocd/dev/**",
+    "argocd/infra/system-upgrade-controller/plans/**"
+  ],
   "argocd": {
     "managerFilePatterns": ["argocd/**/*.yaml$", "talos/**/*.yaml$"]
   },
