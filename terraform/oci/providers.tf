@@ -26,17 +26,19 @@ terraform {
       version = "~> 4.0"
     }
   }
-  # backend "s3" {
-  #   bucket = "terraform"
-  #   endpoints = {
-  #     s3 = "https://minio.yanello.net"
-  #   }
-  #   key                         = "oci"
-  #   region                      = "homelab"
-  #   skip_credentials_validation = true # Skip AWS related checks and validations
-  #   skip_requesting_account_id  = true
-  #   skip_metadata_api_check     = true
-  #   skip_region_validation      = true
-  #   use_path_style              = true # Enable path-style S3 URLs, required for minio (https://<HOST>/<BUCKET> https://developer.hashicorp.com/terraform/language/settings/backends/s3#use_path_style
-  # }
+
+  backend "s3" {
+    profile = "backblaze"
+    bucket  = "myanello-tf"
+    key     = "terraform/oci/terraform.tfstate"
+    endpoints = {
+      s3 = "https://s3.us-west-004.backblazeb2.com"
+    }
+    region                      = "us-west-004"
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_metadata_api_check     = true
+    skip_region_validation      = true
+    use_path_style              = true
+  }
 }

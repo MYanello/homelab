@@ -34,11 +34,6 @@ variable "instance_public_key_path" {
   default     = ""
 }
 
-variable "personal_ip" {
-  description = "Your personal IP address to allow ingress access to the instance."
-  type        = string
-}
-
 variable "name" {
   description = "A user-friendly name for the instance. Does not have to be unique, and it's changeable."
   type        = string

@@ -1,4 +1,20 @@
 ---
+- name: Check active swap
+  ansible.builtin.command: swapon --show --noheadings
+  register: vault_swap
+  changed_when: false
+  check_mode: false
+
+- name: Disable acitve swap
+  ansible.builtin.command: swapoff -a
+  when: vault_swap.stdout | length > 0
+
+- name: Drop swap from fstab
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    regexp: '^\s*[^#]\S*\s+\S*\s+swap\s'
+    state: absent
+
 - name: Install base packages
   ansible.builtin.apt:
     name:
@@ -9,6 +25,7 @@
       - git
       - unzip
       - socat
+      - python3-debian
     state: present
     update_cache: true
 
@@ -19,11 +36,14 @@
     mode: "0644"
 
 - name: HashiCorp apt repository
-  ansible.builtin.apt_repository:
-    filename: hashicorp
-    repo: >-
-      deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]
-      https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+  deb822_repository:
+    name: hashicorp
+    types: deb
+    uris: https://apt.releases.hashicorp.com
+    suites: "{{ ansible_distribution_release }}"
+    components:
+      - main
+    signed_by: /usr/share/keyrings/hashicorp-archive-keyring.gpg
     state: present
 
 - name: Install vault
@@ -68,8 +88,6 @@
     group: "{{ vault_group }}"
     mode: "0600"
 
-# --- TLS: issue BEFORE Vault starts, because the listener needs the cert files ---
-
 - name: Install acme.sh
   ansible.builtin.git:
     repo: https://github.com/acmesh-official/acme.sh.git
@@ -99,7 +117,7 @@
       /opt/acme.sh/acme.sh --install-cert -d {{ vault_hostname }}
       --key-file {{ vault_tls_dir }}/tls.key
       --fullchain-file {{ vault_tls_dir }}/tls.crt
-      --reloadcmd "systemctl reload vault"
+      --reloadcmd "systemctl reload vault || true"
   when: not vault_cert.stat.exists
   changed_when: true
 

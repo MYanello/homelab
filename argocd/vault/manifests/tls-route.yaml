@@ -22,5 +22,35 @@ spec:
     - vault.yanello.net
   rules:
     - backendRefs:
-        - name: vault-ui
-          port: 8202
+        - name: vault-service
+          port: 8200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-service
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8200
+      targetPort: 8200
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: vault-service-1
+  labels:
+    kubernetes.io/service-name: vault-service
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 8200
+endpoints:
+  - addresses:
+      - 192.168.10.5
+    conditions:
+      ready: true
