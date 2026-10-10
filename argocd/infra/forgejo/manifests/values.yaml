@@ -18,17 +18,6 @@ gitea:
       SSH_PORT: "22"
     actions:
       ENABLED: "true"
-  #   database:
-  #     DB_TYPE: postgres
-  #     HOST: db-rw.forgejo.svc.cluster.local:5432
-  #     NAME: forgejodb
-  #     USER: forgejo
-  # additionalConfigFromEnvs:
-  #   - name: GITEA__DATABASE__PASSWD
-  #     valueFrom:
-  #       secretKeyRef:
-  #         name: db-app
-  #         key: password
 
 readinessProbe:
   enabled: true
@@ -71,6 +60,13 @@ tolerations:
   - key: "node-role.kubernetes.io/control-plane"
     operator: "Exists"
     effect: "NoSchedule"
+affinity:
+  preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      preference:
+        matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
 resources:
   requests:
     cpu: 10m

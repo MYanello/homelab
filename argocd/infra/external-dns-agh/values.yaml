@@ -77,6 +77,13 @@ tolerations:
     operator: "Exists"
     effect: "NoSchedule"
 
+affinity:
+  preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      preference:
+        matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
 resources:
   requests:
     memory: 50Mi
