@@ -38,7 +38,7 @@ spec:
                 name: immich-config
             - secretRef:
                 name: immich-secrets
-          image: harbor.yanello.net/ghcr/immich-app/immich-server:v3.2.4@sha256:d317916b28090c33eb36b308464ea391f8b7df1d850fcfea227a39ec879718c2
+          image: harbor.yanello.net/ghcr/immich-app/immich-server:v3.3.1@sha256:db996e352359771c6a3db121a0ed8761516b22f727fc092a0f46dcfef82c1bc1
           ports:
             - containerPort: 2283
               protocol: TCP
