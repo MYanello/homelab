@@ -23,28 +23,3 @@ spec:
           selector:
             matchLabels:
               kubernetes.io/metadata.name: external-services
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: vault-private-tls-gateway
-  labels:
-    external-dns.yanello.net/gateway: private
-spec:
-  gatewayClassName: cilium
-  addresses:
-    - value: 10.10.8.104
-      type: IPAddress
-  listeners:
-    - name: vault-tls-passthrough
-      protocol: TLS
-      hostname: "vault.yanello.net"
-      port: 443
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              kubernetes.io/metadata.name: external-services

@@ -1,11 +1,11 @@
 ui = true
 disable_mlock = true
 
-api_addr     = "https://{{ vault_hostname }}:8200"
+api_addr     = "https://{{ vault_hostname }}:443"
 cluster_addr = "https://{{ hostvars[inventory_hostname].ansible_host }}:8201"
 
 listener "tcp" {
-  address       = "0.0.0.0:8200"
+  address       = "0.0.0.0:443"
   tls_cert_file = "{{ vault_tls_dir }}/tls.crt"
   tls_key_file  = "{{ vault_tls_dir }}/tls.key"
 }
