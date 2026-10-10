@@ -1,17 +1,62 @@
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ubiquiti-ca
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDfTCCAmWgAwIBAgIEZ+UoHTANBgkqhkiG9w0BAQsFADBrMQswCQYDVQQGEwJV
+    UzERMA8GA1UECAwITmV3IFlvcmsxETAPBgNVBAcMCE5ldyBZb3JrMRYwFAYDVQQK
+    DA1VYmlxdWl0aSBJbmMuMQ4wDAYDVQQLDAVVbmlGaTEOMAwGA1UEAwwFVW5pRmkw
+    HhcNMjUwMzI3MTAyNzQxWhcNMjcwNjMwMTAyNzQxWjBrMQswCQYDVQQGEwJVUzER
+    MA8GA1UECAwITmV3IFlvcmsxETAPBgNVBAcMCE5ldyBZb3JrMRYwFAYDVQQKDA1V
+    YmlxdWl0aSBJbmMuMQ4wDAYDVQQLDAVVbmlGaTEOMAwGA1UEAwwFVW5pRmkwggEi
+    MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCzBDKZCbxLtUa5kdoD36+cRdeH
+    sOP0JK5dm59poZBn++Nll+cHlVqpQyZceYS0za7slmg39u31tmhAZs8JMRo7+yLu
+    4Lh37musbuXEVb/bKgnnafnBG2ufM6FeKFL9Z60ON+4l2VA6faOBI76xk7+EHJWh
+    nkDCZoOUEaIieRfxtC76+z3Cgd0UtNRPnyXoTnEFkPp4rFrTPKK8jV3zOHo10kdp
+    Jwh9+ae4a0inYmb+2hiICk6O6JtUJW46qKzbSA5ekKzmoztXDkefBxxMu72xS3mM
+    zhsVZXr2cNIbNqnyoXane7auOlYgifPTjX7iCrd6jZGK+AFhJ9LQuzUIpmIDAgMB
+    AAGjKTAnMBAGA1UdEQQJMAeCBVVuaUZpMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA0G
+    CSqGSIb3DQEBCwUAA4IBAQBvd6puF4xfdq7cmvS0Y4hBhefznyHnBKbCXpKi7YPo
+    J5H5aww39bxm6MHpx0Z+762LrK9KOVF3QxtH4nJeeMeLF5FowmBBBD5NSIxVf6Ev
+    cwL+3CKVnvvZWC3fPx1LEEiIg01vIej5phWF84fFY3D7leJsj3z9WxQIS/ucFcLt
+    2Eaou7clh17PP1GpdozNiMGd/5pS1xqlbRII4H+hHp2BHrFcSaAwWDfduvSToLa4
+    OhrjDUW1BscwWaYQ/bGiqLb/wnHNKEmGH1S9DOex9OlruRCgNo/ELrMciji8TeH5
+    dHqcIF8+5Tphh8ywXR9VOsJnxVGh1a5EIPFtSZmII1ly
+    -----END CERTIFICATE-----
+---
 apiVersion: gateway.networking.k8s.io/v1
-kind: TLSRoute
+kind: BackendTLSPolicy
+metadata:
+  name: ubiquiti-backend-tls
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: ubiquiti-service
+      sectionName: https
+  validation:
+    caCertificateRefs:
+      - name: ubiquiti-ca
+        group: ""
+        kind: ConfigMap
+    hostname: unifi
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: ubiquiti
 spec:
   hostnames:
     - ui.yanello.net
   parentRefs:
-    - name: ui-private-tls-gateway
+    - name: cilium-private-gateway
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
-      sectionName: ubiquiti-tls-passthrough
+      sectionName: https
   rules:
     - backendRefs:
         - name: ubiquiti-service
@@ -19,6 +64,10 @@ spec:
           kind: Service
           port: 8443
           weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
 ---
 apiVersion: v1
 kind: Service
@@ -26,7 +75,7 @@ metadata:
   name: ubiquiti-service
 spec:
   ports:
-    - name: http
+    - name: https
       protocol: TCP
       port: 8443
       targetPort: 8443
@@ -40,8 +89,8 @@ metadata:
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http
-    appProtocol: http
+  - name: https
+    appProtocol: https
     protocol: TCP
     port: 8443
 endpoints:

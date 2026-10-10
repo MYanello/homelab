@@ -40,7 +40,7 @@
     name: hashicorp
     types: deb
     uris: https://apt.releases.hashicorp.com
-    suites: "{{ ansible_distribution_release }}"
+    suites: "{{ ansible_facts['distribution_release'] }}"
     components:
       - main
     signed_by: /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -158,7 +158,7 @@
 
 - name: Report seal status
   ansible.builtin.uri:
-    url: "https://{{ vault_hostname }}:8200/v1/sys/seal-status"
+    url: "https://vault.yanello.net/v1/sys/seal-status"
     validate_certs: true
   register: vault_seal
   retries: 12
