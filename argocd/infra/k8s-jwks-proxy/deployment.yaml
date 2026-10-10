@@ -27,12 +27,13 @@ spec:
           operator: "Exists"
           effect: "NoSchedule"
       affinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            preference:
-              matchExpressions:
-                - key: node-role.kubernetes.io/control-plane
-                  operator: Exists
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
