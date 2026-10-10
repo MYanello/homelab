@@ -5,7 +5,6 @@ metadata:
   name: ubiquiti
 spec:
   hostnames:
-    - ubiquiti.yanello.net
     - ui.yanello.net
   parentRefs:
     - name: ubiquiti-private-tls-gateway
