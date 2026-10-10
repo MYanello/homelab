@@ -171,5 +171,5 @@
     msg: >-
       sealed={{ vault_seal.json.sealed | default('n/a') }}
       initialized={{ vault_seal.json.initialized | default('n/a') }}
-      (uninitialized Vault: run `vault operator init` once, store the keys)
+      (if uninitialized Vault: run `vault operator init` once, store the keys)
   when: vault_seal.json is defined
