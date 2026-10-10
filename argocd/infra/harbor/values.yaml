@@ -90,6 +90,9 @@ persistence:
 cache:
   enabled: true
 
+metrics:
+  enabled: true
+
 portal:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
@@ -191,19 +194,6 @@ exporter:
               - key: node-role.kubernetes.io/control-plane
                 operator: Exists
 trivy:
-  tolerations:
-    - key: "node-role.kubernetes.io/control-plane"
-      operator: "Exists"
-      effect: "NoSchedule"
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          preference:
-            matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
-nginx:
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
