@@ -15,7 +15,7 @@ metadata:
   name: vault-route
 spec:
   parentRefs:
-    - name: cilium-private-gateway
+    - name: vault-private-tls-gateway
       namespace: cilium
       sectionName: vault-tls-passthrough
   hostnames:

@@ -8,7 +8,7 @@ spec:
     - ubiquiti.yanello.net
     - ui.yanello.net
   parentRefs:
-    - name: cilium-private-tls-gateway
+    - name: ubiquiti-private-tls-gateway
       group: gateway.networking.k8s.io
       kind: Gateway
       namespace: cilium
