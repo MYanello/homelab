@@ -6,8 +6,9 @@ generators:
   - ./secret-generator.yaml
 
 resources:
-  - netpol.yaml
+  - ./netpol.yaml
   - ./cert.yaml
+  - ./vmscrape.yaml
 
 helmCharts:
   - name: harbor
