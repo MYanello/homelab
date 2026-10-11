@@ -6,12 +6,13 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: doppler
+    name: vault
     kind: ClusterSecretStore
   target:
     name: sops-age
     creationPolicy: Owner
   data:
     - remoteRef:
-        key: SOPS_AGE_KEY
+        key: general
+        property: SOPS_AGE_KEY
       secretKey: key.txt

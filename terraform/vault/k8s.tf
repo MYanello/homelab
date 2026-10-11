@@ -43,12 +43,12 @@ resource "vault_mount" "k8s_kv" {
 }
 
 resource "vault_policy" "esops" {
-  name = "esops"
+  name   = "esops"
   policy = <<-EOT
-    path "k8s/data/esops/*" {
+    path "k8s-kv/data/*" {
       capabilities = ["create", "read", "update", "patch", "delete"]
     }
-    path "k8s/metadata/esops/*" {
+    path "k8s-kv/metadata/*" {
       capabilities = ["read", "list", "delete"]
     }
   EOT
