@@ -17,4 +17,9 @@ spec:
               protocol: TCP
   egress:
     - toEntities:
-        - all
+        - kube-apiserver
+    - toEntities:
+        - world
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: external-secrets
