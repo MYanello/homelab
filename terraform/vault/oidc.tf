@@ -71,7 +71,8 @@ resource "vault_jwt_auth_backend" "authentik" {
   bound_issuer       = module.vault-oauth-app.issuer_url
 
   tune {
-    max_lease_ttl      = "90000s"
+    max_lease_ttl      = "768h"
+    default_lease_ttl  = "24h"
     listing_visibility = "unauth"
   }
 }

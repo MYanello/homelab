@@ -33,5 +33,5 @@ data "sops_file" "authentik" {
 
 provider "authentik" {
   url   = "https://authentik.yanello.net"
-  token = data.sops_file.authentik.data["token"]
+  # token is automatically read from AUTHENTIK_TOKEN environment variable
 }

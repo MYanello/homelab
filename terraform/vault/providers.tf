@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    oci = {
+      source  = "oracle/oci"
+      version = ">= 4.0"
+    }
     vault = {
       source  = "hashicorp/vault"
       version = ">= 5.0.0"
@@ -20,7 +24,7 @@ terraform {
   backend "s3" {
     profile = "backblaze"
     bucket  = "myanello-tf"
-    key     = "terraform/oci/terraform.tfstate"
+    key     = "terraform/vault/terraform.tfstate"
     endpoints = {
       s3 = "https://s3.us-west-004.backblazeb2.com"
     }
@@ -46,4 +50,17 @@ provider "authentik" {
 provider "kubernetes" {
   config_path    = "~/.kube/config"
   config_context = "homecontext"
+}
+
+data "sops_file" "oci" {
+  source_file = "sops/oci.enc.yaml"
+  input_type  = "yaml"
+}
+
+provider "oci" {
+  tenancy_ocid     = data.sops_file.oci.data["tenancy_ocid"]
+  user_ocid        = data.sops_file.oci.data["user_ocid"]
+  fingerprint      = data.sops_file.oci.data["fingerprint"]
+  private_key_path = data.sops_file.oci.data["private_key_path"]
+  region           = data.sops_file.oci.data["region"]
 }
