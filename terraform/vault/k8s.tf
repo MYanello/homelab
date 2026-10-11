@@ -44,14 +44,14 @@ resource "vault_mount" "k8s_kv" {
 
 resource "vault_policy" "esops" {
   name   = "esops"
-  policy = <<-EOT
+  policy = <<-POL
     path "k8s-kv/data/*" {
       capabilities = ["create", "read", "update", "patch", "delete"]
     }
     path "k8s-kv/metadata/*" {
       capabilities = ["read", "list", "delete"]
     }
-  EOT
+  POL
 }
 
 resource "vault_kubernetes_auth_backend_role" "esops" {
