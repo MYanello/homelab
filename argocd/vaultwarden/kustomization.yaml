@@ -6,7 +6,6 @@ resources:
   - manifests/netpol.yaml
   - manifests/http-route.yaml
   - manifests/bw-sync.yaml
-  - manifests/secret-store.yaml
   - manifests/bw-secrets.yaml
 
 generators:
