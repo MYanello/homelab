@@ -27,8 +27,7 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: external-secrets
     - toEntities:
-        - cluster
-        - world
+        - all
       toPorts:
         - ports:
             - port: "443"
