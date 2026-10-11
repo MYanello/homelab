@@ -12,6 +12,10 @@ terraform {
       source  = "goauthentik/authentik"
       version = ">= 2026.5.1"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.30.0"
+    }
   }
   backend "s3" {
     profile = "backblaze"
@@ -37,4 +41,9 @@ provider "vault" {
 provider "authentik" {
   url = "https://authentik.yanello.net"
   # token is automatically read from AUTHENTIK_TOKEN environment variable
+}
+
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+  config_context = "homecontext"
 }

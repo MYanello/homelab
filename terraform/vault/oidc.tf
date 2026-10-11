@@ -43,12 +43,12 @@ module "vault-oauth-app" {
     matching_mode     = "strict"
     url               = "https://vault.yanello.net/ui/vault/auth/oidc/oidc/callback"
     redirect_uri_type = "authorization"
-  },
-  {
-    matching_mode     = "strict"
-    url               = "http://localhost:8250/oidc/callback"
-    redirect_uri_type = "authorization"
-  }
+    },
+    {
+      matching_mode     = "strict"
+      url               = "http://localhost:8250/oidc/callback"
+      redirect_uri_type = "authorization"
+    }
   ]
   meta_launch_url = ""
 }
@@ -77,12 +77,12 @@ resource "vault_jwt_auth_backend" "authentik" {
 }
 
 resource "vault_jwt_auth_backend_role" "admin" {
-  backend        = vault_jwt_auth_backend.authentik.path
-  role_name      = "admin"
-  role_type      = "oidc"
-  user_claim     = "sub"
+  backend      = vault_jwt_auth_backend.authentik.path
+  role_name    = "admin"
+  role_type    = "oidc"
+  user_claim   = "sub"
   groups_claim = "groups"
-  oidc_scopes    = ["openid", "profile", "email", "groups"]
+  oidc_scopes  = ["openid", "profile", "email", "groups"]
 
   allowed_redirect_uris = [
     "https://vault.yanello.net/oidc/callback",
@@ -105,7 +105,7 @@ resource "vault_identity_group_alias" "vault_admin" {
 
 
 resource "vault_policy" "admin" {
-  name = "admin"
+  name   = "admin"
   policy = <<-EOT
     path "*" {
       capabilities = ["create", "read", "update", "delete", "list", "sudo", "patch"]
