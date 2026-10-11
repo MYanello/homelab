@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - ./manifests/tls-route.yaml
+  - ./rbac.yaml
