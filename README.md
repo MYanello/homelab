@@ -4,6 +4,10 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, 3 n150
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to configure argocd and other core components.
 
 ## Worklog
+### 11.10.26
+- Move secrets from Doppler to Vault
+- Set up Vault and uptime kuma ansible configs
+
 ### 08.23.26
 - Move Authentik applications to terraform
 
