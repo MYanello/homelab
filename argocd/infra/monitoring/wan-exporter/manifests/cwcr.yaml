@@ -6,7 +6,7 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: doppler
+    name: vault
     kind: ClusterSecretStore
   target:
     name: cwcr-dockerconfig
@@ -26,9 +26,6 @@ spec:
           }
   data:
     - remoteRef:
-        conversionStrategy: Default
-        decodingStrategy: None
-        key: CWCR_TOKEN
-        metadataPolicy: None
-        nullBytePolicy: Ignore
+        key: general
+        property: CWCR_TOKEN
       secretKey: TOKEN
