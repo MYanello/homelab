@@ -25,11 +25,3 @@ resource "authentik_application" "this" {
   open_in_new_tab    = var.open_in_new_tab
   policy_engine_mode = "any"
 }
-
-output "provider_id" {
-  value = authentik_provider_oauth2.this.id
-}
-
-output "application_id" {
-  value = authentik_application.this.id
-}

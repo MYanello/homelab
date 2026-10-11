@@ -104,3 +104,9 @@ variable "logout_uri" {
   type        = string
   default     = ""
 }
+
+variable "authentik_url" {
+  description = "Authentik base URL"
+  type        = string
+  default     = "https://authentik.yanello.net"
+}
