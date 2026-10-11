@@ -1,6 +1,0 @@
----
-common_packages:
-  - jq
-  - open-iscsi
-  - nfs-common
-  - cifs-utils

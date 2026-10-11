@@ -1,0 +1,7 @@
+---
+- name: Configure Uptime Kuma host
+  hosts: uptime_kuma
+  become: true
+  gather_facts: true
+  roles:
+    - uptime_kuma
