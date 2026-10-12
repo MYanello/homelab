@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dispatcharr
+  name: dispatcharr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: dispatcharr
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: dispatcharr
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: America/Toronto
+            - name: DISPATCHARR_ENV
+              value: aio
+            - name: REDIS_HOST
+              value: localhost
+            - name: CELERY_BROKER_URL
+              value: redis://localhost:6379/0
+            - name: DISPATCHARR_LOG_LEVEL
+              value: info
+          image: harbor.yanello.net/ghcr/dispatcharr/dispatcharr:0.32.0-20261011233203
+          imagePullPolicy: IfNotPresent
+          name: dispatcharr
+          ports:
+            - containerPort: 9191
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+            limits:
+              memory: 2Gi
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          startupProbe:
+            httpGet:
+              path: /
+              port: 9191
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9191
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

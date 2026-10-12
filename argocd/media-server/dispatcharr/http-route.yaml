@@ -1,0 +1,25 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Dispatcharr
+    gethomepage.dev/icon: dispatcharr
+    gethomepage.dev/description: "Dispatcharr is a modern platform for managing live\
+      \ TV, IPTV, and VOD streams with EPG aggregation and streaming proxy."
+    gethomepage.dev/pod-selector: app=dispatcharr
+  labels:
+    app.kubernetes.io/instance: dispatcharr-app
+  name: dispatcharr-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - dispatcharr.yanello.net
+  rules:
+    - backendRefs:
+        - name: dispatcharr
+          port: 9191

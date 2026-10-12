@@ -1,0 +1,32 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: dispatcharr
+spec:
+  endpointSelector:
+    matchLabels:
+      app: dispatcharr
+  ingress:
+    - fromEntities:
+        - ingress
+      toPorts:
+        - ports:
+            - port: "9191"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "9191"
+              protocol: TCP
+  egress:
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+            - port: "443"
+              protocol: TCP

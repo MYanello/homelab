@@ -37,7 +37,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -95,7 +95,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -113,7 +113,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -171,7 +171,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -189,7 +189,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -283,7 +283,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -297,7 +297,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(qmk_ruleset_hits{job=\"$instance\", outcome=\"default\"}) / sum(qmk_ruleset_hits{job=\"$instance\"})",
@@ -314,7 +314,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -364,7 +364,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "time() - process_start_time_seconds{job=\"$instance\"}",
@@ -380,7 +380,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -427,7 +427,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -444,7 +444,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "IP addresses blocked by the firewall",
       "fieldConfig": {
@@ -495,7 +495,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(iocaine_firewall_blocks{job=\"$instance\"})",
@@ -510,7 +510,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Total number of requests served",
       "fieldConfig": {
@@ -562,7 +562,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -583,7 +583,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Total amount of garbage served.",
       "fieldConfig": {
@@ -634,7 +634,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(qmk_garbage_generated{job=\"$instance\", host=~\"$hosts\"})",
@@ -662,7 +662,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "CPU time spent generating garbage",
       "fieldConfig": {
@@ -745,7 +745,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -768,7 +768,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Resident memory size",
       "fieldConfig": {
@@ -851,7 +851,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "process_resident_memory_bytes{job=\"$instance\"}",
@@ -866,7 +866,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -953,7 +953,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -978,8 +978,24 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "VictoriaMetrics",
+          "value": "VictoriaMetrics"
+        },
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
         "allowCustomValue": false,
         "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "label_values(iocaine_version,job)",
         "description": "The iocaine instance to show metrics for.",
         "label": "instance",
@@ -997,6 +1013,10 @@
       {
         "allowCustomValue": false,
         "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "label_values(qmk_requests,host)",
         "includeAll": true,
         "label": "hosts",
