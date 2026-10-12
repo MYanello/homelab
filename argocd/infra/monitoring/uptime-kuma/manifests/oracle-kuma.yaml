@@ -56,3 +56,22 @@ endpoints:
       - 150.136.155.17
     conditions:
       ready: true
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: oracle-kuma
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+    - targets:
+        - 150.136.155.17:3001
+  path: /metrics
+  scheme: http
+  basicAuth:
+    password:
+      name: oracle-kuma-auth
+      key: oracleApi
+    username:
+      name: oracle-kuma-auth
+      key: username
