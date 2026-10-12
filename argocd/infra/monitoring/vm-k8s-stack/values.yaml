@@ -182,6 +182,7 @@ grafana:
       datasources:
         - name: VictoriaLogs
           type: victoriametrics-logs-datasource
+          uid: victorialogs
           url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
         - name: Garmin-InfluxDB
           uid: garmin_influxdb
