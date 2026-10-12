@@ -5,7 +5,7 @@
   changed_when: false
   check_mode: false
 
-- name: Disable acitve swap
+- name: Disable active swap
   ansible.builtin.command: swapoff -a
   when: vault_swap.stdout | length > 0
 
@@ -26,6 +26,7 @@
       - unzip
       - socat
       - python3-debian
+      - jq
     state: present
     update_cache: true
 
@@ -87,6 +88,9 @@
     owner: "{{ vault_user }}"
     group: "{{ vault_group }}"
     mode: "0600"
+
+- name: Configure logging
+  ansible.builtin.include_tasks: logging.yml
 
 - name: Install acme.sh
   ansible.builtin.git:

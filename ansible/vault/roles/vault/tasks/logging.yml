@@ -1,0 +1,72 @@
+---
+- name: Check for Vector
+  ansible.builtin.stat:
+    path: /usr/bin/vector
+  register: vault_vector_binary
+
+- name: Add Vector repository
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      curl -1sLf https://setup.vector.dev | bash
+    executable: /bin/bash
+  when: not vault_vector_binary.stat.exists
+
+- name: Install Vector
+  ansible.builtin.apt:
+    name: vector
+    state: present
+    update_cache: true
+
+- name: Audit log directory
+  ansible.builtin.file:
+    path: "{{ vault_audit_log_dir }}"
+    state: directory
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: "0700"
+
+- name: Audit log rotation
+  ansible.builtin.template:
+    src: vault-logrotate.j2
+    dest: /etc/logrotate.d/vault
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Vector systemd override directory
+  ansible.builtin.file:
+    path: /etc/systemd/system/vector.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Vector runs as root to read the Vault audit log
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/vector.service.d/override.conf
+    content: |
+      [Service]
+      User=root
+      Group=root
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - daemon reload
+    - restart vector
+
+- name: Vector configuration
+  ansible.builtin.template:
+    src: vector.yaml.j2
+    dest: /etc/vector/vector.yaml
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart vector
+
+- name: Enable and start Vector
+  ansible.builtin.systemd:
+    name: vector
+    enabled: true
+    state: started

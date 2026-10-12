@@ -7,3 +7,8 @@
   ansible.builtin.systemd:
     name: vault
     state: restarted
+
+- name: restart vector
+  ansible.builtin.systemd:
+    name: vector
+    state: restarted

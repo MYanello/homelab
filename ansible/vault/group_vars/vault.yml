@@ -3,6 +3,9 @@ vault_hostname: vault.yanello.net
 vault_config_dir: /etc/vault.d
 vault_data_dir: /opt/vault/data
 vault_tls_dir: /etc/vault.d/tls
+vault_audit_log_dir: /var/log/vault
+vault_audit_log_file: /var/log/vault/audit.log
+vault_victorialogs_insert_url: https://logs.yanello.net/insert/jsonline
 vault_home: /home/vault
 vault_user: vault
 vault_group: vault

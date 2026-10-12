@@ -1,0 +1,31 @@
+data_dir: /var/lib/vector
+
+sources:
+  vault_audit:
+    type: file
+    include:
+      - "{{ vault_audit_log_file }}"
+
+transforms:
+  parse:
+    type: remap
+    inputs:
+      - vault_audit
+    source: |
+      . = parse_json!(.message)
+      .host = "{{ inventory_hostname }}"
+      .message = (to_string(.request.operation) ?? "-") + " " + (to_string(.request.path) ?? "-")
+
+sinks:
+  victorialogs:
+    type: http
+    inputs:
+      - parse
+    uri: "{{ vault_victorialogs_insert_url }}?_stream_fields=host,type&_msg_field=message&_time_field=time"
+    compression: gzip
+    encoding:
+      codec: json
+    framing:
+      method: newline_delimited
+    healthcheck:
+      enabled: false
