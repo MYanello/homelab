@@ -9,6 +9,7 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/mariadb.yaml
   - ./manifests/oracle-kuma.yaml
+  - ./manifests/vmservicescrape.yaml
 
 helmCharts:
   - name: uptime-kuma

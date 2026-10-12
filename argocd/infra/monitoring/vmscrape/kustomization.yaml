@@ -6,6 +6,5 @@ resources:
   - ./homeassistant.yaml
   - ./haproxy.yaml
   - ./netdata.yaml
-  - ./kuma.yaml
   - ./opnsense.yaml
   - ./vllm.yaml

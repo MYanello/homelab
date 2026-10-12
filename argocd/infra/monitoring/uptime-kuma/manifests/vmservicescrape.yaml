@@ -1,0 +1,21 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: uptime-kuma
+spec:
+  endpoints:
+    - port: http
+      path: /metrics
+      scheme: http
+      interval: 60s
+      basicAuth:
+        password:
+          name: kuma-auth
+          key: apiKey
+  namespaceSelector:
+    matchNames:
+      - monitoring
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: uptime-kuma
