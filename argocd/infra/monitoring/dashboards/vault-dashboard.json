@@ -2552,29 +2552,38 @@
         "useTags": false
       },
       {
-        "allValue": "",
-        "current": {},
-        "datasource": {
-          "type": "prometheus",
-          "uid": "VictoriaMetrics"
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "k8s_kv",
+          "value": "k8s_kv"
         },
-        "definition": "label_values(vault_secret_kv_count, mount_point)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Mount Point:",
-        "multi": true,
+        "multi": false,
         "name": "mountpoint",
-        "options": [],
-        "query": "label_values(vault_secret_kv_count, mount_point)",
-        "refresh": 2,
-        "regex": "/(.*)//",
+        "options": [
+          {
+            "selected": true,
+            "text": "k8s_kv",
+            "value": "k8s_kv"
+          },
+          {
+            "selected": false,
+            "text": "auth_token",
+            "value": "auth_token"
+          },
+          {
+            "selected": false,
+            "text": "auth_kubernetes",
+            "value": "auth_kubernetes"
+          }
+        ],
+        "query": "k8s_kv,auth_token,auth_kubernetes",
+        "refresh": 0,
         "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "custom"
       }
     ]
   },
