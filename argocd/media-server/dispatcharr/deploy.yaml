@@ -64,6 +64,9 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: data
+            - mountPath: /data/m3us
+              name: m3u
+              readOnly: true
           startupProbe:
             httpGet:
               path: /
@@ -84,3 +87,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: m3u
+          configMap:
+            name: dispatcharr-m3u
+            items:
+              - key: canada-news.m3u
+                path: canada-news.m3u

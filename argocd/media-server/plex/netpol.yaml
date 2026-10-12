@@ -96,12 +96,22 @@ spec:
               protocol: UDP
             - port: "32400"
               protocol: TCP
+            - port: "443"
+              protocol: TCP
     - toEntities:
         - host
       toPorts:
         - ports:
             - port: "5351"
               protocol: UDP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: dispatcharr
+            app: dispatcharr
+      toPorts:
+        - ports:
+            - port: "9191"
+              protocol: TCP
     - toEntities:
         - world
       toPorts:
