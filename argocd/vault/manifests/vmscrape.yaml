@@ -1,0 +1,12 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vault
+spec:
+  scrape_interval: 60s
+  staticConfigs:
+    - targets:
+        - vault.yanello.net
+  path: /v1/sys/metrics
+  scheme: https

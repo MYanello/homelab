@@ -8,6 +8,9 @@ listener "tcp" {
   address       = "0.0.0.0:8200"
   tls_cert_file = "{{ vault_tls_dir }}/tls.crt"
   tls_key_file  = "{{ vault_tls_dir }}/tls.key"
+  telemetry {
+    unauthenticated_metrics_access = true
+  }
 }
 
 storage "raft" {

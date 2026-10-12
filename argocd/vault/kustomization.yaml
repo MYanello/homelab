@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./manifests/tls-route.yaml
   - ./manifests/rbac.yaml
+  - ./manifests/vmscrape.yaml
