@@ -1,0 +1,90 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: plex-channel-scan
+  labels:
+    app: plex-scan
+spec:
+  schedule: "15 */2 * * *" # every 2h
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app: plex-scan
+        spec:
+          restartPolicy: Never
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 100
+            runAsGroup: 101
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: scan
+              image: harbor.yanello.net/docker/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777
+              imagePullPolicy: IfNotPresent
+              command: ["sh", "-c"]
+              args:
+                - |
+                  set -eu
+                  base="${PLEX_URL}"
+                  dev="${DEVICE_ID}"
+                  auth="X-Plex-Token=${PLEX_TOKEN}"
+
+                  echo "starting Plex tuner scan for device ${dev}"
+                  curl -fsS -X POST "${base}/media/grabbers/devices/${dev}/scan?${auth}" -o /dev/null
+
+                  xml=""
+                  for _ in $(seq 1 30); do
+                    sleep 10
+                    xml="$(curl -fsS "${base}/media/grabbers/devices/${dev}/channels?${auth}" || true)"
+                    n="$(printf '%s' "${xml}" | grep -c '<DeviceChannel ' || true)"
+                    echo "scan poll: ${n} channels found"
+                    [ "${n}" -gt 0 ] && break
+                  done
+
+                  keys="$(printf '%s' "${xml}" | grep -o 'key="[0-9]*"' | sed 's/key="//; s/"$//')"
+                  if [ -z "${keys}" ]; then
+                    echo "no channels discovered; leaving DVR unchanged"
+                    exit 0
+                  fi
+
+                  csv="$(printf '%s\n' "${keys}" | paste -sd, -)"
+                  mapping=""
+                  for k in ${keys}; do mapping="${mapping}${k}=${k}&"; done
+                  mapping="${mapping%&}"
+                  b64="$(printf '%s' "${mapping}" | base64 | tr -d '\n')"
+
+                  echo "saving ${n} channels as enabled"
+                  curl -fsS -X PUT -G \
+                    --data-urlencode "channelMapping=${b64}" \
+                    --data-urlencode "channelsEnabled=${csv}" \
+                    "${base}/media/grabbers/devices/${dev}/channels?${auth}" -o /dev/null
+                  echo "done"
+              env:
+                - name: PLEX_URL
+                  value: http://plex.plex.svc.cluster.local:32400
+                - name: DEVICE_ID
+                  value: "1"
+              envFrom:
+                - secretRef:
+                    name: plex-scan-secrets
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                    - ALL
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 10Mi
+                limits:
+                  memory: 50Mi

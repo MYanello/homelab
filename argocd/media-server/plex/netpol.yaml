@@ -49,6 +49,14 @@ spec:
         - ports:
             - port: "32400"
               protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: plex
+            app: plex-scan
+      toPorts:
+        - ports:
+            - port: "32400"
+              protocol: TCP
     - fromCIDR:
         - 192.168.0.0/16
         - 10.10.8.0/22
