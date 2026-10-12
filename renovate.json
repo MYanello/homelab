@@ -43,6 +43,10 @@
         "victoria-metrics-k8s-stack",
         "victoria-metrics-operator-crds"
       ]
+    },
+    {
+      "matchDepNames": ["harbor.yanello.net/docker/chromedp/headless-shell"],
+      "automerge": true
     }
   ]
 }
