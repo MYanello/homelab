@@ -9,7 +9,5 @@ resources:
   - pvc.yaml
   - service.yaml
 
-configMapGenerator:
-  - name: dispatcharr-m3u
-    files:
-      - canada-news.m3u
+generators:
+  - secret-generator.yaml
