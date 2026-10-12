@@ -52,7 +52,7 @@ spec:
     - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: plex
-            app: plex-scan
+            app: plex-guide-refresh
       toPorts:
         - ports:
             - port: "32400"
