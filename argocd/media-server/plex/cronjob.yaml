@@ -37,7 +37,7 @@ spec:
                   base="${PLEX_URL}"
                   auth="X-Plex-Token=${PLEX_TOKEN}"
 
-                  echo "triggering Plex EPG guide refresh (re-reads the XMLTV lineup)"
+                  echo "triggering Plex EPG guide refresh"
                   curl -fsS -X POST "${base}/butler/RefreshEpgGuides?${auth}" -o /dev/null
                   echo "done"
               env:
