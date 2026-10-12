@@ -9,4 +9,10 @@ spec:
     - targets:
         - vault.yanello.net
   path: /v1/sys/metrics
+  params:
+    format:
+      - prometheus
+  relabelConfigs:
+    - targetLabel: job
+      replacement: vault
   scheme: https
