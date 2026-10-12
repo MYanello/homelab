@@ -48,3 +48,9 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: vault-dashboard
+    files:
+      - ./vault-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
