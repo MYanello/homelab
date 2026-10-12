@@ -21,6 +21,16 @@ spec:
       labels:
         app: dispatcharr
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
+      runtimeClassName: nvidia
       containers:
         - env:
             - name: TZ
@@ -33,7 +43,11 @@ spec:
               value: redis://localhost:6379/0
             - name: DISPATCHARR_LOG_LEVEL
               value: info
-          image: harbor.yanello.net/ghcr/dispatcharr/dispatcharr:0.32.0-20261011233203
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,video,utility
+          image: harbor.yanello.net/ghcr/dispatcharr/dispatcharr:0.32.0-20261011233203@sha256:1802f831326dd56a28203571bc6dfdcdd5ca29fc712e2b6c429edc01c3f668c6
           imagePullPolicy: IfNotPresent
           name: dispatcharr
           ports:
@@ -43,8 +57,10 @@ spec:
             requests:
               cpu: 100m
               memory: 500Mi
+              nvidia.com/gpu: "1"
             limits:
               memory: 2Gi
+              nvidia.com/gpu: "1"
           volumeMounts:
             - mountPath: /data
               name: data
