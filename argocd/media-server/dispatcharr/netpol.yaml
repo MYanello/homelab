@@ -17,6 +17,7 @@ spec:
     - fromCIDR:
         - 192.168.0.0/16
         - 10.10.8.0/22
+        - 10.42.0.0/16
       toPorts:
         - ports:
             - port: "9191"
@@ -24,9 +25,3 @@ spec:
   egress:
     - toEntities:
         - world
-      toPorts:
-        - ports:
-            - port: "80"
-              protocol: TCP
-            - port: "443"
-              protocol: TCP
