@@ -16,4 +16,4 @@ repos:
         name: sanitize grafana dashboards
         entry: uv run utils/scripts/sanitize-grafana-dashboards.py
         language: system
-        files: ^argocd/infra/monitoring/dashboards/.*\.json$
+        files: ^argocd/.*dashboard.*\.json$
