@@ -5,9 +5,10 @@ api_addr     = "https://{{ vault_hostname }}:8200"
 cluster_addr = "https://{{ hostvars[inventory_hostname].ansible_host }}:8201"
 
 listener "tcp" {
-  address       = "0.0.0.0:8200"
-  tls_cert_file = "{{ vault_tls_dir }}/tls.crt"
-  tls_key_file  = "{{ vault_tls_dir }}/tls.key"
+  address                 = "0.0.0.0:8200"
+  tls_cert_file           = "{{ vault_tls_dir }}/tls.crt"
+  tls_key_file            = "{{ vault_tls_dir }}/tls.key"
+  tls_disable_client_certs = "true"
   telemetry {
     unauthenticated_metrics_access = true
   }
