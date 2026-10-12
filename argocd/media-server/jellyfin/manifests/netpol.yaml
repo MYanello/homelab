@@ -37,12 +37,17 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: tracearr
             app: tracearr
+      toPorts:
+        - ports:
+            - port: "3000"
+              protocol: TCP
+    - toEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: dispatcharr
             app: dispatcharr
       toPorts:
         - ports:
-            - port: "3000"
+            - port: "9191"
               protocol: TCP
     - toEntities:
         - world
