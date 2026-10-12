@@ -42,3 +42,9 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: harbor-dashboard
+    files:
+      - ./harbor-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"

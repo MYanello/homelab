@@ -21,3 +21,8 @@ seal "ocikms" {
   management_endpoint = "{{ vault_ocikms_management_endpoint }}"
   key_id              = "{{ vault_ocikms_seal_key_id }}"
 }
+
+telemetry {
+  prometheus_retention_time = "60s"
+  disable_hostname          = true
+}
