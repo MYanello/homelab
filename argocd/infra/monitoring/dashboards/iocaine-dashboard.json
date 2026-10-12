@@ -99,15 +99,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sort_desc(sum(iocaine_requests_total{job=\"$instance\", verdict=~\"accept.*\", host=~\"$hosts\"}) by (user_agent_group))",
+          "expr": "sort_desc(sum(qmk_ruleset_hits{job=\"$instance\", outcome=\"garbage\"}) by (ruleset))",
           "format": "time_series",
           "instant": true,
-          "legendFormat": "{{user_agent_group}}",
+          "legendFormat": "{{ruleset}}",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "Top trapped agents ($hosts)",
+      "title": "Trapped by ruleset",
       "type": "bargauge"
     },
     {
@@ -175,7 +175,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sort_desc(sum(iocaine_requests_total{job=\"$instance\", verdict=~\"accept.*\", host=~\"$hosts\"}) by (host))",
+          "expr": "sort_desc(sum(qmk_requests{job=\"$instance\", host=~\"$hosts\"}) by (host))",
           "format": "time_series",
           "instant": true,
           "legendFormat": "{{host}}",
@@ -230,28 +230,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Reject"
+              "options": "Fallthrough"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
                   "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Challenge"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
                   "mode": "fixed"
                 }
               }
@@ -302,7 +287,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(iocaine_requests_total{job=\"$instance\", verdict=\"accept::garbage\", host=~\"$hosts\"}) / sum(iocaine_requests_total{job=\"$instance\", host=~\"$hosts\"})",
+          "expr": "sum(qmk_ruleset_hits{job=\"$instance\", outcome=\"garbage\"}) / sum(qmk_ruleset_hits{job=\"$instance\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "Garbage",
@@ -315,26 +300,12 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(iocaine_requests_total{job=\"$instance\", verdict=\"accept::challenge\", host=~\"$hosts\"}) / sum(iocaine_requests_total{job=\"$instance\", host=~\"$hosts\"})",
+          "expr": "sum(qmk_ruleset_hits{job=\"$instance\", outcome=\"default\"}) / sum(qmk_ruleset_hits{job=\"$instance\"})",
           "hide": false,
           "instant": false,
-          "legendFormat": "Challenge",
+          "legendFormat": "Fallthrough",
           "range": true,
-          "refId": "Challenge"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(iocaine_requests_total{job=\"$instance\", verdict=~\"reject.*\", host=~\"$hosts\"})/sum(iocaine_requests_total{job=\"$instance\", host=~\"$hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Reject",
-          "range": true,
-          "refId": "Reject"
+          "refId": "Fallthrough"
         }
       ],
       "title": "Outcome distribution",
@@ -475,7 +446,7 @@
         "type": "prometheus",
         "uid": "P4169E866C3094E38"
       },
-      "description": "Maximum depth of the explored maze",
+      "description": "IP addresses blocked by the firewall",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -491,7 +462,7 @@
               }
             ]
           },
-          "unit": "sishort"
+          "unit": "short"
         },
         "overrides": []
       },
@@ -527,13 +498,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max(iocaine_maze_depth{job=\"$instance\", host=~\"$hosts\"})",
+          "expr": "sum(iocaine_firewall_blocks{job=\"$instance\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Depth",
+      "title": "Blocked IPs",
       "type": "stat"
     },
     {
@@ -596,7 +567,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(iocaine_requests_total{job=\"$instance\", host=~\"$hosts\"})",
+          "expr": "sum(qmk_requests{job=\"$instance\", host=~\"$hosts\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -666,7 +637,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(iocaine_garbage_served{job=\"$instance\", host=~\"$hosts\"})",
+          "expr": "sum(qmk_garbage_generated{job=\"$instance\", host=~\"$hosts\"})",
           "legendFormat": "Traffic",
           "range": true,
           "refId": "A"
@@ -986,7 +957,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(iocaine_requests_total{job=\"$instance\"}[$__rate_interval]))",
+          "expr": "sum(rate(qmk_requests{job=\"$instance\"}[$__rate_interval]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1026,7 +997,7 @@
       {
         "allowCustomValue": false,
         "current": {},
-        "definition": "label_values(iocaine_requests_total,host)",
+        "definition": "label_values(qmk_requests,host)",
         "includeAll": true,
         "label": "hosts",
         "multi": true,
@@ -1034,7 +1005,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(iocaine_requests_total,host)",
+          "query": "label_values(qmk_requests,host)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

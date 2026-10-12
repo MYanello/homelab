@@ -10,4 +10,5 @@ declare-handler default language=roto {
     wordlists "/opt/iocaine/share/data/words.txt"
   }
   ai-robots-txt-path "/opt/iocaine/share/data/ai.robots.txt-robots.json"
+  unwanted-visitors ""
 }
