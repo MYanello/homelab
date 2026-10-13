@@ -10,6 +10,6 @@ server:
   resources:
     requests:
       cpu: 10m
-      memory: 192Mi
+      memory: 200Mi
     limits:
-      memory: 256Mi
+      memory: 500Mi
