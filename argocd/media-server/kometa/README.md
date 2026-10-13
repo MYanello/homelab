@@ -1,1 +1,0 @@
-Frequently needs trakt tokens updated. Can run through the script hosted at https://metamanager.wiki/en/latest/config/trakt/#usage
