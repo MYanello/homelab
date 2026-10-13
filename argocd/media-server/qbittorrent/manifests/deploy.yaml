@@ -38,10 +38,10 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "8Gi"
+              memory: "10Gi"
               cpu: 50m
             limits:
-              memory: "12Gi"
+              memory: "14Gi"
           ports:
             - name: qbit-webui
               containerPort: 8080

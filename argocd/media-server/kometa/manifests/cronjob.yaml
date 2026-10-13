@@ -63,8 +63,8 @@ spec:
                   mountPath: /assets
               resources:
                 requests:
-                  memory: "500Mi"
-                  cpu: "200m"
+                  memory: "250Mi"
+                  cpu: "100m"
                 limits:
                   memory: "1Gi"
           volumes:

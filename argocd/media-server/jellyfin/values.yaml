@@ -9,7 +9,7 @@ resources:
     memory: 8Gi
   requests:
     nvidia.com/gpu: "1"
-    cpu: "500m"
+    cpu: "250m"
     memory: 500Mi
 
 volumes:

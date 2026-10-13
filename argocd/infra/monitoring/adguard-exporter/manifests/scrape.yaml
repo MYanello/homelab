@@ -13,3 +13,7 @@ spec:
       scheme: http
       scrapeTimeout: 10s
       interval: 15s
+      metricRelabelConfigs:
+        - action: drop
+          source_labels: [__name__]
+          regex: adguard_query_domain_total

@@ -77,8 +77,8 @@ spec:
               name: ingest
           resources:
             requests:
-              cpu: 200m
-              memory: 1Gi
+              cpu: 100m
+              memory: 500Mi
             limits:
               memory: 4Gi
       volumes:

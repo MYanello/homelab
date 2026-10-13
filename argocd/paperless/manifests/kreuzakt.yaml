@@ -33,9 +33,9 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 1280Mi
+              memory: 400Mi
             limits:
-              memory: 1664Mi
+              memory: 750Mi
           env:
             - name: TZ
               value: America/Toronto

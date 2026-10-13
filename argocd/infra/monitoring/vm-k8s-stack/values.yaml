@@ -38,6 +38,8 @@ kubelet:
           regex: (uid)
         - action: labeldrop
           regex: (id|name)
+        - action: labeldrop
+          regex: (feature_node_kubernetes_io_.*|nvidia_com_.*|beta_kubernetes_io_.*)
         - action: drop
           source_labels: [__name__]
           regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
@@ -55,7 +57,7 @@ kubeApiServer:
           metricRelabelConfigs:
             - action: drop
               source_labels: [__name__]
-              regex: apiserver_request_duration_seconds_bucket|apiserver_request_sli_duration_seconds_bucket|apiserver_request_body_size_bytes_bucket|apiserver_response_sizes_bucket|apiserver_storage_list_duration_seconds_bucket|apiserver_watch_events_dispatch_duration_seconds_bucket|apiserver_watch_events_sizes_bucket|apiserver_watch_list_duration_seconds_bucket|apiserver_watch_cache_initialization_duration_seconds_bucket|apiserver_watch_cache_read_wait_seconds_bucket
+              regex: apiserver_request_duration_seconds_bucket|apiserver_request_sli_duration_seconds_bucket|apiserver_request_body_size_bytes_bucket|apiserver_response_sizes_bucket|apiserver_storage_list_duration_seconds_bucket|apiserver_watch_events_dispatch_duration_seconds_bucket|apiserver_watch_events_sizes_bucket|apiserver_watch_list_duration_seconds_bucket|apiserver_watch_cache_initialization_duration_seconds_bucket|apiserver_watch_cache_read_wait_seconds_bucket|etcd_request_duration_seconds_bucket
           port: https
           scheme: https
           tlsConfig:
@@ -125,7 +127,7 @@ vmsingle:
     resources:
       requests:
         cpu: 150m
-        memory: 8Gi
+        memory: 18Gi
       limits:
         memory: 32Gi
 

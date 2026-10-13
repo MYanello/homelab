@@ -5,6 +5,7 @@ defaultSettings:
   defaultDataLocality: "best-effort"
   taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
   nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+  guaranteedInstanceManagerCPU: "5"
 
 defaultBackupStore:
   backupTarget: "s3://myanello-longhorn@s3.us-west-004/"

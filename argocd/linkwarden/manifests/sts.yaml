@@ -43,7 +43,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 1Gi
+              memory: 500Mi
             limits:
               memory: 4Gi
   volumeClaimTemplates:
@@ -93,7 +93,7 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 500Mi
+              memory: 250Mi
             limits:
               memory: 1Gi
   volumeClaimTemplates:

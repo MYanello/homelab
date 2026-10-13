@@ -125,8 +125,8 @@ spec:
             limits:
               memory: 1Gi
             requests:
-              cpu: 100m
-              memory: 500Mi
+              cpu: 50m
+              memory: 100Mi
       restartPolicy: Always
 ---
 apiVersion: apps/v1
@@ -236,9 +236,9 @@ spec:
           resources:
             requests:
               cpu: 10m
-              memory: 448Mi
+              memory: 250Mi
             limits:
-              memory: 640Mi
+              memory: 500Mi
       restartPolicy: Always
 ---
 apiVersion: gateway.networking.k8s.io/v1
