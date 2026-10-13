@@ -10,6 +10,11 @@
       "type": "remote",
       "url": "https://vm-mcp.yanello.net/mcp",
       "enabled": true
+    },
+    "kagi": {
+      "type": "remote",
+      "url": "https://mcp.kagi.com/mcp",
+      "enabled": true
     }
   }
 }
