@@ -1,0 +1,7 @@
+---
+- name: Configure OPNsense WAN speedtest metrics
+  hosts: opnsense
+  become: true
+  gather_facts: true
+  roles:
+    - speedtest_metrics

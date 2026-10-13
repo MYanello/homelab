@@ -1,0 +1,45 @@
+#!/bin/sh
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+SERVER_ID="{{ speedtest_server_id }}"
+DIR="{{ node_exporter_textfile_dir }}"
+OUT="$DIR/speedtest.prom"
+PY="{{ opnsense_python }}"
+WRAP="{{ speedtest_script_dir }}/opn_speedtest.py"
+
+[ -d "$DIR" ] || exit 1
+TMP="$(mktemp "$DIR/.speedtest.XXXXXX")" || exit 1
+json="$("$PY" "$WRAP" "$SERVER_ID" 2>/dev/null)"
+now="$(date +%s)"
+
+if printf '%s' "$json" | jq -e 'has("error")' >/dev/null 2>&1; then
+  dl=0; ul=0; ping=0; ok=0; sid=""; sname=""
+else
+  dl="$(printf '%s' "$json" | jq -r '.download // 0')"
+  ul="$(printf '%s' "$json" | jq -r '.upload // 0')"
+  ping="$(printf '%s' "$json" | jq -r '.latency // 0')"
+  sid="$(printf '%s' "$json" | jq -r '.serverid // ""')"
+  sname="$(printf '%s' "$json" | jq -r '.servername // ""')"
+  ok=1
+fi
+
+esc() { printf '%s' "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }
+sname_esc="$(esc "$sname")"
+sid_esc="$(esc "$sid")"
+
+{
+  printf '# TYPE speedtest_download_mbps gauge\n'
+  printf 'speedtest_download_mbps %s\n' "$dl"
+  printf '# TYPE speedtest_upload_mbps gauge\n'
+  printf 'speedtest_upload_mbps %s\n' "$ul"
+  printf '# TYPE speedtest_ping_ms gauge\n'
+  printf 'speedtest_ping_ms %s\n' "$ping"
+  printf '# TYPE speedtest_success gauge\n'
+  printf 'speedtest_success %s\n' "$ok"
+  printf '# TYPE speedtest_timestamp_seconds gauge\n'
+  printf 'speedtest_timestamp_seconds %s\n' "$now"
+  printf '# TYPE speedtest_info gauge\n'
+  printf 'speedtest_info{server_id="%s",server_name="%s",source="opnsense"} 1\n' "$sid_esc" "$sname_esc"
+} > "$TMP"
+
+chmod 0644 "$TMP"
+mv -f "$TMP" "$OUT"

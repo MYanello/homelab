@@ -1,0 +1,7 @@
+---
+speedtest_server_id: "53393"
+speedtest_script_dir: /usr/local/opnsense/scripts/OPNsense/speedtest
+node_exporter_textfile_dir: /var/tmp/node_exporter
+opnsense_python: /usr/local/bin/python3
+speedtest_cron_minute: "15"
+speedtest_cron_hour: "*"

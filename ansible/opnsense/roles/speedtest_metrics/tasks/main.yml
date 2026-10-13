@@ -1,0 +1,53 @@
+---
+- name: Ensure OPNsense community plugin repository is present
+  ansible.builtin.copy:
+    src: mimugmail.conf
+    dest: /usr/local/etc/pkg/repos/mimugmail.conf
+    owner: root
+    group: wheel
+    mode: "0644"
+
+- name: Check whether the speedtest plugin is installed
+  ansible.builtin.command:
+    cmd: pkg info -e os-speedtest-community
+  register: speedtest_metrics_plugin
+  changed_when: false
+  failed_when: false
+
+- name: Install the speedtest plugin
+  ansible.builtin.command:
+    cmd: configctl firmware install os-speedtest-community
+  when: speedtest_metrics_plugin.rc != 0
+  changed_when: true
+
+- name: Check whether the Ookla engine is installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/speedtest
+  register: speedtest_metrics_engine
+
+- name: Install the Ookla engine
+  ansible.builtin.command:
+    cmd: configctl speedtest install-socket
+  when: not speedtest_metrics_engine.stat.exists
+  changed_when: true
+
+- name: Deploy the metrics writer
+  ansible.builtin.template:
+    src: metrics.sh.j2
+    dest: "{{ speedtest_script_dir }}/metrics.sh"
+    owner: root
+    group: wheel
+    mode: "0755"
+
+- name: Schedule the hourly speedtest metrics run
+  ansible.builtin.cron:
+    name: opnsense speedtest metrics
+    user: root
+    minute: "{{ speedtest_cron_minute }}"
+    hour: "{{ speedtest_cron_hour }}"
+    job: "{{ speedtest_script_dir }}/metrics.sh"
+
+- name: Seed metrics on first run
+  ansible.builtin.command:
+    cmd: "{{ speedtest_script_dir }}/metrics.sh"
+    creates: "{{ node_exporter_textfile_dir }}/speedtest.prom"
