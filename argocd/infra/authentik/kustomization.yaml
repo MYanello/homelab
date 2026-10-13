@@ -8,7 +8,7 @@ resources:
   - ./manifests/reference-grants.yaml
   - ./manifests/cnpg.yaml
   - ./manifests/admin.yaml
-  - ./manifests/disco.yaml
+  # - ./manifests/disco.yaml
 
 generators:
   - ./manifests/secret-generator.yaml
