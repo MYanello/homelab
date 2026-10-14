@@ -5,8 +5,8 @@ metadata:
   name: authentik-self-signed
 spec:
   commonName: authentik-self-signed
-  duration: 2160h
+  duration: 8760h
   issuerRef:
-    name: local-intermediate-ca1-issuer
+    name: vault-pki-issuer
     kind: ClusterIssuer
   secretName: authentik-self-signed

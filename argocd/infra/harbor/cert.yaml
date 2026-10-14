@@ -6,7 +6,7 @@ metadata:
   namespace: harbor
 spec:
   commonName: harbor-token-ca
-  duration: 2160h
+  duration: 8760h
   issuerRef:
     name: vault-pki-issuer
     kind: ClusterIssuer
