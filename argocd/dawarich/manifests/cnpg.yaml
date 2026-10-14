@@ -35,9 +35,9 @@ spec:
   resources:
     requests:
       cpu: 10m
-      memory: 250Mi
+      memory: 600Mi
     limits:
-      memory: 500Mi
+      memory: 600Mi
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
