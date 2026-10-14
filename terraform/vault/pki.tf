@@ -3,14 +3,14 @@ resource "vault_mount" "pki" {
   type                      = "pki"
   description               = "Yanello root certificate authority"
   default_lease_ttl_seconds = 315360000
-  max_lease_ttl_seconds     = 630720000
+  max_lease_ttl_seconds     = 315360000
 }
 
 resource "vault_pki_secret_backend_root_cert" "root" {
   backend              = vault_mount.pki.path
   type                 = "internal"
   common_name          = "yanello-root-ca"
-  ttl                  = "175200h"
+  ttl                  = "87600h"
   format               = "pem"
   private_key_format   = "der"
   key_type             = "ec"
@@ -24,7 +24,7 @@ resource "vault_mount" "pki_int" {
   type                      = "pki"
   description               = "Yanello intermediate certificate authority"
   default_lease_ttl_seconds = 43200
-  max_lease_ttl_seconds     = 473040000
+  max_lease_ttl_seconds     = 157680000
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "intermediate" {
@@ -39,15 +39,16 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "intermediate" {
   backend              = vault_mount.pki.path
   csr                  = vault_pki_secret_backend_intermediate_cert_request.intermediate.csr
   common_name          = "yanello-intermediate-ca1"
-  ttl                  = "131400h"
+  ttl                  = "43800h"
   max_path_length      = 0
   use_csr_values       = true
   exclude_cn_from_sans = true
+  depends_on           = [vault_pki_secret_backend_root_cert.root]
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate" {
   backend     = vault_mount.pki_int.path
-  certificate = "${vault_pki_secret_backend_root_sign_intermediate.intermediate.certificate}\n${vault_pki_secret_backend_root_sign_intermediate.intermediate.issuing_ca}"
+  certificate = vault_pki_secret_backend_root_sign_intermediate.intermediate.certificate
 }
 
 resource "vault_pki_secret_backend_config_urls" "pki_int" {
@@ -63,8 +64,8 @@ resource "vault_pki_secret_backend_config_urls" "pki_int" {
 resource "vault_pki_secret_backend_role" "cert_manager" {
   backend           = vault_mount.pki_int.path
   name              = "cert-manager"
-  ttl               = "2160h"
-  max_ttl           = "87600h"
+  ttl               = "7776000"
+  max_ttl           = "157680000"
   allow_any_name    = true
   allow_localhost   = false
   allow_ip_sans     = false
