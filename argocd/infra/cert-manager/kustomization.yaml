@@ -2,6 +2,7 @@
 resources:
   - ./manifests/netpol.yaml
   - ./manifests/resources.yaml
+  - ./manifests/vault-issuer.yaml
 
 generators:
   - ./manifests/secret-generator.yaml

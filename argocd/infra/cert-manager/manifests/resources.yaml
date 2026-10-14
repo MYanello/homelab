@@ -100,3 +100,18 @@ metadata:
 spec:
   ca:
     secretName: local-intermediate-ca1-secret
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: vault-pki-issuer
+spec:
+  vault:
+    server: https://vault.yanello.net
+    path: pki_int/sign/cert-manager
+    auth:
+      kubernetes:
+        mountPath: /v1/auth/kubernetes
+        role: cert-manager
+        serviceAccountRef:
+          name: vault-issuer
