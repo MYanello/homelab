@@ -37,6 +37,14 @@ global:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
       effect: "NoSchedule"
+  volumes:
+    - name: oidc-signing
+      secret:
+        secretName: authentik-self-signed
+  volumeMounts:
+    - name: oidc-signing
+      mountPath: /certs/oidc-signing
+      readOnly: true
 
 authentik:
   email:
