@@ -8,6 +8,6 @@ spec:
   commonName: harbor-token-ca
   duration: 87600h
   issuerRef:
-    name: local-intermediate-ca1-issuer
+    name: vault-pki-issuer
     kind: ClusterIssuer
   secretName: harbor-token-tls
