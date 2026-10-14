@@ -642,10 +642,10 @@ module "jellyfin" {
   property_mappings  = local.oidc_mappings
   redirect_uris = [{
     matching_mode     = "strict"
-    url               = "https://jellyfin.yanello.net/api/auth/oidc/callback"
+    url               = "https://jellyfin.yanello.net/sso/OIDC/Callback/authentik"
     redirect_uri_type = "authorization"
   }]
-  meta_launch_url = "https://jellyfin.yanello.net/sso/OIDC/Callback/authentik"
+  meta_launch_url = "https://jellyfin.yanello.net/sso/OIDC/QuickConnect/authentik"
 }
 
 data "authentik_user" "marcus" {
