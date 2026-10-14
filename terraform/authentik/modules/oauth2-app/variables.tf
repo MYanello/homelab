@@ -90,7 +90,7 @@ variable "grant_types" {
 variable "signing_key" {
   description = "Signing key ID"
   type        = string
-  default     = "26f428c7-9534-4ea6-a839-9a6cf003c9c6"
+  default     = "2fea7ac5-db09-45fe-a89e-ceaf18f8d83f"
 }
 
 variable "logout_method" {
