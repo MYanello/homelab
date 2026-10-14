@@ -1,0 +1,100 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  labels:
+    app: jellyfin
+    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/instance: jellyfin
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: jellyfin
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+        app.kubernetes.io/name: jellyfin
+        app.kubernetes.io/instance: jellyfin
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
+      volumes:
+        - name: config
+          hostPath:
+            path: /mnt/ssd/k8s/jellyfin
+            type: DirectoryOrCreate
+        - name: cache
+          emptyDir: {}
+        - name: media
+          hostPath:
+            path: /data/media
+      terminationGracePeriodSeconds: 10
+      runtimeClassName: nvidia
+      containers:
+        - name: jellyfin
+          image: harbor.yanello.net/docker/jellyfin/jellyfin:12.2@sha256:357724bf0ae27a672c7cbaa899db2d9abeb13dbd8657ccce750258a4c059d037
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+              memory: 8Gi
+            requests:
+              nvidia.com/gpu: "1"
+              cpu: "250m"
+              memory: 500Mi
+          ports:
+            - name: http
+              containerPort: 8096
+              protocol: TCP
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,video,utility
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: cache
+              mountPath: /cache
+            - name: media
+              mountPath: /data/media
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 10

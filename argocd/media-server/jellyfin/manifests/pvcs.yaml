@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-config
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: truenas-ssd-nfs
+  volumeName: pvc-032aad59-717d-4618-aa88-1d2696ba6940
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: truenas-hdd-nfs
+  volumeName: pvc-602e9cae-3241-4a8a-b1c0-516400d7b731
+  resources:
+    requests:
+      storage: 25Gi
