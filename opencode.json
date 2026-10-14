@@ -14,7 +14,11 @@
     "kagi": {
       "type": "remote",
       "url": "https://mcp.kagi.com/mcp",
-      "enabled": true
+      "enabled": true,
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:KAGI_API_KEY}"
+      }
     }
   }
 }
