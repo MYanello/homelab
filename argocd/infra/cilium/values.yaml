@@ -31,6 +31,10 @@ enableIPv4Masquerade: true
 ipv4NativeRoutingCIDR: 10.0.0.0/8
 autoDirectNodeRoutes: true
 
+encryption:
+  enabled: true
+  type: wireguard
+
 envoy:
   securityContext:
     capabilities:
