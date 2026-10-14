@@ -26,11 +26,6 @@ terraform {
   }
 }
 
-data "sops_file" "authentik" {
-  source_file = "sops.yaml"
-  input_type  = "yaml"
-}
-
 provider "authentik" {
   url   = "https://authentik.yanello.net"
   # token is automatically read from AUTHENTIK_TOKEN environment variable

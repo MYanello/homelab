@@ -355,7 +355,7 @@ module "core-weave-argo" {
   property_mappings  = local.oidc_mappings
   redirect_uris = [{
     matching_mode     = "strict"
-    url               = "https://cw623e.cd.akuity.cloud/auth/callback"
+    url               = "https://login-sa.core-services.ingress.coreweave.com/source/oauth/callback/cw623e-oidc/"
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
@@ -629,4 +629,39 @@ module "bytestash" {
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = "https://bs.yanello.net"
+}
+
+module "jellyfin" {
+  source = "./modules/oauth2-app"
+
+  name               = "Jellyfin"
+  slug               = "jellyfin"
+  client_id          = "bba910b62b1e53bb8eec22a34647f44c451b"
+  authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
+  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
+  property_mappings  = local.oidc_mappings
+  redirect_uris = [{
+    matching_mode     = "strict"
+    url               = "https://jellyfin.yanello.net/api/auth/oidc/callback"
+    redirect_uri_type = "authorization"
+  }]
+  meta_launch_url = "https://jellyfin.yanello.net/sso/OIDC/Callback/authentik"
+}
+
+data "authentik_user" "marcus" {
+  username = "marcus"
+}
+
+resource "authentik_group" "jellyfin-admins" {
+  name = "jellyfin-admin"
+  users = [
+    data.authentik_user.marcus.id
+  ]
+}
+
+resource "authentik_group" "jellyfin-users" {
+  name = "jellyfin-user"
+  users = [
+    data.authentik_user.marcus.id
+  ]
 }
