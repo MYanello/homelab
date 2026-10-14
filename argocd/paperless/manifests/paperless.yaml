@@ -21,7 +21,7 @@ spec:
       labels:
         app: paperless
       annotations:
-        backup.velero.io/backup-volumes: "paperless-export,paperless-media,paperless-data,paperless-consume"
+        backup.velero.io/backup-volumes: "paperless-media,paperless-data"
     spec:
       tolerations:
         - key: "node-role.kubernetes.io/control-plane"
@@ -50,8 +50,6 @@ spec:
               mountPath: /usr/src/paperless/data
             - name: paperless-media
               mountPath: /usr/src/paperless/media
-          #   - name: paperless-consume
-          #     mountPath: /usr/src/paperless/consume
           resources:
             requests:
               cpu: 10m
@@ -71,11 +69,29 @@ spec:
               port: 8000
             periodSeconds: 30
             timeoutSeconds: 10
-        # - name: protonmail-bridge
-        #   image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.25.0@sha256:2f804b70bbb5693254dfc9e2f5f0bc3570734f5b841c6b374686a3db82b1ea9d
-        #   volumeMounts:
-        #     - mountPath: "/root"
-        #       name: protonmail-data
+        - name: protonmail-bridge
+          image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.25.0@sha256:2f804b70bbb5693254dfc9e2f5f0bc3570734f5b841c6b374686a3db82b1ea9d
+          imagePullPolicy: IfNotPresent
+          # command: ["sleep", "infinity"]
+          env:
+            - name: PROTONMAIL_BRIDGE_AUTO_UPDATE
+              value: "false"
+          ports:
+            - name: smtp
+              containerPort: 25
+              protocol: TCP
+            - name: imap
+              containerPort: 143
+              protocol: TCP
+          volumeMounts:
+            - name: protonmail-data
+              mountPath: /root
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+            limits:
+              memory: 500Mi
       restartPolicy: Always
       volumes:
         - name: paperless-data
@@ -308,4 +324,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: 1Gi

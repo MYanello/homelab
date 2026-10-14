@@ -1,0 +1,133 @@
+diff --git a/argocd/paperless/kustomization.yaml b/argocd/paperless/kustomization.yaml
+index b1f5545b..0ef3760d 100644
+--- a/argocd/paperless/kustomization.yaml
++++ b/argocd/paperless/kustomization.yaml
+@@ -13,3 +13,4 @@ resources:
+   - manifests/cnpg.yaml
+   - manifests/kreuzakt.yaml
+   - manifests/gpt.yaml
++  - manifests/paperless-ai.yaml
+diff --git a/argocd/paperless/manifests/netpol.yaml b/argocd/paperless/manifests/netpol.yaml
+index 28c9e2b8..fb53794e 100644
+--- a/argocd/paperless/manifests/netpol.yaml
++++ b/argocd/paperless/manifests/netpol.yaml
+@@ -15,6 +15,17 @@ spec:
+             - port: "8000"
+               protocol: TCP
+   egress:
++    # DNS, so the bridge sidecar can resolve Proton's API hosts.
++    - toEndpoints:
++        - matchLabels:
++            k8s:io.kubernetes.pod.namespace: kube-system
++            k8s:k8s-app: kube-dns
++      toPorts:
++        - ports:
++            - port: "53"
++              protocol: UDP
++            - port: "53"
++              protocol: TCP
+     - toEndpoints:
+         - matchLabels:
+             k8s:io.kubernetes.pod.namespace: paperless
+@@ -55,6 +66,17 @@ spec:
+         - ports:
+             - port: "9000"
+               protocol: TCP
++    # The protonmail-bridge sidecar shares this pod's identity, so its API calls
++    # to Proton leave through this policy. toFQDNs is the tighter option but it
++    # only installs the 443 rule while the DNS proxy still caches the name; if
++    # the vault ever goes quiet past the record TTL, egress silently stops.
++    # world:443 avoids that, at the cost of not restricting the destination.
++    - toEntities:
++        - world
++      toPorts:
++        - ports:
++            - port: "443"
++              protocol: TCP
+ ---
+ apiVersion: cilium.io/v2
+ kind: CiliumNetworkPolicy
+diff --git a/argocd/paperless/manifests/paperless.yaml b/argocd/paperless/manifests/paperless.yaml
+index 2b5a9691..f395c417 100644
+--- a/argocd/paperless/manifests/paperless.yaml
++++ b/argocd/paperless/manifests/paperless.yaml
+@@ -21,7 +21,7 @@ spec:
+       labels:
+         app: paperless
+       annotations:
+-        backup.velero.io/backup-volumes: "paperless-export,paperless-media,paperless-data,paperless-consume"
++        backup.velero.io/backup-volumes: "paperless-media,paperless-data"
+     spec:
+       tolerations:
+         - key: "node-role.kubernetes.io/control-plane"
+@@ -43,6 +43,9 @@ spec:
+           envFrom:
+             - configMapRef:
+                 name: paperless-env
++            # paperless-secrets holds PAPERLESS_SECRET_KEY, which is what signs
++            # sessions and encrypts the mail account passwords. Dropping this ref
++            # silently blanks the stored IMAP passwords, so mail fails auth.
+             - secretRef:
+                 name: paperless-secrets
+           volumeMounts:
+@@ -50,6 +53,11 @@ spec:
+               mountPath: /usr/src/paperless/data
+             - name: paperless-media
+               mountPath: /usr/src/paperless/media
++            # Not mounted at /root: paperless runs as root, so shadowing root's
++            # home with an empty 100Mi volume would hide anything the image keeps
++            # there. Only the bridge needs this volume, and it needs it at /root.
++            - name: protonmail-data
++              mountPath: /protonmail-data
+           #   - name: paperless-consume
+           #     mountPath: /usr/src/paperless/consume
+           resources:
+@@ -71,11 +79,32 @@ spec:
+               port: 8000
+             periodSeconds: 30
+             timeoutSeconds: 10
+-        # - name: protonmail-bridge
+-        #   image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.25.0@sha256:2f804b70bbb5693254dfc9e2f5f0bc3570734f5b841c6b374686a3db82b1ea9d
+-        #   volumeMounts:
+-        #     - mountPath: "/root"
+-        #       name: protonmail-data
++        - name: protonmail-bridge
++          image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.25.0@sha256:2f804b70bbb5693254dfc9e2f5f0bc3570734f5b841c6b374686a3db82b1ea9d
++          imagePullPolicy: IfNotPresent
++          # Bridge self-updates into the data volume and the launcher then runs
++          # that copy instead of the image's binaries. This tag is pinned by
++          # digest, so without this env one manual `init` would ship a bridge
++          # nobody reviewed, and Renovate would not see it.
++          env:
++            - name: PROTONMAIL_BRIDGE_AUTO_UPDATE
++              value: "false"
++          ports:
++            - name: smtp
++              containerPort: 25
++              protocol: TCP
++            - name: imap
++              containerPort: 143
++              protocol: TCP
++          volumeMounts:
++            - name: protonmail-data
++              mountPath: /root
++          resources:
++            requests:
++              cpu: 10m
++              memory: 128Mi
++            limits:
++              memory: 512Mi
+       restartPolicy: Always
+       volumes:
+         - name: paperless-data
+@@ -88,6 +117,10 @@ spec:
+           persistentVolumeClaim:
+             claimName: protonmail-data
+ ---
++# Bridge sidecar. Its ports are the whole point of the container: socat binds 25
++# and 143 inside the pod and forwards to the bridge on 127.0.0.1:1025/1143, so an
++# IMAP client in this pod connects to `localhost:1143`. Renaming or removing the
++# `imap` port breaks the mail rule's imap_port without any other symptom.
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
