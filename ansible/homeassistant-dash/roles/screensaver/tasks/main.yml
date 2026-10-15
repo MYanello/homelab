@@ -1,0 +1,85 @@
+---
+- name: Remove distro xscreensaver split packages
+  ansible.builtin.apt:
+    name:
+      - xscreensaver-data
+      - xscreensaver-data-extra
+      - xscreensaver-gl
+      - xscreensaver-gl-extra
+      - gnome-screensaver
+      - cinnamon-screensaver
+      - mate-screensaver
+      - light-locker
+    state: absent
+
+- name: Download upstream xscreensaver .deb
+  ansible.builtin.get_url:
+    url: "https://github.com/xscreensaver/xscreensaver/releases/download/v{{ xscreensaver_version }}/xscreensaver_{{\
+      \ xscreensaver_version }}-0_amd64.deb"
+    dest: "/tmp/xscreensaver_{{ xscreensaver_version }}-0_amd64.deb"
+    checksum: "sha256:63c341484524eb3dd062337432be33f8e878dff9df04255f7f630bf2a616c34c"
+    mode: "0644"
+
+- name: Repackage upstream xscreensaver .deb for Debian/Ubuntu
+  ansible.builtin.shell:
+    cmd: |
+      set -e
+      rm -rf /tmp/xscreensaver-build
+      dpkg-deb -R /tmp/xscreensaver_{{ xscreensaver_version }}-0_amd64.deb /tmp/xscreensaver-build
+      sed -i 's#^Depends:.*#Depends: libpam0g, libpam-modules, libsystemd0, xdg-utils, perl, attr#' /tmp/xscreensaver-build/DEBIAN/control
+      sed -i '/^Package: xscreensaver$/a Maintainer: Jamie Zawinski <jwz@jwz.org>' /tmp/xscreensaver-build/DEBIAN/control
+      sed -i 's#^killall -HUP xscreensaver.*#killall -HUP xscreensaver || true#' /tmp/xscreensaver-build/DEBIAN/postinst
+      dpkg-deb -b -Znone /tmp/xscreensaver-build /tmp/xscreensaver_{{ xscreensaver_version }}-0_local_amd64.deb
+      rm -rf /tmp/xscreensaver-build
+  changed_when: false
+
+- name: Install upstream xscreensaver
+  ansible.builtin.apt:
+    deb: "/tmp/xscreensaver_{{ xscreensaver_version }}-0_local_amd64.deb"
+
+- name: Provide libjpeg.so.62 for the upstream image helper
+  ansible.builtin.file:
+    src: /usr/lib/x86_64-linux-gnu/libjpeg.so.8
+    dest: /usr/lib/x86_64-linux-gnu/libjpeg.so.62
+    state: link
+    force: true
+
+- name: Configure xscreensaver for the kiosk user
+  ansible.builtin.copy:
+    dest: /home/{{ ansible_user }}/.xscreensaver
+    content: |
+      timeout: 0:03:00
+      lock: false
+      dpmsEnabled: false
+      mode: one
+      selected: 0
+      imageDirectory: /home/{{ ansible_user }}/Photo_Frame
+      chooseRandomImages: true
+      programs: glslideshow -root -zoom 75 -pan 19
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0600"
+
+- name: Ensure autostart directory exists
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.config/autostart
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: Autostart xscreensaver in the session
+  ansible.builtin.copy:
+    dest: /home/{{ ansible_user }}/.config/autostart/xscreensaver.desktop
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Name=XScreenSaver
+      Exec=env -u WAYLAND_DISPLAY -u XDG_SESSION_TYPE -u XDG_RUNTIME_DIR /usr/bin/xscreensaver -nosplash
+      X-GNOME-Autostart-enabled=true
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: Disable GNOME blanking and locking so xscreensaver controls the screen
+  ansible.builtin.import_tasks: gnome_settings.yml

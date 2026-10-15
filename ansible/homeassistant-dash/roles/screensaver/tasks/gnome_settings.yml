@@ -1,0 +1,32 @@
+---
+- name: Look up kiosk user uid
+  ansible.builtin.getent:
+    database: passwd
+    key: "{{ ansible_user }}"
+
+- name: Disable GNOME blanking and locking so xscreensaver controls the screen
+  become: true
+  become_user: "{{ ansible_user }}"
+  environment:
+    HOME: "/home/{{ ansible_user }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_facts['getent_passwd'][ansible_user][1] }}"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ ansible_facts['getent_passwd'][ansible_user][1] }}/bus"
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - key: /org/gnome/desktop/session/idle-delay
+      value: "uint32 0"
+    - key: /org/gnome/desktop/screensaver/lock-enabled
+      value: false
+    - key: /org/gnome/desktop/screensaver/idle-activation-enabled
+      value: false
+    - key: /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type
+      value: "'nothing'"
+    - key: /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout
+      value: "int32 0"
+    - key: /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type
+      value: "'nothing'"
+    - key: /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout
+      value: "int32 0"

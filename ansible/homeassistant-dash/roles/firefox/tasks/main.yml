@@ -1,0 +1,31 @@
+---
+- name: Install base packages
+  ansible.builtin.apt:
+    name:
+      - firefox
+    state: present
+    update_cache: true
+
+- name: Ensure autostart directory exists
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.config/autostart
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: Configure firefox kiosk autostart
+  ansible.builtin.copy:
+    dest: /home/{{ ansible_user }}/.config/autostart/firefox.desktop
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Name=Homeassistant
+      Comment=Home Assistant dashboard kiosk
+      Exec=/usr/bin/firefox -kiosk {{ homeassistant_dash_url }}
+      Terminal=false
+      StartupNotify=false
+      X-GNOME-Autostart-enabled=true
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"

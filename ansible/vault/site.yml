@@ -1,6 +1,6 @@
 ---
 - name: Configure HashiCorp Vault node
-  hosts: vault
+  hosts: vault-vm
   become: true
   gather_facts: true
   roles:

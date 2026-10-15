@@ -1,0 +1,9 @@
+---
+- name: Configure the Home Assistant dashboard kiosk
+  hosts: surface
+  gather_facts: false
+  become: true
+  roles:
+    - autologin
+    - firefox
+    - screensaver

@@ -1,0 +1,29 @@
+---
+- name: Install gdm3 packages
+  ansible.builtin.apt:
+    name:
+      - gdm3
+    state: present
+    update_cache: true
+
+- name: Enable gdm3 service
+  ansible.builtin.systemd:
+    name: gdm3
+    enabled: true
+    state: started
+
+- name: Enable gdm3 auto login
+  community.general.ini_file:
+    path: /etc/gdm3/custom.conf
+    section: daemon
+    option: AutomaticLoginEnable
+    value: "true"
+    mode: "0644"
+
+- name: Set up gdm3 auto login user
+  community.general.ini_file:
+    path: /etc/gdm3/custom.conf
+    section: daemon
+    option: AutomaticLogin
+    value: "{{ ansible_user }}"
+    mode: "0644"
