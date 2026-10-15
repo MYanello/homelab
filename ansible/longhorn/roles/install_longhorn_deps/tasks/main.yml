@@ -1,5 +1,4 @@
 ---
-
 # Use: dpkg -S findmnt to find the corresponding package that provides findmnt => util-linux
 - name: Install packages required to make longhorn possible
   package: name={{ item }} state=present allow_unauthenticated=yes

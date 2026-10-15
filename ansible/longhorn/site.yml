@@ -1,10 +1,8 @@
 ---
-
-- hosts: pi
+- hosts: all_k3s_nodes
   gather_facts: false
   become: true
   become_method: sudo
   roles:
-    - format_usb_device
-    - install_longhorn_sw_preps
-    - mkfs_usb_device
+    - install_longhorn_deps
+    - prep_usb_device
