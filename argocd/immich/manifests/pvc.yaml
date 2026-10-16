@@ -34,3 +34,40 @@ spec:
   resources:
     requests:
       storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: surface-photos
+spec:
+  capacity:
+    storage: 250Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - nfsvers=4.2
+    - nconnect=8
+    - hard
+    - intr
+    - rsize=131072
+    - wsize=131072
+    - timeo=600
+    - retrans=2
+  nfs:
+    server: truenas.lan
+    path: /mnt/K8s-HDD/home_shared/Photo_Frame
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: surface-photos
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  volumeName: surface-photos
+  resources:
+    requests:
+      storage: 250Gi

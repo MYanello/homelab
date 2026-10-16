@@ -56,12 +56,7 @@ spec:
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
-            - name: photo-frame
-              mountPath: /usr/src/app/photo-frame
       volumes:
-        - name: photo-frame
-          persistentVolumeClaim:
-            claimName: photo-frame
         - name: photos
           persistentVolumeClaim:
             claimName: photos
