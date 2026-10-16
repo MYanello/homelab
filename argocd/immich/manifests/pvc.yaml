@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: surface-photos
+  name: surface-photos-marcus
 spec:
   capacity:
     storage: 250Gi
@@ -62,7 +62,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: surface-photos
+  name: surface-photos-marcus
 spec:
   accessModes:
     - ReadWriteMany
@@ -71,3 +71,27 @@ spec:
   resources:
     requests:
       storage: 250Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: marcus-surface
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: truenas-hdd-nfs
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: camille-surface
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: truenas-hdd-nfs
+  resources:
+    requests:
+      storage: 100Gi
