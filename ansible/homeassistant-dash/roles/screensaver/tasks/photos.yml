@@ -1,0 +1,21 @@
+---
+- name: Install nfs-common
+  ansible.builtin.apt:
+    name:
+      - nfs-common
+    state: present
+    update_cache: true
+
+- name: Create the mountpoint
+  ansible.builtin.file:
+    path: "{{ truenas_mount_path }}"
+    state: directory
+    mode: "0755"
+
+- name: Mount the TrueNAS share and persist it in fstab
+  ansible.posix.mount:
+    path: "{{ truenas_mount_path }}"
+    src: "{{ truenas_mount_server }}:{{ truenas_mount_export }}"
+    fstype: nfs
+    opts: "{{ truenas_mount_opts }}"
+    state: mounted

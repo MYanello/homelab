@@ -6,3 +6,8 @@ screensaver_max_zoom: 1.2
 screensaver_min_pan: -0.8
 screensaver_max_pan: 0.8
 screensaver_fps: 30
+
+truenas_mount_server: "192.168.10.78"
+truenas_mount_export: "/mnt/K8s-HDD/home_shared/Photo_Frame"
+truenas_mount_path: "/mnt/Photo_Frame"
+truenas_mount_opts: "nfsvers=4.2,hard,intr,noatime,_netdev,nofail"

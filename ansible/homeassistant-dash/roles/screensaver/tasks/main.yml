@@ -33,3 +33,6 @@
 - name: Disable GNOME blanking and locking so the photo screensaver controls the
     screen
   ansible.builtin.import_tasks: gnome_settings.yml
+
+- name: Mount shared photo dir
+  ansible.builtin.import_tasks: photos.yml
