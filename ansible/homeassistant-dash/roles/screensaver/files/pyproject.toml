@@ -14,6 +14,7 @@ dependency-metadata = [
         "typing-extensions",
     ] },
 ]
+config-settings-package = { pygobject-stubs = { config = "Gtk4,Gdk4"}}
 
 [tool.ty.rules]
 dynamic-function-decorator-return = "error"
@@ -30,6 +31,7 @@ ignore = [
 
 [dependency-groups]
 dev = [
+    "pygobject-stubs",
     "ruff",
     "ty",
 ]

@@ -7,6 +7,15 @@ name = "pygobject-stubs"
 requires-dist = ["typing-extensions"]
 
 [[package]]
+name = "pygobject-stubs"
+version = "2.19.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/95/26/0835a4fdf18f87fa4d3740f8b3a610a834536af91fc22e60e561213291de/pygobject_stubs-2.19.0.tar.gz", hash = "sha256:b6da3fa0f99dbb039f16489994a6e00a5b40c0e4cea5993b9a6c46d0ed5340eb", size = 1072302, upload-time = "2026-10-16T17:36:38.071Z" }
+
+[[package]]
 name = "ruff"
 version = "0.17.1"
 source = { registry = "https://pypi.org/simple" }
@@ -38,6 +47,7 @@ source = { virtual = "." }
 
 [package.dev-dependencies]
 dev = [
+    { name = "pygobject-stubs" },
     { name = "ruff" },
     { name = "ty" },
 ]
@@ -46,8 +56,9 @@ dev = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "ruff", specifier = ">=0.17.1" },
-    { name = "ty", specifier = ">=0.0.89" },
+    { name = "pygobject-stubs" },
+    { name = "ruff" },
+    { name = "ty" },
 ]
 
 [[package]]
@@ -73,4 +84,13 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b1/d5/dfd7ed5e4af472b20a11ef651da4bca55f9dc8be485cd152337f94caddde/ty-0.0.89-py3-none-win32.whl", hash = "sha256:0146637ed2321717280bfe4e4b20a18813b741da280e8039d7df2bf22b0251f1", size = 13224078, upload-time = "2026-10-16T10:34:57.735Z" },
     { url = "https://files.pythonhosted.org/packages/b4/14/1ee663c422e3a2d910c5cc27e7d84bd7709a3df0aca28a713843c6c3fa5d/ty-0.0.89-py3-none-win_amd64.whl", hash = "sha256:9fc56322a1aff29a19088d2025f3c42a6d25a7035668048bb908c9f8b66f480d", size = 13727433, upload-time = "2026-10-16T10:35:00.15Z" },
     { url = "https://files.pythonhosted.org/packages/09/93/af8f7250920823ca6d582bcf0abf803fb92c8b99415ba7f40f2304102c6f/ty-0.0.89-py3-none-win_arm64.whl", hash = "sha256:1d4967c8f7bfd67c9708115b41d7049197c5d20c76fb2e136fe78b0437ada05b", size = 13287101, upload-time = "2026-10-16T10:35:02.918Z" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.16.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz", hash = "sha256:dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5", size = 113555, upload-time = "2026-07-02T08:40:05.92Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl", hash = "sha256:481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8", size = 45571, upload-time = "2026-07-02T08:40:04.659Z" },
 ]

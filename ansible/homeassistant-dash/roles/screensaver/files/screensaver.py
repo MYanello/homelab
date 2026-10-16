@@ -23,7 +23,7 @@ IFACE = "org.gnome.Mutter.IdleMonitor"
 
 @dataclass
 class Config:
-    image_dir: Path
+    image_dirs: list[Path]
     idle_ms: int
     slide_seconds: int
     max_zoom: float
@@ -38,7 +38,9 @@ def parse_args(argv: list[str] | None = None) -> Config:
     parser = argparse.ArgumentParser(description="Photo frame screensaver.")
     parser.add_argument(
         "--image-dir",
-        default=os.path.expanduser("~/Photo_Frame"),
+        default=None,
+        type=Path,
+        action="append",
         help="Directory of photos to display.",
     )
     parser.add_argument(
@@ -85,8 +87,10 @@ def parse_args(argv: list[str] | None = None) -> Config:
     if args.fps <= 0:
         parser.error("--fps must be positive")
 
+    image_dirs = args.image_dir if args.image_dir is not None else [Path("/mnt/Photo_Frame")]
+    
     return Config(
-        image_dir=Path(args.image_dir).expanduser(),
+        image_dirs=image_dirs,
         idle_ms=args.idle_seconds * 1000,
         slide_seconds=args.slide_seconds,
         max_zoom=args.max_zoom,
@@ -98,11 +102,16 @@ def parse_args(argv: list[str] | None = None) -> Config:
     )
 
 
-def load_images(image_dir: Path) -> list[str]:
+def load_images(dirs: list[Path]) -> list[str]:
     names: list[str] = []
-    for name in sorted(os.listdir(image_dir)):
-        if name.lower().endswith((".jpg", ".jpeg", ".png")):
-            names.append(str(image_dir / name))
+    for dir in dirs:
+        try:
+            entries = sorted(os.listdir(dir))
+        except OSError:
+            continue # dir doesn't exist, try the others
+        for name in entries:
+            if name.lower().endswith((".jpg", ".jpeg", ".png")):
+                names.append(str(dir / name))
     random.shuffle(names)
     return names
 
@@ -189,7 +198,7 @@ class PhotoScreensaver(Gtk.Application):
         self.slide: Slide = Slide()
         self.window.set_child(self.slide)
         self.window.set_visible(False)
-        self.images = load_images(self.config.image_dir)
+        self.images = load_images(self.config.image_dirs)
         self.conn: Gio.DBusConnection = Gio.bus_get_sync(Gio.BusType.SESSION, None)
         self.conn.signal_subscribe(
             BUS,
