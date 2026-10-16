@@ -2,12 +2,14 @@
 screensaver_idle_seconds: 180
 screensaver_slide_seconds: 15
 screensaver_min_zoom: 1.05
-screensaver_max_zoom: 1.2
-screensaver_min_pan: -0.8
-screensaver_max_pan: 0.8
+screensaver_max_zoom: 1.10
+screensaver_min_pan: -0.2
+screensaver_max_pan: 0.2
 screensaver_fps: 30
 
-truenas_mount_server: "192.168.10.78"
-truenas_mount_export: "/mnt/K8s-HDD/home_shared/Photo_Frame"
-truenas_mount_path: "/mnt/Photo_Frame"
+truenas_mount_server: "truenas.lan"
+marcus_mount_export: "/mnt/K8s-HDD/truenas-hdd-nfs/pvc-d7c437cd-105a-44d8-b688-a3f933608e8b"
+marcus_mount_path: "/mnt/Photo_Frame_Marcus"
+camille_mount_export: "/mnt/K8s-HDD/truenas-hdd-nfs/pvc-ca71f66a-c20b-469e-90c7-26bdad23a59c"
+camille_mount_path: "/mnt/Photo_Frame_Camille"
 truenas_mount_opts: "nfsvers=4.2,hard,noatime,_netdev,x-systemd.automount,x-systemd.idle-timeout=0,x-systemd.mount-timeout=30s"

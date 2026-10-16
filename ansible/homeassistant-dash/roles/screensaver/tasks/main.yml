@@ -1,4 +1,11 @@
 ---
+- name: Mount shared photo dir
+  ansible.builtin.import_tasks: photos_mount.yml
+
+- name: Disable GNOME blanking and locking so the photo screensaver controls the
+    screen
+  ansible.builtin.import_tasks: gnome_settings.yml
+
 - name: Install python3-gi
   ansible.builtin.apt:
     name:
@@ -29,10 +36,3 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: "0644"
-
-- name: Disable GNOME blanking and locking so the photo screensaver controls the
-    screen
-  ansible.builtin.import_tasks: gnome_settings.yml
-
-- name: Mount shared photo dir
-  ansible.builtin.import_tasks: photos.yml
