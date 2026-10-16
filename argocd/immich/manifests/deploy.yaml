@@ -56,10 +56,20 @@ spec:
           volumeMounts:
             - name: photos
               mountPath: /usr/src/app/upload
+            - name: marcus-surface
+              mountPath: "/usr/src/app/upload/library/Marcus/Photo Frame"
+            - name: camille-surface
+              mountPath: '/usr/src/app/upload/library/Camille/Photo Frame'
       volumes:
         - name: photos
           persistentVolumeClaim:
             claimName: photos
+        - name: marcus-surface
+          persistentVolumeClaim:
+            claimName: marcus-surface
+        - name: camille-surface
+          persistentVolumeClaim:
+            claimName: camille-surface
 ---
 apiVersion: apps/v1
 kind: Deployment
