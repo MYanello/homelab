@@ -12,3 +12,7 @@ node_modules
 argocd/iocaine/data/
 
 charts/
+
+# Nix
+.devenv
+.direnv

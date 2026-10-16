@@ -1,0 +1,8 @@
+---
+screensaver_idle_seconds: 180
+screensaver_slide_seconds: 15
+screensaver_min_zoom: 1.05
+screensaver_max_zoom: 1.2
+screensaver_min_pan: -0.8
+screensaver_max_pan: 0.8
+screensaver_fps: 30

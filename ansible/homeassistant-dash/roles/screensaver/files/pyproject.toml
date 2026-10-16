@@ -1,0 +1,35 @@
+[project]
+name = "screensaver"
+version = "0.1.0"
+authors = [
+    { name = "Marcus Yanello" }
+]
+
+requires-python = ">=3.13"
+
+[tool.uv]
+package = false
+dependency-metadata = [
+    { name = "pygobject-stubs", requires-dist = [
+        "typing-extensions",
+    ] },
+]
+
+[tool.ty.rules]
+dynamic-function-decorator-return = "error"
+missing-type-argument = "error"
+possibly-unresolved-reference = "warn"
+unsound-return-statement = "error"
+
+[tool.ruff.lint]
+extend-select = ["ANN", "PYI"]
+preview = true
+ignore = [
+    "E402"
+]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "ty",
+]

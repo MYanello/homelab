@@ -1,0 +1,7 @@
+# vim: set ft=ini:
+[Desktop Entry]
+Type=Application
+Name=Screensaver
+Exec=/usr/local/bin/screensaver.py
+Terminal=false
+X-GNOME-Autostart-enabled=true
