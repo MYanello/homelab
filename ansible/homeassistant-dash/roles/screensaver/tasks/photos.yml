@@ -19,3 +19,4 @@
     fstype: nfs
     opts: "{{ truenas_mount_opts }}"
     state: mounted
+  notify: reload systemd units

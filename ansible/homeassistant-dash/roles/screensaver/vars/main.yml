@@ -10,4 +10,4 @@ screensaver_fps: 30
 truenas_mount_server: "192.168.10.78"
 truenas_mount_export: "/mnt/K8s-HDD/home_shared/Photo_Frame"
 truenas_mount_path: "/mnt/Photo_Frame"
-truenas_mount_opts: "nfsvers=4.2,hard,intr,noatime,_netdev,nofail"
+truenas_mount_opts: "nfsvers=4.2,hard,noatime,_netdev,x-systemd.automount,x-systemd.idle-timeout=0,x-systemd.mount-timeout=30s"
