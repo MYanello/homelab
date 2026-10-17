@@ -87,8 +87,10 @@ def parse_args(argv: list[str] | None = None) -> Config:
     if args.fps <= 0:
         parser.error("--fps must be positive")
 
-    image_dirs = args.image_dir if args.image_dir is not None else [Path("/mnt/Photo_Frame")]
-    
+    image_dirs = (
+        args.image_dir if args.image_dir is not None else [Path("/mnt/Photo_Frame")]
+    )
+
     return Config(
         image_dirs=image_dirs,
         idle_ms=args.idle_seconds * 1000,
@@ -108,7 +110,7 @@ def load_images(dirs: list[Path]) -> list[str]:
         try:
             entries = sorted(os.listdir(dir))
         except OSError:
-            continue # dir doesn't exist, try the others
+            continue  # dir doesn't exist, try the others
         for name in entries:
             if name.lower().endswith((".jpg", ".jpeg", ".png")):
                 names.append(str(dir / name))
@@ -116,14 +118,39 @@ def load_images(dirs: list[Path]) -> list[str]:
     return names
 
 
-def load_texture(path: os.PathLike[str]) -> Gdk.Texture | None:
+def load_texture(path: os.PathLike[str], max_size: int) -> Gdk.Texture | None:
     pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.fspath(path))
     if pixbuf is None:
         return None
     rotated = pixbuf.apply_embedded_orientation()
     if rotated is not None:
         pixbuf = rotated
-    return Gdk.Texture.new_for_pixbuf(pixbuf)
+    width = pixbuf.get_width()
+    height = pixbuf.get_height()
+    longest = max(width, height)
+    if max_size > 0 and longest > max_size:
+        scale = max_size / longest
+        pixbuf = pixbuf.scale_simple(
+            max(1, round(width * scale)),
+            max(1, round(height * scale)),
+            GdkPixbuf.InterpType.BILINEAR,
+        )
+    if pixbuf:
+        return Gdk.Texture.new_for_pixbuf(pixbuf)
+    return None
+
+
+def screen_longest_side() -> int:
+    display = Gdk.Display.get_default()
+    longest = 0
+    if display is not None:
+        monitors = display.get_monitors()
+        for i in range(monitors.get_n_items()):
+            monitor = monitors.get_item(i)
+            if monitor:
+                geometry = monitor.get_geometry()
+                longest = max(longest, geometry.width, geometry.height)
+    return longest
 
 
 class Slide(Gtk.Widget):
@@ -190,6 +217,7 @@ class PhotoScreensaver(Gtk.Application):
         self.frames_left: int = 0
         self.index: int = 0
         self.images: list[str] = []
+        self.max_texture: int = 0
 
     @override
     def do_activate(self) -> None:
@@ -248,6 +276,7 @@ class PhotoScreensaver(Gtk.Application):
         self.index = 0
         if not self.images:
             return
+        self.max_texture = round(screen_longest_side() * self.config.max_zoom)
         if self.config.debug:
             print("start", file=sys.stderr)
         self.show_next()
@@ -269,7 +298,7 @@ class PhotoScreensaver(Gtk.Application):
         path = self.images[self.index % len(self.images)]
         self.index += 1
         try:
-            texture = load_texture(Path(path))
+            texture = load_texture(Path(path), self.max_texture)
         except GLib.Error:
             return
         self.slide.set_texture(
