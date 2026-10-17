@@ -1,23 +1,22 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "vmlogs": {
-      "type": "remote",
-      "url": "https://vmlogs-mcp.yanello.net/mcp",
-      "enabled": true
-    },
-    "vmetrics": {
-      "type": "remote",
-      "url": "https://vm-mcp.yanello.net/mcp",
-      "enabled": true
-    },
-    "kagi": {
-      "type": "remote",
-      "url": "https://mcp.kagi.com/mcp",
-      "enabled": true,
-      "oauth": false,
-      "headers": {
-        "Authorization": "Bearer {env:KAGI_API_KEY}"
+    "servers": {
+      "vmlogs": {
+        "type": "remote",
+        "url": "https://vmlogs-mcp.yanello.net/mcp"
+      },
+      "vmetrics": {
+        "type": "remote",
+        "url": "https://vm-mcp.yanello.net/mcp"
+      },
+      "kagi": {
+        "type": "remote",
+        "url": "https://mcp.kagi.com/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "Bearer {env:KAGI_API_KEY}"
+        }
       }
     }
   }
