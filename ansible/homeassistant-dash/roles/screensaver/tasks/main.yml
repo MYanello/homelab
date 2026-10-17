@@ -11,7 +11,7 @@
     name:
       - python3-gi
     state: present
-    update_cache: true
+    update_cache: false
 
 - name: Install the screensaver
   ansible.builtin.copy:

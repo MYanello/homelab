@@ -2,6 +2,6 @@
 [Desktop Entry]
 Type=Application
 Name=Screensaver
-Exec=/usr/local/bin/screensaver.py --idle-seconds {{ screensaver_idle_seconds }} --slide-seconds {{ screensaver_slide_seconds }} --min-zoom {{ screensaver_min_zoom }} --max-zoom {{ screensaver_max_zoom }} --min-pan {{ screensaver_min_pan }} --max-pan {{ screensaver_max_pan }} --fps {{ screensaver_fps }} --image-dir {{ marcus_mount_path }} --image-dir {{ camille_mount_path }}
+Exec=env GSK_RENDERER=gl /usr/local/bin/screensaver.py --idle-seconds {{ screensaver_idle_seconds }} --slide-seconds {{ screensaver_slide_seconds }} --min-zoom {{ screensaver_min_zoom }} --max-zoom {{ screensaver_max_zoom }} --min-pan {{ screensaver_min_pan }} --max-pan {{ screensaver_max_pan }} --fps {{ screensaver_fps }} --image-dir {{ marcus_mount_path }} --image-dir {{ camille_mount_path }}
 Terminal=false
 X-GNOME-Autostart-enabled=true
