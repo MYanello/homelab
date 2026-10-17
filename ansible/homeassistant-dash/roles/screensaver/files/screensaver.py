@@ -198,7 +198,6 @@ class PhotoScreensaver(Gtk.Application):
         self.slide: Slide = Slide()
         self.window.set_child(self.slide)
         self.window.set_visible(False)
-        self.images = load_images(self.config.image_dirs)
         self.conn: Gio.DBusConnection = Gio.bus_get_sync(Gio.BusType.SESSION, None)
         self.conn.signal_subscribe(
             BUS,
@@ -245,6 +244,8 @@ class PhotoScreensaver(Gtk.Application):
             self.arm_idle()
 
     def start(self) -> None:
+        self.images = load_images(self.config.image_dirs)
+        self.index = 0
         if not self.images:
             return
         if self.config.debug:
