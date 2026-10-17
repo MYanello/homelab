@@ -17,7 +17,7 @@ from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
 from prometheus_client import Gauge, Info, start_http_server
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=os.environ.get("LOG_LEVEL", "").upper() or logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%dT%H:%M:%S",
 )
@@ -164,7 +164,6 @@ class OracleException(Exception):
     backoff.expo,
     Exception,
     max_tries=4,
-    jitter=None,
     base=2,
     factor=5,
 )
@@ -284,6 +283,8 @@ The oracle instance will be unreachable until this
 succeeds.
 """,
                         )
+            else:
+                logger.debug(f"IP unchanged: {ip}")
         except urllib.error.HTTPError as e:
             logger.error(f"HTTP Error getting IP: {e.code}: {e.reason}")
         except urllib.error.URLError as e:
