@@ -9,7 +9,7 @@ resources:
   - ntopng.yaml
   - pikvm.yaml
   - router.yaml
-  - ubiquiti.yaml
+  # - ubiquiti.yaml
   - coffee.yaml
   - proxmox.yaml
   - truenas.yaml
