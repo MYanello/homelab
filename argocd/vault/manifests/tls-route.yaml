@@ -15,9 +15,9 @@ metadata:
   name: vault-route
 spec:
   parentRefs:
-    - name: vault-private-tls-gateway
+    - name: private-tls-passthrough-gateway
       namespace: cilium
-      sectionName: vault-tls-passthrough
+      sectionName: tls-passthrough
   hostnames:
     - vault.yanello.net
   rules:

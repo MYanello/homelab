@@ -2,7 +2,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: vault-private-tls-gateway
+  name: private-tls-passthrough-gateway
   labels:
     external-dns.yanello.net/gateway: private
 spec:
@@ -11,15 +11,12 @@ spec:
     - value: 10.10.8.104
       type: IPAddress
   listeners:
-    - name: vault-tls-passthrough
+    - name: tls-passthrough
       protocol: TLS
-      hostname: "vault.yanello.net"
+      hostname: "*.yanello.net"
       port: 443
       tls:
         mode: Passthrough
       allowedRoutes:
         namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              kubernetes.io/metadata.name: vault
+          from: All
