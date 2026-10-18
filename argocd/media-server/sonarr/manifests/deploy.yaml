@@ -48,7 +48,7 @@ spec:
                 name: config
             - secretRef:
                 name: config
-          image: harbor.yanello.net/docker/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06
+          image: harbor.yanello.net/docker/linuxserver/sonarr:4.0.20@sha256:44b06045a98bc1f237b9ffefc4b28dab64cb29305e4a2a94875ae93b5224e4cc
           imagePullPolicy: IfNotPresent
           name: sonarr
           ports:
