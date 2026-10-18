@@ -25,6 +25,7 @@ resource "vault_mount" "pki_int" {
   description               = "Yanello intermediate certificate authority"
   default_lease_ttl_seconds = 43200
   max_lease_ttl_seconds     = 157680000
+  allowed_response_headers  = ["Location", "Replay-Nonce", "Link"]
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "intermediate" {
@@ -59,6 +60,25 @@ resource "vault_pki_secret_backend_config_urls" "pki_int" {
   crl_distribution_points = [
     "https://vault.yanello.net/v1/pki_int/crl"
   ]
+}
+
+resource "vault_pki_secret_backend_config_cluster" "pki_int" {
+  backend  = vault_mount.pki_int.path
+  path     = "https://vault.yanello.net/v1/pki_int"
+  aia_path = "https://vault.yanello.net/v1/pki_int"
+}
+
+resource "vault_pki_secret_backend_config_acme" "pki_int" {
+  backend                  = vault_mount.pki_int.path
+  enabled                  = true
+  allowed_issuers          = ["*"]
+  allowed_roles            = ["pikvm"]
+  allow_role_ext_key_usage = false
+  default_directory_policy = "forbid"
+  dns_resolver             = ""
+  eab_policy               = "not-required"
+
+  depends_on = [vault_pki_secret_backend_config_cluster.pki_int]
 }
 
 resource "vault_pki_secret_backend_role" "cert_manager" {
@@ -100,12 +120,19 @@ resource "vault_kubernetes_auth_backend_role" "cert_manager" {
   token_policies                   = [vault_policy.cert_manager.name]
 }
 
-output "pki_root_ca_certificate" {
-  description = "PEM encoded Vault PKI root CA certificate"
-  value       = vault_pki_secret_backend_root_cert.root.certificate
-}
-
-output "pki_intermediate_ca_certificate" {
-  description = "PEM encoded Vault PKI intermediate CA certificate"
-  value       = vault_pki_secret_backend_root_sign_intermediate.intermediate.certificate
+resource "vault_pki_secret_backend_role" "pikvm" {
+  backend            = vault_mount.pki_int.path
+  name               = "pikvm"
+  key_type           = "any"
+  key_bits           = 0
+  ttl                = "7776000"
+  max_ttl            = "157680000"
+  allowed_domains    = ["pikvm.yanello.net"]
+  allow_bare_domains = true
+  allow_ip_sans      = true
+  server_flag        = true
+  client_flag        = false
+  code_signing_flag  = false
+  require_cn         = false
+  enforce_hostnames  = false
 }

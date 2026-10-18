@@ -1,0 +1,67 @@
+---
+- name: Configure PiKVM
+  hosts: pikvm_hosts
+  become: true
+  gather_facts: true
+
+  vars:
+    pikvm_domain: pikvm.yanello.net
+    pikvm_ip: 192.168.1.9
+    pikvm_acme_email: marcus@yanello.net
+    pikvm_acme_role: pikvm
+    pikvm_acme_directory: "https://vault.yanello.net/v1/pki_int/roles/{{ pikvm_acme_role }}/acme/directory"
+
+  tasks:
+    - name: Configure TLS certificate
+      block:
+        - name: Switch filesystem to read-write
+          ansible.builtin.command:
+            cmd: /usr/bin/rw
+          changed_when: false
+
+        - name: Enable KVMD HTTPS
+          ansible.builtin.replace:
+            path: /etc/kvmd/override.yaml
+            regexp: '(?m)^(nginx:\n\s*https:\n\s*enabled:\s+)false'
+            replace: '\1true'
+          register: pikvm_https
+
+        - name: Request certificate from Vault ACME
+          ansible.builtin.command:
+            argv:
+              - /usr/bin/kvmd-certbot
+              - certonly_webroot
+              - --server
+              - "{{ pikvm_acme_directory }}"
+              - --agree-tos
+              - --non-interactive
+              - --email
+              - "{{ pikvm_acme_email }}"
+              - --domain
+              - "{{ pikvm_domain }}"
+              - --ip-address
+              - "{{ pikvm_ip }}"
+          register: pikvm_certbot
+          changed_when: "'Successfully received certificate' in pikvm_certbot.stdout"
+
+        - name: Install certificate for KVMD-Nginx
+          ansible.builtin.command:
+            cmd: /usr/bin/kvmd-certbot install_nginx {{ pikvm_domain }}
+          changed_when: false
+
+        - name: Restart KVMD-Nginx
+          ansible.builtin.systemd:
+            name: kvmd-nginx
+            state: restarted
+          when: pikvm_https.changed
+
+        - name: Enable automatic certificate renewal
+          ansible.builtin.systemd:
+            name: kvmd-certbot.timer
+            enabled: true
+            state: started
+      always:
+        - name: Switch filesystem back to read-only
+          ansible.builtin.command:
+            cmd: /usr/bin/ro
+          changed_when: false

@@ -7,7 +7,6 @@
   ignore_unreachable: true
   serial: 1
   max_fail_percentage: 100
-
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:

@@ -25,3 +25,13 @@ output "vault_autounseal_api_key_fingerprint" {
   value       = oci_identity_api_key.vault_autounseal.fingerprint
   sensitive   = true
 }
+
+output "pki_root_ca_certificate" {
+  description = "PEM encoded Vault PKI root CA certificate"
+  value       = vault_pki_secret_backend_root_cert.root.certificate
+}
+
+output "pki_intermediate_ca_certificate" {
+  description = "PEM encoded Vault PKI intermediate CA certificate"
+  value       = vault_pki_secret_backend_root_sign_intermediate.intermediate.certificate
+}
