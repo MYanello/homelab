@@ -64,6 +64,8 @@ resource "vault_pki_secret_backend_config_urls" "pki_int" {
 resource "vault_pki_secret_backend_role" "cert_manager" {
   backend           = vault_mount.pki_int.path
   name              = "cert-manager"
+  key_type          = "any"
+  key_bits          = 0
   ttl               = "7776000"
   max_ttl           = "157680000"
   allow_any_name    = true

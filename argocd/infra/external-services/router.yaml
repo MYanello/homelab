@@ -1,18 +1,18 @@
 ---
 apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+kind: TLSRoute
 metadata:
-  name: opnsense-httproute
+  name: opnsense-route
 spec:
+  parentRefs:
+    - name: private-tls-passthrough-gateway
+      namespace: cilium
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      sectionName: tls-passthrough
   hostnames:
     - opn.yanello.net
     - router.yanello.net
-  parentRefs:
-    - name: cilium-private-gateway
-      group: gateway.networking.k8s.io
-      kind: Gateway
-      namespace: cilium
-      sectionName: https
   rules:
     - backendRefs:
         - name: opnsense-service
@@ -20,10 +20,6 @@ spec:
           kind: Service
           port: 1000
           weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
 ---
 apiVersion: v1
 kind: Service
@@ -31,7 +27,7 @@ metadata:
   name: opnsense-service
 spec:
   ports:
-    - name: http
+    - name: https
       protocol: TCP
       port: 1000
       targetPort: 1000
@@ -48,8 +44,8 @@ metadata:
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http # should match with the name of the service port defined above
-    appProtocol: http
+  - name: https # should match with the name of the service port defined above
+    appProtocol: https
     protocol: TCP
     port: 1000
 endpoints:
