@@ -20,7 +20,7 @@ sources:
   - gateway-tlsroute
   - service
   - crd
-gatewayNamespace: cilium
+# gatewayNamespace: cilium
 
 extraArgs:
   - --gateway-label-filter=external-dns.yanello.net/gateway=private
