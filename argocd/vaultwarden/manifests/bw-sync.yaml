@@ -51,6 +51,8 @@ spec:
               value: "0"
             - name: MIN_FILES
               value: "0"
+            - name: NODE_EXTRA_CA_CERTS
+              value: "/etc/vault-ca/ca.crt"
           envFrom:
             - secretRef:
                 name: bitwarden-secrets
@@ -60,7 +62,15 @@ spec:
               memory: 100Mi
             limits:
               memory: 500Mi
+          volumeMounts:
+            - name: vault-pki-ca
+              mountPath: /etc/vault-ca
+              readOnly: true
           securityContext:
             runAsUser: 0
             runAsGroup: 0
+      volumes:
+        - name: vault-pki-ca
+          configMap:
+            name: vault-pki-ca
       restartPolicy: Always

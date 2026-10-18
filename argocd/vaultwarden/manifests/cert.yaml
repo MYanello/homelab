@@ -1,0 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vaultwarden-tls
+  namespace: vaultwarden
+spec:
+  secretName: vaultwarden-tls
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  dnsNames:
+    - bitwarden.yanello.net
+    - vaultwarden
+    - vaultwarden.vaultwarden
+    - vaultwarden.vaultwarden.svc
+    - vaultwarden.vaultwarden.svc.cluster.local
+  issuerRef:
+    name: vault-pki-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

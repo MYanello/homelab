@@ -7,6 +7,7 @@ resources:
   - manifests/http-route.yaml
   - manifests/bw-sync.yaml
   - manifests/bw-secrets.yaml
+  - manifests/cert.yaml
 
 generators:
   - manifests/secret-generator.yaml
@@ -19,7 +20,7 @@ patches:
       - op: add
         path: /spec/template/metadata/annotations
         value: 
-          backup.velero.io/backup-volumes: vaultwarden-data-vaultwarden-0
+          backup.velero.io/backup-volumes: data
 
 helmCharts:
   - name: vaultwarden

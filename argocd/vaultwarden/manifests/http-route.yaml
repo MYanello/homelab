@@ -27,4 +27,53 @@ spec:
     - backendRefs:
         - name: vaultwarden
           namespace: vaultwarden
-          port: 80
+          port: 443
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-pki-ca
+  namespace: vaultwarden
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIBnTCCAUKgAwIBAgIUHkQ3yQ6G/zoyamvi7yN7MoXDfxgwCgYIKoZIzj0EAwIw
+    GjEYMBYGA1UEAxMPeWFuZWxsby1yb290LWNhMB4XDTI2MTAxNDE0MTcxNloXDTM2
+    MTAxMTE0MTc0NlowGjEYMBYGA1UEAxMPeWFuZWxsby1yb290LWNhMFkwEwYHKoZI
+    zj0CAQYIKoZIzj0DAQcDQgAEBsT5/gIARLJWd83f3R6gpGsH2aB6tCMFSLnKteot
+    pNR7iUkcyxwG3AgwJ/xDIDz+G0fzW/C7IXkPT52d+E21YKNmMGQwDgYDVR0PAQH/
+    BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYEFBPKI708BpCK/NjZ
+    mQ6bjMH5DzC8MB8GA1UdIwQYMBaAFBPKI708BpCK/NjZmQ6bjMH5DzC8MAoGCCqG
+    SM49BAMCA0kAMEYCIQC/HvJIMgfn1IDCDY54NMZjjE9SPi5o82u1QAsAWm0C7gIh
+    AKU0536bGg0S89QUdmNoIFYxsIei1liGRbF2TxAG9MX/
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    MIIBzDCCAXKgAwIBAgIUPBxcPl8Bt9VyajADIG3WCVa0MnMwCgYIKoZIzj0EAwIw
+    GjEYMBYGA1UEAxMPeWFuZWxsby1yb290LWNhMB4XDTI2MTAxNDE0MTcxNloXDTMx
+    MTAxMzE0MTc0NlowIzEhMB8GA1UEAxMYeWFuZWxsby1pbnRlcm1lZGlhdGUtY2Ex
+    MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/VapY2MWNbCo+7gKKyh25+urVU1b
+    zScRD7faaNrGh773pYrwgSkxluQGxJKH6lINywGGmiVA5x06yzVI5hNkwqOBjDCB
+    iTAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU
+    WIy7rttSsiZlUPnwrw1bQAOATgcwHwYDVR0jBBgwFoAUE8ojvTwGkIr82NmZDpuM
+    wfkPMLwwIwYDVR0RBBwwGoIYeWFuZWxsby1pbnRlcm1lZGlhdGUtY2ExMAoGCCqG
+    SM49BAMCA0gAMEUCIDUp/Uc01yZmepBylAJ3iHzeOt2CWSky1a/COXrLmEnAAiEA
+    /RM7banTnfVQJt+CZzyghkytBX8GntkIulXglUVfq9g=
+    -----END CERTIFICATE-----
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: BackendTLSPolicy
+metadata:
+  name: vaultwarden-backend-tls
+  namespace: vaultwarden
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: vaultwarden
+      sectionName: https
+  validation:
+    caCertificateRefs:
+      - name: vault-pki-ca
+        group: ""
+        kind: ConfigMap
+    hostname: bitwarden.yanello.net
