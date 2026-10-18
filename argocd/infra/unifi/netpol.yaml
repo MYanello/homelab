@@ -1,0 +1,79 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: unifi
+spec:
+  endpointSelector:
+    matchLabels:
+      app: unifi
+  ingress:
+    - fromEntities:
+        - world
+        - cluster
+        - ingress
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+            - port: "8080"
+              protocol: TCP
+            - port: "3478"
+              protocol: UDP
+            - port: "10001"
+              protocol: UDP
+            - port: "1900"
+              protocol: UDP
+            - port: "8843"
+              protocol: TCP
+            - port: "8880"
+              protocol: TCP
+            - port: "6789"
+              protocol: TCP
+            - port: "5514"
+              protocol: UDP
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: unifi
+            k8s:app: unifi-mongo
+      toPorts:
+        - ports:
+            - port: "27017"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s:k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+            - port: "80"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: unifi-mongo
+spec:
+  endpointSelector:
+    matchLabels:
+      app: unifi-mongo
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: unifi
+            k8s:app: unifi
+      toPorts:
+        - ports:
+            - port: "27017"
+              protocol: TCP

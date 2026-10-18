@@ -1,0 +1,93 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: unifi-mongo
+spec:
+  replicas: 1
+  serviceName: unifi-mongo
+  selector:
+    matchLabels:
+      app: unifi-mongo
+  template:
+    metadata:
+      labels:
+        app: unifi-mongo
+    spec:
+      containers:
+        - name: mongo
+          image: harbor.yanello.net/docker/library/mongo:7.0.9
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: unifi-secrets
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data/db
+              name: data
+            - mountPath: /docker-entrypoint-initdb.d/init-mongo.sh
+              name: init
+              subPath: init-mongo.sh
+          resources:
+            requests:
+              cpu: 100m
+              memory: 250Mi
+            limits:
+              memory: 1Gi
+      volumes:
+        - name: init
+          configMap:
+            name: unifi-mongo-init
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn-xfs
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unifi-mongo
+spec:
+  ports:
+    - name: mongo
+      port: 27017
+      targetPort: 27017
+  selector:
+    app: unifi-mongo
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unifi-mongo-init
+data:
+  init-mongo.sh: |-
+    #!/bin/bash
+    if which mongosh > /dev/null 2>&1; then
+      mongo_init_bin='mongosh'
+    else
+      mongo_init_bin='mongo'
+    fi
+    "${mongo_init_bin}" <<EOF
+    use ${MONGO_AUTHSOURCE}
+    db.auth("${MONGO_INITDB_ROOT_USERNAME}", "${MONGO_INITDB_ROOT_PASSWORD}")
+    db.createUser({
+      user: "${MONGO_USER}",
+      pwd: "${MONGO_PASS}",
+      roles: [
+        "clusterMonitor",
+        { db: "${MONGO_DBNAME}", role: "dbOwner" },
+        { db: "${MONGO_DBNAME}_stat", role: "dbOwner" },
+        { db: "${MONGO_DBNAME}_audit", role: "dbOwner" },
+        { db: "${MONGO_DBNAME}_restore", role: "dbOwner" }
+      ]
+    })
+    EOF
