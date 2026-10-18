@@ -51,6 +51,12 @@ resource "vault_policy" "esops" {
     path "${vault_mount.k8s_kv.path}/metadata/*" {
       capabilities = ["read", "list", "delete"]
     }
+    path "${vault_mount.pki.path}/cert/ca" {
+      capabilities = ["read"]
+    }
+    path "${vault_mount.pki_int.path}/cert/ca" {
+      capabilities = ["read"]
+    }
   POL
 }
 
@@ -62,26 +68,4 @@ resource "vault_kubernetes_auth_backend_role" "esops" {
   token_ttl                        = 3600
   token_max_ttl                    = 86400
   token_policies                   = [vault_policy.esops.name]
-}
-
-resource "vault_policy" "trust_manager" {
-  name   = "trust-manager"
-  policy = <<-POL
-    path "${vault_mount.pki.path}/cert/ca" {
-      capabilities = ["read"]
-    }
-    path "${vault_mount.pki_int.path}/cert/ca" {
-      capabilities = ["read"]
-    }
-  POL
-}
-
-resource "vault_kubernetes_auth_backend_role" "trust_manager" {
-  backend                          = vault_auth_backend.kubernetes.path
-  role_name                        = "trust-manager"
-  bound_service_account_names      = ["external-secrets"]
-  bound_service_account_namespaces = ["trust-manager"]
-  token_ttl                        = 3600
-  token_max_ttl                    = 86400
-  token_policies                   = [vault_policy.trust_manager.name]
 }

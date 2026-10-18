@@ -63,14 +63,14 @@ spec:
             limits:
               memory: 500Mi
           volumeMounts:
-            - name: vault-pki-ca
+            - name: yanello-ca
               mountPath: /etc/vault-ca
               readOnly: true
           securityContext:
             runAsUser: 0
             runAsGroup: 0
       volumes:
-        - name: vault-pki-ca
+        - name: yanello-ca
           configMap:
-            name: vault-pki-ca
+            name: yanello-ca
       restartPolicy: Always
