@@ -1,0 +1,60 @@
+---
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: VaultDynamicSecret
+metadata:
+  name: yanello-root-ca
+spec:
+  path: pki/cert/ca
+  method: GET
+  resultType: Data
+  provider:
+    server: "https://vault.yanello.net"
+    auth:
+      kubernetes:
+        mountPath: kubernetes
+        role: esops
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: yanello-root-ca
+spec:
+  refreshInterval: 1h
+  target:
+    name: yanello-root-ca
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: VaultDynamicSecret
+          name: yanello-root-ca
+---
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: VaultDynamicSecret
+metadata:
+  name: yanello-int-ca
+spec:
+  path: pki_int/cert/ca
+  method: GET
+  resultType: Data
+  provider:
+    server: "https://vault.yanello.net"
+    auth:
+      kubernetes:
+        mountPath: kubernetes
+        role: esops
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: yanello-int-ca
+spec:
+  refreshInterval: 1h
+  target:
+    name: yanello-int-ca
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: VaultDynamicSecret
+          name: yanello-int-ca

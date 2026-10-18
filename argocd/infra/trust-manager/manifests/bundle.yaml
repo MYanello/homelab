@@ -1,0 +1,16 @@
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: yanello-ca
+spec:
+  sources:
+    - secret:
+        name: yanello-root-ca
+        key: certificate
+    - secret:
+        name: yanello-int-ca
+        key: certificate
+  target:
+    configMap:
+      key: ca.crt

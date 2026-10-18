@@ -1,0 +1,38 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./manifests/ca-sync.yaml
+  - ./manifests/bundle.yaml
+
+helmCharts:
+  - name: trust-manager
+    repo: https://charts.jetstack.io
+    version: "v0.25.0"
+    releaseName: trust-manager
+    namespace: trust-manager
+    valuesInline:
+      crds:
+        enabled: true
+      app:
+        trust:
+          namespace: trust-manager
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+        limits:
+          memory: 100Mi
