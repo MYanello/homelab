@@ -13,6 +13,15 @@ masterkeySecretKey: PROXY_MASTER_KEY
 environmentSecrets:
   - litellm-secrets
 
+envVars:
+  PROXY_BASE_URL: https://llm.yanello.net
+  GENERIC_CLIENT_ID: WKvSFMamJfufOsIv8KmuoyUBhvihplxuOEaP5Zsu
+  GENERIC_AUTHORIZATION_ENDPOINT: https://authentik.yanello.net/application/o/authorize/
+  GENERIC_TOKEN_ENDPOINT: https://authentik.yanello.net/application/o/token/
+  GENERIC_USERINFO_ENDPOINT: https://authentik.yanello.net/application/o/userinfo/
+  GENERIC_SCOPE: openid profile email
+  GENERIC_USER_ID_ATTRIBUTE: sub
+
 proxy_config:
   model_list:
     - model_name: vllm/latest

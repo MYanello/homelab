@@ -10,6 +10,7 @@ resources:
   - netpol.yaml
   - http-route.yaml
   - scrape.yaml
+  - ext-secrets.yaml
 
 helmCharts:
   - name: litellm-helm
