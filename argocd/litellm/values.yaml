@@ -7,14 +7,15 @@ resources:
     memory: 512Mi
   limits:
     memory: 2Gi
-masterkeySecretName: litellm-secrets
+masterkeySecretName: vault-secrets
 masterkeySecretKey: PROXY_MASTER_KEY
 
 environmentSecrets:
-  - litellm-secrets
+  - vault-secrets
 
 envVars:
   PROXY_BASE_URL: https://llm.yanello.net
+  PROXY_ADMIN_ID: e95de16d00fdf34bef87a53906c3d77e603ac08f1dbe42735451d36a673f0131
   GENERIC_CLIENT_ID: WKvSFMamJfufOsIv8KmuoyUBhvihplxuOEaP5Zsu
   GENERIC_AUTHORIZATION_ENDPOINT: https://authentik.yanello.net/application/o/authorize/
   GENERIC_TOKEN_ENDPOINT: https://authentik.yanello.net/application/o/token/
@@ -48,7 +49,7 @@ db:
 redis:
   enabled: true
   auth:
-    existingSecret: litellm-secrets
+    existingSecret: vault-secrets
     existingSecretPasswordKey: REDIS_PASSWORD
   master:
     persistence:
