@@ -1,0 +1,64 @@
+---
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 512Mi
+  limits:
+    memory: 2Gi
+masterkeySecretName: litellm-secrets
+masterkeySecretKey: PROXY_MASTER_KEY
+
+environmentSecrets:
+  - litellm-secrets
+
+proxy_config:
+  model_list:
+    - model_name: vllm
+      litellm_params:
+        model: vllm/latest
+        api_base: https://vllm.cw623e-myanello.coreweave.app/v1
+        api_key: os.environ/VLLM_API_KEY
+  general_settings:
+    master_key: os.environ/PROXY_MASTER_KEY
+    store_model_in_db: true
+
+db:
+  deployStandalone: false
+  useExisting: true
+  endpoint: litellm-db-rw
+  database: litellm
+  secret:
+    name: litellm-db-app
+    usernameKey: username
+    passwordKey: password
+  connectionPool:
+    enabled: true
+
+redis:
+  enabled: true
+  auth:
+    existingSecret: litellm-secrets
+    existingSecretPasswordKey: REDIS_PASSWORD
+  master:
+    persistence:
+      enabled: true
+      storageClass: truenas-ssd
+      size: 2Gi
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
+
+migrationJob:
+  hooks:
+    argocd:
+      enabled: false
+
+metricsServer:
+  enabled: true
+serviceMonitor:
+  enabled: false

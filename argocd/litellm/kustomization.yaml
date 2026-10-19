@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generators:
+  - secret-generator.yaml
+
+resources:
+  - cnpg.yaml
+  - netpol.yaml
+  - http-route.yaml
+  - scrape.yaml
+
+helmCharts:
+  - name: litellm-helm
+    repo: oci://ghcr.io/berriai
+    version: "1.106.0"
+    releaseName: litellm
+    namespace: litellm
+    valuesFile: values.yaml

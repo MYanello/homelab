@@ -1,0 +1,19 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: litellm-app
+  name: litellm-http-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - llm.yanello.net
+  rules:
+    - backendRefs:
+        - name: litellm
+          namespace: litellm
+          port: 4000
