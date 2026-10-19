@@ -22,15 +22,6 @@ spec:
         app: immich-server
     spec:
       runtimeClassName: nvidia
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
       containers:
         - name: immich-server
           envFrom:
@@ -59,7 +50,7 @@ spec:
             - name: marcus-surface
               mountPath: "/usr/src/app/upload/library/Marcus/Photo Frame"
             - name: camille-surface
-              mountPath: '/usr/src/app/upload/library/Camille/Photo Frame'
+              mountPath: "/usr/src/app/upload/library/Camille/Photo Frame"
       volumes:
         - name: photos
           persistentVolumeClaim:
@@ -94,15 +85,6 @@ spec:
         app: immich-machine-learning
     spec:
       runtimeClassName: nvidia
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - marcus-server
       containers:
         - name: immich-machine-learning
           envFrom:
