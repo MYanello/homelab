@@ -486,7 +486,7 @@ module "immich" {
     },
   ]
   meta_launch_url = ""
-  logout_uri = "https://immich.yanello.net/api/oauth/backchannel-logout"
+  # logout_uri = "https://immich.yanello.net/api/oauth/backchannel-logout"
 }
 
 module "linkwarden" {
