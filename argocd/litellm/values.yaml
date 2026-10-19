@@ -27,12 +27,18 @@ proxy_config:
   model_list:
     - model_name: vllm/latest
       litellm_params:
-        model: openai/vllm/latest
+        model: hosted_vllm/vllm/latest
         api_base: https://vllm.cw623e-myanello.coreweave.app/v1
         api_key: os.environ/VLLM_API_KEY
+    - model_name: "openrouter/*"
+      litellm_params:
+        model: "openrouter/*"
+        api_key: os.environ/OPENROUTER_API_KEY
   general_settings:
     master_key: os.environ/PROXY_MASTER_KEY
     store_model_in_db: true
+    disable_env_credential_login: true
+    disable_password_login_when_sso_enabled: true
 
 db:
   deployStandalone: false
