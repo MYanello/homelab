@@ -20,10 +20,6 @@ spec:
     parameters:
       max_connections: "200"
       shared_buffers: "512MB"
-  bootstrap:
-    initdb:
-      database: honcho
-      owner: honcho
   enableSuperuserAccess: true
   resources:
     requests:
