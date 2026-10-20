@@ -47,6 +47,14 @@ spec:
         - ports:
             - port: "9000"
               protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: monitoring
+            k8s:app.kubernetes.io/name: opentelemetry-collector
+      toPorts:
+        - ports:
+            - port: "4318"
+              protocol: TCP
     - toEntities:
         - world
       toPorts:

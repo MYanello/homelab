@@ -2,6 +2,8 @@
 image:
   repository: harbor.yanello.net/ghcr/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s
 mode: daemonset
+service:
+  enabled: true
 presets:
   logsCollection:
     enabled: true
