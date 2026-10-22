@@ -24,9 +24,9 @@ spec:
   resources:
     requests:
       cpu: 10m
-      memory: 576Mi
+      memory: 500Mi
     limits:
-      memory: 704Mi
+      memory: 1000Mi
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       enabled: true
