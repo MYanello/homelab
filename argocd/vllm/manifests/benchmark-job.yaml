@@ -21,6 +21,7 @@ spec:
                 --backend openai \
                 --base-url https://sglang.cw623e-myanello.coreweave.app \
                 --model inference/latest \
+                --tokenizer audnai/penclaw-GLM-5.3-abliterated \
                 --num-prompts 200 \
                 --input-len 1024 \
                 --output-len 512 \
