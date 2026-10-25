@@ -19,14 +19,12 @@ spec:
             - |
               vllm bench serve \
                 --backend openai \
-                --base-url https://vllm.cw623e-myanello.coreweave.app \
-                --model deepseek-ai/DeepSeek-V4.1-Flash \
-                --tokenizer deepseek-ai/DeepSeek-V4.1-Flash \
+                --base-url https://sglang.cw623e-myanello.coreweave.app \
                 --num-prompts 200 \
                 --input-len 1024 \
                 --output-len 512 \
                 --request-rate inf \
-                --max-concurrency 8 \
+                --max-concurrency 2 \
           env:
             - name: OPENAI_API_KEY
               valueFrom:
