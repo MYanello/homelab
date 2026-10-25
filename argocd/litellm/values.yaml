@@ -30,11 +30,11 @@ envVars:
 
 proxy_config:
   model_list:
-    - model_name: vllm/latest
+    - model_name: inference/latest
       litellm_params:
-        model: hosted_vllm/vllm/latest
-        api_base: https://vllm.cw623e-myanello.coreweave.app/v1
-        api_key: os.environ/VLLM_API_KEY
+        model: custom_openai/sglang/latest
+        api_base: https://sglang.cw623e-myanello.coreweave.app/v1
+        api_key: os.environ/HOSTED_API_KEY
     - model_name: "openrouter/*"
       litellm_params:
         model: "openrouter/*"
