@@ -11,6 +11,6 @@ resources:
   - manifests/paperless.yaml
   - manifests/service.yaml
   - manifests/cnpg.yaml
-  - manifests/kreuzakt.yaml
-  - manifests/gpt.yaml
-  - manifests/paperless-ai.yaml
+  # - manifests/kreuzakt.yaml
+  # - manifests/gpt.yaml
+  # - manifests/paperless-ai.yaml
