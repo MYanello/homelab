@@ -33,6 +33,11 @@ spec:
                 secretKeyRef:
                   name: api-key
                   key: api-key
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hf-token
+                  key: token
           resources:
             requests:
               cpu: 250m
