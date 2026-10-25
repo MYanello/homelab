@@ -22,7 +22,7 @@ spec:
         runAsGroup: 65532
         fsGroup: 65532
       containers:
-        - image: harbor.yanello.net/docker/aauren/ntopng-exporter:v1.7.1@sha256:1dda4646e970a8a0ca0d5b734464ad8b74d35343fab8dcd4c92bd178f905163a
+        - image: harbor.yanello.net/docker/aauren/ntopng-exporter:v1.8.0@sha256:899c0465856a81caeddc76ea1f62f37cfb7c0a8c7b41917cf7cf84faeeb8418a
           name: ntopng-exporter
           imagePullPolicy: IfNotPresent
           ports:
