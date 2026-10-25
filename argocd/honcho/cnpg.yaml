@@ -19,12 +19,12 @@ spec:
   postgresql:
     parameters:
       max_connections: "200"
-      shared_buffers: "512MB"
+      shared_buffers: "500MB"
   enableSuperuserAccess: true
   resources:
     requests:
       cpu: 10m
-      memory: 500Mi
+      memory: 750Mi
     limits:
       memory: 1000Mi
   plugins:
