@@ -27,6 +27,7 @@ spec:
                 --output-len 512 \
                 --request-rate inf \
                 --max-concurrency 2 \
+                --dataset-name spec_bench --spec-bench-output-len 512 --spec-bench-category coding
           env:
             - name: OPENAI_API_KEY
               valueFrom:
