@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
-  - https://github.com/prometheus-operator/prometheus-operator?ref=v0.94.1
+  - https://github.com/prometheus-operator/prometheus-operator?ref=v0.94.2
