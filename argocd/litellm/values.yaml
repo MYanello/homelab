@@ -22,11 +22,11 @@ envVars:
   GENERIC_USERINFO_ENDPOINT: https://authentik.yanello.net/application/o/userinfo/
   GENERIC_SCOPE: openid profile email
   GENERIC_USER_ID_ATTRIBUTE: sub
-  # OTEL_EXPORTER_OTLP_ENDPOINT: http://opentelemetry-collector.monitoring.svc.cluster.local:4318
-  # OTEL_EXPORTER_OTLP_PROTOCOL: http/json
-  # OTEL_SERVICE_NAME: litellm
-  # OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: EVENT_ONLY
-  # LITELLM_OTEL_INTEGRATION_ENABLE_EVENTS: "true"
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://opentelemetry-collector.monitoring.svc.cluster.local:4318
+  OTEL_EXPORTER_OTLP_PROTOCOL: http/json
+  OTEL_SERVICE_NAME: litellm
+  OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: EVENT_ONLY
+  LITELLM_OTEL_INTEGRATION_ENABLE_EVENTS: "true"
 
 proxy_config:
   model_list:
@@ -44,9 +44,9 @@ proxy_config:
     store_model_in_db: true
     disable_env_credential_login: true
     disable_password_login_when_sso_enabled: true
-  # litellm_settings:
-    # callbacks:
-      # - otel
+  litellm_settings:
+    callbacks:
+      - otel
 
 db:
   deployStandalone: false
