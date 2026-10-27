@@ -35,6 +35,8 @@ proxy_config:
         model: custom_openai/sglang/latest
         api_base: https://sglang.cw623e-myanello.coreweave.app/v1
         api_key: os.environ/HOSTED_API_KEY
+        allowed_openai_params:
+          - reasoning_effort
     - model_name: "openrouter/*"
       litellm_params:
         model: "openrouter/*"
