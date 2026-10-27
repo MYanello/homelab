@@ -73,9 +73,7 @@ spec:
           image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.27.1@sha256:34776750cefa14fee586d3865ffb14dc9dc14693231d95fbfe59155a2b0e10e7
           imagePullPolicy: IfNotPresent
           # command: ["sleep", "infinity"]
-          args:
-            - --log-level
-            - debug
+          args: ["--log-level", "info"]
           env:
             - name: PROTONMAIL_BRIDGE_AUTO_UPDATE
               value: "false"

@@ -10,7 +10,7 @@ data:
   USERMAP_GID: "3000"
   PAPERLESS_URL: https://paperless.yanello.net
   PAPERLESS_PORT: "8000"
-  PAPERLESS_TIME_ZONE: America/Chicago
+  PAPERLESS_TIME_ZONE: America/Toronto
   PAPERLESS_REDIS: redis://redis:6379
   PAPERLESS_DBHOST: paperless-db-rw # db
   PAPERLESS_DBENGINE: postgresql # mariadb
