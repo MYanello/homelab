@@ -35,8 +35,7 @@ spec:
         - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:3.3.4@sha256:9bc6e8248891bcfa6f52fffe8b81e4ea8cae75790c3ec1b9906961a7ba55c969
           imagePullPolicy: IfNotPresent
           name: paperless
-          # command: ["sleep", "infinity"]
-
+          command: ["sleep", "infinity"]
           # securityContext:
           #   runAsUser: 3000
           #   runAsGroup: 3000
@@ -66,19 +65,19 @@ spec:
               memory: 1Gi
             limits:
               memory: 5Gi
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8000
-            periodSeconds: 30
-            timeoutSeconds: 10
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8000
-            periodSeconds: 30
-            timeoutSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8000
+          #   periodSeconds: 30
+          #   timeoutSeconds: 10
+          #   failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8000
+          #   periodSeconds: 30
+          #   timeoutSeconds: 10
         - name: protonmail-bridge
           image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.27.1@sha256:34776750cefa14fee586d3865ffb14dc9dc14693231d95fbfe59155a2b0e10e7
           imagePullPolicy: IfNotPresent
