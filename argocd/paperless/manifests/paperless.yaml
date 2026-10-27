@@ -23,6 +23,10 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: "paperless-media,paperless-data"
     spec:
+      securityContext:
+        runAsUser: 3000
+        runAsGroup: 3000
+        fsGroup: 3000
       tolerations:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
@@ -31,6 +35,10 @@ spec:
         - image: harbor.yanello.net/ghcr/paperless-ngx/paperless-ngx:3.3.4@sha256:9bc6e8248891bcfa6f52fffe8b81e4ea8cae75790c3ec1b9906961a7ba55c969
           imagePullPolicy: IfNotPresent
           name: paperless
+          securityContext:
+            runAsUser: 3000
+            runAsGroup: 3000
+            allowPrivilegeEscalation: false
           ports:
             - containerPort: 8000
               protocol: TCP
