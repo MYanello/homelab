@@ -23,6 +23,7 @@ data:
   PAPERLESS_AI_ENABLED: "true"
   PAPERLESS_AI_LLM_BACKEND: openai-like
   PAPERLESS_AI_LLM_MODEL: inference/latest
+  PAPERLESS_AI_LLM_ENDPOINT: http://litellm.litellm:4000
   PAPERLESS_AI_LLM_EMBEDDING_BACKEND: openai-like
   PAPERLESS_AI_LLM_EMBEDDING_MODEL: openrouter/openai/text-embedding-3-small
-  PAPERLESS_AI_LLM_ENDPOINT: http://litellm.litellm:4000
+  PAPERLESS_AI_EMBEDDING_ENDPOINT: http://litellm.litellm:4000
