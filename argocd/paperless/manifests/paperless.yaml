@@ -23,10 +23,10 @@ spec:
       annotations:
         backup.velero.io/backup-volumes: "paperless-media,paperless-data"
     spec:
-      # securityContext:
-      #   runAsUser: 3000
-      #   runAsGroup: 3000
-      #   fsGroup: 3000
+      securityContext:
+        runAsUser: 3000
+        runAsGroup: 3000
+        fsGroup: 3000
       tolerations:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
@@ -36,10 +36,10 @@ spec:
           imagePullPolicy: IfNotPresent
           name: paperless
           command: ["sleep", "infinity"]
-          # securityContext:
-          #   runAsUser: 3000
-          #   runAsGroup: 3000
-          #   allowPrivilegeEscalation: false
+          securityContext:
+            runAsUser: 3000
+            runAsGroup: 3000
+            allowPrivilegeEscalation: false
           ports:
             - containerPort: 8000
               protocol: TCP
@@ -65,19 +65,19 @@ spec:
               memory: 1Gi
             limits:
               memory: 5Gi
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8000
-          #   periodSeconds: 30
-          #   timeoutSeconds: 10
-          #   failureThreshold: 5
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8000
-          #   periodSeconds: 30
-          #   timeoutSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            periodSeconds: 30
+            timeoutSeconds: 10
         - name: protonmail-bridge
           image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.27.1@sha256:34776750cefa14fee586d3865ffb14dc9dc14693231d95fbfe59155a2b0e10e7
           imagePullPolicy: IfNotPresent
