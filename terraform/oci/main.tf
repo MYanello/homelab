@@ -1,17 +1,5 @@
-module "free_compartment" {
-  source = "./free_compartment"
-
-  tenancy                   = data.sops_file.oci.data["tenancy_ocid"]
-  instance_hostname         = "free_1"
-  instance_ocpus            = 1
-  instance_memory           = 1
-  instance_boot_volume_size = 50
-  instance_public_key_path  = local.instance_public_key_path
-  name                      = "free_instance_0"
-}
-
-
 locals {
+  tenancy                        = data.sops_file.oci.data["tenancy_ocid"]
   instance_shape                 = "VM.Standard.E2.1.Micro"
   memory_in_gbs                  = 1
   ocpus                          = 1
@@ -32,9 +20,51 @@ data "oci_identity_availability_domains" "ads" {
   compartment_id = data.sops_file.oci.data["tenancy_ocid"]
 }
 
+resource "oci_identity_compartment" "free_compartment" {
+  compartment_id = local.tenancy
+  description    = "Oracle Cloud Free Tier compartment"
+  name           = "always-free"
+  enable_delete  = true
+}
+
+resource "oci_core_vcn" "free_vcn" {
+  cidr_block     = "10.1.0.0/16"
+  compartment_id = oci_identity_compartment.free_compartment.id
+  display_name   = "freeVCN"
+  dns_label      = "freevcn"
+}
+
+resource "oci_core_subnet" "free_subnet" {
+  cidr_block      = "10.1.20.0/24"
+  display_name    = "freeSubnet"
+  dns_label       = "freesubnet"
+  compartment_id  = oci_identity_compartment.free_compartment.id
+  vcn_id          = oci_core_vcn.free_vcn.id
+  route_table_id  = oci_core_route_table.free_route_table.id
+  dhcp_options_id = oci_core_vcn.free_vcn.default_dhcp_options_id
+}
+
+resource "oci_core_internet_gateway" "free_internet_gateway" {
+  compartment_id = oci_identity_compartment.free_compartment.id
+  display_name   = "freeIG"
+  vcn_id         = oci_core_vcn.free_vcn.id
+}
+
+resource "oci_core_route_table" "free_route_table" {
+  compartment_id = oci_identity_compartment.free_compartment.id
+  vcn_id         = oci_core_vcn.free_vcn.id
+  display_name   = "freeRouteTable"
+
+  route_rules {
+    destination       = "0.0.0.0/0"
+    destination_type  = "CIDR_BLOCK"
+    network_entity_id = oci_core_internet_gateway.free_internet_gateway.id
+  }
+}
+
 resource "oci_core_instance" "free_instance_1" {
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[1].name
-  compartment_id      = module.free_compartment.compartment-id
+  compartment_id      = oci_identity_compartment.free_compartment.id
   shape               = local.instance_shape
   display_name        = "free_1"
 
@@ -51,7 +81,7 @@ resource "oci_core_instance" "free_instance_1" {
 
   create_vnic_details {
     assign_public_ip = true
-    subnet_id        = module.free_compartment.subnet-id
+    subnet_id        = oci_core_subnet.free_subnet.id
     display_name     = "free_1"
   }
 
