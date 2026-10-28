@@ -8,7 +8,7 @@ resources:
 helmCharts:
   - name: trust-manager
     repo: https://charts.jetstack.io
-    version: "v0.25.0"
+    version: "v0.26.0"
     releaseName: trust-manager
     namespace: trust-manager
     valuesInline:
