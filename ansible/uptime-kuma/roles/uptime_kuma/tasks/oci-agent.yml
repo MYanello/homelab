@@ -1,0 +1,24 @@
+---
+- name: Disable oracle cloud agent
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: false
+    state: stopped
+  loop:
+    - snap.oracle-cloud-agent.oracle-cloud-agent.service
+    - snap.oracle-cloud-agent.oracle-cloud-agent-updater.service
+  failed_when: false
+
+- name: Mask snapd
+  ansible.builtin.systemd_service:
+    name: snapd
+    masked: true
+    state: stopped
+  failed_when: false
+
+- name: Disable snapd socket
+  ansible.builtin.systemd_service:
+    name: snapd.socket
+    enabled: false
+    state: stopped
+  failed_when: false
