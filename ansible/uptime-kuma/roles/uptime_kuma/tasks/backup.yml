@@ -1,0 +1,69 @@
+---
+- name: Install backup packages
+  ansible.builtin.apt:
+    name:
+      - rclone
+      - sqlite3
+    state: present
+    update_cache: true
+
+- name: Ensure backup staging directory
+  ansible.builtin.file:
+    path: "{{ uptime_kuma_backup_staging_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Ensure rclone config directory
+  ansible.builtin.file:
+    path: "{{ uptime_kuma_backup_rclone_config | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Write rclone configuration
+  ansible.builtin.template:
+    src: rclone.conf.j2
+    dest: "{{ uptime_kuma_backup_rclone_config }}"
+    owner: root
+    group: root
+    mode: "0600"
+
+- name: Write backup script
+  ansible.builtin.template:
+    src: uptime-kuma-backup.sh.j2
+    dest: "{{ uptime_kuma_backup_script }}"
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Write backup service unit
+  ansible.builtin.template:
+    src: uptime-kuma-backup.service.j2
+    dest: /etc/systemd/system/uptime-kuma-backup.service
+    owner: root
+    group: root
+    mode: "0644"
+  register: uptime_kuma_backup_service
+
+- name: Write backup timer unit
+  ansible.builtin.template:
+    src: uptime-kuma-backup.timer.j2
+    dest: /etc/systemd/system/uptime-kuma-backup.timer
+    owner: root
+    group: root
+    mode: "0644"
+  register: uptime_kuma_backup_timer
+
+- name: Reload systemd
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+  when: uptime_kuma_backup_service.changed or uptime_kuma_backup_timer.changed
+
+- name: Enable backup timer
+  ansible.builtin.systemd_service:
+    name: uptime-kuma-backup.timer
+    enabled: true
+    state: started

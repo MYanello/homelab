@@ -1,0 +1,8 @@
+[Unit]
+Description=Back up Uptime Kuma database to Backblaze B2
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart={{ uptime_kuma_backup_script }}

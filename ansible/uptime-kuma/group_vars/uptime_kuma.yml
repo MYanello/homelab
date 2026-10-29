@@ -9,3 +9,11 @@ uptime_kuma_docker_user: ubuntu
 swap_file: /swapfile
 swap_size: 2G
 swappiness: "10"
+uptime_kuma_backup_enabled: true
+uptime_kuma_backup_staging_dir: /var/lib/uptime-kuma-backup
+uptime_kuma_backup_rclone_config: /etc/rclone/rclone.conf
+uptime_kuma_backup_script: /usr/local/bin/uptime-kuma-backup.sh
+uptime_kuma_backup_time: "04:30:00"
+uptime_kuma_backup_b2_endpoint: https://s3.us-west-004.backblazeb2.com
+uptime_kuma_backup_b2_region: us-west-004
+uptime_kuma_backup_remote: backblaze:myanello-backups/oracle-free

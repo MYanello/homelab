@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Uptime Kuma database backup
+
+[Timer]
+OnCalendar=*-*-* {{ uptime_kuma_backup_time }}
+Persistent=true
+RandomizedDelaySec=5m
+Unit=uptime-kuma-backup.service
+
+[Install]
+WantedBy=timers.target

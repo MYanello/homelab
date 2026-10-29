@@ -1,0 +1,10 @@
+[backblaze]
+type = s3
+provider = Other
+access_key_id = {{ uptime_kuma_backup_b2_key_id }}
+secret_access_key = {{ uptime_kuma_backup_b2_app_key }}
+endpoint = {{ uptime_kuma_backup_b2_endpoint }}
+region = {{ uptime_kuma_backup_b2_region }}
+upload_cutoff = 5M
+chunk_size = 5M
+no_check_bucket = true

@@ -1,0 +1,18 @@
+---
+uptime_kuma_backup_b2_key_id: ENC[AES256_GCM,data:KVfHmo7sIMMv2CRBymaZZrfDwH71rPOO3w==,iv:/7hheTG9BBWl6dm222RWG3On/FktHcg/arIDi1m6p+M=,tag:G61OVELtVy8bFyx6/daAag==,type:str]
+uptime_kuma_backup_b2_app_key: ENC[AES256_GCM,data:m+DzwJEG6aRXttg/JmTHGxa2cX6iTl/Qb9N5G1PJlA==,iv:nL1+aEjS5tlrLWhaPJxO7rwaF+8EQE7+ZueiPuwJRhM=,tag:k4yU8eQa4znvaHFxihc1Ew==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3NWFBWmwzUk00ZlVBSUMy
+        d3ZqeW1iZnJwaTZSV3RHZzE0Zi84L3psNEV3CkxMdm1xZ3c2RzJWd2RmK3gyU3VV
+        c0V0d0dSdFc3bUNCc2E3UEg2MXRmbGsKLS0tIGZGV09ERWJ5TUhWOXMzRTg2b0NU
+        N3hOVlFXeTRIUDVuZDJVQ3l4OTViRjgKjoq1K/CKSft7pr3EgPsADB4jJ+r/369W
+        Mj67gqYXLtMWaOA7mXL7lSSR8Fu/v8l80ji22LDMTjeCDej0XTug3Q==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+  lastmodified: "2026-10-29T18:20:31Z"
+  mac: ENC[AES256_GCM,data:X23p9OWde/V8L1XF4+vGxZ4YSUsawC1UZMnbOjKIo4uEf5IhaObcNAq4Cx5h03X5QCdrgVACP9yXCQAp/aV/bPJjqgQVuGhty1v6jM8DWTaIHsZ6BjLXE3o3fgq3MT+pikUts55pLadxLQH5jOdCpzVzDGBfQ95pWle+nU3YCfE=,iv:5cwZkj2lHSC9qwfWnI8ME7nmoDzscy6UY4gAdJLAQoc=,tag:nhMaWi7X3n0n1Bd9gGvVqA==,type:str]
+  unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+  version: 3.13.3

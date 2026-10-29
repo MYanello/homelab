@@ -109,3 +109,7 @@
   ansible.builtin.command:
     cmd: netfilter-persistent save
   when: uptime_kuma_firewall.changed
+
+- name: Configure backups
+  ansible.builtin.import_tasks: backup.yml
+  when: uptime_kuma_backup_enabled | bool
