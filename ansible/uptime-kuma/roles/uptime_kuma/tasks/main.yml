@@ -10,6 +10,14 @@
     state: present
     update_cache: true
 
+- name: Remove unattended upgrades
+  ansible.builtin.apt:
+    name:
+      - unattended-upgrades
+    state: absent
+    purge: true
+    autoremove: true
+
 - name: Install docker
   ansible.builtin.apt:
     name:
@@ -22,6 +30,15 @@
     name: docker
     enabled: true
     state: started
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ uptime_kuma_docker_user }}"
+    groups: docker
+    append: true
+
+- name: Configure swap
+  ansible.builtin.import_tasks: swap.yml
 
 - name: Ensure uptime kuma data directory
   ansible.builtin.file:

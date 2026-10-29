@@ -1,0 +1,43 @@
+---
+- name: Create swap file
+  ansible.builtin.command:
+    cmd: fallocate -l {{ swap_size }} {{ swap_file }}
+    creates: "{{ swap_file }}"
+  register: uptime_kuma_swap_created
+
+- name: Set swap file permissions
+  ansible.builtin.file:
+    path: "{{ swap_file }}"
+    owner: root
+    group: root
+    mode: "0600"
+
+- name: Format swap file
+  ansible.builtin.command:
+    cmd: mkswap {{ swap_file }}
+  when: uptime_kuma_swap_created.changed
+
+- name: Enable swap file
+  ansible.builtin.command:
+    cmd: swapon {{ swap_file }}
+  register: uptime_kuma_swapon_result
+  failed_when: false
+  changed_when:
+    - uptime_kuma_swapon_result.rc == 0
+    - "'already active' not in uptime_kuma_swapon_result.stderr"
+
+- name: Persist swap file in fstab
+  ansible.posix.mount:
+    path: none
+    src: "{{ swap_file }}"
+    fstype: swap
+    opts: sw
+    state: present
+
+- name: Set swappiness
+  ansible.posix.sysctl:
+    name: vm.swappiness
+    value: "{{ swappiness }}"
+    sysctl_set: true
+    state: present
+    reload: true
