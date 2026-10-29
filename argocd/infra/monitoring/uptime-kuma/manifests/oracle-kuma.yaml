@@ -53,7 +53,7 @@ ports:
     port: 3001
 endpoints:
   - addresses:
-      - 150.136.155.17
+      - 150.136.165.15
     conditions:
       ready: true
 ---
@@ -65,7 +65,7 @@ spec:
   scrape_interval: 60s
   staticConfigs:
     - targets:
-        - 150.136.155.17:3001
+        - 150.136.165.15:3001
   path: /metrics
   scheme: http
   basicAuth:
