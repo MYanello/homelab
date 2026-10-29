@@ -4,146 +4,73 @@
     name:
       - ca-certificates
       - curl
-      - git
-      - build-essential
       - python3
+      - python3-apt
       - acl
     state: present
     update_cache: true
 
-- name: NodeSource apt keyring
-  ansible.builtin.get_url:
-    url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
-    dest: /etc/apt/keyrings/nodesource.asc
-    mode: "0644"
-
-- name: NodeSource apt repository
-  deb822_repository:
-    name: nodesource
-    types: deb
-    uris: https://deb.nodesource.com/node_{{ uptime_kuma_node_major }}.x
-    suites: nodistro
-    components:
-      - main
-    signed_by: /etc/apt/keyrings/nodesource.asc
-    state: present
-
-- name: Install nodejs
+- name: Install docker
   ansible.builtin.apt:
-    name: nodejs
+    name:
+      - docker.io
     state: present
     update_cache: true
 
-- name: Install pm2
-  ansible.builtin.command:
-    cmd: npm install -g pm2
-    creates: /usr/bin/pm2
+- name: Enable docker
+  ansible.builtin.systemd_service:
+    name: docker
+    enabled: true
+    state: started
 
-- name: Uptime Kuma user
-  ansible.builtin.user:
-    name: "{{ uptime_kuma_user }}"
-    home: "{{ uptime_kuma_home }}"
-    system: true
-    create_home: true
-    shell: /usr/sbin/nologin
-
-- name: Ensure uptime kuma directory
+- name: Ensure uptime kuma data directory
   ansible.builtin.file:
-    path: "{{ uptime_kuma_dir }}"
+    path: "{{ uptime_kuma_data_dir }}"
     state: directory
-    owner: "{{ uptime_kuma_user }}"
-    group: "{{ uptime_kuma_user }}"
-    mode: "0750"
+    owner: root
+    group: root
+    mode: "0755"
 
-- name: Clone uptime kuma
-  ansible.builtin.git:
-    repo: "{{ uptime_kuma_repo }}"
-    dest: "{{ uptime_kuma_dir }}"
-    version: "{{ uptime_kuma_version }}"
-    depth: 1
-  become_user: "{{ uptime_kuma_user }}"
+- name: Pull uptime kuma image
+  community.docker.docker_image:
+    name: "{{ uptime_kuma_image }}"
+    tag: "{{ uptime_kuma_version }}"
+    source: pull
+    force_source: "{{ uptime_kuma_pull }}"
+  register: uptime_kuma_pull_result
 
-- name: Run uptime kuma setup
-  ansible.builtin.command:
-    cmd: npm run setup
-    chdir: "{{ uptime_kuma_dir }}"
-    creates: "{{ uptime_kuma_dir }}/.setup-{{ uptime_kuma_version }}"
-  become_user: "{{ uptime_kuma_user }}"
-  environment:
-    HOME: "{{ uptime_kuma_home }}"
+- name: Run uptime kuma
+  community.docker.docker_container:
+    name: uptime-kuma
+    image: "{{ uptime_kuma_image }}:{{ uptime_kuma_version }}"
+    state: started
+    restart_policy: unless-stopped
+    detach: true
+    pull: false
+    published_ports:
+      - "{{ uptime_kuma_port }}:3001"
+    volumes:
+      - "{{ uptime_kuma_data_dir }}:/app/data"
+    env:
+      UPTIME_KUMA_HOST: "{{ uptime_kuma_host }}"
+      UPTIME_KUMA_PORT: "3001"
+    comparisons:
+      image: strict
+  register: uptime_kuma_container
 
-- name: Mark setup complete
-  ansible.builtin.file:
-    path: "{{ uptime_kuma_dir }}/.setup-{{ uptime_kuma_version }}"
-    state: touch
-    owner: "{{ uptime_kuma_user }}"
-    group: "{{ uptime_kuma_user }}"
-  changed_when: false
+- name: Wait for uptime kuma to listen
+  ansible.builtin.wait_for:
+    host: "{{ uptime_kuma_host }}"
+    port: "{{ uptime_kuma_port }}"
+    timeout: 120
 
-- name: Uptime Kuma environment file
-  ansible.builtin.copy:
-    content: |
-      UPTIME_KUMA_HOST={{ uptime_kuma_host }}
-      UPTIME_KUMA_PORT={{ uptime_kuma_port }}
-    dest: "{{ uptime_kuma_dir }}/.env"
-    owner: "{{ uptime_kuma_user }}"
-    group: "{{ uptime_kuma_user }}"
-    mode: "0600"
-  become_user: "{{ uptime_kuma_user }}"
-  register: uptime_kuma_env
-
-- name: Check pm2-logrotate module
-  ansible.builtin.stat:
-    path: "{{ uptime_kuma_home }}/.pm2/modules/pm2-logrotate"
-  register: uptime_kuma_logrotate
-
-- name: Install pm2-logrotate
-  ansible.builtin.command:
-    cmd: pm2 install pm2-logrotate
-  become_user: "{{ uptime_kuma_user }}"
-  environment:
-    HOME: "{{ uptime_kuma_home }}"
-  when: not uptime_kuma_logrotate.stat.exists
-
-- name: Check uptime kuma pm2 process
-  ansible.builtin.command:
-    cmd: pm2 describe uptime-kuma
-  become_user: "{{ uptime_kuma_user }}"
-  environment:
-    HOME: "{{ uptime_kuma_home }}"
-  register: uptime_kuma_pm2
+- name: Check for existing uptime kuma firewall rule
+  ansible.builtin.shell:
+    cmd: iptables -C INPUT -p tcp --dport {{ uptime_kuma_port }} -m state --state
+      NEW -j ACCEPT
+  register: uptime_kuma_fw_check
   changed_when: false
   failed_when: false
-
-- name: Start uptime kuma
-  ansible.builtin.command:
-    cmd: pm2 start server/server.js --name uptime-kuma
-    chdir: "{{ uptime_kuma_dir }}"
-  become_user: "{{ uptime_kuma_user }}"
-  environment:
-    HOME: "{{ uptime_kuma_home }}"
-  when: uptime_kuma_pm2.rc != 0
-
-- name: Restart uptime kuma if running
-  ansible.builtin.command:
-    cmd: pm2 restart uptime-kuma --update-env
-  become_user: "{{ uptime_kuma_user }}"
-  environment:
-    HOME: "{{ uptime_kuma_home }}"
-  when: uptime_kuma_pm2.rc == 0 and uptime_kuma_env.changed
-
-- name: Save pm2 process list
-  ansible.builtin.command:
-    cmd: pm2 save --force
-  become_user: "{{ uptime_kuma_user }}"
-  environment:
-    HOME: "{{ uptime_kuma_home }}"
-  changed_when: false
-
-- name: Configure pm2 startup on boot
-  ansible.builtin.command:
-    cmd: pm2 startup systemd -u {{ uptime_kuma_user }} --hp {{ uptime_kuma_home }}
-  changed_when: false
 
 - name: Allow uptime kuma through host firewall
   ansible.builtin.iptables:
@@ -154,7 +81,8 @@
     ctstate:
       - NEW
     jump: ACCEPT
-    action: insert
+    action: append
+  when: uptime_kuma_fw_check.rc != 0
   register: uptime_kuma_firewall
 
 - name: Persist host firewall rules
