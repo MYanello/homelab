@@ -79,7 +79,7 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 10
         - name: protonmail-bridge
-          image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.27.1@sha256:34776750cefa14fee586d3865ffb14dc9dc14693231d95fbfe59155a2b0e10e7
+          image: harbor.yanello.net/ghcr/dancwilliams/protonmail-bridge-docker:v3.27.1@sha256:466a52a468195037b1e518ac06e7708da1db5423217774058ee7c94eca3c9851
           imagePullPolicy: IfNotPresent
           # command: ["sleep", "infinity"]
           args: ["--log-level", "info"]
