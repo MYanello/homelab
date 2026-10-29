@@ -9,7 +9,7 @@
 
 - name: Ensure backup staging directory
   ansible.builtin.file:
-    path: "{{ uptime_kuma_backup_staging_dir }}"
+    path: "{{ backup_staging_dir }}"
     state: directory
     owner: root
     group: root
@@ -17,7 +17,7 @@
 
 - name: Ensure rclone config directory
   ansible.builtin.file:
-    path: "{{ uptime_kuma_backup_rclone_config | dirname }}"
+    path: "{{ backup_rclone_config | dirname }}"
     state: directory
     owner: root
     group: root
@@ -26,7 +26,7 @@
 - name: Write rclone configuration
   ansible.builtin.template:
     src: rclone.conf.j2
-    dest: "{{ uptime_kuma_backup_rclone_config }}"
+    dest: "{{ backup_rclone_config }}"
     owner: root
     group: root
     mode: "0600"
@@ -34,7 +34,7 @@
 - name: Write backup script
   ansible.builtin.template:
     src: uptime-kuma-backup.sh.j2
-    dest: "{{ uptime_kuma_backup_script }}"
+    dest: "{{ backup_script }}"
     owner: root
     group: root
     mode: "0700"
@@ -46,7 +46,7 @@
     owner: root
     group: root
     mode: "0644"
-  register: uptime_kuma_backup_service
+  register: backup_service
 
 - name: Write backup timer unit
   ansible.builtin.template:
@@ -60,7 +60,7 @@
 - name: Reload systemd
   ansible.builtin.systemd_service:
     daemon_reload: true
-  when: uptime_kuma_backup_service.changed or uptime_kuma_backup_timer.changed
+  when: backup_service.changed or uptime_kuma_backup_timer.changed
 
 - name: Enable backup timer
   ansible.builtin.systemd_service:

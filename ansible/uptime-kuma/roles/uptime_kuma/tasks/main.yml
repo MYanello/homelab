@@ -36,7 +36,7 @@
 
 - name: Add user to docker group
   ansible.builtin.user:
-    name: "{{ uptime_kuma_docker_user }}"
+    name: "{{ docker_user }}"
     groups: docker
     append: true
 
@@ -112,4 +112,4 @@
 
 - name: Configure backups
   ansible.builtin.import_tasks: backup.yml
-  when: uptime_kuma_backup_enabled | bool
+  when: backup_enabled | bool

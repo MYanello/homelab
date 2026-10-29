@@ -1,9 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-STAGING="{{ uptime_kuma_backup_staging_dir }}"
-CONFIG="{{ uptime_kuma_backup_rclone_config }}"
-REMOTE="{{ uptime_kuma_backup_remote }}"
+STAGING="{{ backup_staging_dir }}"
+CONFIG="{{ backup_rclone_config }}"
+REMOTE="{{ backup_remote }}"
 DB="{{ uptime_kuma_data_dir }}/kuma.db"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 OUT="${STAGING}/kuma-${STAMP}.db"
