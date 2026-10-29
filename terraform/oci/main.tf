@@ -8,7 +8,7 @@ locals {
   arm_ocpus                          = 2
   instance_boot_volume_size          = 50
   image_operating_system             = "Canonical Ubuntu"
-  image_operating_system_version     = "26.04"
+  image_operating_system_version     = "26.04 Minimal"
   arm_image_operating_system_version = "26.04 Minimal aarch64"
   arm_availability_domain_index      = 1
   arm_fault_domain                   = "FAULT-DOMAIN-1"
