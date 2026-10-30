@@ -81,7 +81,7 @@ jobs:
             -v $(pwd)/values.yaml:/argocd-config/values.yaml \
             -e TARGET_BRANCH=${{ github.head_ref }} \
             -e REPO=${{ github.repository }} \
-            dagandersen/argocd-diff-preview:v0.2.15@sha256:01c4712f945f9183ef1eacbaf5974ced42624b8bdfc6dab876a07ab89bd0cd83 \
+            dagandersen/argocd-diff-preview:v0.2.17@sha256:ea90848df29337b50d5058330210b38e39232360b78d9c60951fc92e454c6941
             --diff-ignore="checksum|caBundle" \
             --debug
 
