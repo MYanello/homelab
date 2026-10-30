@@ -37,12 +37,32 @@ jobs:
             key.txt: "${SOPS_KEY}"
           EOF
 
+      - name: Preinstall Redis Secret
+        run: |
+          mkdir -p preinstall
+          cat > preinstall/argocd-redis.yaml <<-EOF
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: argocd-redis
+            namespace: argocd
+          stringData:
+            auth: ci-password
+          EOF
+
       - name: Set Argo CD Custom Values
         run: |
           cat > values.yaml <<-'EOF'
           configs:
             cm:
               kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
+          redis:
+            image:
+              repository: harbor.yanello.net/docker/library/redis
+              tag: 8.6.4-alpine
+            existingSecret: argocd-redis
+          redisSecretInit:
+            enabled: false
           repoServer:
             env:
               - name: SOPS_AGE_KEY_FILE
@@ -78,10 +98,11 @@ jobs:
             -v $(pwd)/pull-request:/target-branch \
             -v $(pwd)/output:/output \
             -v $(pwd)/secrets:/secrets \
+            -v $(pwd)/preinstall:/preinstall \
             -v $(pwd)/values.yaml:/argocd-config/values.yaml \
             -e TARGET_BRANCH=${{ github.head_ref }} \
             -e REPO=${{ github.repository }} \
-            dagandersen/argocd-diff-preview:v0.2.17@sha256:ea90848df29337b50d5058330210b38e39232360b78d9c60951fc92e454c6941
+            dagandersen/argocd-diff-preview:v0.2.17@sha256:ea90848df29337b50d5058330210b38e39232360b78d9c60951fc92e454c6941 \
             --diff-ignore="checksum|caBundle" \
             --debug
 
