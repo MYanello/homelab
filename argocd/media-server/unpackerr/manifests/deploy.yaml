@@ -33,16 +33,16 @@ spec:
               value: "false"
             - name: UN_SONARR_0_URL
               value: http://sonarr.sonarr.svc.cluster.local:8989
-            - name: UN_SONARR_PATHS_0
+            - name: UN_SONARR_0_PATHS_0
               value: /data/media/torrents/completed/tv
             - name: UN_RADARR_0_URL
               value: http://radarr.radarr.svc.cluster.local:7878
-            - name: UN_RADARR_PATHS_0
+            - name: UN_RADARR_0_PATHS_0
               value: /data/media/torrents/completed/movies
             - name: UN_LOG_FILE
               value: /data/logs/log.txt
-            - name: UN_FOLDER_0_MOVE_BACK
-              value: "true"
+            # - name: UN_FOLDER_0_MOVE_BACK
+            #   value: "true"
           envFrom:
             - secretRef:
                 name: unpackerr-secrets

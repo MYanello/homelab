@@ -5,6 +5,8 @@ kind: Kustomization
 resources:
   - manifests/netpol.yaml
   - manifests/deploy.yaml
+  - manifests/http-route.yaml
+  - manifests/service.yaml
 
 configMapGenerator:
   - name: config
