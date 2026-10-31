@@ -28,7 +28,7 @@ spec:
             - name: PUID
               value: "3000"
             - name: TZ
-              value: America/Chicago
+              value: America/Toronto
             - name: UN_DEBUG
               value: "false"
             - name: UN_SONARR_0_URL
