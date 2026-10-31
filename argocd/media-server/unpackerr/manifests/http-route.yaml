@@ -1,0 +1,24 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Unpackerr
+    gethomepage.dev/icon: unpackerr
+    gethomepage.dev/pod-selector: app=unpackerr
+  labels:
+    app.kubernetes.io/instance: unpackerr-app
+  name: unpackerr-httproute
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - unpackerr.yanello.net
+  rules:
+    - backendRefs:
+        - name: unpackerr
+          namespace: unpackerr
+          port: 5656
