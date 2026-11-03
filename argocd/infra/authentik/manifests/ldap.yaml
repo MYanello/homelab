@@ -65,7 +65,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: ldap
-          image: harbor.yanello.net/ghcr/goauthentik/ldap:2026.8.5@sha256:sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87
+          image: harbor.yanello.net/ghcr/goauthentik/ldap:2026.8.5@sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87@sha256:sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87
           args:
             - server
             - --ldap-tls-cert=/tls/tls.crt
