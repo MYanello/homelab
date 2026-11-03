@@ -4,6 +4,12 @@ The k8s cluster is a picocluster 3 node cluster with raspberry pi 4 4gbs, 3 n150
 Bootstrapping is done by running the ansible playbook to set up k3s, then the terraform to configure argocd and other core components.
 
 ## Worklog
+### 11.03.26
+- Cluster-wide database outage. Unattended-upgrades shipped kernel 7.0.0-42-generic overnight, the worker nodes rebooted into it, and every freshly started container got a stacked AppArmor label (`cri-containerd.apparmor.d//&unconfined`). containerd's default profile only allows `signal`/`ptrace` between processes sharing the plain profile name, so nothing inside a container could signal anything else
+  - Root cause confirmed upstream: [containerd#14485](https://github.com/containerd/containerd/issues/14485), fix PRs [#14487](https://github.com/containerd/containerd/pull/14487) and [#12887](https://github.com/containerd/containerd/pull/12887) not in any release yet, [k3s#13625](https://github.com/k3s-io/k3s/issues/13625) waiting on the containerd bump
+- Workaround applied on all 5 nodes: installed a patched profile at `/etc/apparmor.d/cri-containerd.apparmor.d` (upstream template plus three stacked-peer signal rules and three stacked-peer ptrace rules) and loaded it with `sudo apparmor_parser -Kr`. containerd skips loading its embedded profile when the name is already loaded, so the host copy sticks across reboots and k3s restarts
+- Cleanup once k3s bundles a fixed containerd: `sudo rm /etc/apparmor.d/cri-containerd.apparmor.d` on each node and restart k3s
+
 ### 11.10.26
 - Move secrets from Doppler to Vault
 - Set up Vault and uptime kuma ansible configs
