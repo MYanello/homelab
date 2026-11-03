@@ -18,6 +18,10 @@ data "authentik_property_mapping_provider_scope" "openid" {
   managed = "goauthentik.io/providers/oauth2/scope-openid"
 }
 
+data "authentik_group" "admin" {
+  name = "admin"
+}
+
 resource "authentik_property_mapping_provider_scope" "email" {
   name        = "email"
   scope_name  = "email"

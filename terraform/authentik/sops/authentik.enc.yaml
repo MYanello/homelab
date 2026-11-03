@@ -1,0 +1,17 @@
+---
+opnsense_ldap_bind_password: ENC[AES256_GCM,data:/i+FK/XQyuOGA8/I+tipMj6y8O4EVxRJ9zy9iqaR8x1biE061wrdnRdetBdfUOQF,iv:UZISPUkXoHACoRwhqSoCbNynbMrCROy4Q6VU7zMejTE=,tag:7YkDwPUknXJNe8ti5/RkBA==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0R3JHcUN4VVdkOGFmUzRn
+        QW52ZzBsNUJpeGN5Rm1kSXFPamZReFRsZzJVClRxVzhGRFN2NXZVLzJVUmFsTnUx
+        dXNJUVkyUzB0SGNYTWU5bUV3SFZqTWcKLS0tIEdIRjJ2d1VteDEveFB5L2IzaDB0
+        WGx3OCtDYXRjeVJ6VWZWdXZIK0FFbFkK1rp5CRcTh2tHNmHnV9HRCFS8ZNyQG7HC
+        +M684yTdKgy91/vtnR9hv20EQuXHbvqiq91Hmf4nuF63vKTqDWhA0Q==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+  lastmodified: "2026-11-03T20:42:40Z"
+  mac: ENC[AES256_GCM,data:rw3dHjbrv4MHZzJ636r/58htun9xpqxM8jWFikLcXr/k++n18mQXXEwBhtw3f5mFlr+nAzTF7weX2jDB90Myvkl8fISToo2wsVg2EuybIO6JE28WZ8IneYv/qGQNJlRMm1TvvZImSIiOARd2hAVNbTSV30K//fCSHV2L6oQhOa0=,iv:h3p/tXAq07c1oRCLoD9LoenW8Ew9w7+Vg7l80i3sHZI=,tag:1u2om89x2XCpq20wJ+4Kug==,type:str]
+  unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+  version: 3.13.3
