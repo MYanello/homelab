@@ -16,7 +16,7 @@ listener "tcp" {
 
 storage "raft" {
   path    = "{{ vault_data_dir }}"
-  node_id = "{{ inventory_hostname }}"
+  node_id = "vault"
 }
 
 seal "ocikms" {
