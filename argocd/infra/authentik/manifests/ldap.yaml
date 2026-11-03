@@ -26,7 +26,7 @@ metadata:
     app.kubernetes.io/instance: ldap-outpost
   annotations:
     lbipam.cilium.io/ips: 10.10.8.105
-    external-dns.yanello.net/hostname: ldap.yanello.net
+    external-dns.kubernetes.io/hostname: ldap.yanello.net
 spec:
   type: LoadBalancer
   selector:
