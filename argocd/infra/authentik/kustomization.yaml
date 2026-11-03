@@ -9,6 +9,7 @@ resources:
   - ./manifests/cnpg.yaml
   - ./manifests/admin.yaml
   - ./manifests/cert.yaml
+  - ./manifests/ldap.yaml
 
 generators:
   - ./manifests/secret-generator.yaml

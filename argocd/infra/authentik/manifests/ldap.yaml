@@ -1,0 +1,146 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ldap-outpost
+spec:
+  commonName: ldap.yanello.net
+  dnsNames:
+    - ldap.yanello.net
+  duration: 8760h
+  renewBefore: 720h
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: vault-pki-issuer
+    kind: ClusterIssuer
+  secretName: ldap-outpost-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ldap-outpost
+  labels:
+    app.kubernetes.io/name: ldap-outpost
+    app.kubernetes.io/instance: ldap-outpost
+  annotations:
+    lbipam.cilium.io/ips: 10.10.8.105
+    external-dns.yanello.net/hostname: ldap.yanello.net
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: ldap-outpost
+    app.kubernetes.io/instance: ldap-outpost
+  ports:
+    - name: ldaps
+      port: 636
+      targetPort: ldaps
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap-outpost
+  labels:
+    app.kubernetes.io/name: ldap-outpost
+    app.kubernetes.io/instance: ldap-outpost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ldap-outpost
+      app.kubernetes.io/instance: ldap-outpost
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ldap-outpost
+        app.kubernetes.io/instance: ldap-outpost
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: ldap
+          image: harbor.yanello.net/ghcr/goauthentik/ldap:2026.8.5@sha256:sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87
+          args:
+            - server
+            - --ldap-tls-cert=/tls/tls.crt
+            - --ldap-tls-key=/tls/tls.key
+          ports:
+            - name: ldaps
+              containerPort: 636
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: ldap-outpost-api
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+          livenessProbe:
+            tcpSocket:
+              port: ldaps
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: ldaps
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              memory: 250Mi
+      volumes:
+        - name: tls
+          secret:
+            secretName: ldap-outpost-tls
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: ldap-outpost
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: ldap-outpost
+      app.kubernetes.io/instance: ldap-outpost
+  ingress:
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "636"
+              protocol: TCP
+  egress:
+    - toEntities:
+        - cluster
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s:k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
