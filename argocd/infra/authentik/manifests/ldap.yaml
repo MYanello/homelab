@@ -66,19 +66,21 @@ spec:
       containers:
         - name: ldap
           image: harbor.yanello.net/ghcr/goauthentik/ldap:2026.8.5@sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87
-          args:
-            - server
-            - --ldap-tls-cert=/tls/tls.crt
-            - --ldap-tls-key=/tls/tls.key
-          ports:
-            - name: ldaps
-              containerPort: 636
-              protocol: TCP
           env:
             - name: AUTHENTIK_HOST
               value: http://authentik-server.authentik.svc.cluster.local
             - name: AUTHENTIK_INSECURE
               value: "false"
+            - name: AUTHENTIK_LISTEN__LDAPS
+              value: 0.0.0.0:636
+            - name: AUTHENTIK_LDAP__TLS__CERT
+              value: /tls/tls.crt
+            - name: AUTHENTIK_LDAP__TLS__KEY
+              value: /tls/tls.key
+          ports:
+            - name: ldaps
+              containerPort: 636
+              protocol: TCP
           envFrom:
             - secretRef:
                 name: ldap-outpost-api
