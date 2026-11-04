@@ -41,9 +41,15 @@ global:
     - name: oidc-signing
       secret:
         secretName: authentik-self-signed
+    - name: ldap-outpost-tls
+      secret:
+        secretName: ldap-outpost-tls
   volumeMounts:
     - name: oidc-signing
       mountPath: /certs/oidc-signing
+      readOnly: true
+    - name: ldap-outpost-tls
+      mountPath: /certs/ldap-outpost
       readOnly: true
 
 authentik:
