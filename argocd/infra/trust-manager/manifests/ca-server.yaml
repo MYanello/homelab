@@ -145,3 +145,7 @@ spec:
           kind: Service
           port: 8080
           weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

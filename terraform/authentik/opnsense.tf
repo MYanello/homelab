@@ -1,11 +1,18 @@
+data "authentik_certificate_key_pair" "ldap-outpost" {
+  name              = "ldap-outpost"
+  fetch_key         = false
+  fetch_certificate = false
+}
+
 resource "authentik_provider_ldap" "opnsense" {
   name        = "OPNsense"
-  base_dn     = "OU=opnsense,DC=ldap,DC=goauthentik,DC=io"
+  base_dn     = "DC=ldap,DC=goauthentik,DC=io"
   bind_flow   = data.authentik_flow.default-authentication.id
   unbind_flow = data.authentik_flow.default-invalidation-flow.id
   bind_mode   = "direct"
   search_mode = "direct"
 
+  certificate     = data.authentik_certificate_key_pair.ldap-outpost.id
   tls_server_name = "ldap.yanello.net"
 }
 
@@ -18,9 +25,15 @@ resource "authentik_application" "opnsense" {
 }
 
 resource "authentik_policy_binding" "opnsense-admin" {
-  target = authentik_provider_ldap.opnsense.id
+  target = authentik_application.opnsense.uuid
   group  = data.authentik_group.admin.id
   order  = 0
+}
+
+resource "authentik_policy_binding" "opnsense-bind" {
+  target = authentik_application.opnsense.uuid
+  user   = authentik_user.opnsense.id
+  order  = 1
 }
 
 data "sops_file" "authentik" {
