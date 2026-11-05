@@ -26,7 +26,7 @@ metadata:
     app.kubernetes.io/instance: ldap-outpost
   annotations:
     lbipam.cilium.io/ips: 10.10.8.105
-    external-dns.yanello.net/hostname: ldap.yanello.net
+    external-dns.kubernetes.io/hostname: ldap.yanello.net
 spec:
   type: LoadBalancer
   selector:
@@ -66,10 +66,17 @@ spec:
       containers:
         - name: ldap
           image: harbor.yanello.net/ghcr/goauthentik/ldap:2026.8.5@sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87@sha256:sha256:4c75bd27918418d2d6fbbfe4581bbd5a199fe38942d24559c4483edd64a1ea87
-          args:
-            - server
-            - --ldap-tls-cert=/tls/tls.crt
-            - --ldap-tls-key=/tls/tls.key
+          env:
+            - name: AUTHENTIK_HOST
+              value: http://authentik-server.authentik.svc.cluster.local
+            - name: AUTHENTIK_INSECURE
+              value: "false"
+            - name: AUTHENTIK_LISTEN__LDAPS
+              value: 0.0.0.0:636
+            - name: AUTHENTIK_LDAP__TLS__CERT
+              value: /tls/tls.crt
+            - name: AUTHENTIK_LDAP__TLS__KEY
+              value: /tls/tls.key
           ports:
             - name: ldaps
               containerPort: 636

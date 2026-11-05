@@ -10,8 +10,16 @@ data "authentik_flow" "default-invalidation-flow" {
   slug = "default-provider-invalidation-flow"
 }
 
+data "authentik_flow" "default-authentication" {
+  slug = "default-authentication-flow"
+}
+
 data "authentik_property_mapping_provider_scope" "openid" {
   managed = "goauthentik.io/providers/oauth2/scope-openid"
+}
+
+data "authentik_group" "admin" {
+  name = "admin"
 }
 
 resource "authentik_property_mapping_provider_scope" "email" {

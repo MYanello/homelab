@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/bundle.yaml
+  - ./manifests/ca-server.yaml
 
 helmCharts:
   - name: trust-manager
