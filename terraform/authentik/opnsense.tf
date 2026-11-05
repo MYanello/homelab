@@ -6,7 +6,7 @@ data "authentik_certificate_key_pair" "ldap-outpost" {
 
 resource "authentik_provider_ldap" "opnsense" {
   name        = "OPNsense"
-  base_dn     = "OU=opnsense,DC=ldap,DC=goauthentik,DC=io"
+  base_dn     = "DC=ldap,DC=goauthentik,DC=io"
   bind_flow   = data.authentik_flow.default-authentication.id
   unbind_flow = data.authentik_flow.default-invalidation-flow.id
   bind_mode   = "direct"
