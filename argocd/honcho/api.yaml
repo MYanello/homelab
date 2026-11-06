@@ -13,6 +13,10 @@ spec:
       labels:
         app: honcho-api
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
       initContainers:
         - name: db-migrate
           resources:
