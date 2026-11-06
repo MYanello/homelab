@@ -1,0 +1,76 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: oracle-snatch
+  name: oracle-snatch
+spec:
+  backoffLimit: 0
+  podFailurePolicy:
+    rules:
+      - action: FailJob
+        onExitCodes:
+          containerName: oracle-snatch
+          operator: In
+          values: [1]
+      - action: Ignore
+        onExitCodes:
+          containerName: oracle-snatch
+          operator: In
+          values: [255]
+      - action: Ignore
+        onPodConditions:
+          - type: DisruptionTarget
+  template:
+    metadata:
+      labels:
+        app: oracle-snatch
+    spec:
+      imagePullSecrets:
+        - name: cwcr-dockerconfig
+      containers:
+        - name: oracle-snatch
+          image: harbor.yanello.net/library/oracle-snatch:06.11.26@sha256:342c98ee936d4a91f6d5bbb64a430297b56c78bab962a380f4de07bd01e365cd
+          imagePullPolicy: IfNotPresent
+          command: [uv, run, /opt/snatch.py]
+          envFrom:
+            - configMapRef:
+                name: oracle-snatch-config
+          volumeMounts:
+            - name: oci-config
+              mountPath: /etc/oracle-snatch/oci/config
+              subPath: config
+              readOnly: true
+            - name: oci-key
+              mountPath: /etc/oracle-snatch/oci/private.pem
+              subPath: private.pem
+              readOnly: true
+            - name: ssh-pubkey
+              mountPath: /etc/oracle-snatch/ssh/id_ed25519.pub
+              subPath: id_ed25519.pub
+              readOnly: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              memory: 128Mi
+      restartPolicy: Never
+      volumes:
+        - name: oci-config
+          configMap:
+            name: oracle-snatch-oci-config
+        - name: oci-key
+          secret:
+            secretName: oracle
+            defaultMode: 0400
+            items:
+              - key: private.pem
+                path: private.pem
+        - name: ssh-pubkey
+          configMap:
+            name: oracle-snatch-config
+            items:
+              - key: id_ed25519.pub
+                path: id_ed25519.pub
