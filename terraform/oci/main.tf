@@ -22,12 +22,12 @@ data "oci_core_images" "instance_images" {
   shape                    = local.instance_shape
 }
 
-# data "oci_core_images" "arm_instance_images" {
-#   compartment_id           = data.sops_file.oci.data["tenancy_ocid"]
-#   operating_system         = local.image_operating_system
-#   operating_system_version = local.arm_image_operating_system_version
-#   shape                    = local.arm_instance_shape
-# }
+ data "oci_core_images" "arm_instance_images" {
+   compartment_id           = data.sops_file.oci.data["tenancy_ocid"]
+   operating_system         = local.image_operating_system
+   operating_system_version = local.arm_image_operating_system_version
+   shape                    = local.arm_instance_shape
+ }
 
 data "oci_identity_availability_domains" "ads" {
   compartment_id = data.sops_file.oci.data["tenancy_ocid"]
