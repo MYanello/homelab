@@ -10,6 +10,8 @@ swap_file: /swapfile
 swap_size: 2G
 swappiness: "10"
 backup_enabled: true
+restore_enabled: true
+restore_force: false
 backup_staging_dir: /var/lib/uptime-kuma-backup
 backup_rclone_config: /etc/rclone/rclone.conf
 backup_script: /usr/local/bin/uptime-kuma-backup.sh

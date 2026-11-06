@@ -51,6 +51,14 @@
     group: root
     mode: "0755"
 
+- name: Configure rclone access to backup storage
+  ansible.builtin.import_tasks: rclone.yml
+  when: backup_enabled | bool or restore_enabled | bool
+
+- name: Restore database from backup
+  ansible.builtin.import_tasks: restore.yml
+  when: restore_enabled | bool
+
 - name: Pull uptime kuma image
   community.docker.docker_image:
     name: "{{ uptime_kuma_image }}"

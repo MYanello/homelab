@@ -1,0 +1,93 @@
+---
+- name: Check for an existing uptime kuma database
+  ansible.builtin.stat:
+    path: "{{ uptime_kuma_data_dir }}/kuma.db"
+  register: uptime_kuma_db_stat
+
+- name: Determine whether to restore
+  ansible.builtin.set_fact:
+    uptime_kuma_should_restore: >-
+      {{
+        (restore_force | bool)
+        or (not uptime_kuma_db_stat.stat.exists)
+      }}
+
+- name: List available backups
+  ansible.builtin.command:
+    cmd: >-
+      rclone --config {{ backup_rclone_config }} lsf
+      --files-only {{ backup_remote }}
+  register: uptime_kuma_backup_list
+  changed_when: false
+  when: uptime_kuma_should_restore
+
+- name: Select the newest backup
+  ansible.builtin.set_fact:
+    uptime_kuma_restore_object: >-
+      {{
+        uptime_kuma_backup_list.stdout_lines
+        | select('match', '^kuma-.*\.db$')
+        | sort
+        | last
+        | default('', true)
+      }}
+  when: uptime_kuma_should_restore
+
+- name: Fail when no backup is available
+  ansible.builtin.fail:
+    msg: >-
+      Restore was requested but no kuma-*.db object exists in
+      {{ backup_remote }}
+  when:
+    - uptime_kuma_should_restore
+    - uptime_kuma_restore_object | length == 0
+
+- name: Stop uptime kuma before restoring
+  community.docker.docker_container:
+    name: uptime-kuma
+    state: stopped
+  when: uptime_kuma_should_restore
+
+- name: Download the selected backup
+  ansible.builtin.command:
+    cmd: >-
+      rclone --config {{ backup_rclone_config }} copyto
+      {{ backup_remote }}/{{ uptime_kuma_restore_object }}
+      {{ uptime_kuma_data_dir }}/kuma.db
+  when: uptime_kuma_should_restore
+
+- name: Verify the restored database
+  ansible.builtin.command:
+    cmd: >-
+      sqlite3 {{ uptime_kuma_data_dir }}/kuma.db
+      'PRAGMA integrity_check;'
+  register: uptime_kuma_restore_integrity
+  changed_when: false
+  when: uptime_kuma_should_restore
+
+- name: Fail when the restored database is corrupt
+  ansible.builtin.fail:
+    msg: >-
+      Restored database failed integrity check:
+      {{ uptime_kuma_restore_integrity.stdout }}
+  when:
+    - uptime_kuma_should_restore
+    - uptime_kuma_restore_integrity.stdout != 'ok'
+
+- name: Set ownership on the restored database
+  ansible.builtin.file:
+    path: "{{ uptime_kuma_data_dir }}/kuma.db"
+    state: file
+    owner: root
+    group: root
+    mode: "0644"
+  when: uptime_kuma_should_restore
+
+- name: Report restore outcome
+  ansible.builtin.debug:
+    msg: >-
+      {{
+        ('restored ' ~ uptime_kuma_restore_object ~ ' from ' ~ backup_remote)
+        if uptime_kuma_should_restore
+        else ('existing database kept at ' ~ uptime_kuma_data_dir ~ '/kuma.db')
+      }}

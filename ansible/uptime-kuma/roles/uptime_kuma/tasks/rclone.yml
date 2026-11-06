@@ -1,0 +1,32 @@
+---
+- name: Install rclone and sqlite3
+  ansible.builtin.apt:
+    name:
+      - rclone
+      - sqlite3
+    state: present
+    update_cache: true
+
+- name: Ensure backup staging directory
+  ansible.builtin.file:
+    path: "{{ backup_staging_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Ensure rclone config directory
+  ansible.builtin.file:
+    path: "{{ backup_rclone_config | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Write rclone configuration
+  ansible.builtin.template:
+    src: rclone.conf.j2
+    dest: "{{ backup_rclone_config }}"
+    owner: root
+    group: root
+    mode: "0600"
