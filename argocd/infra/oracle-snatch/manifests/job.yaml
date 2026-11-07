@@ -6,22 +6,7 @@ metadata:
     app: oracle-snatch
   name: oracle-snatch
 spec:
-  backoffLimit: 0
-  podFailurePolicy:
-    rules:
-      - action: FailJob
-        onExitCodes:
-          containerName: oracle-snatch
-          operator: In
-          values: [1]
-      - action: Ignore
-        onExitCodes:
-          containerName: oracle-snatch
-          operator: In
-          values: [255]
-      - action: Ignore
-        onPodConditions:
-          - type: DisruptionTarget
+  backoffLimit: 100
   template:
     metadata:
       labels:
@@ -56,7 +41,7 @@ spec:
               memory: 32Mi
             limits:
               memory: 128Mi
-      restartPolicy: Never
+      restartPolicy: OnFailure
       volumes:
         - name: oci-config
           configMap:
