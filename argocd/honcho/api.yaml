@@ -25,7 +25,7 @@ spec:
               memory: 64Mi
             limits:
               memory: 128Mi
-          image: harbor.yanello.net/ghcr/plastic-labs/honcho:v3.5.0@sha256:23ff96bf62ab2ca14928e6766db1a30a7729f5b7c9e2285af0cd4a179c0d393d
+          image: harbor.yanello.net/ghcr/plastic-labs/honcho:v3.6.0@sha256:eb906a2d251aa48b22347e4465b40785ea7a84e2bfd1105780416bf1f0121099
           imagePullPolicy: Always
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
           envFrom:
@@ -33,7 +33,7 @@ spec:
                 name: honcho-env
       containers:
         - name: api
-          image: harbor.yanello.net/ghcr/plastic-labs/honcho:v3.5.0@sha256:23ff96bf62ab2ca14928e6766db1a30a7729f5b7c9e2285af0cd4a179c0d393d
+          image: harbor.yanello.net/ghcr/plastic-labs/honcho:v3.6.0@sha256:eb906a2d251aa48b22347e4465b40785ea7a84e2bfd1105780416bf1f0121099
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
