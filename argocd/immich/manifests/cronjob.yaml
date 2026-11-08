@@ -1,0 +1,95 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: immich-storage-template
+  labels:
+    app: immich-storage-template
+spec:
+  schedule: "30 */1 * * *" # every 1h
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 14400 # 4h
+      template:
+        metadata:
+          labels:
+            app: immich-storage-template
+        spec:
+          restartPolicy: Never
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: refresh
+              image: harbor.yanello.net/docker/curlimages/curl:8.23.0@sha256:3fb7e13e5d179a845c97d78204f3f1064d1907037f26a3ebf91710571151fd93
+              imagePullPolicy: IfNotPresent
+              command: ["sh", "-c"]
+              args:
+                - |
+                  set -eu
+                  base="${URL}"
+
+                  echo "triggering immich storage template job"
+                  payload='{"command":"start","force":false}'
+                  curl -fsS -X PUT \
+                    -H "Content-Type: application/json" \
+                    -H "x-api-key: ${IMMICH_API_KEY}" \
+                    --data "$payload" \
+                    "${base}/api/jobs/storageTemplateMigration" \
+                    -o /dev/null
+                  echo "done"
+              env:
+                - name: URL
+                  value: http://immich-server.immich.svc.cluster.local:2283
+                - name: IMMICH_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: immich-secrets
+                      key: jobs_api_key
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                    - ALL
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 10Mi
+                limits:
+                  memory: 50Mi
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: immich-template-job
+spec:
+  endpointSelector:
+    matchLabels:
+      app: immich-storage-template
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s:k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: immich
+            app: immich-server
+      toPorts:
+        - ports:
+            - port: "2283"
+              protocol: TCP

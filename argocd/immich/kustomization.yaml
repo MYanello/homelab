@@ -10,6 +10,7 @@ resources:
   - manifests/sts.yaml
   - manifests/pvc.yaml
   - manifests/cm.yaml
+  - ./manifests/cronjob.yaml
 
 generators:
   - manifests/secret-generator.yaml
