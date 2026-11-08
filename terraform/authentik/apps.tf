@@ -595,7 +595,7 @@ module "rxr" {
   property_mappings  = local.oidc_mappings
   redirect_uris = [{
     matching_mode     = "strict"
-    url               = "https://resume.yanello.net/api/auth/oauth2/callback/custom"
+    url               = "https://resume.yanello.net/api/auth/callback/custom"
     redirect_uri_type = "authorization"
   }]
   meta_launch_url = ""
