@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - manifests/netpol.yaml
-  - manifests/benchmark-job.yaml
+  # - manifests/benchmark-job.yaml
 
 generators:
   - manifests/secret-generator.yaml
