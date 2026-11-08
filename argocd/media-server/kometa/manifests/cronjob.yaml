@@ -25,9 +25,8 @@ spec:
             - name: copy-config
               image: harbor.yanello.net/docker/busybox:1.38.0@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
               command:
-                - sh
-                - -c
                 - |
+                  sh -c
                   cp -r /tmp/* /config/
                   rm -f /config/logs/*
               volumeMounts:
@@ -49,10 +48,11 @@ spec:
             - name: kometa
               image: harbor.yanello.net/docker/kometateam/kometa:v2.5.4@sha256:e3f509c3044ac011e1938dae2f7e80ea3cfe9663720a9f98683d1ea28c127e64
               imagePullPolicy: Always
-              command: ["python", "kometa.py", "-r"]
+              command:
+                - python kometa.py -r
               env:
                 - name: TZ
-                  value: "UTC"
+                  value: UTC
               envFrom:
                 - secretRef:
                     name: kometa-secrets
@@ -63,10 +63,10 @@ spec:
                   mountPath: /assets
               resources:
                 requests:
-                  memory: "250Mi"
-                  cpu: "100m"
+                  memory: 250Mi
+                  cpu: 100m
                 limits:
-                  memory: "1Gi"
+                  memory: 1Gi
           volumes:
             - name: config
               persistentVolumeClaim:
