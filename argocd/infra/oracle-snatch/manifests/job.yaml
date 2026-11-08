@@ -22,6 +22,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: oracle-snatch-config
+          env:
+            - name: NTFY_TOPIC
+              valueFrom:
+                secretKeyRef:
+                  name: oracle
+                  key: NTFY_TOPIC
           volumeMounts:
             - name: oci-config
               mountPath: /etc/oracle-snatch/oci/config
