@@ -1,0 +1,55 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: rustfs-httproute
+spec:
+  hostnames:
+    - rustfs.yanello.net
+  parentRefs:
+    - name: cilium-private-gateway
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: rustfs-service
+          group: ""
+          kind: Service
+          port: 30293
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustfs-service
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 30293
+      targetPort: 30293
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: rustfs-service-1
+  labels:
+    kubernetes.io/service-name: rustfs-service
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 30293
+endpoints:
+  - addresses:
+      - 192.168.10.78
+    conditions:
+      ready: true
