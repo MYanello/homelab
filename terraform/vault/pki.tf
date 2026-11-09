@@ -136,3 +136,13 @@ resource "vault_pki_secret_backend_role" "pikvm" {
   require_cn         = false
   enforce_hostnames  = false
 }
+
+output "pki_root_ca_certificate" {
+  description = "PEM encoded Vault PKI root CA certificate"
+  value       = vault_pki_secret_backend_root_cert.root.certificate
+}
+
+output "pki_intermediate_ca_certificate" {
+  description = "PEM encoded Vault PKI intermediate CA certificate"
+  value       = vault_pki_secret_backend_root_sign_intermediate.intermediate.certificate
+}
