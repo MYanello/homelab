@@ -669,7 +669,7 @@ module "litellm" {
 module "rustfs" {
   source = "./modules/oauth2-app"
 
-  name               = "rustfs"
+  name               = "RustFS"
   slug               = "rustfs"
   client_id          = "b08bd1e12112c6aa74563fb8f9d0bda9ba761984c4856eed"
   authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
