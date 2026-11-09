@@ -24,23 +24,24 @@ resource "vault_policy" "rustfs_kms" {
   policy = <<-EOT
     path "rustfs/encrypt/rustfs-default-key" { capabilities = ["update"] }
     path "rustfs/decrypt/rustfs-default-key" { capabilities = ["update"] }
-    path "rustfs/keys/"                      { capabilities = ["read"] }
+    path "rustfs/keys/"                      { capabilities = ["read", "list"] }
     path "rustfs/keys/rustfs-internal-kms-probe"            { capabilities = ["create", "read", "update"] }
     path "rustfs/generateDataKey/rustfs-internal-kms-probe" { capabilities = ["update"] }
     path "rustfs/decrypt/rustfs-internal-kms-probe"         { capabilities = ["update"] }
 
-    path "secret/*"     { capabilities = ["create", "read", "update", "delete"] }
+    path "secret/data/rustfs/kms/transit-metadata/*"     { capabilities = ["create", "read", "update", "delete"] }
     path "secret/metadata/rustfs/kms/transit-metadata/*" { capabilities = ["create", "read", "update", "delete", "list"] }
   EOT
 }
 
 resource "vault_token_auth_backend_role" "rustfs_kms" {
-  role_name      = "rustfs-kms"
-  token_policies = [vault_policy.rustfs_kms.name]
-  token_ttl      = "0"
-  token_max_ttl  = "0"
-  token_num_uses = 0
-  orphan         = true
+  role_name               = "rustfs-kms"
+  allowed_policies        = [vault_policy.rustfs_kms.name]
+  token_no_default_policy = true
+  token_ttl               = "0"
+  token_max_ttl           = "0"
+  token_num_uses          = 0
+  orphan                  = true
 }
 
 output "rustfs_kms_issue_command" {
