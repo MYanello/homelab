@@ -665,20 +665,20 @@ module "litellm" {
   meta_launch_url = "https://llm.yanello.net/ui"
 }
 
-data "authentik_user" "marcus" {
-  username = "marcus"
-}
 
-resource "authentik_group" "jellyfin-admins" {
-  name = "jellyfin-admin"
-  users = [
-    data.authentik_user.marcus.id
-  ]
-}
+module "rustfs" {
+  source = "./modules/oauth2-app"
 
-resource "authentik_group" "jellyfin-users" {
-  name = "jellyfin-user"
-  users = [
-    data.authentik_user.marcus.id
-  ]
+  name               = "rustfs"
+  slug               = "rustfs"
+  client_id          = "b08bd1e12112c6aa74563fb8f9d0bda9ba761984c4856eed"
+  authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
+  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
+  property_mappings  = local.oidc_mappings
+  redirect_uris = [{
+    matching_mode     = "strict"
+    url               = "https://rustfs.yanello.net/rustfs/admin/v3/oidc/callback/default"
+    redirect_uri_type = "authorization"
+  }]
+  meta_launch_url = "https://rustfs.yanello.net"
 }

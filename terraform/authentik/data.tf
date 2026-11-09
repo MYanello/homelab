@@ -70,3 +70,7 @@ locals {
     data.authentik_property_mapping_provider_scope.entitlements.id,
   ]
 }
+
+data "authentik_user" "marcus" {
+  username = "marcus"
+}
