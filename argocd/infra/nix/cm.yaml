@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nix-cache-config
+data:
+  harmonia.toml: |
+    bind = "0.0.0.0:5000"
+    workers = 4
+    max_connection_rate = 256
+    priority = 30
+    enable_compression = true
+    sign_key_paths = ["/keys/cache.key"]
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nix-cache-ssh-keys
+data:
+  authorized_keys: |-
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSFPmucwRooJa6yfsnUzqTabNpL9XciN6wyP4fShTcW myanello

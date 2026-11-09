@@ -1,0 +1,38 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: nix-cache
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: nix-cache
+  ingress:
+    - fromEntities:
+        - ingress
+      toPorts:
+        - ports:
+            - port: "5000"
+              protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+        - 10.10.8.0/22
+      toPorts:
+        - ports:
+            - port: "22"
+              protocol: TCP
+            - port: "5000"
+              protocol: TCP
+  egress:
+    - toEntities:
+        - cluster
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s:k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
