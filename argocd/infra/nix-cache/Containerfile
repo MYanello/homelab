@@ -1,28 +1,23 @@
 # vim: set ft=dockerfile
 
-ARG HARMONIA_REF=harmonia-v3.3.0
-
 FROM rust:1.99.1-slim-trixie AS harmonia-build
+ARG HARMONIA_REF=harmonia-v3.3.0
+WORKDIR /src
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential pkg-config git xz-utils \
     && rm -rf /var/lib/apt/lists/*
-RUN git clone --depth 1 --branch ${HARMONIA_REF} https://github.com/nix-community/harmonia /src
-WORKDIR /src
+RUN git clone --depth 1 --branch ${HARMONIA_REF} https://github.com/nix-community/harmonia
 RUN cargo build --release -p harmonia-cache -p harmonia-store-gc
 
 
-FROM debian:trixie-slim AS runtime
-COPY --from=harmonia-build /src/target/release/harmonia-cache /usr/local/bin/harmonia-cache
-COPY --from=harmonia-build /src/target/release/harmonia-gc /usr/local/bin/harmonia-gc
-EXPOSE 5000
-CMD ["harmonia-cache"]
-
-
-FROM debian:trixie-slim AS ssh
+FROM debian:trixie-slim
 RUN apt-get update \
     && apt-get install -y --no-install-recommends openssh-server nix-bin \
     && rm -rf /var/lib/apt/lists/*
+COPY --from=harmonia-build /src/target/release/harmonia-cache /usr/local/bin/harmonia-cache
+COPY --from=harmonia-build /src/target/release/harmonia-gc /usr/local/bin/harmonia-gc
 RUN useradd -m -d /home/nix -s /bin/sh nix \
     && printf 'AllowUsers nix\nPermitRootLogin no\nPasswordAuthentication no\nPubkeyAuthentication yes\n' \
     > /etc/ssh/sshd_config.d/90-cache.conf
-EXPOSE 22
+EXPOSE 22 5000
+CMD ["harmonia-cache"]

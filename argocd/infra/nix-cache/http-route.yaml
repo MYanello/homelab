@@ -12,7 +12,7 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - cache.yanello.net
+    - nix-cache.yanello.net
   rules:
     - backendRefs:
         - name: nix-cache

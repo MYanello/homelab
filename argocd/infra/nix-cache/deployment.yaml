@@ -19,7 +19,7 @@ spec:
     spec:
       initContainers:
         - name: init-store
-          image: harbor.yanello.net/library/nix-cache-ssh:v3.3.0
+          image: harbor.yanello.net/library/nix-cache:v3.3.0
           command:
             - /bin/sh
             - -c
@@ -87,7 +87,7 @@ spec:
             limits:
               memory: 500Mi
         - name: sshd
-          image: harbor.yanello.net/library/nix-cache-ssh:v3.3.0
+          image: harbor.yanello.net/library/nix-cache:v3.3.0
           command:
             - /bin/sh
             - -c
