@@ -39,7 +39,7 @@ spec:
             - name: secrets
               mountPath: /etc/nix-cache/secrets
               readOnly: true
-            - name: ssh-keys
+            - name: ssh-pub-keys
               mountPath: /mnt/ssh-keys
               readOnly: true
             - name: tmp
@@ -82,7 +82,7 @@ spec:
                 path: ssh_host_ed25519_key
               - key: ssh-host-rsa-key
                 path: ssh_host_rsa_key
-        - name: ssh-keys
+        - name: ssh-pub-keys
           configMap:
             name: nix-cache-ssh-keys
         - name: tmp
