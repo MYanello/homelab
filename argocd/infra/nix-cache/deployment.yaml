@@ -17,26 +17,8 @@ spec:
       labels:
         app.kubernetes.io/name: nix-cache
     spec:
-      initContainers:
-        - name: init-store
-          image: harbor.yanello.net/library/nix-cache:v3.3.0
-          command:
-            - /bin/sh
-            - -c
-            - |
-              set -eu
-              mkdir -p /nix/store /nix/var/nix/db /nix/var/log/nix/drvs /nix/var/nix/gcroots
-              chown -R nix:nix /nix
-              if [ ! -f /nix/var/nix/db/db.sqlite ]; then
-                su -s /bin/sh nix -c "nix-store --load-db </dev/null"
-              fi
-          securityContext:
-            runAsUser: 0
-          volumeMounts:
-            - name: nix-store
-              mountPath: /nix
       containers:
-        - name: harmonia
+        - name: nix-cache
           image: harbor.yanello.net/library/nix-cache:v3.3.0
           env:
             - name: CONFIG_FILE
@@ -45,15 +27,23 @@ spec:
             - name: http
               containerPort: 5000
               protocol: TCP
+            - name: ssh
+              containerPort: 22
+              protocol: TCP
           volumeMounts:
             - name: nix-store
               mountPath: /nix
-              readOnly: true
             - name: config
               mountPath: /config
               readOnly: true
             - name: sign-key
               mountPath: /keys
+              readOnly: true
+            - name: ssh-host-keys
+              mountPath: /etc/ssh/hostkeys
+              readOnly: true
+            - name: ssh-keys
+              mountPath: /mnt/ssh-keys
               readOnly: true
             - name: tmp
               mountPath: /tmp
@@ -70,68 +60,13 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 5
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 65534
-            runAsGroup: 65534
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            seccompProfile:
-              type: RuntimeDefault
-            capabilities:
-              drop:
-                - ALL
+            runAsUser: 0
           resources:
             requests:
               cpu: 50m
               memory: 100Mi
             limits:
-              memory: 500Mi
-        - name: sshd
-          image: harbor.yanello.net/library/nix-cache:v3.3.0
-          command:
-            - /bin/sh
-            - -c
-            - |
-              set -eu
-              mkdir -p /run/sshd /home/nix/.ssh
-              cp /mnt/ssh-keys/authorized_keys /home/nix/.ssh/authorized_keys
-              chown -R nix:nix /home/nix/.ssh
-              chmod 700 /home/nix/.ssh
-              chmod 600 /home/nix/.ssh/authorized_keys
-              exec /usr/sbin/sshd -D -e \
-                -o HostKey=/etc/ssh/hostkeys/ssh_host_ed25519_key \
-                -o HostKey=/etc/ssh/hostkeys/ssh_host_rsa_key
-          ports:
-            - name: ssh
-              containerPort: 22
-              protocol: TCP
-          volumeMounts:
-            - name: nix-store
-              mountPath: /nix
-            - name: ssh-host-keys
-              mountPath: /etc/ssh/hostkeys
-              readOnly: true
-            - name: ssh-keys
-              mountPath: /mnt/ssh-keys
-              readOnly: true
-          securityContext:
-            runAsUser: 0
-          livenessProbe:
-            tcpSocket:
-              port: ssh
-            initialDelaySeconds: 10
-            timeoutSeconds: 5
-          readinessProbe:
-            tcpSocket:
-              port: ssh
-            initialDelaySeconds: 10
-            timeoutSeconds: 5
-          resources:
-            requests:
-              cpu: 10m
-              memory: 32Mi
-            limits:
-              memory: 256Mi
+              memory: 1000Mi
       volumes:
         - name: nix-store
           persistentVolumeClaim:
