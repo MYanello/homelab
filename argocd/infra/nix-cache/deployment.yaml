@@ -39,6 +39,7 @@ spec:
             - name: sign-key
               mountPath: /keys
               readOnly: true
+
             - name: ssh-host-keys
               mountPath: /etc/ssh/hostkeys
               readOnly: true
@@ -77,7 +78,7 @@ spec:
         - name: sign-key
           secret:
             secretName: nix-cache-secrets
-            defaultMode: 0444
+            defaultMode: 0400
             items:
               - key: cache-signing-key
                 path: cache.key
