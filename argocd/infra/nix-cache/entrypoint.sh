@@ -8,7 +8,9 @@ if [ ! -f /nix/var/nix/db/db.sqlite ]; then
 fi
 
 install -m 0600 -o nix -g nix /mnt/ssh-keys/authorized_keys /home/nix/.ssh/authorized_keys
-install -m 0400 -o nobody -g nogroup /etc/nix/cache-secret-src/cache.key /keys/cache.key
+install -D -m 0400 -o nobody -g nogroup /etc/nix-cache/secrets/cache.key /keys/cache.key
+install -m 0600 /etc/nix-cache/secrets/ssh_host_ed25519_key /etc/ssh/ssh_host_ed25519_key
+install -m 0600 /etc/nix-cache/secrets/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
 
 su -s /bin/sh nobody -c "exec harmonia-cache" &
 HARMONIA_PID=$!

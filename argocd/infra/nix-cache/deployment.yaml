@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: nix-cache
-          image: harbor.yanello.net/library/nix-cache:v3.3.0-2
+          image: harbor.yanello.net/library/nix-cache:v3.3.0-3
           env:
             - name: CONFIG_FILE
               value: /config/harmonia.toml
@@ -37,7 +37,7 @@ spec:
               mountPath: /config
               readOnly: true
             - name: secrets
-              mountPath: /run/secrets
+              mountPath: /etc/nix-cache/secrets
               readOnly: true
             - name: ssh-keys
               mountPath: /mnt/ssh-keys

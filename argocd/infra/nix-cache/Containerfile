@@ -16,17 +16,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m -d /home/nix -s /bin/sh nix \
     && install -d -m 0755 /run/sshd \
-    && install -d -m 0700 -o nix -g nix /home/nix/.ssh
+    && install -d -m 0700 -o nix -g nix /home/nix/.ssh \
+    && rm -f /etc/ssh/ssh_host_*
 COPY <<EOF /etc/ssh/sshd_config.d/90-cache.conf
 AllowUsers nix
 PermitRootLogin no
 PasswordAuthentication no
 PubkeyAuthentication yes
-EOF
-
-COPY <<EOF /etc/ssh/sshd_config.d/91-cache-keys.conf
-HostKey /etc/ssh/hostkeys/ssh_host_ed25519_key
-HostKey /etc/ssh/hostkeys/ssh_host_rsa_key
 EOF
 
 COPY --from=harmonia-build /src/target/release/harmonia-cache /usr/local/bin/harmonia-cache

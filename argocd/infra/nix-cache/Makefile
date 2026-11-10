@@ -1,5 +1,5 @@
 REGISTRY := harbor.yanello.net/library
-VERSION  := v3.3.0-2
+VERSION  := v3.3.0-3
 PLATFORM := linux/amd64
 
 .PHONY: build 
