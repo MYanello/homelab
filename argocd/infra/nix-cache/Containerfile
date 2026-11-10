@@ -25,7 +25,6 @@ PubkeyAuthentication yes
 EOF
 
 COPY <<EOF /etc/ssh/sshd_config.d/91-cache-keys.conf
-AuthorizedKeysFile /mnt/ssh-keys/authorized_keys
 HostKey /etc/ssh/hostkeys/ssh_host_ed25519_key
 HostKey /etc/ssh/hostkeys/ssh_host_rsa_key
 EOF

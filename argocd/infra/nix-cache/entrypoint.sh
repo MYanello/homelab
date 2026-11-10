@@ -7,6 +7,8 @@ if [ ! -f /nix/var/nix/db/db.sqlite ]; then
   su -s /bin/sh nix -c "nix-store --load-db </dev/null"
 fi
 
+install -m 0600 -o nix -g nix /mnt/ssh-keys/authorized_keys /home/nix/.ssh/authorized_keys
+
 su -s /bin/sh nobody -c "exec harmonia-cache" &
 HARMONIA_PID=$!
 /usr/sbin/sshd -D -e &
