@@ -12,11 +12,9 @@ spec:
       labels:
         app: oracle-snatch
     spec:
-      imagePullSecrets:
-        - name: cwcr-dockerconfig
       containers:
         - name: oracle-snatch
-          image: harbor.yanello.net/library/oracle-snatch:0.2.2@sha256:747a67d9bba2de45e282c03b6c51901bd63add60a019b6c59b117bb09cb20513
+          image: harbor.yanello.net/library/oracle-snatch:0.2.2@sha256:48953a89bcd252dc19298485f13c0f2073ed5954c399f4c13ee77b8880075095
           imagePullPolicy: IfNotPresent
           command: [uv, run, /opt/snatch.py]
           envFrom:
