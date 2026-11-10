@@ -17,6 +17,9 @@ spec:
       labels:
         app.kubernetes.io/name: nix-cache
     spec:
+      securityContext:
+        fsGroup: 65534
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: nix-cache
           image: harbor.yanello.net/library/nix-cache:v3.3.0-1
@@ -77,14 +80,14 @@ spec:
         - name: sign-key
           secret:
             secretName: nix-cache-secrets
-            defaultMode: 0444
+            defaultMode: 0440
             items:
               - key: cache-signing-key
                 path: cache.key
         - name: ssh-host-keys
           secret:
             secretName: nix-cache-secrets
-            defaultMode: 0400
+            defaultMode: 0600
             items:
               - key: ssh-host-ed25519-key
                 path: ssh_host_ed25519_key
