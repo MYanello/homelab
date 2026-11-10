@@ -16,7 +16,6 @@ spec:
         - name: oracle-snatch
           image: harbor.yanello.net/library/oracle-snatch:0.2.3@sha256:d3e2e628c32b07a16df0f72547e3bb9596dd8ec73bb5f5f81c52f580dc9c0adf
           imagePullPolicy: IfNotPresent
-          command: [uv, run, /opt/snatch.py]
           envFrom:
             - configMapRef:
                 name: oracle-snatch-config
