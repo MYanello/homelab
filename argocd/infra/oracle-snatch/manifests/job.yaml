@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: oracle-snatch
-          image: harbor.yanello.net/library/oracle-snatch:0.2.2@sha256:48953a89bcd252dc19298485f13c0f2073ed5954c399f4c13ee77b8880075095
+          image: harbor.yanello.net/library/oracle-snatch:0.2.3@sha256:d3e2e628c32b07a16df0f72547e3bb9596dd8ec73bb5f5f81c52f580dc9c0adf
           imagePullPolicy: IfNotPresent
           command: [uv, run, /opt/snatch.py]
           envFrom:
