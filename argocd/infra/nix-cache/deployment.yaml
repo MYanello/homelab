@@ -36,11 +36,8 @@ spec:
             - name: config
               mountPath: /config
               readOnly: true
-            - name: sign-key
-              mountPath: /keys
-              readOnly: true
-            - name: ssh-host-keys
-              mountPath: /etc/ssh/hostkeys
+            - name: secrets
+              mountPath: /run/secrets
               readOnly: true
             - name: ssh-keys
               mountPath: /mnt/ssh-keys
@@ -74,18 +71,13 @@ spec:
         - name: config
           configMap:
             name: nix-cache-config
-        - name: sign-key
-          secret:
-            secretName: nix-cache-secrets
-            defaultMode: 0444
-            items:
-              - key: cache-signing-key
-                path: cache.key
-        - name: ssh-host-keys
+        - name: secrets
           secret:
             secretName: nix-cache-secrets
             defaultMode: 0400
             items:
+              - key: cache-signing-key
+                path: cache.key
               - key: ssh-host-ed25519-key
                 path: ssh_host_ed25519_key
               - key: ssh-host-rsa-key
