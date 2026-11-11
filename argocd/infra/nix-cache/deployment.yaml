@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: nix-cache
-          image: harbor.yanello.net/library/nix-cache:v3.3.0-3
+          image: harbor.yanello.net/library/nix-cache:v3.3.0-3@sha256:5b85aafeefb239715ed24909e7df3d6cd1c857329657d033ada085d8f908abea
           env:
             - name: CONFIG_FILE
               value: /config/harmonia.toml
