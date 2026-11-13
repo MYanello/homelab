@@ -182,7 +182,7 @@ spec:
           operator: "Exists"
           effect: "NoSchedule"
       containers:
-        - image: harbor.yanello.net/docker/gotenberg/gotenberg:9.3.0@sha256:04eaccf4c512167381c8084dfc35e3cda4dd7e8ea605e5fd9fcf3bd83917566c
+        - image: harbor.yanello.net/docker/gotenberg/gotenberg:9.4.1@sha256:7d790c081a944f4d30cacb59a2cdccbe71569532af691b93c36551f6a877b4fc
           imagePullPolicy: IfNotPresent
           name: gotenberg
           command:
