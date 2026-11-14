@@ -3,7 +3,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: upgrade-build
-  namespace: nix-cache
 spec:
   schedule: "0 4 * * *"
   timeZone: "America/Toronto"
@@ -34,7 +33,7 @@ spec:
                 - name: KEYFILE
                   value: /keys/cache.key
                 - name: NIX_SSHOPTS
-                  value: -i /keys/id_ed25519 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/keys/known_hosts
+                  value: -i /keys/privateKey -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/keys/known_hosts
                 - name: SYSTEM
                   value: x86_64-linux
                 - name: WORKDIR
@@ -44,7 +43,7 @@ spec:
               volumeMounts:
                 - name: script
                   mountPath: /scripts
-                - name: push-keys
+                - name: ssh-keys
                   mountPath: /keys
                   readOnly: true
                 - name: work
@@ -63,8 +62,12 @@ spec:
             - name: script
               configMap:
                 name: upgrade-build
-            - name: push-keys
+            - name: ssh-keys
               secret:
-                secretName: nix-cache-push
+                defaultMode: 0400
+                secretName: nix-cache-secrets
+                items:
+                  - key: privateKey
+                    path: privateKey
             - name: work
               emptyDir: {}
