@@ -41,9 +41,7 @@ spec:
                 - name: HOME
                   value: /work
               volumeMounts:
-                - name: script
-                  mountPath: /scripts
-                - name: ssh-keys
+                - name: keys
                   mountPath: /keys
                   readOnly: true
                 - name: work
@@ -59,15 +57,16 @@ spec:
               securityContext:
                 privileged: true
           volumes:
-            - name: script
-              configMap:
-                name: upgrade-build
-            - name: ssh-keys
+            - name: keys
               secret:
                 defaultMode: 0400
                 secretName: nix-cache-secrets
                 items:
                   - key: privateKey
                     path: privateKey
+                  - key: cache-signing-key
+                    path: cache.key
+                  - key: known_hosts
+                    path: known_hosts
             - name: work
               emptyDir: {}

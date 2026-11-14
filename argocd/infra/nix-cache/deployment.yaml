@@ -40,7 +40,7 @@ spec:
               mountPath: /etc/nix-cache/secrets
               readOnly: true
             - name: ssh-pub-keys
-              mountPath: /etc/nix-cache/secrets/publicKey
+              mountPath: /mnt/ssh-keys
               readOnly: true
             - name: tmp
               mountPath: /tmp
@@ -82,7 +82,12 @@ spec:
                 path: ssh_host_ed25519_key
               - key: ssh-host-rsa-key
                 path: ssh_host_rsa_key
+        - name: ssh-pub-keys
+          secret:
+            secretName: nix-cache-secrets
+            defaultMode: 0444
+            items:
               - key: publicKey
-                path: publicKey
+                path: authorized_keys
         - name: tmp
           emptyDir: {}
