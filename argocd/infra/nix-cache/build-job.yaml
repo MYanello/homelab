@@ -21,17 +21,16 @@ spec:
           automountServiceAccountToken: false
           containers:
             - name: upgrade-build
-              image: harbor.yanello.net/library/nix-cache:v3.3.0-3@sha256:5b85aafeefb239715ed24909e7df3d6cd1c857329657d033ada085d8f908abea
-              command: ["bash", "/scripts/upgrade-build.sh"]
-              args:
-                - "https://forgejo.yanello.net/marcus/nix"
+              image: harbor.yanello.net/library/nix-cache:v3.3.0-4@sha256:47c12824eea80c53bc45d9ed50d7070458a845811d31a6bec0baba0c36dbc859
+              command: ["bash", "upgrade-build.sh"]
+              args: ["https://forgejo.yanello.net/marcus/nix"]
               env:
                 - name: NIX_CONFIG
                   value: |
                     experimental-features = nix-command flakes
                     trusted-users = root
                 - name: CACHE
-                  value: ssh-ng://nix@nix-cache.nix-cache.svc.cluster.local
+                  value: ssh-ng://nix@nix-cache
                 - name: KEYFILE
                   value: /keys/cache.key
                 - name: NIX_SSHOPTS
@@ -43,18 +42,29 @@ spec:
                 - name: HOME
                   value: /work
               volumeMounts:
-                - {name: script, mountPath: /scripts}
-                - {name: push-keys, mountPath: /keys, readOnly: true}
-                - {name: work, mountPath: /work}
+                - name: script
+                  mountPath: /scripts
+                - name: push-keys
+                  mountPath: /keys
+                  readOnly: true
+                - name: work
+                  mountPath: /work
               resources:
-                requests: {cpu: "2", memory: 4Gi, ephemeral-storage: 10Gi}
-                limits: {cpu: "8", memory: 16Gi, ephemeral-storage: 50Gi}
+                requests:
+                  cpu: "2"
+                  memory: 4Gi
+                  ephemeral-storage: 10Gi
+                limits:
+                  memory: 16Gi
+                  ephemeral-storage: 50Gi
               securityContext:
                 privileged: true
           volumes:
             - name: script
-              configMap: {name: upgrade-build}
+              configMap:
+                name: upgrade-build
             - name: push-keys
-              secret: {secretName: nix-cache-push}
+              secret:
+                secretName: nix-cache-push
             - name: work
               emptyDir: {}

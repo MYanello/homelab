@@ -10,3 +10,4 @@ resources:
   - http-route.yaml
   - netpol.yaml
   - ext-secrets.yaml
+  - build-job.yaml
