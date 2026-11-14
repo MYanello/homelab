@@ -17,5 +17,5 @@ kind: ConfigMap
 metadata:
   name: nix-cache-ssh-keys
 data:
-  authorized_keys: |-
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSFPmucwRooJa6yfsnUzqTabNpL9XciN6wyP4fShTcW myanello
+  authorized_keys: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSFPmucwRooJa6yfsnUzqTabNpL9XciN6wyP4fShTcW
+    myanello

@@ -1,0 +1,60 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: upgrade-build
+  namespace: nix-cache
+spec:
+  schedule: "0 4 * * *"
+  timeZone: "America/Toronto"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 7200
+      template:
+        spec:
+          restartPolicy: Never
+          automountServiceAccountToken: false
+          containers:
+            - name: upgrade-build
+              image: harbor.yanello.net/library/nix-cache:v3.3.0-3@sha256:5b85aafeefb239715ed24909e7df3d6cd1c857329657d033ada085d8f908abea
+              command: ["bash", "/scripts/upgrade-build.sh"]
+              args:
+                - "https://forgejo.yanello.net/marcus/nix"
+              env:
+                - name: NIX_CONFIG
+                  value: |
+                    experimental-features = nix-command flakes
+                    trusted-users = root
+                - name: CACHE
+                  value: ssh-ng://nix@nix-cache.nix-cache.svc.cluster.local
+                - name: KEYFILE
+                  value: /keys/cache.key
+                - name: NIX_SSHOPTS
+                  value: -i /keys/id_ed25519 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/keys/known_hosts
+                - name: SYSTEM
+                  value: x86_64-linux
+                - name: WORKDIR
+                  value: /work
+                - name: HOME
+                  value: /work
+              volumeMounts:
+                - {name: script, mountPath: /scripts}
+                - {name: push-keys, mountPath: /keys, readOnly: true}
+                - {name: work, mountPath: /work}
+              resources:
+                requests: {cpu: "2", memory: 4Gi, ephemeral-storage: 10Gi}
+                limits: {cpu: "8", memory: 16Gi, ephemeral-storage: 50Gi}
+              securityContext:
+                privileged: true
+          volumes:
+            - name: script
+              configMap: {name: upgrade-build}
+            - name: push-keys
+              secret: {secretName: nix-cache-push}
+            - name: work
+              emptyDir: {}
