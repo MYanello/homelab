@@ -42,6 +42,9 @@ spec:
             - name: ssh-pub-keys
               mountPath: /mnt/ssh-keys
               readOnly: true
+            - name: nix-conf
+              mountPath: /etc/nix
+              readOnly: true
             - name: tmp
               mountPath: /tmp
           livenessProbe:
@@ -89,5 +92,11 @@ spec:
             items:
               - key: client-key-pub
                 path: authorized_keys
+        - name: nix-conf
+          configMap:
+            name: nix-cache-config
+            items:
+              - key: nix.conf
+                path: nix.conf
         - name: tmp
           emptyDir: {}

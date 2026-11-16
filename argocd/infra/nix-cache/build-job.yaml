@@ -27,14 +27,6 @@ spec:
                 - "#nixosConfigurations.desktop.config.system.build.toplevel"
                 - "#nixosConfigurations.laptop.config.system.build.toplevel"
               env:
-                - name: NIX_CONFIG
-                  value: |
-                    experimental-features = nix-command flakes
-                    trusted-users = root
-                    build-users-group =
-                    fallback = true
-                    extra-substituters = http://nix-cache.nix-cache.svc.cluster.local:5000
-                    extra-trusted-public-keys = nix-cache.yanello.net-1:bWUWi7WOldRLLH8TjeBV0MP55jTgP98wC6JqCOQW9B4=
                 - name: CACHE
                   value: ssh-ng://nix@nix-cache-ssh
                 - name: KEYFILE
@@ -55,6 +47,9 @@ spec:
                   readOnly: true
                 - name: work
                   mountPath: /work
+                - name: nix-conf
+                  mountPath: /etc/nix
+                  readOnly: true
               resources:
                 requests:
                   cpu: "2"
@@ -79,3 +74,6 @@ spec:
                     path: known_hosts
             - name: work
               emptyDir: {}
+            - name: nix-conf
+              configMap:
+                name: nix-build-config

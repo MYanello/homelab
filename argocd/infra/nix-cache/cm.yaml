@@ -11,3 +11,18 @@ data:
     priority = 30
     enable_compression = true
     sign_key_paths = ["/keys/cache.key"]
+  nix.conf: |
+    extra-trusted-public-keys = nix-cache.yanello.net-1:bWUWi7WOldRLLH8TjeBV0MP55jTgP98wC6JqCOQW9B4=
+    build-users-group =
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nix-build-config
+data:
+  nix.conf: |-
+    experimental-features = nix-command flakes
+    build-users-group =
+    fallback = true
+    extra-substituters = http://nix-cache.nix-cache.svc.cluster.local:5000
+    extra-trusted-public-keys = nix-cache.yanello.net-1:bWUWi7WOldRLLH8TjeBV0MP55jTgP98wC6JqCOQW9B4=
