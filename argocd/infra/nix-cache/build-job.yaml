@@ -32,6 +32,9 @@ spec:
                     experimental-features = nix-command flakes
                     trusted-users = root
                     build-users-group =
+                    fallback = true
+                    extra-substituters = http://nix-cache.nix-cache.svc.cluster.local:5000
+                    extra-trusted-public-keys = nix-cache.yanello.net-1:bWUWi7WOldRLLH8TjeBV0MP55jTgP98wC6JqCOQW9B4=
                 - name: CACHE
                   value: ssh-ng://nix@nix-cache-ssh
                 - name: KEYFILE
