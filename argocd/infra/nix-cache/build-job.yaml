@@ -33,7 +33,7 @@ spec:
                     trusted-users = root
                     build-users-group =
                 - name: CACHE
-                  value: ssh-ng://nix@nix-cache
+                  value: ssh-ng://nix@nix-cache-ssh
                 - name: KEYFILE
                   value: /keys/cache.key
                 - name: NIX_SSHOPTS
