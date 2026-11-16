@@ -51,7 +51,7 @@ spec:
           envFrom:
             - secretRef:
                 name: bytestash-secrets
-          image: harbor.yanello.net/ghcr/jordan-dalby/bytestash:1.6.1@sha256:2c79156850340eeff4e76bbb81e3aab78b42e40509cf2af0acdb18682e579cf1
+          image: harbor.yanello.net/ghcr/jordan-dalby/bytestash:1.6.2@sha256:86d5726ef9a417775cc05120eed04c36915cbc41aea83c5799fc6b8d3ad77db5
           volumeMounts:
             - mountPath: /data/snippets
               name: snip
