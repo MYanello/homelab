@@ -1,0 +1,56 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nix-cache-gc
+spec:
+  schedule: "30 5 * * *"
+  timeZone: "America/Toronto"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 1800
+      template:
+        spec:
+          restartPolicy: Never
+          automountServiceAccountToken: false
+          containers:
+            - name: gc
+              image: harbor.yanello.net/library/nix-cache:v3.3.0-8@sha256:c0bad9eaa117360bcd905a9ce2ea023661bd76ba3aa5ae84a3aa5dde5087c029
+              command: ["bash", "gc.sh"]
+              env:
+                - name: KEEP
+                  value: "3"
+              volumeMounts:
+                - name: nix-store
+                  mountPath: /nix
+                - name: nix-conf
+                  mountPath: /etc/nix
+                  readOnly: true
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 250Mi
+                limits:
+                  memory: 1Gi
+          volumes:
+            - name: nix-store
+              persistentVolumeClaim:
+                claimName: nix-store
+            - name: nix-conf
+              configMap:
+                name: nix-gc-config
+                items:
+                  - key: gc-nix.conf
+                    path: nix.conf
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchLabels:
+                      app.kubernetes.io/name: nix-cache
+                  topologyKey: kubernetes.io/hostname

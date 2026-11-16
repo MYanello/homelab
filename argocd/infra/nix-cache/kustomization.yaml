@@ -11,3 +11,4 @@ resources:
   - netpol.yaml
   - ext-secrets.yaml
   - build-job.yaml
+  - gc.yaml

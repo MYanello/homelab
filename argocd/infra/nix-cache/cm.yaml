@@ -27,3 +27,12 @@ data:
     fallback = true
     extra-substituters = http://nix-cache.nix-cache.svc.cluster.local:5000
     extra-trusted-public-keys = nix-cache.yanello.net-1:bWUWi7WOldRLLH8TjeBV0MP55jTgP98wC6JqCOQW9B4=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nix-gc-config
+data:
+  gc-nix.conf: |-
+    experimental-features = nix-command flakes
+    build-users-group =
