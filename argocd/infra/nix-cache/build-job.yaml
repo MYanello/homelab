@@ -22,7 +22,7 @@ spec:
             - name: upgrade-build
               image: harbor.yanello.net/library/nix-cache:v3.3.0-5@sha256:bd6fabce3cb2f7b7004f6c1613fda9f0dff9ce53d88abb3a2062baa5517daebd
               command: ["bash", "upgrade-build.sh"]
-              args: ["https://forgejo.yanello.net/marcus/nix"]
+              args: ["ssh://git@forgejo-ssh.yanello.net/marcus/nix.git"]
               env:
                 - name: NIX_CONFIG
                   value: |
