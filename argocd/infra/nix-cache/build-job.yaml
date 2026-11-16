@@ -28,6 +28,7 @@ spec:
                   value: |
                     experimental-features = nix-command flakes
                     trusted-users = root
+                    build-users-group =
                 - name: CACHE
                   value: ssh-ng://nix@nix-cache
                 - name: KEYFILE
