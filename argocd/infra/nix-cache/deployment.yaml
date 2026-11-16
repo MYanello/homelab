@@ -63,7 +63,7 @@ spec:
               cpu: 50m
               memory: 100Mi
             limits:
-              memory: 1000Mi
+              memory: 1Gi
       volumes:
         - name: nix-store
           persistentVolumeClaim:
@@ -87,7 +87,7 @@ spec:
             secretName: nix-cache-secrets
             defaultMode: 0444
             items:
-              - key: publicKey
+              - key: client-key-pub
                 path: authorized_keys
         - name: tmp
           emptyDir: {}

@@ -34,6 +34,8 @@ spec:
                   value: /keys/cache.key
                 - name: NIX_SSHOPTS
                   value: -i /keys/privateKey -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/keys/known_hosts
+                - name: GIT_SSH_COMMAND
+                  value: ssh -i /keys/privateKey -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/keys/known_hosts
                 - name: SYSTEM
                   value: x86_64-linux
                 - name: WORKDIR
@@ -62,7 +64,7 @@ spec:
                 defaultMode: 0400
                 secretName: nix-cache-secrets
                 items:
-                  - key: privateKey
+                  - key: client-key
                     path: privateKey
                   - key: cache-signing-key
                     path: cache.key
