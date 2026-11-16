@@ -20,7 +20,7 @@ spec:
           automountServiceAccountToken: false
           containers:
             - name: upgrade-build
-              image: harbor.yanello.net/library/nix-cache:v3.3.0-8@sha256:c0bad9eaa117360bcd905a9ce2ea023661bd76ba3aa5ae84a3aa5dde5087c029
+              image: harbor.yanello.net/library/nix-cache:v3.3.0-9@sha256:e4c76c1331da796a9eea8eb7cf4e929b958e1495693f097aede0b4ca78c5d464
               command: ["bash", "upgrade-build.sh"]
               args:
                 - ssh://git@forgejo-ssh.yanello.net/marcus/nix.git
@@ -37,6 +37,8 @@ spec:
                   value: ssh -i /keys/privateKey -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/keys/known_hosts
                 - name: SYSTEM
                   value: x86_64-linux
+                - name: PUSH_BRANCH
+                  value: main
                 - name: WORKDIR
                   value: /work
                 - name: HOME
