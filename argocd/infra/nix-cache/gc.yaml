@@ -24,7 +24,7 @@ spec:
               command: ["bash", "gc.sh"]
               env:
                 - name: KEEP
-                  value: "3"
+                  value: "8"
               volumeMounts:
                 - name: nix-store
                   mountPath: /nix
