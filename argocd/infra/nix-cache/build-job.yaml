@@ -20,9 +20,12 @@ spec:
           automountServiceAccountToken: false
           containers:
             - name: upgrade-build
-              image: harbor.yanello.net/library/nix-cache:v3.3.0-6@sha256:625fe1b6f43420409f551c984408d1365a20ab90508b25f6a2f679d8948d3b8d
+              image: harbor.yanello.net/library/nix-cache:v3.3.0-7@sha256:333c5a77c9052c826605b1054cb767c1681c1c296a6efacd08a6f4e4f3ed8fa8
               command: ["bash", "upgrade-build.sh"]
-              args: ["ssh://git@forgejo-ssh.yanello.net/marcus/nix.git"]
+              args:
+                - ssh://git@forgejo-ssh.yanello.net/marcus/nix.git
+                - "#nixosConfigurations.desktop.config.system.build.toplevel"
+                - "#nixosConfigurations.laptop.config.system.build.toplevel"
               env:
                 - name: NIX_CONFIG
                   value: |
