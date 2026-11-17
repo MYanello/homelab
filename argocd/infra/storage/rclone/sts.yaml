@@ -24,8 +24,8 @@ spec:
           command:
             - sh
             - -c
-            - 'exec rclone gui --addr=:5572 --api-addr=:5573 --no-open-browser --user="$USER"
-              --pass="$PASS"'
+            - 'exec rclone gui --log-level ERROR --addr=:5572 --api-addr=:5573 --no-open-browser
+              --user="$USER" --pass="$PASS"'
           envFrom:
             - secretRef:
                 name: htpasswd
