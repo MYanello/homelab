@@ -96,6 +96,7 @@ resource "oci_core_instance" "free_instance_1" {
     assign_public_ip = true
     subnet_id        = oci_core_subnet.free_subnet.id
     display_name     = "free_1"
+    skip_source_dest_check = true
   }
 
   metadata = {
