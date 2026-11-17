@@ -20,7 +20,7 @@ spec:
           automountServiceAccountToken: false
           containers:
             - name: gc
-              image: harbor.yanello.net/library/nix-cache:latest
+              image: harbor.yanello.net/library/nix-cache:latest@sha256:fdcaa2e342bcb106007e3076d6843a289f850517dd36b6d1d845296053c20c42
               command: ["bash", "gc.sh"]
               env:
                 - name: KEEP_RECENT
