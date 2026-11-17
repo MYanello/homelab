@@ -14,6 +14,8 @@ spec:
         - ports:
             - port: "5572"
               protocol: TCP
+            - port: "5573"
+              protocol: TCP
   egress:
     - toEntities:
         - world

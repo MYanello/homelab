@@ -10,5 +10,8 @@ spec:
     - name: http
       port: 5572
       targetPort: http
+    - name: api
+      port: 5573
+      targetPort: api
   selector:
     app: rclone

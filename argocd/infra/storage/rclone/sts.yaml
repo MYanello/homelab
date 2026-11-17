@@ -17,39 +17,25 @@ spec:
       labels:
         app: rclone
     spec:
-      initContainers:
-        - name: generate-htpasswd
-          image: harbor.yanello.net/docker/httpd:alpine3.24@sha256:d72968666c0a6961b07036d85fc053bc3cf640583cb1ff8360e1617818f164dc
-          command: ["sh", "-c"]
-          args:
-            - |
-              htpasswd -cbB /config/rclone/htpasswd "$USER" "$PASS"
-          envFrom:
-            - secretRef:
-                name: htpasswd
-          volumeMounts:
-            - name: config
-              mountPath: /config/rclone
-          resources:
-            requests:
-              memory: 64Mi
-              cpu: 50m
-            limits:
-              memory: 250Mi
       containers:
         - name: rclone
           imagePullPolicy: IfNotPresent
           image: harbor.yanello.net/docker/rclone/rclone:1.76.0@sha256:7cbeec24a44f206067597c0368be4de90ae19a64d5113c7d1938bd737a81e466
-          args:
-            - rcd
-            - --rc-web-gui
-            - --rc-web-gui-no-open-browser
-            - --rc-addr=:5572
-            - --rc-htpasswd=/config/rclone/htpasswd
+          command:
+            - sh
+            - -c
+            - 'exec rclone gui --addr=:5572 --api-addr=:5573 --no-open-browser --user="$USER"
+              --pass="$PASS"'
+          envFrom:
+            - secretRef:
+                name: htpasswd
           ports:
             - containerPort: 5572
               protocol: TCP
               name: http
+            - containerPort: 5573
+              protocol: TCP
+              name: api
           volumeMounts:
             - mountPath: /config/rclone
               name: config
