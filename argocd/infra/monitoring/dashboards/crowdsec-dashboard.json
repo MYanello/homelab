@@ -9,14 +9,6 @@
       "pluginName": "Prometheus"
     },
     {
-      "name": "DS_LOKI",
-      "label": "Loki",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "loki",
-      "pluginName": "Loki"
-    },
-    {
       "name": "DS_INGRESS-NGINX-PROMETHEUS",
       "label": "ingress-nginx-prometheus",
       "description": "",
@@ -186,8 +178,8 @@
     },
     {
       "datasource": {
-        "type": "loki",
-        "uid": "${query0}"
+        "type": "victoriametrics-logs-datasource",
+        "uid": "victorialogs"
       },
       "fieldConfig": {
         "defaults": {
@@ -242,29 +234,23 @@
       "targets": [
         {
           "datasource": {
-            "type": "loki",
-            "uid": "${DS_LOKI}"
+            "type": "victoriametrics-logs-datasource",
+            "uid": "victorialogs"
           },
           "editorMode": "code",
-          "expr": "sum by (cenario, ip) (\n  count_over_time(\n    {container=\"crowdsec-lapi\"} |~ \"alert\"\n    | regexp `alert : (?P<scenario>\\S+) by ip (?P<source_ip>\\S+)`\n    | label_format cenario=\"{{.scenario}}\", ip=\"{{.source_ip}}\"\n  [${__range}])\n)",
+          "expr": "app_name:crowdsec \"alert\" | extract_regexp \"alert : (?P<scenario>[^ ]+) by ip (?P<ip>[^ ]+)\" from _msg | stats by (scenario, ip) count() as alerts",
           "legendFormat": "",
-          "queryType": "instant",
+          "queryType": "stats",
           "refId": "A"
         }
       ],
-      "title": "Total ban by IP",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {}
-        }
-      ],
+      "title": "Alerts by scenario and IP",
       "type": "table"
     },
     {
       "datasource": {
-        "type": "loki",
-        "uid": "${query0}"
+        "type": "victoriametrics-logs-datasource",
+        "uid": "victorialogs"
       },
       "gridPos": {
         "h": 7,
@@ -287,16 +273,16 @@
       "targets": [
         {
           "datasource": {
-            "type": "loki",
-            "uid": "${DS_LOKI}"
+            "type": "victoriametrics-logs-datasource",
+            "uid": "victorialogs"
           },
           "editorMode": "code",
-          "expr": "{container=\"crowdsec-lapi\"} |= \"/v1/decisions?ip=\"",
-          "queryType": "range",
+          "expr": "app_name:crowdsec",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
-      "title": "Decisions list",
+      "title": "CrowdSec daemon logs",
       "transformations": [
         {
           "disabled": true,
@@ -313,8 +299,8 @@
     },
     {
       "datasource": {
-        "type": "loki",
-        "uid": "${query0}"
+        "type": "victoriametrics-logs-datasource",
+        "uid": "victorialogs"
       },
       "fieldConfig": {
         "defaults": {
@@ -368,27 +354,16 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_INGRESS-NGINX-PROMETHEUS}"
+            "type": "victoriametrics-logs-datasource",
+            "uid": "victorialogs"
           },
           "editorMode": "code",
-          "expr": "{container=\"crowdsec-lapi\"} |~ \"alert\" | regexp `alert : (?P<scenario>\\S+) by ip (?P<source_ip>\\S+)` | scenario != \"\" | line_format `cenario=\"{{.scenario}}\", ip=\"{{.source_ip}}\"`",
-          "queryType": "range",
+          "expr": "app_name:crowdsec \"alert\" | extract_regexp \"alert : (?P<scenario>[^ ]+) by ip (?P<ip>[^ ]+)\" from _msg",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
       "title": "IPs that attempted malicious attacks",
-      "transformations": [
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "kvp",
-            "keepTime": true,
-            "replace": true,
-            "source": "Line"
-          }
-        }
-      ],
       "type": "table"
     },
     {
@@ -665,7 +640,7 @@
     "crowdsec",
     "waf",
     "prod & qa",
-    "loki and prometheus"
+    "victorialogs and prometheus"
   ],
   "templating": {
     "list": [
@@ -674,16 +649,6 @@
         "name": "Prometheus_Source",
         "options": [],
         "query": "prometheus",
-        "refresh": 1,
-        "regex": "",
-        "type": "datasource"
-      },
-      {
-        "current": {},
-        "label": "Loki_source",
-        "name": "query0",
-        "options": [],
-        "query": "loki",
         "refresh": 1,
         "regex": "",
         "type": "datasource"
@@ -699,5 +664,5 @@
   "title": "Crowdsec monitoring",
   "uid": "ceuwj6n4mjmrkf",
   "weekStart": "",
-  "description": "CrowdSec monitoring dashboard with real-time insights on blocked pods, attack scenarios, banned IPs, and security decisions."
+  "description": "CrowdSec metrics and OPNsense CrowdSec logs, including attack scenarios and source IPs when present in log messages."
 }
