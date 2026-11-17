@@ -1,7 +1,7 @@
 ---
 database:
   podAnnotations:
-    backup.velero.io/backup-volumes: database
+    backup.velero.io/backup-volumes: database-data
   internal:
     tolerations:
       - key: "node-role.kubernetes.io/control-plane"
@@ -22,8 +22,6 @@ database:
       limits:
         memory: 250Mi
 redis:
-  podAnnotations:
-    backup.velero.io/backup-volumes: data
   internal:
     tolerations:
       - key: "node-role.kubernetes.io/control-plane"
@@ -136,8 +134,6 @@ core:
       memory: 1Gi
 jobservice:
   existingSecret: harbor-secrets
-  annotations:
-    backup.velero.io/backup-volumes: harbor-jobservice
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
@@ -160,8 +156,6 @@ registry:
   existingSecret: harbor-secrets
   credentials:
     existingSecret: harbor-secrets
-  annotations:
-    backup.velero.io/backup-volumes: harbor-registry
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
