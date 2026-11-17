@@ -26,6 +26,8 @@ spec:
                 - ssh://git@forgejo-ssh.yanello.net/marcus/nix.git
                 - "#nixosConfigurations.desktop.config.system.build.toplevel"
                 - "#nixosConfigurations.laptop.config.system.build.toplevel"
+                - "#homeConfigurations.hermes.activationPackage"
+                - "#homeConfigurations.devshell.activationPackage"
               env:
                 - name: CACHE
                   value: ssh-ng://nix@nix-cache-ssh
