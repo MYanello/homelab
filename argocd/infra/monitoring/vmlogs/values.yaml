@@ -1,5 +1,9 @@
 ---
 server:
+  syslog:
+    udp:
+      - name: syslog-ingest
+        value: :5514
   persistentVolume:
     enabled: true
     storageClassName: truenas-hdd

@@ -656,7 +656,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total de request dos bouncers",
+      "title": "Total request per bouncer",
       "type": "timeseries"
     }
   ],

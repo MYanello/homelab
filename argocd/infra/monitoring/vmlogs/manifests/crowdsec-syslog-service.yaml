@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syslog-ingest
+  labels:
+    app.kubernetes.io/instance: monitoring-app
+    lbipam.cilium.io/ips: 10.10.8.106
+    external-dns.kubernetes.io/hostname: logs-ingest.yanello.net
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/instance: victoria-logs-single
+    app.kubernetes.io/name: victoria-logs-single
+    app.kubernetes.io/component: server
+  ports:
+    - name: syslog-ingest
+      protocol: UDP
+      port: 5514
+      targetPort: syslog-ingest

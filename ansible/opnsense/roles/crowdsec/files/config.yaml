@@ -21,7 +21,7 @@ common:
   log_level: info
   log_max_files: 10
   log_max_size: 20
-  log_media: file
+  log_media: syslog
 config_paths:
   config_dir: /usr/local/etc/crowdsec/
   data_dir: /var/db/crowdsec/data/

@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./manifests/http-route.yaml
   - ./manifests/mcp.yaml
+  - ./manifests/crowdsec-syslog-service.yaml
 
 helmCharts:
   - name: victoria-logs-single

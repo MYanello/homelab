@@ -1,0 +1,5 @@
+---
+- name: Restart CrowdSec
+  ansible.builtin.service:
+    name: crowdsec
+    state: restarted

@@ -1,7 +1,8 @@
 ---
-- name: Configure OPNsense WAN speedtest metrics
+- name: Configure OPNsense
   hosts: opnsense
   become: true
   gather_facts: true
   roles:
+    - crowdsec
     - speedtest_metrics
