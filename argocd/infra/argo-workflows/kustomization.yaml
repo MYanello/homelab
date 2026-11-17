@@ -6,7 +6,7 @@ generators:
   - ./secret-generator.yaml
 
 resources:
-  - netpol.yaml
+  - ./netpol.yaml
   - ./http-route.yaml
 
 helmCharts:
@@ -26,9 +26,9 @@ helmCharts:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 25Mi
           limits:
-            memory: 32Mi
+            memory: 100Mi
       server:
         image:
           registry: harbor.yanello.net/quay
