@@ -5,8 +5,8 @@ metadata:
   name: syslog-ingest
   labels:
     app.kubernetes.io/instance: monitoring-app
-    lbipam.cilium.io/ips: 10.10.8.106
-    external-dns.kubernetes.io/hostname: logs-ingest.yanello.net
+    lbipam.cilium.io/ips: 10.10.8.4
+    external-dns.kubernetes.io/hostname: syslog-ingest.yanello.net
 spec:
   type: LoadBalancer
   selector:
