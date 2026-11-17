@@ -68,7 +68,7 @@ spec:
                   memory: 250Mi
                   cpu: 100m
                 limits:
-                  memory: 1Gi
+                  memory: 2Gi
           volumes:
             - name: config
               persistentVolumeClaim:

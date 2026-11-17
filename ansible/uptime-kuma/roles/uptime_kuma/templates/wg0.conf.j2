@@ -1,0 +1,12 @@
+[Interface]
+Address = {{ wireguard_gateway_address }}
+PrivateKey = {{ wireguard_gateway_private_key }}
+
+[Peer]
+PublicKey = {{ wireguard_gateway_peer_public_key }}
+{% if wireguard_gateway_preshared_key is defined and wireguard_gateway_preshared_key | length > 0 %}
+PresharedKey = {{ wireguard_gateway_preshared_key }}
+{% endif %}
+Endpoint = {{ wireguard_gateway_endpoint }}:{{ wireguard_gateway_endpoint_port }}
+AllowedIPs = {{ wireguard_gateway_allowed_ips | join(", ") }}
+PersistentKeepalive = {{ wireguard_gateway_keepalive }}

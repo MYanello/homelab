@@ -18,3 +18,17 @@ backup_script: /usr/local/bin/uptime-kuma-backup.sh
 b2_endpoint: https://s3.us-west-004.backblazeb2.com
 b2_region: us-west-004
 backup_remote: backblaze:myanello-backups/oracle-free
+
+wireguard_gateway_enabled: false
+wireguard_gateway_interface: wg0
+wireguard_gateway_config_path: "/etc/wireguard/{{ wireguard_gateway_interface }}.conf"
+wireguard_gateway_address: 192.168.11.100/32
+wireguard_gateway_endpoint: yanello.net
+wireguard_gateway_endpoint_port: 51520
+wireguard_gateway_peer_public_key: 7KL5t/AKIBuBXc/SAXr0tECak0G3YcT/kjNjl8Oz8Tc=
+wireguard_gateway_allowed_ips:
+  - 192.168.0.0/16
+  - 10.10.8.0/22
+wireguard_gateway_keepalive: 25
+wireguard_gateway_source_cidr: 10.1.0.0/16
+wireguard_gateway_endpoint_script: /usr/local/bin/wireguard-gateway-endpoint.sh

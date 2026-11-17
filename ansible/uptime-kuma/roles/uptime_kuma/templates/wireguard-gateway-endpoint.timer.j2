@@ -1,0 +1,12 @@
+[Unit]
+Description=Periodically refresh the WireGuard gateway peer endpoint
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=2min
+AccuracySec=15s
+Persistent=true
+Unit=wireguard-gateway-endpoint.service
+
+[Install]
+WantedBy=timers.target
