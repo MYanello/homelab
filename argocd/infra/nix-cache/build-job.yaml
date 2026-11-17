@@ -49,6 +49,8 @@ spec:
                 - name: keys
                   mountPath: /keys
                   readOnly: true
+                - name: nix-store
+                  mountPath: /nix
                 - name: work
                   mountPath: /work
                 - name: nix-conf
@@ -56,11 +58,11 @@ spec:
                   readOnly: true
               resources:
                 requests:
-                  cpu: "2"
+                  cpu: "8"
                   memory: 4Gi
                   ephemeral-storage: 10Gi
                 limits:
-                  memory: 16Gi
+                  memory: 12Gi
                   ephemeral-storage: 50Gi
               securityContext:
                 privileged: true
@@ -81,3 +83,13 @@ spec:
             - name: nix-conf
               configMap:
                 name: nix-build-config
+            - name: nix-store
+              persistentVolumeClaim:
+                claimName: nix-store
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchLabels:
+                      app.kubernetes.io/name: nix-cache
+                  topologyKey: kubernetes.io/hostname
