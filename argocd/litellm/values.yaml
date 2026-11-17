@@ -32,9 +32,8 @@ proxy_config:
   model_list:
     - model_name: inference/latest
       litellm_params:
-        model: openrouter/deepseek/deepseek-v4.1-flash-1017  # custom_openai/sglang/latest
-        api_base: https://sglang.cw623e-myanello.coreweave.app/v1
-        api_key: os.environ/HOSTED_API_KEY
+        model: openrouter/deepseek/deepseek-v4.1-flash-1017
+        api_key: os.environ/OPENROUTER_API_KEY
         allowed_openai_params:
           - reasoning_effort
     - model_name: "openrouter/*"
