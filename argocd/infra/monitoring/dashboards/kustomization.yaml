@@ -54,3 +54,9 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: crowdsec-dashboard
+    files:
+      - ./crowdsec-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"
