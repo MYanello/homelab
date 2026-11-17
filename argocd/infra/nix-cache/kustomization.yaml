@@ -12,3 +12,8 @@ resources:
   - ext-secrets.yaml
   - build-job.yaml
   - gc.yaml
+
+images:
+  - name: harbor.yanello.net/library/nix-cache
+    newName: harbor.yanello.net/library/nix-cache
+    newTag: v3.3.0-10@sha256:fdcaa2e342bcb106007e3076d6843a289f850517dd36b6d1d845296053c20c42

@@ -20,13 +20,13 @@ spec:
           automountServiceAccountToken: false
           containers:
             - name: gc
-              image: harbor.yanello.net/library/nix-cache:v3.3.0-10@sha256:00e4c9fb68d80c7186f70bb291c54000f2dad714c6c783d2d9f431c9ca82da8c
+              image: harbor.yanello.net/library/nix-cache:latest
               command: ["bash", "gc.sh"]
               env:
-                - name: KEEP
-                  value: "8"
-                - name: PATTERNS
-                  value: "*nixos-system-*,*home-manager-generation"
+                - name: KEEP_RECENT
+                  value: 3d
+                - name: ENSURE_FREE
+                  value: 50G
               volumeMounts:
                 - name: nix-store
                   mountPath: /nix
