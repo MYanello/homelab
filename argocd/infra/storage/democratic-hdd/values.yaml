@@ -78,6 +78,8 @@ controller:
       limits:
         memory: 64Mi
   externalSnapshotter:
+    image:
+      tag: v8.6.0
     resources:
       requests:
         cpu: 10m
@@ -120,7 +122,12 @@ storageClasses:
       node-publish-secret: null
       controller-expand-secret: null
 # if your cluster supports snapshots you may enable below
-volumeSnapshotClasses: []
+volumeSnapshotClasses:
+  - name: truenas-hdd
+    deletionPolicy: Delete
+    parameters: {}
+    secrets:
+      snapshotter-secret: null
 # - name: freenas-iscsi-csi
 #  parameters:
 #  # if true, snapshots will be created with zfs send/receive

@@ -20,8 +20,6 @@ spec:
     metadata:
       labels:
         app: paperless
-      annotations:
-        backup.velero.io/backup-volumes: "paperless-media,paperless-data"
     spec:
       # securityContext:
       #   runAsUser: 3000

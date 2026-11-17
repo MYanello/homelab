@@ -78,6 +78,8 @@ controller:
       limits:
         memory: 64Mi
   externalSnapshotter:
+    image:
+      tag: v8.6.0
     resources:
       requests:
         cpu: 10m
@@ -119,6 +121,12 @@ storageClasses:
       node-publish-secret: null
       controller-expand-secret: null
 
+volumeSnapshotClasses:
+  - name: truenas-hdd-nfs
+    deletionPolicy: Delete
+    parameters: {}
+    secrets:
+      snapshotter-secret: null
 driver:
   existingConfigSecret: democratic-secret
   config:
