@@ -276,14 +276,15 @@ alertmanager:
             send_resolved: true
             http_config:
               http_headers:
-                Title:
-                  values:
-                    - "{{ .CommonLabels.alertname }} [{{ .Status }}]"
                 Priority:
                   values:
-                    - '{{ if eq .Status "firing" }}high{{ else }}default{{ end }}'
+                    - high
                 Tags:
-                  values: ["rotating_light"]
+                  values:
+                    - rotating_light
+                Click:
+                  values:
+                    - https://alertmanager.yanello.net/#/alerts
   spec:
     volumes:
       - name: ntfy-url
