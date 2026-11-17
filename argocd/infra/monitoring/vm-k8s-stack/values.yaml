@@ -64,6 +64,15 @@ kubeApiServer:
             caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
             serverName: kubernetes
 
+kubeScheduler:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
 kube-state-metrics:
   resources:
     requests:
