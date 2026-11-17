@@ -60,9 +60,9 @@ controller:
     resources:
       requests:
         cpu: 10m
-        memory: 16Mi
+        memory: 30Mi
       limits:
-        memory: 16Mi
+        memory: 75Mi
   externalProvisioner:
     resources:
       requests:
@@ -81,9 +81,9 @@ controller:
     resources:
       requests:
         cpu: 10m
-        memory: 16Mi
+        memory: 30Mi
       limits:
-        memory: 16Mi
+        memory: 75Mi
 storageClasses:
   - name: truenas-hdd
     defaultClass: false
