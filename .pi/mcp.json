@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "vmlogs": {
+      "url": "https://vmlogs-mcp.yanello.net/mcp"
+    },
+    "vmetrics": {
+      "url": "https://vm-mcp.yanello.net/mcp"
+    },
+    "kagi": {
+      "url": "https://mcp.kagi.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${KAGI_API_KEY}"
+      }
+    }
+  }
+}

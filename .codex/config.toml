@@ -1,0 +1,9 @@
+[mcp_servers.vmlogs]
+url = "https://vmlogs-mcp.yanello.net/mcp"
+
+[mcp_servers.vmetrics]
+url = "https://vm-mcp.yanello.net/mcp"
+
+[mcp_servers.kagi]
+url = "https://mcp.kagi.com/mcp"
+bearer_token_env_var = "KAGI_API_KEY"
