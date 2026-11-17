@@ -20,35 +20,13 @@ spec:
           automountServiceAccountToken: false
           containers:
             - name: gc
-              image: harbor.yanello.net/library/nix-cache:v3.3.0-8@sha256:c0bad9eaa117360bcd905a9ce2ea023661bd76ba3aa5ae84a3aa5dde5087c029
-              command: ["bash", "-c"]
-              args:
-                - |
-                  set -euo pipefail
-                  mkdir -p /nix/var/nix/gcroots/auto
-                  IFS=',' read -ra patterns <<< "${PATTERNS:-nixos-system-*,home-manager-generation}" || true
-                  rooted=0
-                  for pattern in "${patterns[@]}"; do
-                    mapfile -t found < <(ls -dt /nix/store/$pattern 2>/dev/null | head -n "${KEEP:-6}")
-                    for path in "${found[@]}"; do
-                      nix-store --add-root "/nix/var/nix/gcroots/auto/keep-$(basename "$path")" --indirect -r "$path"
-                    done
-                    rooted=$((rooted + ${#found[@]}))
-                    printf '%s: rooted %d\n' "$pattern" "${#found[@]}"
-                  done
-                  if [ "$rooted" -eq 0 ]; then
-                    echo "error: nothing matched, refusing to collect garbage" >&2
-                    exit 1
-                  fi
-                  du -sh /nix/store
-                  nix store gc
-                  du -sh /nix/store
-                  df -h /nix | tail -1
+              image: harbor.yanello.net/library/nix-cache:v3.3.0-10@sha256:00e4c9fb68d80c7186f70bb291c54000f2dad714c6c783d2d9f431c9ca82da8c
+              command: ["bash", "gc.sh"]
               env:
                 - name: KEEP
                   value: "8"
                 - name: PATTERNS
-                  value: nixos-system-*,home-manager-generation
+                  value: "*nixos-system-*,*home-manager-generation"
               volumeMounts:
                 - name: nix-store
                   mountPath: /nix
