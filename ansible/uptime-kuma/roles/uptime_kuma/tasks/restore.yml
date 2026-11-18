@@ -42,11 +42,19 @@
     - uptime_kuma_should_restore
     - uptime_kuma_restore_object | length == 0
 
+- name: Look up the uptime kuma container
+  community.docker.docker_container_info:
+    name: uptime-kuma
+  register: uptime_kuma_container
+  when: uptime_kuma_should_restore
+
 - name: Stop uptime kuma before restoring
   community.docker.docker_container:
     name: uptime-kuma
     state: stopped
-  when: uptime_kuma_should_restore
+  when:
+    - uptime_kuma_should_restore
+    - uptime_kuma_container.exists
 
 - name: Download the selected backup
   ansible.builtin.command:
