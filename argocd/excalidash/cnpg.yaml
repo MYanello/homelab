@@ -7,7 +7,7 @@ spec:
   inheritedMetadata:
     annotations:
       backup.velero.io/backup-volumes: pgdata
-  instances: 1
+  instances: 0
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
