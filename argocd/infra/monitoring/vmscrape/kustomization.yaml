@@ -7,4 +7,4 @@ resources:
   - ./haproxy.yaml
   - ./netdata.yaml
   - ./opnsense.yaml
-  - ./vllm.yaml
+  # - ./vllm.yaml
