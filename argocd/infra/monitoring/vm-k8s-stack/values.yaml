@@ -1,4 +1,18 @@
 ---
+defaultRules:
+  rules:
+    KubeMemoryOvercommit:
+      enabled: false
+    NodeFilesystemAlmostOutOfSpace:
+      enabled: false
+  groups:
+    kube-apiserver-availability.rules:
+      enabled: false
+    kube-apiserver-burnrate.rules:
+      enabled: false
+    kube-apiserver-histogram.rules:
+      enabled: false
+
 victoria-metrics-operator:
   enabled: true
   admissionWebhooks:

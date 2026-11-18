@@ -14,7 +14,7 @@ spec:
     matchNames:
       - backrest
   endpoints:
-    - port: http-monitoring
+    - port: http
       path: /metrics
       scheme: http
       interval: 30s

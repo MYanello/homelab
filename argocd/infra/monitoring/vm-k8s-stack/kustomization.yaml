@@ -6,6 +6,7 @@ resources:
   - ./manifests/netpol.yaml
   - ./manifests/http-route.yaml
   - ./manifests/mcp-victoriametrics.yaml
+  - ./manifests/alert-rules.yaml
 
 generators:
   - ./manifests/secrets/secret-generator.yaml
