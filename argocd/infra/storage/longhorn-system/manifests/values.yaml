@@ -27,70 +27,70 @@ longhornManager:
   resources:
     requests:
       cpu: 50m
-      memory: 384Mi
+      memory: 400Mi
     limits:
-      memory: 448Mi
+      memory: 500Mi
   initContainer:
     resources:
       requests:
         cpu: 10m
-        memory: 32Mi
+        memory: 30Mi
       limits:
-        memory: 64Mi
+        memory: 75Mi
 longhornCsiPlugin:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 30Mi
     limits:
-      memory: 32Mi
+      memory: 30Mi
 csi:
   attacher:
     resources:
       requests:
         cpu: 10m
-        memory: 32Mi
+        memory: 30Mi
       limits:
-        memory: 32Mi
+        memory: 30Mi
   provisioner:
     resources:
       requests:
         cpu: 10m
-        memory: 32Mi
+        memory: 30Mi
       limits:
-        memory: 32Mi
+        memory: 30Mi
   resizer:
     resources:
       requests:
         cpu: 10m
-        memory: 32Mi
+        memory: 30Mi
       limits:
-        memory: 32Mi
+        memory: 30Mi
   snapshotter:
     resources:
       requests:
         cpu: 10m
-        memory: 32Mi
+        memory: 30Mi
       limits:
-        memory: 32Mi
+        memory: 30Mi
 longhornDriverDeployer:
   resources:
     requests:
       cpu: 10m
-      memory: 16Mi
+      memory: 15Mi
     limits:
-      memory: 16Mi
+      memory: 20Mi
   initContainer:
     resources:
       requests:
         cpu: 10m
-        memory: 64Mi
+        memory: 75Mi
       limits:
-        memory: 128Mi
+        memory: 125Mi
 longhornUi:
   resources:
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 25Mi
     limits:
-      memory: 64Mi
+      memory: 75Mi
