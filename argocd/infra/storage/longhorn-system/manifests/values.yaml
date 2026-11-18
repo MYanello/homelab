@@ -12,7 +12,7 @@ defaultBackupStore:
   backupTargetCredentialSecret: "s3-secrets"
 
 preUpgradeChecker:
-  jobEnabled: false
+  jobEnabled: true
 
 persistence:
   defaultClassReplicaCount: "2"
