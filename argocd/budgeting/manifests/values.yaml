@@ -2,6 +2,7 @@
 image:
   tag: v1.19.3
   pullPolicy: Always
+replicaCount: 0
 
 rollout:
   enabled: true
@@ -33,6 +34,6 @@ oidc:
 resources:
   requests:
     cpu: 10m
-    memory: 16Mi
+    memory: 10Mi
   limits:
-    memory: 16Mi
+    memory: 25Mi
