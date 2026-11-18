@@ -13,6 +13,9 @@ spec:
         password:
           name: kuma-auth
           key: apiKey
+        username:
+          name: oracle-kuma-auth
+          key: username
   namespaceSelector:
     matchNames:
       - monitoring
