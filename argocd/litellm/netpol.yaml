@@ -30,6 +30,13 @@ spec:
         - ports:
             - port: "4000"
               protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: honcho
+      toPorts:
+        - ports:
+            - port: "4000"
+              protocol: TCP
   egress:
     - toEndpoints:
         - matchLabels:

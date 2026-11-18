@@ -14,7 +14,7 @@ spec:
             app.kubernetes.io/name: vmagent
       toPorts:
         - ports:
-            - port: "8085"
+            - port: "9898"
               protocol: TCP
     - fromEndpoints:
         - matchLabels:

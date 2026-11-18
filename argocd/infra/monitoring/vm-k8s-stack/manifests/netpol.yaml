@@ -47,3 +47,17 @@ spec:
         - ports:
             - port: "8086"
               protocol: TCP
+    - fromCIDR:
+        - 192.168.0.0/16
+      toPorts:
+        - ports:
+            - port: "5514"
+              protocol: UDP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: litellm
+            k8s:app.kubernetes.io/name: litellm
+      toPorts:
+        - ports:
+            - port: "4318"
+              protocol: TCP
