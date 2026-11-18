@@ -16,6 +16,14 @@ spec:
               protocol: TCP
             - port: "3000"
               protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: immich
+            app: immich-storage-template
+      toPorts:
+        - ports:
+            - port: "2283"
+              protocol: TCP
   egress:
     - toEndpoints:
         - matchLabels:
