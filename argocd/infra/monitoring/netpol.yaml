@@ -17,9 +17,13 @@ spec:
               protocol: TCP
             - port: "3001"
               protocol: TCP
+            - port: "8080"
+              protocol: TCP
             - port: "8428"
               protocol: TCP
             - port: "8429"
+              protocol: TCP
+            - port: "9093"
               protocol: TCP
             - port: "9428"
               protocol: TCP
