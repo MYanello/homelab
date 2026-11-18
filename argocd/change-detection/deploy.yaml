@@ -21,7 +21,7 @@ spec:
         app: change-detection
     spec:
       containers:
-        - image: harbor.yanello.net/ghcr/dgtlmoon/changedetection.io:0.60.7@sha256:096dae27b5d677b89f0e810fff95a70403271aa3ff3b6437952d2db9be7e74c5
+        - image: harbor.yanello.net/ghcr/dgtlmoon/changedetection.io:0.70.3@sha256:47b1e9cc3eff820e6022b655e3fcc948625f60c1770ae8b9c30aa3bf104dc255
           imagePullPolicy: IfNotPresent
           name: change-detection
           env:
