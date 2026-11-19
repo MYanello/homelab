@@ -53,7 +53,7 @@ jobs:
             echo "stringData:"
             echo "  type: helm"
             echo "  name: harbor"
-            echo "  url: harbor.yanello.net"
+            echo "  url: harbor.yanello.net/helm"
             echo "  enableOCI: \"true\""
             echo "  username: robot-renovate"
             printf '  password: "%s"\n' "$HARBOR_ROBOT_PASSWORD"

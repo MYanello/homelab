@@ -8,10 +8,20 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: "https://github.com/myanello/homelab"
-    path: "argocd/budgeting/manifests"
-    targetRevision: "main"
+  sources:
+    - repoURL: "harbor.yanello.net/helm"
+      chart: "budgeting"
+      targetRevision: "0.2.3"
+      helm:
+        releaseName: "budgeting"
+        valueFiles:
+          - "$values/argocd/budgeting/manifests/values.yaml"
+    - repoURL: "https://github.com/myanello/homelab"
+      targetRevision: "main"
+      ref: "values"
+    - repoURL: "https://github.com/myanello/homelab"
+      path: "argocd/budgeting/manifests"
+      targetRevision: "main"
   destination:
     name: in-cluster
     namespace: budgeting
