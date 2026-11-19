@@ -112,9 +112,9 @@ spec:
           resources:
             requests:
               cpu: 10m
-              memory: 64Mi
+              memory: 100Mi
             limits:
-              memory: 500Mi
+              memory: 1Gi
           ports:
             - containerPort: 8191
               protocol: TCP
