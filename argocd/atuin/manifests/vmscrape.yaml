@@ -1,0 +1,20 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: atuin
+  labels:
+    app.kubernetes.io/name: atuin
+spec:
+  selector:
+    matchLabels:
+      app: atuin
+  namespaceSelector:
+    matchNames:
+      - atuin
+  endpoints:
+    - port: metrics
+      path: /metrics
+      scheme: http
+      interval: 30s
+      scrapeTimeout: 10s

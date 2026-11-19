@@ -8,6 +8,7 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/cnpg.yaml
   - ./manifests/deploy.yaml
+  - ./manifests/vmscrape.yaml
 
 configMapGenerator:
   - name: atuin-config

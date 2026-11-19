@@ -10,6 +10,9 @@ spec:
     - name: "http"
       port: 8888
       targetPort: 8888
+    - name: "metrics"
+      port: 9001
+      targetPort: 9001
   selector:
     app: atuin
 ---
