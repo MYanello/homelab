@@ -42,22 +42,22 @@ jobs:
           HARBOR_ROBOT_PASSWORD: ${{ secrets.HARBOR_ROBOT_PASSWORD }}
         run: |
           mkdir -p secrets
-          {
-            echo "apiVersion: v1"
-            echo "kind: Secret"
-            echo "metadata:"
-            echo "  name: harbor-helm-repo"
-            echo "  namespace: argocd"
-            echo "  labels:"
-            echo "    argocd.argoproj.io/secret-type: repository"
-            echo "stringData:"
-            echo "  type: helm"
-            echo "  name: harbor"
-            echo "  url: harbor.yanello.net/helm"
-            echo "  enableOCI: \"true\""
-            echo "  username: robot-argo-diff-preview"
-            printf '  password: "%s"\n' "$HARBOR_ROBOT_PASSWORD"
-          } > secrets/harbor-repo.yaml
+          cat > secrets/harbor-repo.yaml <<-EOF
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: harbor-helm-repo
+            namespace: argocd
+            labels:
+              argocd.argoproj.io/secret-type: repository
+          stringData:
+            type: helm
+            name: harbor
+            url: harbor.yanello.net/helm
+            enableOCI: "true"
+            username: robot-argo-diff-preview
+            password: "${HARBOR_ROBOT_PASSWORD}"
+          EOF
 
       - name: Preinstall Redis Secret
         run: |
