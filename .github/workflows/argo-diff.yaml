@@ -55,7 +55,7 @@ jobs:
             echo "  name: harbor"
             echo "  url: harbor.yanello.net/helm"
             echo "  enableOCI: \"true\""
-            echo "  username: robot-renovate"
+            echo "  username: robot-argo-diff-preview"
             printf '  password: "%s"\n' "$HARBOR_ROBOT_PASSWORD"
           } > secrets/harbor-repo.yaml
 
