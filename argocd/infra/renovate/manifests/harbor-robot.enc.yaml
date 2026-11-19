@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: renovate-harbor
+type: Opaque
+stringData:
+  HARBOR_ROBOT_USERNAME: ENC[AES256_GCM,data:WaZzr8JvirGRmwBqvtA=,iv:D1g7KMV3fj7t1V4KGgzZH2JPXunIEveryK37xZDzN3k=,tag:ztMYdiCOZljqFEkNmfsenA==,type:str]
+  HARBOR_ROBOT_PASSWORD: ENC[AES256_GCM,data:pFiIsAEABCrrpdTVB41x192b9L3DYwnbM9IAT+ARmbQ=,iv:004R09ACmavRxwWmCf+7CQXsZGPHmy7Cqh8xn1nWTT4=,tag:jsormFGkQ8Rtf/7DsiFgAQ==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4cy9aVldHYmZFYXNjZmdV
+        TU1ieWJBdk5mWm1scGtjV2Y5SXVDWUJGamlJCjExLzczWDl6YVEvdHU3Ris5YTlF
+        SHpUazdDU2s0enZFb1RjekJBU3VpT0EKLS0tIGRScThBWlNJT0FJWnZ2a3lTTmIz
+        ZWdlNWN4VkFHVWZGSkpsK2tqcDVZWWMKQ/zCFxkNgIZWiniwV9VpARvtbO511QZk
+        nBuwaad4TBh7FgGCcRMCAVgjt+I0Yt390JEQw/VR3aaXKBEqc3MGiA==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1fd6r86ze2kzv9fey9y0jx47uekpkjsat76l2t6uesfhjpx7463cqtawww5
+  lastmodified: "2026-11-19T02:23:44Z"
+  mac: ENC[AES256_GCM,data:UgxK8NBBnsyP6VxGUU42GKFhAXzNU9UiWck8i1wqMit+rji2p0WckOhb0S/eUnTgPOE/gGJlgqHAYQ8qfTgOgG825RXntgiggY2j3przXwVAc/GfkzSQ1xNr5Euu7OA+GZU0eY8uiYHWRfYuA8zcnTYLct71OXXxL3VcABpmIQA=,iv:8B3Cund+li6FJZTwu3AORrDxp6b2I0pyt4vdjT/t37o=,tag:tQXHq1gml4f0x7g1DmZrLw==,type:str]
+  unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+  version: 3.13.3

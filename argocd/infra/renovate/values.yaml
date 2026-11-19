@@ -4,6 +4,9 @@ cachePersistence:
   storageClass: longhorn
   size: 20Gi
 
+extraEnvFromSecrets:
+  - name: renovate-harbor
+
 containerSecurityContext:
   runAsUser: 1000
   runAsGroup: 1000

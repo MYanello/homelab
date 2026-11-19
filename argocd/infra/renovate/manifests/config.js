@@ -63,6 +63,8 @@ module.exports = {
     {
       matchHost: "harbor.yanello.net",
       allowInternal: true,
+      username: process.env.HARBOR_ROBOT_USERNAME,
+      password: process.env.HARBOR_ROBOT_PASSWORD,
     },
   ],
 };
