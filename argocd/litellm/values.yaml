@@ -4,7 +4,7 @@ replicaCount: 1
 resources:
   requests:
     cpu: 50m
-    memory: 512Mi
+    memory: 500Mi
   limits:
     memory: 2Gi
 masterkeySecretName: vault-secrets
@@ -27,6 +27,8 @@ envVars:
   OTEL_SERVICE_NAME: litellm
   OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: EVENT_ONLY
   LITELLM_OTEL_INTEGRATION_ENABLE_EVENTS: "true"
+  AUTO_REDIRECT_UI_LOGIN_TO_SSO: "true"
+  LITELLM_HIDE_DEFAULT_CREDENTIALS_HINT: "true"
 
 proxy_config:
   model_list:
