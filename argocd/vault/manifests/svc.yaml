@@ -1,52 +1,43 @@
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: TLSRoute
+apiVersion: v1
+kind: Service
 metadata:
+  name: vault-service
+  namespace: vault
   annotations:
+    io.cilium/lb-ipam-ips: 10.10.8.103
+    external-dns.kubernetes.io/hostname: vault.yanello.net
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Vault
     gethomepage.dev/icon: sh-hashicorp-vault
     gethomepage.dev/description: "Vault provides organizations with identity-based\
       \ security to automatically authenticate and authorize access to secrets and\
       \ other sensitive data."
-    gethomepage.dev/pod-selector: app.kubernetes.io/name=vault
-  labels:
-    app.kubernetes.io/instance: vault-app
-  name: vault-route
 spec:
-  parentRefs:
-    - name: private-tls-passthrough-gateway
-      namespace: cilium
-      sectionName: tls-passthrough
-  hostnames:
-    - vault.yanello.net
-  rules:
-    - backendRefs:
-        - name: vault-service
-          port: 8200
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: vault-service
-spec:
+  type: LoadBalancer
+  loadBalancerSourceRanges:
+    - 166.19.10.192/26
+    - 166.19.19.0/24
+    - 192.168.1.0/24
+    - 192.168.10.0/24
   ports:
-    - name: http
+    - name: https
       protocol: TCP
-      port: 8200
+      port: 443
       targetPort: 8200
 ---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
   name: vault-service-1
+  namespace: vault
   labels:
     kubernetes.io/service-name: vault-service
     endpointslice.kubernetes.io/managed-by: cluster-admin
 addressType: IPv4
 ports:
-  - name: http
-    appProtocol: http
+  - name: https
+    appProtocol: https
     protocol: TCP
     port: 8200
 endpoints:
