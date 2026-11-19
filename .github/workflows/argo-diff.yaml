@@ -37,6 +37,28 @@ jobs:
             key.txt: "${SOPS_KEY}"
           EOF
 
+      - name: Write Harbor Repo Secret
+        env:
+          HARBOR_ROBOT_PASSWORD: ${{ secrets.HARBOR_ROBOT_PASSWORD }}
+        run: |
+          mkdir -p secrets
+          {
+            echo "apiVersion: v1"
+            echo "kind: Secret"
+            echo "metadata:"
+            echo "  name: harbor-helm-repo"
+            echo "  namespace: argocd"
+            echo "  labels:"
+            echo "    argocd.argoproj.io/secret-type: repository"
+            echo "stringData:"
+            echo "  type: helm"
+            echo "  name: harbor"
+            echo "  url: harbor.yanello.net"
+            echo "  enableOCI: \"true\""
+            echo "  username: robot-renovate"
+            printf '  password: "%s"\n' "$HARBOR_ROBOT_PASSWORD"
+          } > secrets/harbor-repo.yaml
+
       - name: Preinstall Redis Secret
         run: |
           mkdir -p preinstall
