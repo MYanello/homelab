@@ -7,6 +7,7 @@ metadata:
   annotations:
     io.cilium/lb-ipam-ips: 10.10.8.103
     external-dns.kubernetes.io/hostname: vault.yanello.net
+    service.cilium.io/forwarding-mode: "snat"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Vault
     gethomepage.dev/icon: sh-hashicorp-vault
