@@ -8,6 +8,16 @@ spec:
     matchLabels:
       app.kubernetes.io/name: nix-cache
   ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: nix-cache
+            k8s:app.kubernetes.io/name: nix-cache-build
+      toPorts:
+        - ports:
+            - port: "22"
+              protocol: TCP
+            - port: "5000"
+              protocol: TCP
     - fromEntities:
         - ingress
       toPorts:
@@ -16,7 +26,6 @@ spec:
               protocol: TCP
     - fromCIDR:
         - 192.168.0.0/16
-        - 10.10.8.0/22
       toPorts:
         - ports:
             - port: "22"
@@ -24,8 +33,6 @@ spec:
             - port: "5000"
               protocol: TCP
   egress:
-    - toEntities:
-        - cluster
     - toEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: kube-system
@@ -39,9 +46,8 @@ spec:
     - toEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: forgejo
-            k8s:app.kubernetes.io.name: forgejo
-            k8s:app.kubernetes.io.component: ssh
+            k8s:app.kubernetes.io/name: forgejo
       toPorts:
         - ports:
-            - port: "22"
+            - port: "2222"
               protocol: TCP
