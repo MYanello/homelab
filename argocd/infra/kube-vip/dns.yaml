@@ -5,7 +5,7 @@ metadata:
   name: k8s
 spec:
   endpoints:
-    - dnsName: k8s.yanello.net
+    - dnsName: k8s-vip.yanello.net
       recordType: A
       recordTTL: 300
       targets:
