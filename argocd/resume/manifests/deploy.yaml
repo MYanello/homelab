@@ -102,6 +102,6 @@ spec:
               memory: 64Mi
             limits:
               memory: 96Mi
-          image: harbor.yanello.net/docker/chromedp/headless-shell:159.0.8144.0@sha256:09f37647df489182c1b064c2de6e585d891a95d1b826e189a52603069f3c48d8
+          image: harbor.yanello.net/docker/chromedp/headless-shell:159.0.8154.6@sha256:7eabeac218d40d4d691b20d61f7f28b1b0b9c31ecda56f86dc761807774d1960
           ports:
             - containerPort: 9222
