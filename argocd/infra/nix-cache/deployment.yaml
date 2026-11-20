@@ -17,6 +17,15 @@ spec:
       labels:
         app.kubernetes.io/name: nix-cache
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - name: nix-cache
           image: harbor.yanello.net/library/nix-cache:latest@sha256:fdcaa2e342bcb106007e3076d6843a289f850517dd36b6d1d845296053c20c42
