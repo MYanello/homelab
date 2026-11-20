@@ -344,23 +344,6 @@ module "calibre" {
   meta_launch_url = ""
 }
 
-module "core-weave-argo" {
-  source = "./modules/oauth2-app"
-
-  name               = "CoreWeave Argo"
-  slug               = "core-weave-argo"
-  client_id          = "aeXlzcalWLlVEjlENVR0Yt2fTEUcdlwRVUR1Cs6M"
-  authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
-  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
-  property_mappings  = local.oidc_mappings
-  redirect_uris = [{
-    matching_mode     = "strict"
-    url               = "https://login-sa.core-services.ingress.coreweave.com/source/oauth/callback/cw623e-oidc/"
-    redirect_uri_type = "authorization"
-  }]
-  meta_launch_url = ""
-}
-
 module "dawarich" {
   source = "./modules/oauth2-app"
 
