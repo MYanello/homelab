@@ -7,6 +7,6 @@ generators:
 
 resources:
   - ./netpol.yaml
-  - ./cnpg.yaml
-  - ./httproute.yaml
-  - ./preview-service.yaml
+  # - ./cnpg.yaml
+  # - ./httproute.yaml
+  # - ./preview-service.yaml
