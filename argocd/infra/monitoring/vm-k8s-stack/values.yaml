@@ -3,6 +3,8 @@ defaultRules:
   rules:
     KubeMemoryOvercommit:
       enabled: false
+    KubeCPUOvercommit:
+      enabled: false
     NodeFilesystemAlmostOutOfSpace:
       enabled: false
   groups:
