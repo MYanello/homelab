@@ -1,0 +1,6 @@
+---
+- name: Restart AdGuard Home
+  become: true
+  ansible.builtin.service:
+    name: adguardhome
+    state: restarted
