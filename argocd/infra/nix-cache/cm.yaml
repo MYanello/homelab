@@ -25,7 +25,7 @@ data:
     experimental-features = nix-command flakes
     build-users-group =
     fallback = true
-    max-jobs = 8
+    max-jobs = 4
     cores = 1
     extra-substituters = http://nix-cache.nix-cache.svc.cluster.local:5000
     extra-trusted-public-keys = nix-cache.yanello.net-1:bWUWi7WOldRLLH8TjeBV0MP55jTgP98wC6JqCOQW9B4=

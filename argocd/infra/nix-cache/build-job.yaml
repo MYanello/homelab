@@ -61,11 +61,11 @@ spec:
                   readOnly: true
               resources:
                 requests:
-                  cpu: "8"
+                  cpu: "4"
                   memory: 4Gi
                   ephemeral-storage: 10Gi
                 limits:
-                  memory: 12Gi
+                  memory: 8Gi
                   ephemeral-storage: 50Gi
               securityContext:
                 privileged: true
