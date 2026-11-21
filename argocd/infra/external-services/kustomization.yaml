@@ -18,3 +18,4 @@ resources:
   - valetudo.yaml
   # - hermes.yaml
   - rustfs.yaml
+  - bell.yaml
