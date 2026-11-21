@@ -20,17 +20,31 @@ WORK=/tmp/scan
 mkdir -p "$WORK"
 rm -f "$WORK"/*.tif "$WORK"/*.pdf
 
-rc=0
-scanimage \
-  --device-name "brother4:$DEV" \
-  --source "$SOURCE" \
-  --resolution 600 \
-  --batch="$WORK/page-%04d.tif" || rc=$?
+echo "scan: mode=$MODE device=$DEV source=$SOURCE"
 
-if [ "$rc" -ne 0 ] && [ "$rc" -ne 7 ]; then
-  echo "scanimage exited $rc" >&2
-  exit "$rc"
-fi
+case "$DEV" in
+  *net*) sleep 1 ;;
+esac
+
+attempt=0
+while : ; do
+  rc=0
+  scanimage \
+    --device-name "brother4:$DEV" \
+    --source "$SOURCE" \
+    --resolution 600 \
+    --batch="$WORK/page-%04d.tif" || rc=$?
+  if [ "$rc" -eq 0 ] || [ "$rc" -eq 7 ]; then
+    break
+  fi
+  attempt=$((attempt + 1))
+  if [ "$attempt" -ge 3 ]; then
+    echo "scanimage exited $rc after $attempt attempts" >&2
+    exit "$rc"
+  fi
+  sleep 1
+  rm -f "$WORK"/*.tif
+done
 
 set -- "$WORK"/page-*.tif
 if [ ! -e "$1" ]; then

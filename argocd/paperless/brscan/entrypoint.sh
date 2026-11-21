@@ -23,9 +23,9 @@ mkdir -p "${SCAN_DROP_DIR:-/consume}"
 echo "configured devices:"
 scanimage -L || true
 
-echo "scan key diagnosis:"
-brscan-skey --diagnosis || true
-
 brscan-skey
+
+echo "registered machines:"
+brscan-skey -l || true
 
 exec sleep infinity

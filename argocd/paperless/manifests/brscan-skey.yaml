@@ -41,10 +41,10 @@ spec:
               mountPath: /consume
           resources:
             limits:
-              memory: 250Mi
+              memory: 1Gi
             requests:
               cpu: 10m
-              memory: 30Mi
+              memory: 100Mi
       volumes:
         - name: scan
           emptyDir:

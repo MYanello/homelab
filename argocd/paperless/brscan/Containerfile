@@ -29,6 +29,7 @@ RUN curl -fsSL -o /tmp/skey.tar.gz "https://github.com/EasyNetDev/brscan-skey/ar
     mkdir -p /etc/opt/brother/scanner/brscan-skey /opt/brother/scanner/brscan-skey/script-paperless && \
     ln -sf /opt/brother/scanner/brscan-skey/brscan-skey /usr/local/bin/brscan-skey
 
+COPY brscan-skey.config /opt/brother/scanner/brscan-skey/brscan-skey.config
 COPY brscan-skey.config /etc/opt/brother/scanner/brscan-skey/brscan-skey.config
 COPY brscan-snmp.cfg /etc/opt/brother/scanner/brscan-skey/brscan-snmp.cfg
 COPY scan.sh /opt/brother/scanner/brscan-skey/script-paperless/scan.sh
