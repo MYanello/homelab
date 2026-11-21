@@ -1,18 +1,16 @@
 locals {
-  tenancy                            = data.sops_file.oci.data["tenancy_ocid"]
-  instance_shape                     = "VM.Standard.E2.1.Micro"
-  memory_in_gbs                      = 1
-  ocpus                              = 1
-  arm_instance_shape                 = "VM.Standard.A1.Flex"
-  arm_memory_in_gbs                  = 12
-  arm_ocpus                          = 2
-  instance_boot_volume_size          = 50
-  image_operating_system             = "Canonical Ubuntu"
-  image_operating_system_version     = "26.04 Minimal"
-  arm_image_operating_system_version = "26.04 Minimal aarch64"
-  arm_availability_domain_index      = 1
-  arm_fault_domain                   = "FAULT-DOMAIN-1"
-  instance_public_key_path           = "/home/marcus/.ssh/id_ed25519.pub"
+  tenancy                        = data.sops_file.oci.data["tenancy_ocid"]
+  instance_shape                 = "VM.Standard.E2.1.Micro"
+  memory_in_gbs                  = 1
+  ocpus                          = 1
+  arm_instance_shape             = "VM.Standard.A1.Flex"
+  arm_memory_in_gbs              = 12
+  arm_ocpus                      = 2
+  instance_boot_volume_size      = 50
+  image_operating_system         = "Canonical Ubuntu"
+  image_operating_system_version = "26.04 Minimal"
+  arm_availability_domain_index  = 1
+  instance_public_key_path       = "/home/marcus/.ssh/id_ed25519.pub"
 }
 
 data "oci_core_images" "instance_images" {
@@ -21,13 +19,6 @@ data "oci_core_images" "instance_images" {
   operating_system_version = local.image_operating_system_version
   shape                    = local.instance_shape
 }
-
- data "oci_core_images" "arm_instance_images" {
-   compartment_id           = data.sops_file.oci.data["tenancy_ocid"]
-   operating_system         = local.image_operating_system
-   operating_system_version = local.arm_image_operating_system_version
-   shape                    = local.arm_instance_shape
- }
 
 data "oci_identity_availability_domains" "ads" {
   compartment_id = data.sops_file.oci.data["tenancy_ocid"]
@@ -93,9 +84,9 @@ resource "oci_core_instance" "free_instance_1" {
   }
 
   create_vnic_details {
-    assign_public_ip = true
-    subnet_id        = oci_core_subnet.free_subnet.id
-    display_name     = "free_1"
+    assign_public_ip       = true
+    subnet_id              = oci_core_subnet.free_subnet.id
+    display_name           = "free_1"
     skip_source_dest_check = true
   }
 
@@ -104,31 +95,20 @@ resource "oci_core_instance" "free_instance_1" {
   }
 }
 
-# resource "oci_core_instance" "free_arm_1" {
-#   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[local.arm_availability_domain_index].name
-#   compartment_id      = oci_identity_compartment.free_compartment.id
-#   fault_domain        = local.arm_fault_domain
-#   shape               = local.arm_instance_shape
-#   display_name        = "free_arm_1"
-#
-#   shape_config {
-#     memory_in_gbs = local.arm_memory_in_gbs
-#     ocpus         = local.arm_ocpus
-#   }
-#
-#   source_details {
-#     source_id               = data.oci_core_images.arm_instance_images.images[0].id
-#     source_type             = "image"
-#     boot_volume_size_in_gbs = local.instance_boot_volume_size
-#   }
-#
-#   create_vnic_details {
-#     assign_public_ip = true
-#     subnet_id        = oci_core_subnet.free_subnet.id
-#     display_name     = "free_arm_1"
-#   }
-#
-#   metadata = {
-#     ssh_authorized_keys = file(local.instance_public_key_path)
-#   }
-# }
+resource "oci_core_instance" "free_arm_1" {
+  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[local.arm_availability_domain_index].name
+  compartment_id      = local.tenancy
+  shape               = local.arm_instance_shape
+  display_name        = "free-arm"
+
+  shape_config {
+    memory_in_gbs = local.arm_memory_in_gbs
+    ocpus         = local.arm_ocpus
+  }
+
+  source_details {
+    source_id               = "ocid1.image.oc1.iad.aaaaaaaagcccqesxzyiuok6mglwa4lprh55x4ynf2i6rakwneutaljkttyha"
+    source_type             = "image"
+    boot_volume_size_in_gbs = local.instance_boot_volume_size
+  }
+}
