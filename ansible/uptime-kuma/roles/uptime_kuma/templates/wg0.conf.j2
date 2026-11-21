@@ -4,8 +4,8 @@ PrivateKey = {{ wireguard_gateway_private_key }}
 
 [Peer]
 PublicKey = {{ wireguard_gateway_peer_public_key }}
-{% if wireguard_gateway_preshared_key is defined and wireguard_gateway_preshared_key | length > 0 %}
-PresharedKey = {{ wireguard_gateway_preshared_key }}
+{% if wireguard_gateway_psk is defined and wireguard_gateway_psk | length > 0 %}
+PresharedKey = {{ wireguard_gateway_psk }}
 {% endif %}
 Endpoint = {{ wireguard_gateway_endpoint }}:{{ wireguard_gateway_endpoint_port }}
 AllowedIPs = {{ wireguard_gateway_allowed_ips | join(", ") }}

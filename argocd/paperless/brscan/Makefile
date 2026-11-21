@@ -6,4 +6,4 @@ IMAGE := brscan
 
 build:
 	docker buildx build -f Containerfile --push --platform $(PLATFORM) \
-	-t $(REGISTRY)/nix-cache:$(VERSION) -t $(REGISTRY)/$(IMAGE):latest $(PUSH) .
+	-t $(REGISTRY)/$(IMAGE):$(VERSION) -t $(REGISTRY)/$(IMAGE):latest $(PUSH) .

@@ -25,7 +25,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: brscan-skey
-          image: harbor.yanello.net/library/brscan-skey:0.3.2
+          image: harbor.yanello.net/library/brscan:v0.4.10-0
           imagePullPolicy: Always
           env:
             - name: PRINTER_IP
@@ -41,7 +41,7 @@ spec:
               mountPath: /consume
           resources:
             limits:
-              memory: 250i
+              memory: 250Mi
             requests:
               cpu: 10m
               memory: 30Mi
