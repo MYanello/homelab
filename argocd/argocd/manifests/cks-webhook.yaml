@@ -68,4 +68,7 @@ spec:
       sectionName: https
   validation:
     hostname: argocd.cw623e-test-cluster.coreweave.app
-    wellKnownCACertificates: System
+    caCertificateRefs:
+      - group: ""
+        kind: ConfigMap
+        name: yanello-ca
