@@ -5,7 +5,7 @@ image:
 replicaCount: 0
 
 rollout:
-  enabled: true
+  enabled: false
   revisionHistoryLimit: 2
   strategy:
     blueGreen:

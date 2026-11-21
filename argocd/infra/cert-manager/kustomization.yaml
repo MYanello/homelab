@@ -14,7 +14,8 @@ helmCharts:
     releaseName: cert-manager
     namespace: cert-manager
     valuesInline:
-      installCRDs: true
+      crds:
+        enabled: true
       featureGates: NameConstraints=true
       affinity:
         nodeAffinity:
