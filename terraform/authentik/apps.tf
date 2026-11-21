@@ -15,9 +15,10 @@ module "argocd" {
   authorization_flow = data.authentik_flow.default-authorization-explicit-consent.id
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   property_mappings  = local.oidc_mappings
-  redirect_uris = [{
-    url = "https://argocd.yanello.net/api/dex/callback"
-  }]
+  redirect_uris = [
+    { url = "https://argocd.yanello.net/auth/callback" },
+    { url = "https://localhost:8080/auth/callback" }
+  ]
   meta_launch_url = "https://argocd.yanello.net/auth/login"
 }
 

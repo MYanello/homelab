@@ -11,6 +11,8 @@ data:
   controller.diff.server.side: "true"
   webhook.github.secret: $argocd-custom-secrets:webhook.github.secret
   url: https://argocd.yanello.net
+  additionalUrls: |
+    - https://localhost:8080
   resource.links: |
     - url: https://{{index .resource.spec.hostnames 0}}
       title: Resource
