@@ -22,29 +22,35 @@ resource "vault_transit_secret_backend_key" "rustfs" {
 resource "vault_policy" "rustfs_kms" {
   name   = "rustfs-kms"
   policy = <<-EOT
-    path "rustfs/encrypt/rustfs-default-key" { capabilities = ["update"] }
-    path "rustfs/decrypt/rustfs-default-key" { capabilities = ["update"] }
-    path "rustfs/keys/"                      { capabilities = ["read", "list"] }
-    path "rustfs/keys/rustfs-internal-kms-probe"            { capabilities = ["create", "read", "update"] }
-    path "rustfs/generateDataKey/rustfs-internal-kms-probe" { capabilities = ["update"] }
-    path "rustfs/decrypt/rustfs-internal-kms-probe"         { capabilities = ["update"] }
+    path "rustfs/keys"          { capabilities = ["list"] }
+    path "rustfs/keys/*"        { capabilities = ["create", "read", "update", "delete", "list"] }
+    path "rustfs/keys/*/config" { capabilities = ["read", "update"] }
+    path "rustfs/keys/*/rotate" { capabilities = ["update"] }
+    path "rustfs/encrypt/*"     { capabilities = ["create", "update"] }
+    path "rustfs/decrypt/*"     { capabilities = ["create", "update"] }
+    path "rustfs/rewrap/*"      { capabilities = ["create", "update"] }
 
-    path "secret/data/rustfs/kms/transit-metadata/*"     { capabilities = ["create", "read", "update", "delete"] }
-    path "secret/metadata/rustfs/kms/transit-metadata/*" { capabilities = ["create", "read", "update", "delete", "list"] }
+    path "secret/data/rustfs/kms/transit-metadata/*"     { capabilities = ["create", "read", "update"] }
+    path "secret/metadata/rustfs/kms/transit-metadata/*" { capabilities = ["read", "list", "delete"] }
+
+    path "auth/token/lookup-self" { capabilities = ["read"] }
+    path "auth/token/renew-self"  { capabilities = ["update"] }
   EOT
 }
 
-resource "vault_token_auth_backend_role" "rustfs_kms" {
-  role_name               = "rustfs-kms"
-  allowed_policies        = [vault_policy.rustfs_kms.name]
-  token_no_default_policy = true
-  token_ttl               = "0"
-  token_max_ttl           = "0"
-  token_num_uses          = 0
-  orphan                  = true
+resource "vault_auth_backend" "approle" {
+  type        = "approle"
+  path        = "approle"
 }
 
-output "rustfs_kms_issue_command" {
-  description = "Issue a token for rustfs from the role, then paste it into the rustfs KMS config"
-  value       = "vault write -field=token auth/token/create role=rustfs-kms"
+resource "vault_approle_auth_backend_role" "rustfs_kms" {
+  backend                 = vault_auth_backend.approle.path
+  role_name               = "rustfs-kms"
+  token_policies          = [vault_policy.rustfs_kms.name]
+  token_ttl               = 3600 # RustFS per-attempt timeout (default 30s)
+  token_max_ttl           = 86400
+  token_no_default_policy = true
+  token_num_uses          = 0
+  secret_id_ttl           = 0
+  secret_id_num_uses      = 0
 }
