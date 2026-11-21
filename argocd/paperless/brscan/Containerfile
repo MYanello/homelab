@@ -1,0 +1,44 @@
+FROM debian:13-slim@sha256:a72b4433de1cf7d6bae0c4cee74d0547f58601a643b3375f070c51600d63b6b2
+
+ARG BRSCAN4_URL=https://download.brother.com/welcome/dlf006645/brscan4-0.4.10-1.amd64.deb
+ARG SKEY_SHA=848c628722f1e98579d698ac5a4ef42e333275aa
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        libsane1 \
+        sane-utils \
+        img2pdf \
+        libusb-0.1-4 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL -o /tmp/brscan4.deb "$BRSCAN4_URL" && \
+    dpkg -x /tmp/brscan4.deb / && \
+    rm -f /tmp/brscan4.deb && \
+    mkdir -p /usr/lib/x86_64-linux-gnu/sane && \
+    ln -sf /usr/lib64/sane/libsane-brother4.so.1.0.7 /usr/lib/x86_64-linux-gnu/sane/libsane-brother4.so.1.0.7 && \
+    ln -sf libsane-brother4.so.1.0.7 /usr/lib/x86_64-linux-gnu/sane/libsane-brother4.so.1 && \
+    ln -sf libsane-brother4.so.1.0.7 /usr/lib/x86_64-linux-gnu/sane/libsane-brother4.so && \
+    echo brother4 > /etc/sane.d/dll.conf
+
+RUN curl -fsSL -o /tmp/skey.tar.gz "https://github.com/EasyNetDev/brscan-skey/archive/$SKEY_SHA.tar.gz" && \
+    tar -xzf /tmp/skey.tar.gz -C /tmp && \
+    cp -a "/tmp/brscan-skey-$SKEY_SHA/opt/brother/scanner/brscan-skey" /opt/brother/scanner/ && \
+    rm -rf /tmp/skey.tar.gz "/tmp/brscan-skey-$SKEY_SHA" && \
+    mkdir -p /etc/opt/brother/scanner/brscan-skey /opt/brother/scanner/brscan-skey/script-paperless && \
+    ln -sf /opt/brother/scanner/brscan-skey/brscan-skey /usr/local/bin/brscan-skey
+
+COPY brscan-skey.config /etc/opt/brother/scanner/brscan-skey/brscan-skey.config
+COPY brscan-snmp.cfg /etc/opt/brother/scanner/brscan-skey/brscan-snmp.cfg
+COPY scan.sh /opt/brother/scanner/brscan-skey/script-paperless/scan.sh
+COPY entrypoint.sh /usr/local/bin/brscan-entrypoint.sh
+
+RUN chmod 755 \
+        /opt/brother/scanner/brscan-skey/brscan-skey \
+        /opt/brother/scanner/brscan-skey/brscan-skey-exe \
+        /opt/brother/scanner/brscan-skey/skey-scanimage \
+        /opt/brother/scanner/brscan-skey/script-paperless/scan.sh \
+        /usr/local/bin/brscan-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/brscan-entrypoint.sh"]

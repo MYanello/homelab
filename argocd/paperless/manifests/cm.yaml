@@ -15,6 +15,7 @@ data:
   PAPERLESS_DBHOST: paperless-db-rw # db
   PAPERLESS_DBENGINE: postgresql # mariadb
   PAPERLESS_CONSUMER_POLLING: "5"
+  PAPERLESS_CONSUMPTION_DIR: /usr/src/paperless/consume
   PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
   PAPERLESS_FILENAME_FORMAT: "{{ created_year }}/{{ correspondent }}/{{ title }}"
   PAPERLESS_TIKA_ENABLED: "1"

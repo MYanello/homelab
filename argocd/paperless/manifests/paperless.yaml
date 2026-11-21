@@ -57,6 +57,8 @@ spec:
               mountPath: /usr/src/paperless/data
             - name: paperless-media
               mountPath: /usr/src/paperless/media
+            - name: paperless-consume
+              mountPath: /usr/src/paperless/consume
           resources:
             requests:
               cpu: 10m
@@ -111,6 +113,9 @@ spec:
         - name: protonmail-data
           persistentVolumeClaim:
             claimName: protonmail-data
+        - name: paperless-consume
+          persistentVolumeClaim:
+            claimName: paperless-consume
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -309,6 +314,18 @@ spec:
   resources:
     requests:
       storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-consume
+spec:
+  storageClassName: truenas-ssd-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: brscan-skey
+  name: brscan-skey
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: brscan-skey
+  template:
+    metadata:
+      labels:
+        app: brscan-skey
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      nodeSelector:
+        kubernetes.io/hostname: marcus-server
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: brscan-skey
+          image: harbor.yanello.net/library/brscan-skey:0.3.2
+          imagePullPolicy: Always
+          env:
+            - name: PRINTER_IP
+              value: 192.168.1.19
+            - name: PRINTER_MODEL
+              value: MFC-L2710DW
+            - name: SCAN_DROP_DIR
+              value: /consume
+          volumeMounts:
+            - name: scan
+              mountPath: /tmp/scan
+            - name: consume
+              mountPath: /consume
+          resources:
+            limits:
+              memory: 250i
+            requests:
+              cpu: 10m
+              memory: 30Mi
+      volumes:
+        - name: scan
+          emptyDir:
+            sizeLimit: 1Gi
+        - name: consume
+          persistentVolumeClaim:
+            claimName: paperless-consume
