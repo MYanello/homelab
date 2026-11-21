@@ -677,8 +677,8 @@ module "cks-argo" {
   property_mappings  = local.oidc_mappings
   redirect_uris = [{
     matching_mode     = "strict"
-    url               = "https://argocd.cw623e-test-cluster.coreweave.app/api/dex/callback"
+    url               = "https://argocd.cw623e-test-cluster.coreweave.app/auth/callback"
     redirect_uri_type = "authorization"
   }]
-  meta_launch_url = "https://rustfs.yanello.net"
+  meta_launch_url = "https://argocd.cw623e-test-cluster.coreweave.app/auth/login"
 }

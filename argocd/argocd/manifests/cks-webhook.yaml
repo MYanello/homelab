@@ -1,0 +1,71 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: cks-argocd
+spec:
+  parentRefs:
+    - name: cilium-public-gateway
+      namespace: cilium
+      sectionName: https
+      group: gateway.networking.k8s.io
+      kind: Gateway
+  hostnames:
+    - cks-argo.yanello.net
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /api/webhook
+          method: POST
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            hostname: argocd.cw623e-test-cluster.coreweave.app
+      backendRefs:
+        - name: cks-argocd-service
+          port: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cks-argocd-service
+spec:
+  ports:
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: cks-argocd-service-1
+  labels:
+    kubernetes.io/service-name: cks-argocd-service
+    endpointslice.kubernetes.io/managed-by: cluster-admin
+addressType: IPv4
+ports:
+  - name: https
+    appProtocol: https
+    protocol: TCP
+    port: 443
+endpoints:
+  - addresses:
+      - 10.20.4.5
+    conditions:
+      ready: true
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: BackendTLSPolicy
+metadata:
+  name: cks-argocd
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: cks-argocd-service
+      sectionName: https
+  validation:
+    hostname: argocd.cw623e-test-cluster.coreweave.app
+    wellKnownCACertificates: System
