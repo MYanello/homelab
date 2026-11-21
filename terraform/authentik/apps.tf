@@ -665,3 +665,20 @@ module "rustfs" {
   }]
   meta_launch_url = "https://rustfs.yanello.net"
 }
+
+module "cks-argo" {
+  source = "./modules/oauth2-app"
+
+  name               = "CKS Argo"
+  slug               = "cks-argo"
+  client_id          = "5994aa81efa700b89df204f4d664281c793af798a12bf0cd"
+  authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
+  invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
+  property_mappings  = local.oidc_mappings
+  redirect_uris = [{
+    matching_mode     = "strict"
+    url               = "https://argocd.cw623e-test-cluster.coreweave.app/api/dex/callback"
+    redirect_uri_type = "authorization"
+  }]
+  meta_launch_url = "https://rustfs.yanello.net"
+}

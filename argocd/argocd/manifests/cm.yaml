@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
 data:
+  admin.enabled: "false"
   kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
   controller.diff.server.side: "true"
   webhook.github.secret: $argocd-custom-secrets:webhook.github.secret
