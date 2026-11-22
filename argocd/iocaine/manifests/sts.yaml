@@ -68,7 +68,7 @@ spec:
               memory: 128Mi
       containers:
         - name: iocaine
-          image: harbor.yanello.net/madhouse/iocaine/iocaine:3.5.1@sha256:cfb56064334d3ba36a34f54b68440318c44651f6efea26aca0b832d05e497de7
+          image: harbor.yanello.net/madhouse/iocaine/iocaine:3.6.0@sha256:7a5f790892a025364961c835ef83fe5a1c4edf50dc71e1a1bd5bf7bad02918d0
           command: ["iocaine"]
           args: ["--config-path", "/etc/iocaine/config.d", "start"]
           ports:
