@@ -1,19 +1,4 @@
 ---
-- name: Configure Raspberry Pi cgroup settings
-  hosts: raspberry_pi
-  become: true
-  tasks:
-    - name: Enable cgroups in boot parameters
-      ansible.builtin.lineinfile:
-        path: /boot/firmware/cmdline.txt
-        backrefs: true
-        regexp: '^((?!.*\bcgroup_memory=1 cgroup_enable=memory\b).*)$'
-        line: '\1 cgroup_memory=1 cgroup_enable=memory'
-      register: cmdline
-    - name: Reboot if boot parameters were changed
-      ansible.builtin.reboot: null
-      when: cmdline.changed
-
 - name: Bootstrap the first k3s server
   hosts: k3s_bootstrap
   become: true
@@ -56,16 +41,16 @@
 - name: Wait for all control plane nodes to register
   hosts: k3s_control_plane
   become: true
-  vars:
-    total_amount_of_nodes: "{{ groups['k3s_control_plane'] | count }}"
   tasks:
     - name: Wait until all control plane nodes are registered
-      ansible.builtin.shell: |
-        k3s kubectl get nodes --no-headers | wc -l
-      register: agents
-      until: agents.stdout | int == total_amount_of_nodes | int
+      ansible.builtin.command:
+        cmd: k3s kubectl get node {{ item }} -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}'
+      loop: "{{ groups['k3s_control_plane'] }}"
+      register: cp_nodes
+      until: cp_nodes.stdout == 'True'
       retries: 10
       delay: 10
+      changed_when: false
 
 - name: Install k3s agents
   hosts: k3s_agents

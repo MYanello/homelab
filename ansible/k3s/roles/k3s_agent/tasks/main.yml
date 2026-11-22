@@ -11,6 +11,14 @@
     mode: "0755"
   when: not k3s_binary.stat.exists
 
+- name: Create the k3s config directory
+  ansible.builtin.file:
+    path: /etc/rancher/k3s
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
 - name: Write the kubelet config
   ansible.builtin.template:
     src: kubelet.config.j2
