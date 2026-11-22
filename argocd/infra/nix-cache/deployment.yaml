@@ -28,7 +28,7 @@ spec:
                       - marcus-server
       containers:
         - name: nix-cache
-          image: harbor.yanello.net/library/nix-cache:latest@sha256:fdcaa2e342bcb106007e3076d6843a289f850517dd36b6d1d845296053c20c42
+          image: harbor.yanello.net/library/nix-cache:latest@sha256:092dc099ba8f9a3f4fb806acb2bb3ebaaf133cd73a0e33531ccebd781ded001b
           env:
             - name: CONFIG_FILE
               value: /config/harmonia.toml
