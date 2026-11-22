@@ -147,6 +147,8 @@ vmsingle:
       maxLabelsPerTimeseries: "500"
       storage.minFreeDiskSpaceBytes: "10GB"
       search.maxQueryDuration: "60s"
+      search.maxConcurrentRequests: "32"
+      search.maxQueueDuration: "60s"
     serviceSpec:
       spec:
         type: LoadBalancer
