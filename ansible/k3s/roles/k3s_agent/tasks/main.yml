@@ -1,0 +1,40 @@
+---
+- name: Check whether k3s is already installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/k3s
+  register: k3s_binary
+
+- name: Download the k3s install script
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: "{{ k3s_install_script_dest }}"
+    mode: "0755"
+  when: not k3s_binary.stat.exists
+
+- name: Write the kubelet config
+  ansible.builtin.template:
+    src: kubelet.config.j2
+    dest: "{{ k3s_kubelet_config_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart k3s-agent
+
+- name: Write /etc/rancher/k3s/config.yaml
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/rancher/k3s/config.yaml
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart k3s-agent
+
+- name: Install k3s agent
+  ansible.builtin.command: "{{ k3s_install_script_dest }}"
+  environment:
+    INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
+    K3S_NODE_NAME: "{{ inventory_hostname }}"
+    K3S_TOKEN: "{{ k3s_token }}"
+    K3S_URL: "https://{{ k3s_control_plane_vip }}:6443"
+  when: not k3s_binary.stat.exists or (reinstall | bool)

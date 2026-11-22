@@ -1,0 +1,11 @@
+---
+# true on the node that runs --cluster-init; false on the nodes that join it
+k3s_cluster_init: false
+
+k3s_server_exec_init: >-
+  --disable servicelb --cluster-init --flannel-backend=none
+  --disable-network-policy --cluster-cidr={{ cluster_cidr }} --disable=traefik
+
+k3s_server_exec_join: >-
+  server --disable servicelb --flannel-backend=none
+  --disable-network-policy --cluster-cidr={{ cluster_cidr }} --disable=traefik

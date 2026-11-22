@@ -11,3 +11,5 @@ tls-san:
 {% for san in (k3s_additional_tls_sans | default('')).split(',') if san | trim %}
   - {{ san | trim }}
 {% endfor %}
+kubelet-arg:
+  - "config={{ k3s_kubelet_config_path }}"

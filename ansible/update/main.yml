@@ -66,8 +66,8 @@
           failed: true
       when: updates_count.stdout is not defined
 
-- name: Update PiKVM Hosts
-  hosts: pikvm_hosts
+- name: Update PiKVM
+  hosts: pikvm
   gather_facts: false
   serial: 1
   max_fail_percentage: 100
@@ -102,7 +102,7 @@
           failed: false
 
 - name: Final Summary
-  hosts: ubuntu_hosts:pikvm_hosts
+  hosts: ubuntu_hosts:pikvm
   gather_facts: false
   tasks:
     - name: Build summary report

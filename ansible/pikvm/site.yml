@@ -1,6 +1,6 @@
 ---
 - name: Configure PiKVM
-  hosts: pikvm_hosts
+  hosts: pikvm
   become: true
   gather_facts: true
 
