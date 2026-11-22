@@ -3,3 +3,4 @@ collections:
   - name: kubernetes.core
   - name: community.sops
   - name: community.general.ini_file
+  - name: ansible.posix
