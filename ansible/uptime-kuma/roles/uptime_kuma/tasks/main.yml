@@ -43,10 +43,6 @@
 - name: Configure swap
   ansible.builtin.import_tasks: swap.yml
 
-- name: Configure wireguard gateway
-  ansible.builtin.import_tasks: wireguard_gateway.yml
-  when: wireguard_gateway_enabled | bool
-
 - name: Ensure uptime kuma data directory
   ansible.builtin.file:
     path: "{{ uptime_kuma_data_dir }}"

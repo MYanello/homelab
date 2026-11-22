@@ -24,24 +24,6 @@ data "oci_identity_availability_domains" "ads" {
   compartment_id = data.sops_file.oci.data["tenancy_ocid"]
 }
 
-data "oci_core_vnic_attachments" "free_1" {
-  compartment_id = oci_identity_compartment.free_compartment.id
-  instance_id    = oci_core_instance.free_instance_1.id
-}
-
-data "oci_core_private_ips" "free_1" {
-  vnic_id = data.oci_core_vnic_attachments.free_1.vnic_attachments[0].vnic_id
-}
-
-data "oci_core_vnic_attachments" "free_arm" {
-  compartment_id = local.tenancy
-  instance_id    = oci_core_instance.free_arm_1.id
-}
-
-data "oci_core_private_ips" "free_arm" {
-  vnic_id = data.oci_core_vnic_attachments.free_arm.vnic_attachments[0].vnic_id
-}
-
 resource "oci_identity_compartment" "free_compartment" {
   compartment_id = local.tenancy
   description    = "Oracle Cloud Free Tier compartment"
@@ -139,30 +121,6 @@ resource "oci_core_default_route_table" "free_vcn" {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
     network_entity_id = oci_core_internet_gateway.free_internet_gateway.id
-  }
-
-  route_rules {
-    destination       = "192.168.0.0/16"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_private_ips.free_1.private_ips[0].id
-  }
-
-  route_rules {
-    destination       = "10.10.8.0/22"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_private_ips.free_1.private_ips[0].id
-  }
-
-  route_rules {
-    destination       = "10.42.0.0/16"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_private_ips.free_1.private_ips[0].id
-  }
-
-  route_rules {
-    destination       = "10.42.3.0/24"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_private_ips.free_arm.private_ips[0].id
   }
 }
 

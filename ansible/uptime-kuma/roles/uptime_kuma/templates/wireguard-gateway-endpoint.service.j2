@@ -1,9 +1,0 @@
-[Unit]
-Description=Refresh WireGuard gateway peer endpoint
-Wants=network-online.target
-After=network-online.target wg-quick@{{ wireguard_gateway_interface }}.service
-ConditionPathExists={{ wireguard_gateway_config_path }}
-
-[Service]
-Type=oneshot
-ExecStart={{ wireguard_gateway_endpoint_script }}
