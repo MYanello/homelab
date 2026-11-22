@@ -21,6 +21,15 @@ spec:
       labels:
         app: unpackerr
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - marcus-server
       containers:
         - env:
             - name: PGID
@@ -58,6 +67,11 @@ spec:
           volumeMounts:
             - mountPath: /data/media
               name: media
+            - mountPath: /data/logs
+              name: logs
+      securityContext:
+        runAsUser: 3000
+        runAsGroup: 3000
       volumes:
         - name: config
           configMap:
