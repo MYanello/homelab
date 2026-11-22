@@ -25,7 +25,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: brscan-skey
-          image: harbor.yanello.net/library/brscan:v0.4.10-0
+          image: harbor.yanello.net/library/brscan:v0.4.10-0@sha256:29c2fb994cfa27eaa5e087c015621630fa6ace53dde3fbe4cba0dd04410c147c
           imagePullPolicy: Always
           env:
             - name: PRINTER_IP
