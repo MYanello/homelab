@@ -18,6 +18,7 @@
     state: absent
     purge: true
     autoremove: true
+
 - name: Disable oracle cloud agent
   ansible.builtin.import_tasks: oci-agent.yml
 

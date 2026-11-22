@@ -1,0 +1,7 @@
+---
+- name: Authorize the public keys for {{ ansible_user }}
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
+    key: "{{ ssh_rotate_public_keys | join('\n') }}"
+    state: present
+    manage_dir: true

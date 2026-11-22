@@ -1,0 +1,25 @@
+---
+- name: Verify SSH login with each key
+  ansible.builtin.command:
+    argv:
+      - ssh
+      - -i
+      - "{{ item }}"
+      - -o
+      - IdentitiesOnly=yes
+      - -o
+      - BatchMode=yes
+      - -o
+      - StrictHostKeyChecking=accept-new
+      - -o
+      - "ConnectTimeout={{ ssh_rotate_connect_timeout }}"
+      - -p
+      - "{{ ansible_port | default(22) }}"
+      - "{{ ansible_user }}@{{ ansible_host | default(inventory_hostname) }}"
+      - true
+  delegate_to: localhost
+  become: false
+  changed_when: false
+  loop: "{{ ssh_rotate_identities }}"
+  loop_control:
+    label: "{{ item | basename }}"

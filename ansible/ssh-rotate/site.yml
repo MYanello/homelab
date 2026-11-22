@@ -1,0 +1,39 @@
+---
+- name: Rotate SSH authorized keys
+  hosts: all
+  become: "{{ ansible_user != 'root' }}"
+  gather_facts: false
+  serial: 1
+  max_fail_percentage: 100
+  ignore_unreachable: true
+
+  tasks:
+    - name: Rotate the authorized keys
+      when: ssh_rotate_enabled | default(true)
+      block:
+        - name: Read the public keys
+          ansible.builtin.set_fact:
+            ssh_rotate_public_keys: "{{ ssh_rotate_public_keys | default([]) + [lookup('file', item ~ '.pub')] }}"
+          loop: "{{ ssh_rotate_identities }}"
+
+        - name: Make the filesystem writable
+          ansible.builtin.command: /usr/bin/rw
+          changed_when: false
+          when: ssh_rotate_fs_readonly | default(false)
+
+        - name: Apply the keys
+          block:
+            - name: Add the keys
+              ansible.builtin.include_tasks: tasks/add-key.yml
+
+            - name: Verify the keys
+              ansible.builtin.include_tasks: tasks/verify-login.yml
+
+            - name: Prune superseded keys
+              ansible.builtin.include_tasks: tasks/prune-keys.yml
+              when: ssh_rotate_prune_extra_keys | bool
+          always:
+            - name: Restore the read-only filesystem
+              ansible.builtin.command: /usr/bin/ro
+              changed_when: false
+              when: ssh_rotate_fs_readonly | default(false)

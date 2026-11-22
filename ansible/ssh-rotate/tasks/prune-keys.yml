@@ -1,0 +1,8 @@
+---
+- name: Leave only the current keys in authorized_keys
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
+    key: "{{ ssh_rotate_public_keys | join('\n') }}"
+    state: present
+    exclusive: true
+    manage_dir: true

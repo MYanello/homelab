@@ -1,0 +1,6 @@
+---
+ssh_rotate_identities:
+  - "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+ssh_rotate_connect_timeout: 10
+ssh_rotate_prune_extra_keys: false
+ssh_rotate_enabled: true
