@@ -2,9 +2,9 @@
 - name: Initialize the USB device (destroys existing data)
   when: wipe_usb | bool
   block:
-    - name: Un-mount {{ usb_dev }}1 from /app/longhorn before wiping
+    - name: Un-mount {{ usb_dev }}1 from {{ mountpount }} before wiping
       ansible.posix.mount:
-        path: /app/longhorn
+        path: "{{ mountpount }}"
         src: "{{ usb_dev }}1"
         fstype: ext4
         state: unmounted
@@ -13,7 +13,7 @@
       community.general.parted:
         device: "{{ usb_dev }}"
         unit: MiB
-      register: sda_info
+      register: dev_info
       ignore_errors: true
 
     - name: Remove all partitions from disk
@@ -21,7 +21,7 @@
         device: "{{ usb_dev }}"
         number: "{{ item.num }}"
         state: absent
-      loop: "{{ sda_info.partitions | default([]) }}"
+      loop: "{{ dev_info.partitions | default([]) }}"
 
     - name: Create a new ext4 primary partition
       community.general.parted:
@@ -35,18 +35,18 @@
         fstype: ext4
         dev: "{{ usb_dev }}1"
 
-- name: Create the mountpoint /app/longhorn
+- name: Create the mountpoint
   file:
-    path: /app/longhorn
+    path: "{{ mountpount }}"
     state: directory
     recurse: true
     owner: root
     group: root
     mode: "0755"
 
-- name: Mount the device onto /app/longhorn
+- name: Mount the device onto "{{ mountpount }}"
   ansible.posix.mount:
-    path: /app/longhorn
+    path: "{{ mountpount }}"
     src: "{{ usb_dev }}1"
     fstype: ext4
     state: mounted
@@ -59,5 +59,5 @@
 - name: Mount the drive on boot
   lineinfile:
     path: /etc/fstab
-    line: "UUID={{ uuid.stdout }} /app/longhorn ext4 defaults,nofail 0 0"
+    line: "UUID={{ uuid.stdout }} {{ mountpount }} ext4 defaults,nofail 0 0"
     state: present

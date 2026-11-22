@@ -1,3 +1,4 @@
 ---
 usb_dev: /dev/sda
-wipe_usb: false
+wipe_usb: true
+mountpount: /mnt/k8s/

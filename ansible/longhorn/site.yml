@@ -1,5 +1,5 @@
 ---
-- hosts: all_k3s_nodes
+- hosts: raspberry_pi
   gather_facts: false
   become: true
   become_method: sudo
