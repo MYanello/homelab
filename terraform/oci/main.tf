@@ -213,8 +213,9 @@ resource "oci_core_instance" "free_arm_1" {
   }
 
   create_vnic_details {
-    assign_public_ip = true
-    subnet_id        = oci_core_subnet.free_subnet.id
+    assign_public_ip       = true
+    subnet_id              = oci_core_subnet.free_subnet.id
+    skip_source_dest_check = true
   }
 
   metadata = {
