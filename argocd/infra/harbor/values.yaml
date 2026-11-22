@@ -38,9 +38,9 @@ redis:
     resources:
       requests:
         cpu: 10m
-        memory: 16Mi
+        memory: 15Mi
       limits:
-        memory: 16Mi
+        memory: 50Mi
 existingSecretAdminPassword: harbor-secrets
 
 updateStrategy:
