@@ -22,7 +22,7 @@ spec:
         app: ai
     spec:
       containers:
-        - image: harbor.yanello.net/docker/clusterzx/paperless-ai:4.3.0@sha256:a80f17d24f974bb56a95353f05ec421c94ca082f4f69393d78c1a6a978a443ca
+        - image: harbor.yanello.net/docker/clusterzx/paperless-ai:4.3.1@sha256:87a49846b49afe17eb66690a989ad25f67a7d107191586aa9dbfed370129fc20
           imagePullPolicy: IfNotPresent
           name: ai
           env:
