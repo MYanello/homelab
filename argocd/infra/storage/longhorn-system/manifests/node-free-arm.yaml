@@ -1,0 +1,10 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: free-arm
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  allowScheduling: false
+  evictionRequested: false

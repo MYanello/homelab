@@ -54,14 +54,15 @@
 - name: Allow forwarding from the VCN into the wireguard tunnel
   ansible.builtin.iptables:
     chain: FORWARD
-    source: "{{ wireguard_gateway_source_cidr }}"
+    source: "{{ item }}"
     out_interface: "{{ wireguard_gateway_interface }}"
     jump: ACCEPT
     action: insert
     rule_num: 1
+  loop: "{{ wireguard_gateway_forwarded_cidrs }}"
   register: uptime_kuma_wireguard_forward_vcn
 
-- name: Allow return traffic from the wireguard tunnel to the VCN
+- name: Retire the conntrack-restricted return rule
   ansible.builtin.iptables:
     chain: FORWARD
     in_interface: "{{ wireguard_gateway_interface }}"
@@ -70,20 +71,29 @@
       - ESTABLISHED
       - RELATED
     jump: ACCEPT
+    state: absent
+  register: uptime_kuma_wireguard_forward_return_absent
+
+- name: Allow forwarding from the wireguard tunnel into the VCN
+  ansible.builtin.iptables:
+    chain: FORWARD
+    in_interface: "{{ wireguard_gateway_interface }}"
+    destination: "{{ item }}"
+    jump: ACCEPT
     action: insert
     rule_num: 1
-  register: uptime_kuma_wireguard_forward_return
+  loop: "{{ wireguard_gateway_forwarded_cidrs }}"
+  register: uptime_kuma_wireguard_forward_vcn_in
 
-# Masquerading means OPNsense only ever has to route back to the gateway
-# address, so no static routes for the VCN are needed on the home side.
-- name: Masquerade VCN traffic towards the home network
+- name: Retire masquerading towards the home network
   ansible.builtin.iptables:
     table: nat
     chain: POSTROUTING
     source: "{{ wireguard_gateway_source_cidr }}"
     out_interface: "{{ wireguard_gateway_interface }}"
     jump: MASQUERADE
-  register: uptime_kuma_wireguard_nat
+    state: absent
+  register: uptime_kuma_wireguard_nat_absent
 
 - name: Persist wireguard gateway firewall rules
   ansible.builtin.command:
@@ -91,8 +101,9 @@
   changed_when: false
   when: >-
     uptime_kuma_wireguard_forward_vcn.changed or
-    uptime_kuma_wireguard_forward_return.changed or
-    uptime_kuma_wireguard_nat.changed
+    uptime_kuma_wireguard_forward_return_absent.changed or
+    uptime_kuma_wireguard_forward_vcn_in.changed or
+    uptime_kuma_wireguard_nat_absent.changed
 
 - name: Write wireguard gateway endpoint refresh script
   ansible.builtin.template:
