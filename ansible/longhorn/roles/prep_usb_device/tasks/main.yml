@@ -44,20 +44,14 @@
     group: root
     mode: "0755"
 
-- name: Mount the device onto "{{ mountpount }}"
-  ansible.posix.mount:
-    path: "{{ mountpount }}"
-    src: "{{ usb_dev }}1"
-    fstype: ext4
-    state: mounted
-
 - name: Get the uuid
   command: blkid -s UUID -o value {{ usb_dev }}1
   register: uuid
   changed_when: false
 
-- name: Mount the drive on boot
-  lineinfile:
-    path: /etc/fstab
-    line: "UUID={{ uuid.stdout }} {{ mountpount }} ext4 defaults,nofail 0 0"
-    state: present
+- name: Mount the device onto "{{ mountpount }}"
+  ansible.posix.mount:
+    path: "{{ mountpount }}"
+    src: "UUID={{ uuid.stdout }}"
+    fstype: ext4
+    state: mounted

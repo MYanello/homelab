@@ -1,0 +1,50 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: pi0
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false,ServerSideApply=true
+spec:
+  allowScheduling: true
+  disks:
+    usb:
+      path: /mnt/usb/longhorn
+      allowScheduling: true
+      diskType: filesystem
+      tags:
+        - usb
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: pi1
+  namespace: longhorn-system
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false,ServerSideApply=true
+spec:
+  allowScheduling: true
+  disks:
+    usb:
+      path: /mnt/usb/longhorn
+      allowScheduling: true
+      diskType: filesystem
+      tags:
+        - usb
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: pi2
+  namespace: longhorn-system
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false,ServerSideApply=true
+spec:
+  allowScheduling: true
+  disks:
+    usb:
+      path: /mnt/usb/longhorn
+      allowScheduling: true
+      diskType: filesystem
+      tags:
+        - usb
