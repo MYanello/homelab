@@ -32,8 +32,6 @@ spec:
               value: 192.168.1.19
             - name: PRINTER_MODEL
               value: MFC-L2710DW
-            - name: SCAN_DROP_DIR
-              value: /consume
           volumeMounts:
             - name: scan
               mountPath: /tmp/scan

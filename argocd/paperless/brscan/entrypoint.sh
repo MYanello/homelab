@@ -23,7 +23,7 @@ mkdir -p "${SCAN_DROP_DIR:-/consume}"
 echo "configured devices:"
 scanimage -L || true
 
-brscan-skey
+brscan-skey -u "${SCAN_NAME:-paperless}"
 
 echo "registered machines:"
 brscan-skey -l || true
