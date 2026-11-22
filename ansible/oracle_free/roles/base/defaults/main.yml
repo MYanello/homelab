@@ -1,0 +1,6 @@
+---
+docker_user: ubuntu
+swap_file: /swapfile
+
+swap_size: 2G
+swappiness: "10"

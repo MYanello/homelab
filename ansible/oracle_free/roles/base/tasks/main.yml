@@ -1,0 +1,44 @@
+---
+- name: Install base packages
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - python3
+      - python3-apt
+      - acl
+      - iptables-persistent
+    state: present
+    update_cache: true
+
+- name: Remove unattended upgrades
+  ansible.builtin.apt:
+    name:
+      - unattended-upgrades
+    state: absent
+    purge: true
+    autoremove: true
+- name: Disable oracle cloud agent
+  ansible.builtin.import_tasks: oci-agent.yml
+
+- name: Install docker
+  ansible.builtin.apt:
+    name:
+      - docker.io
+    state: present
+    update_cache: true
+
+- name: Enable docker
+  ansible.builtin.systemd_service:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ docker_user }}"
+    groups: docker
+    append: true
+
+- name: Configure swap
+  ansible.builtin.import_tasks: swap.yml

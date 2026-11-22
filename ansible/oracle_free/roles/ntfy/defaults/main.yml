@@ -1,0 +1,7 @@
+---
+ntfy_image: binwiederhier/ntfy
+ntfy_tag: v2.9.0
+ntfy_pull: false
+ntfy_port: 8080
+ntfy_data_dir: /opt/ntfy-data
+ntfy_host: 0.0.0.0

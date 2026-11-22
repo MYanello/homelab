@@ -1,7 +1,9 @@
 ---
 - name: Configure Uptime Kuma host
-  hosts: uptime_kuma
+  hosts: oracle_free
   become: true
   gather_facts: true
   roles:
+    - base
     - uptime_kuma
+    - ntfy

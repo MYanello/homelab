@@ -1,0 +1,67 @@
+---
+- name: Ensure ntfy data directory
+  ansible.builtin.file:
+    path: "{{ ntfy_data_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Pull ntfy image
+  community.docker.docker_image:
+    name: "{{ ntfy_image }}"
+    tag: "{{ ntfy_tag }}"
+    source: pull
+    force_source: "{{ ntfy_pull }}"
+  register: ntfy_pull_result
+
+- name: Run ntfy
+  community.docker.docker_container:
+    name: ntfy
+    image: "{{ ntfy_image }}:{{ ntfy_tag }}"
+    state: started
+    restart_policy: unless-stopped
+    detach: true
+    pull: false
+    published_ports:
+      - "{{ ntfy_port }}:80"
+    volumes:
+      - "{{ ntfy_data_dir }}:/var/cache/ntfy"
+    env:
+      TZ: America/Toronto
+    command:
+      - serve
+      - --base-url
+      - "https://ntfy.yanello.net"
+      - --cache-file
+      - /var/cache/ntfy/cache.db
+    comparisons:
+      image: strict
+  register: ntfy_container
+
+- name: Wait for ntfy to listen
+  ansible.builtin.wait_for:
+    host: "{{ ntfy_host }}"
+    port: "{{ ntfy_port }}"
+    timeout: 120
+
+- name: Check for existing ntfy firewall rule
+  ansible.builtin.shell:
+    cmd: iptables -C INPUT -p tcp --dport {{ ntfy_port }} -m state --state NEW -j
+      ACCEPT
+  register: ntfy_fw_check
+  changed_when: false
+  failed_when: false
+
+- name: Allow ntfy through host firewall
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_ports:
+      - "{{ ntfy_port }}"
+    ctstate:
+      - NEW
+    jump: ACCEPT
+    action: append
+  when: ntfy_fw_check.rc != 0
+  notify: Persist firewall rules

@@ -1,0 +1,4 @@
+---
+- name: Persist firewall rules
+  ansible.builtin.command:
+    cmd: netfilter-persistent save
