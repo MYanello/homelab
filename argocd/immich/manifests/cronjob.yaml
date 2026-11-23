@@ -13,6 +13,7 @@ spec:
   failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
+      backoffLimit: 0
       ttlSecondsAfterFinished: 14400 # 4h
       template:
         metadata:
@@ -38,13 +39,34 @@ spec:
 
                   echo "triggering immich storage template job"
                   payload='{"command":"start","force":false}'
-                  curl -fsS -X PUT \
+                  resp=$(curl -sS -X PUT \
                     -H "Content-Type: application/json" \
                     -H "x-api-key: ${IMMICH_API_KEY}" \
                     --data "$payload" \
-                    "${base}/api/jobs/storageTemplateMigration" \
-                    -o /dev/null
-                  echo "done"
+                    -w '|%{http_code}' \
+                    "${base}/api/jobs/storageTemplateMigration")
+                  code="${resp##*|}"
+                  body="${resp%|*}"
+                  case "$code" in
+                    2*)
+                      echo "done"
+                      ;;
+                    400)
+                      case "$body" in
+                        *"already running"*)
+                          echo "previous run still active, skipping"
+                          ;;
+                        *)
+                          echo "unexpected 400: ${body}"
+                          exit 1
+                          ;;
+                      esac
+                      ;;
+                    *)
+                      echo "unexpected ${code}: ${body}"
+                      exit 1
+                      ;;
+                  esac
               env:
                 - name: URL
                   value: http://immich-server.immich.svc.cluster.local:2283
