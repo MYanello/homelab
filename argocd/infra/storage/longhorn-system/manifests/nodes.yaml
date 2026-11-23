@@ -6,11 +6,11 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Prune=false,ServerSideApply=true
 spec:
-  allowScheduling: true
+  allowScheduling: false
   disks:
     usb:
       path: /mnt/usb/longhorn
-      allowScheduling: true
+      allowScheduling: false
       diskType: filesystem
       tags:
         - usb
@@ -23,11 +23,11 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Prune=false,ServerSideApply=true
 spec:
-  allowScheduling: true
+  allowScheduling: false
   disks:
     usb:
       path: /mnt/usb/longhorn
-      allowScheduling: true
+      allowScheduling: false
       diskType: filesystem
       tags:
         - usb
@@ -40,11 +40,11 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Prune=false,ServerSideApply=true
 spec:
-  allowScheduling: true
+  allowScheduling: false
   disks:
     usb:
       path: /mnt/usb/longhorn
-      allowScheduling: true
+      allowScheduling: false
       diskType: filesystem
       tags:
         - usb
