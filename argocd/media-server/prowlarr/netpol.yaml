@@ -27,6 +27,9 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: qbittorrent
             app: cross-seed
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: books
+            app: bookorbit
       toPorts:
         - ports:
             - port: "9696"
