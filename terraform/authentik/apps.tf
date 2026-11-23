@@ -676,10 +676,17 @@ module "cks-argo" {
   authorization_flow = data.authentik_flow.default-authorization-implicit-consent.id
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   property_mappings  = local.oidc_mappings
-  redirect_uris = [{
-    matching_mode     = "strict"
-    url               = "https://argocd.cw623e-test-cluster.coreweave.app/auth/callback"
-    redirect_uri_type = "authorization"
-  }]
+  redirect_uris = [
+    {
+      matching_mode     = "strict"
+      url               = "https://argocd.cw623e-test-cluster.coreweave.app/auth/callback"
+      redirect_uri_type = "authorization"
+    },
+    {
+      matching_mode     = "strict"
+      url               = "https://localhost:8080/auth/callback"
+      redirect_uri_type = "authorization"
+    }
+  ]
   meta_launch_url = "https://argocd.cw623e-test-cluster.coreweave.app/auth/login"
 }
