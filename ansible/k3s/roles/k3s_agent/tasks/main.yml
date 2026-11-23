@@ -19,6 +19,9 @@
     group: root
     mode: "0755"
 
+- name: Relocate the k3s data directory when it is not the default
+  ansible.builtin.import_tasks: data_dir.yml
+
 - name: Write the kubelet config
   ansible.builtin.template:
     src: kubelet.config.j2

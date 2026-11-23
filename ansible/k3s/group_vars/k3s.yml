@@ -15,3 +15,4 @@ k3s_service_account_issuer: https://k8s.yanello.net
 k3s_service_account_jwks_uri: https://k8s.yanello.net/openid/v1/jwks
 k3s_kubelet_config_path: /etc/rancher/k3s/kubelet.config.yaml
 max_pods: "250"
+k3s_data_dir: /var/lib/rancher/k3s

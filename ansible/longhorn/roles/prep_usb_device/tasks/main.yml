@@ -55,3 +55,4 @@
     src: "UUID={{ uuid.stdout }}"
     fstype: ext4
     state: mounted
+    opts: "nofail,noatime"

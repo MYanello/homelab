@@ -112,7 +112,9 @@ write_files:
 
 ## Run arbitrary commands at rc.local like time
 runcmd:
+  - [systemctl, mask, --now, rsyslog, syslog.socket]
   - [systemctl, restart, systemd-journald]
+  - rm -f /var/log/syslog /var/log/kern.log /var/log/mail.log /var/log/auth.log
 #- [ ls, -l, / ]
 #- [ sh, -xc, "echo $(date) ': hello world!'" ]
 #- [ wget, "http://ubuntu.com", -O, /run/mydir/index.html ]

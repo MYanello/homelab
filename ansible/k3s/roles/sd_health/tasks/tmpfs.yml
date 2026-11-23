@@ -1,0 +1,11 @@
+---
+- name: Mount temporary directories as tmpfs
+  ansible.posix.mount:
+    path: "{{ item }}"
+    src: tmpfs
+    fstype: tmpfs
+    opts: rw,nosuid,nodev,size=256m,mode=1777
+    state: mounted
+  loop:
+    - /tmp
+    - /var/tmp

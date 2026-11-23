@@ -57,3 +57,9 @@
   become: true
   roles:
     - k3s_agent
+
+- name: Reduce SD card writes on the Raspberry Pi agents
+  hosts: raspberry_pi
+  become: true
+  roles:
+    - sd_health

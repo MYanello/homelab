@@ -1,0 +1,6 @@
+---
+- name: Disable background writers
+  ansible.builtin.import_tasks: timers.yml
+
+- name: Put temporary directories in RAM
+  ansible.builtin.import_tasks: tmpfs.yml

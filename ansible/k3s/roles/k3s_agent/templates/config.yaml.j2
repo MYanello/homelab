@@ -1,2 +1,3 @@
- kubelet-arg:
+data-dir: {{ k3s_data_dir }}
+kubelet-arg:
   - "config={{ k3s_kubelet_config_path }}"

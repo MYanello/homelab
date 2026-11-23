@@ -1,0 +1,24 @@
+---
+- name: Gather the installed units
+  ansible.builtin.service_facts: null
+
+- name: Mask units that write to the SD card
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+    masked: true
+  loop:
+    - sysstat.service
+    - sysstat-collect.timer
+    - sysstat-rotate.timer
+    - sysstat-summary.timer
+    - motd-news.timer
+    - update-notifier-download.timer
+    - update-notifier-motd.timer
+  when: item in ansible_facts.services
+
+- name: Remove the sysstat data directory
+  ansible.builtin.file:
+    path: /var/log/sysstat
+    state: absent

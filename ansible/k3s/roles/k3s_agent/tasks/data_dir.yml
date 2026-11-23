@@ -1,0 +1,30 @@
+---
+- name: Check whether the relocated data directory exists
+  ansible.builtin.stat:
+    path: "{{ k3s_data_dir }}"
+  register: k3s_data_dir_target
+  when: k3s_data_dir != '/var/lib/rancher/k3s'
+
+- name: Check whether the default data directory exists
+  ansible.builtin.stat:
+    path: /var/lib/rancher/k3s
+  register: k3s_data_dir_default
+  when: k3s_data_dir != '/var/lib/rancher/k3s'
+
+- name: Stop k3s-agent before relocating its data directory
+  ansible.builtin.systemd_service:
+    name: k3s-agent
+    state: stopped
+  when:
+    - k3s_data_dir != '/var/lib/rancher/k3s'
+    - not k3s_data_dir_target.stat.exists
+    - k3s_data_dir_default.stat.exists
+
+- name: Copy the k3s data directory to {{ k3s_data_dir }}
+  ansible.builtin.command:
+    cmd: cp -a /var/lib/rancher/k3s {{ k3s_data_dir }}
+    creates: "{{ k3s_data_dir }}"
+  when:
+    - k3s_data_dir != '/var/lib/rancher/k3s'
+    - not k3s_data_dir_target.stat.exists
+    - k3s_data_dir_default.stat.exists
