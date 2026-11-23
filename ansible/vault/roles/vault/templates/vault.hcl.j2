@@ -9,6 +9,17 @@ listener "tcp" {
   tls_cert_file           = "{{ vault_tls_dir }}/tls.crt"
   tls_key_file            = "{{ vault_tls_dir }}/tls.key"
   tls_disable_client_certs = "true"
+
+  max_request_size         = 1048576
+  max_request_duration     = "30s"
+  max_token_header_size    = 4096
+  http_read_header_timeout = "5s"
+  http_write_timeout       = "30s"
+  http_idle_timeout        = "60s"
+
+  x_forwarded_for_authorized_addrs      = "{{ groups['k3s'] | map('extract', hostvars, 'ansible_host') | join(',') }}"
+  x_forwarded_for_reject_not_authorized = true
+
   telemetry {
     unauthenticated_metrics_access = true
   }

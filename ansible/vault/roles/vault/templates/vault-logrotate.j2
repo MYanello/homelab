@@ -5,5 +5,9 @@
     delaycompress
     missingok
     notifempty
-    copytruncate
+    create 0640 {{ vault_user }} {{ vault_group }}
+    sharedscripts
+    postrotate
+        /usr/bin/systemctl reload vault >/dev/null 2>&1 || true
+    endscript
 }

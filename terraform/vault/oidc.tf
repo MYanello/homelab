@@ -71,8 +71,8 @@ resource "vault_jwt_auth_backend" "authentik" {
   bound_issuer       = module.vault-oauth-app.issuer_url
 
   tune {
-    max_lease_ttl      = "768h"
-    default_lease_ttl  = "24h"
+    max_lease_ttl      = "24h"
+    default_lease_ttl  = "8h"
     listing_visibility = "unauth"
   }
 }
@@ -84,6 +84,10 @@ resource "vault_jwt_auth_backend_role" "admin" {
   user_claim   = "sub"
   groups_claim = "groups"
   oidc_scopes  = ["openid", "profile", "email", "groups"]
+
+  bound_claims = {
+    groups = "admin"
+  }
 
   allowed_redirect_uris = [
     "https://vault.yanello.net/oidc/callback",
