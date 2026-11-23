@@ -9,3 +9,17 @@
       - nfs-common
     state: present
     update_cache: true
+
+- name: Persist the kernel modules Longhorn requires
+  ansible.builtin.copy:
+    dest: /etc/modules-load.d/longhorn.conf
+    content: |
+      dm_crypt
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Load the kernel modules Longhorn requires
+  community.general.modprobe:
+    name: dm_crypt
+    state: present
