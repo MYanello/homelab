@@ -16,12 +16,6 @@ spec:
     - matches:
         - path:
             type: Exact
-            value: /v1/auth/cks-jwt/login
-        - path:
-            type: PathPrefix
-            value: /v1/cks-k8s-kv/data/
-        - path:
-            type: Exact
             value: /v1/auth/token/lookup-self
         - path:
             type: Exact
@@ -31,13 +25,25 @@ spec:
             value: /v1/auth/token/revoke-self
         - path:
             type: Exact
-            value: /v1/sys/health
+            value: /v1/identity/oidc/.well-known/openid-configuration
+        - path:
+            type: Exact
+            value: /v1/identity/oidc/.well-known/keys
+        - path:
+            type: Exact
+            value: /v1/auth/cks-jwt/login
+        - path:
+            type: PathPrefix
+            value: /v1/cks-k8s-kv/data/
         - path:
             type: Exact
             value: /v1/cks_pki_int/sign/cert-manager
         - path:
             type: Exact
             value: /v1/cks_pki_int/cert/ca
+        - path:
+            type: Exact
+            value: /v1/identity/oidc/token/caios-test
       backendRefs:
         - name: vault-service
           port: 8200
