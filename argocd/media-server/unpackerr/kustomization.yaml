@@ -13,6 +13,3 @@ configMapGenerator:
   - name: config
     files:
       - manifests/config.toml
-
-generators:
-  - manifests/secret-generator.yaml
