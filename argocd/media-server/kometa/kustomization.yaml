@@ -12,3 +12,4 @@ resources:
   - ./manifests/config-tv.yaml
   - ./manifests/cronjob.yaml
   - ./manifests/pvc.yaml
+  - ./manifests/ext-secrets.yaml

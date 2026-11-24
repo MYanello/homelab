@@ -55,6 +55,11 @@ spec:
               env:
                 - name: TZ
                   value: UTC
+                - name: KOMETA_SONARR_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: sonarr-api-key
+                      key: apiKey
               envFrom:
                 - secretRef:
                     name: kometa-secrets

@@ -44,6 +44,11 @@ spec:
               value: http://sonarr.sonarr.svc.cluster.local:8989
             - name: UN_SONARR_0_PATHS_0
               value: /data/media/torrents/completed/tv
+            - name: UN_SONARR_0_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sonarr-api-key
+                  key: apiKey
             - name: UN_RADARR_0_URL
               value: http://radarr.radarr.svc.cluster.local:7878
             - name: UN_RADARR_0_PATHS_0

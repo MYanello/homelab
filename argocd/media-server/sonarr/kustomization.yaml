@@ -10,6 +10,3 @@ resources:
   - manifests/http-route.yaml
   - manifests/cnpg.yaml
   - manifests/cm.yaml
-
-generators:
-  - manifests/secret-generator.yaml
