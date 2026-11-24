@@ -23,20 +23,6 @@ jobs:
         with:
           ref: main
           path: main
-      - name: Write SOPS Secret
-        run: |
-          mkdir -p secrets
-          SOPS_KEY=$(echo "${{ secrets.SOPS_KEY }}" | base64 -w 0)
-          cat > secrets/secret-sops.yaml <<-EOF
-          apiVersion: v1
-          kind: Secret
-          metadata:
-            name: sops-age
-            namespace: argocd
-          data:
-            key.txt: "${SOPS_KEY}"
-          EOF
-
       - name: Write Harbor Repo Secret
         env:
           HARBOR_ROBOT_PASSWORD: ${{ secrets.HARBOR_ROBOT_PASSWORD }}
@@ -77,7 +63,7 @@ jobs:
           cat > values.yaml <<-'EOF'
           configs:
             cm:
-              kustomize.buildOptions: --enable-helm --enable-alpha-plugins --enable-exec
+              kustomize.buildOptions: --enable-helm
           redis:
             image:
               repository: harbor.yanello.net/docker/library/redis
@@ -85,31 +71,6 @@ jobs:
             existingSecret: argocd-redis
           redisSecretInit:
             enabled: false
-          repoServer:
-            env:
-              - name: SOPS_AGE_KEY_FILE
-                value: /.config/sops/age/key.txt
-            volumes:
-              - name: custom-tools
-                emptyDir: {}
-              - name: sops-age
-                secret:
-                  secretName: sops-age
-            initContainers:
-              - name: install-ksops
-                image: viaductoss/ksops:v4.5.1@sha256:4def9fdd4e2f850265740ebe9592c5455d19b76891e88e602df8b52d74b95334
-                command: ["/usr/local/bin/ksops", "install", "/custom-tools"]
-                volumeMounts:
-                  - mountPath: /custom-tools
-                    name: custom-tools
-              # Only ksops is added; ArgoCD already ships a suitable kustomize.
-            volumeMounts:
-              - mountPath: /usr/local/bin/ksops
-                name: custom-tools
-                subPath: ksops
-              - mountPath: /.config/sops/age/key.txt
-                name: sops-age
-                subPath: key.txt
           EOF
       - name: Generate Diff
         run: |

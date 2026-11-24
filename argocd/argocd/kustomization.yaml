@@ -4,7 +4,6 @@ kind: Kustomization
 
 resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v3.6.2/manifests/install.yaml
-  - ./manifests/sops.yaml
   - ./manifests/http-route.yaml
   - ./manifests/netpol.yaml
   - ./manifests/cks-webhook.yaml
@@ -12,7 +11,6 @@ resources:
 
 patches:
   - path: ./manifests/cm.yaml
-  - path: ksops-patch.yaml
   # - path: manifests/dex-probes-patch.yaml
   - target:
       kind: Deployment
