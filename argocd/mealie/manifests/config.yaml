@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mealie-config
+data:
+  DB_ENGINE: postgres
+  POSTGRES_USER: mealie
+  POSTGRES_SERVER: postgres
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: mealie
+  OIDC_CONFIGURATION_URL: https://authentik.yanello.net/application/o/mealie/.well-known/openid-configuration
+  OPENAI_BASE_URL: https://openrouter.ai/api/v1/

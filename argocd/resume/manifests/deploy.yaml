@@ -59,6 +59,8 @@ spec:
               value: Authentik
             - name: OAUTH_DISCOVERY_URL
               value: https://authentik.yanello.net/application/o/rxr/.well-known/openid-configuration
+            - name: AI_ALLOWED_BASE_URLS
+              value: https://llm.yanello.net
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

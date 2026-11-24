@@ -44,6 +44,8 @@ spec:
               value: openid profile email groups
             - name: HBOX_OPTIONS_ALLOW_LOCAL_LOGIN
               value: "true"
+            - name: HBOX_OIDC_ISSUER_URL
+              value: https://authentik.yanello.net/application/o/homebox/
           envFrom:
             - secretRef:
                 name: hbox-secrets

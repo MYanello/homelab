@@ -29,6 +29,10 @@ spec:
             - secretRef:
                 name: adguard-exporter-secrets
           env:
+            - name: ADGUARD_HOST
+              value: https://agh.yanello.net
+            - name: ADGUARD_USER
+              value: marcus
             - name: EXPORTER_PORT
               value: "9617"
             - name: SCRAPE_INTERVAL

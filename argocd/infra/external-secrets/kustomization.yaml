@@ -6,9 +6,6 @@ resources:
   - ./manifests/netpol.yaml
   - ./manifests/cluster-secret-store.yaml
 
-generators:
-  - ./manifests/secret-generator.yaml
-
 helmCharts:
   - name: external-secrets
     repo: https://charts.external-secrets.io

@@ -18,6 +18,15 @@ spec:
         - name: mongo
           image: harbor.yanello.net/docker/library/mongo:7.0.9@sha256:97aac78a80553735b3d9b9b7212803468781b4859645f892a3d04e6b621a7b77
           imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO_AUTHSOURCE
+              value: admin
+            - name: MONGO_DBNAME
+              value: unifi
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_USER
+              value: unifi
           envFrom:
             - secretRef:
                 name: unifi-secrets
