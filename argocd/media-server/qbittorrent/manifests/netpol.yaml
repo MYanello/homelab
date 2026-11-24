@@ -19,6 +19,9 @@ spec:
             k8s:io.kubernetes.pod.namespace: radarr
             app: radarr
         - matchLabels:
+            k8s:io.kubernetes.pod.namespace: homepage
+            k8s:app.kubernetes.io/name: homepage
+        - matchLabels:
             k8s:io.kubernetes.pod.namespace: sonarr
             app: sonarr
         - matchLabels:

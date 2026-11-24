@@ -18,6 +18,9 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: monitoring
             k8s:app.kubernetes.io/name: vmagent
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: homepage
+            k8s:app.kubernetes.io/name: homepage
       toPorts:
         - ports:
             - port: "5216"
