@@ -2,14 +2,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-generators:
-  - ./manifests/secret-generator.yaml
-
 resources:
+  - ./manifests/ext-secrets.yaml
   - ./manifests/netpol.yaml
   - ./manifests/health-check.yaml
-  - ./manifests/http-route.yaml
-  - ./manifests/cert.yaml
+  # - ./manifests/http-route.yaml
+  # - ./manifests/cert.yaml
 
 patches:
   - path: ./manifests/health-check-patch.yaml

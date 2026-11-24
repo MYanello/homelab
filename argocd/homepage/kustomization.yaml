@@ -2,9 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-generators:
-  - ./manifests/secret-generator.yaml
-
 configMapGenerator:
   - name: config
     files:
@@ -18,6 +15,7 @@ configMapGenerator:
       - ./manifests/config/widgets.yaml
 
 resources:
+  - ./manifests/ext-secrets.yaml
   - ./manifests/netpol.yaml
   - ./manifests/deploy.yaml
   - ./manifests/svc.yaml

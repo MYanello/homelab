@@ -3,11 +3,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+  - manifests/ext-secrets.yaml
   - manifests/netpol.yaml
   - manifests/deploy.yaml
   - manifests/service.yaml
   - manifests/cnpg.yaml
   - manifests/http-route.yaml
-
-generators:
-  - manifests/secret-generator.yaml
