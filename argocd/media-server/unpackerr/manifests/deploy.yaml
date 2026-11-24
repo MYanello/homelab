@@ -53,6 +53,11 @@ spec:
               value: http://radarr.radarr.svc.cluster.local:7878
             - name: UN_RADARR_0_PATHS_0
               value: /data/media/torrents/completed/movies
+            - name: UN_RADARR_0_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: radarr-api-key
+                  key: apiKey
             - name: UN_LOG_FILE
               value: /data/logs/log.txt
             # - name: UN_FOLDER_0_MOVE_BACK

@@ -60,6 +60,11 @@ spec:
                     secretKeyRef:
                       name: sonarr-api-key
                       key: apiKey
+                - name: KOMETA_RADARR_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: radarr-api-key
+                      key: apiKey
               envFrom:
                 - secretRef:
                     name: kometa-secrets
