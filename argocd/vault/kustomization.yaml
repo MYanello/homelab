@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
   - ./manifests/http-route.yaml
+  - ./manifests/http-route-public.yaml
   - ./manifests/service.yaml
   - ./manifests/rbac.yaml
   - ./manifests/vmscrape.yaml
