@@ -8,9 +8,7 @@ resources:
   - ./manifests/http-route.yaml
   - ./manifests/netpol.yaml
   - ./manifests/cks-webhook.yaml
-
-generators:
-  - ./manifests/secret-generator.yaml
+  - ./manifests/ext-secrets.yaml
 
 patches:
   - path: ./manifests/cm.yaml
