@@ -7,6 +7,10 @@ defaultRules:
       enabled: false
     NodeFilesystemAlmostOutOfSpace:
       enabled: false
+    TooManyLogs:
+      enabled: false
+    TooManyScrapeErrors:
+      enabled: false
   groups:
     "general.rules":
       enabled: false

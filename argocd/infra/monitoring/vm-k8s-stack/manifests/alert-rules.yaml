@@ -24,3 +24,38 @@ spec:
               at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available
               space left.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  name: vm-health-thresholds
+spec:
+  groups:
+    - name: vm-health-thresholds
+      rules:
+        - alert: TooManyScrapeErrors
+          expr: >-
+            sum(rate(vm_promscrape_scrapes_failed_total[5m]))
+            / sum(rate(vm_promscrape_scrapes_total[5m])) > 0.2
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: Vmagent fails to scrape a large share of its targets.
+            description: >-
+              {{ printf "%.1f" $value }}% of scrapes by {{ $labels.instance }}
+              failed over the last 5 minutes.
+            runbook_url: https://docs.victoriametrics.com/victoriametrics/vmagent/#debugging-scrape-targets
+        - alert: TooManyLogs
+          expr: >-
+            sum(increase(vm_log_messages_total{level="warn"}[5m]))
+            without(app_version,location,is_printed) > 100
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: '"{{ $labels.job }}" ({{ $labels.instance }}) generates too many
+              warn logs'
+            description: >-
+              The job "{{ $labels.job }}" ({{ $labels.instance }}) generated more
+              than 100 warn logs over the last 5 minutes.
