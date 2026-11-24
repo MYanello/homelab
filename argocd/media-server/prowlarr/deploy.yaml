@@ -56,22 +56,22 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-          startupProbe:
-            httpGet:
-              path: /
-              port: 9696
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 9696
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
+          # startupProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 9696
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 9696
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
           resources:
             limits:
               memory: 300Mi

@@ -28,6 +28,12 @@ spec:
           image: harbor.yanello.net/ghcr/plastic-labs/honcho:v3.6.1@sha256:2ced1a958f14c128ddb05e68deb549f9281681e44595a7a3c34adebf5b432b16
           imagePullPolicy: Always
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
+          env:
+            - name: DB_CONNECTION_URI
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: uri
           envFrom:
             - secretRef:
                 name: honcho-env
@@ -38,6 +44,12 @@ spec:
           ports:
             - containerPort: 8000
               name: http
+          env:
+            - name: DB_CONNECTION_URI
+              valueFrom:
+                secretKeyRef:
+                  name: db-app
+                  key: uri
           envFrom:
             - secretRef:
                 name: honcho-env
