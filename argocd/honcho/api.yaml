@@ -29,11 +29,18 @@ spec:
           imagePullPolicy: Always
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
           env:
-            - name: DB_CONNECTION_URI
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: db-app
-                  key: uri
+                  name: db-superuser
+                  key: user
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: db-superuser
+                  key: password
+            - name: DB_CONNECTION_URI
+              value: "postgresql+psycopg://$(DB_USER):$(DB_PASS)@db-rw.honcho.svc.cluster.local:5432/postgres"
           envFrom:
             - secretRef:
                 name: honcho-env
@@ -45,11 +52,18 @@ spec:
             - containerPort: 8000
               name: http
           env:
-            - name: DB_CONNECTION_URI
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: db-app
-                  key: uri
+                  name: db-superuser
+                  key: user
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: db-superuser
+                  key: password
+            - name: DB_CONNECTION_URI
+              value: "postgresql+psycopg://$(DB_USER):$(DB_PASS)@db-rw.honcho.svc.cluster.local:5432/postgres"
           envFrom:
             - secretRef:
                 name: honcho-env

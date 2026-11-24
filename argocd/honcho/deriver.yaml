@@ -28,11 +28,18 @@ spec:
           image: harbor.yanello.net/ghcr/plastic-labs/honcho:v3.6.1@sha256:2ced1a958f14c128ddb05e68deb549f9281681e44595a7a3c34adebf5b432b16
           command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
           env:
-            - name: DB_CONNECTION_URI
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: db-app
-                  key: uri
+                  name: db-superuser
+                  key: user
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: db-superuser
+                  key: password
+            - name: DB_CONNECTION_URI
+              value: "postgresql+psycopg://$(DB_USER):$(DB_PASS)@db-rw.honcho.svc.cluster.local:5432/postgres"
           envFrom:
             - secretRef:
                 name: honcho-env
@@ -42,11 +49,18 @@ spec:
           imagePullPolicy: Always
           command: ["/app/.venv/bin/python", "-m", "src.deriver"]
           env:
-            - name: DB_CONNECTION_URI
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: db-app
-                  key: uri
+                  name: db-superuser
+                  key: user
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: db-superuser
+                  key: password
+            - name: DB_CONNECTION_URI
+              value: "postgresql+psycopg://$(DB_USER):$(DB_PASS)@db-rw.honcho.svc.cluster.local:5432/postgres"
           envFrom:
             - secretRef:
                 name: honcho-env
