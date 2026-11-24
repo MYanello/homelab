@@ -41,7 +41,7 @@ module "vault-oauth-app" {
   property_mappings  = local.oidc_mappings
   redirect_uris = [{
     matching_mode     = "strict"
-    url               = "https://vault.yanello.net/ui/vault/auth/oidc/oidc/callback"
+    url               = "https://vault.yanello.net/ui/vault/auth/authentik/oidc/callback"
     redirect_uri_type = "authorization"
     },
     {
@@ -61,7 +61,7 @@ resource "authentik_group" "vault-admins" {
 }
 
 resource "vault_jwt_auth_backend" "authentik" {
-  path               = "oidc"
+  path               = "authentik"
   type               = "oidc"
   description        = "Authentik OIDC auth backend"
   default_role       = "admin"
@@ -91,7 +91,7 @@ resource "vault_jwt_auth_backend_role" "admin" {
 
   allowed_redirect_uris = [
     "https://vault.yanello.net/oidc/callback",
-    "https://vault.yanello.net/ui/vault/auth/oidc/oidc/callback",
+    "https://vault.yanello.net/ui/vault/auth/authentik/oidc/callback",
     "http://localhost:8250/oidc/callback",
   ]
 }

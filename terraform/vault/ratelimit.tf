@@ -7,9 +7,18 @@ resource "vault_quota_rate_limit" "global_ip" {
   group_by       = "ip"
 }
 
-resource "vault_quota_rate_limit" "oidc_login_ip" {
-  name           = "oidc-login-ip"
-  path           = "auth/oidc"
+resource "vault_quota_rate_limit" "authentik_login_ip" {
+  name           = "authentik-login-ip"
+  path           = "auth/authentik/"
+  rate           = 5
+  interval       = 1
+  block_interval = 60
+  group_by       = "ip"
+}
+
+resource "vault_quota_rate_limit" "cks_login_ip" {
+  name           = "cks-login-ip"
+  path           = "auth/cks/"
   rate           = 5
   interval       = 1
   block_interval = 60
