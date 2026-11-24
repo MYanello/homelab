@@ -156,7 +156,7 @@ vmsingle:
     resources:
       requests:
         cpu: 150m
-        memory: 18Gi
+        memory: 15Gi
       limits:
         memory: 32Gi
 
