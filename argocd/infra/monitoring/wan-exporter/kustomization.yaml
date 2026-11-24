@@ -4,10 +4,8 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
+  - ./manifests/ext-secrets.yaml
   - ./manifests/deploy.yaml
   - ./manifests/svc.yaml
   - ./manifests/scrape.yaml
   - ./manifests/cwcr.yaml
-
-generators:
-  - ./manifests/secret-generator.yaml
