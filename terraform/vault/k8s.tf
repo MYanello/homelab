@@ -46,10 +46,10 @@ resource "vault_policy" "esops" {
   name   = "esops"
   policy = <<-POL
     path "${vault_mount.k8s_kv.path}/data/*" {
-      capabilities = ["create", "read", "update", "patch", "delete"]
+      capabilities = ["read"]
     }
     path "${vault_mount.k8s_kv.path}/metadata/*" {
-      capabilities = ["read", "list", "delete"]
+      capabilities = ["read", "list"]
     }
     path "${vault_mount.pki.path}/cert/ca" {
       capabilities = ["read"]
