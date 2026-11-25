@@ -41,9 +41,6 @@ spec:
         - path:
             type: Exact
             value: /v1/cks_pki_int/cert/ca
-        - path:
-            type: Exact
-            value: /v1/identity/oidc/token/caios-test
       backendRefs:
         - name: vault-service
           port: 8200
