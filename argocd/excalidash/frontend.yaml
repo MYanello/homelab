@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: harbor.yanello.net/docker/zimengxiong/excalidash-frontend:0.6.9@sha256:f78ec33e754d1ba387540021437425e4c4c1038346c5021a324c525642b134cf
+          image: harbor.yanello.net/docker/zimengxiong/excalidash-frontend:0.7.0@sha256:c528f96807a20d865f15a99938833a49a0611ed0fd9913c571b8a5303b420641
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
