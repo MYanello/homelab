@@ -14,6 +14,16 @@ patches:
   # - path: manifests/dex-probes-patch.yaml
   - target:
       kind: Deployment
+      name: argocd-dex-server
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: argocd-dex-server
+      spec:
+        replicas: 0
+  - target:
+      kind: Deployment
     patch: |-
       apiVersion: apps/v1
       kind: Deployment
