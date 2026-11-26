@@ -5,7 +5,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-alertmanager-rules
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: alertmanager.rules
@@ -130,7 +129,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-cpu-limits
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_cpu_limits
@@ -151,7 +149,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-cpu-requests
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_cpu_requests
@@ -172,7 +169,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-cpu-usage-seconds-total
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_cpu_usage_seconds_total
@@ -192,7 +188,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-memory-cache
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_memory_cache
@@ -208,7 +203,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-memory-limits
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_memory_limits
@@ -229,7 +223,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-memory-requests
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_memory_requests
@@ -250,7 +243,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-memory-rss
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_memory_rss
@@ -266,7 +258,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-memory-swap
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_memory_swap
@@ -282,7 +273,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-container-memory-working-set-bytes
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.container_memory_working_set_bytes
@@ -298,7 +288,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-k8s-rules-pod-owner
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: k8s.rules.pod_owner
@@ -365,7 +354,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kube-apiserver-slos
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kube-apiserver-slos
@@ -429,7 +417,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kube-prometheus-node-recording-rules
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kube-prometheus-node-recording.rules
@@ -456,7 +443,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kube-state-metrics
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kube-state-metrics
@@ -518,7 +504,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubelet-rules
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubelet.rules
@@ -548,7 +533,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubernetes-apps
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubernetes-apps
@@ -791,7 +775,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubernetes-resources
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubernetes-resources
@@ -885,7 +868,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubernetes-storage
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubernetes-storage
@@ -980,7 +962,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubernetes-system
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubernetes-system
@@ -1017,7 +998,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubernetes-system-apiserver
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubernetes-system-apiserver
@@ -1111,7 +1091,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-kubernetes-system-kubelet
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: kubernetes-system-kubelet
@@ -1305,7 +1284,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-node-exporter
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: node-exporter
@@ -1612,7 +1590,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-node-exporter-rules
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: node-exporter.rules
@@ -1665,7 +1642,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-node-network
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: node-network
@@ -1689,7 +1665,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-node-rules
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: node.rules
@@ -1717,7 +1692,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-vm-health
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: vm-health
@@ -1899,7 +1873,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-vmagent
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - concurrency: 2
@@ -2110,7 +2083,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-vmalert
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - interval: 30s
@@ -2290,7 +2262,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-vmoperator
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - name: vmoperator
@@ -2341,7 +2312,6 @@ metadata:
   name: victoria-metrics-k8s-stack-rule-vmsingle
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
 spec:
   groups:
     - concurrency: 2

@@ -1,26 +1,4 @@
 ---
-defaultRules:
-  rules:
-    KubeMemoryOvercommit:
-      enabled: false
-    KubeCPUOvercommit:
-      enabled: false
-    NodeFilesystemAlmostOutOfSpace:
-      enabled: false
-    TooManyLogs:
-      enabled: false
-    TooManyScrapeErrors:
-      enabled: false
-  groups:
-    "general.rules":
-      enabled: false
-    kube-apiserver-availability.rules:
-      enabled: false
-    kube-apiserver-burnrate.rules:
-      enabled: false
-    kube-apiserver-histogram.rules:
-      enabled: false
-
 victoria-metrics-operator:
   enabled: true
   admissionWebhooks:
@@ -163,12 +141,6 @@ vmsingle:
         memory: 15Gi
       limits:
         memory: 32Gi
-
-defaultDashboards:
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
-  node-exporter-full:
-    enabled: true
 
 syncJob:
   enabled: false

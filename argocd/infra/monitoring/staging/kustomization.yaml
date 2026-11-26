@@ -6,7 +6,6 @@ generatorOptions:
   disableNameSuffixHash: true
   labels:
     app.kubernetes.io/instance: victoria-metrics-k8s-stack
-    app.kubernetes.io/managed-by: sync-job
     grafana_dashboard: "1"
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
