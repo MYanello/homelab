@@ -96,6 +96,15 @@ spec:
       labels:
         app: printer
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostnamebeta.kubernetes.io/arch=amd64
+                    operator: In
+                    values:
+                      - amd64
       containers:
         - name: printer
           resources:
