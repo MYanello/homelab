@@ -1,0 +1,140 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app.kubernetes.io/instance: victoria-metrics-k8s-stack
+    app.kubernetes.io/managed-by: sync-job
+    grafana_dashboard: "1"
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+
+resources:
+  - ./vmrules.yaml
+
+configMapGenerator:
+  - name: victoria-metrics-k8s-stack-dashboard-alertmanager-overview
+    files:
+      - ./dashboards/alertmanager-overview.json
+  - name: victoria-metrics-k8s-stack-dashboard-apiserver
+    files:
+      - ./dashboards/apiserver.json
+  - name: victoria-metrics-k8s-stack-dashboard-cluster-total
+    files:
+      - ./dashboards/cluster-total.json
+  - name: victoria-metrics-k8s-stack-dashboard-grafana-overview
+    files:
+      - ./dashboards/grafana-overview.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-cluster
+    files:
+      - ./dashboards/k8s-resources-cluster.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-multicluster
+    files:
+      - ./dashboards/k8s-resources-multicluster.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-namespace
+    files:
+      - ./dashboards/k8s-resources-namespace.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-node
+    files:
+      - ./dashboards/k8s-resources-node.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-nodes-overview
+    files:
+      - ./dashboards/k8s-resources-nodes-overview.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-pod
+    files:
+      - ./dashboards/k8s-resources-pod.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-windows-cluster
+    files:
+      - ./dashboards/k8s-resources-windows-cluster.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-windows-namespace
+    files:
+      - ./dashboards/k8s-resources-windows-namespace.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-windows-pod
+    files:
+      - ./dashboards/k8s-resources-windows-pod.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-workload
+    files:
+      - ./dashboards/k8s-resources-workload.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-resources-workloads-namespace
+    files:
+      - ./dashboards/k8s-resources-workloads-namespace.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-windows-cluster-rsrc-use
+    files:
+      - ./dashboards/k8s-windows-cluster-rsrc-use.json
+  - name: victoria-metrics-k8s-stack-dashboard-k8s-windows-node-rsrc-use
+    files:
+      - ./dashboards/k8s-windows-node-rsrc-use.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubelet
+    files:
+      - ./dashboards/kubelet.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubernetes-system-api-server
+    files:
+      - ./dashboards/kubernetes-system-api-server.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubernetes-system-coredns
+    files:
+      - ./dashboards/kubernetes-system-coredns.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubernetes-views-global
+    files:
+      - ./dashboards/kubernetes-views-global.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubernetes-views-namespaces
+    files:
+      - ./dashboards/kubernetes-views-namespaces.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubernetes-views-nodes
+    files:
+      - ./dashboards/kubernetes-views-nodes.json
+  - name: victoria-metrics-k8s-stack-dashboard-kubernetes-views-pods
+    files:
+      - ./dashboards/kubernetes-views-pods.json
+  - name: victoria-metrics-k8s-stack-dashboard-namespace-by-pod
+    files:
+      - ./dashboards/namespace-by-pod.json
+  - name: victoria-metrics-k8s-stack-dashboard-namespace-by-workload
+    files:
+      - ./dashboards/namespace-by-workload.json
+  - name: victoria-metrics-k8s-stack-dashboard-node-cluster-rsrc-use
+    files:
+      - ./dashboards/node-cluster-rsrc-use.json
+  - name: victoria-metrics-k8s-stack-dashboard-node-exporter-full
+    files:
+      - ./dashboards/node-exporter-full.json
+  - name: victoria-metrics-k8s-stack-dashboard-node-rsrc-use
+    files:
+      - ./dashboards/node-rsrc-use.json
+  - name: victoria-metrics-k8s-stack-dashboard-nodes-aix
+    files:
+      - ./dashboards/nodes-aix.json
+  - name: victoria-metrics-k8s-stack-dashboard-nodes-darwin
+    files:
+      - ./dashboards/nodes-darwin.json
+  - name: victoria-metrics-k8s-stack-dashboard-nodes
+    files:
+      - ./dashboards/nodes.json
+  - name: victoria-metrics-k8s-stack-dashboard-persistentvolumesusage
+    files:
+      - ./dashboards/persistentvolumesusage.json
+  - name: victoria-metrics-k8s-stack-dashboard-pod-total
+    files:
+      - ./dashboards/pod-total.json
+  - name: victoria-metrics-k8s-stack-dashboard-prometheus
+    files:
+      - ./dashboards/prometheus.json
+  - name: victoria-metrics-k8s-stack-dashboard-prometheus-remote-write
+    files:
+      - ./dashboards/prometheus-remote-write.json
+  - name: victoria-metrics-k8s-stack-dashboard-victoriametrics-operator
+    files:
+      - ./dashboards/victoriametrics-operator.json
+  - name: victoria-metrics-k8s-stack-dashboard-victoriametrics-single-node
+    files:
+      - ./dashboards/victoriametrics-single-node.json
+  - name: victoria-metrics-k8s-stack-dashboard-victoriametrics-vmagent
+    files:
+      - ./dashboards/victoriametrics-vmagent.json
+  - name: victoria-metrics-k8s-stack-dashboard-victoriametrics-vmalert
+    files:
+      - ./dashboards/victoriametrics-vmalert.json
+  - name: victoria-metrics-k8s-stack-dashboard-workload-total
+    files:
+      - ./dashboards/workload-total.json

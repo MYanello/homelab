@@ -1,0 +1,378 @@
+{
+  "title": "Kubernetes / Compute Resources / Nodes Overview",
+  "editable": false,
+  "timezone": "UTC",
+  "tags": [
+    "kubernetes-mixin",
+    "vm-k8s-stack"
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "datasource",
+        "label": "Data source",
+        "type": "datasource",
+        "query": "prometheus",
+        "hide": 0,
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "regex": ""
+      },
+      {
+        "name": "cluster",
+        "label": "cluster",
+        "type": "constant",
+        "query": ".*",
+        "definition": ".*",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "multi": false,
+        "includeAll": false,
+        "hide": 2,
+        "refresh": 2,
+        "sort": 1
+      }
+    ]
+  },
+  "panels": [
+    {
+      "title": "Node & Pod Count",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "count(kube_node_info{cluster=~\"$cluster\",job=\"kube-state-metrics\"}) by(cluster)",
+          "legendFormat": "nodes"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(kubelet_running_pods{cluster=~\"$cluster\",job=\"kubelet\",metrics_path=\"/metrics\"}) by(cluster)",
+          "legendFormat": "pods"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "decimals": 0,
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pods"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "CPU Usage",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(kube_node_status_allocatable{cluster=~\"$cluster\",job=\"kube-state-metrics\",resource=\"cpu\"}) by(cluster)",
+          "legendFormat": "allocatable"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{cluster=~\"$cluster\"}) by(cluster)",
+          "legendFormat": "requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=~\"$cluster\"}) by(cluster)",
+          "legendFormat": "usage"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Memory Usage",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(kube_node_status_allocatable{cluster=~\"$cluster\",job=\"kube-state-metrics\",resource=\"memory\"}) by(cluster)",
+          "legendFormat": "allocatable"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=~\"$cluster\"}) by(cluster)",
+          "legendFormat": "requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(node_namespace_pod_container:container_memory_working_set_bytes{cluster=~\"$cluster\",container!=\"\"}) by(cluster)",
+          "legendFormat": "usage"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "unit": "bytes"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 3,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "CPU Utilization per Node",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=~\"$cluster\"}) by(node,cluster) / sum(kube_node_status_allocatable{cluster=~\"$cluster\",job=\"kube-state-metrics\",resource=\"cpu\"}) by(node,cluster)",
+          "legendFormat": "{{node}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 4,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Memory Utilization per Node",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(node_namespace_pod_container:container_memory_working_set_bytes{cluster=~\"$cluster\",container!=\"\"}) by(node,cluster) / sum(kube_node_status_allocatable{cluster=~\"$cluster\",job=\"kube-state-metrics\",resource=\"memory\"}) by(node,cluster)",
+          "legendFormat": "{{node}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          },
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 5,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    }
+  ],
+  "links": [
+    {
+      "asDropdown": true,
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "kubernetes-mixin"
+      ],
+      "targetBlank": false,
+      "title": "Kubernetes",
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "uid": "058020e04168bfdea0c52269cb699df2"
+}

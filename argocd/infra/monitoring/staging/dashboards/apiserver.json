@@ -1,0 +1,874 @@
+{
+  "title": "Kubernetes / API server",
+  "editable": false,
+  "timezone": "UTC",
+  "tags": [
+    "kubernetes-mixin",
+    "vm-k8s-stack"
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "datasource",
+        "label": "Data source",
+        "type": "datasource",
+        "query": "prometheus",
+        "hide": 0,
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "regex": ""
+      },
+      {
+        "name": "cluster",
+        "label": "cluster",
+        "type": "constant",
+        "query": ".*",
+        "definition": ".*",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "multi": false,
+        "includeAll": false,
+        "hide": 2,
+        "refresh": 2,
+        "sort": 1
+      },
+      {
+        "name": "instance",
+        "type": "query",
+        "query": "label_values(up{job=\"apiserver\",cluster=~\"$cluster\"}, instance)",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "includeAll": true,
+        "hide": 0,
+        "refresh": 2,
+        "sort": 1
+      }
+    ]
+  },
+  "panels": [
+    {
+      "title": "Notice",
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "The SLO (service level objective) and other metrics displayed on this dashboard are for informational purposes only.",
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "content": "The SLO (service level objective) and other metrics displayed on this dashboard are for informational purposes only."
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "text"
+    },
+    {
+      "title": "Availability (30d) > 99.000%",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "apiserver_request:availability30d{verb=\"all\",cluster=~\"$cluster\"}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many percent of requests (both read and write) in 30 days have been answered successfully and fast enough?",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 3,
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 2
+      },
+      "id": 2,
+      "interval": "1m",
+      "pluginVersion": "v13.0.0",
+      "type": "stat"
+    },
+    {
+      "title": "Error Budget (30d) > 99.000%",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "100 * (apiserver_request:availability30d{verb=\"all\",cluster=~\"$cluster\"} - 0.990000)",
+          "legendFormat": "error budget"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How much error budget is left looking at our 99.000% availability guarantee?",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 100
+          },
+          "decimals": 3,
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 8,
+        "y": 2
+      },
+      "id": 3,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Read Availability (30d)",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "apiserver_request:availability30d{verb=\"read\",cluster=~\"$cluster\"}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many percent of read requests (LIST,GET) in 30 days have been answered successfully and fast enough?",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 3,
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "interval": "1m",
+      "pluginVersion": "v13.0.0",
+      "type": "stat"
+    },
+    {
+      "title": "Read SLI - Requests",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(code_resource:apiserver_request_total:rate5m{verb=\"read\",cluster=~\"$cluster\"}) by(code,cluster)",
+          "legendFormat": "{{ code }}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many read requests (LIST,GET) per second do the apiservers get by code?",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 100,
+            "stacking": {
+              "mode": "normal"
+            }
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/2../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#56A64B"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/3../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#F2CC0C"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/4../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#3274D9"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/5../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#E02F44"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 9
+      },
+      "id": 5,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Read SLI - Errors",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(code_resource:apiserver_request_total:rate5m{verb=\"read\",code=~\"5..\",cluster=~\"$cluster\"}) by(resource,cluster) / sum(code_resource:apiserver_request_total:rate5m{verb=\"read\",cluster=~\"$cluster\"}) by(resource,cluster)",
+          "legendFormat": "{{ resource }}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many percent of read requests (LIST,GET) per second are returned with errors (5xx)?",
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 9
+      },
+      "id": 6,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Read SLI - Duration",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "cluster_quantile:apiserver_request_sli_duration_seconds:histogram_quantile{verb=\"read\",cluster=~\"$cluster\"}",
+          "legendFormat": "{{ resource }}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many seconds is the 99th percentile for reading (LIST|GET) a given resource?",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 9
+      },
+      "id": 7,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Write Availability (30d)",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "apiserver_request:availability30d{verb=\"write\",cluster=~\"$cluster\"}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many percent of write requests (POST|PUT|PATCH|DELETE) in 30 days have been answered successfully and fast enough?",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 3,
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 16
+      },
+      "id": 8,
+      "interval": "1m",
+      "pluginVersion": "v13.0.0",
+      "type": "stat"
+    },
+    {
+      "title": "Write SLI - Requests",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(code_resource:apiserver_request_total:rate5m{verb=\"write\",cluster=~\"$cluster\"}) by(code,cluster)",
+          "legendFormat": "{{ code }}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many write requests (POST|PUT|PATCH|DELETE) per second do the apiservers get by code?",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "fillOpacity": 100,
+            "stacking": {
+              "mode": "normal"
+            }
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/2../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#56A64B"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/3../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#F2CC0C"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/4../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#3274D9"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/5../i"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": "#E02F44"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 16
+      },
+      "id": 9,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Write SLI - Errors",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(code_resource:apiserver_request_total:rate5m{verb=\"write\",code=~\"5..\",cluster=~\"$cluster\"}) by(resource,cluster) / sum(code_resource:apiserver_request_total:rate5m{verb=\"write\",cluster=~\"$cluster\"}) by(resource,cluster)",
+          "legendFormat": "{{ resource }}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many percent of write requests (POST|PUT|PATCH|DELETE) per second are returned with errors (5xx)?",
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "unit": "percentunit"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 16
+      },
+      "id": 10,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Write SLI - Duration",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "cluster_quantile:apiserver_request_sli_duration_seconds:histogram_quantile{verb=\"write\",cluster=~\"$cluster\"}",
+          "legendFormat": "{{ resource }}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "How many seconds is the 99th percentile for writing (POST|PUT|PATCH|DELETE) a given resource?",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 16
+      },
+      "id": 11,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Work Queue Add Rate",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(workqueue_adds_total{job=\"apiserver\",instance=~\"$instance\",cluster=~\"$cluster\"}[$__rate_interval])) by(instance,name,cluster)",
+          "legendFormat": "{{instance}} {{name}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "unit": "ops"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "id": 12,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Work Queue Depth",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(workqueue_depth{job=\"apiserver\",instance=~\"$instance\",cluster=~\"$cluster\"}[$__rate_interval])) by(instance,name,cluster)",
+          "legendFormat": "{{instance}} {{name}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 23
+      },
+      "id": 13,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Work Queue Latency",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "histogram_quantile(0.99, sum(rate(workqueue_queue_duration_seconds_bucket{job=\"apiserver\",instance=~\"$instance\",cluster=~\"$cluster\"}[$__rate_interval])) by(instance,name,le,cluster))",
+          "legendFormat": "{{instance}} {{name}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "unit": "s"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 14,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Memory",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "process_resident_memory_bytes{job=\"apiserver\",instance=~\"$instance\",cluster=~\"$cluster\"}",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 37
+      },
+      "id": 15,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "CPU usage",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "rate(process_cpu_seconds_total{job=\"apiserver\",instance=~\"$instance\",cluster=~\"$cluster\"}[$__rate_interval])",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 37
+      },
+      "id": 16,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    },
+    {
+      "title": "Goroutines",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "go_goroutines{job=\"apiserver\",instance=~\"$instance\",cluster=~\"$cluster\"}",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 37
+      },
+      "id": 17,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "asTable": true,
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "v13.0.0",
+      "type": "timeseries"
+    }
+  ],
+  "links": [
+    {
+      "asDropdown": true,
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "kubernetes-mixin"
+      ],
+      "targetBlank": false,
+      "title": "Kubernetes",
+      "type": "dashboards"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "uid": "09ec8aa1e996d6ffcd6817bbaff4db1b"
+}
