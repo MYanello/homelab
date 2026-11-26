@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./vmrules.yaml
+  - ./manifests/ext-secrets.yaml
+  - ./manifests/http-routes.yaml
+  - ./manifests/rules.yaml
+  - ./manifests/vmalert.yaml
+  - ./manifests/vmalertmanager-config-secret.yaml
+  - ./manifests/vmalertmanager-templates.yaml
+  - ./manifests/vmalertmanager.yaml

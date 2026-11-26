@@ -6,7 +6,6 @@ resources:
   - ./manifests/ext-secrets.yaml
   - ./manifests/http-route.yaml
   - ./manifests/mcp-victoriametrics.yaml
-  - ./manifests/alert-rules.yaml
 
 helmCharts:
   - name: victoria-metrics-k8s-stack

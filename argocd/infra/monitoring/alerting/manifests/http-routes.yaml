@@ -1,0 +1,60 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/component: vmalert
+    app.kubernetes.io/instance: victoria-metrics-k8s-stack
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.157.0
+  name: vmalert-victoria-metrics-k8s-stack
+spec:
+  hostnames:
+    - vmalert.yanello.net
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: vmalert-victoria-metrics-k8s-stack
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app.kubernetes.io/component: alertmanager
+    app.kubernetes.io/instance: victoria-metrics-k8s-stack
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.157.0
+  name: vmalertmanager-victoria-metrics-k8s-stack
+spec:
+  hostnames:
+    - alertmanager.yanello.net
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: vmalertmanager-victoria-metrics-k8s-stack
+          port: 9093
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

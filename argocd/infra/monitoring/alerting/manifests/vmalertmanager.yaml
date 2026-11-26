@@ -1,0 +1,30 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlertmanager
+metadata:
+  labels:
+    app.kubernetes.io/component: alertmanager
+    app.kubernetes.io/instance: victoria-metrics-k8s-stack
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.157.0
+  name: victoria-metrics-k8s-stack
+spec:
+  configSecret: vmalertmanager-victoria-metrics-k8s-stack
+  externalURL: ""
+  image:
+    tag: v0.35.0
+  port: "9093"
+  replicaCount: 1
+  routePrefix: /
+  selectAllByDefault: true
+  templates:
+    - key: monzo.tmpl
+      name: vmalertmanager-victoria-metrics-k8s-stack-monzo-tpl
+  volumeMounts:
+    - mountPath: /etc/alertmanager-ntfy
+      name: ntfy-url
+      readOnly: true
+  volumes:
+    - name: ntfy-url
+      secret:
+        secretName: vmalertmanager-ntfy
