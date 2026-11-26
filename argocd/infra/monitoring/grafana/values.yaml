@@ -16,9 +16,9 @@ sidecar:
     resources:
       requests:
         cpu: 10m
-        memory: 96Mi
+        memory: 100Mi
       limits:
-        memory: 128Mi
+        memory: 150Mi
   datasources:
     enabled: true
     label: grafana_datasource
@@ -48,36 +48,6 @@ env:
 plugins:
   - victoriametrics-logs-datasource
   - marcusolsson-hourly-heatmap-panel
-datasources:
-  datasources.yaml:
-    apiVersion: 1
-    datasources:
-      - name: VictoriaLogs
-        type: victoriametrics-logs-datasource
-        uid: victorialogs
-        url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
-      - name: Garmin-InfluxDB
-        uid: garmin_influxdb
-        type: influxdb
-        access: proxy
-        url: http://influxdb.monitoring.svc.cluster.local:8086
-        user: "${influxdb-user}"
-        database: GarminStats
-        secureJsonData:
-          password: $influxdb-password
-        jsonData:
-          httpMode: GET
-      - name: Iota-InfluxDB
-        uid: DS_GARMIN_STATS
-        type: influxdb
-        access: proxy
-        url: http://influxdb.monitoring.svc.cluster.local:8086
-        user: "${influxdb-user}"
-        database: home
-        secureJsonData:
-          password: $influxdb-password
-        jsonData:
-          httpMode: GET
 resources:
   requests:
     cpu: 20m

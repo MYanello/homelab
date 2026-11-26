@@ -12,6 +12,7 @@ generatorOptions:
 
 resources:
   - ./manifests/datasources.yaml
+  - ./manifests/ext-secrets.yaml
   - ./manifests/vmservicescrape.yaml
 
 configMapGenerator:

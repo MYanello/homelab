@@ -23,3 +23,29 @@ data:
         type: alertmanager
         uid: Alertmanager
         url: http://vmalertmanager-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:9093
+      - name: VictoriaLogs
+        type: victoriametrics-logs-datasource
+        uid: victorialogs
+        url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+      - name: Garmin-InfluxDB
+        uid: garmin_influxdb
+        type: influxdb
+        access: proxy
+        url: http://influxdb.monitoring.svc.cluster.local:8086
+        user: "${influxdb-user}"
+        database: GarminStats
+        secureJsonData:
+          password: $influxdb-password
+        jsonData:
+          httpMode: GET
+      - name: Iota-InfluxDB
+        uid: DS_GARMIN_STATS
+        type: influxdb
+        access: proxy
+        url: http://influxdb.monitoring.svc.cluster.local:8086
+        user: "${influxdb-user}"
+        database: home
+        secureJsonData:
+          password: $influxdb-password
+        jsonData:
+          httpMode: GET
