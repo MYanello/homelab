@@ -4,6 +4,8 @@ kind: Kustomization
 
 resources:
   - ./manifests/datasources.yaml
+  - ./manifests/ext-secrets.yaml
+  - ./manifests/http-route.yaml
   - ./manifests/vmservicescrape.yaml
 
 helmCharts:
