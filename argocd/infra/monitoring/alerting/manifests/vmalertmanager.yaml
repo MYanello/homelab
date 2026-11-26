@@ -12,7 +12,7 @@ spec:
   configSecret: vmalertmanager-victoria-metrics-k8s-stack
   externalURL: ""
   image:
-    tag: v0.35.0
+    tag: v0.35.1
   port: "9093"
   replicaCount: 1
   routePrefix: /

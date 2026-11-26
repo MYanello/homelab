@@ -146,5 +146,5 @@ helmCharts:
     releaseName: grafana
     namespace: monitoring
     repo: oci://ghcr.io/grafana-community/helm-charts
-    version: "14.4.1"
+    version: "14.6.1"
     valuesFile: values.yaml

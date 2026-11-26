@@ -1,20 +1,6 @@
 ---
 victoria-metrics-operator:
-  enabled: true
-  admissionWebhooks:
-    enabled: true
-    policy: Ignore
-    certManager:
-      enabled: true
-      name: local-intermediate-ca1-issuer
-      kind: ClusterIssuer
-      group: cert-manager.io
-  resources:
-    requests:
-      cpu: 10m
-      memory: 128Mi
-    limits:
-      memory: 128Mi
+  enabled: false
 
 vmagent:
   enabled: true
