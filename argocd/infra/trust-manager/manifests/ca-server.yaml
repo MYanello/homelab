@@ -39,7 +39,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: ca-server
-          image: harbor.yanello.net/docker/nginx/nginx-unprivileged:1.31@sha256:0255fc1dcc1d7b358aac20166543e52029fea577413edadb0912f5b928c7e312
+          image: harbor.yanello.net/docker/nginx/nginx-unprivileged:1.31@sha256:a3ee8631f59c109deead35eef91f428233151b50ed5ee433057f3a93ca570c2c
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
