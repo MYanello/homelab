@@ -170,6 +170,9 @@ defaultDashboards:
   node-exporter-full:
     enabled: true
 
+syncJob:
+  enabled: false
+
 grafana:
   sidecar:
     dashboards:
