@@ -3,16 +3,7 @@ victoria-metrics-operator:
   enabled: false
 
 vmagent:
-  enabled: true
-  spec:
-    extraArgs:
-      promscrape.maxScrapeSize: "32MB"
-    resources:
-      requests:
-        cpu: 150m
-        memory: 500Mi
-      limits:
-        memory: 8Gi
+  enabled: false
 
 kubelet:
   enabled: true
@@ -94,40 +85,7 @@ kube-state-metrics:
               regex: kube_.*_created|kube_.*_metadata_resource_version|kube_configmap_.*|kube_secret_.*|kube_mutatingwebhookconfiguration_.*|kube_validatingwebhookconfiguration_.*|kube_replicaset_.*|kube_replicationcontroller_.*|kube_clusterrolebinding_.*|kube_clusterrole_.*|kube_rolebinding_.*|kube_role_.*|kube_serviceaccount_.*|kube_endpointslice_.*
 
 vmsingle:
-  enabled: true
-  spec:
-    retentionPeriod: 365d
-    storage:
-      storageClassName: "truenas-hdd"
-      resources:
-        requests:
-          storage: 500Gi
-    insertPorts:
-      influxPort: "8086"
-    extraEnvs:
-      - name: search_cacheTimestampOffset
-        value: "10000h"
-      - name: search_cacheMaxAge
-        value: "7d"
-      - name: influx_databaseNames
-        value: "home"
-    extraArgs:
-      vmalert.proxyURL: http://vmalert-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8080
-      maxLabelsPerTimeseries: "500"
-      storage.minFreeDiskSpaceBytes: "10GB"
-      search.maxQueryDuration: "60s"
-      search.maxConcurrentRequests: "32"
-      search.maxQueueDuration: "60s"
-    serviceSpec:
-      spec:
-        type: LoadBalancer
-        loadBalancerIP: 10.10.8.10
-    resources:
-      requests:
-        cpu: 150m
-        memory: 15Gi
-      limits:
-        memory: 32Gi
+  enabled: false
 
 syncJob:
   enabled: false

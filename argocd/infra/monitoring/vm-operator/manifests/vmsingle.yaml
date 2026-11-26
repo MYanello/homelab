@@ -1,0 +1,49 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMSingle
+metadata:
+  labels:
+    app.kubernetes.io/component: vmsingle
+    app.kubernetes.io/instance: victoria-metrics-k8s-stack
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.157.0
+  name: victoria-metrics-k8s-stack
+spec:
+  extraArgs:
+    maxLabelsPerTimeseries: "500"
+    search.maxConcurrentRequests: "32"
+    search.maxQueryDuration: 60s
+    search.maxQueueDuration: 60s
+    storage.minFreeDiskSpaceBytes: 10GB
+    vmalert.proxyURL: http://vmalert-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8080
+  extraEnvs:
+    - name: search_cacheTimestampOffset
+      value: 10000h
+    - name: search_cacheMaxAge
+      value: 7d
+    - name: influx_databaseNames
+      value: home
+  image:
+    tag: v1.157.0
+  insertPorts:
+    influxPort: "8086"
+  port: "8428"
+  replicaCount: 1
+  resources:
+    limits:
+      memory: 32Gi
+    requests:
+      cpu: 150m
+      memory: 15Gi
+  retentionPeriod: 365d
+  serviceSpec:
+    spec:
+      loadBalancerIP: 10.10.8.10
+      type: LoadBalancer
+  storage:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 500Gi
+    storageClassName: truenas-hdd
