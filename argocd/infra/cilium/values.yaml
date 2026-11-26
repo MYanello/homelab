@@ -50,6 +50,13 @@ envoy:
 hubble:
   enabled: true
   eventBufferCapacity: "65535"
+  tls:
+    auto:
+      method: certmanager
+      certManagerIssuerRef:
+        name: vault-pki-issuer
+        kind: ClusterIssuer
+        group: cert-manager.io
   ui:
     enabled: true
     backend:

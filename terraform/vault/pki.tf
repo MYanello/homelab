@@ -99,7 +99,7 @@ resource "vault_pki_secret_backend_role" "cert_manager" {
 }
 
 resource "vault_policy" "cert_manager" {
-  name   = "cert-manager"
+  name   = "home-cert-manager"
   policy = <<-POL
     path "${vault_mount.pki_int.path}/sign/cert-manager" {
       capabilities = ["create", "update"]

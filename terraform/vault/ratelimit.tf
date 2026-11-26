@@ -16,14 +16,6 @@ resource "vault_quota_rate_limit" "authentik_login_ip" {
   group_by       = "ip"
 }
 
-resource "vault_quota_rate_limit" "cks_login_ip" {
-  name           = "cks-login-ip"
-  path           = "auth/cks/"
-  rate           = 5
-  interval       = 1
-  block_interval = 60
-  group_by       = "ip"
-}
 
 resource "vault_generic_endpoint" "quota_config" {
   path           = "sys/quotas/config"
