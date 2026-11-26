@@ -43,6 +43,9 @@ spec:
             k8s:io.kubernetes.pod.namespace: tracearr
             app: tracearr
         - matchLabels:
+            k8s:io.kubernetes.pod.namespace: themerr
+            app: themerr
+        - matchLabels:
             k8s:io.kubernetes.pod.namespace: monitoring
             k8s:app.kubernetes.io/name: uptime-kuma
       toPorts:

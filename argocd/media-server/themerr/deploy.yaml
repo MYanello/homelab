@@ -1,0 +1,121 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: themerr
+  name: themerr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: themerr
+  template:
+    metadata:
+      labels:
+        app: themerr
+      annotations:
+        backup.velero.io/backup-volumes: themerr-config
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+        - name: seed-config
+          image: harbor.yanello.net/docker/busybox:1.38.0@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
+          command:
+            - sh
+            - -c
+            - if [ ! -f /config/config.ini ]; then printf '[Network]\nSSL = false\n'
+              > /config/config.ini; fi
+          volumeMounts:
+            - name: themerr-config
+              mountPath: /config
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 32Mi
+      containers:
+        - name: themerr
+          image: harbor.yanello.net/docker/lizardbyte/themerr:v2026.1125.235904@sha256:3e473a03eb2cb547019f77cdd189735a1b9a703b6127df1e046cb8060991f88d
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: America/Toronto
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: THEMERR_TOKEN_KEY_FILE
+              value: /run/secrets/themerr-token-key
+          ports:
+            - containerPort: 9494
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: themerr-config
+              mountPath: /config
+            - name: token-key
+              mountPath: /run/secrets
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+          startupProbe:
+            httpGet:
+              path: /status
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: http
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 150Mi
+            limits:
+              memory: 1Gi
+      volumes:
+        - name: themerr-config
+          persistentVolumeClaim:
+            claimName: themerr-config
+        - name: token-key
+          secret:
+            secretName: themerr-secrets
+            defaultMode: 0440
+            items:
+              - key: THEMERR_TOKEN_KEY
+                path: themerr-token-key
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: themerr-config
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: truenas-ssd
+  resources:
+    requests:
+      storage: 5Gi

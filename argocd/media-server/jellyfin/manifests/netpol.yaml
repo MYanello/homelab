@@ -28,6 +28,9 @@ spec:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: tracearr
             app: tracearr
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: themerr
+            app: themerr
       toPorts:
         - ports:
             - port: "8096"

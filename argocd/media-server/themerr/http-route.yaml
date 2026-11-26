@@ -1,0 +1,24 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Themerr
+    gethomepage.dev/icon: mdi-music-note
+    gethomepage.dev/description: "Adds theme songs to movies and shows in Plex."
+    gethomepage.dev/pod-selector: app=themerr
+  labels:
+    app.kubernetes.io/instance: themerr-app
+  name: themerr-http-route
+spec:
+  parentRefs:
+    - name: cilium-private-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - themerr.yanello.net
+  rules:
+    - backendRefs:
+        - name: themerr
+          port: 9494
