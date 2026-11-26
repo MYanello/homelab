@@ -1,9 +1,32 @@
 ---
 victoria-metrics-operator:
-  enabled: false
+  enabled: true
+  admissionWebhooks:
+    enabled: true
+    policy: Ignore
+    certManager:
+      enabled: true
+      name: local-intermediate-ca1-issuer
+      kind: ClusterIssuer
+      group: cert-manager.io
+  resources:
+    requests:
+      cpu: 10m
+      memory: 128Mi
+    limits:
+      memory: 128Mi
 
 vmagent:
-  enabled: false
+  enabled: true
+  spec:
+    extraArgs:
+      promscrape.maxScrapeSize: "32MB"
+    resources:
+      requests:
+        cpu: 150m
+        memory: 500Mi
+      limits:
+        memory: 8Gi
 
 kubelet:
   enabled: true
@@ -85,13 +108,120 @@ kube-state-metrics:
               regex: kube_.*_created|kube_.*_metadata_resource_version|kube_configmap_.*|kube_secret_.*|kube_mutatingwebhookconfiguration_.*|kube_validatingwebhookconfiguration_.*|kube_replicaset_.*|kube_replicationcontroller_.*|kube_clusterrolebinding_.*|kube_clusterrole_.*|kube_rolebinding_.*|kube_role_.*|kube_serviceaccount_.*|kube_endpointslice_.*
 
 vmsingle:
-  enabled: false
+  enabled: true
+  spec:
+    retentionPeriod: 365d
+    storage:
+      storageClassName: "truenas-hdd"
+      resources:
+        requests:
+          storage: 500Gi
+    insertPorts:
+      influxPort: "8086"
+    extraEnvs:
+      - name: search_cacheTimestampOffset
+        value: "10000h"
+      - name: search_cacheMaxAge
+        value: "7d"
+      - name: influx_databaseNames
+        value: "home"
+    extraArgs:
+      maxLabelsPerTimeseries: "500"
+      storage.minFreeDiskSpaceBytes: "10GB"
+      search.maxQueryDuration: "60s"
+      search.maxConcurrentRequests: "32"
+      search.maxQueueDuration: "60s"
+    serviceSpec:
+      spec:
+        type: LoadBalancer
+        loadBalancerIP: 10.10.8.10
+    resources:
+      requests:
+        cpu: 150m
+        memory: 15Gi
+      limits:
+        memory: 32Gi
 
 syncJob:
   enabled: false
 
 grafana:
-  enabled: false
+  sidecar:
+    dashboards:
+      enabled: true
+      maxTotalRetries: 10
+      maxConnectRetries: 20
+      maxReadRetries: 10
+      label: grafana_dashboard
+      labelValue: "1"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 96Mi
+        limits:
+          memory: 128Mi
+    datasources:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 100Mi
+  admin:
+    existingSecret: grafana-secrets
+    userKey: grafana-admin-user
+    passwordKey: grafana-admin-password
+  envFromSecrets:
+    - name: grafana-env-secrets
+    - name: influx-secrets
+  env:
+    GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+    GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
+    GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email"
+    GF_AUTH_OAUTH_AUTO_LOGIN: "true"
+    GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups, 'admin') && 'Admin'\
+      \ || contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana\
+      \ Editors') && 'Editor' || 'Viewer'"
+    GF_SERVER_ROOT_URL: "https://grafana.yanello.net"
+  plugins:
+    - victoriametrics-logs-datasource
+    - marcusolsson-hourly-heatmap-panel
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: VictoriaLogs
+          type: victoriametrics-logs-datasource
+          uid: victorialogs
+          url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
+        - name: Garmin-InfluxDB
+          uid: garmin_influxdb
+          type: influxdb
+          access: proxy
+          url: http://influxdb.monitoring.svc.cluster.local:8086
+          user: "${influxdb-user}"
+          database: GarminStats
+          secureJsonData:
+            password: $influxdb-password
+          jsonData:
+            httpMode: GET
+        - name: Iota-InfluxDB
+          uid: DS_GARMIN_STATS
+          type: influxdb
+          access: proxy
+          url: http://influxdb.monitoring.svc.cluster.local:8086
+          user: "${influxdb-user}"
+          database: home
+          secureJsonData:
+            password: $influxdb-password
+          jsonData:
+            httpMode: GET
+  resources:
+    requests:
+      cpu: 20m
+      memory: 320Mi
+    limits:
+      memory: 1Gi
 prometheus-node-exporter:
   resources:
     requests:
@@ -101,7 +231,60 @@ prometheus-node-exporter:
       memory: 64Mi
 
 vmalert:
-  enabled: false
+  enabled: true
+  route:
+    enabled: true
+    parentRefs:
+      - name: cilium-private-gateway
+        group: gateway.networking.k8s.io
+        kind: Gateway
+        namespace: cilium
+        sectionName: https
+    hostnames:
+      - vmalert.yanello.net
 
 alertmanager:
-  enabled: false
+  route:
+    enabled: true
+    parentRefs:
+      - name: cilium-private-gateway
+        group: gateway.networking.k8s.io
+        kind: Gateway
+        namespace: cilium
+        sectionName: https
+    hostnames:
+      - alertmanager.yanello.net
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: ntfy
+      group_by: ["alertname", "namespace"]
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+    receivers:
+      - name: ntfy
+        webhook_configs:
+          - url_file: /etc/alertmanager-ntfy/url
+            send_resolved: true
+            http_config:
+              http_headers:
+                Priority:
+                  values:
+                    - high
+                Tags:
+                  values:
+                    - rotating_light
+                Click:
+                  values:
+                    - https://alertmanager.yanello.net/#/alerts
+  spec:
+    volumes:
+      - name: ntfy-url
+        secret:
+          secretName: vmalertmanager-ntfy
+    volumeMounts:
+      - name: ntfy-url
+        mountPath: /etc/alertmanager-ntfy
+        readOnly: true
