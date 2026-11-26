@@ -83,7 +83,7 @@ resource "vault_pki_secret_backend_config_acme" "pki_int" {
 
 resource "vault_pki_secret_backend_role" "cert_manager" {
   backend           = vault_mount.pki_int.path
-  name              = "cert-manager"
+  name              = "${var.name}-cert-manager"
   key_type          = "any"
   key_bits          = 0
   ttl               = "7776000"
@@ -99,7 +99,7 @@ resource "vault_pki_secret_backend_role" "cert_manager" {
 }
 
 resource "vault_policy" "cert_manager" {
-  name   = "home-cert-manager"
+  name   = "${var.name}-cert-manager"
   policy = <<-POL
     path "${vault_mount.pki_int.path}/sign/cert-manager" {
       capabilities = ["create", "update"]
@@ -112,7 +112,7 @@ resource "vault_policy" "cert_manager" {
 
 resource "vault_kubernetes_auth_backend_role" "cert_manager" {
   backend                          = vault_auth_backend.kubernetes.path
-  role_name                        = "cert-manager"
+  role_name                        = "${var.name}-cert-manager"
   bound_service_account_names      = ["vault-issuer"]
   bound_service_account_namespaces = ["cert-manager"]
   token_ttl                        = 3600

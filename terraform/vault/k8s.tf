@@ -43,7 +43,7 @@ resource "vault_mount" "k8s_kv" {
 }
 
 resource "vault_policy" "esops" {
-  name   = "esops"
+  name   = "home-esops"
   policy = <<-POL
     path "${vault_mount.k8s_kv.path}/data/*" {
       capabilities = ["read"]
