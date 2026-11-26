@@ -91,7 +91,7 @@ spec:
     - backendRefs:
         - group: ""
           kind: Service
-          name: victoria-metrics-k8s-stack-grafana
+          name: grafana
           namespace: monitoring
           port: 80
           weight: 1

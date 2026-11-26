@@ -146,82 +146,8 @@ syncJob:
   enabled: false
 
 grafana:
-  sidecar:
-    dashboards:
-      enabled: true
-      maxTotalRetries: 10
-      maxConnectRetries: 20
-      maxReadRetries: 10
-      label: grafana_dashboard
-      labelValue: "1"
-      resources:
-        requests:
-          cpu: 10m
-          memory: 96Mi
-        limits:
-          memory: 128Mi
-    datasources:
-      resources:
-        requests:
-          cpu: 10m
-          memory: 100Mi
-        limits:
-          memory: 100Mi
-  admin:
-    existingSecret: grafana-secrets
-    userKey: grafana-admin-user
-    passwordKey: grafana-admin-password
-  envFromSecrets:
-    - name: grafana-env-secrets
-    - name: influx-secrets
-  env:
-    GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
-    GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
-    GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email"
-    GF_AUTH_OAUTH_AUTO_LOGIN: "true"
-    GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups, 'admin') && 'Admin'\
-      \ || contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana\
-      \ Editors') && 'Editor' || 'Viewer'"
-    GF_SERVER_ROOT_URL: "https://grafana.yanello.net"
-  plugins:
-    - victoriametrics-logs-datasource
-    - marcusolsson-hourly-heatmap-panel
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      datasources:
-        - name: VictoriaLogs
-          type: victoriametrics-logs-datasource
-          uid: victorialogs
-          url: http://victoria-logs-single-server.monitoring.svc.cluster.local:9428
-        - name: Garmin-InfluxDB
-          uid: garmin_influxdb
-          type: influxdb
-          access: proxy
-          url: http://influxdb.monitoring.svc.cluster.local:8086
-          user: "${influxdb-user}"
-          database: GarminStats
-          secureJsonData:
-            password: $influxdb-password
-          jsonData:
-            httpMode: GET
-        - name: Iota-InfluxDB
-          uid: DS_GARMIN_STATS
-          type: influxdb
-          access: proxy
-          url: http://influxdb.monitoring.svc.cluster.local:8086
-          user: "${influxdb-user}"
-          database: home
-          secureJsonData:
-            password: $influxdb-password
-          jsonData:
-            httpMode: GET
-  resources:
-    requests:
-      cpu: 20m
-      memory: 320Mi
-    limits:
-      memory: 1Gi
+  enabled: false
+
 prometheus-node-exporter:
   resources:
     requests:
