@@ -35,6 +35,45 @@ resource "kubernetes_labels" "server" {
   }
 }
 
+resource "kubernetes_labels" "pi1" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "pi0"
+  }
+  labels = {
+    "storage.type/ssd" = "false",
+    "storage.kubernetes.io/performance" : "slow",
+    "cpu.performance" : "low"
+  }
+}
+
+resource "kubernetes_labels" "pi1" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "pi0"
+  }
+  labels = {
+    "storage.type/ssd" = "false",
+    "storage.kubernetes.io/performance" : "slow",
+    "cpu.performance" : "low"
+  }
+}
+
+resource "kubernetes_labels" "pi2" {
+  api_version = "v1"
+  kind        = "Node"
+  metadata {
+    name = "pi2"
+  }
+  labels = {
+    "storage.type/ssd" = "false",
+    "storage.kubernetes.io/performance" : "slow",
+    "cpu.performance" : "low"
+  }
+}
+
 resource "kubernetes_node_taint" "pc3" {
   metadata {
     name = "pc3"
