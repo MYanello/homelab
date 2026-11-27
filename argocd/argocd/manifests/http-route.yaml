@@ -14,7 +14,7 @@ metadata:
   name: argocd-route
 spec:
   parentRefs:
-    - name: cilium-public-gateway
+    - name: cilium-private-gateway
       namespace: cilium
       sectionName: https
       group: gateway.networking.k8s.io
