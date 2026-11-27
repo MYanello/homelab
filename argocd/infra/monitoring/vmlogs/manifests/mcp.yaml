@@ -22,7 +22,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       containers:
-        - image: harbor.yanello.net/ghcr/victoriametrics/mcp-victorialogs:v1.9.0@sha256:753bb4fbe402ca1a782842f44636830f9895736f11d7fe783b924f8a0daf083d
+        - image: harbor.yanello.net/ghcr/victoriametrics/mcp-victorialogs:v1.11.0@sha256:0b3acd058159adc196ace66b2168895d4fbe6cb2ed75bbad49799863ac4dc56e
           name: mcp-victorialogs
           imagePullPolicy: IfNotPresent
           env:
