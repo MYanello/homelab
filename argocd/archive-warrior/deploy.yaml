@@ -16,7 +16,7 @@ spec:
         app: warrior
     spec:
       containers:
-        - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest@sha256:66d89a09583c870944b477d2a71309a782fddaae6dfbe61d1afcbdbf9a135804
+        - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest@sha256:23a6ae67c436ccfe56ebfd787f4c54c8278cc5ba6dcb64fba6cea51acdc3082d
           name: warrior
           ports:
             - containerPort: 8001
