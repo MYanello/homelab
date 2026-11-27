@@ -9,7 +9,6 @@ resources:
   - ./manifests/cnpg.yaml
   - ./manifests/admin.yaml
   - ./manifests/cert.yaml
-  - ./manifests/ldap.yaml
   - ./manifests/ext-secrets.yaml
 
 helmCharts:
