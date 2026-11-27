@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - manifests/ext-secrets.yaml
-  - netpol.yaml
+  - manifests/netpol.yaml
   - manifests/http-route.yaml
 
 helmCharts:

@@ -16,26 +16,24 @@ spec:
               protocol: TCP
     - fromEndpoints:
         - matchLabels:
+            k8s:io.kubernetes.pod.namespace: paperless
+            k8s:app: paperless
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: honcho
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: open-webui
+            k8s:app.kubernetes.io/component: open-webui
+      toPorts:
+        - ports:
+            - port: "4000"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
             k8s:io.kubernetes.pod.namespace: monitoring
             k8s:app.kubernetes.io/name: vmagent
       toPorts:
         - ports:
             - port: "4001"
-              protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: paperless
-            k8s:app: paperless
-      toPorts:
-        - ports:
-            - port: "4000"
-              protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: honcho
-      toPorts:
-        - ports:
-            - port: "4000"
               protocol: TCP
   egress:
     - toEndpoints:
