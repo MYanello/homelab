@@ -61,10 +61,6 @@ resource "oci_identity_policy" "vault_autounseal" {
   ]
 }
 
-data "sops_file" "vault-autounseal-private" {
-  source_file = "sops/vault-autounseal-private.enc.pem"
-  input_type  = "raw"
-}
 data "sops_file" "vault-autounseal-public" {
   source_file = "sops/vault-autounseal-public.enc.pem"
   input_type  = "raw"
