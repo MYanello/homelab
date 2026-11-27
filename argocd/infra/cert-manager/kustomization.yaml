@@ -2,7 +2,8 @@
 resources:
   - ./manifests/ext-secrets.yaml
   - ./manifests/netpol.yaml
-  - ./manifests/resources.yaml
+  - ./manifests/letsencrypt-issuer.yaml
+  - ./manifests/local-issuer.yaml
   - ./manifests/vault-issuer.yaml
 
 helmCharts:
@@ -11,76 +12,4 @@ helmCharts:
     version: "v1.21.3"
     releaseName: cert-manager
     namespace: cert-manager
-    valuesInline:
-      crds:
-        enabled: true
-      featureGates: NameConstraints=true
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: Exists
-      webhook:
-        featureGates: NameConstraints=true
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists
-        tolerations:
-          - key: "node-role.kubernetes.io/control-plane"
-            operator: "Exists"
-            effect: "NoSchedule"
-        resources:
-          requests:
-            cpu: 10m
-            memory: 32Mi
-          limits:
-            memory: 32Mi
-      extraArgs:
-        - --dns01-recursive-nameservers-only
-        - --dns01-recursive-nameservers=8.8.8.8:53
-      tolerations:
-        - key: "node-role.kubernetes.io/control-plane"
-          operator: "Exists"
-          effect: "NoSchedule"
-      cainjector:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists
-        tolerations:
-          - key: "node-role.kubernetes.io/control-plane"
-            operator: "Exists"
-            effect: "NoSchedule"
-        resources:
-          requests:
-            cpu: 10m
-            memory: 192Mi
-          limits:
-            memory: 256Mi
-      startupapicheck:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists
-        tolerations:
-          - key: "node-role.kubernetes.io/control-plane"
-            operator: "Exists"
-            effect: "NoSchedule"
-      resources:
-        requests:
-          cpu: 10m
-          memory: 64Mi
-        limits:
-          memory: 64Mi
+    valuesFile: ./values.yaml
