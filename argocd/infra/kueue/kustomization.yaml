@@ -6,5 +6,5 @@ helmCharts:
   - name: kueue
     namespace: kueue-system
     releaseName: kueue
-    repo: oci://registry.k8s.io/kueue/charts/kueue
+    repo: oci://registry.k8s.io/kueue/charts
     version: 0.20.8
