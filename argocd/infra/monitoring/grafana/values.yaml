@@ -48,6 +48,9 @@ env:
 plugins:
   - victoriametrics-logs-datasource
   - marcusolsson-hourly-heatmap-panel
+  - prometheus@13.3.0
+  - tempo@13.5.0
+  - cloudwatch@12.11.5
 resources:
   requests:
     cpu: 20m
