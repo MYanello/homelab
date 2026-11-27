@@ -45,7 +45,7 @@ spec:
               memory: 32Mi
       containers:
         - name: themerr
-          image: harbor.yanello.net/docker/lizardbyte/themerr:v2026.1125.235904@sha256:3e473a03eb2cb547019f77cdd189735a1b9a703b6127df1e046cb8060991f88d
+          image: harbor.yanello.net/docker/lizardbyte/themerr:v2026.1127.55302@sha256:414b678d43619ba9aa645162a382340ca1f200a965ad1b385e49c68ff6216369
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
