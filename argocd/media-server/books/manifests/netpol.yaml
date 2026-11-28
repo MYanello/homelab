@@ -144,8 +144,8 @@ spec:
         - ports:
             - port: "9090"
               protocol: TCP
-    - toEntities:
-        - world
+    - toFQDNs:
+        - matchName: s3.us-west-004.backblazeb2.com
       toPorts:
         - ports:
             - port: "443"
