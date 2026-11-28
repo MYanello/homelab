@@ -1,0 +1,58 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authentik-blueprints
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+data:
+  passkeys.yaml: |-
+    version: 1
+    metadata:
+      name: Yanello - WebAuthn passkey login
+    entries:
+    - model: authentik_policies_expression.expressionpolicy
+      id: webauthn-enrollment-missing
+      identifiers:
+        name: webauthn-enrollment-missing
+      attrs:
+        expression: |
+          return not ak_user_has_authenticator(request.user, "webauthn")
+    - model: authentik_stages_authenticator_webauthn.authenticatorwebauthnstage
+      identifiers:
+        name: default-authenticator-webauthn-setup
+      attrs:
+        resident_key_requirement: preferred
+        user_verification: preferred
+    - model: authentik_stages_identification.identificationstage
+      identifiers:
+        name: default-authentication-identification
+      attrs:
+        user_fields:
+        - username
+        - email
+        webauthn_stage: !Find [authentik_stages_authenticator_validate.authenticatorvalidatestage, [name, default-authentication-mfa-validation]]
+    - model: authentik_flows.flowstagebinding
+      id: default-authentication-flow-webauthn-setup-binding
+      identifiers:
+        target: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
+        stage: !Find [authentik_stages_authenticator_webauthn.authenticatorwebauthnstage, [name, default-authenticator-webauthn-setup]]
+        order: 35
+      attrs:
+        evaluate_on_plan: false
+        re_evaluate_policies: true
+    - model: authentik_policies.policybinding
+      identifiers:
+        target: !KeyOf default-authentication-flow-webauthn-setup-binding
+        policy: !KeyOf webauthn-enrollment-missing
+        order: 10
+      attrs:
+        failure_result: false
+    - model: authentik_flows.flowstagebinding
+      identifiers:
+        target: !Find [authentik_flows.flow, [slug, default-enrollment-flow]]
+        stage: !Find [authentik_stages_authenticator_webauthn.authenticatorwebauthnstage, [name, default-authenticator-webauthn-setup]]
+        order: 19
+      attrs:
+        evaluate_on_plan: false
+        re_evaluate_policies: true

@@ -52,6 +52,10 @@ global:
       mountPath: /certs/ldap-outpost
       readOnly: true
 
+blueprints:
+  configMaps:
+    - authentik-blueprints
+
 authentik:
   email:
     host: smtp.gmail.com

@@ -10,6 +10,7 @@ resources:
   - ./manifests/admin.yaml
   - ./manifests/cert.yaml
   - ./manifests/ext-secrets.yaml
+  - ./manifests/blueprints.yaml
 
 helmCharts:
   - name: authentik
