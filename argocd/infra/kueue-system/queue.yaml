@@ -11,7 +11,7 @@ metadata:
 spec:
   namespaceSelector: {} # match all namespaces
   resourceGroups:
-    - coveredResources: ["cpu", "memory"]
+    - coveredResources: ["cpu", "memory", "pods"]
       flavors:
         - name: "default-flavor"
           resources:
