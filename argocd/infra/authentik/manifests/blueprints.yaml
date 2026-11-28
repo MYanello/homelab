@@ -18,12 +18,14 @@ data:
       attrs:
         expression: |
           return not ak_user_has_authenticator(request.user, "webauthn")
+
     - model: authentik_stages_authenticator_webauthn.authenticatorwebauthnstage
       identifiers:
         name: default-authenticator-webauthn-setup
       attrs:
         resident_key_requirement: preferred
         user_verification: preferred
+
     - model: authentik_stages_identification.identificationstage
       identifiers:
         name: default-authentication-identification
@@ -32,6 +34,7 @@ data:
         - username
         - email
         webauthn_stage: !Find [authentik_stages_authenticator_validate.authenticatorvalidatestage, [name, default-authentication-mfa-validation]]
+
     - model: authentik_flows.flowstagebinding
       id: default-authentication-flow-webauthn-setup-binding
       identifiers:
@@ -41,6 +44,7 @@ data:
       attrs:
         evaluate_on_plan: false
         re_evaluate_policies: true
+
     - model: authentik_policies.policybinding
       identifiers:
         target: !KeyOf default-authentication-flow-webauthn-setup-binding
@@ -48,6 +52,7 @@ data:
         order: 10
       attrs:
         failure_result: false
+
     - model: authentik_flows.flowstagebinding
       identifiers:
         target: !Find [authentik_flows.flow, [slug, default-enrollment-flow]]
